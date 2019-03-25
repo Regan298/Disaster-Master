@@ -92,10 +92,14 @@ h) Site adaptation requirements.
 One page summary of the main functions of the product (9.5.4),
 briefly characterizing the minimum viable product.
 
+
+
 #### 1.3.3 User characteristics   
 
 One page identifying the main classes of users and their
 characteristics (9.5.5) 
+
+There are going to be many different people that will use the system once it is deployed. Given that RedR trains a number of different people all from different backgrounds, the users of the system are going to be considerably varied. There are going to be THREE main classes of user. These include; Simulation Participant, Overseer (Government Roleplayer) and Technician. The simulation participants are going to be people who are being tested/trained for deployment into real world disaster zones. Thus, they will be relatively competent but also likey to be under some form of stress as they attempt to maintain order and solve problems related to the situtation that they have been placed in. This may affect their ability to use the software. The overseer is going to be the person responsible for communicating with the teams via email. They will not be participating in the simulation in the saem way as the teams but will still have a large workload. During a simulation, time is scaled down for the sake of convenience and also to create a sense of pressure for the teams. In a typical scenario, the time is scaled down such that one hour of real time is equal to one day in simulation time. Given that the overseer has to communicate with each team every "hour", they are likely going to be stressed and not able to think clearly, which may also limit their ability to use the software. 
 
 #### 1.3.4 Limitations
 
