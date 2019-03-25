@@ -127,6 +127,18 @@ for at least top ten focal use cases, write a short goal statement and
 use case body (up to seven pages).  Identify the use cases that
 comprise a minimum viable product.
 
+Senario Editor
+|  User Action  | System Responsability |
+| ------------- |:-------------:|
+|Senario master launches Senario editor||
+||System prompts user to either create new senario or edit existing one|
+|User selects create senario||
+||System promts user to choose the number and names of NGOs and create pre-scheduled messages to be sent to them.|
+|Senario master selects NGO number and names||
+|Senario master fills in pre-scheduled messages, and submits them to message list||
+||System adds pre-scheduled messages to list and displays them|
+|Senario master selects "save senario"||
+
 ### 3.3 Usability Requirements
 
 See 9.5.12. for most systems, this will be around one page.
