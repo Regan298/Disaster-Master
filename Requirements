@@ -78,34 +78,36 @@ One page defining the system's relationship to other related products
 > A block diagram showing the major elements of the larger system, interconnections, and external interfaces can be helpful.
 > 
 > Describe how the software operates within the following constraints:  
-a) System interfaces;  
-b) User interfaces;  
+a) System interfaces; 
+b) User interfaces; 
 c) Hardware interfaces;  
-d) Software interfaces;  
+d) Software interfaces; The software will likely be based on an existing open source project (KoboToolBox), therefore both KoboToolBox and the team's software will have to be able to communicate with each other. 
 e) Communications interfaces;  
 f) Memory;  
 g) Operations;  
-h) Site adaptation requirements.
+h) Site adaptation requirements; The software will have to be able to run on the hardware that is present in the disaster simulation setting. 
 
 #### 1.3.2 Product functions
 
 One page summary of the main functions of the product (9.5.4),
 briefly characterizing the minimum viable product.
 
-
+As stated in section 1.1, the purpose of the program is send messages (mainly emails), thus, the minimum viable product must at the very least be capable of sending emails and possibly other types of message to and from other machines. 
 
 #### 1.3.3 User characteristics   
 
 One page identifying the main classes of users and their
 characteristics (9.5.5) 
 
-There are going to be many different people that will use the system once it is deployed. Given that RedR trains a number of different people all from different backgrounds, the users of the system are going to be considerably varied. There are going to be THREE main classes of user. These include; Simulation Participant, Overseer (Government Roleplayer) and Technician. The simulation participants are going to be people who are being tested/trained for deployment into real world disaster zones. Thus, they will be relatively competent but also likey to be under some form of stress as they attempt to maintain order and solve problems related to the situtation that they have been placed in. This may affect their ability to use the software. The overseer is going to be the person responsible for communicating with the teams via email. They will not be participating in the simulation in the saem way as the teams but will still have a large workload. During a simulation, time is scaled down for the sake of convenience and also to create a sense of pressure for the teams. In a typical scenario, the time is scaled down such that one hour of real time is equal to one day in simulation time. Given that the overseer has to communicate with each team every "hour", they are likely going to be stressed and not able to think clearly, which may also limit their ability to use the software. 
+There are going to be many different people that will use the system once it is deployed. Given that RedR trains a number of different people all from different backgrounds, the users of the system are going to be considerably varied. There are going to be THREE main classes of user. These include; Simulation Participant, Overseer (Government Roleplayer) and Technician. The simulation participants are going to be people who are being tested/trained for deployment into real world disaster zones. Thus, they will be relatively competent but also likey to be under some form of stress as they attempt to maintain order and solve problems related to the situtation that they have been placed in. This may affect their ability to use the software. The overseer is going to be the person responsible for communicating with the teams via email. They will not be participating in the simulation in the saem way as the teams but will still have a large workload. Given that the overseer has to communicate with each team every hour (with time scaled down to 1 hour real time equals 1 day simulation time), they are likely going to be under pressure and may not able to think clearly, which may also limit their ability to use the software. 
 
 #### 1.3.4 Limitations
 
 One page on the limitations on the product (9.5.6)
 
 While the team will put forward their best attempt to satisfy the client, there will be limitations that may slow progress. There may also be requests from the client that simply may not be able to be met simply because of the nature of the software being used to develop the final product, as well as additional time and knowledge constraints. Regan (the client) mentioned to the team that he wanted to have the final program be able to send text messages to mobile phones. This is an example of a feature that may be out of reach simply because the team have never had any experience in producing software capable of this. The machines that will run the end product software may also be their own limitation to the project. The operating system that RedR's machines run is currently unknown. The hardware of RedR's computers is also unknown but this will likely not be of concern. This is because the simulation program that will be developed will not be particularly computationally expensive as it will not have any complex graphics to render as part of the simulation. 
+
+The users may also become a limitation of the system. The software is only as good as the people that use it. Given that the users of the software may be otherwise preoccupied with other tasks or under some kind of situational stress, the usefulness of the software may be limited based on how the users interact with it. 
 
 ## 2. References
 
@@ -285,10 +287,19 @@ The client suggested using KoboToolBox as a framework for the program.
 
 One page glossary _as required_.
 
+Overseer: The individual responsible for communicating with each of the teams participating within the simulation.
+RedR Australia: An organisation that selects, trains and deploys staff to assist in disaster situations.
+
 ## 7. Contributions
 
 A one-page statement of contributions that lists each member of the
 group and what they contributed to this document.
+
+Riley Grice: 
+Nathan Ellison: 
+Daniel Miller: 
+Tom Buurmans: 
+Lachlan Keene: 
 
 ---
 
