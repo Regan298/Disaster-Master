@@ -71,6 +71,8 @@ One page defining the system's relationship to other related products
 > **9.5.3 Product perspective** <br>
 > Define the system's relationship with other related products. 
 > 
+The software product is going to be a standalone application and will not be implemented into a larger system. This is because the client currently doesn't have other systems to integrate the product with. This will be the first of it's kind and thus will not need to be related to other products. 
+
 > If the product is an element of a larger system, then relate the requirements of that larger system to the functionality of the product covered by the software requirements specification.
 > 
 > If the product is an element of a larger system, then identify the interfaces between the product covered by the software requirements specification and the larger system of which the product is an element. 
@@ -78,12 +80,12 @@ One page defining the system's relationship to other related products
 > A block diagram showing the major elements of the larger system, interconnections, and external interfaces can be helpful.
 > 
 > Describe how the software operates within the following constraints:  
-a) System interfaces; 
-b) User interfaces; 
+a) System interfaces; The kinds of other systems that the software will have to interact with is also largely unknown. It will likely have to communicate with an email system to be able to communicate with the simulation teams.
+b) User interfaces; The software will implement it's own user interface to allow simulation participants to easily be able to interact with it. 
 c) Hardware interfaces; The kind of hardware that the software is going to be running on is also unknown. 
 d) Software interfaces; We don't know which other software our program will have to interface with. The client did not give the team a specific requirement as to which software to use. The client did ssuggest some open source software called KoboToolBox (https://www.kobotoolbox.org/), so the software the team produces will likely have to communicate with KoboToolBox. The client also told us that the machines that the software will be running on are Windows based. While this will likely not be a problem, the team will need to ensure that the language that is chosen to create the software is capable of running on a Windows machine. The version of Windows is also not known, but this will be brought up at the next meeting with the client. 
 e) Communications interfaces; 
-f) Memory; The program will have to be optimised such that it doesn't consume all of the memory on the machines and 
+f) Memory; The program will have to be optimised such that it doesn't consume all of the memory on the machines
 g) Operations; 
 h) Site adaptation requirements; The software will have to be able to run on the hardware that is present in the disaster simulation setting (which will be several different Windows machines)
 
@@ -92,7 +94,7 @@ h) Site adaptation requirements; The software will have to be able to run on the
 One page summary of the main functions of the product (9.5.4),
 briefly characterizing the minimum viable product.
 
-As stated in section 1.1, the purpose of the program is send messages (mainly emails), thus, the minimum viable product must at the very least be capable of sending emails and possibly other types of message to and from other machines. 
+As stated in section 1.1, the purpose of the program is to automate some of the responsibilities of the overseer of the RedR simulations
 
 #### 1.3.3 User characteristics   
 
@@ -281,14 +283,14 @@ One page on assumptions and dependencies (9.5.7).
 
 One key assumption that we will have to make is that the computers that are being operated during the disaster simulation are capable of running the software that will be produced. It is also assumed that RedR will be responsible for maintaining their own network and will be responsible for getting the software back online should it go down. 
 
-The client suggested using KoboToolBox as a framework for the program. 
+The client suggested using KoboToolBox as a framework for the program, though the team has yet to decide whether to actually use this. This choice will be made at a later date when the time for deciding how to build the system comes. 
 
 ### 6.2 Acronyms and abbreviations
 
 One page glossary _as required_.
 
 Overseer: The individual responsible for communicating with each of the teams participating within the simulation.
-RedR Australia: An organisation that selects, trains and deploys staff to assist in disaster situations.
+RedR Australia: An organisation that selects, trains and deploys staff to assist in disaster situations, and is associated with the client. 
 
 ## 7. Contributions
 
@@ -296,7 +298,7 @@ A one-page statement of contributions that lists each member of the
 group and what they contributed to this document.
 
 Riley Grice: 
-Nathan Ellison: 
+Nathan Ellison: Mainly contributed to sections 1, 2 and 6. 
 Daniel Miller: 
 Tom Buurmans: 
 Lachlan Keene: 
