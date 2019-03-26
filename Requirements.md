@@ -80,12 +80,12 @@ One page defining the system's relationship to other related products
 > Describe how the software operates within the following constraints:  
 a) System interfaces; 
 b) User interfaces; 
-c) Hardware interfaces;  
-d) Software interfaces; The software will likely be based on an existing open source project (KoboToolBox), therefore both KoboToolBox and the team's software will have to be able to communicate with each other. 
-e) Communications interfaces;  
-f) Memory;  
-g) Operations;  
-h) Site adaptation requirements; The software will have to be able to run on the hardware that is present in the disaster simulation setting. 
+c) Hardware interfaces; The kind of hardware that the software is going to be running on is also unknown. 
+d) Software interfaces; We don't know which other software our program will have to interface with. The client did not give the team a specific requirement as to which software to use. The client did ssuggest some open source software called KoboToolBox (https://www.kobotoolbox.org/), so the software the team produces will likely have to communicate with KoboToolBox. The client also told us that the machines that the software will be running on are Windows based. While this will likely not be a problem, the team will need to ensure that the language that is chosen to create the software is capable of running on a Windows machine. The version of Windows is also not known, but this will be brought up at the next meeting with the client. 
+e) Communications interfaces; 
+f) Memory; 
+g) Operations; 
+h) Site adaptation requirements; The software will have to be able to run on the hardware that is present in the disaster simulation setting (which will be several different Windows machines)
 
 #### 1.3.2 Product functions
 
