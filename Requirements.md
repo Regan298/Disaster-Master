@@ -83,7 +83,7 @@ b) User interfaces;
 c) Hardware interfaces; The kind of hardware that the software is going to be running on is also unknown. 
 d) Software interfaces; We don't know which other software our program will have to interface with. The client did not give the team a specific requirement as to which software to use. The client did ssuggest some open source software called KoboToolBox (https://www.kobotoolbox.org/), so the software the team produces will likely have to communicate with KoboToolBox. The client also told us that the machines that the software will be running on are Windows based. While this will likely not be a problem, the team will need to ensure that the language that is chosen to create the software is capable of running on a Windows machine. The version of Windows is also not known, but this will be brought up at the next meeting with the client. 
 e) Communications interfaces; 
-f) Memory; 
+f) Memory; The program will have to be optimised such that it doesn't consume all of the memory on the machines and 
 g) Operations; 
 h) Site adaptation requirements; The software will have to be able to run on the hardware that is present in the disaster simulation setting (which will be several different Windows machines)
 
