@@ -58,7 +58,7 @@ The purpose of the system is to reduce the total workload of the overseer in the
 
 One paragraph describing the scope of the system (9.5.2)
 
-The goal of this undertaking is to produce a computer program that is going to be able to be used to automate some of the responsibilities of the overseer in the disaster simulations that RedR frequently run. The cost of producing such a program will be little to none as all of the development process will be able to be completed using hardware that is already available to every team member. The final deliverable product will be a single piece of software that will be capable of operating on multiple machines as well as communicating with each machine over a network operated by RedR. The program will be able to automate the sending and receiving of emails between the teams that are participating in the disaster simulation. It will also track the progress of the simulation since the time scale that is used for each simulation is not one to one (in most cases, 1 hour = one day). 
+The goal of this undertaking is to produce a computer program that is going to be able to be used to automate some of the responsibilities of the overseer in the disaster simulations that RedR frequently run. The cost of producing such a program will be little to none as all of the development process will be able to be completed using hardware that is already available to every team member. The final deliverable product will be a single piece of software that will be capable of operating on multiple machines as well as communicating with each machine over a network operated by RedR. The kind of software that will be produced is still yet undecided (whether it will be a web app or a stand-alone application for example). The program will be able to automate the sending and receiving of emails between the teams that are participating in the disaster simulation. It will also track the progress of the simulation since the time scale that is used for each simulation is not one to one (in most cases, 1 hour = one day). 
 
 [Will need to insert diagrams] 
 
@@ -70,9 +70,11 @@ One page defining the system's relationship to other related products
 
 > **9.5.3 Product perspective** <br>
 > Define the system's relationship with other related products. 
+>
+>Given that the system will be implementing email sending, it will likely piggyback off of an exisiting email service/framework, rather than having the team implement their own >at a great cost of time. This is only going to be the case if the system is connected to the internet. Given that the system is running in a very remote environment, it may be >the case that there is no internet connection available. 
 > 
-The software product is going to be a standalone application and will not be implemented into a larger system. This is because the client currently doesn't have other systems to integrate the product with. This will be the first of it's kind and thus will not need to be related to other products. 
-
+>The software product is going to be a standalone application and will not be implemented into a larger system. This is because the client currently doesn't have other systems >to integrate the product with. This will be the first of it's kind and thus will not need to be related to other products. 
+>
 > If the product is an element of a larger system, then relate the requirements of that larger system to the functionality of the product covered by the software requirements specification.
 > 
 > If the product is an element of a larger system, then identify the interfaces between the product covered by the software requirements specification and the larger system of which the product is an element. 
@@ -80,14 +82,14 @@ The software product is going to be a standalone application and will not be imp
 > A block diagram showing the major elements of the larger system, interconnections, and external interfaces can be helpful.
 > 
 > Describe how the software operates within the following constraints:  
-a) System interfaces; The kinds of other systems that the software will have to interact with is also largely unknown. It will likely have to communicate with an email system to be able to communicate with the simulation teams.
-b) User interfaces; The software will implement it's own user interface to allow simulation participants to easily be able to interact with it. 
-c) Hardware interfaces; The kind of hardware that the software is going to be running on is also unknown. 
-d) Software interfaces; We don't know which other software our program will have to interface with. The client did not give the team a specific requirement as to which software to use. The client did ssuggest some open source software called KoboToolBox (https://www.kobotoolbox.org/), so the software the team produces will likely have to communicate with KoboToolBox. The client also told us that the machines that the software will be running on are Windows based. While this will likely not be a problem, the team will need to ensure that the language that is chosen to create the software is capable of running on a Windows machine. The version of Windows is also not known, but this will be brought up at the next meeting with the client. 
-e) Communications interfaces; 
-f) Memory; The program will have to be optimised such that it doesn't consume all of the memory on the machines
-g) Operations; 
-h) Site adaptation requirements; The software will have to be able to run on the hardware that is present in the disaster simulation setting (which will be several different Windows machines)
+a) System interfaces; The kinds of other systems that the software will have to interact with is also largely unknown. It will likely have to communicate with an email system to be able to communicate with the simulation teams.<br>
+b) User interfaces; The software will implement it's own user interface to allow simulation participants to easily be able to interact with it. <br>
+c) Hardware interfaces; The kind of hardware that the software is going to be running on is also unknown. <br>
+d) Software interfaces; We don't know which other software our program will have to interface with. The client did not give the team a specific requirement as to which software to use. The client did ssuggest some open source software called KoboToolBox (https://www.kobotoolbox.org/), so the software the team produces will likely have to communicate with KoboToolBox. The client also told us that the machines that the software will be running on are Windows based. While this will likely not be a problem, the team will need to ensure that the language that is chosen to create the software is capable of running on a Windows machine. The version of Windows is also not known, but this will be brought up at the next meeting with the client. <br>
+e) Communications interfaces; The program may be required to communicate with an external cloud service for storing data and sending messages between different locations. <br>
+f) Memory; The program will have to be optimised such that it doesn't consume all of the memory on the machines<br>
+g) Operations; <br>
+h) Site adaptation requirements; The software will have to be able to run on the hardware that is present in the disaster simulation setting (which will be several different Windows machines)<br>
 
 #### 1.3.2 Product functions
 
@@ -110,6 +112,8 @@ One page on the limitations on the product (9.5.6)
 While the team will put forward their best attempt to satisfy the client, there will be limitations that may slow progress. There may also be requests from the client that simply may not be able to be met simply because of the nature of the software being used to develop the final product, as well as additional time and knowledge constraints. Regan (the client) mentioned to the team that he wanted to have the final program be able to send text messages to mobile phones. This is an example of a feature that may be out of reach simply because the team have never had any experience in producing software capable of this. The machines that will run the end product software may also be their own limitation to the project. The operating system that RedR's machines run is currently unknown. The hardware of RedR's computers is also unknown but this will likely not be of concern. This is because the simulation program that will be developed will not be particularly computationally expensive as it will not have any complex graphics to render as part of the simulation. 
 
 The users may also become a limitation of the system. The software is only as good as the people that use it. Given that the users of the software may be otherwise preoccupied with other tasks or under some kind of situational stress, the usefulness of the software may be limited based on how the users interact with it. 
+
+Another limitation of the program may be that there is no internet connection available for the program to use. Given taht teh simulations are going to run in a very remote region of Australia (to simulate a different country), it may be the case that there is no internet connection available. In this case, the program will be required to run on a single machine but behave as if it were running on multiple machines. This may limit the usabability of the system seeing as only one person will be capable of using it at a time, while it may be that multiple people *wish* to access it at the same time. Since it will take longer for the simulation teams to be able to check messages, this may limit the usefulness of the product. 
 
 ## 2. References
 
@@ -515,6 +519,8 @@ Online: Mainly in office buildings with internet connection and many computers o
 
 Offline: Anywhere in the world, no internet connection required and only one computer necessary to run the simulation.
 
+RedR are going to be running their simulations in an isolated section of the Australian outback. This area is going to be a very dry, hot and arid place. Some simulations are going to run inside buildings (such as in old school buildings) and some are going to be run outdoors. For those simulations that are run indoors, there will more than likely be internet access. It may be the case that some classes don't have internet access. The program will have to be able to function whether it has access to the internet or not. Without internet, the software will run locally on a single machine. It will distinguish users via a type of login system and each user will only be able to access specific parts of the program. 
+
 ### 3.9 Supporting information
 
 see 9.5.19. 
@@ -596,8 +602,8 @@ The client suggested using KoboToolBox as a framework for the program, though th
 
 One page glossary _as required_.
 
-Overseer: The individual responsible for communicating with each of the teams participating within the simulation.
-RedR Australia: An organisation that selects, trains and deploys staff to assist in disaster situations, and is associated with the client. 
+Overseer: The individual responsible for communicating with each of the teams participating within the simulation.<br>
+RedR Australia: An organisation that selects, trains and deploys staff to assist in disaster situations, and is associated with the client. <br>
 
 ## 7. Contributions
 
