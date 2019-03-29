@@ -161,6 +161,34 @@ See 9.5.12. for most systems, this will be around one page.
 > **9.5.12 Usability requirements**<br>
 > Define usability (quality in use) requirements. Usability requirements and objectives for the software system include measurable effectiveness, efficiency, and satisfaction criteria in specific contexts of use.
 
+Usability is the Program's ability to elegantly run desired features specified by the client. 
+
+Usability Requirements and Objectives:
+Run a distaster scenario with two types of programs running while communicating 
+with each other. The two types of programs running are the Organization(s) and 
+one HQ. 
+
+Both the HQ and Organization(s) must be able to receive and send messages to each
+other. These messages are videos, emails, sounds and pictures, this is to
+increase the immersion for the organization using the program. These must reach
+their destination with instantly. 
+
+All messages are to be recorded by the HQ so that a review of what happened in 
+the Simulation Program can be analysed after the Simulation.
+
+Measureable Effectiveness:
+The effectiveness of the Program will be in the recording of the Simulation. The
+recording will be analysed and the HQ can see what good and bad actions have been 
+taken by organiztions. Training over time using the Simulation will give feedback
+to the organzations and trainees' actions can be seen, critqued and improved.
+
+Efficiency:
+All messages must be sent almost instantaneously and files loading scenarios 
+must not take 5 minutes to load.
+
+Satisfaction Criteria of Specific contexts:
+MUST BE DONE==============================================================================
+
 ### 3.4 Performance requirements
 
 Performance is an important requirement for this system due, to the real time nature of scenario simulation. The core feature of the program will be to support
@@ -182,7 +210,50 @@ overview domain model (e.g.  a UML class diagram of approximately ten
 classes) and write a brief description of the responsibilities of each
 class in the model (3 pages).
 
-### 3.6 Design constraints
+a) Types of information used by various functions:
+
+Pictures: Displayed on the User Interface and being sent from HQ to Organizations.
+
+Videos: Displayed on the User Interface and being sent from HQ to Organizations.
+
+Emails/Messages: Displayed on the User Interface and being sent to and from
+every player in the simulation.
+
+Sound Effects: Displayed on the User Interface and being sent from HQ to Organizations.
+
+Scenario File (for loading): Loaded file in the HQ which will send messages/emails, 
+pictures, videos and sound effects from this file.
+
+Recording File: This will record all information sent and recieved by all players 
+in the Simulation with the time of the action associated.
+
+
+b) Frequency of use:
+The Simulation will be used six times a month.
+
+c) Accessing capabilities:
+HQ: Have access to the scenario's entire data collection, being able to view 
+every video, message, picture and sound. HQ i running the Simulation and needs
+to have full control and visibility over every organization. 
+
+Organization(s): Have limited access, they will only be able to view what has 
+been sent to them by the HQ and other Organizations. This done to make the 
+Simulation as real as possible to put pressure and need on communication between
+organizations and HQ.
+
+d) Data entities and their relationships:
+A data entity is an object in a data model. Data is typically designed by breaking things down into their smallest parts that are useful for representing data relationships
+NEED TO ASK REGAN
+
+e) Integrity constraints:
+Integrity constraints provide a way of ensuring that changes made to the database by authorized users do not result in a loss of data consistency.
+NEED TO ASK REGAN
+
+f) Data retention requirements:
+Keeping recorded data
+
+Overview Domain Model/UML Classes and Description for every Class
+
 
 ### 3.6 Design constraints
 
@@ -218,6 +289,71 @@ List up to twenty systemic requirements/attributes.
 Write a short natural language description of the top nonfunctional
 requirements (approx. five pages).
 
+1. Performance Requirements
+    - Messages that are sent and recieved by Organizations and the HQ must be sent to each other within a minute. Messages must be sent and recieved within a minute because it needs the Simulation must be similar to that of sending messages in a real disaster respose.
+    - Videos, Pictures and Sounds must be played when received and opened by an Organization. These are played to create a more immersion in the simulator, this will be how organizations will react to important news bullitens and updates during a disaster.
+    - Must be able to run offline and online, offline is necessary because the Simulation may be used to train people where there is no internet. The online version will be more useful, as it can handle more users in the simulation through web based design.
+    - Offline will run from one computer and have the ability to be split on multiple monitors connected to the computer.
+
+2. Scalability
+    - New scenarios must be able to load onto the HQ program. 
+    - After loading new scenarios, the HQ program must be able to run it with the organizations.
+    - Amount of Organizations running with the HQ in the Simulation can be changed for different scenarios. Different senarios means the orginazations can train for different environments and different disasters.
+    
+3. Capacity
+    - The online version must handle messages between atleast seven Organizations and one HQ. This would be as if a normal network was used in real life for the organizations, a network that will have capacity for communication.
+    - The offlive version will only handle one user at a time during the Simulation. An HQ will run simulataneously to a client organization on the same computer.
+ 
+4. Availability
+    - The Simulation will be functional once the HQ has loaded the scenario and has Organizations connected.
+
+5. Reliability
+    - There must be an error detection system for messages that have failed to be received or sent, and for failed scenario videos, pictures and sounds.
+    - There must be a error correction system for failed messages, pictures, videos and sounds.
+
+6. Modifiablilty
+    - During the Scenario, the HQ should be able create new scenario messages and be able to send them to the Organizations. This is for the HQ running the simulation to control the scenario, this control allows the HQ to add new problems and add more into the Simulation.
+    - Scenarios files can be edited when the Simulation is not running. If changes in the scenario need to be made by RedR Australia, then they can do it to fit their training purposes.
+    - During the Scenario, the HQ should be able to fire, prevent or delay any event from the loaded Scenario from executing. Allows more control over the Simulation for HQ.
+
+7. Maintainability
+    - A process where if a failure occurs during the Simulation, the recording of everything by the HQ will be able to be used the recorded error to find the bug(s). This will be for bug fixing and testing, for development of the Project and new scenarios created or modified.
+
+8. Serviceability/Supportability
+    - The online version will need an installation for the HQ program and the Organizations can enter the simulation via online clients.
+    - Create a User Manual for the users. This is because the Project Team cannot deploy the Project in Australia.
+    - To install the Disaster Simualtion, a tutorial with instructions will be made to show how it will be done. This is done so other RedR Organizations can use this.
+    - The offline version will need to be installed.
+    - A tutorial will be made to guide organizations on how to use the web based clients.
+
+9. Security
+    - RedR Australia would like to keep all scenario files encrypted and only decrypted when running the Simulation on the HQ program. Privacy for RedR Australia's scenarios is stressed by them.
+    - All organization and the HQ prgrams data will be wiped when the programs are shutdown. Except for the recoding of the Simulation by the HQ which will be exported out.
+
+10. Portability
+    - Other RedR organizations may want to use the Disaster Simulation Program to train up more Disaster response organizations around the world. The Simulation Program should be able to be emailed between RedR Organizations.
+
+11. Manageability
+    - HQ will have manage the scenario and time of the Simulation. This will be in their HQ user interface for HQ user to utilize. Allows the HQ controls for pausing and time contraints.
+
+12. Environmental
+    - Online version: The environment will be in a regular workplace. A Program will run on serveral computers all connected via the HQ's Program.  
+    - Offline version: The environment can be anywhere, our client Regan said "We may have people using the simulation in Afganistan and Iraq.", the offline version should run anywhere in the world for easy access training purposes. 
+
+13. Data Integrity
+    - The Recorded data file must have errors detected and displayed on the file as bad data. Can be used for bug fixing and testing, but so that unreliable data is easily spotted in the recording file of the simulation.
+    - The scenarios will need a token or password to decrypt the scenario file. This will ensure security of the scenarios even if the scenario files are stolen.
+
+14. Usability
+    - Client - Display sent and received messages (similar to an email inbox). In the a real disaster response, emails will is crucial to organizing the response, so having the program messages simlar to an email will help the immersion.
+    
+    - HQ 
+         - Display a list loaded events from the scenario file and what times the events will execute. 
+         - Display sent and received messages (similar to an email inbox). 
+
+15. Accuracy
+    - Recorded data in the recorded data file must contain the type of data (picture, video, message, sound), the content of the data, the time of recording and if there was an error in the recording. 
+
 
 ### 3.8 Physical and Environmental Requirements 
 
@@ -225,6 +361,14 @@ For systems with hardware components, identify the physical
 characteristics of that hardware (9.4.10) and environment conditions
 in which it must operate (9.4.11).  Depending on the project, this
 section may be from one page up to 5 pages.
+
+There is no hardware needed for this project.
+
+However our software must be used in different environments. Two different versions will be able to run. One offline and online.
+
+Online: Mainly in office buildings with internet connection and many computers on the same network.
+
+Offline: Anywhere in the world, no internet connection required and only one computer necessary to run the simulation.
 
 ### 3.9 Supporting information
 
