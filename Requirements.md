@@ -448,16 +448,23 @@ Our next project limitation is that the program must have the capacity to functi
 
 The next project limitation is in relation to the latter. Due to the the uncertainty of not knowing exactly what environments  our program will be deployed into, we must build our program so that it can be deployed and applicable to a theoretical limitless amount of computing environments. This is a major constraint for us as we must consider seriously our programming language of choice to meet this requirement adequately.
 
-An external standard that is imposed on our project is the requirement of adhering to the IEEE 12207-2017 Systems and software engineering - Software life cycle processes document. This document outlines how when developing Software, for utilisation by organisations and for the public, there is a framework of best practice to follow. This framework includes processes, that when applied correctly, through development cycles, will result in the satisfaction of our client. The content of processes, in this standard, that is relevant to our project is summarised as follows. The standard writes how the Software Life Cycle Process is split into four main parts. Agreement processes pertains to how there is a procurement phase. Whereby we need to ensure that we are on clear established agreement terms, such that us as developers and Regan the client have the same mutual understanding of what the project requirements are. Technical management processes pertain to what strategies we will be making use of to organise our work in a structured direct manner. Tools that will be used to achieve this are Task Planning via Issues feature in Gitlab, Decision management by way of keeping log records in Git that track our progress to decide what features to dedicate time toward next, and risk management which will be addressed in section 5. Specify the requirements derived from existing standards or regulations, including:
->
-> a) Report format;<br>
-> b) Data naming;<br>
-> c) Accounting procedures;<br>
-> d) Audit tracing.
->
-> For example, this could specify the requirement for software to trace processing activity. Such traces are needed for some applications to meet minimum regulatory or financial standards. An audit trace requirement
-> may, for example, state that all changes to a payroll database shall be recorded in a trace file with before and
-> after values.
+An external standard that is imposed on our project is the requirement of adhering to the IEEE 12207-2017 Systems and software engineering - Software life cycle
+processes document. This document outlines how when developing Software, for utilisation by organisations and for the public, there is a framework of best
+practice to follow. This framework includes processes, that when applied correctly, through development cycles, will result in the satisfaction of our client.
+The content of processes, in this standard, that is relevant to our project is summarised as follows. The standard writes how the Software Life Cycle Process is
+split into four main parts. Agreement processes pertains to how there is a procurement phase. Whereby, we need to ensure that we are on clear established
+agreement terms, such that us as developers and Regan the client have the same mutual understanding of what the project requirements are. Technical management
+processes pertain to what strategies we will be making use of to organise our work in a structured direct manner. Tools that will be used to achieve this are Task Planning
+via Issues feature in Gitlab, Decision Management by way of keeping log records in Git that track our progress to decide what features to dedicate time toward
+next, and risk management which will be addressed in section 5. Technical Processors are technical based actions that we will utilise to ensure for software quality
+throughout development. These processors are inclusive as follows: Architecture design, that will allow us to effectivly determine what platforms we will need to implement our overall solutions.
+Implementation, is the act of writing our code, upto this phase, we have ensured that this phase will be achieved comprehensivly, as the aforementioned processes would
+have set us up adequately in terms of preperation. Integration process, which is the step of combining our individual components into one coherent functional
+system. Verification, is the process of monitering the way in which we are building our software to ensure that it is upto a high coding standard.
+Validation, is the process whereby we reflect of what we have accomplished thus far to review in regards to assuring that features we have implemented are in accordance
+to the established requirements. Operation and Maintenance phase, is the action of partiarly deploying our program at Regans disposal, such that he will be able
+to provide us with feedback that outlines wether the program meets his expectations or not, indicating where further work needs to be dedicated towards.
+
 
 ### 3.7 Nonfunctional system attributes
 
