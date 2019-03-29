@@ -58,7 +58,7 @@ The purpose of the system is to reduce the total workload of the overseer in the
 
 One paragraph describing the scope of the system (9.5.2)
 
-The goal of this undertaking is to produce a computer program that is going to be able to be used to automate some of the responsibilities of the overseer in the disaster simulations that RedR frequently run. The cost of producing such a program will be little to none as all of the development process will be able to be completed using hardware that is already available to every team member. The final deliverable product will be a single piece of software that will be capable of operating on multiple machines as well as communicating with each machine over a network operated by RedR. The kind of software that will be produced is still yet undecided (whether it will be a web app or a stand-alone application for example). The program will be able to automate the sending and receiving of emails between the teams that are participating in the disaster simulation. It will also track the progress of the simulation since the time scale that is used for each simulation is not one to one (in most cases, 1 hour = one day). 
+The goal of this undertaking is to produce a computer program that is going to be able to be used to automate some of the responsibilities of the overseer in the disaster simulations that RedR frequently run. The cost of producing such a program will be little to none as all of the development process will be able to be completed using hardware that is already available to every team member. The final deliverable product will be a single piece of software that will be capable of operating on multiple machines as well as communicating with each machine over a network operated by RedR. The program will be able to automate the sending and receiving of emails between the teams that are participating in the disaster simulation. It will also track the progress of the simulation since the time scale that is used for each simulation is not one to one (in most cases, 1 hour = one day). 
 
 [Will need to insert diagrams] 
 
@@ -70,11 +70,9 @@ One page defining the system's relationship to other related products
 
 > **9.5.3 Product perspective** <br>
 > Define the system's relationship with other related products. 
->
->Given that the system will be implementing email sending, it will likely piggyback off of an exisiting email service/framework, rather than having the team implement their own >at a great cost of time. This is only going to be the case if the system is connected to the internet. Given that the system is running in a very remote environment, it may be >the case that there is no internet connection available. 
 > 
->The software product is going to be a standalone application and will not be implemented into a larger system. This is because the client currently doesn't have other systems >to integrate the product with. This will be the first of it's kind and thus will not need to be related to other products. 
->
+The software product is going to be a standalone application and will not be implemented into a larger system. This is because the client currently doesn't have other systems to integrate the product with. This will be the first of it's kind and thus will not need to be related to other products. 
+
 > If the product is an element of a larger system, then relate the requirements of that larger system to the functionality of the product covered by the software requirements specification.
 > 
 > If the product is an element of a larger system, then identify the interfaces between the product covered by the software requirements specification and the larger system of which the product is an element. 
@@ -82,14 +80,14 @@ One page defining the system's relationship to other related products
 > A block diagram showing the major elements of the larger system, interconnections, and external interfaces can be helpful.
 > 
 > Describe how the software operates within the following constraints:  
-a) System interfaces; The kinds of other systems that the software will have to interact with is also largely unknown. It will likely have to communicate with an email system to be able to communicate with the simulation teams.<br>
-b) User interfaces; The software will implement it's own user interface to allow simulation participants to easily be able to interact with it. <br>
-c) Hardware interfaces; The kind of hardware that the software is going to be running on is also unknown. <br>
-d) Software interfaces; We don't know which other software our program will have to interface with. The client did not give the team a specific requirement as to which software to use. The client did ssuggest some open source software called KoboToolBox (https://www.kobotoolbox.org/), so the software the team produces will likely have to communicate with KoboToolBox. The client also told us that the machines that the software will be running on are Windows based. While this will likely not be a problem, the team will need to ensure that the language that is chosen to create the software is capable of running on a Windows machine. The version of Windows is also not known, but this will be brought up at the next meeting with the client. <br>
-e) Communications interfaces; The program may be required to communicate with an external cloud service for storing data and sending messages between different locations. <br>
-f) Memory; The program will have to be optimised such that it doesn't consume all of the memory on the machines<br>
-g) Operations; <br>
-h) Site adaptation requirements; The software will have to be able to run on the hardware that is present in the disaster simulation setting (which will be several different Windows machines)<br>
+a) System interfaces; The kinds of other systems that the software will have to interact with is also largely unknown. It will likely have to communicate with an email system to be able to communicate with the simulation teams.
+b) User interfaces; The software will implement it's own user interface to allow simulation participants to easily be able to interact with it. 
+c) Hardware interfaces; The kind of hardware that the software is going to be running on is also unknown. 
+d) Software interfaces; We don't know which other software our program will have to interface with. The client did not give the team a specific requirement as to which software to use. The client did ssuggest some open source software called KoboToolBox (https://www.kobotoolbox.org/), so the software the team produces will likely have to communicate with KoboToolBox. The client also told us that the machines that the software will be running on are Windows based. While this will likely not be a problem, the team will need to ensure that the language that is chosen to create the software is capable of running on a Windows machine. The version of Windows is also not known, but this will be brought up at the next meeting with the client. 
+e) Communications interfaces; 
+f) Memory; The program will have to be optimised such that it doesn't consume all of the memory on the machines
+g) Operations; 
+h) Site adaptation requirements; The software will have to be able to run on the hardware that is present in the disaster simulation setting (which will be several different Windows machines)
 
 #### 1.3.2 Product functions
 
@@ -112,8 +110,6 @@ One page on the limitations on the product (9.5.6)
 While the team will put forward their best attempt to satisfy the client, there will be limitations that may slow progress. There may also be requests from the client that simply may not be able to be met simply because of the nature of the software being used to develop the final product, as well as additional time and knowledge constraints. Regan (the client) mentioned to the team that he wanted to have the final program be able to send text messages to mobile phones. This is an example of a feature that may be out of reach simply because the team have never had any experience in producing software capable of this. The machines that will run the end product software may also be their own limitation to the project. The operating system that RedR's machines run is currently unknown. The hardware of RedR's computers is also unknown but this will likely not be of concern. This is because the simulation program that will be developed will not be particularly computationally expensive as it will not have any complex graphics to render as part of the simulation. 
 
 The users may also become a limitation of the system. The software is only as good as the people that use it. Given that the users of the software may be otherwise preoccupied with other tasks or under some kind of situational stress, the usefulness of the software may be limited based on how the users interact with it. 
-
-Another limitation of the program may be that there is no internet connection available for the program to use. Given taht teh simulations are going to run in a very remote region of Australia (to simulate a different country), it may be the case that there is no internet connection available. In this case, the program will be required to run on a single machine but behave as if it were running on multiple machines. This may limit the usabability of the system seeing as only one person will be capable of using it at a time, while it may be that multiple people *wish* to access it at the same time. Since it will take longer for the simulation teams to be able to check messages, this may limit the usefulness of the product. 
 
 ## 2. References
 
@@ -146,162 +142,17 @@ for at least top ten focal use cases, write a short goal statement and
 use case body (up to seven pages).  Identify the use cases that
 comprise a minimum viable product.
 
-|  User Action  | System Responsibility |
-| --- | --- |
-|User launches Scenario editor|  |
-|  |System prompts user to either create new scenario or edit existing one|
-|User selects "create new scenario"|  |
-|  |System prompts user to choose the number and names of NGOs and create pre-scheduled messages to be sent to them.|
-|User selects NGO number and names|  |
-|  | System adds NGOs to NGO list |
-|User fills in pre-scheduled messages, and submits them to message list|  |
-|  |System adds pre-scheduled messages to list and displays them|
-|User selects "save scenario"|  |
-|  | System saves scenario to local file |
-
-**HQ - Add unscheduled message**
-
-During the simulation, the simulation administrator may want to send additional
-messages from the HQ system. Unscheduled messages can be sent imediately, or
-added to the list of outgoing messages to be sent at a later time.
-
-|  User Action  | System Responsibility |
-| --- | --- |
-| User selects "add unscheduled message" |  |
-|  | System opens new message interface |
-| User fills in relevant fields (recipient, message type (text/email), subject, message contents, message time) and optionality attaches file to message |  |
-| User selects "Add message to schedule" |  |
-|  | System adds message to message list |
-
-**HQ - Begin Simulation**
-
-The HQ system will start sending pre-scheduled messages and begin recording data
-from the simulation.
-
-|  User Action  | System Responsibility |
-| --- | --- |
-| User launches HQ program |  |
-|  | System queries user to load scenario |
-| User selects scenario from local disk |  |
-|  | System query user for scenario log save location |
-| User selects save location on local disk |  |
-|  | System launches interface and starts opens to allow clients to connect|
-| When clients have connected user presses "Start simulation" |  |
-|  | System begins simulation |
-
-**HQ - End Simulation**
-
-The HQ system will end the messaging process and record senario data to a local
-file.
-
-|  User Action  | System Responsibility |
-| --- | --- |
-| User selects "end scenario"  | System automaticly ends senario when run time expired |
-|  | system saves log to previously defined save destination |
-|  | System ends program |
-
-**HQ - Receive Message**
-
-HQ system will identify and display message from any of the NGO clients
-
-|  User Action  | System Responsibility |
-| --- | --- |
-|  | System indicates to user that new message has been received |
-| User selects new message, displayed in message list (filterable by client NGO) |  |
-|  | System opens message contents |
-| User inspects message and can download any attached files |  |
-
-
-**Client - Join Scenario Session**
-
-NGO client should establish 2 way connection with HQ system.
-
-|  User Action  | System Responsibility |
-| --- | --- |
-| User launches client program |  |
-|  | System launches |
-|  | System initiates connection procedure and prompts user for authentication for specified HQ (host)|
-| User authenticates and connects to HQ |  |
-|  | System prompts user to choose an NGO from the sessions NGO list |
-| User selects NGO from list |  |
-|  | System submits selection to host and opens main interface |
-
-**Client - Send Message**
-
-|  User Action  | System Responsibility |
-| --- | --- |
-|  User selects "Send Message" |  |
-|  | System opens new message template interface |
-| User fills in relevant fields (recipient, message type (text/email), subject, message contents) and optionality attaches file to message |  |
-| User submits message |  |
-|  | System submits message to HQ(via internet or from same system) |
-
-**Client - Receive Message**
-
-|  User Action  | System Responsibility |
-| --- | --- |
-|  | System indicates to user that new message has been received |
-| User selects new message, displayed in message list |  |
-|  | System opens message contents |
-| User inspects message and can download any attached files |  |
-
-**client interface can be accessed from the HQ system, in the event there is no internet access.**
-
-|  User Action  | System Responsibility |
-| --- | --- |
-| User begins senario |  |
-|  | System launches senario and sends messages to locally stored client |
-| User can access client inbox/outbox  |  |
-
-**NGO client can connect to HQ while the simulation is running, incase of disconection.**
-
-|  User Action  | System Responsibility |
-| --- | --- |
-| User connects to HQ system |  |
-|  | HQ system re-initialises client, and provides client with all sent messages|
-| user accesses messages |  |
-
-**other usecases (order needs to be checked)**
-
-* The simulation can be run off single offline computer or multiple networked computers. It is unclear if this determination will be made by the system, or manually by a user prior to starting the simulation.
-
-* HQ system can change the time scale of the simulation before it starts (e.g. 1 hour real world = 1 day simulation).
-
-* HQ system can change the simulation run time prior to the simulation starting.
-
-* HQ User can edit message on message list from the HQ system while the simulation is running.
-
-* HQ User can delete message on message list from the HQ system while the simulation is running.
-
-* HQ User loads existing senario in senario editor to make adjustments, before saving to current or new file.
-
-* NGO clients can playback audio file or open any other form of file sent attached to a message (unsure if this will be within the client application, or via a download).
-
-* HQ user can select any outgoing message to view details and contents. This includes previously sent messages.
-
-* NGO client users cannot access any HQ tools or information.
-
-* Users of both HQ system and NGO client can view simulation time/day on their respective interfaces. (1 hour = 1 day simulation time).
-
-* Unsure if NGO clients are able to communicate with other NGO clients. This needs to be clarified.
-
-* NGO clients can create log entry (text or audio) documenting radio communication or other general information.
-
-* HQ user can load file from local disk and atach it to message (Audio files specified to be attached, unsure about other files - images etc).
-
-* HQ user can apply sound effects over audio recordings for immersion, unsure where sound effects will be stored.
-
-* HQ user filters outgoing messages on message list by recipiant
-
-* HQ user filters recieved messages by recipiant
-
-* NGO client directly replies to message from HQ, where recipiant, subject and message fields are pre-filled.
-
-* HQ user replies directly to client, where recipiant, subject and message fields are pre-filled.
-
-* HQ client can view a list of connected NGO clients.
- 
-* HQ can kick NGO client from session.
+Senario Editor
+|  User Action  | System Responsability |
+| ------------- |:-------------:|
+|Senario master launches Senario editor||
+||System prompts user to either create new senario or edit existing one|
+|User selects create senario||
+||System promts user to choose the number and names of NGOs and create pre-scheduled messages to be sent to them.|
+|Senario master selects NGO number and names||
+|Senario master fills in pre-scheduled messages, and submits them to message list||
+||System adds pre-scheduled messages to list and displays them|
+|Senario master selects "save senario"||
 
 ### 3.3 Usability Requirements
 
@@ -345,9 +196,10 @@ instantaneous text based messages between the 1..* core Group terminals and the 
 sending and receiving messages must not exceed 10 seconds. Should this performance requirement not be met, then this will result in unresponsive and ineffective
 disaster based scenarios. In addition, there will be concurrent terminals that rely on their parent (HQ), as well as sibling (Group) terminals, all being
 synchronised with one another. Therefore, this means that this implies that the HQ terminal must constantly be monitoring the performance of group terminals to
-ensure that this critical performance requirement is being satisfied. Moreover, due to the size of the data being transferred, between a limited amount of
-terminals, being relatively small, it ensures that a large computational overhead is not necessary for the system in which we need to build. 
-
+ensure that this critical performance requirement is being satisfied. Another critical perfromance requirement is that the program has the capacity to log every
+event that has occured throughout the simulation in real time. Meaning that should there be a delay in this feature then the log time entries wil not be accurate.
+Moreover, due to the size of the data being transferred, between a limited amount of terminals, being relatively small, it ensures that a large computational
+overhead is not necessary for the system in which we need to build.
 
 
 
@@ -417,9 +269,7 @@ Our next project limitation is that the program must have the capacity to functi
 
 The next project limitation is in relation to the latter. Due to the the uncertainty of not knowing exactly what environments  our program will be deployed into, we must build our program so that it can be deployed and applicable to a theoretical limitless amount of computing environments. This is a major constraint for us as we must consider seriously our programming language of choice to meet this requirement adequately.
 
-> 9.5.16 Standards compliance<br>
->
-> An external standard that is imposed on our project is the requirement of adhering to the IEEE 12207-2017 Systems and software engineering - Software life cycle processes document. This document outlines how when developing Software, for utilisation by organisations and for the public, there is a framework of best practice to follow. This framework includes processes, that when applied correctly, through development cycles, will result in the satisfaction of our client. The content of processes, in this standard, that is relevant to our project is summarised as follows. The standard writes how the Software Life Cycle Process is split into four main parts. Agreement processes pertains to how there is a procurement phase. Whereby we need to ensure that we are on clear established agreement terms, such that us as developers and Regan the client have the same mutual understanding of what the project requirements are. Technical management processes pertain to what strategies we will be making use of to organise our work in a structured direct manner. Tools that will be used to achieve this are Task Planning via Issues feature in Gitlab, Decision management by way of keeping log records in Git that track our progress to decide what features to dedicate time toward next, and risk management which will be addressed in section 5. Specify the requirements derived from existing standards or regulations, including:
+An external standard that is imposed on our project is the requirement of adhering to the IEEE 12207-2017 Systems and software engineering - Software life cycle processes document. This document outlines how when developing Software, for utilisation by organisations and for the public, there is a framework of best practice to follow. This framework includes processes, that when applied correctly, through development cycles, will result in the satisfaction of our client. The content of processes, in this standard, that is relevant to our project is summarised as follows. The standard writes how the Software Life Cycle Process is split into four main parts. Agreement processes pertains to how there is a procurement phase. Whereby we need to ensure that we are on clear established agreement terms, such that us as developers and Regan the client have the same mutual understanding of what the project requirements are. Technical management processes pertain to what strategies we will be making use of to organise our work in a structured direct manner. Tools that will be used to achieve this are Task Planning via Issues feature in Gitlab, Decision management by way of keeping log records in Git that track our progress to decide what features to dedicate time toward next, and risk management which will be addressed in section 5. Specify the requirements derived from existing standards or regulations, including:
 >
 > a) Report format;<br>
 > b) Data naming;<br>
@@ -519,8 +369,6 @@ Online: Mainly in office buildings with internet connection and many computers o
 
 Offline: Anywhere in the world, no internet connection required and only one computer necessary to run the simulation.
 
-RedR are going to be running their simulations in an isolated section of the Australian outback. This area is going to be a very dry, hot and arid place. Some simulations are going to run inside buildings (such as in old school buildings) and some are going to be run outdoors. For those simulations that are run indoors, there will more than likely be internet access. It may be the case that some classes don't have internet access. The program will have to be able to function whether it has access to the internet or not. Without internet, the software will run locally on a single machine. It will distinguish users via a type of login system and each user will only be able to access specific parts of the program. 
-
 ### 3.9 Supporting information
 
 see 9.5.19. 
@@ -539,44 +387,21 @@ indicate testable acceptance criteria.
 
 Identify dates for key project deliverables: 
 
-In discussion with our client Regan there are no specific deliverable dates except from a final release at the end of the course on 11/10/2019.
-For thorough testing, a functional prototype would be developed as early as possible so that Regan can test in the field and provide us with feedback.
+1. architectural prototype
+1. minimum viable product
+1. further releases
+
+(1 page).
 
 ### 5.2 Budget
 
-Our project does not require a budget as it is purely software built using free tools.
-Our client does not have a budget in mind from RedR themselves. We have decided to face that if and when it comes up, due to the likelihood of us needing a budget.
+Present a budget for the project (table), and justify each budget item
+(one paragraph per item, one page overall). 
 
 ### 5.3 Risks 
 
 Identify the ten most important project risks to achieving project goals: their type, likelihood,
 impact, and mitigation strategies (3 pages).
-
-| Risk      | Likelihood    | Severity      |
-| --------- | ------------- | ------------- |
-| A large number of project members are sick at critical times during the project, hindering progress resulting in us falling short of delivery goals. | Moderate | Serious |
-| Unforeseen major changes to requirements prompting a redesign of the system. | Moderate | Tolerable |
-| There is a natural disaster and Regan gets called out into the field to help, making it impossible to communicate with him. | Low | Serious |
-| Expansion in number of users, or amount of data stored, requires paid services, creating unexpected budget requirements. | Moderate | Tolerable |
-| The project requires more time to develop than expected, causing us to fall short of delivery goals. | High | Serious |
-| Developed program has too big a learning curve, making it too difficult for users to use and forcing the client to discard it. | Moderate | Catastrophic |
-| The team focuses on non-required features and functionality (such as visuals), restricting us from finishing on-time. | Moderate | Serious |
-| The developed software ends up requiring hardware investment for testing, making it too costly for the client. | Low | Catastrophic |
-| Employee turnover at RedR resulting in the termination of our project. | Low | Catastrophic |
-| A disaster at VUW restricting access to our files. | Low | Serious |
-
-| Risk      | Strategy      |
-| --------- | ------------- |
-| A large number of project members are sick at critical times during the project, hindering progress resulting in us falling short of delivery goals. | Keep up team discussion and documentation so that each member knows everyone's role, a sick team member's work could then be picked up by the rest of the team. |
-| Unforeseen major changes to requirements prompting a redesign of the system. | Keep up regular communication with the client about requirements, questioning what they need, especially early on, to lower the likelihood of an unforeseen change. |
-| There is a natural disaster and Regan gets called out into the field to help, making it impossible to communicate with him. | Retrieve concrete requirements from Regan early on so that we could carry on the project with little to no input from him. |
-| Expansion in number of users, or amount of data stored, requires paid services, creating unexpected budget requirements. | Research such possibilities and make the client aware. Ask for a potential budget from the client. |
-| The project requires more time to develop than expected, causing us to fall short of delivery goals. | Investigate adopting complete components from elsewhere, make as much use from available resources as possible. |
-| Developed program has too big a learning curve, making it too difficult for users to use and forcing the client to discard it. | Assign time near the end date of the project specifically for user interface design and test with people outside the team. |
-| The team focuses on non-required features and functionality (such as visuals), restricting us from finishing on-time. | Assign time to specific parts of development with correct priorities based on requirements. This will keep us on track. |
-| The developed software ends up requiring hardware investment for testing, making it too costly for the client. | Discuss with the client and the school about their possible testing facilities. |
-| Employee turnover at RedR resulting in the termination of our project. | This event is completely out of our control and there can be nothing done about it if it happens |
-| A disaster at VUW restricting access to our files. | Encorporate a version control system such as GitLab that stores files offsite. This can be accessed remotely. |
 
 If the project will involve any work outside the ECS laboratories, i.e. off-campus activities, these should be included in the following section.
 
@@ -586,24 +411,31 @@ Document here project requirements for Health and Safety. All teams must state i
 
 1. How teams will manage computer-related risks such as Occupational Over-Use, Cable management, etc.  
 
-Occupational Over-Use can be avoided by not working for lengthy periods of time without a break. The team has agreed to 2 10 minute breaks for each 4 hour lab session to break up the time. During this time, team members can go for a walk, get a drink, eat, or anything to aid their general wellbeing. This is stated in our team contract.
-To avoid creating tripping hazards with poor cable management, the team will endeavour to keep cables off the floor where possible. The ECS computer labs are a good example of this. If not possible, the team should be made aware of any cabling around the teams working space by the owner of the cable. Team members should also scan the area around them when arriving at the space to work.
-
 2. Whether project work requires work or testing at any external (off-campus) workplaces/sites. If so, state the team's plans for receiving a Health and Safety induction for the external workplaces/sites. If the team has already received such an induction, state the date it was received. 
 
-The teams health and safety induction took place on 21/03/2019 and was presented by the school's Safety Officer Roger Cliffe.
-Our project does not require us to go off university campus. Our lab work is done on VUW Kelburn campus, and our meeting with Regan take place on the VUW Te Aro campus.
-
 3. Whether project work requires the team test with human or animal subjects? If so, explain why there is no option but for the team to perform this testing, and state the team's plans for receiving Ethics Approval _prior_ to testing.
-
-Our project will be tested with human subjects. This is by requirement of our client, Regan. Once the team has developed a functional version, it will be used in the real world running disaster simulations. These tests will be fully conducted by Regan making it his ethical requirement to ensure the safety of the people using the software.
 
 Also, the document in this section any additional discussions with the School Safety Officer regarding Health and Safety Risks. Give any further information on relevant health and safety regulations, risks, and mitigations, etc.
 
 
 #### 5.4.1 Safety Plans
 
-Project requirements do not involve risk of death, serious harm, harm or injury.
+Safety Plans may be required for some projects, depending on project requirements. Safety Plan templates are available on the course Health & Safety page. Two questions all teams must answer are:
+
+**Do project requirements involve anything that can cause serious harm or death?**  
+Examples: building/modifying devices using voltages > 60 V, chemicals, large moving machinery, flying devices, bodies of water.
+
+If so, you will have to write a separate Safety Plan as part of project requirements, and the Safety Plan must be referenced in this section. For health and safety risks involving serious harm or death, you must first contact the School Safety Officer and Course Coordinator first to discuss the Safety Plan and project requirements.
+
+**Do project requirements involve anything that can cause harm or injury?**  
+Examples: building/modifying things with voltages <= 60V, small moving machinery, wearable devices.
+
+If so, you will have to write a separate Safety Plan as part of project requirements, and the Safety Plan must be referenced in this section. For health and safety risks involving har or injury, you should write a draft of the Safety Plan before contacting the School Safety Officer and Course Coordinator to discuss the Safety Plan and project requirements.
+
+If a safety plan is required, list in this section the date the School Safety officer accepted your Health and Safety plan (if accepted by submission date).
+
+_If the project is purely software and requires no contact risks involving physical harm, then state "Project requirements do not involve risk of death, serious harm, harm or injury." in this section._
+
 
 ## 6. Appendices
 ### 6.1 Assumptions and dependencies 
@@ -618,8 +450,8 @@ The client suggested using KoboToolBox as a framework for the program, though th
 
 One page glossary _as required_.
 
-Overseer: The individual responsible for communicating with each of the teams participating within the simulation.<br>
-RedR Australia: An organisation that selects, trains and deploys staff to assist in disaster situations, and is associated with the client. <br>
+Overseer: The individual responsible for communicating with each of the teams participating within the simulation.
+RedR Australia: An organisation that selects, trains and deploys staff to assist in disaster situations, and is associated with the client. 
 
 ## 7. Contributions
 
