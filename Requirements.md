@@ -154,40 +154,50 @@ Senario Editor
 ||System adds pre-scheduled messages to list and displays them|
 |Senario master selects "save senario"||
 
-### 3.3 Usability Requirements
-
+3.3 Usability Requirements
 See 9.5.12. for most systems, this will be around one page.
 
-> **9.5.12 Usability requirements**<br>
-> Define usability (quality in use) requirements. Usability requirements and objectives for the software system include measurable effectiveness, efficiency, and satisfaction criteria in specific contexts of use.
+Define usability (quality in use) requirements. Usability requirements and objectives for the software system include measurable effectiveness, efficiency, and satisfaction criteria in specific contexts of use.
 
-Usability is the Program's ability to elegantly run desired features specified by the client. 
+Usability is the Program's ability to elegantly run desired features specified by the client.
 
 Usability Requirements and Objectives:
-Run a distaster scenario with two types of programs running while communicating 
-with each other. The two types of programs running are the Organization(s) and 
-one HQ. 
+
+Offline:
+Run a disaster scenario over on one computer where a the HQ and the organization
+will run on. This will ensure the program can be run anywhere for training
+purposes.
+
+Online:
+Run a distaster scenario with two types of programs running while communicating
+with each other over the internet. The two types of programs running are the
+Organization(s) and one HQ.
 
 Both the HQ and Organization(s) must be able to receive and send messages to each
 other. These messages are videos, emails, sounds and pictures, this is to
 increase the immersion for the organization using the program. These must reach
-their destination with instantly. 
+their destination with instantly.
 
-All messages are to be recorded by the HQ so that a review of what happened in 
+All messages are to be recorded by the HQ so that a review of what happened in
 the Simulation Program can be analysed after the Simulation.
 
 Measureable Effectiveness:
 The effectiveness of the Program will be in the recording of the Simulation. The
-recording will be analysed and the HQ can see what good and bad actions have been 
+recording will be analysed and the HQ can see what good and bad actions have been
 taken by organiztions. Training over time using the Simulation will give feedback
 to the organzations and trainees' actions can be seen, critqued and improved.
 
 Efficiency:
-All messages must be sent almost instantaneously and files loading scenarios 
+All messages must be sent within a minute and files loading scenarios
 must not take 5 minutes to load.
 
 Satisfaction Criteria of Specific contexts:
-MUST BE DONE==============================================================================
+Creating a functional offline version of the Disaster Simulaion program. Where
+scenarios can be loaded, run and recorded with an organization using the simulation
+sending messages between the HQ and the organization on the same computer.
+Replaying the recording will be important for analytical purposes for RedR
+Australia, including a replay of the scenario with all messages sent with time
+stamps is a must.
 
 ### 3.4 Performance requirements
 
