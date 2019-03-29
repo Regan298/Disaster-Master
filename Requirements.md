@@ -125,7 +125,14 @@ subsections to focus on the most important parts of your product.
 
 ### 3.1 External interfaces
 
-See 9.5.10. for most systems, this will be around one page. 
+The external interface needed for our system will be Ethernet. Our program needs to support the capturing of all Disaster simulation data in real time.
+Because Regan wants the ability to review data post simulation event. As such, this means that our software solution, needs to support the uploading or
+the transferring of this data to an external location via Ethernet, as an external interface. The reason as to why Ethernet is the external interface for internet,
+, is because our Software will be deployed onto desktop computers meaning they don't support a Wifi external interface. The external destination will be to a list
+of email addresses, that will be inputed at the start of each simulation, for convenience. And the uploading of this data will be at the instant a simulation is
+complete. The data will be in the format of a simple custom defined XML text file, therefore it will be small in size. Once the email has been processed via
+the Ethernet External interface it will noify the HQ Terminal that the function has been accomplished.
+
 
 ### 3.2 Functions
 
@@ -156,25 +163,15 @@ See 9.5.12. for most systems, this will be around one page.
 
 ### 3.4 Performance requirements
 
-See 9.5.13. for most systems, this will be around one page.
-Hardware projects also see section 9.4.6.
+Performance is an important requirement for this system due, to the real time nature of scenario simulation. The core feature of the program will be to support
+instantaneous text based messages between the 1..* core Group terminals and the Single HQ terminal concurrently. As such, this dictates that the delay between
+sending and receiving messages must not exceed 10 seconds. Should this performance requirement not be met, then this will result in unresponsive and ineffective
+disaster based scenarios. In addition, there will be concurrent terminals that rely on their parent (HQ), as well as sibling (Group) terminals, all being
+synchronised with one another. Therefore, this means that this implies that the HQ terminal must constantly be monitoring the performance of group terminals to
+ensure that this critical performance requirement is being satisfied. Moreover, due to the size of the data being transferred, between a limited amount of
+terminals, being relatively small, it ensures that a large computational overhead is not necessary for the system in which we need to build. 
 
-> **9.5.13 Performance requirements** <br>
-> Specify both the static and the dynamic numerical requirements placed on the software or on human interaction with the software as a whole. 
-> 
-> Static numerical requirements may include the following:
-> 
-> a) The number of terminals to be supported;  
-> b) The number of simultaneous users to be supported;  
-> c) Amount and type of information to be handled.
-> 
-> Static numerical requirements are sometimes identified under a separate section entitled Capacity.
-> 
-> Dynamic numerical requirements may include, for example, the numbers of transactions and tasks and the amount of data to be processed within certain time periods for both normal and peak workload conditions. The performance requirements should be stated in measurable terms.
-> 
->  For example, "_95 % of the transactions shall be processed in less than 1 second._" rather than, "An operator shall not have to wait for the transaction to complete."
-> 
-> NOTE Numerical limits applied to one specific function are normally specified as part of the processing subparagraph description of that function.
+
 
 
 ### 3.5 Logical database requirements
@@ -187,22 +184,31 @@ class in the model (3 pages).
 
 ### 3.6 Design constraints
 
-see 9.5.15 and 9.5.16. for most systems, this will be around one page.
+### 3.6 Design constraints
 
-> 9.5.15 Design constraints<br>
-> Specify constraints on the system design imposed by external standards, regulatory requirements, or project limitations.
-> 
+9.5.15 Design constraints<br>
+Specify constraints on the system design imposed by external standards, regulatory requirements, or project limitations.
+
+This project has design constraints imposed upon it by project limitations. These Constraints will dictate the way in which our project Development Life Cycle is affected. A project limitation constraint is time. We are bound by our delivery date in October, in addition to Regan's request of frequent updates to show how our project is progressing. As such, we must plan our time accordingly, using agile time management practices.
+
+Another project limitation constraint is our budget. We have been allocated a budget of $0. This is very reasonable however, because firstly, we are working for a charity organisation. And secondly because this project does not require the purchasing of licensed software packages, nor additional physical hardware.
+
+Our next project limitation is that the program must have the capacity to function in multiple environments. Whereby, these environments will vary in terms of there properties to one another. These properties being access to the external internet and the quantity of concurrent simulation computers. This variance is a result of the real world simulation environment being dynamic, as Regan has stated that the program will be run in varying locations, with some being more equipped in terms of there Hardware. This constrains us, as we are required to develop a program that supports features that may mutually oppose each other, proving a difficulty to develop in regards to.
+
+The next project limitation is in relation to the latter. Due to the the uncertainty of not knowing exactly what environments  our program will be deployed into, we must build our program so that it can be deployed and applicable to a theoretical limitless amount of computing environments. This is a major constraint for us as we must consider seriously our programming language of choice to meet this requirement adequately.
+
 > 9.5.16 Standards compliance<br>
-> Specify the requirements derived from existing standards or regulations, including:
-> 
+>
+> An external standard that is imposed on our project is the requirement of adhering to the IEEE 12207-2017 Systems and software engineering - Software life cycle processes document. This document outlines how when developing Software, for utilisation by organisations and for the public, there is a framework of best practice to follow. This framework includes processes, that when applied correctly, through development cycles, will result in the satisfaction of our client. The content of processes, in this standard, that is relevant to our project is summarised as follows. The standard writes how the Software Life Cycle Process is split into four main parts. Agreement processes pertains to how there is a procurement phase. Whereby we need to ensure that we are on clear established agreement terms, such that us as developers and Regan the client have the same mutual understanding of what the project requirements are. Technical management processes pertain to what strategies we will be making use of to organise our work in a structured direct manner. Tools that will be used to achieve this are Task Planning via Issues feature in Gitlab, Decision management by way of keeping log records in Git that track our progress to decide what features to dedicate time toward next, and risk management which will be addressed in section 5. Specify the requirements derived from existing standards or regulations, including:
+>
 > a) Report format;<br>
 > b) Data naming;<br>
 > c) Accounting procedures;<br>
 > d) Audit tracing.
-> 
+>
 > For example, this could specify the requirement for software to trace processing activity. Such traces are needed for some applications to meet minimum regulatory or financial standards. An audit trace requirement
-may, for example, state that all changes to a payroll database shall be recorded in a trace file with before and
-after values.
+> may, for example, state that all changes to a payroll database shall be recorded in a trace file with before and
+> after values.
 
 ### 3.7 Nonfunctional system attributes
 
