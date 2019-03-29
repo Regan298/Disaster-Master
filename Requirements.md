@@ -387,21 +387,44 @@ indicate testable acceptance criteria.
 
 Identify dates for key project deliverables: 
 
-1. architectural prototype
-1. minimum viable product
-1. further releases
-
-(1 page).
+In discussion with our client Regan there are no specific deliverable dates except from a final release at the end of the course on 11/10/2019.
+For thorough testing, a functional prototype would be developed as early as possible so that Regan can test in the field and provide us with feedback.
 
 ### 5.2 Budget
 
-Present a budget for the project (table), and justify each budget item
-(one paragraph per item, one page overall). 
+Our project does not require a budget as it is purely software built using free tools.
+Our client does not have a budget in mind from RedR themselves. We have decided to face that if and when it comes up, due to the likelihood of us needing a budget.
 
 ### 5.3 Risks 
 
 Identify the ten most important project risks to achieving project goals: their type, likelihood,
 impact, and mitigation strategies (3 pages).
+
+| Risk      | Likelihood    | Severity      |
+| --------- | ------------- | ------------- |
+| A large number of project members are sick at critical times during the project, hindering progress resulting in us falling short of delivery goals. | Moderate | Serious |
+| Unforeseen major changes to requirements prompting a redesign of the system. | Moderate | Tolerable |
+| There is a natural disaster and Regan gets called out into the field to help, making it impossible to communicate with him. | Low | Serious |
+| Expansion in number of users, or amount of data stored, requires paid services, creating unexpected budget requirements. | Moderate | Tolerable |
+| The project requires more time to develop than expected, causing us to fall short of delivery goals. | High | Serious |
+| Developed program has too big a learning curve, making it too difficult for users to use and forcing the client to discard it. | Moderate | Catastrophic |
+| The team focuses on non-required features and functionality (such as visuals), restricting us from finishing on-time. | Moderate | Serious |
+| The developed software ends up requiring hardware investment for testing, making it too costly for the client. | Low | Catastrophic |
+| Employee turnover at RedR resulting in the termination of our project. | Low | Catastrophic |
+| A disaster at VUW restricting access to our files. | Low | Serious |
+
+| Risk      | Strategy      |
+| --------- | ------------- |
+| A large number of project members are sick at critical times during the project, hindering progress resulting in us falling short of delivery goals. | Keep up team discussion and documentation so that each member knows everyone's role, a sick team member's work could then be picked up by the rest of the team. |
+| Unforeseen major changes to requirements prompting a redesign of the system. | Keep up regular communication with the client about requirements, questioning what they need, especially early on, to lower the likelihood of an unforeseen change. |
+| There is a natural disaster and Regan gets called out into the field to help, making it impossible to communicate with him. | Retrieve concrete requirements from Regan early on so that we could carry on the project with little to no input from him. |
+| Expansion in number of users, or amount of data stored, requires paid services, creating unexpected budget requirements. | Research such possibilities and make the client aware. Ask for a potential budget from the client. |
+| The project requires more time to develop than expected, causing us to fall short of delivery goals. | Investigate adopting complete components from elsewhere, make as much use from available resources as possible. |
+| Developed program has too big a learning curve, making it too difficult for users to use and forcing the client to discard it. | Assign time near the end date of the project specifically for user interface design and test with people outside the team. |
+| The team focuses on non-required features and functionality (such as visuals), restricting us from finishing on-time. | Assign time to specific parts of development with correct priorities based on requirements. This will keep us on track. |
+| The developed software ends up requiring hardware investment for testing, making it too costly for the client. | Discuss with the client and the school about their possible testing facilities. |
+| Employee turnover at RedR resulting in the termination of our project. | This event is completely out of our control and there can be nothing done about it if it happens |
+| A disaster at VUW restricting access to our files. | Encorporate a version control system such as GitLab that stores files offsite. This can be accessed remotely. |
 
 If the project will involve any work outside the ECS laboratories, i.e. off-campus activities, these should be included in the following section.
 
@@ -411,31 +434,24 @@ Document here project requirements for Health and Safety. All teams must state i
 
 1. How teams will manage computer-related risks such as Occupational Over-Use, Cable management, etc.  
 
+Occupational Over-Use can be avoided by not working for lengthy periods of time without a break. The team has agreed to 2 10 minute breaks for each 4 hour lab session to break up the time. During this time, team members can go for a walk, get a drink, eat, or anything to aid their general wellbeing. This is stated in our team contract.
+To avoid creating tripping hazards with poor cable management, the team will endeavour to keep cables off the floor where possible. The ECS computer labs are a good example of this. If not possible, the team should be made aware of any cabling around the teams working space by the owner of the cable. Team members should also scan the area around them when arriving at the space to work.
+
 2. Whether project work requires work or testing at any external (off-campus) workplaces/sites. If so, state the team's plans for receiving a Health and Safety induction for the external workplaces/sites. If the team has already received such an induction, state the date it was received. 
 
+The teams health and safety induction took place on 21/03/2019 and was presented by the school's Safety Officer Roger Cliffe.
+Our project does not require us to go off university campus. Our lab work is done on VUW Kelburn campus, and our meeting with Regan take place on the VUW Te Aro campus.
+
 3. Whether project work requires the team test with human or animal subjects? If so, explain why there is no option but for the team to perform this testing, and state the team's plans for receiving Ethics Approval _prior_ to testing.
+
+Our project will be tested with human subjects. This is by requirement of our client, Regan. Once the team has developed a functional version, it will be used in the real world running disaster simulations. These tests will be fully conducted by Regan making it his ethical requirement to ensure the safety of the people using the software.
 
 Also, the document in this section any additional discussions with the School Safety Officer regarding Health and Safety Risks. Give any further information on relevant health and safety regulations, risks, and mitigations, etc.
 
 
 #### 5.4.1 Safety Plans
 
-Safety Plans may be required for some projects, depending on project requirements. Safety Plan templates are available on the course Health & Safety page. Two questions all teams must answer are:
-
-**Do project requirements involve anything that can cause serious harm or death?**  
-Examples: building/modifying devices using voltages > 60 V, chemicals, large moving machinery, flying devices, bodies of water.
-
-If so, you will have to write a separate Safety Plan as part of project requirements, and the Safety Plan must be referenced in this section. For health and safety risks involving serious harm or death, you must first contact the School Safety Officer and Course Coordinator first to discuss the Safety Plan and project requirements.
-
-**Do project requirements involve anything that can cause harm or injury?**  
-Examples: building/modifying things with voltages <= 60V, small moving machinery, wearable devices.
-
-If so, you will have to write a separate Safety Plan as part of project requirements, and the Safety Plan must be referenced in this section. For health and safety risks involving har or injury, you should write a draft of the Safety Plan before contacting the School Safety Officer and Course Coordinator to discuss the Safety Plan and project requirements.
-
-If a safety plan is required, list in this section the date the School Safety officer accepted your Health and Safety plan (if accepted by submission date).
-
-_If the project is purely software and requires no contact risks involving physical harm, then state "Project requirements do not involve risk of death, serious harm, harm or injury." in this section._
-
+Project requirements do not involve risk of death, serious harm, harm or injury.
 
 ## 6. Appendices
 ### 6.1 Assumptions and dependencies 
