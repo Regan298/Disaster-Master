@@ -416,6 +416,24 @@ Keeping recorded data
 
 Overview Domain Model/UML Classes and Description for every Class
 
+The UML diagram is located in the teams GitLab repo:
+https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/P16_Diagram.jpg
+
+| Class              | Description          |
+| ------------------ | -------------------- |
+| ScenarioCreator    | A stand-alone program for creating a disaster scenario. |
+| PlayRecorder       | A stand-alone program for running over a recorded simulation. |
+| HQ                 | A core class for running the simulation, providing all the functionality from the HQ. |
+| ScenarioLoader     | A class that loads in the scenario file for the HQ to run. |
+| Recorder           | A class that monitors the events of the HQ and records it with timestamps. |
+| HQUI               | The user interface for the HQ. |
+| HQSender           | Handles the sending of messages to clients. |
+| HQReceiver         | Handles receiving messages from clients. |
+| ClientSender       | Handles the sending of messages to the HQ. |
+| ClientReceiver     | Handles receiving messages from the HQ. |
+| Client             | A core class for the functionality of clients. |
+| ClientUI           | The user interface for the HQ. |
+
 
 ### 3.6 Design constraints
 
@@ -664,7 +682,7 @@ Nathan Ellison: Mainly contributed to sections 1, 2 and 6.
 
 Daniel Miller: 
 
-Tom Buurmans: 
+Tom Buurmans: 5, UML and class descriptions in 3.5
 
 Lachlan Keene: 
 
