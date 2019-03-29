@@ -142,17 +142,170 @@ for at least top ten focal use cases, write a short goal statement and
 use case body (up to seven pages).  Identify the use cases that
 comprise a minimum viable product.
 
-Senario Editor
-|  User Action  | System Responsability |
-| ------------- |:-------------:|
-|Senario master launches Senario editor||
-||System prompts user to either create new senario or edit existing one|
-|User selects create senario||
-||System promts user to choose the number and names of NGOs and create pre-scheduled messages to be sent to them.|
-|Senario master selects NGO number and names||
-|Senario master fills in pre-scheduled messages, and submits them to message list||
-||System adds pre-scheduled messages to list and displays them|
-|Senario master selects "save senario"||
+**Scenario Editor - New Scenario**
+
+Scenario editor is the system used by the simulation administrator to create 
+a list of scheduled messages to be sent to individual NGOs (clients) during 
+the simulation. New Scenario is the use case for users who want to create
+a new scenario (such as first-time users).
+
+|  User Action  | System Responsibility |
+| --- | --- |
+|User launches Scenario editor|  |
+|  |System prompts user to either create new scenario or edit existing one|
+|User selects "create new scenario"|  |
+|  |System prompts user to choose the number and names of NGOs and create pre-scheduled messages to be sent to them.|
+|User selects NGO number and names|  |
+|  | System adds NGOs to NGO list |
+|User fills in pre-scheduled messages, and submits them to message list|  |
+|  |System adds pre-scheduled messages to list and displays them|
+|User selects "save scenario"|  |
+|  | System saves scenario to local file |
+
+**HQ - Add unscheduled message**
+
+During the simulation, the simulation administrator may want to send additional
+messages from the HQ system. Unscheduled messages can be sent imediately, or
+added to the list of outgoing messages to be sent at a later time.
+
+|  User Action  | System Responsibility |
+| --- | --- |
+| User selects "add unscheduled message" |  |
+|  | System opens new message interface |
+| User fills in relevant fields (recipient, message type (text/email), subject, message contents, message time) and optionality attaches file to message |  |
+| User selects "Add message to schedule" |  |
+|  | System adds message to message list |
+
+**HQ - Begin Simulation**
+
+The HQ system will start sending pre-scheduled messages and begin recording data
+from the simulation.
+
+|  User Action  | System Responsibility |
+| --- | --- |
+| User launches HQ program |  |
+|  | System queries user to load scenario |
+| User selects scenario from local disk |  |
+|  | System query user for scenario log save location |
+| User selects save location on local disk |  |
+|  | System launches interface and starts opens to allow clients to connect|
+| When clients have connected user presses "Start simulation" |  |
+|  | System begins simulation |
+
+**HQ - End Simulation**
+
+The HQ system will end the messaging process and record senario data to a local
+file.
+
+|  User Action  | System Responsibility |
+| --- | --- |
+| User selects "end scenario"  | System automaticly ends senario when run time expired |
+|  | system saves log to previously defined save destination |
+|  | System ends program |
+
+**HQ - Receive Message**
+
+HQ system will identify and display message from any of the NGO clients
+
+|  User Action  | System Responsibility |
+| --- | --- |
+|  | System indicates to user that new message has been received |
+| User selects new message, displayed in message list (filterable by client NGO) |  |
+|  | System opens message contents |
+| User inspects message and can download any attached files |  |
+
+
+**Client - Join Scenario Session**
+
+NGO client should establish 2 way connection with HQ system.
+
+|  User Action  | System Responsibility |
+| --- | --- |
+| User launches client program |  |
+|  | System launches |
+|  | System initiates connection procedure and prompts user for authentication for specified HQ (host)|
+| User authenticates and connects to HQ |  |
+|  | System prompts user to choose an NGO from the sessions NGO list |
+| User selects NGO from list |  |
+|  | System submits selection to host and opens main interface |
+
+**Client - Send Message**
+
+|  User Action  | System Responsibility |
+| --- | --- |
+|  User selects "Send Message" |  |
+|  | System opens new message template interface |
+| User fills in relevant fields (recipient, message type (text/email), subject, message contents) and optionality attaches file to message |  |
+| User submits message |  |
+|  | System submits message to HQ(via internet or from same system) |
+
+**Client - Receive Message**
+
+|  User Action  | System Responsibility |
+| --- | --- |
+|  | System indicates to user that new message has been received |
+| User selects new message, displayed in message list |  |
+|  | System opens message contents |
+| User inspects message and can download any attached files |  |
+
+**client interface can be accessed from the HQ system, in the event there is no internet access.**
+
+|  User Action  | System Responsibility |
+| --- | --- |
+| User begins senario |  |
+|  | System launches senario and sends messages to locally stored client |
+| User can access client inbox/outbox  |  |
+
+**NGO client can connect to HQ while the simulation is running, incase of disconection.**
+
+|  User Action  | System Responsibility |
+| --- | --- |
+| User connects to HQ system |  |
+|  | HQ system re-initialises client, and provides client with all sent messages|
+| user accesses messages |  |
+
+**other usecases (order needs to be checked)**
+
+* The simulation can be run off single offline computer or multiple networked computers. It is unclear if this determination will be made by the system, or manually by a user prior to starting the simulation.
+
+* HQ system can change the time scale of the simulation before it starts (e.g. 1 hour real world = 1 day simulation).
+
+* HQ system can change the simulation run time prior to the simulation starting.
+
+* HQ User can edit message on message list from the HQ system while the simulation is running.
+
+* HQ User can delete message on message list from the HQ system while the simulation is running.
+
+* HQ User loads existing senario in senario editor to make adjustments, before saving to current or new file.
+
+* NGO clients can playback audio file or open any other form of file sent attached to a message (unsure if this will be within the client application, or via a download).
+
+* HQ user can select any outgoing message to view details and contents. This includes previously sent messages.
+
+* NGO client users cannot access any HQ tools or information.
+
+* Users of both HQ system and NGO client can view simulation time/day on their respective interfaces. (1 hour = 1 day simulation time).
+
+* Unsure if NGO clients are able to communicate with other NGO clients. This needs to be clarified.
+
+* NGO clients can create log entry (text or audio) documenting radio communication or other general information.
+
+* HQ user can load file from local disk and atach it to message (Audio files specified to be attached, unsure about other files - images etc).
+
+* HQ user can apply sound effects over audio recordings for immersion, unsure where sound effects will be stored.
+
+* HQ user filters outgoing messages on message list by recipiant
+
+* HQ user filters recieved messages by recipiant
+
+* NGO client directly replies to message from HQ, where recipiant, subject and message fields are pre-filled.
+
+* HQ user replies directly to client, where recipiant, subject and message fields are pre-filled.
+
+* HQ client can view a list of connected NGO clients.
+ 
+* HQ can kick NGO client from session.
+
 
 ### 3.3 Usability Requirements
 See 9.5.12. for most systems, this will be around one page.
