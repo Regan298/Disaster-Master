@@ -407,11 +407,9 @@ organizations and HQ.
 
 d) Data entities and their relationships:
 A data entity is an object in a data model. Data is typically designed by breaking things down into their smallest parts that are useful for representing data relationships
-NEED TO ASK REGAN
 
 e) Integrity constraints:
 Integrity constraints provide a way of ensuring that changes made to the database by authorized users do not result in a loss of data consistency.
-NEED TO ASK REGAN
 
 f) Data retention requirements:
 Keeping recorded data
@@ -660,11 +658,16 @@ RedR Australia: An organisation that selects, trains and deploys staff to assist
 A one-page statement of contributions that lists each member of the
 group and what they contributed to this document.
 
-Riley Grice: 
+Riley Grice: Completed 3.3, 3.5, 3.7, 3.8, 3.9.
+
 Nathan Ellison: Mainly contributed to sections 1, 2 and 6. 
+
 Daniel Miller: 
+
 Tom Buurmans: 
+
 Lachlan Keene: 
+
 
 ---
 
