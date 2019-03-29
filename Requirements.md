@@ -535,6 +535,29 @@ Offline: Anywhere in the world, no internet connection required and only one com
 ### 3.9 Supporting information
 
 see 9.5.19. 
+The SRS should explicitly state whether or not these information items are to be considered part of the
+requirements. The SRS should contain additional supporting information including:
+
+a) Sample input/output formats, descriptions of cost analysis studies, or results of user surveys:
+    - Inputs from the HQ and the organizations will be in txt format for sending basic messages to each other.
+    - There will be feed back from testing by our client Regan who will test it himself and send constant feedback.
+    - Output is the recording file, which will contain txt, jpeg and mp3.
+
+b) Supporting or background information that can help the readers of the SRS:
+    - RedR Austrlia's Disaster Simulation Program is to help train people in organizations. Training will consist of communicating with other organizations. The trainees will have to get funding and make a budget for supplies to respond.
+    - This program will help train people for real world disaster response in organizations.
+
+c) A description of the problems to be solved by the software:
+    - Simplifying the training simulation program for the RedR Australia training team.
+    - Allowing Offline training for disaster simulations on a computer anywhre in the world. This allows quick response training to disasters around the world for RedR Australia.
+    - Allowing Online training with multiple teams witha uniform software to communicate and train. This will solve having the use emailing websites to communicate during the simulation.
+    - The online version will allow training to be done easily by many people around the world and not have to be run onsite by only RedR Australia.
+
+d) Special packaging instructions for the code and the media to meet security, export, initial loading, or other
+requirements:
+    - Load scenario file which is encrytped.
+    - Recording file of entire simulation with stamp marks for all recordings.
+    - Recording file will need to be replayed through the Program for easy analysis. 
 
 ## 4. Verification
 
