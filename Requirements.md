@@ -140,144 +140,81 @@ the Ethernet External interface it will noify the HQ Terminal that the function 
 
 ### 3.2 Functions
 
-This is typically the longest subsection in the document - see 9.5.11.
-List up to fifty use cases (in order of priority for development), and
-for at least top ten focal use cases, write a short goal statement and
-use case body (up to seven pages).  Identify the use cases that
-comprise a minimum viable product.
+**HQ creates new scenario**
 
-**Scenario Editor - New Scenario**
-
-Scenario editor is the system used by the simulation administrator to create 
-a list of scheduled messages to be sent to individual NGOs (clients) during 
-the simulation. New Scenario is the use case for users who want to create
+Scenario editor is the system used by HQ to create 
+a list of scheduled events to be sent to individual NGOs during the simulation. New Scenario is the use case for HQs who want to create
 a new scenario (such as first-time users).
 
 |  User Action  | System Responsibility |
 | --- | --- |
-|User launches Scenario editor|  |
+|HQ launches Scenario editor|  |
 |  |System prompts user to either create new scenario or edit existing one|
-|User selects "create new scenario"|  |
+|HQ selects "create new scenario"|  |
 |  |System prompts user to choose the number and names of NGOs and create pre-scheduled messages to be sent to them.|
-|User selects NGO number and names|  |
+|HQ selects NGO number and names|  |
 |  | System adds NGOs to NGO list |
-|User fills in pre-scheduled messages, and submits them to message list|  |
+|HQ creates and submits messages to message list|  |
 |  |System adds pre-scheduled messages to list and displays them|
-|User selects "save scenario"|  |
+|HQ selects "save scenario"|  |
 |  | System saves scenario to local file |
 
-**HQ - Add unscheduled message**
+**HQ begins simulation**
 
-During the simulation, the simulation administrator may want to send additional
-messages from the HQ system. Unscheduled messages can be sent imediately, or
-added to the list of outgoing messages to be sent at a later time.
+Allows HQ to start simulation, All scheduled events and messages will start firing. System will start recording data regarding simulation.
 
 |  User Action  | System Responsibility |
 | --- | --- |
-| User selects "add unscheduled message" |  |
-|  | System opens new message interface |
-| User fills in relevant fields (recipient, message type (text/email), subject, message contents, message time) and optionality attaches file to message |  |
-| User selects "Add message to schedule" |  |
-|  | System adds message to message list |
-
-**HQ - Begin Simulation**
-
-The HQ system will start sending pre-scheduled messages and begin recording data
-from the simulation.
-
-|  User Action  | System Responsibility |
-| --- | --- |
-| User launches HQ program |  |
+| HQ launches HQ program |  |
 |  | System queries user to load scenario |
-| User selects scenario from local disk |  |
-|  | System query user for scenario log save location |
-| User selects save location on local disk |  |
-|  | System launches interface and starts opens to allow clients to connect|
-| When clients have connected user presses "Start simulation" |  |
+| HQ selects scenario from local disk |  |
+|  | System queries user for scenario log save location |
+| HQ selects save location on local disk |  |
+|  | System launches core system interface|
+| when ready HQ presses "Start simulation" |  |
 |  | System begins simulation |
 
-**HQ - End Simulation**
+**HQ ends simulation**
 
-The HQ system will end the messaging process and record senario data to a local
-file.
+Allows HQ to end simulation, stopping events and all transmittion of messages. Recorded data can then be viewed/saved.
 
 |  User Action  | System Responsibility |
 | --- | --- |
-| User selects "end scenario"  | System automaticly ends senario when run time expired |
-|  | system saves log to previously defined save destination |
+| HQ selects "end scenario"  | Senario time limit expires |
+|  | system saves log to local disk |
 |  | System ends program |
 
-**HQ - Receive Message from NGO**
+**HQ schedules email to be sent to NGO**
 
-HQ system will identify and display message from any of the NGO clients
-
-|  User Action  | System Responsibility |
-| --- | --- |
-|  | System indicates to user that new message has been received |
-| User selects new message, displayed in message list (filterable by client NGO) |  |
-|  | System opens message contents |
-| User inspects message and can download any attached files |  |
-
-
-**Client - Join Scenario Session**
-
-NGO client should establish 2 way connection with HQ system.
+HQ creates scheduled email while the simulation is running to be sent later in the simulation
 
 |  User Action  | System Responsibility |
 | --- | --- |
-| User launches client program |  |
-|  | System launches |
-|  | System initiates connection procedure and prompts user for authentication for specified HQ (host)|
-| User authenticates and connects to HQ |  |
-|  | System prompts user to choose an NGO from the sessions NGO list |
-| User selects NGO from list |  |
-|  | System submits selection to host and opens main interface |
+| HQ selects "compose email" |  |
+|  | System opens new email interface |
+| HQ fills in relevant fields (recipient, subject, message contents) |  |
+| HQ selects time to schedule message |  |
+| HQ selects "Add message to schedule" |  |
+|  | System adds message to message list |
 
-**NGO - Send Message to HQ**
+***NGO sends email to HQ**
 
-|  User Action  | System Responsibility |
-| --- | --- |
-|  User selects "Send Message" |  |
-|  | System opens new message template interface |
-| User fills in relevant fields (recipient, message type (text/email), subject, message contents) and optionality attaches file to message |  |
-| User submits message |  |
-|  | System submits message to HQ(via internet or from same system) |
-
-**NGO - Receive Message from HQ or NGO**
+NGO creates and sends email to HQ.
 
 |  User Action  | System Responsibility |
 | --- | --- |
-|  | System indicates to user that new message has been received |
-| User selects new message, displayed in message list |  |
-|  | System opens message contents |
-| User inspects message and can download any attached files |  |
+|  NGO selects "Compose Email" |  |
+|  | System opens new email template interface |
+| NGO fills in relevant fields (recipient, subject, message contents) |  |
+| NGO submits email |  |
+|  | System submits email to HQ |
 
-**NGO access messages from the core system, in the event there is no internet access.**
 
-|  User Action  | System Responsibility |
-| --- | --- |
-| User begins senario |  |
-|  | System launches senario and sends messages to locally stored client |
-| User can access client inbox/outbox  |  |
+**Other usecases in order of priority**
 
-**Client reconnect to HQ while simulation running.**
-
-|  User Action  | System Responsibility |
-| --- | --- |
-| User connects to HQ system |  |
-|  | HQ system re-initialises client, and provides client with all sent messages|
-| user accesses messages |  |
-
-**other usecases (order needs to be checked)**
-
-* HQ creates new scenario.
-* HQ begins simulation.
-* HQ ends simulation.
 * HQ sends email to NGO.
 * HQ creates new scenario event in scenario editor.
-* HQ schedules email to be sent to NGO.
 * NGO opens received file.
-* NGO sends email to HQ.
 * HQ defines timescale for simulation before it starts (e.g. 1 hour real world = 1 day simulation).
 * HQ defines time limit for simulation before it starts.
 * HQ edits scheduled event from event-list.
