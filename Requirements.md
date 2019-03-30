@@ -205,7 +205,7 @@ file.
 |  | system saves log to previously defined save destination |
 |  | System ends program |
 
-**HQ - Receive Message**
+**HQ - Receive Message from NGO**
 
 HQ system will identify and display message from any of the NGO clients
 
@@ -231,7 +231,7 @@ NGO client should establish 2 way connection with HQ system.
 | User selects NGO from list |  |
 |  | System submits selection to host and opens main interface |
 
-**Client - Send Message**
+**NGO - Send Message to HQ**
 
 |  User Action  | System Responsibility |
 | --- | --- |
@@ -241,7 +241,7 @@ NGO client should establish 2 way connection with HQ system.
 | User submits message |  |
 |  | System submits message to HQ(via internet or from same system) |
 
-**Client - Receive Message**
+**NGO - Receive Message from HQ or NGO**
 
 |  User Action  | System Responsibility |
 | --- | --- |
@@ -250,7 +250,7 @@ NGO client should establish 2 way connection with HQ system.
 |  | System opens message contents |
 | User inspects message and can download any attached files |  |
 
-**client interface can be accessed from the HQ system, in the event there is no internet access.**
+**NGO access messages from the core system, in the event there is no internet access.**
 
 |  User Action  | System Responsibility |
 | --- | --- |
@@ -258,7 +258,7 @@ NGO client should establish 2 way connection with HQ system.
 |  | System launches senario and sends messages to locally stored client |
 | User can access client inbox/outbox  |  |
 
-**NGO client can connect to HQ while the simulation is running, incase of disconection.**
+**Client reconnect to HQ while simulation running.**
 
 |  User Action  | System Responsibility |
 | --- | --- |
@@ -268,7 +268,7 @@ NGO client should establish 2 way connection with HQ system.
 
 **other usecases (order needs to be checked)**
 
-* The simulation can be run off single offline computer or multiple networked computers. It is unclear if this determination will be made by the system, or manually by a user prior to starting the simulation.
+* HQ toggles between cloud hookup or local simulation.
 
 * HQ system can change the time scale of the simulation before it starts (e.g. 1 hour real world = 1 day simulation).
 
