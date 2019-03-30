@@ -597,6 +597,9 @@ should parallel section 3 of your document (see 9.5.18).
 Wherever possible (especially systemic requirements) you should
 indicate testable acceptance criteria.
 
+3.2 Functions:
+To verify that the software performs the correct functions, the client will be the first person to check with. The client is the one who knows exactly what they want their system to do. The simplest way the team can test that the software functions properly would be to have the client sit down and attempt to use the software without any input from the team. That way, the user interface will be able to be tested with unbiased results. Upon the completion of the program, before testing with the client, the team will also be able to verify the functions of the software by comparing the program to this very document, as it holds records of all of requirements that were gathered from the client during the first few meetings. 
+
 3.1 External Interfaces:
 This can be tested by the project team at the developement site. The team can test the external interfaces and fix bugs, and issues. 
 However, the client will perform their own testing on the program and give feed back on the external interfaces to fit into their 
