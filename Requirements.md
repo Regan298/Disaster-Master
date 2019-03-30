@@ -564,6 +564,47 @@ However, the client will perform their own testing on the program and give feed 
 customization desires. The website used by organizations to be in the Simulation will be altered and designed around what the client
 finds easiest for the organizations to use.
 
+3.3 Usability Requirements:
+When testing the offline scenario on a single computer, it will be much easier to create a more 
+accurate situation of where the system will be used. In this case testing would occur on a single 
+offline windows computer. Testing would be internal within the program as when offline the system 
+does not interact with any external databases/components etc. Internal testing will depending on 
+the architecture used for the system, but will need to test all aspects of the program to ensure 
+expected behaviour occurs.
+
+In an online simulation both the core system and client must be able to send/receive files attached 
+to messages. To test this a simulation environment will be setup, and files sent over the network. 
+When files are received they can be tested to ensure they are intact and not corrupted. The system 
+will pass this requirement if it is able to propagate files between clients and the core system. The 
+files must be open-able by the receiver and not corrupted.
+
+3.4 Performance Requirements:
+Unfortunately it will be imposable to verify that the program is performing correctly 
+in the environment it will be deployed (Australia), however an approximation of this 
+environment can be created and tested locally. Simulating the performance of the system 
+can be tested by creating a network of windows based computers connected to another HQ 
+windows based computer. The network will be tested within the university network to 
+approximate the internet environment found where simulations will be run. (e.g. university 
+campus in Australia). Real simulations may run for up to six hours with up to 7 client 
+computers and 1 HQ computer. Testing this at full scale may be infeasible however, due to 
+lack of time and access to windows based computers. Testing will have to be done on a smaller 
+population of approximately 4 computers run over a two hour period. Successfully Sending text 
+based messages between up to 8 computers can be tested by running a simulation on the test 
+environment. The system will pass this requirement if it can maintain a stable connection 
+between all computers over the extended period of time. The system must also recover quickly 
+from any packet loss that may occur over the network. Message delay over the system can also 
+be tested within this same environment, where the delay between sending and receiving a message 
+is recorded. Log accuracy can be tested on this same environment. To do this the number of 
+messages or actions occurring in the system during the simulation is pre-recorded then compared 
+to the number of entries within the log once the simulation ends.
+
+3.5 Design Constraints: 
+To test the system within multiple environments several components must be tested individually. 
+First the offline core system must be tested on multiple different windows computers, with a 
+range of different specifications. A minimum in terms of computer hardware should be found 
+(CPU, RAM, storage) in order to recommend the minimum required computer hardware required to 
+run the core system.
+
 3.7 Non-Function Requirements:
 Feedback will be given to us about non-functional requirements by the client who wished to test themselves. The client will use 
 the program and figure out their needs for non-functional requirements. Testing can also be done by the team to ensure there are no 
