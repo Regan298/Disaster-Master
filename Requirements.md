@@ -111,6 +111,8 @@ While the team will put forward their best attempt to satisfy the client, there 
 
 The users may also become a limitation of the system. The software is only as good as the people that use it. Given that the users of the software may be otherwise preoccupied with other tasks or under some kind of situational stress, the usefulness of the software may be limited based on how the users interact with it. 
 
+Another limitation of the program may be that there is no internet connection available for the program to use. Given taht teh simulations are going to run in a very remote region of Australia (to simulate a different country), it may be the case that there is no internet connection available. In this case, the program will be required to run on a single machine but behave as if it were running on multiple machines. This may limit the usabability of the system seeing as only one person will be capable of using it at a time, while it may be that multiple people *wish* to access it at the same time. Since it will take longer for the simulation teams to be able to check messages, this may limit the usefulness of the product. 
+
 ## 2. References
 
 References to other documents or standards. Follow the IEEE Citation 
@@ -579,6 +581,8 @@ However our software must be used in different environments. Two different versi
 Online: Mainly in office buildings with internet connection and many computers on the same network.
 
 Offline: Anywhere in the world, no internet connection required and only one computer necessary to run the simulation.
+
+RedR are going to be running their simulations in an isolated section of the Australian outback. This area is going to be a very dry, hot and arid place. Some simulations are going to run inside buildings (such as in old school buildings) and some are going to be run outdoors. For those simulations that are run indoors, there will more than likely be internet access. It may be the case that some classes don't have internet access. The program will have to be able to function whether it has access to the internet or not. Without internet, the software will run locally on a single machine. It will distinguish users via a type of login system and each user will only be able to access specific parts of the program. 
 
 ### 3.9 Supporting information
 
