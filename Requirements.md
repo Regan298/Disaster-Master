@@ -94,7 +94,7 @@ h) Site adaptation requirements; The software will have to be able to run on the
 One page summary of the main functions of the product (9.5.4),
 briefly characterizing the minimum viable product.
 
-As stated in section 1.1, the purpose of the program is to automate some of the responsibilities of the overseer during the simulations that RedR run. The software will have to be capable of doing this in a number of different environments, given that the characterisitics of it's operarting environment cannot always be predicted. The main functions of th program are to be able to send messages from one party to another, and track the timescale being simulated. The program will have to be capable of doing both of these things either with or without an internet connection being available. If no internet connection is available, the program will have to be able to run on a single machine and "act" as if it were on multiple different computers by way of allowing users to login and see their own messages that they have received both from the overseer and from other participating teams. If there is an internet connection available, the program must be able to run on multiple different machines at once and allow the users to be able to communicate with each other over the network. The software must also be able to keep track of the time within the simultion (given that time is scaled down for each simulation). The minimum viable product will be a program that is simply able to send messages over a network (or emulate it on one machine) and keep track of time. Beyond that, having the program be able to send/receive videos, images and audio files would significantly enhance the illusion that the simulation participants really are in a disaster simulation. Having the program play certain audio files (such as sounds of helicopters and news reporters) on top of displaying text to the simulation participants would only further add to the realism, and would therefore be a desireable feature of the product. 
+As stated in section 1.1, the purpose of the program is to automate some of the responsibilities of the overseer during the simulations that RedR run. The software will have to be capable of doing this in a number of different environments, given that the characterisitics of it's operarting environment cannot always be predicted. The main functions of th program are to be able to send messages from one party to another, and track the timescale being simulated. The program will have to be capable of doing both of these things either with or without an internet connection being available. If no internet connection is available, the program will have to be able to run on a single machine and "act" as if it were on multiple different computers by way of allowing users to login and see their own messages that they have received both from the overseer and from other participating teams. If there is an internet connection available, the program must be able to run on multiple different machines at once and allow the users to be able to communicate with each other over the network. The software must also be able to keep track of the time within the simultion (given that time is scaled down for each simulation). The minimum viable product will be a program that is simply able to send messages over a network (or emulate it on one machine) and keep track of time. Beyond that, having the program be able to send/receive images and audio files would significantly enhance the illusion that the simulation participants really are in a disaster simulation. Having the program play certain audio files (such as sounds of helicopters and news reporters) on top of displaying text to the simulation participants would only further add to the realism, and would therefore be a desireable feature of the product. 
 
 #### 1.3.3 User characteristics   
 
@@ -331,9 +331,9 @@ with each other over the internet. The two types of programs running are the
 Organization(s) and one HQ.
 
 Both the HQ and Organization(s) must be able to receive and send messages to each
-other. These messages are videos, emails, sounds and pictures, this is to
-increase the immersion for the organization using the program. These must reach
-their destination with one minute.
+other. These messages are emails, sounds and pictures, this is to increase the
+immersion for the organization using the program. These must reach their 
+destination with one minute.
 
 All messages are to be recorded by the HQ so that a review of what happened in
 the Simulation Program can be analysed after the Simulation.
@@ -382,15 +382,13 @@ a) Types of information used by various functions:
 
 Pictures: Displayed on the User Interface and being sent from HQ to Organizations.
 
-Videos: Displayed on the User Interface and being sent from HQ to Organizations.
-
 Emails/Messages: Displayed on the User Interface and being sent to and from
 every player in the simulation.
 
 Sound Effects: Displayed on the User Interface and being sent from HQ to Organizations.
 
 Scenario File (for loading): Loaded file in the HQ which will send messages/emails, 
-pictures, videos and sound effects from this file.
+pictures, and sound effects from this file.
 
 Recording File: This will record all information sent and recieved by all players 
 in the Simulation with the time of the action associated.
@@ -401,7 +399,7 @@ The Simulation will be used six times a month.
 
 c) Accessing capabilities:
 HQ: Have access to the scenario's entire data collection, being able to view 
-every video, message, picture and sound. HQ i running the Simulation and needs
+every message, picture and sound. HQ i running the Simulation and needs
 to have full control and visibility over every organization. 
 
 Organization(s): Have limited access, they will only be able to view what has 
@@ -503,7 +501,7 @@ requirements (approx. five pages).
 
 1. Performance Requirements
     - Messages that are sent and recieved by Organizations and the HQ must be sent to each other within a minute. Messages must be sent and recieved within a minute because it needs the Simulation must be similar to that of sending messages in a real disaster respose.
-    - Videos, Pictures and Sounds must be played when received and opened by an Organization. These are played to create a more immersion in the simulator, this will be how organizations will react to important news bullitens and updates during a disaster.
+    - Pictures and Sounds must be played when received and opened by an Organization. These are played to create a more immersion in the simulator, this will be how organizations will react to important news bullitens and updates during a disaster.
     - Must be able to run offline and online, offline is necessary because the Simulation may be used to train people where there is no internet. The online version will be more useful, as it can handle more users in the simulation through web based design.
     - Offline will run from one computer and have the ability to be split on multiple monitors connected to the computer.
 
@@ -520,8 +518,8 @@ requirements (approx. five pages).
     - The Simulation will be functional once the HQ has loaded the scenario and has Organizations connected.
 
 5. Reliability
-    - There must be an error detection system for messages that have failed to be received or sent, and for failed scenario videos, pictures and sounds.
-    - There must be a error correction system for failed messages, pictures, videos and sounds.
+    - There must be an error detection system for messages that have failed to be received or sent, and for failed scenario, pictures, and sounds.
+    - There must be a error correction system for failed messages, pictures, and sounds.
 
 6. Modifiablilty
     - During the Scenario, the HQ should be able create new scenario messages and be able to send them to the Organizations. This is for the HQ running the simulation to control the scenario, this control allows the HQ to add new problems and add more into the Simulation.
@@ -564,7 +562,7 @@ requirements (approx. five pages).
          - Display sent and received messages (similar to an email inbox). 
 
 15. Accuracy
-    - Recorded data in the recorded data file must contain the type of data (picture, video, message, sound), the content of the data, the time of recording and if there was an error in the recording. 
+    - Recorded data in the recorded data file must contain the type of data (picture, message, sound), the content of the data, the time of recording and if there was an error in the recording. 
 
 
 ### 3.8 Physical and Environmental Requirements 
