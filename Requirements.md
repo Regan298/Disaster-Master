@@ -80,14 +80,14 @@ The software product is going to be a standalone application and will not be imp
 > A block diagram showing the major elements of the larger system, interconnections, and external interfaces can be helpful.
 > 
 > Describe how the software operates within the following constraints:  
-a) System interfaces; The kinds of other systems that the software will have to interact with is also largely unknown. It will likely have to communicate with an email system to be able to communicate with the simulation teams.
-b) User interfaces; The software will implement it's own user interface to allow simulation participants to easily be able to interact with it. 
-c) Hardware interfaces; The kind of hardware that the software is going to be running on is also unknown. 
-d) Software interfaces; We don't know which other software our program will have to interface with. The client did not give the team a specific requirement as to which software to use. The client did ssuggest some open source software called KoboToolBox (https://www.kobotoolbox.org/), so the software the team produces will likely have to communicate with KoboToolBox. The client also told us that the machines that the software will be running on are Windows based. While this will likely not be a problem, the team will need to ensure that the language that is chosen to create the software is capable of running on a Windows machine. The version of Windows is also not known, but this will be brought up at the next meeting with the client. 
-e) Communications interfaces; 
-f) Memory; The program will have to be optimised such that it doesn't consume all of the memory on the machines
-g) Operations; 
-h) Site adaptation requirements; The software will have to be able to run on the hardware that is present in the disaster simulation setting (which will be several different Windows machines)
+a) System interfaces; The kinds of other systems that the software will have to interact with is also largely unknown. It will likely have to communicate with an email system to be able to communicate with the simulation teams.<br>
+b) User interfaces; The software will implement it's own user interface to allow simulation participants to easily be able to interact with it. <br>
+c) Hardware interfaces; The kind of hardware that the software is going to be running on is also unknown. <br>
+d) Software interfaces; We don't know which other software our program will have to interface with. The client did not give the team a specific requirement as to which software to use. The client did ssuggest some open source software called KoboToolBox (https://www.kobotoolbox.org/), so the software the team produces will likely have to communicate with KoboToolBox. The client also told us that the machines that the software will be running on are Windows based. While this will likely not be a problem, the team will need to ensure that the language that is chosen to create the software is capable of running on a Windows machine. The version of Windows is also not known, but this will be brought up at the next meeting with the client. <br>
+e) Communications interfaces; The program may be required to communicate with an external cloud service for storing data and sending messages between different locations.<br>
+f) Memory; The program will have to be optimised such that it doesn't consume all of the memory on the machines<br>
+g) Operations; <br>
+h) Site adaptation requirements; The software will have to be able to run on the hardware that is present in the disaster simulation setting (which will be several different Windows machines)<br>
 
 #### 1.3.2 Product functions
 
