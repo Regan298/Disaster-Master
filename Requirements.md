@@ -117,6 +117,8 @@ References to other documents or standards. Follow the IEEE Citation
 Reference scheme, available from the [IEEE website](https://www.ieee.org/) (please use the search box).
 (1 page, longer if required)
 
+IEEE Systems and software engineering -- Software life cycle processes, IEEE Standard 12207, 2017
+
 ## 3. Specific requirements  
 
 20 pages outlining the requirements of the system.
