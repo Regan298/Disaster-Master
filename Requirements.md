@@ -741,7 +741,7 @@ Riley Grice: Completed 3.3, 3.5, 3.7, 3.8, 3.9. Helped on 4.
 
 Nathan Ellison: Mainly contributed to sections 1, 2 and 6. 
 
-Daniel Miller: 
+Daniel Miller: 3.2, 4
 
 Tom Buurmans: 5, UML and class descriptions in 3.5, collaborated in coming up with use cases and ordered them for 3.2
 
