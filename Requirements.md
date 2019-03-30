@@ -597,6 +597,16 @@ should parallel section 3 of your document (see 9.5.18).
 Wherever possible (especially systemic requirements) you should
 indicate testable acceptance criteria.
 
+3.1 External Interfaces:
+This can be tested by the project team at the developement site. The team can test the external interfaces and fix bugs, and issues. 
+However, the client will perform their own testing on the program and give feed back on the external interfaces to fit into their 
+customization desires. 
+
+3.7 Non-Function Requirements:
+Feedback will be given to us about non-functional requirements by the client who wished to test themselves. The client will use 
+the program and figure out their needs for non-functional requirements. Testing can also be done by the team to ensure there are no 
+bugs and issues around the non-functional requirements.
+
 ## 5. Development schedule.
 
 ### 5.1 Schedule
