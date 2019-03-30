@@ -712,7 +712,7 @@ Nathan Ellison: Mainly contributed to sections 1, 2 and 6.
 
 Daniel Miller: 
 
-Tom Buurmans: 5, UML and class descriptions in 3.5
+Tom Buurmans: 5, UML and class descriptions in 3.5, collaborated in coming up with use cases and ordered them for 3.2
 
 Lachlan Keene: 
 
