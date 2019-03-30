@@ -706,7 +706,7 @@ RedR Australia: An organisation that selects, trains and deploys staff to assist
 A one-page statement of contributions that lists each member of the
 group and what they contributed to this document.
 
-Riley Grice: Completed 3.3, 3.5, 3.7, 3.8, 3.9.
+Riley Grice: Completed 3.3, 3.5, 3.7, 3.8, 3.9. Helped on 4.
 
 Nathan Ellison: Mainly contributed to sections 1, 2 and 6. 
 
