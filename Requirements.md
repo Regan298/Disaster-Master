@@ -603,12 +603,15 @@ To verify that the software performs the correct functions, the client will be t
 3.1 External Interfaces:
 This can be tested by the project team at the developement site. The team can test the external interfaces and fix bugs, and issues. 
 However, the client will perform their own testing on the program and give feed back on the external interfaces to fit into their 
-customization desires. 
+customization desires. The website used by organizations to be in the Simulation will be altered and designed around what the client
+finds easiest for the organizations to use.
 
 3.7 Non-Function Requirements:
 Feedback will be given to us about non-functional requirements by the client who wished to test themselves. The client will use 
 the program and figure out their needs for non-functional requirements. Testing can also be done by the team to ensure there are no 
-bugs and issues around the non-functional requirements.
+bugs and issues around the non-functional requirements. Testing for security, usability, reliability and manageability can be tested 
+by both the team and the client. These will be tailor made for the client with feedback given from them to the project development 
+tean.
 
 ## 5. Development schedule.
 
