@@ -331,7 +331,7 @@ Organization(s) and one HQ.
 Both the HQ and Organization(s) must be able to receive and send messages to each
 other. These messages are videos, emails, sounds and pictures, this is to
 increase the immersion for the organization using the program. These must reach
-their destination with instantly.
+their destination with one minute.
 
 All messages are to be recorded by the HQ so that a review of what happened in
 the Simulation Program can be analysed after the Simulation.
@@ -357,7 +357,7 @@ stamps is a must.
 ### 3.4 Performance requirements
 
 Performance is an important requirement for this system due, to the real time nature of scenario simulation. The core feature of the program will be to support
-instantaneous text based messages between the 1..* core Group terminals and the Single HQ terminal concurrently. As such, this dictates that the delay between
+instantaneous text based messages between the 1 to 7 core Group terminals and the Single HQ terminal concurrently. As such, this dictates that the delay between
 sending and receiving messages must not exceed 10 seconds. Should this performance requirement not be met, then this will result in unresponsive and ineffective
 disaster based scenarios. In addition, there will be concurrent terminals that rely on their parent (HQ), as well as sibling (Group) terminals, all being
 synchronised with one another. Therefore, this means that this implies that the HQ terminal must constantly be monitoring the performance of group terminals to
