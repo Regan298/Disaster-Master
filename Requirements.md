@@ -270,25 +270,46 @@ NGO client should establish 2 way connection with HQ system.
 
 **other usecases (order needs to be checked)**
 
-* HQ toggles between cloud hookup or local simulation.
-* HQ defines time scale for simulation before it starts (e.g. 1 hour real world = 1 day simulation).
-* HQ defines time limit prior to the simulation starting.
-* HQ edits outgoing event on event list from the core system while the simulation is running.
-* HQ deletes event on event list from the HQ system while the simulation is running.
+* HQ creates new scenario.
+* HQ begins simulation.
+* HQ ends simulation.
+* HQ sends email to NGO.
+* HQ creates new scenario event in scenario editor.
+* HQ schedules email to be sent to NGO.
+* NGO opens received file.
+* NGO sends email to HQ.
+* HQ defines timescale for simulation before it starts (e.g. 1 hour real world = 1 day simulation).
+* HQ defines time limit for simulation before it starts.
+* HQ edits scheduled event from event-list.
+* HQ deletes scheduled event from event-list.
+* HQ views email inbox.
+* NGO views email inbox.
+* HQ/NGO view simulation time.
+* HQ opens saved recording of previous simulation.
+* HQ exports recording of current simulation.
 * HQ edits existing scenario in scenario editor.
-* NGO can open any file attached to a message.
-* Both HQ and NGO can view simulation time/day on their respective interfaces.
-* NGO messages another NGO.
-* NGO creates log entry documenting radio communication or other general information.
-* HQ loads file from local disk and attach it to message.
-* HQ toggles audio effect over attached audio file.
-* HQ filters outgoing events by NGO.
-* HQ views inbox.
+* HQ adds from local disk to scenario in scenario editor.
+* HQ sends scheduled audio event to NGO.
+* HQ toggle audio effect for audio event.
+* HQ loads file from local disk to send to NGO.
+* NGO makes new log entry to record miscellaneous data (radio communication, notes etc.).
+* NGO sends email to another NGO.
+* HQ views details of recorded events.
+* HQ replies to NGOs email via inbox.
+* NGO replies to HQ/other NGO via inbox.
+* HQ filters outgoing scheduled events by NGO.
 * HQ filters inbox by NGO.
-* NGO replies to HQ or NGO via inbox, where recipient, subject and message fields are pre-filled.
-* HQ replies to NGO via inbox, where recipient, subject and message fields are pre-filled.
-* HQ views a list of connected clients.
+* Client Joins scenario session.
+* HQ toggles between offline single system mode, or online mode.
+* Client reconnects to core system while simulation is running.
+* HQ views list of connected clients.
 * HQ kicks client from session.
+* HQ sends text to NGO.
+* NGO sends text to HQ.
+* NGO sends text to NGO.
+* HQ views text in inbox.
+* NGO views text in inbox.
+* HQ sends scheduled text to NGO.
 
 
 ### 3.3 Usability Requirements
