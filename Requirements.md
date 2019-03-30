@@ -180,8 +180,9 @@ Allows HQ to end simulation, stopping events and all transmittion of messages. R
 
 |  User Action  | System Responsibility |
 | --- | --- |
-| HQ selects "end scenario"  | Senario time limit expires |
-|  | system saves log to local disk |
+| HQ selects "end scenario"  |  |
+|  | system promts user to view/save log or exit |
+| HQ selects exit |  |
 |  | System ends program |
 
 **HQ schedules email to be sent to NGO**
@@ -209,21 +210,68 @@ NGO creates and sends email to HQ.
 | NGO submits email |  |
 |  | System submits email to HQ |
 
+**NGO opens received file**
+
+NGO recieves and downloads file attached to message from HQ.
+
+|  User Action  | System Responsibility |
+| --- | --- |
+|  | System indicates to NGO that new message has been recieved |
+| NGO opens message |  |
+|  | System indicates file attached to message |
+| NGO clicks on attached file |  |
+|  | system downloads file to NGOs local system |
+| NGO views file from local folder |  |
+
+**HQ edits scheduled event from event-list**
+
+While running the simulation HQ edits contents/details of scheduled event.
+
+|  User Action  | System Responsibility |
+| --- | --- |
+| HQ selects event from event list which they wish to edit |  |
+|  | System opens edit screen showing details of event (details will depend on type of event (email, text, audio file etc.)) |
+| HQ modifies fields |  |
+| HQ saves event |  |
+|  | System updates event in event list |
+
+**HQ exports recording of current simulation**
+
+Once the simulation has ended, HQ exports simulation log to local disk.
+
+|  User Action  | System Responsibility |
+| --- | --- |
+|  | Simulation ends |
+|  | System gives HQ option to view log, save log or exit |
+| HQ selects save log |  |
+|  | System saves log to local disk in easily interperateable format |
+|  | System returns to previous screen |
+
+**Client Joins scenario session**
+
+Before simulation start, NGO connects to core system session via the internet.
+
+|  User Action  | System Responsibility |
+| --- | --- |
+| NGO launches client program |  |
+|  | client program launches |
+|  | System initiates connection procedure and prompts NGO for authentication for specified core system|
+| NGO authenticates and connects to core system |  |
+|  | Core system prompts user to choose an NGO from the sessions NGO list |
+| NGO selects NGO from list |  |
+|  | System submits selection to core system and grants client access to messages |
 
 **Other usecases in order of priority**
 
 * HQ sends email to NGO.
 * HQ creates new scenario event in scenario editor.
-* NGO opens received file.
 * HQ defines timescale for simulation before it starts (e.g. 1 hour real world = 1 day simulation).
 * HQ defines time limit for simulation before it starts.
-* HQ edits scheduled event from event-list.
 * HQ deletes scheduled event from event-list.
 * HQ views email inbox.
 * NGO views email inbox.
 * HQ/NGO view simulation time.
 * HQ opens saved recording of previous simulation.
-* HQ exports recording of current simulation.
 * HQ edits existing scenario in scenario editor.
 * HQ adds from local disk to scenario in scenario editor.
 * HQ sends scheduled audio event to NGO.
@@ -236,7 +284,6 @@ NGO creates and sends email to HQ.
 * NGO replies to HQ/other NGO via inbox.
 * HQ filters outgoing scheduled events by NGO.
 * HQ filters inbox by NGO.
-* Client Joins scenario session.
 * HQ toggles between offline single system mode, or online mode.
 * Client reconnects to core system while simulation is running.
 * HQ views list of connected clients.
