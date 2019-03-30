@@ -271,44 +271,24 @@ NGO client should establish 2 way connection with HQ system.
 **other usecases (order needs to be checked)**
 
 * HQ toggles between cloud hookup or local simulation.
-
-* HQ system can change the time scale of the simulation before it starts (e.g. 1 hour real world = 1 day simulation).
-
-* HQ system can change the simulation run time prior to the simulation starting.
-
-* HQ User can edit message on message list from the HQ system while the simulation is running.
-
-* HQ User can delete message on message list from the HQ system while the simulation is running.
-
-* HQ User loads existing senario in senario editor to make adjustments, before saving to current or new file.
-
-* NGO clients can playback audio file or open any other form of file sent attached to a message (unsure if this will be within the client application, or via a download).
-
-* HQ user can select any outgoing message to view details and contents. This includes previously sent messages.
-
-* NGO client users cannot access any HQ tools or information.
-
-* Users of both HQ system and NGO client can view simulation time/day on their respective interfaces. (1 hour = 1 day simulation time).
-
-* Unsure if NGO clients are able to communicate with other NGO clients. This needs to be clarified.
-
-* NGO clients can create log entry (text or audio) documenting radio communication or other general information.
-
-* HQ user can load file from local disk and atach it to message (Audio files specified to be attached, unsure about other files - images etc).
-
-* HQ user can apply sound effects over audio recordings for immersion, unsure where sound effects will be stored.
-
-* HQ user filters outgoing messages on message list by recipiant
-
-* HQ user filters recieved messages by recipiant
-
-* NGO client directly replies to message from HQ, where recipiant, subject and message fields are pre-filled.
-
-* HQ user replies directly to client, where recipiant, subject and message fields are pre-filled.
-
-* HQ client can view a list of connected NGO clients.
- 
-* HQ can kick NGO client from session.
+* HQ defines time scale for simulation before it starts (e.g. 1 hour real world = 1 day simulation).
+* HQ defines time limit prior to the simulation starting.
+* HQ edits outgoing event on event list from the core system while the simulation is running.
+* HQ deletes event on event list from the HQ system while the simulation is running.
+* HQ edits existing scenario in scenario editor.
+* NGO can open any file attached to a message.
+* Both HQ and NGO can view simulation time/day on their respective interfaces.
+* NGO messages another NGO.
+* NGO creates log entry documenting radio communication or other general information.
+* HQ loads file from local disk and attach it to message.
+* HQ toggles audio effect over attached audio file.
+* HQ filters outgoing events by NGO.
+* HQ views inbox.
+* HQ filters inbox by NGO.
+* NGO replies to HQ or NGO via inbox, where recipient, subject and message fields are pre-filled.
+* HQ replies to NGO via inbox, where recipient, subject and message fields are pre-filled.
+* HQ views a list of connected clients.
+* HQ kicks client from session.
 
 
 ### 3.3 Usability Requirements
