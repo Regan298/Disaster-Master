@@ -411,20 +411,7 @@ https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-pr
 | Client          | A core class for the functionality of clients.               |
 | ClientUI        | The user interface for the HQ.                               |
 
-|      |      |
-| ---- | ---- |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
+
 
 ### 3.6 Design constraints
 
