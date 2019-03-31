@@ -79,9 +79,7 @@ The Scope of this undertaking is to produce a computer program: that is going to
 > c) Hardware interfaces; The specific kind of hardware that the software is going to be running on is unknown, however, as we are not developing hardware this is irrelevant. <br>
 > d) Software interfaces; We don't know which other software our program will have to interface with. The client did not give the team a specific requirement as to which software to use. The client did, however, suggest that a bonus requirement would be for integration with an open source software called KoboToolBox (https://www.kobotoolbox.org/, which is information management software). So this will be an idea that the team will consider. The client also informed us that the machines the software will be running on will tend to be Windows based. This vague source of information could result in a problem for us if we are to depend on software/software libraries, that require additional installation. Because installation is impossible for us due to clients machines being remote and inaccessible. Therefore, the team will need to ensure that the language they choose to develop in, omits the need for software interface dependency's, as they are out of our control. <br>
 > e) Communications interfaces; The program is required to communicate with external cloud service's to support the storing of simulation scenario information, as well as communication between client machines<br>
-> f) Memory; The program will have to be optimised such that it doesn't consume all of the memory on the machines<br>
-> g) Operations; <br>
-> h) Site adaptation requirements; The software will have to be built to support universal types of machines as it needs to be able to run on the hardware that is present in any disaster simulation settings.<br>
+> f) Memory; The program will have to be optimised such that it doesn't consume all of the memory on the machines<br>g) Site adaptation requirements; The software will have to be built to support universal types of machines as it needs to be able to run on the hardware that is present in any disaster simulation settings.<br>
 
 #### 1.3.2 Product functions
 
@@ -101,11 +99,7 @@ Another limitation of the program may be that there is no internet connection av
 
 ## 2. References
 
-References to other documents or standards. Follow the IEEE Citation 
-Reference scheme, available from the [IEEE website](https://www.ieee.org/) (please use the search box).
-(1 page, longer if required)
-
-IEEE Systems and software engineering -- Software life cycle processes, IEEE Standard 12207, 2017
+1.2017,  Software Life Cycle Processes, IEEE Standard 12207, [Online], pp 24-60, Available: https://ieeexplore.ieee.org/document/8100771.
 
 ## 3. Specific requirements  
 
@@ -272,8 +266,6 @@ Before simulation start, NGO connects to core system session via the internet.
 
 ### 3.3 Usability Requirements
 
-See 9.5.12. for most systems, this will be around one page.
-
 Define usability (quality in use) requirements. Usability requirements and objectives for the software system include measurable effectiveness, efficiency, and satisfaction criteria in specific contexts of use.
 
 User Friendliness: For all NGO and HQ users, the interface beign used should be inviting and friendly, meaning
@@ -291,8 +283,8 @@ User Engagement & Immersion: The user interfaces for the NGOs must be engaging. 
 more exciting and focusing for the trainees. Immersion with sounds, messages and events will increase the immersion which will
 help train the NGOs for real world disaster responses as the simulation becomes more realistic.
 
-Performance: All messages must be sent within a minute and files loading scenarios
-must not take 5 minutes to load.
+Performance: All messages must be sent within 10 seconds and files loading scenarios
+must not more than 30 seconds to load.
 
 Measureable Effectiveness:
 The effectiveness of the Program will be in the recording of the Simulation. The
@@ -354,9 +346,9 @@ The Simulation will be used upto six times a month.
 
 c) Accessing capabilities:
 HQ: Will have full control over the scenario being able to change time e.g. 1 day = 1 hour in the Simulation.
-Also, controling events from te scenario, pushing them forawrd or delaying them. HQ will be able to inject new 
+Also, controlling events from the scenario, pushing them forward or delaying them. HQ will be able to inject new 
 events and messages into the Simulation. This gives the HQ more control over how they want the Simulation
-to play out and customize training experiences.
+to play out and to customize training experiences.
 
 NGO(s): Have limited access, they will only be able to view what has 
 been sent to them by the HQ and other NGO's. The only purpose for the NGO's program is
@@ -376,16 +368,18 @@ UIs and Receivers:
 HQ reciever and the Recorder:
     - These two entities will communicate using the HQ main, copying all information received into the recorder
 
-
 Senders and Receivers: 
     - If online the sender and receiver will communicate using interent connections.
     
-    - If offline the sender and receiver will communicate through a direct connection on the same computer.
-    
-    - HQSender and NGOtReviver: Sends messages and events from the scenario from the HQ's program to the NGO programs'.
-    
-    - NGOSender and HQReceiver: Send messages from the NGO programs' to the HQ's program.
-    
+
+```
+- If offline the sender and receiver will communicate through a direct connection on the same computer.
+
+- HQSender and NGOtReviver: Sends messages and events from the scenario from the HQ's program to the NGO programs'.
+
+- NGOSender and HQReceiver: Send messages from the NGO programs' to the HQ's program.
+```
+
 ScenarioLoader and the HQ main:
     - This will load a scenario file and send events and messages into the HQ main where it will wait to be fired at the right time.
     
@@ -417,6 +411,21 @@ https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-pr
 | Client          | A core class for the functionality of clients.               |
 | ClientUI        | The user interface for the HQ.                               |
 
+|      |      |
+| ---- | ---- |
+|      |      |
+|      |      |
+|      |      |
+|      |      |
+|      |      |
+|      |      |
+|      |      |
+|      |      |
+|      |      |
+|      |      |
+|      |      |
+|      |      |
+
 ### 3.6 Design constraints
 
 **Project Limitations.**
@@ -425,60 +434,68 @@ This project has design constraints imposed upon it by project limitations. Thes
 
 **Time**
 
- A project limitation constraint is time. We are bound by our delivery date in October, in addition to Regan's request of frequent updates to show how our project is progressing. As such, we must plan our time accordingly, using agile time management practices.
+ A project limitation constraint is Time. We are bound by our delivery date in October 2019, in addition to Regan's request for frequent updates to show how our project is progressing. As such, we must plan our time accordingly, using agile time management practices.
 
 **Budget**
 
-Another project limitation constraint is our budget. We have been allocated a budget of $0. This is very reasonable however, because firstly, we are working for a charity organisation. And secondly because this project does not require the purchasing of licensed software packages, nor additional physical hardware.
+Another project limitation constraint is our budget. We have been allocated a budget of $0. This is very reasonable, however, because firstly, we are working for a charity organisation. And secondly, because this project does not require the purchasing of licensed software packages, nor additional physical hardware.
 
-**Variation and Uncertainty in Limited Deployable Environments**
+**Variation and Uncertainty in Computationaly Limited Deployable Environments**
 
-Our next project limitation is that the program must have the capacity to function in multiple environments. Whereby, these environments will vary in terms of there properties to one another. These properties being access to the external internet and the quantity of concurrent simulation computers. This variance is a result of the real world simulation environment being dynamic, as Regan has stated that the program will be run in varying locations, with some being more equipped in terms of there Hardware. This constrains us, as we are required to develop a program that supports features that may mutually oppose each other, proving a difficulty to develop in regards to. The next project limitation is in relation to the latter. Due to the the uncertainty of not knowing exactly what environments  our program will be deployed into, we must build our program so that it can be deployed and applicable to a theoretical limitless amount of computing environments. This is a major constraint for us as we must consider seriously our programming language of choice to meet this requirement adequately.
+Our next project limitation is that the program must have the capacity to function in multiple environments. Whereby, these environments will vary in terms of there properties to one another. These properties being access to the external internet and the quantity of concurrent simulation computers. This variance is a result of the real world simulation environment being dynamic, as Regan has stated that the program will be run in varying locations, with some being more equipped in terms of there hardware. This constrains us, as we are required to develop a program that supports features that may mutually oppose each other, proving a difficulty to develop in regards to. The next project limitation is in relation to the latter. Due to the uncertainty of not knowing exactly what environments our program will be deployed into, we must build our program so that it can be deployed and applicable to a theoretically limitless amount of computing environments. This is a major constraint for us as we must consider seriously our programming language of choice to meet this requirement adequately.
+
+**Video Recording Of NGO's **
+
+The client has requested that it would be a well received addition for the program to support video capturing of NGO's. However, this involves design constraints, as firstly we are unsure what sort of recording hardware the client has. And secondly we are constrained by our ability to process and store large video files, as we have very limited capacity for large file storage.
 
 **External Standard Compliance.**
 
 An external standard that is imposed on our project is the requirement of adhering to the IEEE 12207-2017 Systems and software engineering - Software life cycle
-processes document. This document outlines how when developing Software, for utilisation by organisations and for the public, there is a framework of best
+processes document. This standard is opposed upon us because we are professional engineers and such must conform to professional industry practices. This standard outlines how when developing Software, for utilisation by organisations and for the public, there is a framework of best
 practice to follow. This framework includes processes, that when applied correctly, through development cycles, will result in the satisfaction of our client.
-The content of processes, in this standard, that is relevant to our project is summarised as follows. The standard writes how the Software Life Cycle Process is
-split into three main parts.
+The content of processes, in this standard, that is relevant to our project is summarised as follows.
 
 **Agreement Process**
 
 Pertains to how there is a procurement phase. Whereby, we need to ensure that we are on clear established agreement terms, such that us as developers and Regan
-the client have the same mutual understanding of what the project requirements are.
+the client have the same mutual understanding of what the project requirements are. This will be achieved by frequent meetings with the client until all requirement issues are resolved.
 
 **Technical Management Processors**
 
 Pertain to what strategies we will be making use of to organise our work in a structured direct manner. Tools that will be used to achieve this are Task Planning
-via Issues feature in Gitlab, Decision Management by way of keeping log records in Git that track our progress to decide what features to dedicate time toward
+via the Issues feature in Gitlab (By which will form agile sprints), Decision Management by way of keeping log records in Git that track our progress to decide what features to dedicate time toward to
 next, and risk management which will be addressed in Sub-Section 5.
 
 **Technical Processors**
 
-Are technical based actions that we will utilise to ensure for software quality throughout development. These processors are inclusive as follows.
+Are Technical based actions that we will utilise to ensure for software quality throughout development. These processors are inclusive as follows.
 
 *Architecture Design*
 
-That will allow us to effectivly determine what platforms we will need to implement our overall solutions.
+Will allow us to effectively determine what platforms and languages we will be utilising for project software development, this designing process will be acted out and shown in our Architecture Design Report.
+
 *Implementation.*
 
-Is the act of writing our code, upto this phase, we have ensured that this phase will be achieved comprehensivly, as the aforementioned processes would
-have set us up adequately in terms of preperation.
+Is the act of writing our code, up to this phase, we have ensured that this phase will be achieved comprehensively, as the aforementioned processes would
+have set us up adequately in terms of preparation.
+
 *Integration Process*
 
 Which is the step of combining our individual components into one coherent functional system.
+
 *Verification Process*
 
-Is the process of monitering the way in which we are building our software to ensure that it is upto a high coding standard.
+Is the process of monitoring the way in which we are building our software, to ensure that it meets a high coding standard.
+
 *Validation Process*
 
-Whereby we reflect of what we have accomplished thus far, to review in regards to assuring that features we have implemented are in accordance
+Whereby we reflect over what we have accomplished thus far, to review in regards to assuring that features we have implemented, are in accordance
 to the established requirements.
+
 *Operation and Maintenance Process*
 
-Is the action of partiarly deploying our program at Regans disposal, such that he will be able to provide us with feedback that outlines wether
-the program meets his expectations or not, indicating where further work needs to be dedicated towards.
+Is the action of partially deploying our program at Regan's disposal, such that he will be able to provide us with feedback that outlines whether
+the program meets his expectations or not, indicating where further work needs to be dedicated towards. [1]
 
 ```
 
@@ -488,68 +505,55 @@ the program meets his expectations or not, indicating where further work needs t
 
 ### 3.7 Nonfunctional system attributes
 
-Present the systemic (aka nonfunctional) requirements of the product
-(see ISO/IEC 25010).
-List up to twenty systemic requirements/attributes.
-Write a short natural language description of the top nonfunctional
-requirements (approx. five pages).
-
 1. Performance Requirements
-   - Messages that are sent and recieved by Organizations and the HQ must be sent to each other within a minute. Messages must be sent and recieved within a minute because it needs the Simulation must be similar to that of sending messages in a real disaster respose.
-   - Pictures and Sounds must be played when received and opened by an Organization. These are played to create a more immersion in the simulator, this will be how organizations will react to important news bullitens and updates during a disaster.
-   - Must be able to run offline and online, offline is necessary because the Simulation may be used to train people where there is no internet. The online version will be more useful, as it can handle more users in the simulation through web based design.
-   - Offline will run from one computer and have the ability to be split on multiple monitors connected to the computer.
+   - Messages that are sent and received by NGO's and the HQ must be sent to each other within 10 seconds. Messages must be sent and received within 10 seconds because the Simulation must be similar to that of sending messages in a real disaster response.
+   - Pictures and Sounds must be played when received and opened by an NGO's. These are played to create more immersion in the simulator, this will be how NGO's will react to important news bulletins and updates during a disaster.
+   - Must be able to run offline and online, offline is necessary because the Simulation may be used to train people where there is no internet. The online version will be more useful, as it can handle more users in the simulation through web-based design.
+   - Offline will run from one computer and have the ability to be split on multiple monitors/tabs connected/on to the computer.
 2. Scalability
    - New scenarios must be able to load onto the HQ program. 
-   - After loading new scenarios, the HQ program must be able to run it with the organizations.
-   - Amount of Organizations running with the HQ in the Simulation can be changed for different scenarios. Different senarios means the orginazations can train for different environments and different disasters.
+   - After loading new scenarios, the HQ program must be able to run it with the NGO's.
+   - Amount of NGO's running with the HQ in the Simulation can be changed for different scenarios. Different scenarios mean the NGO's can train for different environments and different disasters.
 3. Capacity
-   - The online version must handle messages between atleast seven Organizations and one HQ. This would be as if a normal network was used in real life for the organizations, a network that will have capacity for communication.
-   - The offlive version will only handle one user at a time during the Simulation. An HQ will run simulataneously to a client organization on the same computer.
+   - The online version must handle messages between at least seven NGO's and one HQ. This would be as if a normal network was used in real life for the NGO's, a network that will have capacity for communication.
+   - The offline version will only handle one user at a time during the Simulation. An HQ will run simultaneously to a client NGO on the same computer.
 4. Availability
-   - The Simulation will be functional once the HQ has loaded the scenario and has Organizations connected.
+   - The Simulation will be functional once the HQ has loaded the scenario and has NGO's connected.
 5. Reliability
-   - There must be an error detection system for messages that have failed to be received or sent, and for failed scenario, pictures, and sounds.
-   - There must be a error correction system for failed messages, pictures, and sounds.
-6. Modifiablilty
-   - During the Scenario, the HQ should be able create new scenario messages and be able to send them to the Organizations. This is for the HQ running the simulation to control the scenario, this control allows the HQ to add new problems and add more into the Simulation.
+   - There must be an error detection system for messages that have failed to be received or sent, and for the failed scenario, pictures, and sounds.
+   - There must be an error correction system for failed messages, pictures, and sounds.
+6. Modifiability
+   - During the Scenario, the HQ should be able to create new scenario messages and be able to send them to the NGO's. This is for the HQ running the simulation to control the scenario, this control allows the HQ to add new problems and add more to the Simulation.
    - Scenarios files can be edited when the Simulation is not running. If changes in the scenario need to be made by RedR Australia, then they can do it to fit their training purposes.
    - During the Scenario, the HQ should be able to fire, prevent or delay any event from the loaded Scenario from executing. Allows more control over the Simulation for HQ.
 7. Maintainability
    - A process where if a failure occurs during the Simulation, the recording of everything by the HQ will be able to be used the recorded error to find the bug(s). This will be for bug fixing and testing, for development of the Project and new scenarios created or modified.
 8. Serviceability/Supportability
-   - The online version will need an installation for the HQ program and the Organizations can enter the simulation via online clients.
    - Create a User Manual for the users. This is because the Project Team cannot deploy the Project in Australia.
-   - To install the Disaster Simualtion, a tutorial with instructions will be made to show how it will be done. This is done so other RedR Organizations can use this.
    - The offline version will need to be installed.
-   - A tutorial will be made to guide organizations on how to use the web based clients.
+   - A tutorial will be made to guide NGO's on how to use the web-based clients.
 9. Security
    - RedR Australia would like to keep all scenario files encrypted and only decrypted when running the Simulation on the HQ program. Privacy for RedR Australia's scenarios is stressed by them.
-   - All organization and the HQ prgrams data will be wiped when the programs are shutdown. Except for the recoding of the Simulation by the HQ which will be exported out.
+   - All NGO and the HQ programs data will be wiped when the programs are shut down. Except for the recording of the Simulation by the HQ which will be exported out.
 10. Portability
-    - Other RedR organizations may want to use the Disaster Simulation Program to train up more Disaster response organizations around the world. The Simulation Program should be able to be emailed between RedR Organizations.
+    - Other RedR NGO's may want to use the Disaster Simulation Program to train up more Disaster response NGO's around the world. The Simulation Program should be able to be emailed between RedR NGO's .
 11. Manageability
-    - HQ will have manage the scenario and time of the Simulation. This will be in their HQ user interface for HQ user to utilize. Allows the HQ controls for pausing and time contraints.
+    - HQ will have to manage the scenario and time of the Simulation. This will be in their HQ user interface for HQ user to utilize. Allows the HQ controls for pausing and time constraints.
 12. Environmental
-    - Online version: The environment will be in a regular workplace. A Program will run on serveral computers all connected via the HQ's Program.  
+    - Online version: The environment will be in a regular workplace. A Program will run on several computers all connected via the HQ's Program.  
     - Offline version: The environment can be anywhere, our client Regan said "We may have people using the simulation in Afganistan and Iraq.", the offline version should run anywhere in the world for easy access training purposes. 
 13. Data Integrity
     - The Recorded data file must have errors detected and displayed on the file as bad data. Can be used for bug fixing and testing, but so that unreliable data is easily spotted in the recording file of the simulation.
-    - The scenarios will need a token or password to decrypt the scenario file. This will ensure security of the scenarios even if the scenario files are stolen.
+    - The scenarios will need a token or password to decrypt the scenario file. This will ensure the security of the scenarios even if the scenario files are stolen.
 14. Usability
-    - Client - Display sent and received messages (similar to an email inbox). In the a real disaster response, emails will is crucial to organizing the response, so having the program messages simlar to an email will help the immersion.
+    - Client - Display sent and received messages (similar to an email inbox). In the real disaster response, emails will is crucial to organizing the response, so having the program messages similar to an email will help the immersion.
     - HQ 
-      - Display a list loaded events from the scenario file and what times the events will execute. 
+      - Display a list of loaded events from the scenario file and what times the events will execute. 
       - Display sent and received messages (similar to an email inbox). 
 15. Accuracy
     - Recorded data in the recorded data file must contain the type of data (picture, message, sound), the content of the data, the time of recording and if there was an error in the recording. 
 
 ### 3.8 Physical and Environmental Requirements 
-
-For systems with hardware components, identify the physical
-characteristics of that hardware (9.4.10) and environment conditions
-in which it must operate (9.4.11).  Depending on the project, this
-section may be from one page up to 5 pages.
 
 There is no hardware needed for this project.
 
@@ -563,13 +567,10 @@ RedR are going to be running their simulations in an isolated section of the Aus
 
 ### 3.9 Supporting information
 
-see 9.5.19. 
-The SRS should explicitly state whether or not these information items are to be considered part of the
-requirements. The SRS should contain additional supporting information including:
-
 a) Sample input/output formats, descriptions of cost analysis studies, or results of user surveys:
-    - Inputs from the HQ and the organizations will be in txt format for sending basic messages to each other.
-    - There will be feed back from testing by our client Regan who will test it himself and send constant feedback.
+
+- Inputs from the HQ and the organizations will be in txt format for sending basic messages to each other.
+  - There will be feedback from testing by our client Regan who will test it himself and send constant feedback.
     - Output is the recording file, which will contain txt, jpeg and mp3.
 
 b) Supporting or background information that can help the readers of the SRS:
@@ -579,23 +580,17 @@ b) Supporting or background information that can help the readers of the SRS:
 c) A description of the problems to be solved by the software:
 
 - Simplifying the training simulation program for the RedR Australia training team.
-  - Allowing Offline training for disaster simulations on a computer anywhre in the world. This allows quick response training to disasters around the world for RedR Australia.
-    - Allowing Online training with multiple teams witha uniform software to communicate and train. This will solve having the use emailing websites to communicate during the simulation.
+  - Allowing Offline training for disaster simulations on a computer anywhere in the world. This allows quick response training to disasters around the world for RedR Australia.
+    - Allowing Online training with multiple teams with a uniform software to communicate and train. This will solve having the use of emailing websites to communicate during the simulation.
     - The online version will allow training to be done easily by many people around the world and not have to be run onsite by only RedR Australia.
 
 d) Special packaging instructions for the code and the media to meet security, export, initial loading, or other
 requirements:
-    - Load scenario file which is encrytped.
-    - Recording file of entire simulation with stamp marks for all recordings.
-    - Recording file will need to be replayed through the Program for easy analysis. 
+    - Load scenario file which is encrypted.
+        - Recording file of entire simulation with stamp marks for all recordings.
+        - Recording file will need to be replayed through the Program for easy analysis. 
 
 ## 4. Verification
-
-3 pages outlining how you will verify that the product meets the
-most important specific requirements. The format of this section
-should parallel section 3 of your document (see 9.5.18).
-Wherever possible (especially systemic requirements) you should
-indicate testable acceptance criteria.
 
 To verify that the software performs the correct functions, the client will be the first person to check 
 with. The client is the one who knows exactly what they want their system to do. The simplest way the team 
@@ -605,11 +600,11 @@ unbiased results. Upon the completion of the program, before testing with the cl
 be able to verify the functions of the software by comparing the program to this very document, as it holds 
 records of all of requirements that were gathered from the client during the first few meetings.
 
-3.3 The usability of the simulation can be best tested with the client deploying a test version and giving 
+3.3: The usability of the simulation can be best tested with the client deploying a test version and giving 
 feedback on usability requirements such as custom additions of HQ messages during a simulation, error 
 tolerance and correction of messages during the simulation, the user friendliness of the NGO user interface
 and the HQ user interface (UIs). Feedback from the client in deployed testing will give the project information
-on what errors are occuring when and where and how tot make the program more friendly to the NGO and HQ users
+on what errors are occurring when and where and how to make the program more friendly to the NGO and HQ users
 during the simulation for better training. Having the UIs engaging will help keep trainees keep focused and
 have more stimulation. Feedback on the immersion of the UIs will be crucial from the client's deployment
 and testing of the Project.
@@ -642,8 +637,6 @@ given from them to the project development team.
 
 ### 5.1 Schedule
 
-Identify dates for key project deliverables: 
-
 In discussion with our client Regan there are no specific deliverable dates except from a final release at the end of the course on 11/10/2019.
 For thorough testing, a functional prototype would be developed as early as possible so that Regan can test in the field and provide us with feedback.
 
@@ -653,9 +646,6 @@ Our project does not require a budget as it is purely software built using free 
 Our client does not have a budget in mind from RedR themselves. We have decided to face that if and when it comes up, due to the likelihood of us needing a budget.
 
 ### 5.3 Risks 
-
-Identify the ten most important project risks to achieving project goals: their type, likelihood,
-impact, and mitigation strategies (3 pages).
 
 | Risk                                                         | Likelihood | Severity     |
 | ------------------------------------------------------------ | ---------- | ------------ |
@@ -681,7 +671,7 @@ impact, and mitigation strategies (3 pages).
 | The team focuses on non-required features and functionality (such as visuals), restricting us from finishing on-time. | Assign time to specific parts of development with correct priorities based on requirements. This will keep us on track. |
 | The developed software ends up requiring hardware investment for testing, making it too costly for the client. | Discuss with the client and the school about their possible testing facilities. |
 | Employee turnover at RedR resulting in the termination of our project. | This event is completely out of our control and there can be nothing done about it if it happens |
-| A disaster at VUW restricting access to our files.           | Encorporate a version control system such as GitLab that stores files offsite. This can be accessed remotely. |
+| A disaster at VUW restricting access to our files.           | Incorporate a version control system such as GitLab that stores files offsite. This can be accessed remotely. |
 
 If the project will involve any work outside the ECS laboratories, i.e. off-campus activities, these should be included in the following section.
 
@@ -713,18 +703,25 @@ Project requirements do not involve risk of death, serious harm, harm or injury.
 
 ### 6.1 Assumptions and dependencies 
 
-One page on assumptions and dependencies (9.5.7).
-
-One key assumption that we will have to make is that the computers that are being operated during the disaster simulation are capable of running the software that will be produced. It is also assumed that RedR will be responsible for maintaining their own network and will be responsible for getting the software back online should it go down. 
+One key assumption that we will have to make is that the computers that are being operated during the disaster simulation are capable of running the software that will be produced. It is also assumed that RedR will be responsible for maintaining their own network infrastructure and will be responsible for getting the software back online should it go down. 
 
 The client suggested using KoboToolBox as a framework for the program, though the team has yet to decide whether to actually use this. This choice will be made at a later date when the time for deciding how to build the system comes. 
 
+Client computers support basic sound playback functionality.
+
+Client computers can support video capturing if client makes this feature mandatory.
+
+
+
 ### 6.2 Acronyms and abbreviations
 
-One page glossary _as required_.
-
 Overseer: The individual responsible for communicating with each of the teams participating within the simulation.
+
 RedR Australia: An organisation that selects, trains and deploys staff to assist in disaster situations, and is associated with the client. 
+
+HQ: Head Quarters in the simulation, where the command centre of program is run from.
+
+NGO: Non Government Organisation or Organisation, for short, is the name given to teams of participating trainees in the simulation.
 
 ## 7. Contributions
 
