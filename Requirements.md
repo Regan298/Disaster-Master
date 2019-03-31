@@ -431,7 +431,7 @@ Another project limitation constraint is our budget. We have been allocated a bu
 
 Our next project limitation is that the program must have the capacity to function in multiple environments. Whereby, these environments will vary in terms of there properties to one another. These properties being access to the external internet and the quantity of concurrent simulation computers. This variance is a result of the real world simulation environment being dynamic, as Regan has stated that the program will be run in varying locations, with some being more equipped in terms of there hardware. This constrains us, as we are required to develop a program that supports features that may mutually oppose each other, proving a difficulty to develop in regards to. The next project limitation is in relation to the latter. Due to the uncertainty of not knowing exactly what environments our program will be deployed into, we must build our program so that it can be deployed and applicable to a theoretically limitless amount of computing environments. This is a major constraint for us as we must consider seriously our programming language of choice to meet this requirement adequately.
 
-**Video Recording Of NGO's **
+**Video Recording Of NGO's**
 
 The client has requested that it would be a well received addition for the program to support video capturing of NGO's. However, this involves design constraints, as firstly we are unsure what sort of recording hardware the client has. And secondly we are constrained by our ability to process and store large video files, as we have very limited capacity for large file storage.
 
