@@ -274,6 +274,8 @@ users.
 
 Error Tolerance: Errors in the program must be recorded by the simulation so future debugging can be completed more effectively.
 Error corrections should also be made, if a message fails to send, the program will resend the message until it is properly sent.
+All errors made by users of the HQ and NGOs will be dealt with correctly and an error message will be shown with what went wrong.
+This will help users make less mistakes if future, as feedback errors will help them learn how and how not to use the program.
 
 Customization & Personalization: For HQ users, adding customizations and personalizations into the simulation is necessary for
 training purposes. Personilization allows the HQ the improve certain characteristic of one specific NGO. Customization allows
@@ -285,12 +287,6 @@ help train the NGOs for real world disaster responses as the simulation becomes 
 
 Performance: All messages must be sent within 10 seconds and files loading scenarios
 must not more than 30 seconds to load.
-
-Measureable Effectiveness:
-The effectiveness of the Program will be in the recording of the Simulation. The
-recording will be analysed and the HQ can see what good and bad actions have been
-taken by organiztions. Training over time using the Simulation will give feedback
-to the organzations and trainees' actions can be seen, critqued and improved.
 
 Satisfaction Criteria of Specific contexts:
 Creating a functional offline version of the Disaster Simulaion program. Where
