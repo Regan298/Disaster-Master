@@ -70,16 +70,16 @@ The Scope of this undertaking is to produce a computer program: that is going to
 
 #### 1.3.1 Product perspective
 
-> The software product is going to be a standalone application and will not be implemented into a larger system. This is because the client currently doesn't have other systems to integrate the product with. This will be the first of it's kind and thus will not need to be related to other products. 
->
-> ##### How does the software operate within the following constraints?
->
-> a) System interfaces; The secondary types systems that the Software will have to interact with, will be to a server API that hosts a Database. This will be in order to facilitate master and slave inter-communication.<br>
-> b) User interfaces; We will implement a user interface in a browser environment, to allow simulation participants to have ease of interaction. <br>
-> c) Hardware interfaces; The specific kind of hardware that the software is going to be running on is unknown, however, as we are not developing hardware this is irrelevant. <br>
-> d) Software interfaces; We don't know which other software our program will have to interface with. The client did not give the team a specific requirement as to which software to use. The client did, however, suggest that a bonus requirement would be for integration with an open source software called KoboToolBox (https://www.kobotoolbox.org/, which is information management software). So this will be an idea that the team will consider. The client also informed us that the machines the software will be running on will tend to be Windows based. This vague source of information could result in a problem for us if we are to depend on software/software libraries, that require additional installation. Because installation is impossible for us due to clients machines being remote and inaccessible. Therefore, the team will need to ensure that the language they choose to develop in, omits the need for software interface dependency's, as they are out of our control. <br>
-> e) Communications interfaces; The program is required to communicate with external cloud service's to support the storing of simulation scenario information, as well as communication between client machines<br>
-> f) Memory; The program will have to be optimised such that it doesn't consume all of the memory on the machines<br>g) Site adaptation requirements; The software will have to be built to support universal types of machines as it needs to be able to run on the hardware that is present in any disaster simulation settings.<br>
+The software product is going to be a standalone application and will not be implemented into a larger system. This is because the client currently doesn't have other systems to integrate the product with. This will be the first of it's kind and thus will not need to be related to other products. 
+
+##### How does the software operate within the following constraints?
+
+a) System interfaces; The secondary types systems that the Software will have to interact with, will be to a server API that hosts a Database. This will be in order to facilitate master and slave inter-communication.<br>
+b) User interfaces; We will implement a user interface in a browser environment, to allow simulation participants to have ease of interaction. <br>
+c) Hardware interfaces; The specific kind of hardware that the software is going to be running on is unknown, however, as we are not developing hardware this is irrelevant. <br>
+d) Software interfaces; We don't know which other software our program will have to interface with. The client did not give the team a specific requirement as to which software to use. The client did, however, suggest that a bonus requirement would be for integration with an open source software called KoboToolBox (https://www.kobotoolbox.org/, which is information management software). So this will be an idea that the team will consider. The client also informed us that the machines the software will be running on will tend to be Windows based. This vague source of information could result in a problem for us if we are to depend on software/software libraries, that require additional installation. Because installation is impossible for us due to clients machines being remote and inaccessible. Therefore, the team will need to ensure that the language they choose to develop in, omits the need for software interface dependency's, as they are out of our control. <br>
+e) Communications interfaces; The program is required to communicate with external cloud service's to support the storing of simulation scenario information, as well as communication between client machines<br>
+f) Memory; The program will have to be optimised such that it doesn't consume all of the memory on the machines<br>g) Site adaptation requirements; The software will have to be built to support universal types of machines as it needs to be able to run on the hardware that is present in any disaster simulation settings.<br>
 
 #### 1.3.2 Product functions
 
