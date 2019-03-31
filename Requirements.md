@@ -276,37 +276,29 @@ See 9.5.12. for most systems, this will be around one page.
 
 Define usability (quality in use) requirements. Usability requirements and objectives for the software system include measurable effectiveness, efficiency, and satisfaction criteria in specific contexts of use.
 
-Usability is the Program's ability to elegantly run desired features specified by the client.
+User Friendliness: For all NGO and HQ users, the interface beign used should be inviting and friendly, meaning
+that all tasks required to do in the interface by users should not be complex and simple with guidance for the 
+users.
 
-Usability Requirements and Objectives:
+Error Tolerance: Errors in the program must be recorded by the simulation so future debugging can be completed more effectively.
+Error corrections should also be made, if a message fails to send, the program will resend the message until it is properly sent.
 
-Offline:
-Run a disaster scenario over on one computer where a the HQ and the organization
-will run on. This will ensure the program can be run anywhere for training
-purposes.
+Customization & Personalization: For HQ users, adding customizations and personalizations into the simulation is necessary for
+training purposes. Personilization allows the HQ the improve certain characteristic of one specific NGO. Customization allows
+the HQ to train all NGOs in the simulation for new events which expands training for other scenarios.
 
-Online:
-Run a distaster scenario with two types of programs running while communicating
-with each other over the internet. The two types of programs running are the
-Organization(s) and one HQ.
+User Engagement & Immersion: The user interfaces for the NGOs must be engaging. This will keep training during the simulation 
+more exciting and focusing for the trainees. Immersion with sounds, messages and events will increase the immersion which will
+help train the NGOs for real world disaster responses as the simulation becomes more realistic.
 
-Both the HQ and Organization(s) must be able to receive and send messages to each
-other. These messages are emails, sounds and pictures, this is to increase the
-immersion for the organization using the program. These must reach their 
-destination with one minute.
-
-All messages are to be recorded by the HQ so that a review of what happened in
-the Simulation Program can be analysed after the Simulation.
+Performance: All messages must be sent within a minute and files loading scenarios
+must not take 5 minutes to load.
 
 Measureable Effectiveness:
 The effectiveness of the Program will be in the recording of the Simulation. The
 recording will be analysed and the HQ can see what good and bad actions have been
 taken by organiztions. Training over time using the Simulation will give feedback
 to the organzations and trainees' actions can be seen, critqued and improved.
-
-Efficiency:
-All messages must be sent within a minute and files loading scenarios
-must not take 5 minutes to load.
 
 Satisfaction Criteria of Specific contexts:
 Creating a functional offline version of the Disaster Simulaion program. Where
