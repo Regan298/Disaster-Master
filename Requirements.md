@@ -370,15 +370,14 @@ HQ reciever and the Recorder:
 
 Senders and Receivers: 
     - If online the sender and receiver will communicate using interent connections.
-    
 
-```
-- If offline the sender and receiver will communicate through a direct connection on the same computer.
 
-- HQSender and NGOtReviver: Sends messages and events from the scenario from the HQ's program to the NGO programs'.
+If offline the sender and receiver will communicate through a direct connection on the same computer.
 
-- NGOSender and HQReceiver: Send messages from the NGO programs' to the HQ's program.
-```
+HQSender and NGOtReviver: Sends messages and events from the scenario from the HQ's program to the NGO programs'.
+
+NGOSender and HQReceiver: Send messages from the NGO programs' to the HQ's program.
+
 
 ScenarioLoader and the HQ main:
     - This will load a scenario file and send events and messages into the HQ main where it will wait to be fired at the right time.
