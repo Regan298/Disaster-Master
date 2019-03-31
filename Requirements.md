@@ -55,9 +55,9 @@ The purpose of our software is to reduce the total workload of the overseer in t
 
 The Scope of this undertaking is to produce a computer program: that is going to be used in order to automate some of the responsibilities of the Overseer in the disaster simulations that RedR frequently run. The cost of producing such a program will be little to none, as all of the development processes will be able to be completed using hardware that is already available to every team member and to RedR. The final deliverable product will be a single piece of software, that will be capable of the following key features that define the scope.
 
-1. Ability to load a simulation file, from an Overseer at HQ machine, that dictates for the details of each type of scenario and such that Overseer has main control over current simulation.
+1. Ability to load dynamic simulation files, from an Overseer at HQ machine, that dictates for the details of each type of scenario and such that Overseer has main control over current simulation.
 2. Operating on 1..* Machines, whereby a single machine implies no access to the internet.
-3. Inter-communication between Overseer at HQ and NGO's at Client machines, each machine being over network infrastructure operated by RedR, and communication via superficial emails and texts between teams and Overseer at HQ.
+3. Inter-communication between Overseer at HQ and NGO's at Client machines, each machine being over network infrastructure operated by RedR, and communication via superficial emails and texts between teams and Overseer at HQ. Communication may have embedded imagery and audio files.
 4. Tracking for the progress of the simulation, a varying time scale that is used for each simulation.
 5. Custom creation of varying scenario situations.
 6. Real-time interfering of scenario by Overseer.
@@ -109,176 +109,166 @@ IEEE Systems and software engineering -- Software life cycle processes, IEEE Sta
 
 ## 3. Specific requirements  
 
-20 pages outlining the requirements of the system.
-You should apportion these pages across the following 
-subsections to focus on the most important parts of your product.
-
 ### 3.1 External interfaces
 
-The external interface needed for our system will be Ethernet. Our program needs to support the capturing of all Disaster simulation data in real time.
-Because Regan wants the ability to review data post simulation event. As such, this means that our software solution, needs to support the uploading or
-the transferring of this data to an external location via Ethernet, as an external interface. The reason as to why Ethernet is the external interface for internet,
-, is because our Software will be deployed onto desktop computers meaning they don't support a Wifi external interface. The external destination will be to a list
-of email addresses, that will be inputed at the start of each simulation, for convenience. And the uploading of this data will be at the instant a simulation is
-complete. The data will be in the format of a simple custom defined XML text file, therefore it will be small in size. Once the email has been processed via
-the Ethernet External interface it will noify the HQ Terminal that the function has been accomplished.
+The external interfaces needed for our system will be Ethernet and Wifi. The Latter is depending on the specific hardware of each HQ system configuration. Our program needs to support the capturing of all Disaster simulation data in real time. Because Regan wants the ability to review data post-simulation event. Furthermore, this means that our software solution needs to support the uploading or the transferring of this data to an external location via Ethernet and or WIFI, as an external interface. The external destination will be to a list of email addresses, that will be inputted at the end of each simulation, for the user's convenience. And the uploading of this data will be at the instant a simulation is complete. The review data will be in the format of a simple custom defined XML text file, therefore it will be small in size. Once the email has been processed via the aforementioned External interface that is being utilised, it will notify the HQ Terminal that the function has been accomplished.
 
-- ### 3.2 Functions
+### 3.2 Functions
 
-  **HQ creates new scenario**
+**HQ creates new scenario**
 
-  Scenario editor is the system used by HQ to create 
-  a list of scheduled events to be sent to individual NGOs during the simulation. New Scenario is the use case for HQs who want to create
-  a new scenario (such as first-time users).
+Scenario editor is the system used by HQ to create 
+a list of scheduled events to be sent to individual NGOs during the simulation. New Scenario is the use case for HQs who want to create
+a new scenario (such as first-time users).
 
-  | User Action                                     | System Responsibility                                        |
-  | ----------------------------------------------- | ------------------------------------------------------------ |
-  | HQ launches Scenario editor                     |                                                              |
-  |                                                 | System prompts user to either create new scenario or edit existing one |
-  | HQ selects "create new scenario"                |                                                              |
-  |                                                 | System prompts user to choose the number and names of NGOs and create pre-scheduled messages to be sent to them. |
-  | HQ selects NGO number and names                 |                                                              |
-  |                                                 | System adds NGOs to NGO list                                 |
-  | HQ creates and submits messages to message list |                                                              |
-  |                                                 | System adds pre-scheduled messages to list and displays them |
-  | HQ selects "save scenario"                      |                                                              |
-  |                                                 | System saves scenario to local file                          |
+| User Action                                     | System Responsibility                                        |
+| ----------------------------------------------- | ------------------------------------------------------------ |
+| HQ launches Scenario editor                     |                                                              |
+|                                                 | System prompts user to either create new scenario or edit existing one |
+| HQ selects "create new scenario"                |                                                              |
+|                                                 | System prompts user to choose the number and names of NGOs and create pre-scheduled messages to be sent to them. |
+| HQ selects NGO number and names                 |                                                              |
+|                                                 | System adds NGOs to NGO list                                 |
+| HQ creates and submits messages to message list |                                                              |
+|                                                 | System adds pre-scheduled messages to list and displays them |
+| HQ selects "save scenario"                      |                                                              |
+|                                                 | System saves scenario to local file                          |
 
-  **HQ begins simulation**
+**HQ begins simulation**
 
-  Allows HQ to start simulation, All scheduled events and messages will start firing. System will start recording data regarding simulation.
+Allows HQ to start simulation, All scheduled events and messages will start firing. System will start recording data regarding simulation.
 
-  | User Action                              | System Responsibility                              |
-  | ---------------------------------------- | -------------------------------------------------- |
-  | HQ launches HQ program                   |                                                    |
-  |                                          | System queries user to load scenario               |
-  | HQ selects scenario from local disk      |                                                    |
-  |                                          | System queries user for scenario log save location |
-  | HQ selects save location on local disk   |                                                    |
-  |                                          | System launches core system interface              |
-  | when ready HQ presses "Start simulation" |                                                    |
-  |                                          | System begins simulation                           |
+| User Action                              | System Responsibility                              |
+| ---------------------------------------- | -------------------------------------------------- |
+| HQ launches HQ program                   |                                                    |
+|                                          | System queries user to load scenario               |
+| HQ selects scenario from local disk      |                                                    |
+|                                          | System queries user for scenario log save location |
+| HQ selects save location on local disk   |                                                    |
+|                                          | System launches core system interface              |
+| when ready HQ presses "Start simulation" |                                                    |
+|                                          | System begins simulation                           |
 
-  **HQ ends simulation**
+**HQ ends simulation**
 
-  Allows HQ to end simulation, stopping events and all transmittion of messages. Recorded data can then be viewed/saved.
+Allows HQ to end simulation, stopping events and all transmittion of messages. Recorded data can then be viewed/saved.
 
-  | User Action               | System Responsibility                       |
-  | ------------------------- | ------------------------------------------- |
-  | HQ selects "end scenario" |                                             |
-  |                           | system promts user to view/save log or exit |
-  | HQ selects exit           |                                             |
-  |                           | System ends program                         |
+| User Action               | System Responsibility                       |
+| ------------------------- | ------------------------------------------- |
+| HQ selects "end scenario" |                                             |
+|                           | system promts user to view/save log or exit |
+| HQ selects exit           |                                             |
+|                           | System ends program                         |
 
-  **HQ schedules email to be sent to NGO**
+**HQ schedules email to be sent to NGO**
 
-  HQ creates scheduled email while the simulation is running to be sent later in the simulation
+HQ creates scheduled email while the simulation is running to be sent later in the simulation
 
-  | User Action                                                  | System Responsibility               |
-  | ------------------------------------------------------------ | ----------------------------------- |
-  | HQ selects "compose email"                                   |                                     |
-  |                                                              | System opens new email interface    |
-  | HQ fills in relevant fields (recipient, subject, message contents) |                                     |
-  | HQ selects time to schedule message                          |                                     |
-  | HQ selects "Add message to schedule"                         |                                     |
-  |                                                              | System adds message to message list |
+| User Action                                                  | System Responsibility               |
+| ------------------------------------------------------------ | ----------------------------------- |
+| HQ selects "compose email"                                   |                                     |
+|                                                              | System opens new email interface    |
+| HQ fills in relevant fields (recipient, subject, message contents) |                                     |
+| HQ selects time to schedule message                          |                                     |
+| HQ selects "Add message to schedule"                         |                                     |
+|                                                              | System adds message to message list |
 
-  ***NGO sends email to HQ**
+***NGO sends email to HQ**
 
-  NGO creates and sends email to HQ.
+NGO creates and sends email to HQ.
 
-  | User Action                                                  | System Responsibility                     |
-  | ------------------------------------------------------------ | ----------------------------------------- |
-  | NGO selects "Compose Email"                                  |                                           |
-  |                                                              | System opens new email template interface |
-  | NGO fills in relevant fields (recipient, subject, message contents) |                                           |
-  | NGO submits email                                            |                                           |
-  |                                                              | System submits email to HQ                |
+| User Action                                                  | System Responsibility                     |
+| ------------------------------------------------------------ | ----------------------------------------- |
+| NGO selects "Compose Email"                                  |                                           |
+|                                                              | System opens new email template interface |
+| NGO fills in relevant fields (recipient, subject, message contents) |                                           |
+| NGO submits email                                            |                                           |
+|                                                              | System submits email to HQ                |
 
-  **NGO opens received file**
+**NGO opens received file**
 
-  NGO recieves and downloads file attached to message from HQ.
+NGO recieves and downloads file attached to message from HQ.
 
-  | User Action                      | System Responsibility                                      |
-  | -------------------------------- | ---------------------------------------------------------- |
-  |                                  | System indicates to NGO that new message has been recieved |
-  | NGO opens message                |                                                            |
-  |                                  | System indicates file attached to message                  |
-  | NGO clicks on attached file      |                                                            |
-  |                                  | system downloads file to NGOs local system                 |
-  | NGO views file from local folder |                                                            |
+| User Action                      | System Responsibility                                      |
+| -------------------------------- | ---------------------------------------------------------- |
+|                                  | System indicates to NGO that new message has been recieved |
+| NGO opens message                |                                                            |
+|                                  | System indicates file attached to message                  |
+| NGO clicks on attached file      |                                                            |
+|                                  | system downloads file to NGOs local system                 |
+| NGO views file from local folder |                                                            |
 
-  **HQ edits scheduled event from event-list**
+**HQ edits scheduled event from event-list**
 
-  While running the simulation HQ edits contents/details of scheduled event.
+While running the simulation HQ edits contents/details of scheduled event.
 
-  | User Action                                              | System Responsibility                                        |
-  | -------------------------------------------------------- | ------------------------------------------------------------ |
-  | HQ selects event from event list which they wish to edit |                                                              |
-  |                                                          | System opens edit screen showing details of event (details will depend on type of event (email, text, audio file etc.)) |
-  | HQ modifies fields                                       |                                                              |
-  | HQ saves event                                           |                                                              |
-  |                                                          | System updates event in event list                           |
+| User Action                                              | System Responsibility                                        |
+| -------------------------------------------------------- | ------------------------------------------------------------ |
+| HQ selects event from event list which they wish to edit |                                                              |
+|                                                          | System opens edit screen showing details of event (details will depend on type of event (email, text, audio file etc.)) |
+| HQ modifies fields                                       |                                                              |
+| HQ saves event                                           |                                                              |
+|                                                          | System updates event in event list                           |
 
-  **HQ exports recording of current simulation**
+**HQ exports recording of current simulation**
 
-  Once the simulation has ended, HQ exports simulation log to local disk.
+Once the simulation has ended, HQ exports simulation log to local disk.
 
-  | User Action         | System Responsibility                                        |
-  | ------------------- | ------------------------------------------------------------ |
-  |                     | Simulation ends                                              |
-  |                     | System gives HQ option to view log, save log or exit         |
-  | HQ selects save log |                                                              |
-  |                     | System saves log to local disk in easily interperateable format |
-  |                     | System returns to previous screen                            |
+| User Action         | System Responsibility                                        |
+| ------------------- | ------------------------------------------------------------ |
+|                     | Simulation ends                                              |
+|                     | System gives HQ option to view log, save log or exit         |
+| HQ selects save log |                                                              |
+|                     | System saves log to local disk in easily interperateable format |
+|                     | System returns to previous screen                            |
 
-  **Client Joins scenario session**
+**Client Joins scenario session**
 
-  Before simulation start, NGO connects to core system session via the internet.
+Before simulation start, NGO connects to core system session via the internet.
 
-  | User Action                                   | System Responsibility                                        |
-  | --------------------------------------------- | ------------------------------------------------------------ |
-  | NGO launches client program                   |                                                              |
-  |                                               | client program launches                                      |
-  |                                               | System initiates connection procedure and prompts NGO for authentication for specified core system |
-  | NGO authenticates and connects to core system |                                                              |
-  |                                               | Core system prompts user to choose an NGO from the sessions NGO list |
-  | NGO selects NGO from list                     |                                                              |
-  |                                               | System submits selection to core system and grants client access to messages |
+| User Action                                   | System Responsibility                                        |
+| --------------------------------------------- | ------------------------------------------------------------ |
+| NGO launches client program                   |                                                              |
+|                                               | client program launches                                      |
+|                                               | System initiates connection procedure and prompts NGO for authentication for specified core system |
+| NGO authenticates and connects to core system |                                                              |
+|                                               | Core system prompts user to choose an NGO from the sessions NGO list |
+| NGO selects NGO from list                     |                                                              |
+|                                               | System submits selection to core system and grants client access to messages |
 
-  **Other usecases in order of priority**
+**Other usecases in order of priority**
 
-  - HQ sends email to NGO.
-  - HQ creates new scenario event in scenario editor.
-  - HQ defines timescale for simulation before it starts (e.g. 1 hour real world = 1 day simulation).
-  - HQ defines time limit for simulation before it starts.
-  - HQ deletes scheduled event from event-list.
-  - HQ views email inbox.
-  - NGO views email inbox.
-  - HQ/NGO view simulation time.
-  - HQ opens saved recording of previous simulation.
-  - HQ edits existing scenario in scenario editor.
-  - HQ adds from local disk to scenario in scenario editor.
-  - HQ sends scheduled audio event to NGO.
-  - HQ toggle audio effect for audio event.
-  - HQ loads file from local disk to send to NGO.
-  - NGO makes new log entry to record miscellaneous data (radio communication, notes etc.).
-  - NGO sends email to another NGO.
-  - HQ views details of recorded events.
-  - HQ replies to NGOs email via inbox.
-  - NGO replies to HQ/other NGO via inbox.
-  - HQ filters outgoing scheduled events by NGO.
-  - HQ filters inbox by NGO.
-  - HQ toggles between offline single system mode, or online mode.
-  - Client reconnects to core system while simulation is running.
-  - HQ views list of connected clients.
-  - HQ kicks client from session.
-  - HQ sends text to NGO.
-  - NGO sends text to HQ.
-  - NGO sends text to NGO.
-  - HQ views text in inbox.
-  - NGO views text in inbox.
-  - HQ sends scheduled text to NGO.
+- HQ sends email to NGO.
+- HQ creates new scenario event in scenario editor.
+- HQ defines timescale for simulation before it starts (e.g. 1 hour real world = 1 day simulation).
+- HQ defines time limit for simulation before it starts.
+- HQ deletes scheduled event from event-list.
+- HQ views email inbox.
+- NGO views email inbox.
+- HQ/NGO view simulation time.
+- HQ opens saved recording of previous simulation.
+- HQ edits existing scenario in scenario editor.
+- HQ adds from local disk to scenario in scenario editor.
+- HQ sends scheduled audio event to NGO.
+- HQ toggle audio effect for audio event.
+- HQ loads file from local disk to send to NGO.
+- NGO makes new log entry to record miscellaneous data (radio communication, notes etc.).
+- NGO sends email to another NGO.
+- HQ views details of recorded events.
+- HQ replies to NGOs email via inbox.
+- NGO replies to HQ/other NGO via inbox.
+- HQ filters outgoing scheduled events by NGO.
+- HQ filters inbox by NGO.
+- HQ toggles between offline single system mode, or online mode.
+- Client reconnects to core system while simulation is running.
+- HQ views list of connected clients.
+- HQ kicks client from session.
+- HQ sends text to NGO.
+- NGO sends text to HQ.
+- NGO sends text to NGO.
+- HQ views text in inbox.
+- NGO views text in inbox.
+- HQ sends scheduled text to NGO.
 
 ### 3.3 Usability Requirements
 
@@ -326,27 +316,31 @@ Replaying the recording will be important for analytical purposes for RedR
 Australia, including a replay of the scenario with all messages sent with time
 stamps is a must.
 
-### 3.4 Performance requirements
+### 3.4 Performance Requirements
 
-Performance is an important requirement for this system due, to the real time nature of scenario simulation. The core feature of the program will be to support
-instantaneous text based messages between the 1 to 7 core Group terminals and the Single HQ terminal concurrently. As such, this dictates that the delay between
-sending and receiving messages must not exceed 10 seconds. Should this performance requirement not be met, then this will result in unresponsive and ineffective
-disaster based scenarios. In addition, there will be concurrent terminals that rely on their parent (HQ), as well as sibling (Group) terminals, all being
-synchronised with one another. Therefore, this means that this implies that the HQ terminal must constantly be monitoring the performance of group terminals to
-ensure that this critical performance requirement is being satisfied. Another critical perfromance requirement is that the program has the capacity to log every
-event that has occured throughout the simulation in real time. Meaning that should there be a delay in this feature then the log time entries wil not be accurate.
-Moreover, due to the size of the data being transferred, between a limited amount of terminals, being relatively small, it ensures that a large computational
-overhead is not necessary for the system in which we need to build.
+Performance is an important requirement for this system, due to the real-time, instantaneous, nature of scenario simulation. This invokes the following performance requirements upon our program.
 
+**Messaging Performance**
 
+The core feature of the program will be to support instantaneous text/image/audio based messages between the 1 to * core NGO terminals and the Single HQ terminal concurrently. As such, this dictates that the delay between sending and receiving messages must not exceed 10 seconds. Should this performance requirement not be met, then this will result in unresponsive and ineffective disaster based scenarios. Leading to user frustration when utilisation our Software solution.
 
-### 3.5 Logical database requirements
+**Synchronisation Performance**
 
-See 9.5.14. for most systems, a focus on d) and e) is appropriate,
-such as an object-oriented domain analysis. You should provide an
-overview domain model (e.g.  a UML class diagram of approximately ten
-classes) and write a brief description of the responsibilities of each
-class in the model (3 pages).
+In addition, there will be concurrent program instances that rely on their parent (HQ), as well as sibling (NGO) terminals, all being synchronized with one another. Because, the core functionality of our program will be based upon simultaneous event sending and receiving from a master instance, to multiple slave instances, with regards to time. Therefore, this means that this implies that the HQ terminal must constantly be monitoring the performance of group terminals to ensure that there is no more than a 5-second difference in pinging master to slave. If so, this critical performance requirement is being satisfied and the program will be performing effectively.
+
+**Logging Performance**
+
+Another critical performance requirement is that the program has the capacity to log every event that has occurred throughout the simulation in real time. Meaning, that should there be variance in the delay between event occurrence to event logging, then there are implications of potential to have events logged out of order and so the log time entries will not be accurate.
+
+**Simulation Loading Performance**
+
+Additionally, as our program will support the loading of custom scenarios, prior to the initialisation of each scenario run through. It means that our program will need to be able to process the content of the loaded files in a reasonable amount of time, being under 5 seconds. If this performance requirement is not met, then users will become annoyed, by having to load in simple files that in reality wouldn't be expected to take more than 5 seconds.
+
+**Computing Hardware Performance**
+
+Moreover, due to the size of the data being transferred, between a limited amount of computers, being relatively small, it ensures that a large computational overhead is not necessary for the system in which we need to build. This is fortunate when considering that we have been informed by our client that RedR has Computing Hardware limitations. As such, in addition, we must keep this in mind such that we don't build Software that over exceeds our target deployable environment limits.
+
+### 3.5 Logical Database Requirements
 
 a) Types of information used by various functions:
 
