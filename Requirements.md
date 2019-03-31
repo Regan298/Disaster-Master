@@ -613,14 +613,14 @@ unbiased results. Upon the completion of the program, before testing with the cl
 be able to verify the functions of the software by comparing the program to this very document, as it holds 
 records of all of requirements that were gathered from the client during the first few meetings.
 
-3.3 Usability Requirements: As this simulation program could be used in a vast range of locations and 
-conditions, it must be versatile and able to operate anywhere. To meet this requirement the system must 
-be able to operate on low power windows computers and with or without internet access. This can be tested 
-by either connecting or disconnecting from the internet, and by testing the program on a range of 
-different computers with varying processing power. Analysing the events of the simulation will be a very 
-valuable tool for redR. Because of this it is important that the simulation logs are useful. To ensure 
-this the client will be consulted about the most effective way to collect and display information from 
-the simulation. 
+3.3 The usability of the simulation can be best tested with the client deploying a test version and giving 
+feedback on usability requirements such as custom additions of HQ messages during a simulation, error 
+tolerance and correction of messages during the simulation, the user friendliness of the NGO user interface
+and the HQ user interface (UIs). Feedback from the client in deployed testing will give the project information
+on what errors are occuring when and where and how tot make the program more friendly to the NGO and HQ users
+during the simulation for better training. Having the UIs engaging will help keep trainees keep focused and
+have more stimulation. Feedback on the immersion of the UIs will be crucial from the client's deployment
+and testing of the Project.
 
 3.4 Performance Requirements: Unfortunately, it will be imposable to verify that the program is performing 
 correctly in the environment it will be deployed (Australian locations). However, an approximation of this 
