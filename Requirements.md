@@ -578,46 +578,28 @@ requirements:
 
 ## 4. Verification
 
-To verify that the software performs the correct functions, the client will be the first person to check 
-with. The client is the one who knows exactly what they want their system to do. The simplest way the team 
-can test that the software functions properly would be to have the client sit down and attempt to use 
-the software without any input from the team. That way, the user interface will be able to be tested with 
-unbiased results. Upon the completion of the program, before testing with the client, the team will also 
-be able to verify the functions of the software by comparing the program to this very document, as it holds 
+To verify that the software performs the correct functions, the client will be the first person to check with. The client is the one who knows exactly what they want their system to do. The simplest way the team 
+can test that the software functions properly would be to have the client sit down and attempt to use the software without any input from the team. That way, the user interface will be able to be tested with 
+unbiased results. Upon the completion of the program, before testing with the client, the team will also be able to verify the functions of the software by comparing the program to this very document, as it holds 
 records of all of requirements that were gathered from the client during the first few meetings.
 
-3.3: The usability of the simulation can be best tested with the client deploying a test version and giving 
-feedback on usability requirements such as custom additions of HQ messages during a simulation, error 
-tolerance and correction of messages during the simulation, the user friendliness of the NGO user interface
-and the HQ user interface (UIs). Feedback from the client in deployed testing will give the project information
-on what errors are occurring when and where and how to make the program more friendly to the NGO and HQ users
-during the simulation for better training. Having the UIs engaging will help keep trainees keep focused and
-have more stimulation. Feedback on the immersion of the UIs will be crucial from the client's deployment
-and testing of the Project.
+3.3: The usability of the simulation can be best tested with the client deploying a test version and giving feedback on usability requirements such as custom additions of HQ messages during a simulation, error 
+tolerance and correction of messages during the simulation, the user friendliness of the NGO user interface and the HQ user interface (UIs). Feedback from the client in deployed testing will give the project information
+on what errors are occurring when and where and how to make the program more friendly to the NGO and HQ users during the simulation for better training. Having the UIs engaging will help keep trainees keep focused and
+have more stimulation. Feedback on the immersion of the UIs will be crucial from the client's deployment and testing of the Project.
 
-3.4 Performance Requirements: Unfortunately, it will be imposable to verify that the program is performing 
-correctly in the environment it will be deployed (Australian locations). However, an approximation of this 
-environment can be created and tested locally. Simulating the performance of the system can be tested by 
-creating a network of windows based computers connected to another windows based computer for the core 
-system. The network will be tested within the university network to approximate the internet environment 
-found where simulations will be run. (e.g. university campus in Australia). Real simulations may run for 
-up to six hours with up to 7 client computers and 1 HQ computer. Testing this at full scale may be 
-infeasible however, due to lack of time and access to windows based computers. Testing will have to be 
-done on a smaller population of approximately 4 computers run over a shorter period. Successfully Sending 
-text-based messages between up to 8 computers can be tested by running a simulation on the test environment. 
-The system will pass this requirement if it can maintain a stable connection between all computers over 
-the extended period of time. The system must also recover quickly from any packet loss that may occur over 
-the network. Message delay over the system can also be tested within this same environment, where the 
-delay between sending and receiving a message is recorded. Log accuracy can be tested in this same 
-environment. To do this the number of messages or actions occurring in the system during the simulation 
-can be pre-recorded then compared to the number of entries within the log once the simulation ends.
+3.4 Performance Requirements: Unfortunately, it will be imposable to verify that the program is performing correctly in the environment it will be deployed (Australian locations). However, an approximation of this 
+environment can be created and tested locally. Simulating the performance of the system can be tested by creating a network of windows based computers connected to another windows based computer for the core 
+system. The network will be tested within the university network to approximate the internet environment found where simulations will be run. (e.g. university campus in Australia). Real simulations may run for 
+up to six hours with up to 7 client computers and 1 HQ computer. Testing this at full scale may be infeasible however, due to lack of time and access to windows based computers. Testing will have to be 
+done on a smaller population of approximately 4 computers run over a shorter period. Successfully Sending text-based messages between up to 8 computers can be tested by running a simulation on the test environment. 
+The system will pass this requirement if it can maintain a stable connection between all computers over the extended period of time. The system must also recover quickly from any packet loss that may occur over 
+the network. Message delay over the system can also be tested within this same environment, where the delay between sending and receiving a message is recorded. Log accuracy can be tested in this same 
+environment. To do this the number of messages or actions occurring in the system during the simulation can be pre-recorded then compared to the number of entries within the log once the simulation ends.
 
-3.7 Non-Function Requirements: Feedback will be given to us about non-functional requirements by the 
-client who wished to test themselves. The client will use the program and figure out their needs for 
-non-functional requirements. Testing can also be done by the team to ensure there are no bugs and issues 
-around the non-functional requirements. Testing for security, usability, reliability and manageability 
-can be tested by both the team and the client. These will be tailor made for the client with feedback 
-given from them to the project development team.
+3.7 Non-Function Requirements: Feedback will be given to us about non-functional requirements by the client who wished to test themselves. The client will use the program and figure out their needs for 
+non-functional requirements. Testing can also be done by the team to ensure there are no bugs and issues around the non-functional requirements. Testing for security, usability, reliability and manageability 
+can be tested by both the team and the client. These will be tailor made for the client with feedback given from them to the project development team.
 
 ## 5. Development schedule.
 
