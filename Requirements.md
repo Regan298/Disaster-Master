@@ -361,23 +361,49 @@ b) Frequency of use:
 The Simulation will be used upto six times a month.
 
 c) Accessing capabilities:
-HQ: Have access to the scenario's entire data collection, being able to view 
-every message, picture and sound. HQ running the Simulation and also needs
-to have full control and visibility over every NGO. 
+HQ: Will have full control over the scenario being able to change time e.g. 1 day = 1 hour in the Simulation.
+Also, controling events from te scenario, pushing them forawrd or delaying them. HQ will be able to inject new 
+events and messages into the Simulation. This gives the HQ more control over how they want the Simulation
+to play out and customize training experiences.
 
-Organization(s): Have limited access, they will only be able to view what has 
-been sent to them by the HQ and other NGO's. This done to make the 
-Simulation as real as possible and to put pressure and need on communication between
-organizations and HQ.
+NGO(s): Have limited access, they will only be able to view what has 
+been sent to them by the HQ and other NGO's. The only purpose for the NGO's program is
+to be used for communication.
 
 d) Data entities and their relationships:
-A data entity is an object in a data model. Data is typically designed by breaking things down into their smallest parts that are useful for representing data relationships
+Mains:
+    NGO and HQ mains will be used as to communicate information between their own programs.
+    NGO main will transfer information around in the NGO program and the same for the HQ main.
+
+UIs and Senders:
+    - Each UI for HQ and NGO will take a message that was sent on the UI and passed through its main to the sender.
+
+UIs and Receivers:
+    - Each UI for HQ and NGO will take message received by the receiver and pass it through its main to the UI to be displayed.
+
+HQ reciever and the Recorder:
+    - These two entities will communicate using the HQ main, copying all information received into the recorder
+
+
+Senders and Receivers: 
+    - If online the sender and receiver will communicate using interent connections.
+    
+    - If offline the sender and receiver will communicate through a direct connection on the same computer.
+    
+    - HQSender and NGOtReviver: Sends messages and events from the scenario from the HQ's program to the NGO programs'.
+    
+    - NGOSender and HQReceiver: Send messages from the NGO programs' to the HQ's program.
+    
+ScenarioLoader and the HQ main:
+    - This will load a scenario file and send events and messages into the HQ main where it will wait to be fired at the right time.
+    
 
 e) Integrity constraints:
 Integrity constraints provide a way of ensuring that changes made to the database by authorized users do not result in a loss of data consistency.
 
 f) Data retention requirements:
-Keeping recorded data
+Data collected during the Simultion such as messages and events will all be stored in a file in the HQ program. The data kept will be necessary for analylitical purposes in a review after each Simulation.
+All data collected in the file must be time stamped in a timeline fashion, as it will make reviewing a timeline more effective for analysis.
 
 Overview Domain Model/UML Classes and Description for every Class
 
