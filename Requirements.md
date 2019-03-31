@@ -344,12 +344,12 @@ Moreover, due to the size of the data being transferred, between a limited amoun
 
 a) Types of information used by various functions:
 
-Pictures: Displayed on the User Interface and being sent from HQ to Organizations.
+Pictures: Displayed on the User Interface and being sent from HQ to NGO's.
 
 Emails/Messages: Displayed on the User Interface and being sent to and from
-every player in the simulation.
+every user type in the simulation.
 
-Sound Effects: Displayed on the User Interface and being sent from HQ to Organizations.
+Sound Effects: Displayed on the User Interface and being sent from HQ to NGO's.
 
 Scenario File (for loading): Loaded file in the HQ which will send messages/emails, 
 pictures, and sound effects from this file.
@@ -358,16 +358,16 @@ Recording File: This will record all information sent and recieved by all player
 in the Simulation with the time of the action associated.
 
 b) Frequency of use:
-The Simulation will be used six times a month.
+The Simulation will be used upto six times a month.
 
 c) Accessing capabilities:
 HQ: Have access to the scenario's entire data collection, being able to view 
-every message, picture and sound. HQ i running the Simulation and needs
-to have full control and visibility over every organization. 
+every message, picture and sound. HQ running the Simulation and also needs
+to have full control and visibility over every NGO. 
 
 Organization(s): Have limited access, they will only be able to view what has 
-been sent to them by the HQ and other Organizations. This done to make the 
-Simulation as real as possible to put pressure and need on communication between
+been sent to them by the HQ and other NGO's. This done to make the 
+Simulation as real as possible and to put pressure and need on communication between
 organizations and HQ.
 
 d) Data entities and their relationships:
@@ -381,7 +381,7 @@ Keeping recorded data
 
 Overview Domain Model/UML Classes and Description for every Class
 
-The UML diagram is located in the teams GitLab repo:
+The UML diagram is located in the teams GitLab repo (Many details omitted, as unneeded for requirements drafting) :
 https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/P16_Diagram.jpg
 
 | Class           | Description                                                  |
@@ -401,55 +401,59 @@ https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-pr
 
 ### 3.6 Design constraints
 
+**Project Limitations.**
 
+This project has design constraints imposed upon it by project limitations. These Constraints will dictate the way in which our project Development Life Cycle is affected.
 
-###Project Limitations.
+**Time**
 
-This project has design constraints imposed upon it by project limitations. These Constraints will dictate the way in which our project Development Life Cycle is affected. A project limitation constraint is time. We are bound by our delivery date in October, in addition to Regan's request of frequent updates to show how our project is progressing. As such, we must plan our time accordingly, using agile time management practices.
+ A project limitation constraint is time. We are bound by our delivery date in October, in addition to Regan's request of frequent updates to show how our project is progressing. As such, we must plan our time accordingly, using agile time management practices.
+
+**Budget**
 
 Another project limitation constraint is our budget. We have been allocated a budget of $0. This is very reasonable however, because firstly, we are working for a charity organisation. And secondly because this project does not require the purchasing of licensed software packages, nor additional physical hardware.
 
-Our next project limitation is that the program must have the capacity to function in multiple environments. Whereby, these environments will vary in terms of there properties to one another. These properties being access to the external internet and the quantity of concurrent simulation computers. This variance is a result of the real world simulation environment being dynamic, as Regan has stated that the program will be run in varying locations, with some being more equipped in terms of there Hardware. This constrains us, as we are required to develop a program that supports features that may mutually oppose each other, proving a difficulty to develop in regards to.
+**Variation and Uncertainty in Limited Deployable Environments**
 
-The next project limitation is in relation to the latter. Due to the the uncertainty of not knowing exactly what environments  our program will be deployed into, we must build our program so that it can be deployed and applicable to a theoretical limitless amount of computing environments. This is a major constraint for us as we must consider seriously our programming language of choice to meet this requirement adequately.
+Our next project limitation is that the program must have the capacity to function in multiple environments. Whereby, these environments will vary in terms of there properties to one another. These properties being access to the external internet and the quantity of concurrent simulation computers. This variance is a result of the real world simulation environment being dynamic, as Regan has stated that the program will be run in varying locations, with some being more equipped in terms of there Hardware. This constrains us, as we are required to develop a program that supports features that may mutually oppose each other, proving a difficulty to develop in regards to. The next project limitation is in relation to the latter. Due to the the uncertainty of not knowing exactly what environments  our program will be deployed into, we must build our program so that it can be deployed and applicable to a theoretical limitless amount of computing environments. This is a major constraint for us as we must consider seriously our programming language of choice to meet this requirement adequately.
 
-###External Standard Compliance.
+**External Standard Compliance.**
 An external standard that is imposed on our project is the requirement of adhering to the IEEE 12207-2017 Systems and software engineering - Software life cycle
 processes document. This document outlines how when developing Software, for utilisation by organisations and for the public, there is a framework of best
 practice to follow. This framework includes processes, that when applied correctly, through development cycles, will result in the satisfaction of our client.
 The content of processes, in this standard, that is relevant to our project is summarised as follows. The standard writes how the Software Life Cycle Process is
-split into four main parts.
+split into three main parts.
 
-###Agreement Process
+**Agreement Process**
 Pertains to how there is a procurement phase. Whereby, we need to ensure that we are on clear established agreement terms, such that us as developers and Regan
 the client have the same mutual understanding of what the project requirements are.
 
-###Technical Management Processors
+**Technical Management Processors**
 Pertain to what strategies we will be making use of to organise our work in a structured direct manner. Tools that will be used to achieve this are Task Planning
 via Issues feature in Gitlab, Decision Management by way of keeping log records in Git that track our progress to decide what features to dedicate time toward
 next, and risk management which will be addressed in Sub-Section 5.
 
-
-
-###Technical Processors
+**Technical Processors**
 Are technical based actions that we will utilise to ensure for software quality throughout development. These processors are inclusive as follows.
 
-```
-###Architecture Design
+*Architecture Design*
 That will allow us to effectivly determine what platforms we will need to implement our overall solutions.
-###Implementation.
+*Implementation.*
 Is the act of writing our code, upto this phase, we have ensured that this phase will be achieved comprehensivly, as the aforementioned processes would
 have set us up adequately in terms of preperation.
-###Integration Process
+*Integration Process*
 Which is the step of combining our individual components into one coherent functional system.
-###Verification Process
+*Verification Process*
 Is the process of monitering the way in which we are building our software to ensure that it is upto a high coding standard.
-###Validation Process
+*Validation Process*
 Whereby we reflect of what we have accomplished thus far, to review in regards to assuring that features we have implemented are in accordance
 to the established requirements.
-###Operation and Maintenance Process
+*Operation and Maintenance Process*
 Is the action of partiarly deploying our program at Regans disposal, such that he will be able to provide us with feedback that outlines wether
 the program meets his expectations or not, indicating where further work needs to be dedicated towards.
+
+```
+
 ```
 
 
@@ -696,9 +700,6 @@ RedR Australia: An organisation that selects, trains and deploys staff to assist
 
 ## 7. Contributions
 
-A one-page statement of contributions that lists each member of the
-group and what they contributed to this document.
-
 Riley Grice: Completed 3.3, 3.5, 3.7, 3.8, 3.9. Helped on 4.
 
 Nathan Ellison: Mainly contributed to sections 1, 2 and 6. 
@@ -708,6 +709,8 @@ Daniel Miller: 3.2, 4
 Tom Buurmans: 5, UML and class descriptions in 3.5, collaborated in coming up with use cases and ordered them for 3.2
 
 Lachlan Keene: Document editing, accuracy and consistency. In addition to sections: 2, 3.1, 3.2 (Collaborated with Daniel and Tom) 3.4, 3.6, 4, 6
+
+Please consult our requirement GitLab branches to see individual report progress, our strategy for merging to master document was by way of copy pasting sub sections directly.
 
 ------
 
