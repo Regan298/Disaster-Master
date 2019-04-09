@@ -31,18 +31,32 @@ All team members are expected to contribute equally to the document and list the
 ## 1. Introduction
 
 One page overall introduction including sections 1.1 and 1.2 (ISO/IEC/IEEE 42010:2011(E) clause 5.2)
+The project we have been assigned to is Project 16. Project 16 is software based and the organisation we are working for is RedR Australia. Our client organisation RedR Australia is a "leading international humanitarian response agency that selects, trains and deploys technical specialists." (As RedR states). The goal of the project is to produce a piece of computer software that will be able to assist in the disaster simulations that RedR Australia carries out. The purpose of these simulations is to train new staff to work together and to maintain a level head when under the stress of attempting to maintain order amongst natural disaster victims. During a given simulation, there are several teams of people that are assigned different roles. There is also an overseer of the simulation that watches over the teams as they solve problems together. Currently, the overseer communicates with the teams using both phones and emails. Given that there are multiple teams participating in the simulation (potentially up to 7 groups), the overseer would quickly gain a large workload. This is where the project purpose is revealed. Whereby, RedR would like to automate the process of running as well as tracking the simulation. Because, the tasks involved in managing the simulation (communication, event initialisation, and post-simulation review) are rather tedious and error-prone, given that they are performed by people. And that participants in RedR's current manual simulation feel a lack of immersion  This then presents us with the opportunity to develop a program, such that a computer would assist the human operator. Whereby, reducing their workload considerably and allowing them to focus their attention on other tasks. Furthermore, It would also allow for a greater sense of realism. Whereby, upon the initialisation of a simulation, teams open and read the emails they receive from the overseer, the software would play sounds that emulate the atmosphere of a real disaster zone. Therefore, making the participants feel more immersed in the scenario and thus make them act as if they really were in a real disaster simulation.
 
 ### Client
 
 Identify the client and their contact details.
+Client: Regan Potangaroa
+Email: regan.potangaroa@vuw.ac.nz
 
 ### 1.1 Purpose
 
 One sentence describing the purpose of the system.
+The purpose of our software is to reduce the total workload of the overseer in the RedR Disaster Simulation and to increase immersion for it's participants by automating manual tasks involved in the simulation.
 
 ### 1.2 Scope
 
 One paragraph describing the scope of the system.
+The Scope of this undertaking is to produce a computer program: that is going to be used in order to automate some of the responsibilities of the Overseer in the disaster simulations that RedR frequently run. The cost of producing such a program will be little to none, as all of the development processes will be able to be completed using hardware that is already available to every team member and to RedR. The final deliverable product will be a single piece of software, that will be capable of the following key features that define the scope.
+
+1. Ability to load dynamic simulation files, from an Overseer at HQ machine, that dictates for the details of each type of scenario and such that Overseer has main control over current simulation.
+2. Operating on 1..* Machines, whereby a single machine implies no access to the internet.
+3. Inter-communication between Overseer at HQ and NGO's at Client machines, each machine being over network infrastructure operated by RedR, and communication via superficial emails and texts between teams and Overseer at HQ. Communication may have embedded imagery and audio files.
+4. Tracking for the progress of the simulation, a varying time scale that is used for each simulation.
+5. Custom creation of varying scenario situations.
+6. Real-time interfering of scenario by Overseer.
+7. Review of the events that occurred in past simulations, with functionality to export scenario result.
+8. Ability to function in a range of limited environments on varying hardware.
 
 ### 1.3 Changes to requirements
 
@@ -53,6 +67,7 @@ If the requirement have changed significantly since the requirements document, o
 
 References to other documents or standards. Follow the IEEE Citation Reference scheme, available from the [IEEE website](https://ieee-dataport.org/sites/default/files/analysis/27/IEEE%20Citation%20Guidelines.pdf) (PDF; 20 KB).
 (1 page, longer if required)
+1.2017,  Software Life Cycle Processes, IEEE Standard 12207, [Online], pp 24-60, Available: https://ieeexplore.ieee.org/document/8100771.
 
 ## 3. Architecture
 
@@ -132,6 +147,8 @@ Identify dates for key project deliverables:
 #### 5.2.1 Budget
 
 Present a budget for the project (as a table), showing the amount of expenditure the project requires and the date(s) on which it will be incurred. Substantiate each budget item by reference to fulfilment of project goals (one paragraph per item).
+Our project does not require a budget as it is purely software built using free tools.
+Our client does not have a budget in mind from RedR themselves. We have decided to face that if and when it comes up, due to the likelihood of us needing a budget.
 
 (1 page). 
 
@@ -143,25 +160,84 @@ Present a table of goods or services that will be required to deliver project go
 ### 5.3 Risks 
 
 Identify the ten most important project risks: their type, likelihood, impact, and mitigation strategies (3 pages).
+| Risk                                                         | Likelihood | Severity     |
+| ------------------------------------------------------------ | ---------- | ------------ |
+| A large number of project members are sick at critical times during the project, hindering progress resulting in us falling short of delivery goals. | Moderate   | Serious      |
+| Unforeseen major changes to requirements prompting a redesign of the system. | Moderate   | Tolerable    |
+| There is a natural disaster and Regan gets called out into the field to help, making it impossible to communicate with him. | Low        | Serious      |
+| Expansion in number of users, or amount of data stored, requires paid services, creating unexpected budget requirements. | Moderate   | Tolerable    |
+| The project requires more time to develop than expected, causing us to fall short of delivery goals. | High       | Serious      |
+| Developed program has too big a learning curve, making it too difficult for users to use and forcing the client to discard it. | Moderate   | Catastrophic |
+| The team focuses on non-required features and functionality (such as visuals), restricting us from finishing on-time. | Moderate   | Serious      |
+| The developed software ends up requiring hardware investment for testing, making it too costly for the client. | Low        | Catastrophic |
+| Employee turnover at RedR resulting in the termination of our project. | Low        | Catastrophic |
+| A disaster at VUW restricting access to our files.           | Low        | Serious      |
+
+| Risk                                                         | Strategy                                                     |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| A large number of project members are sick at critical times during the project, hindering progress resulting in us falling short of delivery goals. | Keep up team discussion and documentation so that each member knows everyone's role, a sick team member's work could then be picked up by the rest of the team. |
+| Unforeseen major changes to requirements prompting a redesign of the system. | Keep up regular communication with the client about requirements, questioning what they need, especially early on, to lower the likelihood of an unforeseen change. |
+| There is a natural disaster and Regan gets called out into the field to help, making it impossible to communicate with him. | Retrieve concrete requirements from Regan early on so that we could carry on the project with little to no input from him. |
+| Expansion in number of users, or amount of data stored, requires paid services, creating unexpected budget requirements. | Research such possibilities and make the client aware. Ask for a potential budget from the client. |
+| The project requires more time to develop than expected, causing us to fall short of delivery goals. | Investigate adopting complete components from elsewhere, make as much use from available resources as possible. |
+| Developed program has too big a learning curve, making it too difficult for users to use and forcing the client to discard it. | Assign time near the end date of the project specifically for user interface design and test with people outside the team. |
+| The team focuses on non-required features and functionality (such as visuals), restricting us from finishing on-time. | Assign time to specific parts of development with correct priorities based on requirements. This will keep us on track. |
+| The developed software ends up requiring hardware investment for testing, making it too costly for the client. | Discuss with the client and the school about their possible testing facilities. |
+| Employee turnover at RedR resulting in the termination of our project. | This event is completely out of our control and there can be nothing done about it if it happens |
+| A disaster at VUW restricting access to our files.           | Incorporate a version control system such as GitLab that stores files offsite. This can be accessed remotely. |
+
+If the project will involve any work outside the ECS laboratories, i.e. off-campus activities, these should be included in the following section.
+
 
 ### 5.4 Health and Safety
 
-Document here project requirements for Health and Safety.
+Document here project requirements for Health and Safety. All teams must state in this section:
+
+1. How teams will manage computer-related risks such as Occupational Over-Use, Cable management, etc.  
+
+Occupational Over-Use can be avoided by not working for lengthy periods of time without a break. The team has agreed to 2 10 minute breaks for each 4 hour lab session to break up the time. During this time, team members can go for a walk, get a drink, eat, or anything to aid their general wellbeing. This is stated in our team contract.
+To avoid creating tripping hazards with poor cable management, the team will endeavour to keep cables off the floor where possible. The ECS computer labs are a good example of this. If not possible, the team should be made aware of any cabling around the teams working space by the owner of the cable. Team members should also scan the area around them when arriving at the space to work.
+
+2. Whether project work requires work or testing at any external (off-campus) workplaces/sites. If so, state the team's plans for receiving a Health and Safety induction for the external workplaces/sites. If the team has already received such an induction, state the date it was received. 
+
+The teams health and safety induction took place on 21/03/2019 and was presented by the school's Safety Officer Roger Cliffe.
+Our project does not require us to go off university campus. Our lab work is done on VUW Kelburn campus, and our meeting with Regan take place on the VUW Te Aro campus.
+
+3. Whether project work requires the team test with human or animal subjects? If so, explain why there is no option but for the team to perform this testing, and state the team's plans for receiving Ethics Approval _prior_ to testing.
+
+Our project will be tested with human subjects. This is by requirement of our client, Regan. Once the team has developed a functional version, it will be used in the real world running disaster simulations. These tests will be fully conducted by Regan making it his ethical requirement to ensure the safety of the people using the software.
+
+Also, the document in this section any additional discussions with the School Safety Officer regarding Health and Safety Risks. Give any further information on relevant health and safety regulations, risks, and mitigations, etc.
+
 
 #### 5.4.1 Safety Plans
 
 Safety Plans may be required for some projects, depending on project requirements.
-
+Project requirements do not involve risk of death, serious harm, harm or injury.
 
 ## 6. Appendices
 
 ### 6.1 Assumptions and dependencies 
 
 one page on assumptions and dependencies (9.5.7) 
+One key assumption that we will have to make is that the computers that are being operated during the disaster simulation are capable of running the software that will be produced. It is also assumed that RedR will be responsible for maintaining their own network infrastructure and will be responsible for getting the software back online should it go down. 
+
+The client suggested using KoboToolBox as a framework for the program, though the team has yet to decide whether to actually use this. This choice will be made at a later date when the time for deciding how to build the system comes. 
+
+Client computers support basic sound playback functionality.
+
+Client computers can support video capturing if client makes this feature mandatory.
 
 ### 6.2 Acronyms and abbreviations
 
 one page glossary as required 
+Overseer: The individual responsible for communicating with each of the teams participating within the simulation.
+
+RedR Australia: An organisation that selects, trains and deploys staff to assist in disaster situations, and is associated with the client. 
+
+HQ: Head Quarters in the simulation, where the command centre of program is run from.
+
+NGO: Non Government Organisation or Organisation, for short, is the name given to teams of participating trainees in the simulation.
 
 ## 7. Contributions
 
