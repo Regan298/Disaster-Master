@@ -30,7 +30,7 @@ All team members are expected to contribute equally to the document and list the
 
 ## 1. Introduction
 
-One page overall introduction including sections 1.1 and 1.2 (ISO/IEC/IEEE 42010:2011(E) clause 5.2)
+One page overall introduction including sections 1.1 and 1.2 (ISO/IEC/IEEE 42010:2011(E) clause 5.2)<br>
 The project we have been assigned to is Project 16. Project 16 is software based and the organisation we are working for is RedR Australia. Our client organisation RedR Australia is a "leading international humanitarian response agency that selects, trains and deploys technical specialists." (As RedR states). The goal of the project is to produce a piece of computer software that will be able to assist in the disaster simulations that RedR Australia carries out. The purpose of these simulations is to train new staff to work together and to maintain a level head when under the stress of attempting to maintain order amongst natural disaster victims. During a given simulation, there are several teams of people that are assigned different roles. There is also an overseer of the simulation that watches over the teams as they solve problems together. Currently, the overseer communicates with the teams using both phones and emails. Given that there are multiple teams participating in the simulation (potentially up to 7 groups), the overseer would quickly gain a large workload. This is where the project purpose is revealed. Whereby, RedR would like to automate the process of running as well as tracking the simulation. Because, the tasks involved in managing the simulation (communication, event initialisation, and post-simulation review) are rather tedious and error-prone, given that they are performed by people. And that participants in RedR's current manual simulation feel a lack of immersion  This then presents us with the opportunity to develop a program, such that a computer would assist the human operator. Whereby, reducing their workload considerably and allowing them to focus their attention on other tasks. Furthermore, It would also allow for a greater sense of realism. Whereby, upon the initialisation of a simulation, teams open and read the emails they receive from the overseer, the software would play sounds that emulate the atmosphere of a real disaster zone. Therefore, making the participants feel more immersed in the scenario and thus make them act as if they really were in a real disaster simulation.
 
 ### Client
@@ -41,12 +41,12 @@ Email: regan.potangaroa@vuw.ac.nz
 
 ### 1.1 Purpose
 
-One sentence describing the purpose of the system.
+One sentence describing the purpose of the system.<br>
 The purpose of our software is to reduce the total workload of the overseer in the RedR Disaster Simulation and to increase immersion for it's participants by automating manual tasks involved in the simulation.
 
 ### 1.2 Scope
 
-One paragraph describing the scope of the system.
+One paragraph describing the scope of the system.<br>
 The Scope of this undertaking is to produce a computer program: that is going to be used in order to automate some of the responsibilities of the Overseer in the disaster simulations that RedR frequently run. The cost of producing such a program will be little to none, as all of the development processes will be able to be completed using hardware that is already available to every team member and to RedR. The final deliverable product will be a single piece of software, that will be capable of the following key features that define the scope.
 
 1. Ability to load dynamic simulation files, from an Overseer at HQ machine, that dictates for the details of each type of scenario and such that Overseer has main control over current simulation.
