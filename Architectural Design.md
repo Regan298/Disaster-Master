@@ -81,9 +81,96 @@ This means should refer to information (e.g. risks, requirements, models) in thi
 
 ### 3.1 Stakeholders
 
-See ISO/IEC/IEEE 42010 clause 5.3 and ISO/IEC/IEEE 12207 clause 6.4.4.3(2).
+The development of our software product has concerns and stakeholders that must be identified so that they can be associated with each other. Project concerns will naturally impact stakeholders. However, by establishing associations between concerns and stakeholders, it means that we capable of mitigating and potentially preventing detrimental concern effects for stakeholders.
 
-For most systems this will be about 2 pages, including a table mapping concerns to stakeholder.
+#### Stakeholders
+
+Our project has a wide range of stakeholders, which will be assigned to the following stakeholder categories. Users, Suppliers and Operators-Maintainers-Acquires. This stakeholder category assignment ensures that we have a deeper understanding of our stakeholders. Such that we gain insight regarding the significance and the range of what the concerns for stakeholders are to be.
+
+#### Stakeholders: User
+
+1. "Regan (Main Client)" also as a representation of "Simulation Overseers".
+2. "Trainess", are the active "NGO" participants of the simulation.
+3. "RedR Simulation review Analysts", will be interacting with our program in order
+   to review simulation data.
+
+#### Stakeholders: Supplier 
+
+4. Victoria University, utilises us, the developers, to provide for the client, such that
+   they are the final supplier.
+5. Developers of the Software Product including, however not limited to, Kevin S (Senior Manager),  ENGR301 Project Members (Lachlan K, Riley G, Daniel M, Nathan E, Tom B).
+
+#### Stakeholders: Operator-Maintainer-Acquire
+
+6. RedR Autralia.
+
+#### Concerns
+
+This project has many concerns that are allocated to the following concern classifications: The suitability of the architecture for achieving the system’s purposes, The feasibility of constructing and deploying the system, The potential risks and impacts of the system throughout its life cycle and maintainability and evolvability of the system.
+
+#### Concerns: The suitability of the architecture for achieving the system’s purposes 
+
+1. The architecture is suitable for achieving the system's purpose of communication between NGO's and HQ when these entities are able to communicate meaningfully to each over our server implementation.
+2. The architecture is suitable for achieving the system's purpose of Recording simulations when it supports the tracking of events and what actions NGO's performed in response to these events.
+3. The architecture is suitable for achieving the system's purpose of Reviewing Simulations when review files have a clearly defined language that can be correctly interpreted by our program.
+4. The architecture is suitable for achieving the system's purpose of loading dynamic scenario files when HQ instances can load varying simulation files.
+5. The architecture is suitable for achieving the system's purpose of running within a local network (LAN) when the Software is applicable to any standard LAN infrastructure, regardless of location.
+6. The architecture is suitable for achieving the system's purpose of constructing new custom scenarios for simulating when there is a functional implementation for creating and editing new scenarios.
+7. The architecture is suitable for achieving the system's purpose of ensuring that RedR simulation files are protected when scenario files support encryption.
+8. The architecture is suitable for achieving the system's purpose of real-time scenario interfering when overseers at HQ instances have the ability to modify the scenario whilst a simulation is running.
+
+#### Concerns: The feasibility of constructing and deploying the system
+
+9. Developing a program that simultaneously supports functionality for networked and non-networked environments.
+10. The implementation of the clients networking infrastructure in regards to supporting our server to client model of software.
+11. The clients request for the Software to support communication using real-world text messages to cellular devices.
+12. That the database implementation results in ensuring for an increase in centralisation and expandability,
+13. The way in which the UI and simulation reviews will be presented to the user, as we must ensure it is user-friendly and accessible.
+14. How the developers will be unable to install their overall software solution to this problem, as this responsibility is imposed upon the RedR client due to deployment location being remote (Australia)
+15. The transportation of the Software Solution to the deployment location.
+
+#### Concerns: Potential Product Risks
+
+16. Unexpected program behaviour that results from software errors including bugs, defects and oversights.
+17. Inability to provide updates to the Software post project closure.
+18. Unforeseen Client network and environment updates that compromise the usability of our Software package.
+19. Poor usability regarding UI/UX design in our automated software-based solution results in the current manual solution to the problem proving more effective.
+20. The client discovers an alternative solution to their problem in which causes them to lose motivation and faith in the product we are developing.
+21. Project failure as a result of the developers acting in non-productive ways means that the reputation of VUW and more specifically ENGR301/302 is tarnished.
+
+#### Concerns: Maintainability and Evolvability of the System
+
+22. The need to support modularity meaning the addition of new components.
+23. Usability for client maintenance in terms of: Network Implementation in code, Feature implementation in code and of scenario/scenario review files.
+
+#### Association Table Between Stakeholders and Concerns
+
+| **Concern** # | **Stakeholders** # |
+| ------------- | -------------- |
+| 1.            | 1, 2, 3, 5, 6  |
+| 2.            | 1, 2, 3, 5, 6  |
+| 3.            | 1, 2, 3, 5, 6  |
+| 4.            | 1, 2, 3, 5, 6  |
+| 5.            | 1, 2, 3, 5, 6  |
+| 6.            | 1, 2, 3, 5, 6  |
+| 7.            | 1, 2, 3, 5, 6  |
+| 8.            | 1, 2, 3, 5, 6  |
+| 9.            | 1, 5, 6        |
+| 10.           | 1, 5, 6        |
+| 11.           | 1, 5           |
+| 12.           | 5              |
+| 13.           | 1, 2, 3, 5, 6  |
+| 14.           | 1, 5, 6        |
+| 15.           | 1, 5           |
+| 16.           | 1, 5, 6        |
+| 17.           | 1, 5, 6        |
+| 18.           | 1, 5, 6        |
+| 19.           | 1, 2, 3, 5, 6  |
+| 20.           | 1, 5           |
+| 21.           | 4, 5           |
+| 22.           | 1, 5, 6        |
+| 23.           | 1, 5, 6        |
+
 
 ### 3.2 Architectural Viewpoints
 (1 page, 42010 5.4) 
