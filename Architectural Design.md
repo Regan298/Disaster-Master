@@ -224,7 +224,7 @@ Each architectural view should include at least one architectural model. If arch
 
 ### 4.4 Physical 
 ...
-
+<img src="https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/AAAA.png"/>
 ### 4.5 Scenarios
 ...
 
