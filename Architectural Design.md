@@ -232,7 +232,7 @@ In the diagram it shows how the single "hq" and "ngoClient" classes mutually fea
 ...
 
 ### 4.4 Physical 
-Image of Deployment Diagram: https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/a.png
+Image of Deployment Diagram: https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Resourses/deploymentDiagram.png
 
 ### 4.5 Scenarios
 ...
