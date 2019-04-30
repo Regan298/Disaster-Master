@@ -214,7 +214,16 @@ As appropriate you should include the following viewpoints:
 Each architectural view should include at least one architectural model. If architectural models are shared across views, refer back to the first occurrence of that model in your document, rather than including a separate section for the architectural models.
 
 ### 4.1 Logical
-...
+
+Todo: CLASSDIAGRAM LINK HERE
+
+As discussed the Logical Viewpoint pertains to expressing the functional requirements of the system. Moreover, functional requirements will be described in order to address the relevant logical concerns discussed in the concern section of 3.1. Therefore, this ensures that problems that arise for logical based concerns will be solved. Furthermore, proving beneficial to the success of this project, as indirectly the stakeholders that were associated with logical concerns will not be negatively impacted.
+
+#### Functional Requirement For: Concern 1
+
+In the diagram it shows how the single "hq" and "ngoClient" classes mutually feature the functions: "sendMessage" and "recieveMessage". These functions support the intra communication between the key sole user types being the "Trainees" and "Overseer" user types. These aforementioned functions are achieved by utilising the "Webserver" class, as a dependency. This class is a representation of the server, in which will have many purposes for our project. One of such purposes is facilitating the transferring of data in the form of "messages". However, these "messages" are not explicitly literal messages, rather our implementation of this functionality will be by utilising a messages table within a MySQL Database in addition to a Node.js server. To expand, this implementation will operate in response to a user, be it any user type, interacting with the "Send Message" software function. Whereby, the software will present the user with a UI that mimics the drafting of an real email. However, in reality this drafting will be arbitrary and superficial. Because, in reality the true logical implementation for this function will be firstly that of an HTML form, that is processed using JS. Next, the way in the which processing will occur will be by passing this form in the required Node.js upload format to our Node.js server. Subsequently, the server will have implementation such that the data consisted in the form of the message will be written into our MySQL "Communications" table. The messages table will be constructed with columns as follows: recipient, message body, supplementary media files. The next phase in the messaging process will now be achieved at the end of the initial message's recipient, who is stated in the communications table. At this end JS will constantly be updating it's messages inbox by polling/listening from the Database's Communications table. Moreover, when this end detects the storage of a new message that matches it's own identifier, it will add this message from the sender into a list of stored messages. Whereby, in the last phase in this messaging process, the local JS logic will present the message to the recipient user back in the form of a contextual email. 
+
+#### Functional Requirement For: Concern 2
 
 ### 4.2 Development
 ...
