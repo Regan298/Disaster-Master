@@ -114,7 +114,7 @@ This project has many concerns that are allocated to the following concern class
 2. The architecture is suitable for achieving the system's purpose of Recording simulations when it supports the tracking of events and what actions NGO's performed in response to these events.
 3. The architecture is suitable for achieving the system's purpose of Reviewing Simulations when review files have a clearly defined language that can be correctly interpreted by our program.
 4. The architecture is suitable for achieving the system's purpose of loading dynamic scenario files when HQ instances can load varying simulation files.
-5. The architecture is suitable for achieving the system's purpose of running within a local network (LAN) when the Software is applicable to any standard LAN infrastructure, regardless of location.
+5. The architecture is suitable for achieving the system's purpose of running within a local area network (LAN) when the Software is applicable to any standard LAN infrastructure, regardless of location.
 6. The architecture is suitable for achieving the system's purpose of constructing new custom scenarios for simulating when there is a functional implementation for creating and editing new scenarios.
 7. The architecture is suitable for achieving the system's purpose of ensuring that RedR simulation files are protected when scenario files support encryption.
 8. The architecture is suitable for achieving the system's purpose of real-time scenario interfering when overseers at HQ instances have the ability to modify the scenario whilst a simulation is running.
