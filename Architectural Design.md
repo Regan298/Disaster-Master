@@ -259,8 +259,7 @@ Concern 15 - The transportation of the Software Solution to the deployment locat
 There are three potential options to deploy the project. The first, giving a flash drive with the bash script and the project on it to the client. The second, emailing the bash script and project to the client. The third option is to make it an open source where the client can download the project and the bash script then install it. There will be many deployments and using flash drives will be costly and take time to give them to the client and from the client to RedR Australia, emailing will save time and give them new updates on when a new version has come out. The open source version will allow the client to access and download the project anytime they would like, being able to see the different versions and progressions throughout the project. The team will use open source so the project can be accessed by the client anytime, allowing quicker/on-demand deploying and more testing by the clients of the team's code.
 
 Concern 17 - Inability to provide updates to the Software post project closure:
-It is important for any software project to be kept updated. This ensures that that the simulation program will run when there a OS updates or Javascript and HTML updates. When the project is finished and handed to RedR Australia the team that has worked on the project will not be able to update the project and ensure that it runs smoothly on future updates. This will be a risk that we have to take because we are unable to maintain the project for RedR Australia.
-
+It is important for any software project to be kept updated. This ensures that that the simulation program will run when there a OS updates or Javascript and HTML updates. When the project is finished and handed to RedR Australia the team that has worked on the project will not be able to update t
 ### 4.5 Scenarios
 ...
 
