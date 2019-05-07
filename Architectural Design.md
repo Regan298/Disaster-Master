@@ -232,7 +232,8 @@ In the diagram it shows how the single "hq" and "ngoClient" classes mutually fea
 ...
 
 ### 4.4 Physical 
-Image of Deployment Diagram: https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Resourses/deploymentDiagram.png
+![] (Resourses/deploymentDiagram.png)
+
 
 Offline:
 One device node will be used in the offline version. This will be a computer that runs all the executable environment nodes. The server will run on the device, it will connect all the other execuatble envrionment nodes such as the HQ Interface, the Database and the NGO Interface. All functionality will be linked through the server's connection within the device hosting the server.
@@ -259,7 +260,8 @@ Concern 15 - The transportation of the Software Solution to the deployment locat
 There are three potential options to deploy the project. The first, giving a flash drive with the bash script and the project on it to the client. The second, emailing the bash script and project to the client. The third option is to make it an open source where the client can download the project and the bash script then install it. There will be many deployments and using flash drives will be costly and take time to give them to the client and from the client to RedR Australia, emailing will save time and give them new updates on when a new version has come out. The open source version will allow the client to access and download the project anytime they would like, being able to see the different versions and progressions throughout the project. The team will use open source so the project can be accessed by the client anytime, allowing quicker/on-demand deploying and more testing by the clients of the team's code.
 
 Concern 17 - Inability to provide updates to the Software post project closure:
-It is important for any software project to be kept updated. This ensures that that the simulation program will run when there a OS updates or Javascript and HTML updates. When the project is finished and handed to RedR Australia the team that has worked on the project will not be able to update t
+Concern 17 - Inability to provide updates to the Software post project closure:
+It is important for any software project to be kept updated. This ensures that that the simulation program will run when there a OS updates or JavaScript and HTML updates. When the project is finished and handed to RedR Australia the team that has worked on the project will not be able to update the project and ensure that it runs smoothly on future updates. This will be a risk that we have to take because we are unable to maintain the project for RedR Australia.he project and ensure that it runs smoothly on future updates. This will be a risk that we have to take because we are unable to maintain the project for RedR Australia.
 ### 4.5 Scenarios
 ...
 The RedR Simulation system has many different functions, and thus has numerous different use cases to accompany it. Arguably, the most important ones are the
