@@ -232,7 +232,7 @@ In the diagram it shows how the single "hq" and "ngoClient" classes mutually fea
 ...
 
 ### 4.4 Physical 
-![] (Resourses/deploymentDiagram.png)
+![](Resourses/deploymentDiagram.png)
 
 
 Offline:
