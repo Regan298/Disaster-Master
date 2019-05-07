@@ -24,7 +24,7 @@ All team members are expected to contribute equally to the document and list the
 
 ---
 
-# ENGR 301 Project *NN* Architectural Design and Proof-of-Concept
+# ENGR 301 Project 16 Architectural Design and Proof-of-Concept
 
 **Authors:** a comma-separated list of the names of each member of the team.
 
@@ -50,7 +50,7 @@ One paragraph describing the scope of the system.<br>
 The Scope of this undertaking is to produce a computer program: that is going to be used in order to automate some of the responsibilities of the Overseer in the disaster simulations that RedR frequently run. The cost of producing such a program will be little to none, as all of the development processes will be able to be completed using hardware that is already available to every team member and to RedR. The final deliverable product will be a single piece of software, that will be capable of the following key features that define the scope.
 
 1. Ability to load dynamic simulation files, from an Overseer at HQ machine, that dictates for the details of each type of scenario and such that Overseer has main control over current simulation.
-2. Operating on 1..* Machines, whereby a single machine implies no access to the internet.
+2. Operating on 1 to many machines, whereby a single machine implies no access to the internet. The total number of machines that the program will run on will depend on the number of parties participating/the number of available computers
 3. Inter-communication between Overseer at HQ and NGO's at Client machines, each machine being over network infrastructure operated by RedR, and communication via superficial emails and texts between teams and Overseer at HQ. Communication may have embedded imagery and audio files.
 4. Tracking for the progress of the simulation, a varying time scale that is used for each simulation.
 5. Custom creation of varying scenario situations.
