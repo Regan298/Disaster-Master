@@ -308,6 +308,9 @@ Identify dates for key project deliverables:
 1. further releases required or specified by the client.
 
 
+The team discussed scheduling in regards to project deliverables with our client. The client did not specify any dates for releases other than the final deadline of the 11th of October, 2019. Given this, the team will endeavour to develop a minimum viable product as soon as possible so that we may provide it to the client and allow them to provide us with feedback so that we may further develop, and continue to deploy it, before October 11th. 
+
+
 ### 5.2 Budget and Procurement
 
 #### 5.2.1 Budget
