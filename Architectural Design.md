@@ -307,7 +307,6 @@ Identify dates for key project deliverables:
 1. first deployment to the client.
 1. further releases required or specified by the client.
 
-(1 page).
 
 ### 5.2 Budget and Procurement
 
@@ -317,7 +316,6 @@ Present a budget for the project (as a table), showing the amount of expenditure
 Our project does not require a budget as it is purely software built using free tools.
 Our client does not have a budget in mind from RedR themselves. We have decided to face that if and when it comes up, due to the likelihood of us needing a budget.
 
-(1 page). 
 
 #### 5.2.2 Procurement
 
