@@ -19,50 +19,35 @@ var items = new vis.DataSet([{
   id: 1,
   group: 1,
   content: 'item 1',
-  start: '2015-08-31'
+  start: '2019-05-10'
 }, {
   id: 2,
   group: 2,
   content: 'item 2',
-  start: '2015-09-07'
+  start: '2019-05-12'
 }, {
   id: 3,
   group: 3,
   content: 'item 3',
-  start: '2015-09-16'
+  start: '2019-05-15'
 }, {
   id: 4,
   group: 4,
   content: 'item 4',
-  start: '2015-09-28 09:00:00'
+  start: '2019-05-13 09:00:00'
 }, {
   id: 5,
   group: 4,
   content: 'item 5',
-  start: '2015-09-28 14:00:00'
+  start: '2019-05-10 14:00:00'
 }]);
 
 // Configuration for the Timeline
 var options = {
-  hiddenDates: [{
-      start: '2014-03-21 00:00:00',
-      end: '2014-03-28 00:00:00'
-    }, {
-      start: '2013-10-26 00:00:00',
-      end: '2013-10-28 00:00:00',
-      repeat: 'weekly'
-    }, // daily weekly monthly yearly
-    {
-      start: '2013-03-29 19:00:00',
-      end: '2013-03-30 09:00:00',
-      repeat: 'daily'
-    } // daily weekly monthly yearly
-  ],
-  minHeight: '100%',
   editable: true,
   orientation: 'bottom',
-  min: new Date('2015-01-01'),
-  max: new Date('2015-12-31'),
+  min: new Date('2019-05-10 00:00:00'),
+  max: new Date('2019-05-15 24:00:00'),
   zoomMin: 1000 * 4 * 60 * 24 * 7,
   margin: {
       item: 10,
@@ -74,3 +59,4 @@ var options = {
 var timeline = new vis.Timeline(container, null, options);
 timeline.setGroups(groups);
 timeline.setItems(items);
+timeline.showCurrentTime(true);
