@@ -31,3 +31,8 @@ li a:hover {
 	text-align: center
 }
 
+#countdownTimer {
+	text-align: center;
+	font-size: 20px;
+	margin-top: 0px;
+}
