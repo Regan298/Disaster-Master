@@ -255,8 +255,13 @@ The server is responsible for running the overall simulation. It keeps the simul
 ...
 
 ### 4.4 Physical 
-![](Resourses/deploymentDiagram.png)
+![](Resourses/component.png)
 
+![](Resources/offline.png)
+Offline version of Deployment
+
+![](Resources/online.png)
+Online version of Deployment
 
 Offline:
 One device node will be used in the offline version. This will be a computer that runs all the executable environment nodes. The server will run on the device, it will connect all the other execuatble envrionment nodes such as the HQ Interface, the Database and the NGO Interface. All functionality will be linked through the server's connection within the device hosting the server.
