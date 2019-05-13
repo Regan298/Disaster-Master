@@ -1,0 +1,52 @@
+
+<!-- HTML Structure -->
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <title>RedR Disaster Simulator Trainee</title>
+       <!-- <link rel="stylesheet" href="styles.css?v=1.0"> -->
+   </head>
+   <!-- Start Content/Body -->
+   <body>  		
+     
+      <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+
+
+
+
+     <script src="/socket.io/socket.io.js"></script>
+     <script src="jquery.js"></script>
+         <script>
+  $(function () {
+    var socket = io();
+    $('form').submit(function(e){
+      e.preventDefault(); // prevents page reloading
+      socket.emit('message', $('#m').val());
+      $('#m').val('');
+      return false;
+    });
+    socket.on('message', function(msg){
+      $('#messages').append($('<li>').text(msg));
+    });
+  });
+</script>
+
+      
+      
+      
+   </body>
+</html>
+
+
+<!-- HTML Structure -->
+<!-- Start Content/Body -->
+<!-- Logo Text -->
+<!-- Navigation Links -->
+<!-- Image Display -->
+<!-- Page Text -->
+<!-- Horizontal Line Finish  -->
+

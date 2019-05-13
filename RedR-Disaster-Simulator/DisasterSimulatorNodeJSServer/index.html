@@ -1,0 +1,66 @@
+
+<!-- HTML Structure -->
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <title>RedR Disaster Simulator Landing</title>
+      <style>
+         body{
+            background: skyblue;
+            font-family: verdana;
+            color: #fff;
+            padding: 30px;
+         }
+         h1{
+            font-size: 48px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+         }
+         p{
+            font-size: 30px;
+            text-align: center;
+         }
+         .button{
+            text-align: center;
+         }
+      </style>
+   </head>
+   <!-- Start Content/Body -->
+   <body>  		
+     
+      <h1>Welcome To the RedR Disaster Simulator</h1>
+      <p>Please specify if you are a Trainee or the Overseer</p>
+
+      <div class="button">
+         <button onclick="userType('trainee')">Trainee</button>
+         <button onclick="userType('overseer')">Overseer</button>
+      </div>
+      
+      <script>
+         function userType(type) {
+            var x = document.URL.split('/');
+            window.location.assign(x[0]+type);
+
+         }
+
+      </script>
+
+      
+
+      
+      
+      
+   </body>
+</html>
+
+
+<!-- HTML Structure -->
+<!-- Start Content/Body -->
+<!-- Logo Text -->
+<!-- Navigation Links -->
+<!-- Image Display -->
+<!-- Page Text -->
+<!-- Horizontal Line Finish  -->
+
