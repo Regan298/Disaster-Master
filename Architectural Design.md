@@ -126,7 +126,7 @@ This project has many concerns that are allocated to the following concern class
 10. The implementation of the clients networking infrastructure in regards to supporting our server to client model of software.
 11. The clients request for the Software to support communication using real-world text messages to cellular devices.
 12. That the database implementation results in ensuring for an increase in centralisation and expandability,
-13. The way in which the UI and simulation reviews will be presented to the user, as we must ensure it is user-friendly and accessible.
+13. An unfriendly user interface would be an issue for users and stop the full functionality from being used, effectively causing our software to not meet requirements.
 14. How the developers will be unable to install their overall software solution to this problem, as this responsibility is imposed upon the RedR client due to deployment location being remote (Australia)
 15. The transportation of the Software Solution to the deployment location.
 
