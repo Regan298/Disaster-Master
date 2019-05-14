@@ -230,25 +230,23 @@ In the diagram it shows how the single "hq" and "ngoClient" classes mutually fea
 
 The two primary components are the front and back end. The front end deals with user interfaces and local logic. The back end deals with storage for all system elements, along with processing/running the simulation.
 
+![](Resourses/Component_Diagram.PNG)
+
 Front End:
 
+The front end of the system is split into two different client types, HQ and NGO. The two clients are very similar, with the NGO client being a more cut down and simplified version of HQ due to less requirements.
 
-The front end of the system is split into two separate user interfaces, HQ and NGO. The NGO system is very similar to HQ, however cut down and simplified due to less requirements.
+Both clients depend on local logic in the form of JavaScript libraries to display data to the user. For the HQ client, these libraries are the event graph, inbox list, scenario editor graph and PDF viewer. For the NGO client only the inbox list is required. All of these visual displays depend on external logic to communicate with the back end server and be populated with data. 
 
-The HQ interface depends on several libraries for the visual display of data. These are the event graph, inbox list and scenario editor graph. These visual displays depend on local logic in order to display locally stored events correctly via the visual displays. The NGO interface only includes the inbox visual display.
-
-The HQ system depends on localised logic for the management of locally stored events and the creation of scenarios before they are submitted to the back end system. This internal logic depends on the front end external logic in order to communicate with back end components and keep events and scenario information up to date. The NGO system solely depends on the local event storage component.
-
-The HQ system depends on external logic to interact with other components within the back end system. These include event logging, and message transmission. Both functions rely on the server implementation within the back end system being available, as all messages or other communication are transmitted via the server. The NGO system also depends on messaging transmission.
+External logic is used within both clients to communicate with the back end system and send/receive data. This logic is dependant on the server within the back end system being available, as all data between the HQ client and NGO clients is propagated via the server. This data includes system time, inter-client messages, logging events and in the case of the HQ client, scenario data.
 
 Back End: 
 
+The back end of the system consists of the server implementation and a database.
 
-The back end of the system consists of the server implementation the database and the scenario editor. 
+The server is responsible for running the overall simulation. It controls the connection between itself and the database, and is dependant on this connection for the majority of its functionality. The server is
 
 The database stores all simulation data in a set of tables. User data, scheduled events, sent events, log data and the editor event library are all stored in tables in the database. As the database is passive, it is dependant on the server implementation to maintain and utilize its contents.
-
-The server is responsible for running the overall simulation. It keeps the simulation time, and controls communication between itself the database and intercommunication between all entity's (HQ and NGOs). As a result, all components within the system are dependant on the server implementation to be functional. 
 
 
 ### 4.3 Process
