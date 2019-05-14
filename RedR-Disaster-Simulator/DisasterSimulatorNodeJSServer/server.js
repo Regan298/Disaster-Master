@@ -68,11 +68,22 @@ var con = mysql.createConnection({
  
 });
 
+wait(5000);//wait for 5s for MySQL to start
+
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
   
 });
+
+function wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
+}
+
 
 function saveMessage(latestMessage){
   console.log(latestMessage);
