@@ -111,14 +111,14 @@ This project has many concerns that are allocated to the following concern class
 
 #### Concerns: The suitability of the architecture for achieving the system’s purposes 
 
-1. The architecture is suitable for achieving the system's purpose of communication between NGO's and HQ when these entities are able to communicate meaningfully to each over our server implementation.
-2. The architecture is suitable for achieving the system's purpose of Recording simulations when it supports the tracking of events and what actions NGO's performed in response to these events.
-3. The architecture is suitable for achieving the system's purpose of Reviewing Simulations when review files have a clearly defined language that can be correctly interpreted by our program.
-4. The architecture is suitable for achieving the system's purpose of loading dynamic scenario files when HQ instances can load varying simulation files.
-5. The architecture is suitable for achieving the system's purpose of running within a local area network (LAN) when the Software is applicable to any standard LAN infrastructure, regardless of location.
-6. The architecture is suitable for achieving the system's purpose of constructing new custom scenarios for simulating when there is a functional implementation for creating and editing new scenarios.
-7. The architecture is suitable for achieving the system's purpose of ensuring that RedR simulation files are protected when scenario files support encryption.
-8. The architecture is suitable for achieving the system's purpose of real-time scenario interfering when overseers at HQ instances have the ability to modify the scenario whilst a simulation is running.
+1. That communication between NGO to NGO, HQ to NGO and NGO to HQ fails, as a result of oversights in the web server implementation, poor design choice of server dependencies, a breakdown between the database server and the web server. 
+2. That the recording of actions that NGO's performed in response to scenario events is not captured in such a way that is meaningful to the client. 
+3. That the intricate and contextual details for the scope of RedR scenario types is to vast and complex that it results in the attempted processing of scenario files as well as generation of scenario review files becoming to convoluted and thus proving to difficult to be correctly interpreted by our scenario file processing implementation.
+4. That the server implementation is built such that it does not effectively support a standard typical LAN. 
+5. The implementation for scenario creation results in being to cumbersome to be effectively engaged with by the users.
+6. That the functions responsible for encryption and decryption of scenario files means that the hardware resources required for these functions to perform creates additional overhead on the webserver, for a requirement that is not crucial to the product as a whole.
+7. That the interfering of scenario events in real time proves impossible or extremely difficult to implement, due to the feature requiring a constant connection to the web server.   
+
 
 #### Concerns: The feasibility of constructing and deploying the system
 
