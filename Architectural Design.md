@@ -232,22 +232,23 @@ The two primary components are the front and back end. The front end deals with 
 
 ![](Resourses/Component_Diagram.PNG)
 
-Front End:
+![](Resourses/dependencyDiagram.png)
+
+**Front End:**
 
 The front end of the system is split into two different client types, HQ and NGO. The two clients are very similar, with the NGO client being a more cut down and simplified version of HQ due to less requirements.
 
 Both clients depend on local logic in the form of JavaScript libraries to display data to the user. For the HQ client, these libraries are the event graph, inbox list, scenario editor graph and PDF viewer. For the NGO client only the inbox list is required. All of these visual displays depend on external logic to communicate with the back end server and be populated with data. 
 
-External logic is used within both clients to communicate with the back end system and send/receive data. This logic is dependant on the server within the back end system being available, as all data between the HQ client and NGO clients is propagated via the server. This data includes system time, inter-client messages, logging events and in the case of the HQ client, scenario data.
+External logic is used within both client types to communicate with the back end system. Each client is not visible to any of the other clients,  so all data sent between the HQ client and NGO clients is propagated through and saved by the server. For this reason the external logic is dependant on the server within the back end system being available. Message events can be sent between clients via the server, however other data can be sent directly to or from the server. This includes logging events, scenario data and scenario controls (e.g. time).
 
-Back End: 
+**Back End:**
 
-The back end of the system consists of the server implementation and a database.
+The back end of the system consists of a server implementation to run the overall simulation and a database to store all information within the simulation. 
 
-The server is responsible for running the overall simulation. It controls the connection between itself and the database, and is dependant on this connection for the majority of its functionality. The server is
+The server is responsible for running the overall simulation. It interacts with the database, saving and loading relevant data on behalf of the individual clients. Because of this, the server is dependant on the database to function correctly.
 
 The database stores all simulation data in a set of tables. User data, scheduled events, sent events, log data and the editor event library are all stored in tables in the database. As the database is passive, it is dependant on the server implementation to maintain and utilize its contents.
-
 
 ### 4.3 Process
 ...
