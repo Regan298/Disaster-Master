@@ -268,6 +268,8 @@ One device node will be used in the offline version. This will be a computer tha
 Online:
 There will be multiple devices that host the executable environment nodes. There will be one device used to host the HQ Interface, the Database, and the server. To host the NGO Interface another computer will be used as the device. The NGO Interface will use the server to connect to the HQ Interface and other NGO Interfaces. This server will be a LAN.
 
+Physical Concerns:
+
 Concern 5 - The architecture is suitable for achieving the system's purpose of running within a local network (LAN) when the Software is applicable to any standard LAN infrastructure, regardless of location: (For online mode)
 The system to run on must have a LAN with interconected computers. For the server to allow connections and run there must be a protocol to connect and ensure the system will run. The server that will be running will be a Javascript server which will run on the HQ device, the Javascript webserver will generate the keys and the URL for the NGOs to connect to. The URL and keys will be generated after the scenario is chosen to be run by the Overseer. The Overseer will hand out the generated keys and URL to the NGOs in person. The NGOs will enter the URL on a web browser which will give them the landing page with a login, which they'll enter their keys into, securley connecting the NGOs to the webserver. Through this protocol, the system can now run on LANs.
 
@@ -287,8 +289,9 @@ Concern 15 - The transportation of the Software Solution to the deployment locat
 There are three potential options to deploy the project. The first, giving a flash drive with the bash script and the project on it to the client. The second, emailing the bash script and project to the client. The third option is to make it an open source where the client can download the project and the bash script then install it. There will be many deployments and using flash drives will be costly and take time to give them to the client and from the client to RedR Australia, emailing will save time and give them new updates on when a new version has come out. The open source version will allow the client to access and download the project anytime they would like, being able to see the different versions and progressions throughout the project. The team will use open source so the project can be accessed by the client anytime, allowing quicker/on-demand deploying and more testing by the clients of the team's code.
 
 Concern 17 - Inability to provide updates to the Software post project closure:
-Concern 17 - Inability to provide updates to the Software post project closure:
 It is important for any software project to be kept updated. This ensures that that the simulation program will run when there a OS updates or JavaScript and HTML updates. When the project is finished and handed to RedR Australia the team that has worked on the project will not be able to update the project and ensure that it runs smoothly on future updates. This will be a risk that we have to take because we are unable to maintain the project for RedR Australia.he project and ensure that it runs smoothly on future updates. This will be a risk that we have to take because we are unable to maintain the project for RedR Australia.
+
+
 ### 4.5 Scenarios
 ...
 The RedR Simulation system has many different functions, and thus has numerous different use cases to accompany it. Arguably, the most important ones are the
