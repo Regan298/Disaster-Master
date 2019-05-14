@@ -31,7 +31,7 @@ All team members are expected to contribute equally to the document and list the
 ## 1. Introduction
 
 One page overall introduction including sections 1.1 and 1.2 (ISO/IEC/IEEE 42010:2011(E) clause 5.2)<br>
-The project we have been assigned to is Project 16. Project 16 is software based and the organisation we are working for is RedR Australia. Our client organisation RedR Australia is a "leading international humanitarian response agency that selects, trains and deploys technical specialists." (As RedR states). The goal of the project is to produce a piece of computer software that will be able to assist in the disaster simulations that RedR Australia carries out. The purpose of these simulations is to train new staff to work together and to maintain a level head when under the stress of attempting to maintain order amongst natural disaster victims. During a given simulation, there are several teams of people that are assigned different roles. There is also an overseer of the simulation that watches over the teams as they solve problems together. Currently, the overseer communicates with the teams using both phones and emails. Given that there are multiple teams participating in the simulation (potentially up to 7 groups), the overseer would quickly gain a large workload. RedR would like to automate the process of running as well as tracking the simulation. Because, the tasks involved in managing the simulation (communication, event initialisation, and post-simulation review) are rather tedious and normally performed by people, they are prone to errors. This then presents us with the opportunity to develop a program, such that a computer would assist the human operator. This would reduce their workload considerably and allow them to focus their attention on other tasks. It would also allow for a greater sense of realism. Upon the initialisation of a simulation, teams open and read the emails they receive from the overseer, the software would play sounds that emulate the atmosphere of a real disaster zone. Having the program provide this extra stimuli would help the participants feel more immersed in the scenario. This in turn make them act as if they really were in a real world disaster recovery situation. 
+The project we have been assigned to is Project 16. Project 16 is software based and the organisation we are working for is RedR Australia. Our client organisation RedR Australia is a "leading international humanitarian response agency that selects, trains and deploys technical specialists." (As RedR states). The goal of the project is to produce a piece of computer software that will be able to assist in the disaster simulations that RedR Australia carries out. The purpose of these simulations is to train new staff to work together and to maintain a level head when under the stress of attempting to maintain order amongst natural disaster victims. During a given simulation, there are several teams of people that are assigned different roles. There is also an overseer of the simulation that watches over the teams as they solve problems together. Currently, the overseer communicates with the teams using both phones and emails. Given that there are multiple teams participating in the simulation (potentially up to 7 groups), the overseer would quickly gain a large workload. RedR would like to automate the process of running as well as tracking the simulation. Because the tasks involved in managing the simulation (communication, event initialisation, and post-simulation review) are rather tedious and normally performed by people, they are prone to errors. This then presents us with the opportunity to develop a program that would assist the human operator. This would reduce their workload considerably and allow them to focus their attention on other tasks. It would also allow for a greater sense of realism. Upon the initialisation of a simulation, teams open and read the emails they receive from the overseer and the software would play sounds that emulate the atmosphere of a real disaster zone. Having the program provide this extra stimuli would help the participants feel more immersed in the scenario. This in turn wpuld make them act as if they really were in a real world disaster recovery situation. 
 
 ### Client
 
@@ -48,14 +48,16 @@ The purpose of our software is to reduce the total workload of the overseer in t
 
 The scope of the project is centred around delivering a disaster simulation computer program to RedR Australia. The program must be capable of communicating with other machines that simulation participants will be using. It must also track progress of a simulation and display the relative time. The final product must be delievered to the client by the end of the project (October 11th, 2019). The hardware required to develop the program is already available to the team so there will be little to no cost for this project. 
 
+The final program will be capable of the following:
+
 1. Ability to load dynamic simulation files, from an Overseer at HQ machine, that dictates for the details of each type of scenario and such that Overseer has main control over current simulation.
 2. Operating on 1 to many machines, whereby a single machine implies no access to the internet. The total number of machines that the program will run on will depend on the number of parties participating/the number of available computers
 3. Inter-communication between Overseer at HQ and NGO's at Client machines, each machine being over network infrastructure operated by RedR, and communication via superficial emails and texts between teams and Overseer at HQ. Communication may have embedded imagery and audio files.
-4. Tracking for the progress of the simulation, a varying time scale that is used for each simulation.
+4. Tracking for the progress of the simulation using a timescale that may be different between different simulations.
 5. Custom creation of varying scenario situations.
-6. Real-time interfering of scenario by Overseer.
-7. Review of the events that occurred in past simulations, with functionality to export scenario result.
-8. Ability to function in a range of limited environments on varying hardware.
+6. Real-time interacting with scenario by Overseer.
+7. Review the events that occurred in past simulations, with functionality to export scenario result.
+8. Ability to function in a range of limited environments on varying hardware. 
 
 ### 1.3 Changes to requirements
 
@@ -109,14 +111,14 @@ This project has many concerns that are allocated to the following concern class
 
 #### Concerns: The suitability of the architecture for achieving the system’s purposes 
 
-1. The architecture is suitable for achieving the system's purpose of communication between NGO's and HQ when these entities are able to communicate meaningfully to each over our server implementation.
-2. The architecture is suitable for achieving the system's purpose of Recording simulations when it supports the tracking of events and what actions NGO's performed in response to these events.
-3. The architecture is suitable for achieving the system's purpose of Reviewing Simulations when review files have a clearly defined language that can be correctly interpreted by our program.
-4. The architecture is suitable for achieving the system's purpose of loading dynamic scenario files when HQ instances can load varying simulation files.
-5. The architecture is suitable for achieving the system's purpose of running within a local area network (LAN) when the Software is applicable to any standard LAN infrastructure, regardless of location.
-6. The architecture is suitable for achieving the system's purpose of constructing new custom scenarios for simulating when there is a functional implementation for creating and editing new scenarios.
-7. The architecture is suitable for achieving the system's purpose of ensuring that RedR simulation files are protected when scenario files support encryption.
-8. The architecture is suitable for achieving the system's purpose of real-time scenario interfering when overseers at HQ instances have the ability to modify the scenario whilst a simulation is running.
+1. That communication between NGO to NGO, HQ to NGO and NGO to HQ fails, as a result of oversights in the web server implementation, poor design choice of server dependencies, a breakdown between the database server and the web server. 
+2. That the recording of actions that NGO's performed in response to scenario events is not captured in such a way that is meaningful to the client. 
+3. That the intricate and contextual details for the scope of RedR scenario types is to vast and complex that it results in the attempted processing of scenario files as well as generation of scenario review files becoming to convoluted and thus proving to difficult to be correctly interpreted by our scenario file processing implementation.
+4. That the server implementation is built such that it does not effectively support a standard typical LAN. 
+5. The implementation for scenario creation results in being to cumbersome to be effectively engaged with by the users.
+6. That the functions responsible for encryption and decryption of scenario files means that the hardware resources required for these functions to perform creates additional overhead on the webserver, for a requirement that is not crucial to the product as a whole.
+7. That the interfering of scenario events in real time proves impossible or extremely difficult to implement, due to the feature requiring a constant connection to the web server.   
+
 
 #### Concerns: The feasibility of constructing and deploying the system
 
@@ -228,61 +230,70 @@ In the diagram it shows how the single "hq" and "ngoClient" classes mutually fea
 
 The two primary components are the front and back end. The front end deals with user interfaces and local logic. The back end deals with storage for all system elements, along with processing/running the simulation.
 
-Front End:
+![](Resourses/Component_Diagram.PNG)
 
+![](Resourses/dependencyDiagram.png)
 
-The front end of the system is split into two separate user interfaces, HQ and NGO. The NGO system is very similar to HQ, however cut down and simplified due to less requirements.
+**Front End:**
 
-The HQ interface depends on several libraries for the visual display of data. These are the event graph, inbox list and scenario editor graph. These visual displays depend on local logic in order to display locally stored events correctly via the visual displays. The NGO interface only includes the inbox visual display.
+The front end of the system is split into two different client types, HQ and NGO. The two clients are very similar, with the NGO client being a more cut down and simplified version of HQ due to less requirements.
 
-The HQ system depends on localised logic for the management of locally stored events and the creation of scenarios before they are submitted to the back end system. This internal logic depends on the front end external logic in order to communicate with back end components and keep events and scenario information up to date. The NGO system solely depends on the local event storage component.
+Both clients depend on local logic in the form of JavaScript libraries to display data to the user. For the HQ client, these libraries are the event graph, inbox list, scenario editor graph and PDF viewer. For the NGO client only the inbox list is required. All of these visual displays depend on external logic to communicate with the back end server and be populated with data. 
 
-The HQ system depends on external logic to interact with other components within the back end system. These include event logging, and message transmission. Both functions rely on the server implementation within the back end system being available, as all messages or other communication are transmitted via the server. The NGO system also depends on messaging transmission.
+External logic is used within both client types to communicate with the back end system. Each client is not visible to any of the other clients,  so all data sent between the HQ client and NGO clients is propagated through and saved by the server. For this reason the external logic is dependant on the server within the back end system being available. Message events can be sent between clients via the server, however other data can be sent directly to or from the server. This includes logging events, scenario data and scenario controls (e.g. time).
 
-Back End: 
+**Back End:**
 
+The back end of the system consists of a server implementation to run the overall simulation and a database to store all information within the simulation. 
 
-The back end of the system consists of the server implementation the database and the scenario editor. 
+The server is responsible for running the overall simulation. It interacts with the database, saving and loading relevant data on behalf of the individual clients. Because of this, the server is dependant on the database to function correctly.
 
 The database stores all simulation data in a set of tables. User data, scheduled events, sent events, log data and the editor event library are all stored in tables in the database. As the database is passive, it is dependant on the server implementation to maintain and utilize its contents.
-
-The server is responsible for running the overall simulation. It keeps the simulation time, and controls communication between itself the database and intercommunication between all entity's (HQ and NGOs). As a result, all components within the system are dependant on the server implementation to be functional. 
-
 
 ### 4.3 Process
 ...
 
 ### 4.4 Physical 
-![](Resourses/deploymentDiagram.png)
 
+![](Resourses/components.png)
+
+![](Resourses/offline.png)
 
 Offline:
 One device node will be used in the offline version. This will be a computer that runs all the executable environment nodes. The server will run on the device, it will connect all the other execuatble envrionment nodes such as the HQ Interface, the Database and the NGO Interface. All functionality will be linked through the server's connection within the device hosting the server.
 
+![](Resourses/online.png)
+
 Online:
 There will be multiple devices that host the executable environment nodes. There will be one device used to host the HQ Interface, the Database, and the server. To host the NGO Interface another computer will be used as the device. The NGO Interface will use the server to connect to the HQ Interface and other NGO Interfaces. This server will be a LAN.
 
-Concern 5 - The architecture is suitable for achieving the system's purpose of running within a local network (LAN) when the Software is applicable to any standard LAN infrastructure, regardless of location: (For online mode)
-The system to run on must have a LAN with interconected computers. For the server to allow connections and run there must be a protocol to connect and ensure the system will run. The server that will be running will be a Javascript server which will run on the HQ device, the Javascript webserver will generate the keys and the URL for the NGOs to connect to. The URL and keys will be generated after the scenario is chosen to be run by the Overseer. The Overseer will hand out the generated keys and URL to the NGOs in person. The NGOs will enter the URL on a web browser which will give them the landing page with a login, which they'll enter their keys into, securley connecting the NGOs to the webserver. Through this protocol, the system can now run on LANs.
+Physical Concerns:
 
-There is an issue with firewalls many Javascript servers face, where the URL given to the clients from the host cannot be reached and can't load the landing page, a solution to this problem is by manually changing the firewall settings on each device that will be used during the scenario simulation. Another solution is to run a script where it will change the firewall settings on the computer automatically when the URL is typed in. 
 
-Concern 9 - Developing a program that simultaneously supports functionality for networked and non-networked environments:
-Having the server run on the device of the HQ means that it can run simulations with or without a network. This works because of the protocol on how to connect to the server allows for other devices and the HQ device to connect to the server. If there is no network available, then other devices cannot be used because they're unable to connect to the HQ's device which runs the server. To have NGOs in the simulation for training, the host device can open more web browser tabs and enter the URL and keys. This allows one or multiple NGOs to train on one device. This may not be efficent for training multiple NGOs but it provides training where there is no network available.
-For an NGO that wishes to connect to the server and join the scenario, little is done differently apart from their being a network and using a different device's web browser to enter the URL and keys. Through the protocol of connecting to the server it supports the functionality for networked and non-networked environments. 
+Concern 9 - That Developing a program that simultaneously supports functionality for networked and non-networked environments is not possible:
+If the program is unable to run both and offline and online functionality over a working LAN, the effects would cause the program to have only one option to run a simulation. This would affect RedR's training capabilities. 
+Due to the program not being able to run two online and offline functions then the project would have to develop two separate programs that run. One program would run on one computer that does not require a LAN, the second program would run a server
+over a LAN connecting to multiple computers. This would increase the size of the project significantly, requiring perhaps duplicate code between programs.  
 
-Concern 11 - The clients request for the Software to support communication using real-world text messages to cellular devices:
-In real world disasters, much organization is done with emails as well as text messages. Texts have the benefit of being relativley cheap compared to mobile data usage for emails. Havings texts will create a more realistic simulation for the NGOs as cellular devices and texts will be used in real world disasters to organize a relief effort. Setting up texts in the simulation can be done using Javascript and the Node.js functions. However, this requires the project team to buy specific phone numbers and sim cards online, and with no budget in the project this means we won't be able to implement it. There will be more concerns if it is implemented as well because if the software for the simulation is in different countries than more and more phone numbers will have to be bought. Until budget changes happen, there will cannot be a implementation of texts within the simulation.
+Concern 10 - The implementation of the clients networking infrastructure in regards to supporting our server to client model of software cannot operate due to a lack of network infrastructure, such as a LAN:
+The client running in the deployment location might not have a standard LAN where the program's JavaScript cannot run on or potentially no LAN at all. This would disable the online mode of the program and not allow for the server to run its operations.
+If there is no connection to the internet for the computers in the deployment location then creating one would be necessary to have online mode run, as establishing a network between computers is crucial. Going to the deployment location would have a great cost (flights to Australia), then asking RedR to hire a company to set up a network for them is the best solution. If there is a network but it cannot run the Javascript server then the project team would have to pick either two options. The first option 
+is to change the program so it runs on RedR's network which would require a detailed description of how their network functions and is structured. The second option is to get RedR Australia to get get a new standard network where the server can run on.
 
-Concern 14 - How the developers will be unable to install their overall software solution to this problem, as this responsibility is imposed upon the RedR client due to deployment location being remote (Australia):
-The first place where the fully developed simulation will be deployed is in Australia, the project group cannot be in Australia to deploy it and set it up ourselves. Alternative measures will have to be taken. This is soved by emailing a bash script and the code for the simulation to the client, whom can then install the the simulation using the bash script. The bash script is written in Bash, the scripts are simple and can install the entire simulation program. This will be relativley straight forward process to do. Deployments can be done regularly if the bash scripts are developed early enough.
+Concern 11 - The clients request for the Software to support communication using real-world text messages to cellular devices is not possible or very difficult:
+In real world disasters, much organization is done with emails as well as text messages. Texts have the benefit of being relatively cheap compared to mobile data usage for emails. Setting up texts in the simulation can be done using Javascript and the Node.js functions. However, this requires the project team to buy specific phone numbers and sim cards online, and with no budget in the project this means we won't be able to implement it. There will be more concerns if it is implemented as well because if the software for the simulation is in different countries than more and more phone numbers will have to be bought. Until budget changes happen, there will cannot be a implementation of texts within the simulation. To implement the texting for different countries would require the project team to design each server that runs in a different country and perhaps if there are multiple simulations in each country, more sets of phones are needed. This makes implementing texts and phones into the program very costly and would require constant micromanaging such as keeping track of sim cards numbers and the cost to run the sim cards after deployment which the team cannot do once the project is over.
 
-Concern 15 - The transportation of the Software Solution to the deployment location:
-There are three potential options to deploy the project. The first, giving a flash drive with the bash script and the project on it to the client. The second, emailing the bash script and project to the client. The third option is to make it an open source where the client can download the project and the bash script then install it. There will be many deployments and using flash drives will be costly and take time to give them to the client and from the client to RedR Australia, emailing will save time and give them new updates on when a new version has come out. The open source version will allow the client to access and download the project anytime they would like, being able to see the different versions and progressions throughout the project. The team will use open source so the project can be accessed by the client anytime, allowing quicker/on-demand deploying and more testing by the clients of the team's code.
+Concern 14 - Issues about how the developers will be unable to install their overall software at the deployment location because this responsibility is imposed upon the RedR client due to deployment location being remote (Australia):
+The first place where the fully developed simulation will be deployed is in Australia, the project group cannot be in Australia to deploy it and set it up ourselves. Alternative measures will have to be taken. This is solved by emailing a bash script and the code for the simulation to the client, whom can then install the the simulation using the bash script. The bash script is written in Bash, the scripts are simple and can install the entire simulation program. This will be relativley straightforward process to do. Deployments can be done regularly if the bash scripts are developed early enough.
+
+Concern 15 - The transportation methods of the Software to the deployment location may cause difficulty or may not be possible, and why they are?:
+The software is to be transported to the deployment location in Australia. There are two options for transporting the data to Australia, the first being emailing which is the quickest option, however it would have to be sent through the team's ecs accounts to the client due to the contract keeping the project private. An issue could arise if the internet is down, but this is minor and can quickly fixed. The second option is to send the software to Australia in a flash drive delivered in the mail. Delivering flash drives in the mail has its own problems as it takes several days for new software to reach its destination to be tested or run for a simulation, the flash drive also has the chance to be lost or stolen. Currently, the is a client in New Zealand who the project team can test the software on a limited scale. We will be sending the client a flash drive with the software and a simple bash script to run, the bash script can be run easily and start the server and the begin the simulation. However, this has its own risks of the client or the project team losing the flash drive. Safety precautions will have to be taken when transporting the flash drive as they're easily broken. Safety precautions such as putting flash drives in secure locations while transporting, avoid indefinitely plugging a flash drive into a computer, avoid running software from the flash drive and finally creating a backup of the software while transporting if the safety precautions fail. https://recruitingblogs.com/profiles/blogs/4-tips-for-students-how-to-care-for-your-usb-flash-drive
 
 Concern 17 - Inability to provide updates to the Software post project closure:
-Concern 17 - Inability to provide updates to the Software post project closure:
-It is important for any software project to be kept updated. This ensures that that the simulation program will run when there a OS updates or JavaScript and HTML updates. When the project is finished and handed to RedR Australia the team that has worked on the project will not be able to update the project and ensure that it runs smoothly on future updates. This will be a risk that we have to take because we are unable to maintain the project for RedR Australia.he project and ensure that it runs smoothly on future updates. This will be a risk that we have to take because we are unable to maintain the project for RedR Australia.
+It is important for any software project to be kept updated. This ensures that that the simulation program will run when there a OS updates or JavaScript and HTML updates. When the project is finished and handed to RedR Australia the team that has worked on the project will not be able to update the project and ensure that it runs smoothly on future updates. This will be a risk that we have to take because we are unable to maintain the project for RedR Australia and ensure that it runs smoothly on future updates of the OS it will run on.
+ 
+
+
 ### 4.5 Scenarios
 ...
 The RedR Simulation system has many different functions, and thus has numerous different use cases to accompany it. Arguably, the most important ones are the
