@@ -141,7 +141,7 @@ This project has many concerns that are allocated to the following concern class
 
 #### Concerns: Maintainability and Evolvability of the System
 
-22. The need to support modularity meaning the addition of new components.
+22. If the overall system architecture does not support modularity, extensions to the core system could be infeasible.
 23. Usability for client maintenance in terms of: Network Implementation in code, Feature implementation in code and of scenario/scenario review files.
 
 #### Association Table Between Stakeholders and Concerns
@@ -253,48 +253,56 @@ The database stores all simulation data in a set of tables. User data, scheduled
 ### 4.3 Process
 ...
 
-### 4.4 Physical 
-Deployment Component Diagram
+### 4.4 Physical
+
+**Deployment Component Diagram**
 ![](Resourses/components.png)
 
-Deployment Offline Functionality Diagram
+**Deployment Offline Functionality Diagram**
 ![](Resourses/offline.png)
 
 Offline:
 One device node will be used in the offline version. This will be a computer that runs all the executable environment nodes. The server will run on the device, it will connect all the other execuatble envrionment nodes such as the HQ Interface, the Database and the NGO Interface. All functionality will be linked through the server's connection within the device hosting the server.
 
-Deployment Online Functionality Diagram
+**Deployment Online Functionality Diagram**
 ![](Resourses/online.png)
 
 Online:
 There will be multiple devices that host the executable environment nodes. There will be one device used to host the HQ Interface, the Database, and the server. To host the NGO Interface another computer will be used as the device. The NGO Interface will use the server to connect to the HQ Interface and other NGO Interfaces. This server will be a LAN.
 
-Physical Concerns:
-Multi-purpose Network View
+**Physical Concerns:**
+
+**Multi-purpose Network View**
+
 Concern 9 - That Developing a program that simultaneously supports functionality for networked and non-networked environments is not possible:
 If the program is unable to run both and offline and online functionality over a working LAN, the effects would cause the program to have only one option to run a simulation. This would affect RedR's training capabilities. 
 Due to the program not being able to run two online and offline functions then the project would have to develop two separate programs that run. One program would run on one computer that does not require a LAN, the second program would run a server
 over a LAN connecting to multiple computers. This would increase the size of the project significantly, requiring perhaps duplicate code between programs.  
 
-Current Client Infrastructure View
+**Current Client Infrastructure View**
+
 Concern 10 - The implementation of the clients networking infrastructure in regards to supporting our server to client model of software cannot operate due to a lack of network infrastructure, such as a LAN:
 The client running in the deployment location might not have a standard LAN where the program's JavaScript cannot run on or potentially no LAN at all. This would disable the online mode of the program and not allow for the server to run its operations.
 If there is no connection to the internet for the computers in the deployment location then creating one would be necessary to have online mode run, as establishing a network between computers is crucial. Going to the deployment location would have a great cost (flights to Australia), then asking RedR to hire a company to set up a network for them is the best solution. If there is a network but it cannot run the Javascript server then the project team would have to pick either two options. The first option 
 is to change the program so it runs on RedR's network which would require a detailed description of how their network functions and is structured. The second option is to get RedR Australia to get get a new standard network where the server can run on.
 
-Texting View
+**Texting View**
+
 Concern 11 - The clients request for the Software to support communication using real-world text messages to cellular devices is not possible or very difficult:
 In real world disasters, much organization is done with emails as well as text messages. Texts have the benefit of being relatively cheap compared to mobile data usage for emails. Setting up texts in the simulation can be done using Javascript and the Node.js functions. However, this requires the project team to buy specific phone numbers and sim cards online, and with no budget in the project this means we won't be able to implement it. There will be more concerns if it is implemented as well because if the software for the simulation is in different countries than more and more phone numbers will have to be bought. Until budget changes happen, there will cannot be a implementation of texts within the simulation. To implement the texting for different countries would require the project team to design each server that runs in a different country and perhaps if there are multiple simulations in each country, more sets of phones are needed. This makes implementing texts and phones into the program very costly and would require constant micromanaging such as keeping track of sim cards numbers and the cost to run the sim cards after deployment which the team cannot do once the project is over.
 
-Remote Deployment View
+**Remote Deployment View**
+
 Concern 14 - Issues about how the developers will be unable to install their overall software at the deployment location because this responsibility is imposed upon the RedR client due to deployment location being remote (Australia):
 The first place where the fully developed simulation will be deployed is in Australia. The client has specified that the location could be remote and in a region where it will be difficult to deploy. This location in Australia may not be connected to internet or have a network that is not connected to the outside internet, this could make emails and online repositories unable to deploy the software in the remote locations. Flash drives will most likely have to be used to transport the software to the final location. Flash drives have a risk of being lost, broken or stolen, and also have to take time to be delivered to the deployment location.
 
 Transportations of Software View
+
 Concern 15 - The transportation methods of the Software to the deployment location may cause difficulty or may not be possible, and why they are?:
 The software is to be transported to the deployment location in Australia. There are three options for transporting the data to Australia, the first being emailing which is the quickest option, however it would have to be sent through the team's ecs accounts to the client due to the contract keeping the project private. An issue could arise if the internet is down, but this is minor and can quickly fixed. The second option is to send the software to Australia in a flash drive delivered in the mail. Delivering flash drives in the mail has its own problems as it takes several days for new software to reach its destination to be tested or run for a simulation, the flash drive also has the chance to be lost, broken or stolen. The thid option is to have to have it on on a Gitlab online repository however, the size of the software may be too large to be placed in the repository. The project team has already had an issue where the size of the file is too large to be added into a repository but managed to deal with it by zipping up the software and reduced the size by 75%, allowing the software to be stored on the Gitlab. 
 
-Post Project Updates View
+**Post Project Updates View**
+
 Concern 17 - Inability to provide updates to the Software post project closure:
 It is important for any software project to be kept updated. This ensures that that the simulation program will run when there a OS updates or JavaScript and HTML updates. When the project is finished and handed to RedR Australia the team that has worked on the project will not be able to update the project and ensure that it runs smoothly on future updates. This will be a risk that we have to take because we are unable to maintain the project for RedR Australia and ensure that it runs smoothly on future updates of the OS it will run on.
 
@@ -309,16 +317,11 @@ on the availability of a network connection in the location where this software 
 If one of the NGO users wishes to send a message to the HQ, they simply navigate to the client sender component (visible in the above diagram). From there they may compose their message and send it to the HQ. The message will then appear in the HQ receiver component. These components may be divided among processes running on different machines. If there is no network connection available, all of the data will be contained on one machine within one process. The program will almost mimic an email or instant messaging service, but will be enitrely dedicated to the purposes of humanitarian organisations and will also have the integrated simulation timeline. 
 If the HQ user decides that they wish to add a new simulation scenario to the program, they can accomplish this using the seperate ScenarioCreator component of the system. This will be a standalone application that will run independently of the main simulation program. The scenario creator will only run on the computer that is running the simulation program as the HQ. This is because only the HQ will be allowed to have access to the scenario creator program. 
 
-(Concern 16) The most obvious concern with any computer program is that there will be bugs and defects within it that weren't caught and resolved before release. This could happen because of approaching deadlines causing the team to rush and make mistakes.
-<br>
-(Concern 18) The client may also lose the ability to use the software by not having enough/any hardware available to use it. We have no control over the client's circumstances, and this is simply a risk that we will have to take.
-<br>
-(Concern 19) It might end up that the client finds the interface of the program too hard to use, and will prefer to resort back to their old way of working, making the entire project redundant.
-<br>
-(Concern 20) The client may find another solution to their problem that fits their needs better. This alternative may (for example) be cheaper, easier to use, easier to train other people to use or takes less time to aquire.
-<br>
-(Concern 21) The project may also fail due to team members not being able to co-operate or work efficiently enough to meet the deadline for deployment.
-<br>
+(Concern 16) The most obvious concern with any computer program is that there will be bugs and defects within it that weren't caught and resolved before release. This could happen because of approaching deadlines causing the team to rush and make mistakes. <br>
+(Concern 18) The client may also lose the ability to use the software by not having enough/any hardware available to use it. We have no control over the client's circumstances, and this is simply a risk that we will have to take.<br>
+(Concern 19) It might end up that the client finds the interface of the program too hard to use, and will prefer to resort back to their old way of working, making the entire project redundant.<br>
+(Concern 20) The client may find another solution to their problem that fits their needs better. This alternative may (for example) be cheaper, easier to use, easier to train other people to use or takes less time to aquire. <br>
+(Concern 21) The project may also fail due to team members not being able to co-operate or work efficiently enough to meet the deadline for deployment. <br>
 ## 5. Development Schedule
 
 _For each subsection, make clear what (if anything) has changed from the requirements document._ If unchanged, these sections should be copied over from the requirements document, not simply cross-referenced.
