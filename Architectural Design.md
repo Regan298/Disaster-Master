@@ -115,9 +115,8 @@ This project has many concerns that are allocated to the following concern class
 2. That the recording of actions that NGO's performed in response to scenario events is not captured in such a way that is meaningful to the client. 
 3. That the intricate and contextual details for the scope of RedR scenario types is to vast and complex that it results in the attempted processing of scenario files as well as generation of scenario review files becoming to convoluted and thus proving to difficult to be correctly interpreted by our scenario file processing implementation.
 4. That the server implementation is built such that it does not effectively support a standard typical LAN. 
-5. The implementation for scenario creation results in being to cumbersome to be effectively engaged with by the users.
-6. That the functions responsible for encryption and decryption of scenario files means that the hardware resources required for these functions to perform creates additional overhead on the webserver, for a requirement that is not crucial to the product as a whole.
-7. That the interfering of scenario events in real time proves impossible or extremely difficult to implement, due to the feature requiring a constant connection to the web server.   
+5. That the functions responsible for encryption and decryption of scenario files means that the hardware resources required for these functions to perform creates additional overhead on the webserver, for a requirement that is not crucial to the product as a whole.
+6. That the interfering of scenario events in real time proves impossible or extremely difficult to implement, due to the feature requiring a constant connection to the web server.   
 
 
 #### Concerns: The feasibility of constructing and deploying the system
