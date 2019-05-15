@@ -21,7 +21,6 @@ The document should contain the sections listed below, and conform to the format
 
 All team members are expected to contribute equally to the document and list their contributions in the last section of the document. You should work on your document in your team's GitLab repository in a directory called "M2_Architecture". If more than one team member has contributed to a particular commit, all those team member IDs should be included in the first line of the git commit message. ``git blame``, ``git diff``, file histories, etc. will be tools used to assess individual contributions, so everyone is encouraged to contribute individually, commit early and commit often. Any team wishing to separate individually contributed sections into a single file before collation into the single proposal document for submission is welcome to do so.
 
-
 ---
 
 # ENGR 301 Project 16 Architectural Design and Proof-of-Concept
@@ -116,32 +115,36 @@ This project has many concerns that are allocated to the following concern class
 3. That the intricate and contextual details for the scope of RedR scenario types is to vast and complex that it results in the attempted processing of scenario files as well as generation of scenario review files becoming to convoluted and thus proving to difficult to be correctly interpreted by our scenario file processing implementation.
 4. That the server implementation is built such that it does not effectively support a standard typical LAN. 
 5. That the functions responsible for encryption and decryption of scenario files means that the hardware resources required for these functions to perform creates additional overhead on the webserver, for a requirement that is not crucial to the product as a whole.
-6. That the interfering of scenario events in real time proves impossible or extremely difficult to implement, due to the feature requiring a constant connection to the web server.   
-
+6. That the interfering of scenario events from HQ in real time proves impossible or extremely difficult to implement, due to this feature requiring a constant connection to the web server.   
 
 #### Concerns: The feasibility of constructing and deploying the system
 
+7. Overseer's/NGO's my accidentally terminate the running process of a simulation, resulting in any simulation progress up to the point the simulation was terminated being lost.
+8. An inability to correctly serve varying user types appropriately, such that the solution struggles to distinguish users adequately.
+
 9. Developing a program that simultaneously supports functionality for networked and non-networked environments.
-10. The implementation of the clients networking infrastructure in regards to supporting our server to client model of software.
-11. The clients request for the Software to support communication using real-world text messages to cellular devices.
-12. That the database implementation results in ensuring for an increase in centralisation and expandability,
-13. An unfriendly user interface would be an issue for users and stop the full functionality from being used, effectively causing our software to not meet requirements.
-14. How the developers will be unable to install their overall software solution to this problem, as this responsibility is imposed upon the RedR client due to deployment location being remote (Australia)
-15. The transportation of the Software Solution to the deployment location.
+10. As the Webserver is dependent on the database server for product wide functionality, as disconnect between these entities would be detrimental.
+11. A decoupling between HQ and the Webserver could lead to the Overseer believing that their actions are applied to the current simulation when in reality they are not. 
+12. The implementation of the clients networking infrastructure in regards to supporting our server to client model of software.
+13. The clients request for the Software to support communication using real-world text messages to cellular devices.
+14. That the database implementation results in ensuring for an increase in centralisation and expandability,
+15. An unfriendly user interface would be an issue for users and stop the full functionality from being used, effectively causing our software to not meet requirements.
+16. How the developers will be unable to install their overall software solution to this problem, as this responsibility is imposed upon the RedR client due to deployment location being remote (Australia).
+17. The transportation of the Software Solution to the deployment location.
 
 #### Concerns: Potential Product Risks
 
-16. Unexpected program behaviour that results from software errors including bugs, defects and oversights.
-17. Inability to provide updates to the Software post project closure.
-18. Unforeseen Client network and environment updates that compromise the usability of our Software package.
-19. Poor usability regarding UI/UX design in our automated software-based solution results in the current manual solution to the problem proving more effective.
-20. The client discovers an alternative solution to their problem in which causes them to lose motivation and faith in the product we are developing.
-21. Project failure as a result of the developers acting in non-productive ways means that the reputation of VUW and more specifically ENGR301/302 is tarnished.
+18. Unexpected program behaviour that results from software errors including bugs, defects and oversights.
+19. Inability to provide updates to the Software post project closure.
+20. Unforeseen Client network and environment updates that compromise the usability of our Software package.
+21. Poor usability regarding UI/UX design in our automated software-based solution results in the current manual solution to the problem proving more effective.
+22. The client discovers an alternative solution to their problem in which causes them to lose motivation and faith in the product we are developing.
+23. Project failure as a result of the developers acting in non-productive ways means that the reputation of VUW and more specifically ENGR301/302 is tarnished.
 
 #### Concerns: Maintainability and Evolvability of the System
 
-22. If the overall system architecture does not support modularity, extensions to the core system could be infeasible.
-23. Usability for client maintenance in terms of: Network Implementation in code, Feature implementation in code and of scenario/scenario review files.
+24. If the overall system architecture does not support modularity, extensions to the core system could be infeasible.
+25. Usability for client maintenance in terms of: Network Implementation in code, Feature implementation in code and of scenario/scenario review files.
 
 #### Association Table Between Stakeholders and Concerns
 

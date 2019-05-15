@@ -1,1 +1,16 @@
-RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/mysql-8.0.16-winx64/
+RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/mysql-8.0.16-winx64/*
+RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/node_modules/*
+RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/CHANGELOG.md
+RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/LICENSE
+RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/node.exe
+RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/node_etw_provider.man
+RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/node_perfctr_provider.man
+RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/nodevars.bat
+RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/npm
+RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/npm.cmd
+RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/npx
+RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/npx.cmd
+
+
+
+
