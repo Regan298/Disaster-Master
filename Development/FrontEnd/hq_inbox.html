@@ -16,11 +16,42 @@
 			<li><a class="active">Inbox</a></li>
 
 		</ul>
-		
+		<style>
+                td:hover{background-color:#ddd;;cursor: pointer}
+                .selected{background-color: red;color: #fff;font-weight: bold}
+        </style>
 		
 	</head>
 	<body>
-	
+	<table id="myTable" cellpadding="2" cellspacing="2" border="1" onclick="getPDF()"></table>
+        <script>
+            var message;
+            var table = document.getElementById("myTable");
+            for (var j = 0; j < 10; j++) {
+                message = {
+                    from: "From" + j,
+                    subject: "Subject" + j,
+                    time: "Time" + j,
+                };
+                var row = table.insertRow(j);
+                var cell1 = row.insertCell(0);
+                cell1.innerHTML = message.from + " " + message.subject + " " + message.time;
+            }
+            
+            for(var i = 0; i < table.rows.length; i++) {
+                // row cells
+                for(var j = 0; j < table.rows[i].cells.length; j++) {
+                    table.rows[i].cells[j].onclick = function() {
+                        rIndex = this.parentElement.rowIndex;
+                        cIndex = this.cellIndex+1;
+                        console.log("Row : "+rIndex+" , Cell : "+cIndex);
+                    };
+                }
+            }
+            function getPDF(){
+                
+            }
+        </script>
 
 	</body>
 </html>
