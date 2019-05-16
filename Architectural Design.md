@@ -127,24 +127,23 @@ This project has many concerns that are allocated to the following concern class
 11. A decoupling between HQ and the Webserver could lead to the Overseer believing that their actions are applied to the current simulation when in reality they are not. 
 12. The implementation of the clients networking infrastructure in regards to supporting our server to client model of software.
 13. The clients request for the Software to support communication using real-world text messages to cellular devices.
-14. That the database implementation results in ensuring for an increase in centralisation and expandability,
-15. An unfriendly user interface would be an issue for users and stop the full functionality from being used, effectively causing our software to not meet requirements.
+14. That the database implementation results in ensuring for an increase in centralisation and expandability.
 16. How the developers will be unable to install their overall software solution to this problem, as this responsibility is imposed upon the RedR client due to deployment location being remote (Australia).
 17. The transportation of the Software Solution to the deployment location.
 
 #### Concerns: Potential Product Risks
 
-18. Unexpected program behaviour that results from software errors including bugs, defects and oversights.
-19. Inability to provide updates to the Software post project closure.
-20. Unforeseen Client network and environment updates that compromise the usability of our Software package.
-21. Poor usability regarding UI/UX design in our automated software-based solution results in the current manual solution to the problem proving more effective.
-22. The client discovers an alternative solution to their problem in which causes them to lose motivation and faith in the product we are developing.
-23. Project failure as a result of the developers acting in non-productive ways means that the reputation of VUW and more specifically ENGR301/302 is tarnished.
+17. Unexpected program behaviour that results from software errors including bugs, defects and oversights.
+18. Inability to provide updates to the Software post project closure.
+19. Unforeseen Client network and environment updates that compromise the usability of our Software package.
+20. Poor usability regarding UI/UX design in our automated software-based solution results in the current manual solution to the problem proving more effective.
+21. The client discovers an alternative solution to their problem in which causes them to lose motivation and faith in the product we are developing.
+22. Project failure as a result of the developers acting in non-productive ways means that the reputation of VUW and more specifically ENGR301/302 is tarnished.
 
 #### Concerns: Maintainability and Evolvability of the System
 
-24. If the overall system architecture does not support modularity, extensions to the core system could be infeasible.
-25. Usability for client maintenance in terms of: Network Implementation in code, Feature implementation in code and of scenario/scenario review files.
+23. If the overall system architecture does not support modularity, extensions to the core system could be infeasible.
+24. Usability for client maintenance in terms of: Network Implementation in code, Feature implementation in code and of scenario/scenario review files.
 
 #### Association Table Between Stakeholders and Concerns
 
@@ -222,7 +221,7 @@ Todo: CLASSDIAGRAM LINK HERE
 
 As discussed the Logical Viewpoint pertains to expressing the functional requirements of the system. Moreover, functional requirements will be described in order to address the relevant logical concerns discussed in the concern section of 3.1. Therefore, this ensures that problems that arise for logical based concerns will be solved. Furthermore, proving beneficial to the success of this project, as indirectly the stakeholders that were associated with logical concerns will not be negatively impacted.
 
-#### Functional Requirement For: Concern 1
+#### Communication View
 
 In the diagram it shows how the single "hq" and "ngoClient" classes mutually feature the functions: "sendMessage" and "recieveMessage". These functions support the intra communication between the key sole user types being the "Trainees" and "Overseer" user types. These aforementioned functions are achieved by utilising the "Webserver" class, as a dependency. This class is a representation of the server, in which will have many purposes for our project. One of such purposes is facilitating the transferring of data in the form of "messages". However, these "messages" are not explicitly literal messages, rather our implementation of this functionality will be by utilising a messages table within a MySQL Database in addition to a Node.js server. To expand, this implementation will operate in response to a user, be it any user type, interacting with the "Send Message" software function. Whereby, the software will present the user with a UI that mimics the drafting of an real email. However, in reality this drafting will be arbitrary and superficial. Because, in reality the true logical implementation for this function will be firstly that of an HTML form, that is processed using JS. Next, the way in the which processing will occur will be by passing this form in the required Node.js upload format to our Node.js server. Subsequently, the server will have implementation such that the data consisted in the form of the message will be written into our MySQL "Communications" table. The messages table will be constructed with columns as follows: recipient, message body, supplementary media files. The next phase in the messaging process will now be achieved at the end of the initial message's recipient, who is stated in the communications table. At this end JS will constantly be updating it's messages inbox by polling/listening from the Database's Communications table. Moreover, when this end detects the storage of a new message that matches it's own identifier, it will add this message from the sender into a list of stored messages. Whereby, in the last phase in this messaging process, the local JS logic will present the message to the recipient user back in the form of a contextual email. 
 
