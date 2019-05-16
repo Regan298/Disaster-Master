@@ -265,6 +265,9 @@ If a system is not modular in design, the implementation of additional component
 
 ### 4.4 Physical
 
+The Physical viewpoint will take into account the software's physical aspects and issues that may occur during and after the deployment of the software. A deployment diagram demonstrates both the offline and online modes will run on the physical infrastructure. However, both offline and online versions run simultaneously during the program, meaning a internet tab can be opened on the host server's computer and on another computer given it connected to a network that can connect to the host. The deployment diagrams for both online and offline are separated to see how they're different when the program is running. 
+
+
 **Deployment Component Diagram**<br>
 ![](Resourses/components.png)
 
@@ -286,17 +289,15 @@ There will be multiple devices that host the executable environment nodes. There
 
 Concern 9 - Developing a program that simultaneously supports functionality for environments that are networked and non-networked, with regards to NGO client machine quantity. 
 
-If the program is unable to run both and offline and online functionality over a working LAN, the effects would cause the program to have only one option to run a simulation. This would affect RedR's training capabilities. 
-Due to the program not being able to run two online and offline functions then the project would have to develop two separate programs that run. One program would run on one computer that does not require a LAN, the second program would run a server
-over a LAN connecting to multiple computers. This would increase the size of the project significantly, requiring perhaps duplicate code between programs.  
+If the program is unable to run both and offline and online functionality over a working LAN, the effects would cause the program to have only one option to run a simulation. This would affect RedR's training capabilities.
+Due to the program not being able to run an online and  and offline function simultaneously then the project would have to develop two separate programs. One program would run on one computer that does not require a LAN, the second program would run a server
+over a LAN connecting to multiple computers. This would increase the size of the project significantly, requiring perhaps duplicate code between programs. 
 
 **Current Client Infrastructure View**
 
 Concern 12 - Our assumption of the clients networking infrastructure, in regards to supporting our LAN server to client model of software.
 
-The client running in the deployment location might not have a standard LAN where the program's JavaScript cannot run on or potentially no LAN at all. This would disable the online mode of the program and not allow for the server to run its operations.
-If there is no connection to the internet for the computers in the deployment location then creating one would be necessary to have online mode run, as establishing a network between computers is crucial. Going to the deployment location would have a great cost (flights to Australia), then asking RedR to hire a company to set up a network for them is the best solution. If there is a network but it cannot run the Javascript server then the project team would have to pick either two options. The first option 
-is to change the program so it runs on RedR's network which would require a detailed description of how their network functions and is structured. The second option is to get RedR Australia to get get a new standard network where the server can run on.
+The client running in the deployment location might not have a standard LAN where the program's JavaScript cannot run on or potentially ther is no LAN at all. This would disable the online mode of the program and not allow for the server to run its operations. If there is no connection to the internet for the computers in the deployment location then creating one would be necessary to have online mode run, as establishing a network between computers is crucial. Going to the deployment location would have a great cost (flights to Australia), then asking RedR to hire a company to set up a network for them is the best solution. If there is a network but it cannot run the Javascript server then the project team would have to pick either two options. The first option is to change the program so it runs on RedR's network which would require a detailed description of how their network functions and is structured. The second option is to get RedR Australia to get get a new standard network where the server can run on.
 
 **Texting View**
 
@@ -318,9 +319,14 @@ The software is to be transported to the deployment location in Australia. There
 
 **Post Project Updates View**
 
-Concern 16 & 17 - Inability to effectively provide updates to the Software post project closure, should the client be subjected to discovering unexpected program behaviour, including bugs, defects and oversights. (AND) Unforeseen Client network and environment updates that compromise the usability of our Software package:
+Concern 16 - Inability to effectively provide updates to the Software post project closure, should the client be subjected to discovering unexpected program behaviour, including bugs, defects and oversights:
 
-It is important for any software project to be kept updated. This ensures that that the simulation program will run when there a OS updates or JavaScript and HTML updates. When the project is finished and handed to RedR Australia the team that has worked on the project will not be able to update the project and ensure that it runs smoothly on future updates. This will be a risk that we have to take because we are unable to maintain the project for RedR Australia and ensure that it runs smoothly on future updates of the OS it will run on.
+After the final deployment is sent and the project is finished, there may still be bugs, defects, bugs and oversights. This will be an issue for users during the simulation and may hinder training sessions for NGOs, this could potentially lead to the program not being used at all or only in limited ways. To avoid as many issues with the behavior of the program after the final version there will be lots of testing during the development of the software. Testing such as logging, black and white box testing and usage by RedR can help resolve and correct the issues within the behavior of the simulation before the final version is sent.
+
+Concern 17 - Unforeseen Client network and environment updates that compromise the usability of our Software package.
+
+It is important for any software program to be kept updated. This ensures that the simulation program will run when there a OS, JavaScript or HTML updates. When the project is finished and handed to RedR Australia the team that has worked on the project will not be able to update the project and ensure that it runs smoothly on future updates as the team will have finished and left the project. This will be a risk that we have to take because we are unable to maintain the project for RedR Australia and ensure that it runs smoothly on future updates of the OS it will run on.
+
 
 ### 4.5 Scenarios
 ...
