@@ -121,7 +121,6 @@ This project has many concerns that are allocated to the following concern class
 
 7. Overseer's/NGO's my accidentally terminate the running process of a simulation, resulting in any simulation progress up to the point the simulation was terminated being pottentialy lost.
 8. An inability to correctly serve varying user types appropriately, such that the product solution struggles to distinguish users adequately.
-
 9. Developing a program that simultaneously supports functionality for environments that are networked and non-networked, with regards to NGO client machine quantity.
 10. As the Webserver is dependent on the database server for product wide functionality, a disconnect between these entities would be detrimental.
 11. A decoupling between the HQ machine and the Webserver could lead to the Overseer believing that their actions are being applied to the current simulation, when in reality they are not. 
@@ -225,12 +224,12 @@ In the diagram it shows how the single "hq" and "ngoClient" classes mutually fea
 
 ### 4.2 Development
 
-The two primary components are the front and back end. The front end deals with user interfaces and local logic. The back end deals with storage for all system elements, along with processing/running the simulation.
+The two primary components of the disaster simulation program are the front and back end. The front end consists of local logic (including user interfaces), and external logic for communicating with the back end. The back end consists of a server to distribute data between each client, and a database server for storing the data.
 
 **Component Diagram**
 ![](Resourses/Component_Diagram.PNG)
 
-**Dependency Diagram**
+**Dependency Diagram** <br>
 ![](Resourses/dependencyDiagram.png)
 
 **Front End:**
@@ -239,19 +238,27 @@ The front end of the system is split into two different client types, HQ and NGO
 
 Both clients depend on local logic in the form of local JavaScript libraries to display data to the user. These libraries are the event graph, inbox list, scenario editor graph and PDF viewer. The HQ client utilizes all of these libraries, whereas the NGO client only needs the inbox list and PDF viewer. As the requirement for these two components is identical for both clients, the two library's can be reused with no modification. 
 
-External logic is used within both client types to communicate with the back end system. Each client is not visible to any of the other clients,  so all data sent between the HQ client and NGO clients is propagated through and saved by the server. For this reason the external logic is dependant on the server within the back end system being available. Message events can be sent between clients via the server, however other data can be sent directly to or from the server. This includes logging events, scenario data and scenario controls (e.g. time). 
-
 External logic is used within both client types to communicate with the back end system. Each client is not visible to any of the other clients, so all data sent between the HQ client and NGO clients is propagated through and saved by the server. For this reason the external logic is dependant on the server within the back end system being available. Functions for sending message events between clients via the server, will be the same for both HQ and NGO client types. These functions can be reused, along with functions for transmitting scenario data directly between the server and a client, such as the time remaining in a simulation. Additional External logic will have to be extended for the HQ client, for transmitting scenario commands and data regarding scenario editing.
 
-**Back End:**
+**Back End:** 
 
-The back end of the system consists of a server implementation to run the overall simulation and a database to store all information within the simulation. 
+The back end of the system consists of a server to control the flow of data through the system, and a database to store the data.
 
 The server is responsible for distributing content between each client and the database. It interacts with the database via MySQL, saving and loading relevant data on behalf of the individual clients. Because of this, the server is dependant on the database to function correctly. The server utilizes an HTTP server and Socket.IO for real-time, bi-directional communication between itself and each client with express web-framework.
 
 The database stores all simulation data in a set of tables. User data, scheduled events, sent events, log data and the editor event library are all stored in tables in the database. As the database is passive, it is dependant on the server implementation to maintain and utilize its contents.
 
-**Concerns**
+
+**Concern 20:** Project failure as a result of the developers acting in non-productive ways, means that the reputation of VUW and more specifically ENGR301/302 is tarnished.
+
+
+**Concern 21:** If the overall system architecture does not support modularity, extensions to the core system could be infeasible. 
+
+If a system is not modular in design, the implementation of additional components would be very difficult. This would require heavy modifications or the complete replacement of other components, each with multiple complicated functions and many dependencies. Alternatively modular design (fig 2.1) separates each component into specific subcomponents. Each component is simpler, with a single specific task and only dependant on other components located in a layer below it (fig 2.2). This makes it much simpler to implement new components to the pre-existing system. Any individual component relevant to the system could be added within the appropriate super-component, and implemented with little modification due to the more simplified dependencies. An example of this within (fig 2.1) would be adding another table under the database component or adding a new visualisation component within local logic for either client type.
+
+
+**Concern 22:** Usability for client maintenance in terms of network implementation, feature implementation and for scenario loading / scenario review files.
+
 
 ### 4.3 Process
 ...
