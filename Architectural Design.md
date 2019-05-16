@@ -187,18 +187,10 @@ The entirety of the generated class diagram is predicated on the client's requir
 #### Live Interfering View - Concern 6
 Our software solution will enable the Overseer at "hqMaster" to have the capacity to impose real-time editing of the sequence, as well as the choice over usage of events in a current scenario. The following logical discussion serves as proof of this. Given that an Overseer has followed the process of loading a simulation file into an "hqMaster" instance, as ensured for by the JavaScript function titled "loadSimulation"; they are presented with an interactable timeline in which showcases the current sequence of scenario events. Interactable meaning the modification of events in terms of the supporting of event reshuffling with regards to time, the addition of new events and the removal of current events. Furthermore, these interactable aspects of the timeline will be backed up by the logical implementation within the function titled "updateCurrentScenario". As such, once a change of events has occurred in the interaction UI, this function is invoked to make any necessary relevant changes to the current scenario. The implications of this feature are such that there is potential for NGO users to be affected, if these users are acting out an event (in reality) that is currently occurring (eventStartTime < currentTime < eventEndTime), however, has since been modified. Therefore, "updateCurrentScenario" will immediately notify relevant "ngoClient" classes that a change in the current event has occurred as an imperative and this will be by utilising the "NodeJSWebserver" as an indirect medium from "hqMaster".
 
-
-#### Premature Simulation Termination View - Concern 7
-
 #### Identification Of Varying User Types View - Concern 8
 
-#### Webserver To Database Connection View - Concern 10
+#### Simultaneously support for Networked and Non Networked Environments View - Concern 9
 
-#### HQ To Webserver Connection View - Concern 11
-
-
-
-####  
 
 
 
