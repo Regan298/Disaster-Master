@@ -216,11 +216,32 @@ Each architectural view should include at least one architectural model. If arch
 
 As discussed the Logical Viewpoint pertains to expressing the functional requirements of the system. Moreover, functional requirements will be described in order to address the relevant logical concerns discussed in the concern section of 3.1. Therefore, this ensures that problems that arise for logical based concerns will be solved. Furthermore, proving beneficial to the success of this project, as indirectly the stakeholders that were associated with logical concerns will not be negatively impacted.
 
-#### Communication View
+The diagram implicitly represents the classes "ngoClient" and "hqMaster" as classes, when explicitly they are HTML web pages, therefore relying upon local JavaScript logic as an implementation for their functions.
+#### Communication View - Concern 1
 
-In the diagram it shows how the single "hq" and "ngoClient" classes mutually feature the functions: "sendMessage" and "recieveMessage". These functions support the intra communication between the key sole user types being the "Trainees" and "Overseer" user types. These aforementioned functions are achieved by utilising the "Webserver" class, as a dependency. This class is a representation of the server, in which will have many purposes for our project. One of such purposes is facilitating the transferring of data in the form of "messages". However, these "messages" are not explicitly literal messages, rather our implementation of this functionality will be by utilising a messages table within a MySQL Database in addition to a Node.js server. To expand, this implementation will operate in response to a user, be it any user type, interacting with the "Send Message" software function. Whereby, the software will present the user with a UI that mimics the drafting of an real email. However, in reality this drafting will be arbitrary and superficial. Because, in reality the true logical implementation for this function will be firstly that of an HTML form, that is processed using JS. Next, the way in the which processing will occur will be by passing this form in the required Node.js upload format to our Node.js server. Subsequently, the server will have implementation such that the data consisted in the form of the message will be written into our MySQL "Communications" table. The messages table will be constructed with columns as follows: recipient, message body, supplementary media files. The next phase in the messaging process will now be achieved at the end of the initial message's recipient, who is stated in the communications table. At this end JS will constantly be updating it's messages inbox by polling/listening from the Database's Communications table. Moreover, when this end detects the storage of a new message that matches it's own identifier, it will add this message from the sender into a list of stored messages. Whereby, in the last phase in this messaging process, the local JS logic will present the message to the recipient user back in the form of a contextual email. 
+In our software solution the entities represented by the terms "ngoClient" (0..*) and "hqMaster" (1) will support intra-communication. This means that an NGO User operating at a "ngoClient" machine can communicate with a specified sibling NGO user, in addition to the Overseer operating at the sole "hqMaster" instance and vice versa. In order to support this intra-communication functionality, the diagram depicts how the classes "ngoClient" and "hqMaster" mutually feature the JavaScript function "processMessages". Whereby, potentially up to 8 (7 maximum ngoClient instances plus 1 hqMaster instance) "processMessages"  functions will coexist concurrently. This function will be implemented such that it enables all user types to receive addressed messages for displaying in addition to sending addressed messages onto the "NodeJSWebserver" simultaneously. Once the "NodeJSWebserver" detects the receiving of a new message, it's as depicted, "handleCommunications" function, will firstly process the message by writing the properties of the message into the "communications" table in the "MySQL Database" for the purpose of message recording. Lastly, the implementation of the "handleCommunications" function will ensure, post writing the message to the "MySQL Database", that the message is transferred onto the message's recipient. Finally, upon the arrival of the message at it's intended recipient, a local Web Page JavaScript function will listen to the "NodeJSWebserver" for any inbound messages. And should this function detect a new message, it will display the message to the user in question accordingly.
 
-#### Functional Requirement For: Concern 2
+#### Recording View - Concern 2
+
+A functional requirement of our software solution is to meaningfully cache how NGO users acted in response to Simulation Events occurring. This caching then enables Overseer users (and or stakeholder 3), to review NGO actions for training purposes. The software solution will support this requirement, as dictated by the following overall class diagram description. Firstly, Simulation events (with NGO recipients) are triggered by the "hqMaster" instance locally, using the JavaScript function "runSimulation()". From there the event gets inserted into the "Events" table in our MySQL Database, as an event by utilising the "NodeJS Webserver" function titled "handleEventFireing", as the intermediate step. This function will then deliver scenario events to the relevant "ngoClient" instances, as these instances invoke the JavaScript function "getEvents" in which is paired in tandem with the "handleEventFireing" NodeJS Webserver" function, for inbound event receiving.   Once an event has been detected, at the end of an NGO client, a combination of HTML and JavaScript will present the event to the user in an effective manner. In the process of doing so, the "ngoClient" class invokes the function "storeEventResponse", as such NGO users will be supplied with functionality to potentially respond to how they acted in regards to submitting evidence of their reaction to the event. Moreover, if and when the "storeEventResponse" function is interacted with, it concludes with passing the reaction evidence back to the "NodeJS Webserver". Finally, the Webserver will store this reaction evidence in the corresponding NGO rection, column-specific event row, of the occurred events Database table. In summary, this enables NGO performance training reviews.
+
+#### Land Area Network View - Concern 4
+
+#### Live Interfering View - Concern 6
+
+#### Premature Simulation Termination View - Concern 7
+
+#### Identification Of Varying User Types View - Concern 8
+
+#### Webserver To Database Connection View - Concern 10
+
+#### HQ To Webserver Connection View - Concern 11
+
+
+
+####  
+
+
 
 ### 4.2 Development
 
