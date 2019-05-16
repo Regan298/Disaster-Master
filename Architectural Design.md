@@ -111,37 +111,37 @@ This project has many concerns that are allocated to the following concern class
 #### Concerns: The suitability of the architecture for achieving the system’s purposes 
 
 1. That communication between NGO to NGO, HQ to NGO and NGO to HQ fails, as a result of oversights in the web server implementation, poor design choice of server dependencies, a breakdown between the database server and the web server. 
-2. That the recording of actions that NGO's performed in response to scenario events is not captured in such a way that is meaningful to the client. 
-3. That the intricate and contextual details for the scope of RedR scenario types is to vast and complex that it results in the attempted processing of scenario files as well as generation of scenario review files becoming to convoluted and thus proving to difficult to be correctly interpreted by our scenario file processing implementation.
+2. That the recording of actions that NGO's perform in response to scenario events are not captured in such a way that is meaningful to the client. 
+3. The intricate and contextual details for the scope of RedR scenario types is to vast and complex. That it results in the attempted processing of scenario loading files, as well as the generation of scenario review files, becoming to convoluted and thus proving to difficult to be correctly interpreted by our scenario file processing implementation.
 4. That the server implementation is built such that it does not effectively support a standard typical LAN. 
-5. That the functions responsible for encryption and decryption of scenario files means that the hardware resources required for these functions to perform creates additional overhead on the webserver, for a requirement that is not crucial to the product as a whole.
+5. That the functions responsible for encryption and decryption of scenario files results in the hardware resources required for these functions to perform creating additional overhead on the webserver, for a requirement that is not crucial to the product as a whole.
 6. That the interfering of scenario events from HQ in real time proves impossible or extremely difficult to implement, due to this feature requiring a constant connection to the web server.   
 
 #### Concerns: The feasibility of constructing and deploying the system
 
-7. Overseer's/NGO's my accidentally terminate the running process of a simulation, resulting in any simulation progress up to the point the simulation was terminated being lost.
-8. An inability to correctly serve varying user types appropriately, such that the solution struggles to distinguish users adequately.
+7. Overseer's/NGO's my accidentally terminate the running process of a simulation, resulting in any simulation progress up to the point the simulation was terminated being pottentialy lost.
+8. An inability to correctly serve varying user types appropriately, such that the product solution struggles to distinguish users adequately.
 
-9. Developing a program that simultaneously supports functionality for networked and non-networked environments.
-10. As the Webserver is dependent on the database server for product wide functionality, as disconnect between these entities would be detrimental.
-11. A decoupling between HQ and the Webserver could lead to the Overseer believing that their actions are applied to the current simulation when in reality they are not. 
-12. The implementation of the clients networking infrastructure in regards to supporting our server to client model of software.
+9. Developing a program that simultaneously supports functionality for environments that are networked and non-networked, with regards to NGO client machine quantity.
+10. As the Webserver is dependent on the database server for product wide functionality, a disconnect between these entities would be detrimental.
+11. A decoupling between the HQ machine and the Webserver could lead to the Overseer believing that their actions are being applied to the current simulation, when in reality they are not. 
+12. Our assumption of the clients networking infrastructure in regards to supporting our server to client model of software.
 13. The clients request for the Software to support communication using real-world text messages to cellular devices.
 14. That the database implementation results in ensuring for an increase in centralisation and expandability.
-16. How the developers will be unable to install their overall software solution to this problem, as this responsibility is imposed upon the RedR client due to deployment location being remote (Australia).
-17. The transportation of the Software Solution to the deployment location.
+16. How the developers will be unable to install their overall software solution to this problem, as this responsibility is imposed upon the RedR client due to the deployment location being remote (Australia).
+17. The method of choice for the transportation of the Software Solution to the deployment location.
 
 #### Concerns: Potential Product Risks
 
-17. Inability to effectively provide updates to the Software post project closure should the client be subjected to discovering unexpected program behaviour, including bugs, defects and oversights.
+17. Inability to effectively provide updates to the Software post project closure, should the client be subjected to discovering unexpected program behaviour, including bugs, defects and oversights.
 18. Unforeseen Client network and environment updates that compromise the usability of our Software package.
 19. Poor usability regarding UI/UX design in our automated software-based solution results in the current manual solution to the problem proving more effective.
-20. Project failure as a result of the developers acting in non-productive ways means that the reputation of VUW and more specifically ENGR301/302 is tarnished.
+20. Project failure as a result of the developers acting in non-productive ways, means that the reputation of VUW and more specifically ENGR301/302 is tarnished.
 
 #### Concerns: Maintainability and Evolvability of the System
 
 21. If the overall system architecture does not support modularity, extensions to the core system could be infeasible.
-22. Usability for client maintenance in terms of: Network Implementation in code, Feature implementation in code and of scenario/scenario review files.
+22. Usability for client maintenance in terms of network implementation, feature implementation and for scenario loading / scenario review files.
 
 #### Association Table Between Stakeholders and Concerns
 
