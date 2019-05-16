@@ -125,51 +125,49 @@ This project has many concerns that are allocated to the following concern class
 9. Developing a program that simultaneously supports functionality for environments that are networked and non-networked, with regards to NGO client machine quantity.
 10. As the Webserver is dependent on the database server for product wide functionality, a disconnect between these entities would be detrimental.
 11. A decoupling between the HQ machine and the Webserver could lead to the Overseer believing that their actions are being applied to the current simulation, when in reality they are not. 
-12. Our assumption of the clients networking infrastructure in regards to supporting our server to client model of software.
+12. Our assumption of the clients networking infrastructure, in regards to supporting our LAN server to client model of software.
 13. The clients request for the Software to support communication using real-world text messages to cellular devices.
-14. That the database implementation results in ensuring for an increase in centralisation and expandability.
 16. How the developers will be unable to install their overall software solution to this problem, as this responsibility is imposed upon the RedR client due to the deployment location being remote (Australia).
 17. The method of choice for the transportation of the Software Solution to the deployment location.
 
 #### Concerns: Potential Product Risks
 
-17. Inability to effectively provide updates to the Software post project closure, should the client be subjected to discovering unexpected program behaviour, including bugs, defects and oversights.
-18. Unforeseen Client network and environment updates that compromise the usability of our Software package.
-19. Poor usability regarding UI/UX design in our automated software-based solution results in the current manual solution to the problem proving more effective.
-20. Project failure as a result of the developers acting in non-productive ways, means that the reputation of VUW and more specifically ENGR301/302 is tarnished.
+16. Inability to effectively provide updates to the Software post project closure, should the client be subjected to discovering unexpected program behaviour, including bugs, defects and oversights.
+17. Unforeseen Client network and environment updates that compromise the usability of our Software package.
+18. Poor usability regarding UI/UX design in our automated software-based solution, results in the current manual solution to the problem proving more effective.
+19. Project failure as a result of the developers acting in non-productive ways, means that the reputation of VUW and more specifically ENGR301/302 is tarnished.
 
 #### Concerns: Maintainability and Evolvability of the System
 
-21. If the overall system architecture does not support modularity, extensions to the core system could be infeasible.
-22. Usability for client maintenance in terms of network implementation, feature implementation and for scenario loading / scenario review files.
+20. If the overall system architecture does not support modularity, extensions to the core system could be infeasible.
+
+21. Usability for client maintenance in terms of network implementation, feature implementation and for scenario loading / scenario review files.
 
 #### Association Table Between Stakeholders and Concerns
 
 | **Concern** # | **Stakeholders** # |
 | ------------- | -------------- |
-| 1.            | 1, 2, 3, 5, 6  |
-| 2.            | 1, 2, 3, 5, 6  |
-| 3.            | 1, 2, 3, 5, 6  |
-| 4.            | 1, 2, 3, 5, 6  |
-| 5.            | 1, 2, 3, 5, 6  |
-| 6.            | 1, 2, 3, 5, 6  |
-| 7.            | 1, 2, 3, 5, 6  |
-| 8.            | 1, 2, 3, 5, 6  |
-| 9.            | 1, 5, 6        |
-| 10.           | 1, 5, 6        |
+| 1.            | 1, 2, 3, 5  |
+| 2.            | 1, 2, 3, 5  |
+| 3.            | 1, 5 |
+| 4.            | 1, 5 |
+| 5.            | 1, 5  |
+| 6.            | 1, 5  |
+| 7.            | 1, 2, 3, 5  |
+| 8.            | 1, 3, 5  |
+| 9.            | 1, 5        |
+| 10.           | 1, 2, 3, 5 |
 | 11.           | 1, 5           |
-| 12.           | 5              |
-| 13.           | 1, 2, 3, 5, 6  |
-| 14.           | 1, 5, 6        |
+| 12.           | 1, 5, 6       |
+| 13.           | 1, 5, 6 |
+| 14.           | 1, 5, 6     |
 | 15.           | 1, 5           |
 | 16.           | 1, 5, 6        |
 | 17.           | 1, 5, 6        |
-| 18.           | 1, 5, 6        |
-| 19.           | 1, 2, 3, 5, 6  |
-| 20.           | 1, 5           |
-| 21.           | 4, 5           |
-| 22.           | 1, 5, 6        |
-| 23.           | 1, 5, 6        |
+| 18.           | 1, 2, 3, 5, 6 |
+| 19.           | 1, 4, 5, 6 |
+| 20.           | 1, 5, 6        |
+| 21.           | 1, 5, 6    |
 
 
 ### 3.2 Architectural Viewpoints
