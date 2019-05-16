@@ -212,7 +212,7 @@ Each architectural view should include at least one architectural model. If arch
 
 ### 4.1 Logical
 
-Todo: CLASSDIAGRAM LINK HERE
+![](Resourses/Software_Class_Diagram.png)
 
 As discussed the Logical Viewpoint pertains to expressing the functional requirements of the system. Moreover, functional requirements will be described in order to address the relevant logical concerns discussed in the concern section of 3.1. Therefore, this ensures that problems that arise for logical based concerns will be solved. Furthermore, proving beneficial to the success of this project, as indirectly the stakeholders that were associated with logical concerns will not be negatively impacted.
 
