@@ -226,21 +226,21 @@ In the diagram it shows how the single "hq" and "ngoClient" classes mutually fea
 
 The two primary components of the disaster simulation program are the front and back end. The front end consists of local logic (including user interfaces), and external logic for communicating with the back end. The back end consists of a server to distribute data between each client, and a database server for storing the data.
 
-**Component Diagram**
+**Component Diagram (fig 2.1)**
 ![](Resourses/Component_Diagram.PNG)
 
-**Dependency Diagram** <br>
+**Dependency Diagram (fig 2.2)** <br>
 ![](Resourses/dependencyDiagram.png)
 
 **Front End:**
 
-The front end of the system is split into two different client types, HQ and NGO. The two clients are very similar, with the NGO client being a more cut down and simplified version of HQ due to less requirements. Because of this, many of the components developed for the HQ client can be reused for the NGO client.
+The front end of the system is split into two different client types, HQ and NGO. The two clients are very similar, with the NGO client being a more cut down and simplified version of HQ due to fewer requirements. Because of this, many of the components developed for the HQ client can be reused for the NGO client.
 
 Both clients depend on local logic in the form of local JavaScript libraries to display data to the user. These libraries are the event graph, inbox list, scenario editor graph and PDF viewer. The HQ client utilizes all of these libraries, whereas the NGO client only needs the inbox list and PDF viewer. As the requirement for these two components is identical for both clients, the two library's can be reused with no modification. 
 
-External logic is used within both client types to communicate with the back end system. Each client is not visible to any of the other clients, so all data sent between the HQ client and NGO clients is propagated through and saved by the server. For this reason the external logic is dependant on the server within the back end system being available. Functions for sending message events between clients via the server, will be the same for both HQ and NGO client types. These functions can be reused, along with functions for transmitting scenario data directly between the server and a client, such as the time remaining in a simulation. Additional External logic will have to be extended for the HQ client, for transmitting scenario commands and data regarding scenario editing.
+External logic is used within both client types to communicate with the back end system. Each client is not visible to any of the other clients, so all data sent between the HQ client and NGO clients is propagated through and saved by the server. For this reason, the external logic is dependant on the server within the back end system being available. Functions for sending message events between clients via the server will be the same for both HQ and NGO client types. These functions can be reused, along with functions for transmitting scenario data directly between the server and a client, such as the time remaining in a simulation. Additional External logic will have to be extended for the HQ client, for transmitting scenario commands and data regarding scenario editing.
 
-**Back End:** 
+**Back End:**
 
 The back end of the system consists of a server to control the flow of data through the system, and a database to store the data.
 
@@ -249,15 +249,17 @@ The server is responsible for distributing content between each client and the d
 The database stores all simulation data in a set of tables. User data, scheduled events, sent events, log data and the editor event library are all stored in tables in the database. As the database is passive, it is dependant on the server implementation to maintain and utilize its contents.
 
 
-**Concern 20:** Project failure as a result of the developers acting in non-productive ways, means that the reputation of VUW and more specifically ENGR301/302 is tarnished.
+**Concern 20: Project failure as a result of the developers acting in non-productive ways, means that the reputation of VUW and more specifically ENGR301/302 is tarnished.**
+
+Project failure is a risk, and would likely be caused by a lack of organisation and communication within the team. This would result in a dissatisfied client, and reflect poorly upon the course. This risk can be mitigated however, by the proper implementation of a project management strategy. Fully utilizing GitLab is the first step for this, in order to plan the project and allocate work between team members. Milestones within GitLab will be used to monitor components of the project over the long term, whereas issues will be used to allocate and track individual tasks within a milestone. Issues will be assigned based on the current task, and frequent commenting on these will keep all team members up to date with the progress of each issue.
+
+**Concern 21: If the overall system architecture does not support modularity, extensions to the core system could be infeasible.**
+
+If a system is not modular in design, the implementation of additional components would be very difficult. This would require heavy modifications or the complete replacement of other components, each with multiple complicated functions and many dependencies. Alternatively, modular design (fig 2.1) separates each component into specific subcomponents. Each component is simpler, with a single specific task and only dependant on other components located in a layer below it (fig 2.2). This makes it much simpler to implement new components to the pre-existing system. Any individual component relevant to the system could be added within the appropriate super-component and implemented with little modification due to the more simplified dependencies. An example of this within (fig 2.1) would be adding another table under the database component or adding a new visualisation component within local logic for either client type.
 
 
-**Concern 21:** If the overall system architecture does not support modularity, extensions to the core system could be infeasible. 
+**Concern 22: Usability for client maintenance in terms of network implementation, feature implementation and for scenario loading / scenario review files.**
 
-If a system is not modular in design, the implementation of additional components would be very difficult. This would require heavy modifications or the complete replacement of other components, each with multiple complicated functions and many dependencies. Alternatively modular design (fig 2.1) separates each component into specific subcomponents. Each component is simpler, with a single specific task and only dependant on other components located in a layer below it (fig 2.2). This makes it much simpler to implement new components to the pre-existing system. Any individual component relevant to the system could be added within the appropriate super-component, and implemented with little modification due to the more simplified dependencies. An example of this within (fig 2.1) would be adding another table under the database component or adding a new visualisation component within local logic for either client type.
-
-
-**Concern 22:** Usability for client maintenance in terms of network implementation, feature implementation and for scenario loading / scenario review files.
 
 
 ### 4.3 Process
