@@ -166,7 +166,13 @@ The scenario view-point combines the four architectural components and shows how
 
 ### 4.1 Logical
 
+#### Full Online Class Diagram
+
 ![](Resourses/Software_Class_Diagram.png)
+
+#### Partial Offline Class Diagram
+
+![](Resourses/Software_Class_Diagram_2.png)
 
 As discussed the Logical Viewpoint pertains to expressing the functional requirements of the system. Moreover, functional requirements will be described in order to address the relevant logical concerns discussed in the concern section of 3.1. Therefore, this ensures that problems that arise for logical based concerns will be solved. Furthermore, proving beneficial to the success of this project, as indirectly the stakeholders that were associated with logical concerns will not be negatively impacted.
 
