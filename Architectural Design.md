@@ -249,6 +249,9 @@ The server is responsible for distributing content between each client and the d
 The database stores all simulation data in a set of tables. User data, scheduled events, sent events, log data and the editor event library are all stored in tables in the database. As the database is passive, it is dependant on the server implementation to maintain and utilize its contents.
 
 
+
+
+
 **Concern 20: Project failure as a result of the developers acting in non-productive ways, means that the reputation of VUW and more specifically ENGR301/302 is tarnished.**
 
 Project failure is a risk, and would likely be caused by a lack of organisation and communication within the team. This would result in a dissatisfied client, and reflect poorly upon the course. This risk can be mitigated however, by the proper implementation of a project management strategy. Fully utilizing GitLab is the first step for this, in order to plan the project and allocate work between team members. Milestones within GitLab will be used to monitor components of the project over the long term, whereas issues will be used to allocate and track individual tasks within a milestone. Issues will be assigned based on the current task, and frequent commenting on these will keep all team members up to date with the progress of each issue.
@@ -260,6 +263,7 @@ If a system is not modular in design, the implementation of additional component
 
 **Concern 22: Usability for client maintenance in terms of network implementation, feature implementation and for scenario loading / scenario review files.**
 
+After completion of the project, the client may wish for a third party to implement new features or fix problems found in the originally deployed version. If the components within the project are assembled in such a way that this is difficult to do so, the client may be forced to abandon the system entirely for another option. To make the project more maintainable it will be constructed a way it is easier to understand. A modular structure is excellent for this, as each component is simpler and easier to remove or add to the system. Relevant documentation will also be supplied for each component in the system, to assist future developers in understanding how they work.
 
 
 ### 4.3 Process
