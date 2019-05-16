@@ -91,7 +91,7 @@ This project has many concerns that are allocated to the following concern class
 
 #### Concerns: The feasibility of constructing and deploying the system
 
-7. Overseer's/NGO's my accidentally terminate the running process of a simulation, resulting in any simulation progress up to the point the simulation was terminated being potentialy lost.
+7. Overseer's/NGO's may accidentally terminate the running process of a simulation, resulting in any simulation progress up to the point the simulation was terminated being potentialy lost.
 8. An inability to correctly serve varying user types appropriately, such that the product solution struggles to distinguish users adequately.
 9. Developing a program that simultaneously supports functionality for environments that are networked and non-networked, with regards to NGO client machine quantity.
 10. As the Webserver is dependent on the database server for product wide functionality, a disconnect between these entities would be detrimental.
