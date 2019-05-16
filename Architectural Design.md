@@ -284,7 +284,7 @@ There will be multiple devices that host the executable environment nodes. There
 
 **Multi-purpose Network View**
 
-Concern 9 - That Developing a program that simultaneously supports functionality for networked and non-networked environments is not possible:
+Concern 9 - Developing a program that simultaneously supports functionality for environments that are networked and non-networked, with regards to NGO client machine quantity. 
 If the program is unable to run both and offline and online functionality over a working LAN, the effects would cause the program to have only one option to run a simulation. This would affect RedR's training capabilities. 
 Due to the program not being able to run two online and offline functions then the project would have to develop two separate programs that run. One program would run on one computer that does not require a LAN, the second program would run a server
 over a LAN connecting to multiple computers. This would increase the size of the project significantly, requiring perhaps duplicate code between programs.  
@@ -306,7 +306,7 @@ In real world disasters, much organization is done with emails as well as text m
 Concern 14 - Issues about how the developers will be unable to install their overall software at the deployment location because this responsibility is imposed upon the RedR client due to deployment location being remote (Australia):
 The first place where the fully developed simulation will be deployed is in Australia. The client has specified that the location could be remote and in a region where it will be difficult to deploy. This location in Australia may not be connected to internet or have a network that is not connected to the outside internet, this could make emails and online repositories unable to deploy the software in the remote locations. Flash drives will most likely have to be used to transport the software to the final location. Flash drives have a risk of being lost, broken or stolen, and also have to take time to be delivered to the deployment location.
 
-Transportations of Software View
+**Transportations of Software View**
 
 Concern 15 - The transportation methods of the Software to the deployment location may cause difficulty or may not be possible, and why they are?:
 The software is to be transported to the deployment location in Australia. There are three options for transporting the data to Australia, the first being emailing which is the quickest option, however it would have to be sent through the team's ecs accounts to the client due to the contract keeping the project private. An issue could arise if the internet is down, but this is minor and can quickly fixed. The second option is to send the software to Australia in a flash drive delivered in the mail. Delivering flash drives in the mail has its own problems as it takes several days for new software to reach its destination to be tested or run for a simulation, the flash drive also has the chance to be lost, broken or stolen. The thid option is to have to have it on on a Gitlab online repository however, the size of the software may be too large to be placed in the repository. The project team has already had an issue where the size of the file is too large to be added into a repository but managed to deal with it by zipping up the software and reduced the size by 75%, allowing the software to be stored on the Gitlab. 
