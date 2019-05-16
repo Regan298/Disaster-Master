@@ -265,16 +265,16 @@ If a system is not modular in design, the implementation of additional component
 
 ### 4.4 Physical
 
-**Deployment Component Diagram**
+**Deployment Component Diagram**<br>
 ![](Resourses/components.png)
 
-**Deployment Offline Functionality Diagram**
+**Deployment Offline Functionality Diagram**<br>
 ![](Resourses/offline.png)
 
 Offline:
 One device node will be used in the offline version. This will be a computer that runs all the executable environment nodes. The server will run on the device, it will connect all the other execuatble envrionment nodes such as the HQ Interface, the Database and the NGO Interface. All functionality will be linked through the server's connection within the device hosting the server.
 
-**Deployment Online Functionality Diagram**
+**Deployment Online Functionality Diagram**<br>
 ![](Resourses/online.png)
 
 Online:
@@ -291,29 +291,29 @@ over a LAN connecting to multiple computers. This would increase the size of the
 
 **Current Client Infrastructure View**
 
-Concern 10 - The implementation of the clients networking infrastructure in regards to supporting our server to client model of software cannot operate due to a lack of network infrastructure, such as a LAN:
+Concern 12 - Our assumption of the clients networking infrastructure, in regards to supporting our LAN server to client model of software.
 The client running in the deployment location might not have a standard LAN where the program's JavaScript cannot run on or potentially no LAN at all. This would disable the online mode of the program and not allow for the server to run its operations.
 If there is no connection to the internet for the computers in the deployment location then creating one would be necessary to have online mode run, as establishing a network between computers is crucial. Going to the deployment location would have a great cost (flights to Australia), then asking RedR to hire a company to set up a network for them is the best solution. If there is a network but it cannot run the Javascript server then the project team would have to pick either two options. The first option 
 is to change the program so it runs on RedR's network which would require a detailed description of how their network functions and is structured. The second option is to get RedR Australia to get get a new standard network where the server can run on.
 
 **Texting View**
 
-Concern 11 - The clients request for the Software to support communication using real-world text messages to cellular devices is not possible or very difficult:
+Concern 13 - The clients request for the Software to support communication using real-world text messages to cellular devices.
 In real world disasters, much organization is done with emails as well as text messages. Texts have the benefit of being relatively cheap compared to mobile data usage for emails. Setting up texts in the simulation can be done using Javascript and the Node.js functions. However, this requires the project team to buy specific phone numbers and sim cards online, and with no budget in the project this means we won't be able to implement it. There will be more concerns if it is implemented as well because if the software for the simulation is in different countries than more and more phone numbers will have to be bought. Until budget changes happen, there will cannot be a implementation of texts within the simulation. To implement the texting for different countries would require the project team to design each server that runs in a different country and perhaps if there are multiple simulations in each country, more sets of phones are needed. This makes implementing texts and phones into the program very costly and would require constant micromanaging such as keeping track of sim cards numbers and the cost to run the sim cards after deployment which the team cannot do once the project is over.
 
 **Remote Deployment View**
 
-Concern 14 - Issues about how the developers will be unable to install their overall software at the deployment location because this responsibility is imposed upon the RedR client due to deployment location being remote (Australia):
+Concern 14 - How the developers will be unable to install their overall software solution to this problem, as this responsibility is imposed upon the RedR client due to the deployment location being remote (Australia).
 The first place where the fully developed simulation will be deployed is in Australia. The client has specified that the location could be remote and in a region where it will be difficult to deploy. This location in Australia may not be connected to internet or have a network that is not connected to the outside internet, this could make emails and online repositories unable to deploy the software in the remote locations. Flash drives will most likely have to be used to transport the software to the final location. Flash drives have a risk of being lost, broken or stolen, and also have to take time to be delivered to the deployment location.
 
 **Transportations of Software View**
 
-Concern 15 - The transportation methods of the Software to the deployment location may cause difficulty or may not be possible, and why they are?:
+Concern 15 - The method of choice for the transportation of the Software Solution to the deployment location.
 The software is to be transported to the deployment location in Australia. There are three options for transporting the data to Australia, the first being emailing which is the quickest option, however it would have to be sent through the team's ecs accounts to the client due to the contract keeping the project private. An issue could arise if the internet is down, but this is minor and can quickly fixed. The second option is to send the software to Australia in a flash drive delivered in the mail. Delivering flash drives in the mail has its own problems as it takes several days for new software to reach its destination to be tested or run for a simulation, the flash drive also has the chance to be lost, broken or stolen. The thid option is to have to have it on on a Gitlab online repository however, the size of the software may be too large to be placed in the repository. The project team has already had an issue where the size of the file is too large to be added into a repository but managed to deal with it by zipping up the software and reduced the size by 75%, allowing the software to be stored on the Gitlab. 
 
 **Post Project Updates View**
 
-Concern 17 - Inability to provide updates to the Software post project closure:
+Concern 16 & 17 - Inability to effectively provide updates to the Software post project closure, should the client be subjected to discovering unexpected program behaviour, including bugs, defects and oversights. (AND) Unforeseen Client network and environment updates that compromise the usability of our Software package.
 It is important for any software project to be kept updated. This ensures that that the simulation program will run when there a OS updates or JavaScript and HTML updates. When the project is finished and handed to RedR Australia the team that has worked on the project will not be able to update the project and ensure that it runs smoothly on future updates. This will be a risk that we have to take because we are unable to maintain the project for RedR Australia and ensure that it runs smoothly on future updates of the OS it will run on.
 
 ### 4.5 Scenarios
