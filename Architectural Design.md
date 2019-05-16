@@ -140,8 +140,8 @@ This project has many concerns that are allocated to the following concern class
 
 #### Concerns: Maintainability and Evolvability of the System
 
-22. If the overall system architecture does not support modularity, extensions to the core system could be infeasible.
-23. Usability for client maintenance in terms of: Network Implementation in code, Feature implementation in code and of scenario/scenario review files.
+21. If the overall system architecture does not support modularity, extensions to the core system could be infeasible.
+22. Usability for client maintenance in terms of: Network Implementation in code, Feature implementation in code and of scenario/scenario review files.
 
 #### Association Table Between Stakeholders and Concerns
 
