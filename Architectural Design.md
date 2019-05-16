@@ -133,17 +133,15 @@ This project has many concerns that are allocated to the following concern class
 
 #### Concerns: Potential Product Risks
 
-17. Unexpected program behaviour that results from software errors including bugs, defects and oversights.
-18. Inability to provide updates to the Software post project closure.
-19. Unforeseen Client network and environment updates that compromise the usability of our Software package.
-20. Poor usability regarding UI/UX design in our automated software-based solution results in the current manual solution to the problem proving more effective.
-21. The client discovers an alternative solution to their problem in which causes them to lose motivation and faith in the product we are developing.
-22. Project failure as a result of the developers acting in non-productive ways means that the reputation of VUW and more specifically ENGR301/302 is tarnished.
+17. Inability to effectively provide updates to the Software post project closure should the client be subjected to discovering unexpected program behaviour, including bugs, defects and oversights.
+18. Unforeseen Client network and environment updates that compromise the usability of our Software package.
+19. Poor usability regarding UI/UX design in our automated software-based solution results in the current manual solution to the problem proving more effective.
+20. Project failure as a result of the developers acting in non-productive ways means that the reputation of VUW and more specifically ENGR301/302 is tarnished.
 
 #### Concerns: Maintainability and Evolvability of the System
 
-23. If the overall system architecture does not support modularity, extensions to the core system could be infeasible.
-24. Usability for client maintenance in terms of: Network Implementation in code, Feature implementation in code and of scenario/scenario review files.
+22. If the overall system architecture does not support modularity, extensions to the core system could be infeasible.
+23. Usability for client maintenance in terms of: Network Implementation in code, Feature implementation in code and of scenario/scenario review files.
 
 #### Association Table Between Stakeholders and Concerns
 
