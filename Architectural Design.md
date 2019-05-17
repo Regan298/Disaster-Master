@@ -70,7 +70,7 @@ This project has many concerns that are allocated to the following concern class
 
 1. That communication between NGO to NGO, HQ to NGO and NGO to HQ fails, as a result of oversights in the web server implementation, poor design choice of server dependencies, a breakdown between the database server and the web server. 
 2. That the recording of actions that NGO's perform in response to scenario events are not captured in such a way that is meaningful to the client. 
-3. The intricate and contextual details for the scope of RedR scenario types is to vast and complex. That it results in the attempted processing of scenario loading files, as well as the generation of scenario review files, becoming to convoluted and thus proving to difficult to be correctly interpreted by our scenario file processing implementation.
+3. That the scope supplied by the client is too vast, and requires too much complex functionality out of the system. This could make implementation difficult and the end product over-complicated and hard to use.
 4. That the server implementation is built such that it does not effectively support a standard typical LAN. 
 5. That the functions responsible for encryption and decryption of scenario files results in the hardware resources required for these functions to perform creating additional overhead on the webserver, for a requirement that is not crucial to the product as a whole.
 6. That the interfering of scenario events from HQ in real time proves impossible or extremely difficult to implement, due to this feature requiring the HQ to have a constant connection to the web server.   
@@ -226,6 +226,10 @@ The database stores all simulation data in a set of tables. User data, scheduled
 
 <br><br>
 
+
+**Concern 3: That the scope supplied by the client is too vast, and requires too much complex functionality out of the system. This could make implementation difficult and the end product over-complicated and hard to use.**
+
+A large scope and complicated requirements can result in a buggy implementation and a heavy product which is difficult to use. The risk of this occurring can be mitigated however, by breaking down the projects components with the client. Breaking down the project into a modular structure (fig 3.2), makes each component more defined and its purpose clearer. This helps to convey to the client which components are necessary, and contribute toward completing the MVP. Extensions on the MVP can then be made accordingly, after feedback is given by the client on this more basic version of the system.
 
 **Concern 19: Project failure as a result of the developers acting in non-productive ways, means that the reputation of VUW and more specifically ENGR301/302 is tarnished.**
 
