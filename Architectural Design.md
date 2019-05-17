@@ -129,21 +129,30 @@ This project has many concerns that are allocated to the following concern class
 
 ### 3.2 Architectural Viewpoints
 
-
 **Logical** 
-The logical view-point expresses the functional system requirements in a component based object model.
+The Logical view-point expresses the functional system requirements in a component based object model.
+
+The Logical view-point frames concerns: 1, 2, 4, 6, 8, 9  
 
 **Development** 
 The development view-point expresses the structure and organization of the software source code, focusing on making development easier for a number of developers to manage and extend code.
 
+The Development view-point frames concerns: 3, 19, 20, 21
+
 **Process** 
 The process view-point describes the performance and availability of the system. It addresses the system’s integrity, scalability and fault-tolerance.
+
+The Process view-point frames concerns: 1, 2, 3, 5, 6, 7, 8, 10, 11
 
 **Physical** 
 The physical connections between components from the system engineer's point of view.
 
+The Physical view-point frames concerns: 9, 12, 13, 14, 15, 16, 17
+
 **Scenarios**
 The scenario view-point combines the four architectural components and shows how they interact utilizing a series of use-cases.
+
+The Scenarios view-point frames concern: 18
 
 ### 4. Architectural Views
 
