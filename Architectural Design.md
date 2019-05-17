@@ -11,18 +11,15 @@
 
 ## 1. Introduction
 
-One page overall introduction including sections 1.1 and 1.2 (ISO/IEC/IEEE 42010:2011(E) clause 5.2)<br>
 The project we have been assigned to is Project 16. Project 16 is software based and the organisation we are working for is RedR Australia. Our client organisation RedR Australia is a "leading international humanitarian response agency that selects, trains and deploys technical specialists." (As RedR states). The goal of the project is to produce a piece of computer software that will be able to assist in the disaster simulations that RedR Australia carries out. The purpose of these simulations is to train new staff to work together and to maintain a level head when under the stress of attempting to maintain order amongst natural disaster victims. During a given simulation, there are several teams of people that are assigned different roles. There is also an overseer of the simulation that watches over the teams as they solve problems together. Currently, the overseer communicates with the teams using both phones and emails. Given that there are multiple teams participating in the simulation (potentially up to 7 groups), the overseer would quickly gain a large workload. RedR would like to automate the process of running as well as tracking the simulation. Because the tasks involved in managing the simulation (communication, event initialisation, and post-simulation review) are rather tedious and normally performed by people, they are prone to errors. This then presents us with the opportunity to develop a program that would assist the human operator. This would reduce their workload considerably and allow them to focus their attention on other tasks. It would also allow for a greater sense of realism. Upon the initialisation of a simulation, teams open and read the emails they receive from the overseer and the software would play sounds that emulate the atmosphere of a real disaster zone. Having the program provide this extra stimuli would help the participants feel more immersed in the scenario. This in turn wpuld make them act as if they really were in a real world disaster recovery situation. 
 
 ### Client
 
-Identify the client and their contact details.
 Client: Regan Potangaroa
 Email: regan.potangaroa@vuw.ac.nz
 
 ### 1.1 Purpose
 
-One sentence describing the purpose of the system.<br>
 The purpose of our software is to reduce the total workload of the overseer in the RedR Disaster Simulation and to increase immersion for its participants by automating manual tasks involved in the simulation.
 
 ### 1.2 Scope
@@ -138,9 +135,7 @@ This project has many concerns that are allocated to the following concern class
 
 
 ### 3.2 Architectural Viewpoints
-(1 page, 42010 5.4) 
 
-Identify the architectural viewpoints you will use to present your system's architecture. Write one sentence to outline each viewpoint. Show which viewpoint frames which architectural concern.
 
 **Logical** 
 The logical view-point expresses the functional system requirements in a component based object model.
@@ -355,18 +350,8 @@ There are a few concerns that arise when attempting to see the entire project th
 The user experience is the main concern of the scenario view. The experience the user has while using the software will result from all the the different components of the system coming together to function as one. The entire aim of the program is to automate the client's tasks during RedR Disaster Simulations in as elegant a manner as possible. The client also has to be able to understand what is happening at every step along the way. If the client is not able to follow along with what the computer is doing, they will become lost and quickly confused should the program do something that they weren't expecting. <br>
 ## 5. Development Schedule
 
-_For each subsection, make clear what (if anything) has changed from the requirements document._ If unchanged, these sections should be copied over from the requirements document, not simply cross-referenced.
-
-Schedules must be justified and supported by evidence; they must be either direct client requirements or direct consequences of client requirements. If the requirements document did not contain justification or supporting evidence then both must be provided here.
 
 ### 5.1 Schedule
-
-Identify dates for key project deliverables:
-
-1. prototype(s).
-1. first deployment to the client.
-1. further releases required or specified by the client.
-
 
 The team discussed scheduling in regards to project deliverables with our client. The client did not specify any dates for releases other than the final deadline of the 11th of October, 2019. Given this, the team will endeavour to develop a minimum viable product as soon as possible so that we may provide it to the client and allow them to provide us with feedback so that we may further develop, and continue to deploy it, before October 11th. 
 
@@ -375,15 +360,13 @@ The team discussed scheduling in regards to project deliverables with our client
 
 #### 5.2.1 Budget
 
-Present a budget for the project (as a table), showing the amount of expenditure the project requires and the date(s) on which it will be incurred. Substantiate each budget item by reference to fulfilment of project goals (one paragraph per item).
 Our project does not require a budget as it is purely software built using free tools.
 Our client does not have a budget in mind from RedR themselves. We have decided to face that if and when it comes up, due to the likelihood of us needing a budget.
 
 
 #### 5.2.2 Procurement
 
-Present a table of goods or services that will be required to deliver project goals and specify how they are to be procured (e.g. from the School or from an external organisation). These may be software applications, libraries, training or other infrastructure, including open source software. Justify and substantiate procurement with reference to fulfilment of project goals, one paragraph per item.
-(1 page).
+
 
 ### 5.3 Risks 
 
@@ -418,8 +401,6 @@ If the project will involve any work outside the ECS laboratories, i.e. off-camp
 
 
 ### 5.4 Health and Safety
-
-Document here project requirements for Health and Safety. All teams must state in this section:
 
 1. How teams will manage computer-related risks such as Occupational Over-Use, Cable management, etc.  
 
