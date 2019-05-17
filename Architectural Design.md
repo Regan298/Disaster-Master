@@ -457,5 +457,6 @@ NGO: Non Government Organisation or Organisation, for short, is the name given t
 
 A one page statement of contributions that lists each member of the group and what they contributed to this document.
 
-Riley: Completed 4.4 the Physical Viewpoint of the architecture document. This was comprised of the Deployment Diagrams and concerns of the physical side of the project.
-Nathan: Completed section 4.5 (Scenario View), section 1 (Introduction) and section 1.2 (scope).
+* Riley: Completed 4.4 the Physical Viewpoint of the architecture document. This was comprised of the Deployment Diagrams and concerns of the physical side of the project.
+* Nathan: Completed section 4.5 (Scenario View), section 1 (Introduction) and section 1.2 (scope).
+* Daniel: Completed 4.2 (Development view) and 3.2(Architectural Viewpoints).
