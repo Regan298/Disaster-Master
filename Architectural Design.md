@@ -33,6 +33,9 @@ The final program will be capable of the following:
 
 ## 2. References
 
+https://socket.io/
+https://medium.com/deqode/load-testing-a-nodejs-socket-io-application-with-artillery-916275003e0f
+https://www.sparxsystems.com.au/downloads/whitepapers/FCGSS_US_WP_Applying_4+1_w_UML2.pdf
 
 ## 3. Architecture
 
@@ -245,7 +248,34 @@ After completion of the project, the client may wish for a third party to implem
 
 
 ### 4.3 Process
-...
+
+The process view is split into 4 main processes, these are:
+1. Messaging between HQ and NGOs
+2. Loading scenario with automated event timeline
+3. Messaging between NGOs
+4. Accessing NGO view
+
+Below there is a sequence diagram for each process. Sequence diagrams were chosen as they show the communication and relationship between the different components of the system, while also displaying a timeline of events to visualise the logic.
+
+![](Resourses/4.3Sequence_diagrams.jpg)
+
+#### Non-functional considerations:
+
+##### Performance (Concerns 1, 6):
+
+For communication between the server and the database we will be using socket.io for Node.js. It will be set up as a constant connection between the server and clients (HQ and NGOS), allowing clients to listen to updates from the server. This will run concurrently as a seperate thread to ensure consistent performance for messaging. It is also important for communication events to not use much bandwidth to allow for use in locations where only a low bandwidth network is available. On socket.io's official website[1] they boast as "the fastest and most reliable real-time engine", further research[2] tests in the worst case scenario using a single core CPU server with 1GB of memory on a 4Mbps network. Their tests show socket.io "easily" handling 1600 connections in these conditions with a peak of 7.9% CPU usage and ~475MB of memory utilisation. The maximum broadcast time was 2s, averaging at 300ms. These results show that socket.io will be easily be able to handle the worst environment our program will be run in.
+
+##### Error Recovery (Concerns 7, 10, 11):
+
+It is important that if any of the components were disconnected during a simulation that they could be seemlessly connected back into the system and the simulation could carry on. The detection of components disconnecting is a crucial part of error recovery, if crucial components disconnect then the simulation needs to pause and not crash. The component can then be reconnected mid-simulation and then unpaused. Any actions from the HQ user should receive a status response within a 4s (based on performance of socket.io discussed above) time period, if not then the simulation should be paused and the HQ user must be notified that the server may have failed. With all the data being stored in the database, if the MySQL server were to be disconnected suddenly, it is able to be started again while the rest of the system is running and continue the simulation with data integrity intact. If the Node.js server was to suddenly be disconnected then the current simulation time would be lost, the best way to recover from this is by having the ability to start a simulation scenario from a given time. The user views can be managed with cookies, this allows the server to store data on the current state of the UI and recover in the event of a restart.
+
+##### User Identification (Concern 8):
+
+All NGO users navigate to a NGO landing webpage, from there they enter an NGO key which is then sent to the server and matches with the appropriate NGO view that they are redirected to. The concern along with this is for updating these NGO views with socket.io. socket.io can user collections of connections to allow for updates to happen for groups of users. This will be achieved by the device responding with its IP address after the key is verified, this address will then be added to the NGO collection for socket.io.
+
+##### Security (Concern 5):
+
+The encryption/decryption AES 256-bit method used by the Node.js module cryptr is the current industry standard for data security. We can be confident that this both performs well and secures our client's data.
 
 ### 4.4 Physical
 
@@ -352,13 +382,19 @@ There are a few concerns that arise when attempting to see the entire project th
 (Concern 21) After deployment, the client might want to modify the program and potentially add extra things to it. <br>
 
 The user experience is the main concern of the scenario view. The experience the user has while using the software will result from all the the different components of the system coming together to function as one. The entire aim of the program is to automate the client's tasks during RedR Disaster Simulations in as elegant a manner as possible. The client also has to be able to understand what is happening at every step along the way. If the client is not able to follow along with what the computer is doing, they will become lost and quickly confused should the program do something that they weren't expecting. <br>
+
 ## 5. Development Schedule
 
+Sections 5.1, 5.2.2, 5.3, and 5.4 part 3 have been edited from the originals as part of the requirements document.
 
 ### 5.1 Schedule
 
-The team discussed scheduling in regards to project deliverables with our client. The client did not specify any dates for releases other than the final deadline of the 11th of October, 2019. Given this, the team will endeavour to develop a minimum viable product as soon as possible so that we may provide it to the client and allow them to provide us with feedback so that we may further develop, and continue to deploy it, before October 11th. 
+Our client Regan has no specific deliverable dates except from a final release at the end of the course on 11/10/2019. Below is the schedule that we have come up with to guide our project's development.
 
+1. Minimum viable product is to be completed by the end of June 7th.
+2. Completed User Interface is to be completed by July 16th.
+3. Functional testing product is to be completed by August 16th.
+4. Finished product to be completed by October 1st.
 
 ### 5.2 Budget and Procurement
 
@@ -367,20 +403,29 @@ The team discussed scheduling in regards to project deliverables with our client
 Our project does not require a budget as it is purely software built using free tools.
 Our client does not have a budget in mind from RedR themselves. We have decided to face that if and when it comes up, due to the likelihood of us needing a budget.
 
-
 #### 5.2.2 Procurement
 
+Present a table of goods or services that will be required to deliver project goals and specify how they are to be procured (e.g. from the School or from an external organisation). These may be software applications, libraries, training or other infrastructure, including open source software. Justify and substantiate procurement with reference to fulfilment of project goals, one paragraph per item.
+(1 page).
 
+| Good/Service      | Name          | How it will be procured   | Use           |
+| ----------------- | ------------- | ------------------------- | ------------- |
+| Open source software | MySQL | Downloaded from https://dev.mysql.com/downloads/windows/installer/8.0.html | A tool used to manage our database |
+| Open source JavaScript Runtime | Node.js | Downloaded from https://nodejs.org/en/download/ | Runs our core server on the local machine, this gives the capability to seamlessly open it up to the local network or just on a single local machine |
+| Open source Node.js module repository | npm | Comes packaged with Node.js | Allows us to easily install modules as we need them in development |
+| Open source GUI design tool | Pencil | Downloaded from https://pencil.evolus.vn/ | Used to design our GUI wireframes |
+| Open source JavaScript and HTML visualisation module library | vis.js | located at http://visjs.org/ | Provides a timeline template that fits our clients specifications |
+| Open source JavaScript PDF viewer | PDF.js | Downloaded from the public GibHub repository | Gives our program the ability to display PDFs, this fits with our client's current method of having simulation emails in a PDF format |
+| Free Offline Chrome Extension | Gliffy | Chrome extension store | Used to make diagrams for our architecture document |
+| Javascript library | JQuery | Downloaded from https://jquery.com/download/ | Extended functionality of Javascript |
 
 ### 5.3 Risks 
 
 Identify the ten most important project risks: their type, likelihood, impact, and mitigation strategies (3 pages).
-
-
 | Risk                                                         | Likelihood | Severity     |
 | ------------------------------------------------------------ | ---------- | ------------ |
-| A large number of project members are sick at critical times during the project, hindering progress resulting in us falling short of delivery goals. | Moderate   | Serious      |
-| Unforeseen major changes to requirements prompting a redesign of the system. | Moderate   | Tolerable    |
+| A large number of project members are sick at critical times during the project, hindering progress resulting in us falling short of delivery goals. | Moderate   | Tolerable      |
+| Unforeseen major changes to requirements prompting a redesign of the system. | Moderate   | Serious    |
 | There is a natural disaster and Regan gets called out into the field to help, making it impossible to communicate with him. | Low        | Serious      |
 | Expansion in number of users, or amount of data stored, requires paid services, creating unexpected budget requirements. | Moderate   | Tolerable    |
 | The project requires more time to develop than expected, causing us to fall short of delivery goals. | High       | Serious      |
@@ -396,14 +441,12 @@ Identify the ten most important project risks: their type, likelihood, impact, a
 | Unforeseen major changes to requirements prompting a redesign of the system. | Keep up regular communication with the client about requirements, questioning what they need, especially early on, to lower the likelihood of an unforeseen change. |
 | There is a natural disaster and Regan gets called out into the field to help, making it impossible to communicate with him. | Retrieve concrete requirements from Regan early on so that we could carry on the project with little to no input from him. |
 | Expansion in number of users, or amount of data stored, requires paid services, creating unexpected budget requirements. | Research such possibilities and make the client aware. Ask for a potential budget from the client. |
-| The project requires more time to develop than expected, causing us to fall short of delivery goals. | Investigate adopting complete components from elsewhere, make as much use from available resources as possible. |
-| Developed program has too big a learning curve, making it too difficult for users to use and forcing the client to discard it. | Assign time near the end date of the project specifically for user interface design and test with people outside the team. |
-| The team focuses on non-required features and functionality (such as visuals), restricting us from finishing on-time. | Assign time to specific parts of development with correct priorities based on requirements. This will keep us on track. |
+| The project requires more time to develop than expected, causing us to fall short of delivery goals. | Set a realistic requirements scope, this is our minimum viable product. Focus on completing this before adding other functionality. Use GitLab project management tools to self-manage through issues to ensure the team keeps to the tasks we explicitly set from our schedule. |
+| Developed program has too big a learning curve, making it too difficult for users to use and forcing the client to discard it. | Get frequent feedback on our GUI design from Regan and other RedR disaster simulation hosts. Produce a functional version as early as possible for them to use and give feedback on. |
+| The team focuses on non-required features and functionality (such as visuals), restricting us from finishing on-time. | Assign team members for specific parts of the project. Keep updating our gitlab issues and boards so that we can manage ourselves and not lose focus on the minimum viable product. |
 | The developed software ends up requiring hardware investment for testing, making it too costly for the client. | Discuss with the client and the school about their possible testing facilities. |
 | Employee turnover at RedR resulting in the termination of our project. | This event is completely out of our control and there can be nothing done about it if it happens |
 | A disaster at VUW restricting access to our files.           | Incorporate a version control system such as GitLab that stores files offsite. This can be accessed remotely. |
-
-If the project will involve any work outside the ECS laboratories, i.e. off-campus activities, these should be included in the following section.
 
 
 ### 5.4 Health and Safety
@@ -413,21 +456,18 @@ If the project will involve any work outside the ECS laboratories, i.e. off-camp
 Occupational Over-Use can be avoided by not working for lengthy periods of time without a break. The team has agreed to 2 10 minute breaks for each 4 hour lab session to break up the time. During this time, team members can go for a walk, get a drink, eat, or anything to aid their general wellbeing. This is stated in our team contract.
 To avoid creating tripping hazards with poor cable management, the team will endeavour to keep cables off the floor where possible. The ECS computer labs are a good example of this. If not possible, the team should be made aware of any cabling around the teams working space by the owner of the cable. Team members should also scan the area around them when arriving at the space to work.
 
-2. Whether project work requires work or testing at any external (off-campus) workplaces/sites. If so, state the team's plans for receiving a Health and Safety induction for the external workplaces/sites. If the team has already received such an induction, state the date it was received. 
+2. Off campus project work.
 
 The teams health and safety induction took place on 21/03/2019 and was presented by the school's Safety Officer Roger Cliffe.
-Our project does not require us to go off university campus. Our lab work is done on VUW Kelburn campus, and our meeting with Regan take place on the VUW Te Aro campus.
+Our project does not require us to go off university campus. Our lab work is done on VUW Kelburn campus, and our meetings with Regan take place on the VUW Te Aro campus.
 
-3. Whether project work requires the team test with human or animal subjects? If so, explain why there is no option but for the team to perform this testing, and state the team's plans for receiving Ethics Approval _prior_ to testing.
+3. Testing project work with human subjects.
 
-Our project will be tested with human subjects. This is by requirement of our client, Regan. Once the team has developed a functional version, it will be used in the real world running disaster simulations. These tests will be fully conducted by Regan making it his ethical requirement to ensure the safety of the people using the software.
-
-Also, the document in this section any additional discussions with the School Safety Officer regarding Health and Safety Risks. Give any further information on relevant health and safety regulations, risks, and mitigations, etc.
-
+Our project will be tested with human subjects. This is by requirement of our client, Regan. Once the team has developed a functional version, it will be used in the real world running disaster simulations. These tests will be fully conducted by Regan. As the project is automating disaster simulations that are already carried out manually by Regan, our program does not add any safety concerns. The programs process follows the process Regan's manual simulations already follow.
+This is the only options for testing as these disaster simulation events are the only places where our program will be used.
 
 #### 5.4.1 Safety Plans
 
-Safety Plans may be required for some projects, depending on project requirements.
 Project requirements do not involve risk of death, serious harm, harm or injury.
 
 ## 6. Appendices
