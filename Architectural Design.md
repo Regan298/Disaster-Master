@@ -33,9 +33,7 @@ The final program will be capable of the following:
 
 ## 2. References
 
-https://socket.io/
-https://medium.com/deqode/load-testing-a-nodejs-socket-io-application-with-artillery-916275003e0f
-https://www.sparxsystems.com.au/downloads/whitepapers/FCGSS_US_WP_Applying_4+1_w_UML2.pdf
+[1] Tanuj Soni, "Performance test nodejs socket.io with Artillery," *medium.com*, April 11th 2017. [Online]. Available: https://medium.com/deqode/load-testing-a-nodejs-socket-io-application-with-artillery-916275003e0f. [Accessed May 17, 2019].
 
 ## 3. Architecture
 
@@ -263,7 +261,7 @@ Below there is a sequence diagram for each process. Sequence diagrams were chose
 
 ##### Performance (Concerns 1, 6):
 
-For communication between the server and the database we will be using socket.io for Node.js. It will be set up as a constant connection between the server and clients (HQ and NGOS), allowing clients to listen to updates from the server. This will run concurrently as a seperate thread to ensure consistent performance for messaging. It is also important for communication events to not use much bandwidth to allow for use in locations where only a low bandwidth network is available. On socket.io's official website[1] they boast as "the fastest and most reliable real-time engine", further research[2] tests in the worst case scenario using a single core CPU server with 1GB of memory on a 4Mbps network. Their tests show socket.io "easily" handling 1600 connections in these conditions with a peak of 7.9% CPU usage and ~475MB of memory utilisation. The maximum broadcast time was 2s, averaging at 300ms. These results show that socket.io will be easily be able to handle the worst environment our program will be run in.
+For communication between the server and the database we will be using socket.io for Node.js. It will be set up as a constant connection between the server and clients (HQ and NGOS), allowing clients to listen to updates from the server. This will run concurrently as a seperate thread to ensure consistent performance for messaging. It is also important for communication events to not use much bandwidth to allow for use in locations where only a low bandwidth network is available. On socket.io's official website they boast as "the fastest and most reliable real-time engine", further research tests in the worst case scenario using a single core CPU server with 1GB of memory on a 4Mbps network. Their tests show socket.io "easily" handling 1600 connections in these conditions with a peak of 7.9% CPU usage and ~475MB of memory utilisation. The maximum broadcast time was 2s, averaging at 300ms[1]. These results show that socket.io will be easily be able to handle the worst environment our program will be run in.
 
 ##### Error Recovery (Concerns 7, 10, 11):
 
@@ -476,8 +474,6 @@ Project requirements do not involve risk of death, serious harm, harm or injury.
 
 One key assumption that we will have to make is that the computers that are being operated during the disaster simulation are capable of running the software that will be produced. It is also assumed that RedR will be responsible for maintaining their own network infrastructure and will be responsible for getting the software back online should it go down. 
 
-The client suggested using KoboToolBox as a framework for the program, though the team has yet to decide whether to actually use this. This choice will be made at a later date when the time for deciding how to build the system comes. 
-
 Client computers support basic sound playback functionality.
 
 Client computers can support video capturing if client makes this feature mandatory.
@@ -501,3 +497,5 @@ A one page statement of contributions that lists each member of the group and wh
 * Nathan: Completed section 4.5 (Scenario View), section 1 (Introduction) and section 1.2 (scope).
 * Daniel: Completed 4.2 (Development view) and 3.2(Architectural Viewpoints).
 * Tom: Completed 4.3, all of 5, collaborated with Daniel on 3.2, activity diagrams in 4.5.
+* Lachlan: 
+* All team members collaborated to come up with stakeholders and concerns for section 3.1.
