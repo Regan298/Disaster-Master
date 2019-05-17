@@ -40,10 +40,6 @@ The final program will be capable of the following:
 7. Review the events that occurred in past simulations, with functionality to export scenario result.
 8. Ability to function in a range of limited environments on varying hardware. 
 
-### 1.3 Changes to requirements
-
-If the requirement have changed significantly since the requirements document, outline the changes here. Changes must be justified and supported by evidence, i.e. they must be substantiated.
-(max one page, only if required)
 
 ## 2. References
 
