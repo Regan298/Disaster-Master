@@ -497,5 +497,5 @@ A one page statement of contributions that lists each member of the group and wh
 * Nathan: Completed section 4.5 (Scenario View), section 1 (Introduction) and section 1.2 (scope).
 * Daniel: Completed 4.2 (Development view) and 3.2(Architectural Viewpoints).
 * Tom: Completed 4.3, all of 5, collaborated with Daniel on 3.2, activity diagrams in 4.5.
-* Lachlan: 
+* Lachlan: Completed 3.1 (By refining collaborated concerns, Stakeholder to Concern Table, additional explanations), 4.1 (Including class diagrams)
 * All team members collaborated to come up with stakeholders and concerns for section 3.1.
