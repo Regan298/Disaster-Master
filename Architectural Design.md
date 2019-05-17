@@ -319,7 +319,7 @@ The RedR Simulation system has many different functions, and thus has numerous d
 sending of messages from the HQ (Headquarters) computer to the NGO (Non Government Organisation) computer, as well as the HQ creating a new scenario. Depending
 on the availability of a network connection in the location where this software is going to be used, these two seperate entities may be one, or many different processes. The network and physical connections between the computers will be the responsibility of the client and their associates. We can create a scenario from each use case. In this instance, we'll use the two most important use cases of the system (HQ sending messages to an NGO and HQ creating a new scenario). These functions are supported by the architecture by having these functions delegated to dedicated components of the program. 
 
-<img src="Resourses/Process_View.jpg" alt="if missing, image available at: ">
+<img src="Resourses/scenario-use-cases.png" alt="if missing, image available at: https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Resourses/scenario-use-cases.png">
 
 If one of the NGO users wishes to send a message to the HQ, they simply navigate to the client sender componenet (visible in the above diagram). From there they may compose their message and send it to the HQ. The message will then appear in the HQ receiver component. These components may be divided among processes running on different physical machines. If there is no network connection available, all of the data will be contained on one machine within one process. The program will almost mimic an email or instant messaging service, but will be enitrely dedicated to the purposes of humanitarian organisations and will also have the integrated simulation timeline. The above example is illustrated below:
 
@@ -330,6 +330,8 @@ If one of the NGO users wishes to send a message to the HQ, they simply navigate
 3. (If a network is available) The message is sent over the network to the HQ machine (otherwise) the message is passed to the HQ user.
 4. The new message appears in the HQ inbox as an unread message.
 
+This case can be seen in the above diagram. See the part of the diagram labelled "NGO Sends Message to HQ".
+
 (HQ Creating a Scenario)
 
 1. The HQ user opens the scenario editor.
@@ -337,6 +339,8 @@ If one of the NGO users wishes to send a message to the HQ, they simply navigate
 3. The user enters in information about the scenario such as the name, the timescale and certain events they want to have in it.
 4. User clicks "Create Scenario".
 5. Program brings up the timeline with pre-entered events already on it.
+
+This case can be seen in the above diagram under the heading "HQ Creates New Scenario".
 
 If the HQ user decides that they wish to add a new simulation scenario to the program, they can accomplish this using the seperate ScenarioCreator component of the system. This will be a standalone application that will run independently of the main simulation program. The scenario creator will only run on the computer that is running the simulation program as the HQ. This is because only the HQ will be allowed to have access to the scenario creator program. 
 
@@ -468,4 +472,3 @@ NGO: Non Government Organisation or Organisation, for short, is the name given t
 A one page statement of contributions that lists each member of the group and what they contributed to this document.
 
 Riley: Completed 4.4 the Physical Viewpoint of the architecture document. This was comprised of the Deployment Diagrams and concerns of the physical side of the project.
----
