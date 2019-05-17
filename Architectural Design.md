@@ -376,6 +376,8 @@ Our client does not have a budget in mind from RedR themselves. We have decided 
 ### 5.3 Risks 
 
 Identify the ten most important project risks: their type, likelihood, impact, and mitigation strategies (3 pages).
+
+
 | Risk                                                         | Likelihood | Severity     |
 | ------------------------------------------------------------ | ---------- | ------------ |
 | A large number of project members are sick at critical times during the project, hindering progress resulting in us falling short of delivery goals. | Moderate   | Serious      |
