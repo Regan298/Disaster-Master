@@ -162,10 +162,12 @@ The Scenarios view-point frames concern: 18
 
 #### Full Online Class Diagram
 
+Location: Resourses/Software_Class_Diagram.png
 ![](Resourses/Software_Class_Diagram.png)
 
 #### Partial Offline Class Diagram
 
+Location: Resourses/Software_Class_Diagram_2.png
 ![](Resourses/Software_Class_Diagram_2.png)
 
 As discussed the Logical Viewpoint pertains to expressing the functional requirements of the system. Moreover, functional requirements will be described in order to address the relevant logical concerns discussed in the concern section of 3.1. Therefore, this ensures that problems that arise for logical based concerns will be solved. Furthermore, proving beneficial to the success of this project, as indirectly the stakeholders that were associated with logical concerns will not be negatively impacted.
@@ -202,9 +204,11 @@ A functional requirement of the final software product is to enable multipurpose
 The two primary components of the disaster simulation program are the front and back end. The front end consists of local logic (including user interfaces), and external logic for communicating with the back end. The back end consists of a server to distribute data between each client, and a database server for storing the data.
 
 **Component Diagram (fig 2.1)**
+Location: Resourses/Component_Diagram.PNG
 ![](Resourses/Component_Diagram.PNG)
 
 **Dependency Diagram (fig 2.2)** <br>
+Location: Resourses/dependencyDiagram.png
 ![](Resourses/dependencyDiagram.png)
 
 **Front End:**
@@ -255,6 +259,7 @@ The process view is split into 4 main processes, these are:
 
 Below there is a sequence diagram for each process. Sequence diagrams were chosen as they show the communication and relationship between the different components of the system, while also displaying a timeline of events to visualise the logic.
 
+Location: Resourses/4.3Sequence_diagrams.jpg
 ![](Resourses/4.3Sequence_diagrams.jpg)
 
 #### Non-functional considerations:
@@ -281,15 +286,18 @@ The Physical viewpoint will take into account the software's physical aspects an
 
 
 **Deployment Component Diagram**<br>
+Location: Resourses/components.png
 ![](Resourses/components.png)
 
 **Deployment Offline Functionality Diagram**<br>
+Location: Resourses/offline.png
 ![](Resourses/offline.png)
 
 Offline:
 One device node will be used in the offline version. This will be a computer that runs all the executable environment nodes. The server will run on the device, it will connect all the other execuatble envrionment nodes such as the HQ Interface, the Database and the NGO Interface. All functionality will be linked through the server's connection within the device hosting the server.
 
 **Deployment Online Functionality Diagram**<br>
+Location: Resourses/online.png
 ![](Resourses/online.png)
 
 Online:
@@ -346,6 +354,7 @@ The RedR Simulation system has many different functions, and thus has numerous d
 sending of messages from the HQ (Headquarters) computer to the NGO (Non Government Organisation) computer, as well as the HQ creating a new scenario. Depending
 on the availability of a network connection in the location where this software is going to be used, these two seperate entities may be one, or many different processes. The network and physical connections between the computers will be the responsibility of the client and their associates. We can create a scenario from each use case. In this instance, we'll use the two most important use cases of the system (HQ sending messages to an NGO and HQ creating a new scenario). These functions are supported by the architecture by having these functions delegated to dedicated components of the program. 
 
+Location: Resourses/scenario-use-cases.png
 <img src="Resourses/scenario-use-cases.png" alt="if missing, image available at: https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Resourses/scenario-use-cases.png">
 
 If one of the NGO users wishes to send a message to the HQ, they simply navigate to the client sender componenet (visible in the above diagram). From there they may compose their message and send it to the HQ. The message will then appear in the HQ receiver component. These components may be divided among processes running on different physical machines. If there is no network connection available, all of the data will be contained on one machine within one process. The program will almost mimic an email or instant messaging service, but will be enitrely dedicated to the purposes of humanitarian organisations and will also have the integrated simulation timeline. The above example is illustrated below:
