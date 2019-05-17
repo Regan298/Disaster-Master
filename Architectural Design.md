@@ -1,10 +1,3 @@
-# ENGR 301 Assignment 2: Architectural Design and Proof-of-Concept
-
-## Proof-of-Concept
-
-
----
-
 # ENGR 301 Project 16 Architectural Design and Proof-of-Concept
 
 **Authors:** Riley Grice, Daniel Miller, Nathan Ellison, Lachlan Keene, Tom Buurmans
