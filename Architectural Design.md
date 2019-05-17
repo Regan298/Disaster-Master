@@ -421,9 +421,8 @@ Present a table of goods or services that will be required to deliver project go
 
 ### 5.3 Risks 
 
-Identify the ten most important project risks: their type, likelihood, impact, and mitigation strategies (3 pages).
-| Risk                                                         | Likelihood | Severity     |
-| ------------------------------------------------------------ | ---------- | ------------ |
+| Risk       | Likelihood | Severity     |
+| ---------- | ---------- | ------------ |
 | A large number of project members are sick at critical times during the project, hindering progress resulting in us falling short of delivery goals. | Moderate   | Tolerable      |
 | Unforeseen major changes to requirements prompting a redesign of the system. | Moderate   | Serious    |
 | There is a natural disaster and Regan gets called out into the field to help, making it impossible to communicate with him. | Low        | Serious      |
@@ -435,8 +434,8 @@ Identify the ten most important project risks: their type, likelihood, impact, a
 | Employee turnover at RedR resulting in the termination of our project. | Low        | Catastrophic |
 | A disaster at VUW restricting access to our files.           | Low        | Serious      |
 
-| Risk                                                         | Strategy                                                     |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Risk       | Strategy       |
+| ---------- | -------------- |
 | A large number of project members are sick at critical times during the project, hindering progress resulting in us falling short of delivery goals. | Keep up team discussion and documentation so that each member knows everyone's role, a sick team member's work could then be picked up by the rest of the team. |
 | Unforeseen major changes to requirements prompting a redesign of the system. | Keep up regular communication with the client about requirements, questioning what they need, especially early on, to lower the likelihood of an unforeseen change. |
 | There is a natural disaster and Regan gets called out into the field to help, making it impossible to communicate with him. | Retrieve concrete requirements from Regan early on so that we could carry on the project with little to no input from him. |
