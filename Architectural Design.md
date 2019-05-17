@@ -317,18 +317,38 @@ It is important for any software program to be kept updated. This ensures that t
 ...
 The RedR Simulation system has many different functions, and thus has numerous different use cases to accompany it. Arguably, the most important ones are the
 sending of messages from the HQ (Headquarters) computer to the NGO (Non Government Organisation) computer, as well as the HQ creating a new scenario. Depending
-on the availability of a network connection in the location where this software is going to be used, these two seperate entities may be one or many processes. The network and physical connections between the computers will be the responsibility of the client and their associates. We can create a scenario from each use case. In this instance, we'll use the two most important use cases of the system (HQ sending messages to an NGO and HQ creating a new scenario). These functions are supported by the architecture by having these functions delegated to dedicated components of the program. 
+on the availability of a network connection in the location where this software is going to be used, these two seperate entities may be one, or many different processes. The network and physical connections between the computers will be the responsibility of the client and their associates. We can create a scenario from each use case. In this instance, we'll use the two most important use cases of the system (HQ sending messages to an NGO and HQ creating a new scenario). These functions are supported by the architecture by having these functions delegated to dedicated components of the program. 
 
-<img src="Resourses/P16_Diagram.jpg" alt="P16_Diagram (available at: https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Resourses/P16_Diagram.jpg">
+<img src="Resourses/Process_View.jpg" alt="if missing, image available at: ">
 
-If one of the NGO users wishes to send a message to the HQ, they simply navigate to the client sender component (visible in the above diagram). From there they may compose their message and send it to the HQ. The message will then appear in the HQ receiver component. These components may be divided among processes running on different machines. If there is no network connection available, all of the data will be contained on one machine within one process. The program will almost mimic an email or instant messaging service, but will be enitrely dedicated to the purposes of humanitarian organisations and will also have the integrated simulation timeline. 
+If one of the NGO users wishes to send a message to the HQ, they simply navigate to the client sender componenet (visible in the above diagram). From there they may compose their message and send it to the HQ. The message will then appear in the HQ receiver component. These components may be divided among processes running on different physical machines. If there is no network connection available, all of the data will be contained on one machine within one process. The program will almost mimic an email or instant messaging service, but will be enitrely dedicated to the purposes of humanitarian organisations and will also have the integrated simulation timeline. The above example is illustrated below:
+
+(NGO Sending Message to HQ)
+
+1. The NGO user navigates to their inbox.
+2. The NGO user composes their messages and clicks send.
+3. (If a network is available) The message is sent over the network to the HQ machine (otherwise) the message is passed to the HQ user.
+4. The new message appears in the HQ inbox as an unread message.
+
+(HQ Creating a Scenario)
+
+1. The HQ user opens the scenario editor.
+2. The user clicks the "New Scenario" button and the program presents a form.
+3. The user enters in information about the scenario such as the name, the timescale and certain events they want to have in it.
+4. User clicks "Create Scenario".
+5. Program brings up the timeline with pre-entered events already on it.
+
 If the HQ user decides that they wish to add a new simulation scenario to the program, they can accomplish this using the seperate ScenarioCreator component of the system. This will be a standalone application that will run independently of the main simulation program. The scenario creator will only run on the computer that is running the simulation program as the HQ. This is because only the HQ will be allowed to have access to the scenario creator program. 
 
+There are a few concerns that arise when attempting to see the entire project through the Scenario View. These can be seen below:
+
 (Concern 16) The most obvious concern with any computer program is that there will be bugs and defects within it that weren't caught and resolved before release. This could happen because of approaching deadlines causing the team to rush and make mistakes. <br>
-(Concern 18) The client may also lose the ability to use the software by not having enough/any hardware available to use it. We have no control over the client's circumstances, and this is simply a risk that we will have to take.<br>
-(Concern 19) It might end up that the client finds the interface of the program too hard to use, and will prefer to resort back to their old way of working, making the entire project redundant.<br>
-(Concern 20) The client may find another solution to their problem that fits their needs better. This alternative may (for example) be cheaper, easier to use, easier to train other people to use or takes less time to aquire. <br>
-(Concern 21) The project may also fail due to team members not being able to co-operate or work efficiently enough to meet the deadline for deployment. <br>
+(Concern 18) The client may find that they are unable to use the software effectivel due to the user interface design. This may cause them to simply revert back to their old way of working  and not use the software at all. <br>
+(Concern 19) Another concern is that the project may fail due to the team wasting too much time and not being able to deliver a product to the client on time. <br>
+(Concern 20) The client may find that the system is not able to scale easily if they were (for example) to attempt to run a simulation with more participants than the team had originally anticipated. The client may also decide to revert back to their old methods because of this. <br>
+(Concern 21) After deployment, the client might want to modify the program and potentially add extra things to it. <br>
+
+The user experience is the main concern of the scenario view. The experience the user has while using the software will result from all the the different components of the system coming together to function as one. The entire aim of the program is to automate the client's tasks during RedR Disaster Simulations in as elegant a manner as possible. The client also has to be able to understand what is happening at every step along the way. If the client is not able to follow along with what the computer is doing, they will become lost and quickly confused should the program do something that they weren't expecting. <br>
 ## 5. Development Schedule
 
 _For each subsection, make clear what (if anything) has changed from the requirements document._ If unchanged, these sections should be copied over from the requirements document, not simply cross-referenced.
