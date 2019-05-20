@@ -36,3 +36,11 @@ li a:hover {
 	font-size: 20px;
 	margin-top: 0px;
 }
+
+#pdf {
+
+    height: 30rem; 
+    border: 1rem solid rgba(0,0,0,.1);
+    
+}
+
