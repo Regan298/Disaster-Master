@@ -15,12 +15,13 @@
 		
 		
 
-            <script>var x;</script> #https://stackoverflow.com/questions/50715991/update-javascript-variable-on-a-html-select-value-change
-            <select>
-                <option value="volvo">Group View</option>
-                <option value="saab">Total View</option>
+ 
+            <select id="groupToggle" onchange="loadTimeline(this.value)">
+                <option value="js/reviewTimelineGroups.js">Group View</option>
+                <option value="js/reviewTimelineSingle.js">Total View</option>
             </select>
 		
+
  
 		
 		
@@ -32,14 +33,26 @@
 		
 		<div id="visualization"></div>
 
-		<script  
-		if(x){
-            src="js/reviewTimeline.js";
-        } else {
-            src="js/reviewTimeline.js";
-        }
+		
+		
+
+		<script type ="text/javascript">
             
-            ></script>
+            function loadTimeline(filename){
+                   
+                    var head = document.getElementsByTagName('head')[0];
+
+                    var script = document.createElement('script');
+                    script.src = filename;
+                    script.type = 'text/javascript';
+
+                    head.appendChild(script)
+            }
+            loadTimeline("js/reviewTimelineGroups.js");
+		</script>
+		
+
+		
 	
 	</body>
 </html>
