@@ -7,9 +7,13 @@ var express = require('express');
 var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
+const { Worker, isMainThread, parentPort } = require('worker_threads');
+
+
 var ngoUsers = [];
 var overseerUser;
 
+const worker = new Worker('./autoevents.js');
 
 app.use(express.static('resources'));
 
@@ -29,6 +33,10 @@ app.get('/overseer', function (req, res) {
     res.sendFile(__dirname + '/overseer.html');
 });
 
+//app.get('/ngoselect.html', function (req, res) {
+//	console.log('request: ' + req.url);
+//	res.sendFile(__dirname + '/ngoselect.html');
+//});
 
 http.listen(80, function () {
     console.log('running');
@@ -124,8 +132,8 @@ io.on('connection', function (socket) {
 
 //console.dir (ip.address());
 
-
-var con = mysql.createConnection({
+//Connect to DB
+/*var con = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "root",
@@ -139,7 +147,19 @@ con.connect(function (err) {
     if (err) throw err;
     console.log("Connected!");
 
-});
+});*/
+
+startSim(1);
+
+function startSim(endSimTime) {
+	worker.on('message', (msg) => {
+		console.log(msg);
+		/*events.forEach(function (item, index){
+			console.log(item);
+		});*/
+	});
+	worker.postMessage(endSimTime);
+}
 
 function wait(ms) {
     var start = new Date().getTime();
@@ -148,7 +168,6 @@ function wait(ms) {
         end = new Date().getTime();
     }
 }
-
 
 function saveMessage(latestMessage) {
     console.log(latestMessage);
