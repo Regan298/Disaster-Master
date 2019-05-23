@@ -30,11 +30,11 @@
 		<script type ="text/javascript">
             
             function loadTimeline(filename){//function loads javascript library based off selection
-                    var body = document.getElementsByTagName("DIV")[0];
                     
-                    var elem = document.getElementById("timelineId");
-                    elem.remove();
                     
+                    var elem = document.getElementById("visualization").remove();
+
+                    var body = document.getElementsByTagName("BODY")[0];
                     var script = document.createElement('script');
                     script.id= "timelineId";
                     script.src = filename;
@@ -44,7 +44,7 @@
             
             
             function initloadTimeline(filename){//function loads initial timline javascript library
-                    var body = document.getElementsByTagName("DIV")[0];
+                    var body = document.getElementsByTagName("BODY")[0];
                     var script = document.createElement('script');
                     script.id= "timelineId";
                     script.src = filename;
