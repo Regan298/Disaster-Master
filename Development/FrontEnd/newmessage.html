@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<html>
+	<head>
+		<title>HQ</title>
+		
+
+
+		<ul>
+			<h3 id="time">Time Remaining:<br>16:22</h3>
+
+		</ul>
+		
+		<ul>
+			<li><a href="timeline.html">Event Graph</a></li>
+			<li><a href="hq_inbox.html">Inbox</a></li>
+			<li><a href="hq_outbox.html">Outbox</a></li>
+			 <li><a class="active">New Message</a></li>
+
+		</ul>
+		<style>
+                td:hover{background-color:#ddd;;cursor: pointer}
+                .selected{background-color: red;color: #fff;font-weight: bold}
+                
+                div.ex1 {
+                    position: absolute;
+                    top: 175px;
+                    left: 10px;
+                    width: 280px;
+                    height: 45rem;
+                    overflow-y: scroll;
+                }
+        </style>
+		
+	</head>
+	<body>
+	<form>
+        <form action="">
+            Recipient(s):<br>
+            <input type="emails" name="recipient_emails" maxlength="100">
+        </form>
+        <form action="">
+            Subject:<br>
+            <input type="text" name="subject" maxlength="50">
+        </form>
+        <form action="">
+            Message:<br>
+            <input type="text" name="message" maxlength="10000">
+        </form>
+        <input type="submit">
+
+    </form>
+	</body>
+</html>
