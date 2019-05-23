@@ -18,7 +18,6 @@ li a {
   text-decoration: none;
 }
 
-/* Change the link color to #111 (black) on hover */
 li a:hover {
   background-color: #1E90FF;
 }
@@ -27,7 +26,7 @@ li a:hover {
   background-color: #4CAF50;
 }
 
-#time {
+#topTitle {
 	text-align: center
 }
 
