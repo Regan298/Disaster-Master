@@ -1,0 +1,158 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Scenario Review</title>
+    </head>
+    
+    <style>
+        body {
+            max-width: 500px;
+            margin: auto;
+        }
+        table, td {
+            border: 2px solid black;
+            text-align: center;
+        }
+        input {
+            padding: 10px;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+    
+    <body>
+            <table id="result">
+            <tr>
+                <td>Time</td>
+                <td>Event</td>
+                <td>Remarks</td>
+            </tr>
+            <tr>
+                <td>0800</td>
+                <td>Stuff</td>
+                <td>More stuff</td>
+            </tr>
+            <tr>
+                <td>0800</td>
+                <td>Stuff</td>
+                <td>More stuff</td>
+            </tr>
+            <tr>
+                <td>0800</td>
+                <td>Stuff</td>
+                <td>More stuff</td>
+            </tr>
+            <tr>
+                <td>0800</td>
+                <td>Stuff</td>
+                <td>More stuff</td>
+            </tr>
+            <tr>
+                <td>0800</td>
+                <td>Stuff</td>
+                <td>More stuff</td>
+            </tr>
+        </table>
+        
+        
+        <p id="output">Test</p>
+        
+        <pre id="fileDisplayArea"></pre>
+        
+        
+        <input type="button" onclick="javascript: load();" value="Import"/>
+        <input type="button" onclick="javascript: tableToXML();" value="Export"/>
+        <input type="button" onclick="javascript: save();" value="Save"/> 
+        <input id="fileInput" type="file" accept="text/xml" onchange="load()"><br>
+        
+        <table id="result">
+            <tr>
+                <td>Time</td>
+                <td>Event</td>
+                <td>Remarks</td>
+            </tr>
+            <tr>
+                <td>0800</td>
+                <td>Stuff</td>
+                <td>More stuff</td>
+            </tr>
+            <tr>
+                <td>0800</td>
+                <td>Stuff</td>
+                <td>More stuff</td>
+            </tr>
+            <tr>
+                <td>0800</td>
+                <td>Stuff</td>
+                <td>More stuff</td>
+            </tr>
+            <tr>
+                <td>0800</td>
+                <td>Stuff</td>
+                <td>More stuff</td>
+            </tr>
+            <tr>
+                <td>0800</td>
+                <td>Stuff</td>
+                <td>More stuff</td>
+            </tr>
+        </table>
+        
+        
+        
+        
+        <script>
+        //    var text, parser, xmlDoc;
+
+        //    text = "<bookstore><book>" +
+        //        "<title>Everyday Italian</title>" +
+        //        "<author>Giada De Laurentiis</author>" +
+        //        "<year>2005</year>" +
+        //        "</book></bookstore>";
+
+        //    parser = new DOMParser();
+        //    xmlDoc = parser.parseFromString(text,"text/xml");
+
+        //    document.getElementById("output").innerHTML =
+        //        xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+        </script>
+        
+        
+        
+        <script>
+            window.onload = function() {
+		var fileInput = document.getElementById('fileInput');
+		var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+		fileInput.addEventListener('change', function(e) {
+			var file = fileInput.files[0];
+			var textType = /text.*/;
+            var text;
+
+			if (file.type.match(textType)) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+                    document.getElementById('output').innerHTML = "Load Successful!";
+                    text = reader.result;
+					//fileDisplayArea.innerText = text = reader.result;
+                    console.log(text);
+				}
+
+				reader.readAsText(file);	
+			} else {
+				fileDisplayArea.innerText = "File not supported!"
+			}
+		});
+}
+        </script>
+        
+        
+        
+        <script src="scripts.js" type="text/javascript"></script>
+        <script src="FileSaver.js"></script>
+        
+        
+    
+    </body>
+</html>
