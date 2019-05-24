@@ -118,9 +118,21 @@ io.on('connection', function (socket) {
         io.emit('message', msg);
     });
 
+});
 
+var pool = mysql.createPool({
+	host: "localhost",
+	user: "root",
+	password: "root",
+	database: "simulationData",
+	connectionLimit: 10
+});
 
+wait(3000);
 
+pool.getConnection(function (err, connection) {
+	if (err) throw err;
+	console.log("Connected!");
 });
 
 runSim(10000);

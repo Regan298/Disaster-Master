@@ -49,7 +49,6 @@ function grabEvent(){
 		}
 		
 	})
-	parentPort.postMessage('Hi');
 }
 	
 function endSim(){
