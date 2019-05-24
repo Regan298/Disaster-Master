@@ -1,4 +1,5 @@
 var Stopwatch = require("statman-stopwatch");
+var TimeFormat = require('hh-mm-ss');
 const util = require('util');
 var simLength;
 var currentEvents = [];
@@ -26,7 +27,8 @@ function grabEvent(){
 		
 		if(stopwatch.read() < simLength){
 			wait(1000);
-			var result = con.query("SELECT location FROM timelineevents WHERE Time = '00:00:"+(stopwatch.read()/1000)+"'").then(function(rows){
+			
+			var result = con.query("SELECT location FROM timelineevents WHERE Time = '"+(TimeFormat.fromMs(stopwatch.read(), 'hh:mm:ss'))+"'").then(function(rows){
 				parentPort.postMessage(rows);
 				loop(conn);
 			});
