@@ -6,13 +6,7 @@ const { parentPort } = require('worker_threads');
 var mysql = require('promise-mysql');
 var con;
 
-function connectDB() {
-	
-	/*con.connect(function (err) {
-		if (err) throw err;
-		parentPort.postMessage('DB connection');
-	});*/
-}
+const stopwatch = new Stopwatch();
 
 function getData(){
 	var sql = "SELECT location FROM timelineevents WHERE Recipient = '1'";
@@ -27,14 +21,11 @@ function getData(){
 
 parentPort.on('message', function(e) {
 	simLength = e.data;
-	
-	//wait(3000);
-	//stopwatch.start();
+	stopwatch.start();
 	grabEvent();
 });
 
 function grabEvent(){
-	var count = 0;
 	mysql.createConnection({
 		host: "localhost",
 		user: "root",
@@ -43,28 +34,21 @@ function grabEvent(){
 	}).then(function loop(conn){
 		con = conn;
 		
-		if(count < 10){
+		if(stopwatch.read() < 10000){
 			wait(500);
 			var result = con.query("SELECT location FROM timelineevents WHERE Recipient = '1'").then(function(rows){
 				parentPort.postMessage(rows);
-				count++;
 				loop(conn);
 			});
 
 			//console.log(count);
 		}else{
 			conn.end();
+			endSim();
 		}
 		
 	})
-	/*var count = 0;
-	while(count < 20){
-		wait(500);
-		getData();
-		count++;
-	}*/
 	parentPort.postMessage('Hi');
-	//endSim();
 }
 	
 function endSim(){

@@ -123,32 +123,6 @@ io.on('connection', function (socket) {
 
 });
 
-
-
-
-
-
-
-
-//console.dir (ip.address());
-
-//Connect to DB
-/*var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "root",
-    database: "simulationData"
-
-});
-
-wait(3000);//wait for 5s for MySQL to start
-
-con.connect(function (err) {
-    if (err) throw err;
-    console.log("Connected!");
-
-});*/
-
 startSim(1);
 
 function startSim(endSimTime) {
