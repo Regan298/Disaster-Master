@@ -135,7 +135,7 @@ pool.getConnection(function (err, connection) {
 	console.log("Connected!");
 });
 
-runSim(10000);
+runSim(100000);
 
 function runSim(endSimTime) {
 	worker.on('message', (msg) => {

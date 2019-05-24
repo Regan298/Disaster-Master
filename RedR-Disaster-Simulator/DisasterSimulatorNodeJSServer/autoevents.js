@@ -8,17 +8,6 @@ var con;
 
 const stopwatch = new Stopwatch();
 
-function getData(){
-	var sql = "SELECT location FROM timelineevents WHERE Recipient = '1'";
-	con.query(sql, function (err, result) {
-		if (err) throw err;
-		console.log("done query");
-		console.log(result);
-		currentEvents.push(result);
-		parentPort.postMessage(currentEvents);
-	});
-}
-
 parentPort.on('message', (msg) => {
 	console.log(msg);
 	simLength = msg;
@@ -36,8 +25,8 @@ function grabEvent(){
 		con = conn;
 		
 		if(stopwatch.read() < simLength){
-			wait(500);
-			var result = con.query("SELECT location FROM timelineevents WHERE Recipient = '1'").then(function(rows){
+			wait(1000);
+			var result = con.query("SELECT location FROM timelineevents WHERE Time = '00:00:"+(stopwatch.read()/1000)+"'").then(function(rows){
 				parentPort.postMessage(rows);
 				loop(conn);
 			});
