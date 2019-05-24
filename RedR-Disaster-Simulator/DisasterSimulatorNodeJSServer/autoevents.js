@@ -19,8 +19,9 @@ function getData(){
 	});
 }
 
-parentPort.on('message', function(e) {
-	simLength = e.data;
+parentPort.on('message', (msg) => {
+	console.log(msg);
+	simLength = msg;
 	stopwatch.start();
 	grabEvent();
 });
@@ -34,7 +35,7 @@ function grabEvent(){
 	}).then(function loop(conn){
 		con = conn;
 		
-		if(stopwatch.read() < 10000){
+		if(stopwatch.read() < simLength){
 			wait(500);
 			var result = con.query("SELECT location FROM timelineevents WHERE Recipient = '1'").then(function(rows){
 				parentPort.postMessage(rows);

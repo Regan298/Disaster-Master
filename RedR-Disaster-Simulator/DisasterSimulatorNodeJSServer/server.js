@@ -123,9 +123,9 @@ io.on('connection', function (socket) {
 
 });
 
-startSim(1);
+runSim(10000);
 
-function startSim(endSimTime) {
+function runSim(endSimTime) {
 	worker.on('message', (msg) => {
 		console.log(msg);
 		/*events.forEach(function (item, index){
