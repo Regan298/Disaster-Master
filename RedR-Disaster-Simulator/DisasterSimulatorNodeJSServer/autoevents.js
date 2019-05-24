@@ -28,7 +28,7 @@ function grabEvent(){
 		if(stopwatch.read() < simLength){
 			wait(1000);
 			
-			var result = con.query("SELECT location FROM timelineevents WHERE Time = '"+(TimeFormat.fromMs(stopwatch.read(), 'hh:mm:ss'))+"'").then(function(rows){
+			var result = con.query("SELECT * FROM timelineevents WHERE Time = '"+(TimeFormat.fromMs(stopwatch.read(), 'hh:mm:ss'))+"'").then(function(rows){
 				parentPort.postMessage(rows);
 				loop(conn);
 			});
