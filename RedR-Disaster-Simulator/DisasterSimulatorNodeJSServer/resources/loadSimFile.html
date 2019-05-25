@@ -1,0 +1,13 @@
+
+<h1>Welcome To The Redr Disaster Simulator</h1>
+<h2>Please Select A Simulation File To Begin</h2>
+
+<form method = "post" enctype="multipart/form-data" action="/upload" id="getSimFileForm" onsubmit="setTimeout(function(){window.location.reload();},10)">
+
+    <br><br>
+    <input id="getSimFile" type='file' name="simFile" style="display: none">
+    <label for="getSimFile" id = "submitButton">
+        Upload File
+    </label>
+    <input type="submit" value="upload">
+</form>

@@ -3,6 +3,7 @@ body {
     font-family: verdana;
     color: #fff;
     padding: 30px;
+    text-align: center;
 }
 
 h1 {
@@ -22,6 +23,17 @@ h2 {
 p {
     font-size: 30px;
     text-align: center;
+}
+
+.simFile {
+    width:120px;
+    height:30px;
+    text-align: center;
+}
+
+.welcome {
+
+
 }
 
 .ngoSessionJoining {

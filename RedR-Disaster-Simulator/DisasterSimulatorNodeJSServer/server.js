@@ -1,17 +1,27 @@
-var path = require('path');
+const fs = require('fs');
 var ip = require('ip');
 var opn = require('opn');
-var fs = require('fs');
 var mysql = require('mysql');
 var express = require('express');
 var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 const { Worker, isMainThread, parentPort } = require('worker_threads');
+const fileUpload = require('express-fileupload');
+app.use(fileUpload());
+var simFile;
+
+
+const simData = {
+    ready: false,
+    title: "Sebadoah"
+};
+
+
 
 
 var ngoUsers = [];
-var overseerUser;
+
 
 const worker = new Worker('./autoevents.js');
 
@@ -19,24 +29,29 @@ app.use(express.static('resources'));
 
 app.get('/', function (req, res) {
     console.log('request: ' + req.url);
-    res.sendFile(__dirname + '/overseer.html');
+    res.sendFile(__dirname + '/HQ.html');
 });
 
 
-app.get('/trainee', function (req, res) {
+app.get('/ngo', function (req, res) {
     console.log('request: ' + req.url);
     res.sendFile(__dirname + '/trainee.html');
 });
 
-app.get('/overseer', function (req, res) {
-    console.log('request: ' + req.url);
-    res.sendFile(__dirname + '/overseer.html');
-});
+app.post('/upload', function (req, res) {
 
-//app.get('/ngoselect.html', function (req, res) {
-//	console.log('request: ' + req.url);
-//	res.sendFile(__dirname + '/ngoselect.html');
-//});
+    //TODO: Suss File Properly
+    if (req.files) {
+
+        console.log(req.files.simFile);
+        simFile = req.files.simFile;
+       simData.ready = true;
+
+    }
+
+})
+
+
 
 http.listen(80, function () {
     console.log('running');
@@ -51,10 +66,11 @@ var host = {
     name: 'overseer'
 }
 
-ngoUsers.push(host);
-//Socket for joining
+
+
 
 io.on('connection', function (socket) {
+
     //To remove placeholder chars at start of ips
     var ipCurrent;
     if (socket.handshake.address.substr(0, 7) == "::ffff:") {
@@ -84,13 +100,8 @@ io.on('connection', function (socket) {
                 console.log(ngo.ip);
                 console.log(ngo.name);
                 ngoUsers.push(ngo);
-                console.log("got here");
-                io.emit('ngoList', 'cat');
 
-
-
-
-
+                io.emit('ngoList', {ngoUsers});
             }
 
 
@@ -98,25 +109,21 @@ io.on('connection', function (socket) {
 
     });
 
-    /*socket.on('ngoList', function(msg) {
-        var x = JSON.stringify(ngoUsers);
-        socket.emit('ngoList', x);
-    });*/
-
-   // socket.on('ngoList', function(msg) {
-    /*if(ngoUsers[0])
-    console.log(ngoUsers[0].name);
-    if(ngoUsers[0] != null) {
-        socket.emit('ngoList', {ngoUsers});
-    }*/
-
-   // });
+    if(simData.ready){
+        console.log("REAdy");
+        io.emit('simState', {simData});
+    } else {
+        console.log(simData.state);
+        io.emit('simState', {simData});
+    }
 
 
     socket.on('message', function(msg){
         console.log(msg);
         io.emit('message', msg);
     });
+
+
 
 });
 
@@ -140,9 +147,6 @@ runSim(100000);
 function runSim(endSimTime) {
 	worker.on('message', (msg) => {
 		console.log(msg);
-		/*events.forEach(function (item, index){
-			console.log(item);
-		});*/
 	});
 	worker.postMessage(endSimTime);
 }

@@ -4,19 +4,21 @@
 <head>
     <meta charset="utf-8">
     <title>RedR Disaster Simulator Landing</title>
-    <link rel="stylesheet" href="overseer.css">
+    <link rel="stylesheet" href="HQ.css">
 
 </head>
 <!-- Start Content/Body -->
 <body>
+
+
+<!--Empty Divs For Mudoularity-->
+<div class="welcome" id="welcome"></div>
+<div class="scenarioHeader" id="scenarioHeader"></div>
+<div class="communication" id="communication"></div>
+
 <script src="/socket.io/socket.io.js"></script>
 <script src="jquery.js"></script>
-
-<div id="ngocount">
-	<script>
-		$("#ngocount").load("ngoselect.html");
-	</script>
-</div>
+<script src="HQ.js"></script>
 
 
 
