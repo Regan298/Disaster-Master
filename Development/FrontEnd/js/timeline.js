@@ -1,18 +1,11 @@
 var container = document.getElementById('visualization');
+var timelineHeight = window.innerHeight/1.5;
 
 var groups = new vis.DataSet([
     {id: 1, content: 'Group 1'},
     {id: 2, content: 'Group 2'},
     {id: 3, content: 'Group 3'},
-    {id: 4, content: 'Group 4'}/*,
-  {id: 5, content: 'Phase&nbsp;1'},
-    {id: 6, content: 'Phase&nbsp;2'},
-    {id: 7, content: 'Phase&nbsp;3'},
-    {id: 8, content: 'Phase&nbsp;4'},
-  {id: 9, content: 'Phase&nbsp;1'},
-    {id: 10, content: 'Phase&nbsp;2'},
-    {id: 11, content: 'Phase&nbsp;3'},
-    {id: 12, content: 'Phase&nbsp;4'}*/
+    {id: 4, content: 'Group 4'}
 ]);
 
 var items = new vis.DataSet([{
@@ -42,9 +35,14 @@ var items = new vis.DataSet([{
   start: '2019-05-10 14:00:00'
 }]);
 
-// Configuration for the Timeline
+// Config for Timeline
 var options = {
   editable: true,
+  
+  //for making timeline scrollable
+  verticalScroll: true,
+  maxHeight: timelineHeight,
+  
   orientation: 'bottom',
   min: new Date('2019-05-10 00:00:00'),
   max: new Date('2019-05-15 24:00:00'),
@@ -55,7 +53,7 @@ var options = {
     }
 };
 
-// Create a Timeline
+// Create Timeline
 var timeline = new vis.Timeline(container, null, options);
 timeline.setGroups(groups);
 timeline.setItems(items);
