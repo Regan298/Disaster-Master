@@ -174,6 +174,12 @@ runSim(100000);
 function runSim(endSimTime) {
 	worker.on('message', (msg) => {
 		console.log(msg);
+		console.log(msg[0].Location);
+		var recievedEvent = {
+            to: msg[0].Recipient,
+            contentLocation: msg[0].Location
+        }
+        io.emit('event', {recievedEvent});
 	});
 	worker.postMessage(endSimTime);
 }

@@ -4,6 +4,7 @@ var users = [];
 
 loadNGOTitle();
 loadCommunication();
+loadEvents();
 handleNGOS();
 
 
@@ -46,7 +47,13 @@ $(function () {
 
     });
 
+	socket.on('event', function (evnt) {
+		console.log('got event');
+        console.log(evnt.recievedEvent.contentLocation);
+        var to = evnt.recievedEvent.to;
+        $('#eventList').append($('<li>').text(evnt.recievedEvent.contentLocation));
 
+    });
 
 
 });
@@ -93,7 +100,16 @@ function loadNGOTitle() {
 
 }
 
+function loadEvents(){
+	
+	var htmlContent = "<h1>Events</h1>\n" +
+        "<ul id=\"eventList\">\n" +
+        "\n" +
+        "</ul>\n";
 
+
+    $(htmlContent).appendTo(".events");
+}
 
 
 function loadCommunication(){
@@ -114,7 +130,4 @@ function loadCommunication(){
 
 
     $(htmlContent).appendTo(".communication");
-
-
-
 }
