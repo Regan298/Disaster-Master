@@ -120,11 +120,13 @@ io.on('connection', function (socket) {
 
     });
 
+    //socket.emit('ngoName', ngoTemp.name);
+
     for(var i = 0; i < ngoUsers.length; i++){
         ngoTemp = ngoUsers[i];
         if(ngoTemp.ip == ipCurrent){
             console.log(ngoTemp.name);
-            io.emit('ngoName', ngoTemp.name);
+            socket.emit('ngoName', ngoTemp.name);
         }
     }
 

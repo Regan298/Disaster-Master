@@ -40,8 +40,14 @@ $(function () {
     socket.on('message', function (msg) {
         console.log(msg.recievedMessage.content);
         var from = msg.recievedMessage.from;
-        console.log('#'+from);
-        $('#'+from).append($('<li>').text(msg.recievedMessage.content));
+        var to = msg.recievedMessage.to;
+        if(from === 'HQ') {
+            console.log('#' + to);
+            $('#' + to).append($('<li>').text(msg.recievedMessage.content));
+        }
+        if(to === 'HQ'){
+            $('#' + from).append($('<li>').text(msg.recievedMessage.content));
+        }
 
     });
 
