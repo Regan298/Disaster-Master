@@ -1,56 +1,47 @@
-var ngoCount;
-var ngoUsers;
 const socket = io();
 var simTitle;
-var simStarted = false;
-
-//Handle Page Elements
-$(function () {
-    socket.on('simState', function (data) {
-
-        if (data.simData['ready'] == true && !simStarted) {
-            console.log("HERE")
-            simStarted = true;
-            console.log("config complete");
-            simTitle = data.simData.title;
-            $(".welcome").remove();
-            loadScenarioHeader();
-            loadCommunication();
+var ngos = [];
+var started;
 
 
-        } else {
-            $("#welcome").load("loadSimFile.html");
-        }
-    });
+
+//Load Page Elements
+loadCommunication();
+loadScenarioHeader();
+
+//New NGOS
+socket.on('ngoList', function (data) {
+    console.log("new ngo");
+    ngos = data.ngoUsers;
+
+    handleNGOS();
 });
 
 //Handle Messaging Form
 $(function () {
-
-    socket.on('ngoList', function (data) {
-
-        var ngos = data.ngoUsers;
-        console.log(ngos[0]);
-        $('#ngoRecipient').append($('<option>', {
-            value: ngos[ngos.length-1].name,
-            text: ngos[ngos.length-1].name
-
-        }));
-
-
-    });
-
-
     $('#message').submit(function (e) {
-        console.log("submitmessage");
         e.preventDefault(); // prevents page reloading
+        console.log("submitmessage");
+
 
         console.log($('#ngoRecipient').val());
 
-        /*var message = {
-             recipient = $('#ngoRecipient').val()
+        var message = {
+            from: 'HQ',
+            to: $('#ngoRecipient').val(),
+            content: $('#input').val()
          }
-        */socket.emit('message', $('#messageContent').val());
+
+        $('#input').val('');
+        socket.emit('message', {message});
+
+    });
+
+    socket.on('message', function (msg) {
+        console.log(msg.recievedMessage.content);
+        var from = msg.recievedMessage.from;
+        console.log('#'+from);
+        $('#'+from).append($('<li>').text(msg.recievedMessage.content));
 
     });
 
@@ -59,33 +50,61 @@ $(function () {
 
 });
 
+function handleNGOS() {
+
+
+
+    if(ngos != null) {
+        console.log("TEST");
+
+
+            $('#ngoRecipient').append($('<option>', {
+                value: ngos[ngos.length-1].name,
+                text: ngos[ngos.length-1].name
+
+            }));
+
+
+
+        $('#ngoList').append("<ul id='" + ngos[ngos.length-1].name +"'>" + "NGO: " + ngos[ngos.length-1].name + "</ul>");
+
+
+
+
+    }
+
+
+
+}
+
+
 
 function loadScenarioHeader(){
-    var url = document.URL.split('/');
-    url = url[2] + "/ngo";
 
-    var htmlContent = "<h1>Scenario: " + simTitle + "</h1>" +
-        "<h2> Please inform your NGO's to go to this page: " + url + "</h2>";
+        socket.on('simState', function (data) {
+            if(!started) {
+                started = true;
+                simTitle = data.simData.title;
+                var url = document.URL.split('/');
+                url = url[2] + "/ngo";
 
-    $(htmlContent).appendTo(".scenarioHeader");
+                var htmlContent = "<h1>Scenario: " + simTitle + "</h1>" +
+                    "<h2> Please inform your NGO's to go to this page: " + url + "</h2>";
+
+                $(htmlContent).appendTo(".scenarioHeader");
+
+            }
+        });
+
+
+
 
 }
 
 function loadCommunication(){
+
     $("#communication").load("communication.html");
 
-
-    /*var htmlContent = "<h1>Communication</h1>" +
-        /!*"<form id='message' action=''/>" +
-        "<input type='text' id='input'/>" +*!/
-        "<button type='button' id='submitBtn'>Submit Form</button>";
-        /!*"</form>";*!/
-
-    $(htmlContent).appendTo(".communication");*/
-
-
-    /*"<select form = 'message' id='ngoRecipient'>" +
-    "</select>" +*/
 
 }
 

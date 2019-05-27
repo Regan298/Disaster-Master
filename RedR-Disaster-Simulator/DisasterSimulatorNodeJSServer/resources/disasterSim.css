@@ -31,9 +31,25 @@ p {
     text-align: center;
 }
 
-.welcome {
+
+.communication{
+    margin-left: 10%;
+    float: left;
+}
+
+.communication select {
+
+   width: 25%;
 
 
+}
+
+.communication form {
+   margin-top: 10%;
+}
+
+.communication table {
+    border: 2px brown;
 }
 
 .ngoSessionJoining {

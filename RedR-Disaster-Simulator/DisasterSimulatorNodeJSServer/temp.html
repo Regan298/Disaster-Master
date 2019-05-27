@@ -1,16 +1,3 @@
-<!-- HTML Structure -->
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>RedR Disaster Simulator Trainee</title>
-    <link rel="stylesheet" href="overseer.css">
-
-</head>
-<!-- Start Content/Body -->
-<body>
-<script src="/socket.io/socket.io.js"></script>
-<script src="jquery.js"></script>
 <script>
     var name;
     var config = true;
@@ -60,17 +47,17 @@
 
             //process chat
 
-                $('message').submit(function (e) {
-                    //Send
-                    // e.preventDefault(); // prevents page reloading
-                    socket.emit('message', $('#input').val());
-                    $('#input').val('');
-                    return false;
-                });
-                socket.on('message', function (msg) {
-                    //Recieve
-                    $('#recieveList').append($('<li>').text(msg));
-                });
+            $('message').submit(function (e) {
+                //Send
+                // e.preventDefault(); // prevents page reloading
+                socket.emit('message', $('#input').val());
+                $('#input').val('');
+                return false;
+            });
+            socket.on('message', function (msg) {
+                //Recieve
+                $('#recieveList').append($('<li>').text(msg));
+            });
 
 
 
@@ -102,27 +89,5 @@
     <button>Send</button>
     </form>
 </div>
-
-
-
-
-</body>
-</html>
-
-
-<!--
-$(function () {
-var socket = io();
-$('ngoName').submit(function (e) {
-e.preventDefault(); // prevents page reloading
-socket.emit('message', $('#input').val());
-$('#m').val('');
-return false;
-});
-socket.on('message', function (msg) {
-$('#messages').append($('<li>').text(msg));
-    });
-    });
--->
 
 

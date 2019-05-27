@@ -28,14 +28,24 @@ const worker = new Worker('./autoevents.js');
 app.use(express.static('resources'));
 
 app.get('/', function (req, res) {
-    console.log('request: ' + req.url);
+    console.log('request:kj ' + req.url);
+    res.sendFile(__dirname + '/HQConfig.html');
+});
+
+app.get('/hq', function (req, res) {
+    console.log('request:kj ' + req.url);
     res.sendFile(__dirname + '/HQ.html');
 });
 
 
 app.get('/ngo', function (req, res) {
     console.log('request: ' + req.url);
-    res.sendFile(__dirname + '/trainee.html');
+    res.sendFile(__dirname + '/ngoConfig.html');
+});
+
+app.get('/ngoMain', function (req, res) {
+    console.log('request: ' + req.url);
+    res.sendFile(__dirname + '/NGO.html');
 });
 
 app.post('/upload', function (req, res) {
@@ -63,11 +73,12 @@ opn('http://' + hostIP);
 
 var host = {
     ip: hostIP,
-    name: 'overseer'
+    name: 'HQ'
 }
 
+//TO fix:
 
-
+ngoUsers.push(host);
 
 io.on('connection', function (socket) {
 
@@ -109,6 +120,16 @@ io.on('connection', function (socket) {
 
     });
 
+    for(var i = 0; i < ngoUsers.length; i++){
+        ngoTemp = ngoUsers[i];
+        if(ngoTemp.ip == ipCurrent){
+            console.log(ngoTemp.name);
+            io.emit('ngoName', ngoTemp.name);
+        }
+    }
+
+    io.emit('users', {ngoUsers});
+
     if(simData.ready){
         console.log("REAdy");
         io.emit('simState', {simData});
@@ -119,8 +140,12 @@ io.on('connection', function (socket) {
 
 
     socket.on('message', function(msg){
-        console.log(msg);
-        io.emit('message', msg);
+        var recievedMessage = {
+            from: msg.message.from,
+            to: msg.message.to,
+            content: msg.message.content
+        }
+        io.emit('message', {recievedMessage});
     });
 
 
