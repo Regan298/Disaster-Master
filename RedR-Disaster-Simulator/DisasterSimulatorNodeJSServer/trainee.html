@@ -1,52 +1,128 @@
-
 <!-- HTML Structure -->
 <!doctype html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <title>RedR Disaster Simulator Trainee</title>
-       <!-- <link rel="stylesheet" href="styles.css?v=1.0"> -->
-   </head>
-   <!-- Start Content/Body -->
-   <body>  		
-     
-      <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
+<head>
+    <meta charset="utf-8">
+    <title>RedR Disaster Simulator Trainee</title>
+    <link rel="stylesheet" href="overseer.css">
+
+</head>
+<!-- Start Content/Body -->
+<body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="jquery.js"></script>
+<script>
+    var name;
+    var config = true;
+
+    $(function () {
+
+
+        //send name
+        const socket = io();
+
+        $('#message').submit(function (e) {
+
+
+            e.preventDefault(); // prevents page reloading
+            console.log($('#m').val());
+
+            socket.emit('message', $('#m').val());
+            return false;
+        });
+        socket.on('message', function(msg){
+            $('#recieveList').append($('<li>').text(msg));
+        });
+
+        $('#ngoName').submit(function (e) {
+            console.log("TEST");
+            //e.preventDefault(); // prevents page reloading
+            name = $('#input').val();
+            socket.emit('join', $('#input').val());
+            $(this).parent().remove();
+            document.getElementById("heading").innerHTML = "NGO: " + name;
+            document.getElementById("welcome").remove();
+            config = false;
+            console.log("namesent");
+
+
+
+            //add chat box
+            $("<div class='messages'>" + name +
+                "<ul id='recieveList'></ul> " +
+                "<form id='message' action=''/>" +
+                "<input type='text' id='input'/>" +
+                "<input type = 'submit' value='Send'/>" +
+                "</form>" +
+                "</div>"
+            ).appendTo('body');
+
+
+            //process chat
+
+                $('message').submit(function (e) {
+                    //Send
+                    // e.preventDefault(); // prevents page reloading
+                    socket.emit('message', $('#input').val());
+                    $('#input').val('');
+                    return false;
+                });
+                socket.on('message', function (msg) {
+                    //Recieve
+                    $('#recieveList').append($('<li>').text(msg));
+                });
+
+
+
+        });
+
+    });
+
+
+</script>
+
+<h1 id="heading">Trainee Landing</h1>
+<p id="welcome">Please Specify Your NGO Name</p>
+
+<div class="ngoNamefield">
+    <form id="ngoName" action="">
+        <input type="text" id="input"/>
+        <input type = "submit" value="Send"/>
     </form>
 
 
 
+</div>
 
-     <script src="/socket.io/socket.io.js"></script>
-     <script src="jquery.js"></script>
-         <script>
-  $(function () {
-    var socket = io();
-    $('form').submit(function(e){
-      e.preventDefault(); // prevents page reloading
-      socket.emit('message', $('#m').val());
-      $('#m').val('');
-      return false;
-    });
-    socket.on('message', function(msg){
-      $('#messages').append($('<li>').text(msg));
-    });
-  });
-</script>
+<div class='messages'>
+    <p> Messages Recieved: </p>
+    <ul id='recieveList'></ul>
+    <form id='message' action=''/>
+    <input id='m'/>
+    <button>Send</button>
+    </form>
+</div>
 
-      
-      
-      
-   </body>
+
+
+
+</body>
 </html>
 
 
-<!-- HTML Structure -->
-<!-- Start Content/Body -->
-<!-- Logo Text -->
-<!-- Navigation Links -->
-<!-- Image Display -->
-<!-- Page Text -->
-<!-- Horizontal Line Finish  -->
+<!--
+$(function () {
+var socket = io();
+$('ngoName').submit(function (e) {
+e.preventDefault(); // prevents page reloading
+socket.emit('message', $('#input').val());
+$('#m').val('');
+return false;
+});
+socket.on('message', function (msg) {
+$('#messages').append($('<li>').text(msg));
+    });
+    });
+-->
+
 
