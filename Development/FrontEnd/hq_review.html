@@ -16,6 +16,10 @@
                 <option value="js/reviewTimelineGroups.js">Group View</option>
                 <option value="js/reviewTimelineSingle.js">Total View</option>
             </select>
+        
+        <!-- Scripts for file saving and accessing timeline data -->
+        <script src="FileSaver.js"></script>
+        <script src="js/timeline.js"></script>
 		
 	</head>
 	
@@ -37,7 +41,7 @@
                 loadTimeline(filename);
             }
             
-            function loadTimeline(filename){//function loads timline javascript library from directory
+            function loadTimeline(filename){//function loads timeline javascript library from directory
                     var body = document.getElementsByTagName("BODY")[0];
                     var script = document.createElement('script');
                     script.src = filename;
@@ -47,12 +51,16 @@
             
 		</script>
 		
+<!-- Code has been migrated to timeline.js -->
+<!--
 		<script>
             function save() {
-            var blob = new Blob(["Hello world"], {type: "text/plain;charset=utf-8"});
-            saveAs(blob, "hello world.txt");
-        }
+                var blob = new Blob(["xml"], {type: "text/xml;charset=utf-8"});
+                saveAs(blob, "xml.xml");
+            }
         </script>
-        <script src="FileSaver.js"></script>
+-->
+        
+        
 	</body>
 </html>

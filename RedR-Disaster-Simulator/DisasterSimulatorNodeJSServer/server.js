@@ -154,6 +154,8 @@ io.on('connection', function (socket) {
 
 });
 
+wait(2000);
+
 var pool = mysql.createPool({
 	host: "localhost",
 	user: "root",
@@ -162,7 +164,7 @@ var pool = mysql.createPool({
 	connectionLimit: 10
 });
 
-wait(3000);
+wait(5000);
 
 pool.getConnection(function (err, connection) {
 	if (err) throw err;
