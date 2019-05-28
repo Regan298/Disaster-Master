@@ -9,22 +9,22 @@ var items = new vis.DataSet([{
   id: 1,
   group: 1,
   content: 'item 1',
-  start: '2019-05-10'
+  start: '2019-05-10 04:30:00'
 }, {
   id: 2,
   group: 2,
   content: 'item 2',
-  start: '2019-05-12'
+  start: '2019-05-12 16:30:00'
 }, {
   id: 3,
   group: 3,
   content: 'item 3',
-  start: '2019-05-15'
+  start: '2019-05-15 09:00:00'
 }, {
   id: 4,
   group: 4,
   content: 'item 4',
-  start: '2019-05-13 09:00:00'
+  start: '2019-05-13 12:00:00'
 }, {
   id: 5,
   group: 4,
