@@ -4,6 +4,7 @@ var users = [];
 var events = [];
 var rowCount = 0;
 
+
 loadNGOTitle();
 //loadCommunication();
 handleNGOS();
@@ -48,6 +49,9 @@ $(function () {
         }
 
     });
+
+	//TODO: load completed events
+	
 
     //on receive event
 	socket.on('event', function (evnt) {
@@ -114,7 +118,7 @@ function loadEvents(){
         "<ul id=\"eventList\">\n" +
         "\n" +
 	"</ul>\n";*/
-	var table = document.getElementById("myTable");
+	var table = document.getElementById("inboxTable");
 	//adds cells as well as the titles of cells into the cells
 	console.log(events[rowCount]);
 	console.log(rowCount);
