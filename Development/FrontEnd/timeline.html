@@ -11,10 +11,9 @@
 			<h3 id="topTitle">Time Remaining:</h3>
 			<script  src="js/countdownTimer.js"></script>
 			<div id="countdownTimer"></div>
-		
-
-
 		</ul>
+		
+		
 		
 		<ul>
 			<li><a class="active">Event Graph</a></li>
@@ -33,7 +32,12 @@
 		
 		<div id="visualization"></div>
 
-		<script  src="js/timeline.js"></script>
-	
+		<script type="text/javascript" src="js/timelineComponents.js"></script>
+		
+		<script type="text/javascript">
+            var container = document.getElementById('visualization');
+            var timeline = new vis.Timeline(container, items, groups, options);
+		</script>
+		
 	</body>
 </html>
