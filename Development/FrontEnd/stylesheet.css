@@ -63,7 +63,6 @@ h1 {
     font-size: 19px;
 }
 
-<<<<<<< Development/FrontEnd/stylesheet.css
 #eventOverlay {
     position: fixed;
     display: none;
@@ -95,9 +94,8 @@ h1 {
     font-size: 20px;
     color: white;
 }
-=======
+
 inputM {
     width: 300px;
     height:200px;
->>>>>>> Development/FrontEnd/stylesheet.css
 }
