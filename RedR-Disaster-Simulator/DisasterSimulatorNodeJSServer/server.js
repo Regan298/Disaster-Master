@@ -8,8 +8,11 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 const { Worker, isMainThread, parentPort } = require('worker_threads');
 const fileUpload = require('express-fileupload');
+var TimeFormat = require('hh-mm-ss');
+var dateFormat = require('dateformat');
 app.use(fileUpload());
 var simFile;
+var connection;
 
 
 const simData = {
@@ -34,7 +37,7 @@ app.get('/', function (req, res) {
 
 app.get('/hq', function (req, res) {
     console.log('request:kj ' + req.url);
-    res.sendFile(__dirname + '/HQ.html');
+    res.sendFile(__dirname + '/hq_home.html');
 });
 
 
@@ -45,7 +48,7 @@ app.get('/ngo', function (req, res) {
 
 app.get('/ngoMain', function (req, res) {
     console.log('request: ' + req.url);
-    res.sendFile(__dirname + '/NGO.html');
+    res.sendFile(__dirname + '/ngo_inbox.html');
 });
 
 app.post('/upload', function (req, res) {
@@ -59,7 +62,7 @@ app.post('/upload', function (req, res) {
 
     }
 
-})
+});
 
 
 
@@ -74,7 +77,7 @@ opn('http://' + hostIP);
 var host = {
     ip: hostIP,
     name: 'HQ'
-}
+};
 
 //TO fix:
 
@@ -147,6 +150,17 @@ io.on('connection', function (socket) {
             to: msg.message.to,
             content: msg.message.content
         }
+		
+		//send to DB
+        var d = new Date();
+        var date = dateFormat(d, "HH:MM:ss")
+        var sql = "INSERT INTO messages (Recipient, Sender, Time, Content) VALUES ('" + msg.message.to + "', '" + msg.message.from + "', '" + date + "', '" + msg.message.content + "') ";
+        console.log(sql);
+        connection.query(sql, function (err, result) {
+            if (err) throw err;
+            console.log("message saved");
+        });
+		
         io.emit('message', {recievedMessage});
     });
 
@@ -164,8 +178,9 @@ var pool = mysql.createPool({
 
 wait(3000);
 
-pool.getConnection(function (err, connection) {
+pool.getConnection(function (err, conn) {
 	if (err) throw err;
+	connection = conn;
 	console.log("Connected!");
 });
 
@@ -174,6 +189,13 @@ runSim(100000);
 function runSim(endSimTime) {
 	worker.on('message', (msg) => {
 		console.log(msg);
+		console.log(msg[0].Location);
+		var recievedEvent = {
+            to: msg[0].Recipient,
+            contentLocation: msg[0].Location,
+			time: msg[0].Time
+        }
+        io.emit('event', {recievedEvent});
 	});
 	worker.postMessage(endSimTime);
 }

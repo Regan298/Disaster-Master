@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<html>
+	<head>
+		<title>HQ-Communication</title>
+		
+
+
+		<ul>
+			<h3 id="topTitle">Time Remaining:</h3>
+			<script  src="js/countdownTimer.js"></script>
+			<div id="countdownTimer"></div>
+
+		</ul>
+		
+		<ul>
+			<li><a href="timeline.html">Event Graph</a></li>
+			<li><a href="hq_inbox.html">Inbox</a></li>
+			<li><a href="hq_outbox.html">Outbox</a></li>
+            <li><a class="active">Communication</a></li>
+
+		</ul>
+		<style>
+                td:hover{background-color:#ddd;;cursor: pointer}
+                .selected{background-color: red;color: #fff;font-weight: bold}
+                
+                div.ex1 {
+                    position: absolute;
+                    top: 175px;
+                    left: 10px;
+                    width: 280px;
+                    height: 45rem;
+                    overflow-y: scroll;
+                }
+        </style>
+		
+	</head>
+	<body>
+	<br>
+        <form action="">
+            Recipient(s):<br>
+            <input type="emails" name="recipient_emails" maxlength="100">
+        </form>
+        
+        <br>
+        
+        <form action="" id="Subject">
+        </form>
+        Subject:<br>
+        <textarea style="resize:none;height:" maxlength="50" rows="1" cols="30" form="Subject"></textarea>
+        
+        <br>
+        <br>
+        
+        <form action="" id="Message">
+        Message:<br>
+        </form>
+        <textarea style="resize:none;height:400px;width:800px" maxlength="10000" form="Message"></textarea>
+        
+        <br>
+        
+        <button type="button" name="sendButton">Send</button>
+	</body>
+</html>

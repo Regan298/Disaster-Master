@@ -29,7 +29,9 @@ function grabEvent(){
 			wait(1000);
 			
 			var result = con.query("SELECT * FROM timelineevents WHERE Time = '"+(TimeFormat.fromMs(stopwatch.read(), 'hh:mm:ss'))+"'").then(function(rows){
-				parentPort.postMessage(rows);
+				if(rows.length>0){
+					parentPort.postMessage(rows);
+				}
 				loop(conn);
 			});
 

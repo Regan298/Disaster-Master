@@ -1,0 +1,69 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #A9A9A9;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #1E90FF;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+#topTitle {
+	text-align: center
+}
+
+#countdownTimer {
+	text-align: center;
+	font-size: 20px;
+	margin-top: 0px;
+}
+
+#pdf {
+/* Only resize the element if PDF is embedded */
+                position: absolute;
+                top: 150px;
+                right: 100px;
+                left: 300px;
+                height: 45rem; 
+                border: 1rem solid rgba(0,0,0,.1);
+} 
+
+table {
+    width: 260px;
+}
+
+h1 {
+    border: 1px solid black;
+    padding-top: 4px;
+  padding-right: 30px;
+  padding-bottom: 4px;
+  padding-left: 30px;
+    width: 260;
+    position: absolute;
+    top: 127px;
+    left: 20px;
+    font-size: 19px;
+}
+
+inputM {
+    width: 300px;
+    height:200px;
+}
