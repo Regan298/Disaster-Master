@@ -46,13 +46,23 @@ li a:hover {
     border: 1rem solid rgba(0,0,0,.1);
 }
 
-#timelinePdf {
+#overlayPdf {
     position: absolute;
+    top: 10vh;
     right: 20vw;
     left: 20vw;
-    height: 95vh; 
+    height: 90vh; 
     border: 1rem solid rgba(0,0,0,.1);
 } 
+
+#overlayText{
+    position: absolute;
+    
+    right: 20vw;
+    left: 20vw;
+    font-size: 20px;
+    color: white;
+}
 
 table {
     width: 260px;
@@ -81,6 +91,6 @@ h1 {
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.5);
-    z-index: 2;
+    z-index: 3;
     cursor: pointer;
 }

@@ -29,9 +29,14 @@
 	
         <div id="eventOverlay" onclick="off()"><!-- container for overlay -->
 
-        <div id = "timelinePdf"></div>
+        <div id = overlayText>
+            <h3>Recipiant: name  Subject: Day 5 Report  Time: 14:33</h3>
+        </div>
+        
+        
+        <div id = "overlayPdf"></div>
         <script src="js/PDFObject/pdfobject.js"></script>
-        <script>PDFObject.embed("pdftest.pdf", "#timelinePdf");</script>
+        <script>PDFObject.embed("pdftest.pdf", "#overlayPdf");</script>
         
         </div>
         
