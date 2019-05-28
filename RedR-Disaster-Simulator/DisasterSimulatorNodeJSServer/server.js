@@ -21,8 +21,6 @@ const simData = {
 };
 
 
-
-
 var ngoUsers = [];
 
 
@@ -48,7 +46,7 @@ app.get('/ngo', function (req, res) {
 
 app.get('/ngoMain', function (req, res) {
     console.log('request: ' + req.url);
-    res.sendFile(__dirname + '/ngo_inbox.html');
+    res.sendFile(__dirname + '/NGO.html');
 });
 
 app.post('/upload', function (req, res) {
@@ -173,7 +171,7 @@ var pool = mysql.createPool({
 	user: "root",
 	password: "root",
 	database: "simulationData",
-	connectionLimit: 10
+	connectionLimit: 50
 });
 
 wait(3000);

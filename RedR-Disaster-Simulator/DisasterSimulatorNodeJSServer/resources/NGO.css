@@ -1,0 +1,116 @@
+* {box-sizing: border-box}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial;
+}
+
+/* Style tab links */
+.tablink {
+  background-color: #555;
+  color: black;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+  color: black;
+  display: none;
+  padding: 100px 20px;
+  height: 100%;
+}
+
+td:hover{background-color:#ddd;;cursor: pointer}
+
+.selected{background-color: red;color: #fff;font-weight: bold}
+                
+div.ex1 {
+    position: absolute;
+    top: 175px;
+    left: 10px;
+    width: 280px;
+    height: 45rem;
+    overflow-y: scroll;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #A9A9A9;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #1E90FF;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+#topTitle {
+	text-align: center;
+}
+
+#countdownTimer {
+	text-align: center;
+	font-size: 20px;
+	margin-top: 0px;
+}
+
+#inboxPdf, #outboxPdf {
+/* Only resize the element if PDF is embedded */
+    position: absolute;
+    top: 150px;
+    right: 100px;
+    left: 300px;
+    height: 45rem; 
+    border: 1rem solid rgba(0,0,0,.1);
+} 
+
+table {
+    width: 260px;
+}
+
+h1 {
+    border: 1px solid black;
+    padding-top: 4px;
+	padding-right: 30px;
+	padding-bottom: 4px;
+	padding-left: 30px;
+    width: 260;
+    position: absolute;
+    top: 127px;
+    left: 20px;
+    font-size: 19px;
+}
+
+inputM {
+    width: 300px;
+    height:200px;
+}
+

@@ -1,25 +1,61 @@
 <!-- HTML Structure -->
 <!doctype html>
+<link rel="stylesheet" type="text/css" href="NGO.css">
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>RedR Disaster Simulator Trainee</title>
-    <link rel="stylesheet" href="disasterSim.css">
+    <title>NGO</title>
+
+		<ul>
+			<h3 id="topTitle">Time Remaining:</h3>
+			<script  src="js/countdownTimer.js"></script>
+			<div id="countdownTimer"></div>
+		</ul>
 
 </head>
 <!-- Start Content/Body -->
 <body>
-<div class="ngoTitle" id="ngoTitle"></div>
+<!--<div class="ngoTitle" id="ngoTitle"></div>
 <div class="communication" id="communication"></div>
-<div class="events" id="events"></div>
-
-
+<div class="events" id="events"></div>-->
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="jquery.js"></script>
 <script src="ngo.js"></script>
 
+<div class="tab">
+  <button class="tablinks" onclick="openView(this, 'Inbox')" id="defaultOpen">Inbox</button>
+  <button class="tablinks" onclick="openView(this, 'Outbox')">Outbox</button>
+  <button class="tablinks" onclick="openView(this, 'Messaging')">Messaging</button>
+</div>
 
+<div id="Inbox" class="tabcontent">
+	<div id="inbox" class="inbox"></div>
+	<script>$("#inbox").load("ngo_inbox.html");</script>
+</div>
+
+<div id="Outbox" class="tabcontent">
+	<div id="outbox" class="outbox"></div>
+	<script>$("#outbox").load("ngo_outbox.html");</script>
+</div>
+
+<div id="Messaging" class="tabcontent">
+	<div id="messaging" class="messaging"></div>
+	<script>$("#messaging").load("ngo_newmessage.html");</script>
+</div>
+<script>
+	function openView(elmnt, pageName) {
+		// Hide all elements with class="tabcontent" by default */
+		var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		}
+
+		// Show the specific tab content
+		document.getElementById(pageName).style.display = "block";
+	}
+	document.getElementById("defaultOpen").click();
+</script>
 </body>
 </html>
 
