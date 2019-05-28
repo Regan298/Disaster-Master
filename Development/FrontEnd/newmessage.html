@@ -15,7 +15,7 @@
 			<li><a href="timeline.html">Event Graph</a></li>
 			<li><a href="hq_inbox.html">Inbox</a></li>
 			<li><a href="hq_outbox.html">Outbox</a></li>
-			 <li><a class="active">New Message</a></li>
+            <li><a class="active">Communication</a></li>
 
 		</ul>
 		<style>
@@ -34,21 +34,21 @@
 		
 	</head>
 	<body>
-	<form>
         <form action="">
             Recipient(s):<br>
             <input type="emails" name="recipient_emails" maxlength="100">
         </form>
+        <br>
         <form action="">
             Subject:<br>
-            <input type="text" name="subject" maxlength="50">
+            <input type="test" name="subject" maxlength="50">
         </form>
+        <br>
         <form action="">
             Message:<br>
-            <input type="text" name="message" maxlength="10000">
+            <input type="text" name="message" maxlength="10000" style="height:400px;width:800px">
         </form>
-        <input type="submit">
-
-    </form>
+        <br>
+        <button type="button">Send</button>
 	</body>
 </html>
