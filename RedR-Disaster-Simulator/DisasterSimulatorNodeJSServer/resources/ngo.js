@@ -1,8 +1,10 @@
 const socket = io();
 var name;
 var users = [];
-var events = [];
-var rowCount = 0;
+var inboxEvents = [];
+var outboxEvents = [];
+var inboxRowCount = 0;
+var outboxRowCount = 0;
 
 
 loadNGOTitle();
@@ -60,8 +62,9 @@ $(function () {
         var to = evnt.recievedEvent.to;
         if(to === name){
             //$('#eventList').append($('<li>').text(evnt.recievedEvent.contentLocation));
-			events.push(evnt.recievedEvent);
-			loadEvents();
+			inboxEvents.push(evnt.recievedEvent);
+			loadInboxEvents();
+			//loadOutboxEvents();
         }
 
 
@@ -112,7 +115,7 @@ function loadNGOTitle() {
 
 }
 
-function loadEvents(){
+function loadInboxEvents(){
 	
 	/*var htmlContent = "<h1>Events</h1>\n" +
         "<ul id=\"eventList\">\n" +
@@ -120,26 +123,56 @@ function loadEvents(){
 	"</ul>\n";*/
 	var table = document.getElementById("inboxTable");
 	//adds cells as well as the titles of cells into the cells
-	console.log(events[rowCount]);
-	console.log(rowCount);
-	var row = table.insertRow(rowCount);
+	console.log(inboxEvents[inboxRowCount]);
+	console.log(inboxRowCount);
+	var row = table.insertRow(inboxRowCount);
 	var cell1 = row.insertCell(0);
-	cell1.innerHTML = "HQ" + " " + "Subject" + " " + events[rowCount].time;
-	table.rows[rowCount].cells[0].onclick = function () {
+	cell1.innerHTML = "HQ" + " " + "Subject" + " " + inboxEvents[inboxRowCount].time;
+	table.rows[inboxRowCount].cells[0].onclick = function () {
 		rIndex = this.parentElement.rowIndex;
 		cIndex = this.cellIndex;
 		//console.log("Row : "+rIndex+" , Cell : "+cIndex);
 		var cellValue = (table.rows[rIndex].cells[cIndex].innerHTML);
-		getPDF(rowCount);
+		getInboxPDF(inboxRowCount);
 	};
 
-	rowCount++;
+	inboxRowCount++;
     //$(htmlContent).appendTo(".events");
 }
 
-function getPDF(cellValue){
+function loadOutboxEvents(){
+	
+	/*var htmlContent = "<h1>Events</h1>\n" +
+        "<ul id=\"eventList\">\n" +
+        "\n" +
+	"</ul>\n";*/
+	var table = document.getElementById("outboxTable");
+	//adds cells as well as the titles of cells into the cells
+	console.log(outboxEvents[outboxRowCount]);
+	console.log(outboxRowCount);
+	var row = table.insertRow(outboxRowCount);
+	var cell1 = row.insertCell(0);
+	cell1.innerHTML = "HQ" + " " + "Subject" + " " + outboxEvents[outboxRowCount].time;
+	table.rows[outboxRowCount].cells[0].onclick = function () {
+		rIndex = this.parentElement.rowIndex;
+		cIndex = this.cellIndex;
+		//console.log("Row : "+rIndex+" , Cell : "+cIndex);
+		var cellValue = (table.rows[rIndex].cells[cIndex].innerHTML);
+		getOutboxPDF(outboxRowCount);
+	};
+
+	outboxRowCount++;
+    //$(htmlContent).appendTo(".events");
+}
+
+function getInboxPDF(cellValue){
 	console.log(cellValue);
-    PDFObject.embed(events[cellValue-1].contentLocation, "#pdf");/*change my-container to pdf*/
+    PDFObject.embed(inboxEvents[cellValue-1].contentLocation, "#inboxPdf");/*change my-container to pdf*/
+}
+
+function getOutboxPDF(cellValue){
+	console.log(cellValue);
+    PDFObject.embed(outboxEvents[cellValue-1].contentLocation, "#outboxPdf");/*change my-container to pdf*/
 }
 
 

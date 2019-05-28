@@ -82,7 +82,7 @@ li a:hover {
 	margin-top: 0px;
 }
 
-#pdf {
+#inboxPdf, #outboxPdf {
 /* Only resize the element if PDF is embedded */
     position: absolute;
     top: 150px;
