@@ -1,18 +1,19 @@
 const socket = io();
 var name;
 var users = [];
+var events = [];
+var rowCount = 0;
 
 loadNGOTitle();
 loadCommunication();
-loadEvents();
 handleNGOS();
 
 
 
-//Handle Messaging Form
+//Handle Messaging and Events
 $(function () {
 
-
+    //New message form
     $('#messageNGO').submit(function (e) {
         console.log("TEST");
         e.preventDefault(); // prevents page reloading
@@ -32,6 +33,7 @@ $(function () {
 
     });
 
+    //on receive message
     socket.on('message', function (msg) {
         console.log(msg.recievedMessage.content);
         var from = msg.recievedMessage.from;
@@ -47,11 +49,17 @@ $(function () {
 
     });
 
+    //on receive event
 	socket.on('event', function (evnt) {
 		console.log('got event');
         console.log(evnt.recievedEvent.contentLocation);
         var to = evnt.recievedEvent.to;
-        $('#eventList').append($('<li>').text(evnt.recievedEvent.contentLocation));
+        if(to === name){
+            //$('#eventList').append($('<li>').text(evnt.recievedEvent.contentLocation));
+			events.push(evnt.recievedEvent);
+			loadEvents();
+        }
+
 
     });
 
@@ -102,13 +110,32 @@ function loadNGOTitle() {
 
 function loadEvents(){
 	
-	var htmlContent = "<h1>Events</h1>\n" +
+	/*var htmlContent = "<h1>Events</h1>\n" +
         "<ul id=\"eventList\">\n" +
         "\n" +
-        "</ul>\n";
+	"</ul>\n";*/
+	var table = document.getElementById("myTable");
+	//adds cells as well as the titles of cells into the cells
+	console.log(events[rowCount]);
+	console.log(rowCount);
+	var row = table.insertRow(rowCount);
+	var cell1 = row.insertCell(0);
+	cell1.innerHTML = "HQ" + " " + "Subject" + " " + events[rowCount].time;
+	table.rows[rowCount].cells[0].onclick = function () {
+		rIndex = this.parentElement.rowIndex;
+		cIndex = this.cellIndex;
+		//console.log("Row : "+rIndex+" , Cell : "+cIndex);
+		var cellValue = (table.rows[rIndex].cells[cIndex].innerHTML);
+		getPDF(rowCount);
+	};
 
+	rowCount++;
+    //$(htmlContent).appendTo(".events");
+}
 
-    $(htmlContent).appendTo(".events");
+function getPDF(cellValue){
+	console.log(cellValue);
+    PDFObject.embed(events[cellValue-1].contentLocation, "#pdf");/*change my-container to pdf*/
 }
 
 

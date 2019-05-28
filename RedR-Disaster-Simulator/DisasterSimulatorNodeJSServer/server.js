@@ -37,7 +37,7 @@ app.get('/', function (req, res) {
 
 app.get('/hq', function (req, res) {
     console.log('request:kj ' + req.url);
-    res.sendFile(__dirname + '/HQ.html');
+    res.sendFile(__dirname + '/hq_home.html');
 });
 
 
@@ -48,7 +48,7 @@ app.get('/ngo', function (req, res) {
 
 app.get('/ngoMain', function (req, res) {
     console.log('request: ' + req.url);
-    res.sendFile(__dirname + '/NGO.html');
+    res.sendFile(__dirname + '/ngo_inbox.html');
 });
 
 app.post('/upload', function (req, res) {
@@ -154,7 +154,6 @@ io.on('connection', function (socket) {
 		//send to DB
         var d = new Date();
         var date = dateFormat(d, "HH:MM:ss")
-        //var date = (TimeFormat.fromMs(d, 'hh:mm:ss'));
         var sql = "INSERT INTO messages (Recipient, Sender, Time, Content) VALUES ('" + msg.message.to + "', '" + msg.message.from + "', '" + date + "', '" + msg.message.content + "') ";
         console.log(sql);
         connection.query(sql, function (err, result) {
@@ -193,7 +192,8 @@ function runSim(endSimTime) {
 		console.log(msg[0].Location);
 		var recievedEvent = {
             to: msg[0].Recipient,
-            contentLocation: msg[0].Location
+            contentLocation: msg[0].Location,
+			time: msg[0].Time
         }
         io.emit('event', {recievedEvent});
 	});
