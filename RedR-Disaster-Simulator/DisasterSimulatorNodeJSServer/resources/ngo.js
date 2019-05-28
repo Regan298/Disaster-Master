@@ -5,7 +5,7 @@ var events = [];
 var rowCount = 0;
 
 loadNGOTitle();
-loadCommunication();
+//loadCommunication();
 handleNGOS();
 
 

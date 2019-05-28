@@ -2,11 +2,12 @@ const socket = io();
 var simTitle;
 var ngos = [];
 var started;
-
+var events = [];
+var rowCount = 0;
 
 
 //Load Page Elements
-loadCommunication();
+//loadCommunication();
 loadScenarioHeader();
 
 //New NGOS
@@ -17,7 +18,7 @@ socket.on('ngoList', function (data) {
     handleNGOS();
 });
 
-//Handle Messaging Form
+//Handle Messaging and Events
 $(function () {
     $('#message').submit(function (e) {
         e.preventDefault(); // prevents page reloading
@@ -51,7 +52,11 @@ $(function () {
 
     });
 
-
+	//on receive event
+	socket.on('event', function (evnt) {
+        events.push(evnt.recievedEvent);
+		loadEvents();
+    });
 
 
 });
@@ -105,6 +110,36 @@ function loadScenarioHeader(){
 
 
 
+}
+
+function loadEvents(){
+	
+	/*var htmlContent = "<h1>Events</h1>\n" +
+        "<ul id=\"eventList\">\n" +
+        "\n" +
+	"</ul>\n";*/
+	var table = document.getElementById("myTable");
+	//adds cells as well as the titles of cells into the cells
+	console.log(events[rowCount]);
+	console.log(rowCount);
+	var row = table.insertRow(rowCount);
+	var cell1 = row.insertCell(0);
+	cell1.innerHTML = "" + events[rowCount].to + " " + "Subject" + " " + events[rowCount].time;
+	table.rows[rowCount].cells[0].onclick = function () {
+		rIndex = this.parentElement.rowIndex;
+		cIndex = this.cellIndex;
+		//console.log("Row : "+rIndex+" , Cell : "+cIndex);
+		var cellValue = (table.rows[rIndex].cells[cIndex].innerHTML);
+		getPDF(rowCount);
+	};
+
+	rowCount++;
+    //$(htmlContent).appendTo(".events");
+}
+
+function getPDF(cellValue){
+	console.log(cellValue);
+    PDFObject.embed(events[cellValue-1].contentLocation, "#pdf");/*change my-container to pdf*/
 }
 
 function loadCommunication(){
