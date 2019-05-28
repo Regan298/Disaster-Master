@@ -1,6 +1,3 @@
-//var container = document.getElementById('visualization');
-var timelineHeight = window.innerHeight/1.5;
-
 var groups = new vis.DataSet([
     {id: 1, content: 'Group 1'},
     {id: 2, content: 'Group 2'},
@@ -35,9 +32,10 @@ var items = new vis.DataSet([{
   start: '2019-05-10 14:00:00'
 }]);
 
+var timelineHeight = window.innerHeight/1.5;
 // Config for Timeline
 var options = {
-  editable: true,
+  editable: false,
   
   //for making timeline scrollable
   verticalScroll: true,
@@ -52,3 +50,6 @@ var options = {
       axis: 5
     }
 };
+
+//redraw()
+//getSelection()
