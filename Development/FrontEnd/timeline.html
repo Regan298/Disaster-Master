@@ -27,7 +27,15 @@
 	</head>
 	<body>
 	
-        <div id="eventOverlay"></div><!-- container for overlay -->
+        <div id="eventOverlay" onclick="off()"><!-- container for overlay -->
+
+        <div id = "timelinePdf"></div>
+        <script src="js/PDFObject/pdfobject.js"></script>
+        <script>PDFObject.embed("pdftest.pdf", "#timelinePdf");</script>
+        
+        </div>
+        
+        
         <div id="visualization"></div><!-- container for timeline -->
 	
 		<script src="vis-4.21.0/dist/vis.js"></script>
@@ -41,20 +49,15 @@
 		
 		
 		<script>//functions for activating/disabling overlay
-            function on() {
+            timeline.on('select', function on() {
                 document.getElementById("eventOverlay").style.display = "block";
-            }
+            });
 
             function off() {
                 document.getElementById("eventOverlay").style.display = "none";
-            } 
-            
-            //timeline.on('select', on());
-            
-            
-            
+            }
         </script>
 
-		
+
 	</body>
 </html>
