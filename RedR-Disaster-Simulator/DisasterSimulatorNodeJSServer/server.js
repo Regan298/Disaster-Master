@@ -8,8 +8,11 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 const { Worker, isMainThread, parentPort } = require('worker_threads');
 const fileUpload = require('express-fileupload');
+var TimeFormat = require('hh-mm-ss');
+var dateFormat = require('dateformat');
 app.use(fileUpload());
 var simFile;
+var connection;
 
 
 const simData = {
@@ -59,7 +62,7 @@ app.post('/upload', function (req, res) {
 
     }
 
-})
+});
 
 
 
@@ -74,7 +77,7 @@ opn('http://' + hostIP);
 var host = {
     ip: hostIP,
     name: 'HQ'
-}
+};
 
 //TO fix:
 
@@ -147,6 +150,18 @@ io.on('connection', function (socket) {
             to: msg.message.to,
             content: msg.message.content
         }
+		
+		//send to DB
+        var d = new Date();
+        var date = dateFormat(d, "HH:MM:ss")
+        //var date = (TimeFormat.fromMs(d, 'hh:mm:ss'));
+        var sql = "INSERT INTO messages (Recipient, Sender, Time, Content) VALUES ('" + msg.message.to + "', '" + msg.message.from + "', '" + date + "', '" + msg.message.content + "') ";
+        console.log(sql);
+        connection.query(sql, function (err, result) {
+            if (err) throw err;
+            console.log("message saved");
+        });
+		
         io.emit('message', {recievedMessage});
     });
 
@@ -164,8 +179,9 @@ var pool = mysql.createPool({
 
 wait(3000);
 
-pool.getConnection(function (err, connection) {
+pool.getConnection(function (err, conn) {
 	if (err) throw err;
+	connection = conn;
 	console.log("Connected!");
 });
 
