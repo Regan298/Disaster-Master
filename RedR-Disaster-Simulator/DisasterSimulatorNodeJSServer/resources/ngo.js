@@ -57,20 +57,21 @@ $(function () {
 
     //on receive event
 	socket.on('event', function (evnt) {
-		console.log('got event');
-        console.log(evnt.recievedEvent.contentLocation);
-        var to = evnt.recievedEvent.to;
-        if(to === name){
-            //$('#eventList').append($('<li>').text(evnt.recievedEvent.contentLocation));
-			inboxEvents.push(evnt.recievedEvent);
-			loadInboxEvents();
-			//loadOutboxEvents();
-        }
-
-
+		console.log('got events');
+		inboxEvents = [];
+		for(var i = 0; i<evnt.msg.length; i++){
+			var to = evnt.msg[i].Recipient;
+			if(to === name){
+				//$('#eventList').append($('<li>').text(evnt.recievedEvent.contentLocation));
+				inboxEvents.push(evnt.msg[i]);
+				
+				//loadOutboxEvents();
+			}
+		}
+		console.log(inboxEvents);
+		loadInboxEvents(inboxEvents);
+        
     });
-
-
 });
 
 function handleNGOS(){
@@ -115,7 +116,7 @@ function loadNGOTitle() {
 
 }
 
-function loadInboxEvents(){
+function loadInboxEvents(inboxEvents){
 	
 	/*var htmlContent = "<h1>Events</h1>\n" +
         "<ul id=\"eventList\">\n" +
@@ -123,20 +124,30 @@ function loadInboxEvents(){
 	"</ul>\n";*/
 	var table = document.getElementById("inboxTable");
 	//adds cells as well as the titles of cells into the cells
-	console.log(inboxEvents[inboxRowCount]);
-	console.log(inboxRowCount);
-	var row = table.insertRow(inboxRowCount);
-	var cell1 = row.insertCell(0);
-	cell1.innerHTML = "HQ" + " " + "Subject" + " " + inboxEvents[inboxRowCount].time;
-	table.rows[inboxRowCount].cells[0].onclick = function () {
-		rIndex = this.parentElement.rowIndex;
-		cIndex = this.cellIndex;
-		//console.log("Row : "+rIndex+" , Cell : "+cIndex);
-		var cellValue = (table.rows[rIndex].cells[cIndex].innerHTML);
-		getInboxPDF(inboxRowCount);
-	};
+	//console.log(inboxEvents[inboxRowCount]);
+	//console.log(inboxRowCount);
+	
+	while(table.hasChildNodes()){
+		table.removeChild(table.firstChild);
+	}
+	
+	
+	for(var i = 0; i<inboxEvents.length; i++){
+		var row = table.insertRow(i);
+		var cell1 = row.insertCell(0);
+		cell1.innerHTML = "HQ" + " " + "Subject" + " " + inboxEvents[i].Time;
+		table.rows[i].cells[0].onclick = function () {
+			rIndex = this.parentElement.rowIndex;
+			cIndex = this.cellIndex;
+			//console.log("Row : "+rIndex+" , Cell : "+cIndex);
+			var cellValue = (table.rows[rIndex].cells[cIndex].innerHTML);
+			getInboxPDF(i);
+		};
+	}
+	
+	
 
-	inboxRowCount++;
+	//inboxRowCount++;
     //$(htmlContent).appendTo(".events");
 }
 
@@ -148,31 +159,37 @@ function loadOutboxEvents(){
 	"</ul>\n";*/
 	var table = document.getElementById("outboxTable");
 	//adds cells as well as the titles of cells into the cells
-	console.log(outboxEvents[outboxRowCount]);
-	console.log(outboxRowCount);
-	var row = table.insertRow(outboxRowCount);
-	var cell1 = row.insertCell(0);
-	cell1.innerHTML = "HQ" + " " + "Subject" + " " + outboxEvents[outboxRowCount].time;
-	table.rows[outboxRowCount].cells[0].onclick = function () {
-		rIndex = this.parentElement.rowIndex;
-		cIndex = this.cellIndex;
-		//console.log("Row : "+rIndex+" , Cell : "+cIndex);
-		var cellValue = (table.rows[rIndex].cells[cIndex].innerHTML);
-		getOutboxPDF(outboxRowCount);
-	};
+	while(table.hasChildNodes()){
+		table.removeChild(table.firstChild);
+	}
+	
+	
+	for(var i = 0; i<outboxEvents.length; i++){
+		var row = table.insertRow(i);
+		var cell1 = row.insertCell(0);
+		cell1.innerHTML = "HQ" + " " + "Subject" + " " + outboxEvents[i].Time;
+		table.rows[i].cells[0].onclick = function () {
+			rIndex = this.parentElement.rowIndex;
+			cIndex = this.cellIndex;
+			//console.log("Row : "+rIndex+" , Cell : "+cIndex);
+			var cellValue = (table.rows[rIndex].cells[cIndex].innerHTML);
+			getOutboxPDF(i);
+		};
+	}
+	
 
-	outboxRowCount++;
+	//outboxRowCount++;
     //$(htmlContent).appendTo(".events");
 }
 
 function getInboxPDF(cellValue){
 	console.log(cellValue);
-    PDFObject.embed(inboxEvents[cellValue-1].contentLocation, "#inboxPdf");/*change my-container to pdf*/
+    PDFObject.embed(inboxEvents.msg[cellValue-1].Location, "#inboxPdf");/*change my-container to pdf*/
 }
 
 function getOutboxPDF(cellValue){
 	console.log(cellValue);
-    PDFObject.embed(outboxEvents[cellValue-1].contentLocation, "#outboxPdf");/*change my-container to pdf*/
+    PDFObject.embed(outboxEvents[cellValue-1].Location, "#outboxPdf");/*change my-container to pdf*/
 }
 
 
