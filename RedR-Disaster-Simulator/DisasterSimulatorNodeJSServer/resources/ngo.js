@@ -178,7 +178,8 @@ function getOutboxPDF(cellValue){
 
 function loadCommunication(){
 
-    var htmlContent = "<h1>Communication</h1>\n" +
+    var htmlContent = "<h1>Communication</h1><br>\n" +
+        "\n" +
         "<ul id=\"ngoList\">\n" +
         "\n" +
         "</ul>\n" +
@@ -187,11 +188,13 @@ function loadCommunication(){
         "\n" +
         "</select>\n" +
         "\n" +
-        "<form id=\"messageNGO\" action=\"\">\n" +
-        "    <input type=\"text\" id=\"input\"/>\n" +
-        "    <input type=\"submit\" value=\"Send\" class=\"button\"/>\n" +
+        "<br>\n" +
+        "Message:<br>\n" +
+        "<form action=\"\" id=\"messageNGO\">\n" +
+        "\t<textarea style=\"resize:none;height:400px;width:800px\" maxlength=\"10000\" form=\"messageNGO\" id=\"input\"></textarea>\n" +
+        "\t<input type=\"submit\" value=\"Send\" class=\"button\"/>\n" +
         "</form>";
 
 
-    $(htmlContent).appendTo(".communication");
+    $(htmlContent).appendTo(".messaging");
 }
