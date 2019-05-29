@@ -14,13 +14,10 @@
 </head>
 <!-- Start Content/Body -->
 <body>
+<script src="jquery.js"></script>
 <!--<div class="ngoTitle" id="ngoTitle"></div>
 <div class="communication" id="communication"></div>
 <div class="events" id="events"></div>-->
-
-<script src="/socket.io/socket.io.js"></script>
-<script src="jquery.js"></script>
-<script src="ngo.js"></script>
 
 <div class="tab">
   <button class="tablinks" onclick="openView(this, 'Inbox')" id="defaultOpen">Inbox</button>
@@ -40,7 +37,7 @@
 
 <div id="Messaging" class="tabcontent">
 	<div id="messaging" class="messaging"></div>
-	<script>$("#messaging").load("ngo_newmessage.html");</script>
+	<script src="ngoMessagingScript.js"></script>
 </div>
 <script>
 	function openView(elmnt, pageName) {
@@ -56,6 +53,12 @@
 	}
 	document.getElementById("defaultOpen").click();
 </script>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="ngo.js"></script>
+
+
 </body>
 </html>
 

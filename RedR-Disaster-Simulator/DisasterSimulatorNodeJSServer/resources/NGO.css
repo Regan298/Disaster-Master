@@ -44,6 +44,33 @@ div.ex1 {
     overflow-y: scroll;
 }
 
+.ngoList {
+    width: 100%;
+    text-align: center;
+}
+
+.ngoList li {
+    font-size: 30px;
+    display: inline;
+    text-align: center;
+}
+
+.messages{
+    text-align: center;
+}
+
+.recieveList {
+    width: 100%;
+    text-align: center;
+}
+
+.recieveList li {
+    font-size: 30px;
+    display: inline;
+    text-align: center;
+}
+
+/*
 ul {
   list-style-type: none;
   margin: 0;
@@ -67,6 +94,7 @@ li a {
 li a:hover {
   background-color: #1E90FF;
 }
+*/
 
 .active {
   background-color: #4CAF50;
