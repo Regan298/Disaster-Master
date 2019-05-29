@@ -184,7 +184,7 @@ function loadOutboxEvents(){
 
 function getInboxPDF(cellValue){
 	console.log(cellValue);
-    PDFObject.embed(inboxEvents.msg[cellValue-1].Location, "#inboxPdf");/*change my-container to pdf*/
+    PDFObject.embed(inboxEvents[cellValue-1].Location, "#inboxPdf");/*change my-container to pdf*/
 }
 
 function getOutboxPDF(cellValue){

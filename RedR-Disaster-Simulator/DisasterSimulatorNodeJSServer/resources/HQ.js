@@ -154,7 +154,7 @@ function loadEvents(){
 
 function getPDF(cellValue){
 	console.log(cellValue);
-    PDFObject.embed(events.msg[cellValue-1].Location, "#outboxPdf");/*change my-container to pdf*/
+    PDFObject.embed(events[cellValue-1].Location, "#outboxPdf");/*change my-container to pdf*/
 }
 
 function loadCommunication(){
