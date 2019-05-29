@@ -20,7 +20,7 @@ socket.on('ngoList', function (data) {
 
 //Handle Messaging and Events
 $(function () {
-    $('#message').submit(function (e) {
+    $('#messageHQ').submit(function (e) {
         e.preventDefault(); // prevents page reloading
         console.log("submitmessage");
 
