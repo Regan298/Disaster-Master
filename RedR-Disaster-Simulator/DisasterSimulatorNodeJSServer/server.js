@@ -35,7 +35,7 @@ app.get('/', function (req, res) {
 
 app.get('/hq', function (req, res) {
     console.log('request:kj ' + req.url);
-    res.sendFile(__dirname + '/hq_home.html');
+    res.sendFile(__dirname + '/HQ.html');
 });
 
 
@@ -61,8 +61,6 @@ app.post('/upload', function (req, res) {
     }
 
 });
-
-
 
 http.listen(80, function () {
     console.log('running');
@@ -187,13 +185,8 @@ runSim(100000);
 function runSim(endSimTime) {
 	worker.on('message', (msg) => {
 		console.log(msg);
-		console.log(msg[0].Location);
-		var recievedEvent = {
-            to: msg[0].Recipient,
-            contentLocation: msg[0].Location,
-			time: msg[0].Time
-        }
-        io.emit('event', {recievedEvent});
+
+        io.emit('event', {msg});
 	});
 	worker.postMessage(endSimTime);
 }

@@ -1,88 +1,47 @@
-<!DOCTYPE HTML>
-<link rel="stylesheet" type="text/css" href="stylesheet.css">
-<html>
-	<head>
-		<title>HQ-Inbox</title>
-		
 
+<h1>
+	From | Subject | Time
+</h1>
+<div class="ex1">
+<table id="inboxTable" cellpadding="2" cellspacing="2" border="1"></table>
+</div>
+	<!--<script>
+		var message;
+		var table = document.getElementById("myTable");
+		//adds cells as well as the titles of cells into the cells
+		for (var j = 0; j < 50; j++) {
+			message = {
+				from: "From" + j,
+				subject: "Subject" + j,
+				time: "Time" + j,
+			};
+			var row = table.insertRow(j);
+			var cell1 = row.insertCell(0);
+			cell1.innerHTML = message.from + " " + message.subject + " " + message.time;
+		}
+		//for loop for onclick function
+		for(var i = 0; i < table.rows.length; i++) {
+			// row cells
+			for(var j = 0; j < table.rows[i].cells.length; j++) {
+				table.rows[i].cells[j].onclick = function() {
+					rIndex = this.parentElement.rowIndex;
+					cIndex = this.cellIndex;
+					//console.log("Row : "+rIndex+" , Cell : "+cIndex);
+					var cellValue = (table.rows[rIndex].cells[cIndex].innerHTML);
+					getPDF(cellValue);
+				};
+			}
+		}
+	</script>-->
+	
+	<br>
+	
+	<div id = "inboxPdf"></div>
+	<script src="js/PDFObject/pdfobject.js"></script>
+	
+<!--<script>
+	function getPDF(cellValue){
+		PDFObject.embed("pdftest.pdf", "#pdf");/*change my-container to pdf*/
+	}
+</script>-->
 
-		<ul>
-			<h3 id="topTitle">Time Remaining:</h3>
-			<script  src="js/countdownTimer.js"></script>
-			<div id="countdownTimer"></div>
-
-		</ul>
-		
-		<ul>
-			<li><a href="timeline.html">Event Graph</a></li>
-			<li><a class="active">Inbox</a></li>
-			<li><a href="hq_outbox.html">Outbox</a></li>
-			 <li><a href="newmessage.html">Communication</a></li>
-
-		</ul>
-		<style>
-                td:hover{background-color:#ddd;;cursor: pointer}
-                .selected{background-color: red;color: #fff;font-weight: bold}
-                
-                div.ex1 {
-                    position: absolute;
-                    top: 175px;
-                    left: 10px;
-                    width: 280px;
-                    height: 45rem;
-                    overflow-y: scroll;
-                }
-        </style>
-		
-	</head>
-	<body>
-	<h1>
-        From | Subject | Time
-	</h1>
-	<div class="ex1">
-	<table id="myTable" cellpadding="2" cellspacing="2" border="1"></table>
-	</div>
-        <script>
-            var message;
-            var table = document.getElementById("myTable");
-            //adds cells as well as the titles of cells into the cells
-            for (var j = 0; j < 50; j++) {
-                message = {
-                    from: "From" + j,
-                    subject: "Subject" + j,
-                    time: "Time" + j,
-                };
-                var row = table.insertRow(j);
-                var cell1 = row.insertCell(0);
-                cell1.innerHTML = message.from + " " + message.subject + " " + message.time;
-            }
-            //for loop for onclick function
-            for(var i = 0; i < table.rows.length; i++) {
-                // row cells
-                for(var j = 0; j < table.rows[i].cells.length; j++) {
-                    table.rows[i].cells[j].onclick = function() {
-                        rIndex = this.parentElement.rowIndex;
-                        cIndex = this.cellIndex;
-                        //console.log("Row : "+rIndex+" , Cell : "+cIndex);
-                        var cellValue = (table.rows[rIndex].cells[cIndex].innerHTML);
-                        getPDF(cellValue);
-                    };
-                }
-            }
-        </script>
-        
-        <br>
-        
-        <div id = "pdf"></div>
-        <script src="js/PDFObject/pdfobject.js"></script>
-        
-        <script>
-        function getPDF(cellValue){
-            PDFObject.embed("pdftest.pdf", "#pdf");/*change my-container to pdf*/
-        }
-        </script>
-        
-        
-
-	</body>
-</html>

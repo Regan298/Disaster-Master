@@ -1,59 +1,15 @@
-<!DOCTYPE HTML>
-<link rel="stylesheet" type="text/css" href="stylesheet.css">
-<html>
-	<head>
-		<title>HQ-Outbox</title>
-		
+
+<h1>
+	To | Subject | Time
+</h1>
+<div class="ex1">
+<table id="outboxTable" cellpadding="2" cellspacing="2" border="1"></table>
+</div>
+	
+	<br>
+	
+	<div id = "outboxPdf"></div>
+	<script src="js/PDFObject/pdfobject.js"></script>
+	
 
 
-		<ul>
-			<h3 id="topTitle">Time Remaining:</h3>
-			<script  src="js/countdownTimer.js"></script>
-			<div id="countdownTimer"></div>
-
-		</ul>
-		
-		<ul>
-			<li><a href="timeline.html">Event Graph</a></li>
-			<li><a href="hq_inbox.html">Inbox</a></li>
-			<li><a class="active">Outbox</a></li>
-			 <li><a href="newmessage.html">Communication</a></li>
-
-		</ul>
-		<style>
-                td:hover{background-color:#ddd;;cursor: pointer}
-                .selected{background-color: red;color: #fff;font-weight: bold}
-                
-                div.ex1 {
-                    position: absolute;
-                    top: 175px;
-                    left: 10px;
-                    width: 280px;
-                    height: 45rem;
-                    overflow-y: scroll;
-                }
-        </style>
-		
-	</head>
-	<body>
-	<h1>
-        To | Subject | Time
-	</h1>
-	<script src="/socket.io/socket.io.js"></script>
-	<script src="jquery.js"></script>
-	<div class="ex1">
-	<table id="myTable" cellpadding="2" cellspacing="2" border="1"></table>
-	</div>
-        <script src="HQ.js"></script>
-        
-        <br>
-        
-        <div id = "pdf"></div>
-        <script src="js/PDFObject/pdfobject.js"></script>
-        
-
-        
-        
-
-	</body>
-</html>
