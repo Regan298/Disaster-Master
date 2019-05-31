@@ -1,0 +1,66 @@
+<!-- HTML Structure -->
+<!doctype html>
+<link rel="stylesheet" type="text/css" href="HQ.css">
+<html lang="en">
+<head>
+    <title>HQ</title>
+
+		<ul>
+			<h3 id="topTitle">Time Remaining:</h3>
+			<script  src="js/countdownTimer.js"></script>
+			<div id="countdownTimer"></div>
+		</ul>
+
+</head>
+<!-- Start Content/Body -->
+<body>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="jquery.js"></script>
+<script src="HQ.js"></script>
+
+<div class="tab">
+	<button class="tablinks" onclick="openView(this, 'Timeline')" id="defaultOpen">Timeline</button>
+	<button class="tablinks" onclick="openView(this, 'Inbox')">Inbox</button>
+	<button class="tablinks" onclick="openView(this, 'Outbox')">Outbox</button>
+	<button class="tablinks" onclick="openView(this, 'Messaging')">Messaging</button>
+</div>
+
+<div id="Timeline" class="tabcontent">
+	<div id="timeline" class="timeline"></div>
+	<script>$("#timeline").load("timeline.html");</script>
+</div>
+
+<div id="Inbox" class="tabcontent">
+	<div id="inbox" class="inbox"></div>
+	<script>$("#inbox").load("hq_inbox.html");</script>
+</div>
+
+<div id="Outbox" class="tabcontent">
+	<div id="outbox" class="outbox"></div>
+	<script>$("#outbox").load("hq_outbox.html");</script>
+</div>
+
+<div id="Messaging" class="tabcontent">
+	<div id="messaging" class="messaging"></div>
+    <script src="hqMessagingScript.js"></script>
+	<!--<script>$("#messaging").load("hq_newmessage.html");</script>-->
+</div>
+<script>
+	function openView(elmnt, pageName) {
+		// Hide all elements with class="tabcontent" by default */
+		var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		}
+
+		// Show the specific tab content
+		document.getElementById(pageName).style.display = "block";
+	}
+	document.getElementById("defaultOpen").click();
+</script>
+</body>
+</html>
+
+

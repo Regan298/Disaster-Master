@@ -1,0 +1,45 @@
+<!-- HTML Structure -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>RedR Disaster Simulator Landing</title>
+    <link rel="stylesheet" href="disasterSim.css">
+
+</head>
+<!-- Start Content/Body -->
+<body>
+
+<script>
+    function redirect(){
+
+        window.location.replace("hq");
+        return false;
+
+    }
+
+</script>
+
+<h1>Welcome To The Redr Disaster Simulator</h1>
+<h2>Please Select A Simulation File To Begin</h2>
+
+<form method = "post" enctype="multipart/form-data" action="/upload" id="getSimFileForm" onsubmit="return redirect()">
+
+    <br><br>
+    <input id="getSimFile" type='file' name="simFile" style="display: none">
+    <label for="getSimFile" id = "submitButton">
+        Upload File
+    </label>
+    <input type="submit" value="upload">
+</form>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="jquery.js"></script>
+
+
+
+
+</body>
+</html>
+

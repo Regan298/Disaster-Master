@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<html>
+	<head>
+
+		<title>HQ-Review</title>
+
+		<ul>
+			<h3 id="topTitle">Review:</h3>
+            <li><a>Save Review</a></li>
+			<li><a>Load Review</a></li>
+
+		</ul>
+		
+            <select id="groupToggle" onchange="loadTimeline(this.value)"> <!-- loads selected timeline when selected-->
+                <option value="js/reviewTimelineGroups.js">Group View</option>
+                <option value="js/reviewTimelineSingle.js">Total View</option>
+            </select>
+		
+		
+	</head>
+	
+	<body onload= "initloadTimeline('js/reviewTimelineGroups.js')"> <!-- loads initial timeline -->
+	
+		<script src="vis-4.21.0/dist/vis.js"></script>
+		<link href="vis-4.21.0/dist/vis.css" rel="stylesheet" type="text/css" />
+		
+		<div id="visualization"></div>
+
+		<script type ="text/javascript">
+            
+            function loadTimeline(filename){//function loads javascript library based off selection
+                    var body = document.getElementsByTagName("DIV")[0];
+                    
+                    var elem = document.getElementById("timelineId");
+                    elem.remove();
+                    
+                    var script = document.createElement('script');
+                    script.id= "timelineId";
+                    script.src = filename;
+                    script.type = 'text/javascript';
+                    body.appendChild(script);
+            }
+            
+            
+            function initloadTimeline(filename){//function loads initial timline javascript library
+                    var body = document.getElementsByTagName("DIV")[0];
+                    var script = document.createElement('script');
+                    script.id= "timelineId";
+                    script.src = filename;
+                    script.type = 'text/javascript';
+                    body.appendChild(script);
+            }
+            
+		</script>
+	</body>
+</html>
