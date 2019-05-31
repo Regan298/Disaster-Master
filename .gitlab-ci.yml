@@ -1,8 +1,8 @@
 image: node:latest
 
-    stages:
-      - build
-      - test
+stages:
+    - build
+    - test
 
     cache:
       paths:
