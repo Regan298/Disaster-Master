@@ -104,6 +104,7 @@ function loadScenarioHeader(){
 
         socket.on('simState', function (data) {
             if(!started) {
+                console.log("HERE");
                 started = true;
                 simTitle = data.simData.title;
                 var url = document.URL.split('/');
@@ -112,14 +113,10 @@ function loadScenarioHeader(){
                 var htmlContent = "<h1>Scenario: " + simTitle + "</h1>" +
                     "<h2> Please inform your NGO's to go to this page: " + url + "</h2>";
 
-                $(htmlContent).appendTo(".scenarioHeader");
+                $(htmlContent).appendTo(".header");
 
             }
         });
-
-
-
-
 }
 
 function loadEvents(){
@@ -154,7 +151,7 @@ function loadEvents(){
 
 function getPDF(cellValue){
 	console.log(cellValue);
-    PDFObject.embed(events.msg[cellValue-1].Location, "#outboxPdf");/*change my-container to pdf*/
+    PDFObject.embed(events[cellValue-1].Location, "#outboxPdf");/*change my-container to pdf*/
 }
 
 function loadCommunication(){
