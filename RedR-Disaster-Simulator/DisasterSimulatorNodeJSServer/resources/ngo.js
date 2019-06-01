@@ -109,7 +109,7 @@ function loadNGOTitle() {
         name = data;
         var htmlContent = "<h1>NGO: " + name + "</h1>";
 
-        $(htmlContent).appendTo(".ngoTitle");
+        $(htmlContent).appendTo(".header");
     });
 
 

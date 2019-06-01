@@ -1,22 +1,23 @@
 * {box-sizing: border-box}
 
 body, html {
-  height: 100%;
-  margin: 0;
-  font-family: Arial;
+    background: skyblue;
+    font-family: verdana;
+    color: #fff;
+    padding: 30px;
+    text-align: center;
 }
 
 /* Style tab links */
-.tablink {
-  background-color: #555;
-  color: black;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  font-size: 17px;
-  width: 25%;
+.tablinks {
+    background-color: #ffffff;
+    color: black;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    margin-top: 2.5%;
+    font-size: 17px;
+    width: 10%;
 }
 
 .tablink:hover {
@@ -25,23 +26,40 @@ body, html {
 
 /* Style the tab content (and add height:100% for full page content) */
 .tabcontent {
-  color: black;
-  display: none;
-  padding: 100px 20px;
-  height: 100%;
+    color: black;
+    display: none;
+    padding: 2.5% 20px;
+    height: 100%;
+}
+
+#topTitle {
+    text-align: center;
+
 }
 
 td:hover{background-color:#ddd;;cursor: pointer}
 
 .selected{background-color: red;color: #fff;font-weight: bold}
                 
-div.ex1 {
+.ex1 {
+    margin-left: 10%;
+    background-color: #ffffff;
     position: absolute;
-    top: 175px;
-    left: 10px;
-    width: 280px;
+    width: 15%;
     height: 45rem;
     overflow-y: scroll;
+}
+
+#inboxPdf, #outboxPdf {
+    /* Only resize the element if PDF is embedded */
+    margin-left: 30%;
+    background-color: #ffffff;
+    position: absolute;
+
+    width: 50%;
+
+    height: 45rem;
+    border: 1rem solid rgba(0,0,0,.1);
 }
 
 .ngoList {
@@ -100,9 +118,6 @@ li a:hover {
   background-color: #4CAF50;
 }
 
-#topTitle {
-	text-align: center;
-}
 
 #countdownTimer {
 	text-align: center;
@@ -110,21 +125,13 @@ li a:hover {
 	margin-top: 0px;
 }
 
-#inboxPdf, #outboxPdf {
-/* Only resize the element if PDF is embedded */
-    position: absolute;
-    top: 150px;
-    right: 100px;
-    left: 300px;
-    height: 45rem; 
-    border: 1rem solid rgba(0,0,0,.1);
-} 
+
 
 table {
     width: 260px;
 }
 
-h1 {
+/*h1 {
     border: 1px solid black;
     padding-top: 4px;
 	padding-right: 30px;
@@ -135,7 +142,7 @@ h1 {
     top: 127px;
     left: 20px;
     font-size: 19px;
-}
+}*/
 
 inputM {
     width: 300px;
