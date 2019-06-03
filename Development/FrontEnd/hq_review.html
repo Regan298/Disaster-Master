@@ -69,13 +69,15 @@
             function loadTimeline(mode){//function loads timline javascript library from directory
                     if(mode == 0){
                         var timeline = new vis.Timeline(container, items, groups, options);
-                        timeline.on('select', function on() {
+                        timeline.on('select', function (properties) {
                             document.getElementById("eventOverlay").style.display = "block";
+                            //properties.items
                         });
                     } else{
                         var timeline = new vis.Timeline(container, items, options);
                         timeline.on('select', function on() {
                             document.getElementById("eventOverlay").style.display = "block";
+                            //properties.items
                         });
                     }
             }
