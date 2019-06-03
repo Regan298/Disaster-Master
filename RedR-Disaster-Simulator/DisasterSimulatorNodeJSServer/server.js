@@ -34,6 +34,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/hq', function (req, res) {
+    //wait
     console.log('request:kj ' + req.url);
     res.sendFile(__dirname + '/HQ.html');
 });
@@ -50,17 +51,23 @@ app.get('/ngoMain', function (req, res) {
 });
 
 app.post('/upload', function (req, res) {
-
+    console.log("HERE");
     //TODO: Suss File Properly
     if (req.files) {
 
         console.log(req.files.simFile);
         simFile = req.files.simFile;
-       simData.ready = true;
+        simData.ready = true;
+        parseXMLForLoading();
 
     }
 
 });
+
+function parseXMLForLoading() {
+
+    console.log("simFile:"+simFile);
+}
 
 http.listen(80, function () {
     console.log('running');
@@ -151,7 +158,7 @@ io.on('connection', function (socket) {
         var d = new Date();
         var date = dateFormat(d, "HH:MM:ss")
         var sql = "INSERT INTO messages (Recipient, Sender, Time, Content) VALUES ('" + msg.message.to + "', '" + msg.message.from + "', '" + date + "', '" + msg.message.content + "') ";
-        console.log(sql);
+
         connection.query(sql, function (err, result) {
             if (err) throw err;
             console.log("message saved");
@@ -184,7 +191,7 @@ runSim(100000);
 
 function runSim(endSimTime) {
 	worker.on('message', (msg) => {
-		console.log(msg);
+
 
         io.emit('event', {msg});
 	});
