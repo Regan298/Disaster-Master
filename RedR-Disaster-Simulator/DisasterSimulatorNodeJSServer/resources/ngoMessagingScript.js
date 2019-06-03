@@ -1,5 +1,4 @@
-var htmlContent = "<h1>Communication</h1><br>\n" +
-	"\n" +
+var htmlContent = "\n" +
 	"<ul id=\"ngoList\">\n" +
 	"\n" +
 	"</ul>\n" +
@@ -8,10 +7,12 @@ var htmlContent = "<h1>Communication</h1><br>\n" +
 	"\n" +
 	"</select>\n" +
 	"\n" +
-	"<br>\n" +
+	"<br><br>\n" +
 	"Message:<br>\n" +
+	"<br>" +
 	"<form action=\"\" id=\"messageNGO\">\n" +
 	"\t<textarea style=\"resize:none;height:400px;width:800px\" maxlength=\"10000\" form=\"messageNGO\" id=\"input\"></textarea>\n" +
+	"<br>" +
 	"\t<input type=\"submit\" value=\"Send\" class=\"button\"/>\n" +
 	"</form>";
 

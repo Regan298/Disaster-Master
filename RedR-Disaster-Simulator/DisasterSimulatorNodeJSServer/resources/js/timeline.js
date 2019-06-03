@@ -60,3 +60,15 @@ var timeline = new vis.Timeline(container, null, options);
 timeline.setGroups(groups);
 timeline.setItems(items);
 timeline.showCurrentTime(true);
+
+
+function save() {
+    var i;
+    var xml = "<events>\n";
+    for(i=1; i<items.length; i++) {
+        xml += "<item>" + items.get(i).content + "</item>\n";
+    }
+    xml += "</events>"
+    var blob = new Blob([xml], {type: "text/xml;charset=utf-8"});
+    saveAs(blob, "xml.xml");
+}
