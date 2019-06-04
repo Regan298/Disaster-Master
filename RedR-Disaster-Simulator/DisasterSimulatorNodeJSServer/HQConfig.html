@@ -12,11 +12,17 @@
 
 <script>
     function redirect(){
-
-        window.location.replace("hq");
-        return false;
-
+        sleep(2000).then(() => {
+            window.location.replace("hq");
+            return false;                     
+        })
+        
+        
     }
+    
+    const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
 
 </script>
 
@@ -33,6 +39,16 @@
     <input type="submit" value="upload">
 </form>
 
+<!--
+<input id="fileInput" type="file" accept="text/xml" onchange="load()"><br>
+    
+<script>
+    function load() {
+        
+    }
+</script>
+-->
+    
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="jquery.js"></script>
