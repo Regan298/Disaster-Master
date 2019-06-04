@@ -57,7 +57,7 @@ app.post('/upload', function (req, res) {
 
     //TODO: Suss File Properly
     if (req.files) {
-
+        console.log("file stuff");
 
 
         let simFileTemp = req.files.simFile;
@@ -101,7 +101,7 @@ function parseXMLForLoading() {
                     + currentEventLocation + "') ";
                 pool.query(sql, function (err, result) {
                     if (err) throw err;
-                    console.log("message saved");
+                    console.log("timeline event loaded from file");
                 });
             }
 
