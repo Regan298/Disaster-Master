@@ -56,7 +56,7 @@ app.post('/upload', function (req, res) {
 
         console.log(req.files.simFile);
         simFile = req.files.simFile;
-       simData.ready = true;
+        simData.ready = true;
 
     }
 
