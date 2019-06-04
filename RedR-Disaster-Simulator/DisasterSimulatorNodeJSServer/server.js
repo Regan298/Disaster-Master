@@ -10,14 +10,18 @@ const { Worker, isMainThread, parentPort } = require('worker_threads');
 const fileUpload = require('express-fileupload');
 var TimeFormat = require('hh-mm-ss');
 var dateFormat = require('dateformat');
+var xml2js = require('xml2js');
+var parser = new xml2js.Parser();
 app.use(fileUpload());
 var simFile;
 var connection;
+var formidable = require('formidable');
 
-
+//ngoCount gets updated when file parsed
 const simData = {
     ready: false,
-    title: "Sebadoah"
+    title: "Sebadoah",
+    ngoCount: 99
 };
 
 
@@ -51,12 +55,19 @@ app.get('/ngoMain', function (req, res) {
 });
 
 app.post('/upload', function (req, res) {
-    console.log("HERE");
+
     //TODO: Suss File Properly
     if (req.files) {
 
-        console.log(req.files.simFile);
-        simFile = req.files.simFile;
+
+
+        let simFileTemp = req.files.simFile;
+
+        simFileTemp.mv(__dirname + '/currentScenario.xml', function (err) {
+            if(err)
+                return res.status(500).send(err);
+
+        });
         simData.ready = true;
         parseXMLForLoading();
 
@@ -65,9 +76,47 @@ app.post('/upload', function (req, res) {
 });
 
 function parseXMLForLoading() {
+    var name;
+    var ngoCount;
+    var eventsArray;
 
-    console.log("simFile:"+simFile);
+
+
+    var parser = new xml2js.Parser();
+    fs.readFile(__dirname + '/currentScenario.xml', function(err, data) {
+        parser.parseString(data, function (err, result) {
+            simData.title = result['scenario']['name'].toString();
+            simData.ngoCount = result['scenario']['ngoCount'].toString();
+            eventsArray = result['scenario']['event'];
+
+
+
+            for(var i = 0; i < eventsArray.length; i++){
+                var currentEventRecipient = eventsArray[i].recipient;
+                var currentEventTime = eventsArray[i].time;
+                var currentEventType = eventsArray[i].type;
+                var currentEventLocation = eventsArray[i].location;
+
+                var sql = "INSERT INTO timelineevents (Recipient, Time, Type, Location)" +
+                    " VALUES (" + "'" + currentEventRecipient  + "', '" + currentEventTime + "', '" + currentEventType + "', '"
+                    + currentEventLocation + "') ";
+                pool.query(sql, function (err, result) {
+                    if (err) throw err;
+                    console.log("message saved");
+                });
+            }
+
+
+        });
+    });
+
+
+
+
+
 }
+
+
 
 http.listen(80, function () {
     console.log('running');
