@@ -160,7 +160,17 @@ io.on('connection', function (socket) {
         io.emit('message', {recievedMessage});
     });
 
+    socket.on('timelineReady', function(msg){
+        //get all events from database
+        var sql = "SELECT * FROM timelineevents";
+        connection.query(sql, function (err, result) {
+            if (err) throw err;
+            socket.emit('timelineEvents', {result});
+        });
+        
 
+        
+    });
 
 });
 
@@ -186,7 +196,7 @@ runSim(100000);
 
 function runSim(endSimTime) {
 	worker.on('message', (msg) => {
-		console.log(msg);
+		//console.log(msg);
 
         io.emit('event', {msg});
 	});
