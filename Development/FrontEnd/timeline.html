@@ -56,9 +56,10 @@
 		</script>
 		
 		
-		<script>//functions for activating/disabling overlay
-            timeline.on('select', function on() {
+		<script type ="text/javascript">//functions for activating/disabling overlay
+            timeline.on('select', function (properties) {
                 document.getElementById("eventOverlay").style.display = "block";
+                //properties.items
             });
 
             function off() {
