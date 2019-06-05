@@ -7,34 +7,9 @@ var groups = new vis.DataSet([
     {id: 4, content: 'Group 4'}
 ]);
 
-var testItems = [{
-  id: 10,
-  group: 1,
-  content: 'item 1',
-  start: '2019-05-10 04:30:00'
-}, {
-  id: 20,
-  group: 2,
-  content: 'item 2',
-  start: '2019-05-12 16:30:00'
-}, {
-  id: 30,
-  group: 3,
-  content: 'item 3',
-  start: '2019-05-15 09:00:00'
-}, {
-  id: 40,
-  group: 4,
-  content: 'item 4',
-  start: '2019-05-13 12:00:00'
-}, {
-  id: 50,
-  group: 4,
-  content: 'item 5',
-  start: '2019-05-10 14:00:00'
-}]
+var items = []
 
-var items = new vis.DataSet(testItems);
+//var items = new vis.DataSet(events);
 
 var timelineHeight = window.innerHeight/1.5;
 // Config for Timeline

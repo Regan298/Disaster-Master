@@ -32,14 +32,14 @@
 
     	for (var i = 0; i < events.result.length; i++) {
             console.log(events.result[i]);
-    		testItems.push({
+    		items.push({
     			id: events.result[i].id,
     			group: 1,
     			content: events.result[i].Location,
     			start: '2019-05-10 ' + events.result[i].Time
     		});
     	}
-        timeline.setItems(testItems);
+        timeline.setItems(items);
         //timeline.redraw();
     });
 

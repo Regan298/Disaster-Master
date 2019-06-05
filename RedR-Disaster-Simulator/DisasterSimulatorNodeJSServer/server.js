@@ -236,6 +236,7 @@ var pool = mysql.createPool({
 	user: "root",
 	password: "root",
 	database: "simulationData",
+    multipleStatements: true,
 	connectionLimit: 50
 });
 
@@ -245,13 +246,19 @@ pool.getConnection(function (err, conn) {
 	if (err) throw err;
 	connection = conn;
 	console.log("Connected!");
+    runSim(1000000);
 });
 
-runSim(100000);
+
 
 function runSim(endSimTime) {
+    //clear DB
+    connection.query("TRUNCATE TABLE timelineevents; TRUNCATE TABLE messages; TRUNCATE TABLE ngos", function (err, result){
+        if(err) throw err;
+        console.log("DB cleared");
+    });
 	worker.on('message', (msg) => {
-		//console.log(msg);
+		//console.log("got events");
 
         io.emit('event', {msg});
 	});
@@ -264,13 +271,4 @@ function wait(ms) {
     while (end < start + ms) {
         end = new Date().getTime();
     }
-}
-
-function saveMessage(latestMessage) {
-    console.log(latestMessage);
-    var sql = "INSERT INTO communication (message) VALUES ('" + latestMessage + "') ";
-    con.query(sql, function (err, result) {
-        if (err) throw err;
-        console.log("message saved");
-    });
 }
