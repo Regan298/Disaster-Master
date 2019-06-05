@@ -10,16 +10,16 @@
 <!-- Start Content/Body -->
 <body>
 
+    
+<!-- Gets the server to wait for the file to be uploaded before redirecting the user -->
 <script>
     function redirect(){
         sleep(2000).then(() => {
             window.location.replace("hq");
             return false;                     
         })
-        
-        
     }
-    
+
     const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
@@ -29,7 +29,9 @@
 <h1>Welcome To The Redr Disaster Simulator</h1>
 <h2>Please Select A Simulation File To Begin</h2>
 
-<form method = "post" enctype="multipart/form-data" action="/upload" id="getSimFileForm" onsubmit="">
+<!-- Space for user input -->    
+
+<form method = "post" enctype="multipart/form-data" action="/upload" id="getSimFileForm" onsubmit="return redirect()">
 
     <br><br>
     <input id="getSimFile" type='file' name="simFile" style="display: none">
@@ -38,16 +40,6 @@
     </label>
     <input type="submit" value="upload">
 </form>
-
-<!--
-<input id="fileInput" type="file" accept="text/xml" onchange="load()"><br>
-    
-<script>
-    function load() {
-        
-    }
-</script>
--->
     
 
 <script src="/socket.io/socket.io.js"></script>
