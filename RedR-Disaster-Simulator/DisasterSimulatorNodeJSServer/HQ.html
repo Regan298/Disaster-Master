@@ -4,19 +4,14 @@
 <html lang="en">
 <head>
     <title>HQ</title>
-		<div id="header" class="header">
+		<div id="header" class="header"></div>
 
-		</div>
-
-			<h3 id="topTitle">
-				Time Remaining:
-			</h3>
+			<h3 id="topTitle">Time Remaining:</h3>
 
 			<div id="countdownTimer">
 				<script  src="js/countdownTimer.js"></script>
 			</div>
 
-		</div>
 
 
 </head>
@@ -32,6 +27,7 @@
 	<button class="tablinks" onclick="openView(this, 'Inbox')">Inbox</button>
 	<button class="tablinks" onclick="openView(this, 'Outbox')">Outbox</button>
 	<button class="tablinks" onclick="openView(this, 'Messaging')">Messaging</button>
+    <button class="tablinks"><a href="hq_review.html">End Simulation</a></button>
 </div>
 
 <div id="Timeline" class="tabcontent">
@@ -54,6 +50,14 @@
     <script src="hqMessagingScript.js"></script>
 	<!--<script>$("#messaging").load("hq_newmessage.html");</script>-->
 </div>
+    
+<!--
+<div id="End" class="tabcontent">
+    <div id="end" class="end"></div>
+</div>
+-->
+
+    
 <script>
 	function openView(elmnt, pageName) {
 		// Hide all elements with class="tabcontent" by default */
