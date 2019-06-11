@@ -10,6 +10,7 @@ var rowCount = 0;
 //loadCommunication();
 loadScenarioHeader();
 
+
 //New NGOS
 socket.on('ngoList', function (data) {
     console.log("new ngo");
@@ -73,11 +74,8 @@ $(function () {
 
 function handleNGOS() {
 
-
-
     if(ngos != null) {
         console.log("TEST");
-
 
             $('#ngoRecipient').append($('<option>', {
                 value: ngos[ngos.length-1].name,
@@ -88,16 +86,11 @@ function handleNGOS() {
 
 
         $('#ngoList').append("<ul id='" + ngos[ngos.length-1].name +"'>" + "NGO: " + ngos[ngos.length-1].name + "</ul>");
-
-
-
-
     }
-
-
-
 }
 
+//redraw()
+//getSelection()
 
 
 function loadScenarioHeader(){

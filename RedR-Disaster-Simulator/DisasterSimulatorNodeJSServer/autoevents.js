@@ -38,6 +38,7 @@ function grabEvent(){
 
 			//console.log(count);
 		}else{
+            
 			conn.end();
 			endSim();
 		}
@@ -48,6 +49,7 @@ function grabEvent(){
 function endSim(){
 	stopwatch.stop();
 	stopwatch.reset();
+    console.log("end of simulation");
 }
 
 function wait(ms) {

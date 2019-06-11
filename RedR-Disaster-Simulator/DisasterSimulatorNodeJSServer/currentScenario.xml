@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario name="Sebadoah" ngoCount="5">
+	<name>Sebadoah</name>
+	<ngoCount>5</ngoCount>
+	
+	<event>
+		<recipient>Test</recipient>
+		<time>00:00:45</time>
+		<type>pdf</type>
+		<location>/files/test.pdf</location>
+	</event>
+	<event>
+		<recipient>Test</recipient>
+		<time>00:00:59</time>
+		<type>pdf</type>
+		<location>/files/test.pdf</location>
+	</event>
+</scenario>

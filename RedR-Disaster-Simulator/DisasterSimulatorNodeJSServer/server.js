@@ -10,14 +10,18 @@ const { Worker, isMainThread, parentPort } = require('worker_threads');
 const fileUpload = require('express-fileupload');
 var TimeFormat = require('hh-mm-ss');
 var dateFormat = require('dateformat');
+var xml2js = require('xml2js');
+var parser = new xml2js.Parser();
 app.use(fileUpload());
 var simFile;
 var connection;
+var formidable = require('formidable');
 
-
+//ngoCount gets updated when file parsed
 const simData = {
     ready: false,
-    title: "Sebadoah"
+    title: "Sebadoah",
+    ngoCount: 99
 };
 
 
@@ -34,7 +38,6 @@ app.get('/', function (req, res) {
 });
 
 app.get('/hq', function (req, res) {
-    //wait
     console.log('request:kj ' + req.url);
     res.sendFile(__dirname + '/HQ.html');
 });
@@ -51,12 +54,19 @@ app.get('/ngoMain', function (req, res) {
 });
 
 app.post('/upload', function (req, res) {
-    console.log("HERE");
+
     //TODO: Suss File Properly
     if (req.files) {
+        console.log("file stuff");
 
-        console.log(req.files.simFile);
-        simFile = req.files.simFile;
+
+        let simFileTemp = req.files.simFile;
+
+        simFileTemp.mv(__dirname + '/currentScenario.xml', function (err) {
+            if(err)
+                return res.status(500).send(err);
+
+        });
         simData.ready = true;
         parseXMLForLoading();
 
@@ -65,9 +75,47 @@ app.post('/upload', function (req, res) {
 });
 
 function parseXMLForLoading() {
+    var name;
+    var ngoCount;
+    var eventsArray;
 
-    console.log("simFile:"+simFile);
+
+
+    var parser = new xml2js.Parser();
+    fs.readFile(__dirname + '/currentScenario.xml', function(err, data) {
+        parser.parseString(data, function (err, result) {
+            simData.title = result['scenario']['name'].toString();
+            simData.ngoCount = result['scenario']['ngoCount'].toString();
+            eventsArray = result['scenario']['event'];
+
+
+
+            for(var i = 0; i < eventsArray.length; i++){
+                var currentEventRecipient = eventsArray[i].recipient;
+                var currentEventTime = eventsArray[i].time;
+                var currentEventType = eventsArray[i].type;
+                var currentEventLocation = eventsArray[i].location;
+
+                var sql = "INSERT INTO timelineevents (Recipient, Time, Type, Location)" +
+                    " VALUES (" + "'" + currentEventRecipient  + "', '" + currentEventTime + "', '" + currentEventType + "', '"
+                    + currentEventLocation + "') ";
+                pool.query(sql, function (err, result) {
+                    if (err) throw err;
+                    console.log("timeline event loaded from file");
+                });
+            }
+
+
+        });
+    });
+
+
+
+
+
 }
+
+
 
 http.listen(80, function () {
     console.log('running');
@@ -158,7 +206,7 @@ io.on('connection', function (socket) {
         var d = new Date();
         var date = dateFormat(d, "HH:MM:ss")
         var sql = "INSERT INTO messages (Recipient, Sender, Time, Content) VALUES ('" + msg.message.to + "', '" + msg.message.from + "', '" + date + "', '" + msg.message.content + "') ";
-
+        console.log(sql);
         connection.query(sql, function (err, result) {
             if (err) throw err;
             console.log("message saved");
@@ -167,7 +215,17 @@ io.on('connection', function (socket) {
         io.emit('message', {recievedMessage});
     });
 
+    socket.on('timelineReady', function(msg){
+        //get all events from database
+        var sql = "SELECT * FROM timelineevents";
+        connection.query(sql, function (err, result) {
+            if (err) throw err;
+            socket.emit('timelineEvents', {result});
+        });
+        
 
+        
+    });
 
 });
 
@@ -178,6 +236,7 @@ var pool = mysql.createPool({
 	user: "root",
 	password: "root",
 	database: "simulationData",
+    multipleStatements: true,
 	connectionLimit: 50
 });
 
@@ -187,13 +246,19 @@ pool.getConnection(function (err, conn) {
 	if (err) throw err;
 	connection = conn;
 	console.log("Connected!");
+    runSim(1000000);
 });
 
-runSim(100000);
+
 
 function runSim(endSimTime) {
+    //clear DB
+    connection.query("TRUNCATE TABLE timelineevents; TRUNCATE TABLE messages; TRUNCATE TABLE ngos", function (err, result){
+        if(err) throw err;
+        console.log("DB cleared");
+    });
 	worker.on('message', (msg) => {
-
+		//console.log("got events");
 
         io.emit('event', {msg});
 	});
@@ -206,13 +271,4 @@ function wait(ms) {
     while (end < start + ms) {
         end = new Date().getTime();
     }
-}
-
-function saveMessage(latestMessage) {
-    console.log(latestMessage);
-    var sql = "INSERT INTO communication (message) VALUES ('" + latestMessage + "') ";
-    con.query(sql, function (err, result) {
-        if (err) throw err;
-        console.log("message saved");
-    });
 }

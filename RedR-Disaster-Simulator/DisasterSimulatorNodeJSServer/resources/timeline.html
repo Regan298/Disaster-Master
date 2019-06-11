@@ -1,8 +1,63 @@
 
+<div id="eventOverlay" onclick="off()"><!-- container for overlay -->
+
+<div id = overlayText>
+    <h3 id="eventViewRecipiant" style="margin: 0; padding:0;">Recipiant: name</h3>  
+    <h3 id="eventViewSubject" style="margin: 0; padding:0;">Subject: Day 5 Report</h3>  
+    <h3 id="eventViewSchedule" style="margin: 0; padding:0;">Scheduled Time: Day 2 14:33</h3>
+</div>
+
+
+<div id = "overlayPdf"></div>
+<script src="js/PDFObject/pdfobject.js"></script>
+<script>PDFObject.embed("pdftest.pdf", "#overlayPdf");</script>
+
+</div>
+
+
+<div id="visualization"></div><!-- container for timeline -->
+
 <script src="vis-4.21.0/dist/vis.js"></script>
 <link href="vis-4.21.0/dist/vis.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/timelineComponents.js"></script>
 
-<div id="visualization"></div>
+<script type="text/javascript">//initialises timeline object
+    var container = document.getElementById('visualization');
+    var timeline = new vis.Timeline(container, items, groups, options);
+</script>
 
-<script  src="js/timeline.js"></script>
+<script>
+    socket.on('timelineEvents', function (events) {
+    	console.log("got " + events.result);
 
+    	for (var i = 0; i < events.result.length; i++) {
+            console.log(events.result[i]);
+    		items.push({
+    			id: events.result[i].id,
+    			group: 1,
+    			content: events.result[i].Location,
+    			start: '2019-05-10 ' + events.result[i].Time
+    		});
+    	}
+        timeline.setItems(items);
+        //timeline.redraw();
+    });
+
+    $(function () {
+    	var msg = 'hi';
+    	socket.emit('timelineReady', {
+    		msg
+    	});
+    });
+</script>
+
+
+<script>//functions for activating/disabling overlay
+    timeline.on('select', function on() {
+        document.getElementById("eventOverlay").style.display = "block";
+    });
+
+    function off() {
+        document.getElementById("eventOverlay").style.display = "none";
+    }
+</script>
