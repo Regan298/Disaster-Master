@@ -51,6 +51,15 @@ $(function () {
             $('#' + from).append($('<li>').text(msg.recievedMessage.content));
         }
 
+        $('<style>'+
+            "#" + to + " li:nth-child(odd){ " +
+            "    text-align: center;\n" +
+            "    color: red;\n" +
+            "    font-weight: bold;\n" +
+            "}"
+
+            +'</style>').appendTo(document.head);
+
     });
 
 	//on receive event
