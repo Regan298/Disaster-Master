@@ -41,14 +41,42 @@ $(function () {
         console.log(msg.recievedMessage.content);
         var from = msg.recievedMessage.from;
         var to = msg.recievedMessage.to;
-        if(from === name) {
+
+        $('#' + to).append($('<li>').text(msg.recievedMessage.content));
+        $('#' + from).append($('<li>').text(msg.recievedMessage.content));
+
+        $('<style>'+
+            "#" + to + " li:nth-child(odd){ " +
+            "    text-align: center;\n" +
+            "    color: red;\n" +
+            "    font-weight: bold;\n" +
+            "}"
+
+            +'</style>').appendTo(document.head);
+
+
+
+
+
+
+        /*if(from === name) {
             //message came from self
            console.log('#' + to);
            $('#' + to).append($('<li>').text(msg.recievedMessage.content));
         }
         if(to === name){
             $('#' + from).append($('<li>').text(msg.recievedMessage.content));
-        }
+
+            $('<style>'+
+                "#" + from + "li:nth-child(odd) { font-size: 30px;\n" +
+                "    display: inline;\n" +
+                "    text-align: center;\n" +
+                "    color: red;\n" +
+                "    font-weight: bold;\n" +
+                "}"
+
+                +'</style>').appendTo(document.head);
+        }*/
 
     });
 
@@ -72,6 +100,8 @@ $(function () {
 		loadInboxEvents(inboxEvents);
         
     });
+
+
 });
 
 function handleNGOS(){

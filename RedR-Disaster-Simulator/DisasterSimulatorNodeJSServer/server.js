@@ -144,17 +144,17 @@ io.on('connection', function (socket) {
 
     socket.on('join', function (msg) {
         console.log("detect user send")
-        if (ipCurrent != hostIP) {
+        //if (ipCurrent != hostIP) {
 
             var found = false;
-            for (var i = 0; i < ngoUsers.length; i++) {
+            /*for (var i = 0; i < ngoUsers.length; i++) {
                 if (ngoUsers[i].ip == ipCurrent) {
                     found = true;
                     break;
                 }
-            }
+            }*/
 
-            if (!found) {
+            //if (!found) {
 
 
                 var ngo = {
@@ -167,10 +167,10 @@ io.on('connection', function (socket) {
                 ngoUsers.push(ngo);
 
                 io.emit('ngoList', {ngoUsers});
-            }
+            //}
 
 
-        }
+       // }
 
     });
 
@@ -179,8 +179,10 @@ io.on('connection', function (socket) {
     for(var i = 0; i < ngoUsers.length; i++){
         ngoTemp = ngoUsers[i];
         if(ngoTemp.ip == ipCurrent){
-            console.log(ngoTemp.name);
-            socket.emit('ngoName', ngoTemp.name);
+            if(!ngoTemp.name.includes("HQ")) {
+                console.log(ngoTemp.name);
+                socket.emit('ngoName', ngoTemp.name);
+            }
         }
     }
 

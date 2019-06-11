@@ -77,15 +77,24 @@ td:hover{background-color:#ddd;;cursor: pointer}
     text-align: center;
 }
 
-.recieveList {
+.ngoList {
     width: 100%;
     text-align: center;
 }
 
-.recieveList li {
+.ngoList li:nth-child(odd) {
     font-size: 30px;
     display: inline;
     text-align: center;
+    color: red;
+    font-weight: bold;
+}
+
+.ngoList li:nth-child(even) {
+    font-size: 30px;
+    display: inline;
+    text-align: center;
+    font-weight: bold;
 }
 
 /*
