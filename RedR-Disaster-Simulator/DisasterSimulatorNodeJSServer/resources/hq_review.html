@@ -94,7 +94,8 @@
         
         <script>
             function save() {
-                var blob = new Blob(["xml"], {type: "text/xml;charset=utf-8"});
+                var xml = "<scenario>\n<name>Sebedoha</name>\n<event></event>\n<event></event>\n</scenario>"
+                var blob = new Blob([xml], {type: "text/xml;charset=utf-8"});
                 saveAs(blob, "xml.xml");
             }
         </script>
