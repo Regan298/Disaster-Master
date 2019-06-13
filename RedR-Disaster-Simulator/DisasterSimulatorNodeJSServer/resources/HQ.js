@@ -74,7 +74,7 @@ $(function () {
 			
 			//loadOutboxEvents();
 		}
-		console.log(events);
+		console.log("event: "+events);
 		loadEvents(events);
 
     });
