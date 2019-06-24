@@ -1,10 +1,4 @@
-body {
-    background: skyblue;
-    font-family: verdana;
-    color: #fff;
-    padding: 30px;
-    text-align: center;
-}
+
 
 h1 {
     font-size: 48px;
@@ -23,6 +17,39 @@ h2 {
 p {
     font-size: 30px;
     text-align: center;
+}
+
+#menu {
+    background-color: white;
+    height: 5vh;
+    
+    width: 100%;
+}
+
+#navigationContent {
+    position: relative;
+    font-size: 2vh;
+    top: 25%;
+    text-align: right;
+    right: 20%; 
+}
+
+#mainContent {
+    display: inline-block;
+    background-color: #F1F1F1;
+    font-family: verdana;
+    width: 100%;
+    
+    text-align: center;
+    
+}
+
+li#link {
+    display: inline;
+}
+
+a { 
+    padding: 10px 30px;
 }
 
 .simFile {

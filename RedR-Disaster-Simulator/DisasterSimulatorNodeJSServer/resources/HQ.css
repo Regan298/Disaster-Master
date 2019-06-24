@@ -9,6 +9,11 @@ body, html {
 
 }
 
+.hqMenu {
+  float: left;
+  background-color: white;
+}
+
 /* Style tab links */
 .tablinks {
   background-color: #ffffff;

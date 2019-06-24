@@ -33,8 +33,7 @@ const worker = new Worker('./autoevents.js');
 app.use(express.static('resources'));
 
 app.get('/', function (req, res) {
-    console.log('request:kj ' + req.url);
-    res.sendFile(__dirname + '/HQConfig.html');
+    res.sendFile(__dirname + '/hq-config.html');
 });
 
 app.get('/hq', function (req, res) {
@@ -55,59 +54,75 @@ app.get('/ngoMain', function (req, res) {
 
 app.post('/upload', function (req, res) {
 
-    //TODO: Suss File Properly
     if (req.files) {
-        console.log("file stuff");
-
 
         let simFileTemp = req.files.simFile;
 
         simFileTemp.mv(__dirname + '/currentScenario.xml', function (err) {
-            if(err)
+            if(err) {
                 return res.status(500).send(err);
+            }
 
         });
-        simData.ready = true;
-        parseXMLForLoading();
 
+
+        let validFile = parseXMLForLoading();
+
+        if(!validFile){
+            return res.status(500).send("Bad File, Please Input A Valid File :)");
+        } else {
+            res.sendFile(__dirname + '/HQ.html');
+        }
+        simData.ready = true;
+
+
+
+    } else {
+        return res.status(500).send("Bad File, Please Input A Valid File :)");
     }
 
 });
 
 function parseXMLForLoading() {
-    var name;
-    var ngoCount;
-    var eventsArray;
+
+    try {
+        var name;
+        var ngoCount;
+        var eventsArray;
 
 
-
-    var parser = new xml2js.Parser();
-    fs.readFile(__dirname + '/currentScenario.xml', function(err, data) {
-        parser.parseString(data, function (err, result) {
-            simData.title = result['scenario']['name'].toString();
-            simData.ngoCount = result['scenario']['ngoCount'].toString();
-            eventsArray = result['scenario']['event'];
-
+        var parser = new xml2js.Parser();
+        fs.readFile(__dirname + '/currentScenario.xml', function (err, data) {
+            parser.parseString(data, function (err, result) {
+                simData.title = result['scenario']['name'].toString();
+                simData.ngoCount = result['scenario']['ngoCount'].toString();
+                eventsArray = result['scenario']['event'];
 
 
-            for(var i = 0; i < eventsArray.length; i++){
-                var currentEventRecipient = eventsArray[i].recipient;
-                var currentEventTime = eventsArray[i].time;
-                var currentEventType = eventsArray[i].type;
-                var currentEventLocation = eventsArray[i].location;
+                for (var i = 0; i < eventsArray.length; i++) {
+                    var currentEventRecipient = eventsArray[i].recipient;
+                    var currentEventTime = eventsArray[i].time;
+                    var currentEventType = eventsArray[i].type;
+                    var currentEventLocation = eventsArray[i].location;
 
-                var sql = "INSERT INTO timelineevents (Recipient, Time, Type, Location)" +
-                    " VALUES (" + "'" + currentEventRecipient  + "', '" + currentEventTime + "', '" + currentEventType + "', '"
-                    + currentEventLocation + "') ";
-                pool.query(sql, function (err, result) {
-                    if (err) throw err;
-                    console.log("timeline event loaded from file");
-                });
-            }
+                    var sql = "INSERT INTO timelineevents (Recipient, Time, Type, Location)" +
+                        " VALUES (" + "'" + currentEventRecipient + "', '" + currentEventTime + "', '" + currentEventType + "', '"
+                        + currentEventLocation + "') ";
+                    pool.query(sql, function (err, result) {
+                        if (err) throw err;
+                        console.log("timeline event loaded from file");
+                    });
+                }
 
 
+            });
         });
-    });
+
+    } catch (e) {
+        return true;
+    }
+
+    return false;
 
 
 
@@ -242,7 +257,7 @@ var pool = mysql.createPool({
 	connectionLimit: 50
 });
 
-wait(5000);
+wait(3000);
 
 pool.getConnection(function (err, conn) {
 	if (err) throw err;
