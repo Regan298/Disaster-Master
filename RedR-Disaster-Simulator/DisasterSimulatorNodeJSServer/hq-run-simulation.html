@@ -17,6 +17,10 @@
 
 <body>
 
+<script src="/socket.io/socket.io.js"></script>
+<script src="jquery.js"></script>
+<script src="run-simulation.js"></script>
+
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
     <div class="container">
@@ -47,19 +51,19 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1 class="mt-5">Please Select A Simulation File To Begin </h1>
-
-        <br>
-        <form method="post" enctype="multipart/form-data" action="/hq-run-simulation">
-
-            <div class="btn btn-primary btn-sm float-centre">
-
-              <input type="file" name="simFile">
-              <input type="submit" value="Begin">
+        <!--Scenario Title Gets Updated In Socket-->
+        <div class="scenarioTitle"></div>
+        <div class="timeControl">
+          <img src="assests/play.png">
+        </div>
 
 
-          </div>
-        </form>
+        <!--Timer-->
+        <div id="timeManagement">
+
+          <script src="countdownTimer.js"></script>
+        </div>
+
       </div>
     </div>
   </div>

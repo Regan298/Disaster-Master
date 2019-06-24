@@ -33,6 +33,10 @@ const worker = new Worker('./autoevents.js');
 app.use(express.static('resources'));
 
 app.get('/', function (req, res) {
+    res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/hq-config', function (req, res) {
     res.sendFile(__dirname + '/hq-config.html');
 });
 
@@ -52,9 +56,10 @@ app.get('/ngoMain', function (req, res) {
     res.sendFile(__dirname + '/NGO.html');
 });
 
-app.post('/upload', function (req, res) {
+app.post('/hq-run-simulation', function (req, res) {
 
     if (req.files) {
+        console.log("filereq");
 
         let simFileTemp = req.files.simFile;
 
@@ -71,7 +76,11 @@ app.post('/upload', function (req, res) {
         if(!validFile){
             return res.status(500).send("Bad File, Please Input A Valid File :)");
         } else {
-            res.sendFile(__dirname + '/HQ.html');
+            res.sendFile(__dirname + '/hq-run-simulation.html', function (err) {
+                res.end();
+
+            });
+
         }
         simData.ready = true;
 
