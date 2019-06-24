@@ -119,10 +119,10 @@ function parseXMLForLoading() {
         });
 
     } catch (e) {
-        return true;
+        return false;
     }
 
-    return false;
+    return true;
 
 
 
