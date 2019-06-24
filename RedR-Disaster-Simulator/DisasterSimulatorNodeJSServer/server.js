@@ -40,9 +40,8 @@ app.get('/hq-config', function (req, res) {
     res.sendFile(__dirname + '/hq-config.html');
 });
 
-app.get('/hq', function (req, res) {
-    console.log('request:kj ' + req.url);
-    res.sendFile(__dirname + '/HQ.html');
+app.get('/hq-run-simulation', function (req, res) {
+    res.sendFile(__dirname + '/hq-run-simulation.html');
 });
 
 
@@ -56,9 +55,9 @@ app.get('/ngoMain', function (req, res) {
     res.sendFile(__dirname + '/NGO.html');
 });
 
-app.post('/hq-run-simulation', function (req, res) {
+app.post('/upload', function (req, res) {
 
-    if (req.files) {
+    if (req.files != null) {
         console.log("filereq");
 
         let simFileTemp = req.files.simFile;
@@ -76,10 +75,10 @@ app.post('/hq-run-simulation', function (req, res) {
         if(!validFile){
             return res.status(500).send("Bad File, Please Input A Valid File :)");
         } else {
-            res.sendFile(__dirname + '/hq-run-simulation.html', function (err) {
-                res.end();
+            res.redirect('hq-run-simulation');
+            res.end("File Sent");
 
-            });
+
 
         }
         simData.ready = true;

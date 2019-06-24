@@ -82,6 +82,8 @@ body {
   border-width: medium;
   background-color: red;
   border-color: red;
+  color: white;
+  font-size: 2rem;
 }
 
 
