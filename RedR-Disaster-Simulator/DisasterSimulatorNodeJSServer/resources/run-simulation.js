@@ -9,6 +9,7 @@ var rowCount = 0;
 //Load Page Elements
 //loadCommunication();
 loadScenarioHeader();
+//handleNGOS();
 
 function loadScenarioHeader(){
 
@@ -20,7 +21,7 @@ function loadScenarioHeader(){
             var url = document.URL.split('/');
             url = url[2] + "/ngo";
 
-            var htmlContent = "<h1 class='mt-5'>Scenario: " + simTitle + "</h1>" +
+            var htmlContent = "<h1 class='titles'><span>Scenario: " + simTitle +  "</span></h1>" +
                 "<p class='lead'> Please inform your NGO's to go to this page: " + url + "</p>";
 
             $(htmlContent).appendTo(".scenarioTitle");
@@ -100,21 +101,97 @@ $(function () {
 
 });
 
-function handleNGOS() {
+$(function () {
 
-    if(ngos != null) {
-        console.log("TEST");
+console.log("ngo");
+    /*if(ngos != null) {*/
 
-            $('#ngoRecipient').append($('<option>', {
-                value: ngos[ngos.length-1].name,
-                text: ngos[ngos.length-1].name
+    $("#messagingElement").append("<div class='messagingButtons'></div>");
 
-            }));
+        $(".messagingButtons").append("<button class=\"btn btn-secondary\" onclick=\"switchNGOChat(this, 'ngo1')\" id=\"ngo1Button\">PeaceDoves</button>");
 
+        $(".messagingButtons").append("<button class=\"btn btn-secondary\" onclick=\"switchNGOChat(this, 'ngo2')\" id=\"ngo2Button\">PeaceDoves2</button>");
 
+    $(".messagingButtons").append("<button class=\"btn btn-secondary\" onclick=\"switchNGOChat(this, 'ngo3')\" id=\"ngo3Button\">PeaceDoves3</button>");
 
-        $('#ngoList').append("<ul id='" + ngos[ngos.length-1].name +"'>" + "NGO: " + ngos[ngos.length-1].name + "</ul>");
+    $(".messagingButtons").append("<button class=\"btn btn-secondary\" onclick=\"switchNGOChat(this, 'ngo4')\" id=\"ngo4Button\">PeaceDoves4</button>");
+
+    $(".messagingButtons").append("<button class=\"btn btn-secondary\" onclick=\"switchNGOChat(this, 'ngo5')\" id=\"ngo5Button\">PeaceDoves5</button>");
+
+    $(".messagingButtons").append("<button class=\"btn btn-secondary\" onclick=\"switchNGOChat(this, 'ngo6')\" id=\"ngo6Button\">PeaceDoves6</button>");
+
+    $(".messagingButtons").append("<button class=\"btn btn-secondary\" onclick=\"switchNGOChat(this, 'ngo7')\" id=\"ngo7Button\">PeaceDoves7</button>");
+
+    $(".messagingButtons").append("<button class=\"btn btn-secondary\" onclick=\"switchNGOChat(this, 'ngo8')\" id=\"ngo8Button\">PeaceDovesPeaceDoves</button>");
+
+        $("#messagingElement").append("<div class='messagingContent'></div>");
+
+        $(".messagingContent").append("<div id=\"ngo2\" class=\"tabcontent\">\n" +
+            "  <ul>\n" +
+            "    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ante nisi, mollis nec dignissim dignissim, rutrum eu eros. Integer ullamcorper vel urna in dictum. Mauris tempor, lectus at iaculis venenatis, lectus quam pellentesque nibh, non mollis velit dolor eget ipsum. Duis nec laoreet arcu. Sed risus est, pulvinar a lacinia vitae, elementum in sapien. Vestibulum urna turpis, laoreet id eros in, varius fringilla ipsum. </li>\n" +
+            "    <li>cat1</li>\n" +
+            "    <li>ca2</li>\n" +
+            "    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ante nisi, mollis nec dignissim dignissim, rutrum eu eros. Integer ullamcorper vel urna in dictum. Mauris tempor, lectus at iaculis venenatis, lectus quam pellentesque nibh, non mollis velit dolor eget ipsum. Duis nec laoreet arcu. Sed risus est, pulvinar a lacinia vitae, elementum in sapien. Vestibulum urna turpis, laoreet id eros in, varius fringilla ipsum.</li>\n" +
+            "    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ante nisi, mollis nec dignissim dignissim, rutrum eu eros. Integer ullamcorper vel urna in dictum. Mauris tempor, lectus at iaculis venenatis, lectus quam pellentesque nibh, non mollis velit dolor eget ipsum. Duis nec laoreet arcu. Sed risus est, pulvinar a lacinia vitae, elementum in sapien. Vestibulum urna turpis, laoreet id eros in, varius fringilla ipsum.</li>\n" +
+            "\n" +
+            "  </ul>\n" +
+            "\n" +
+            "\n" +
+            "</div>");
+
+        $(".messagingContent").append("<div id=\"ngo1\" class=\"tabcontent\">\n" +
+                "  <ul>\n" +
+                "    <li>cat</li>\n" +
+                "    <li>cat1</li>\n" +
+                "    <li>ca2</li>\n" +
+                "    <li>ca3</li>\n" +
+                "    <li>cat4</li>\n" +
+                "\n" +
+                "  </ul>\n" +
+                "\n" +
+                "\n" +
+                "</div>");
+
+    switchNGOChat();
+
+   /* }*/
+});
+
+function switchNGOChat(elmnt, ngo) {
+
+    //Highlight selected button and unlight non selected
+    if(ngo != null) {
+
+        buttons = document.getElementsByClassName("btn btn-secondary");
+        for (i = 0; i < buttons.length; i++) {
+            buttons[i].style.backgroundColor = "#b5b5b5";
+        }
+
+        document.getElementById(ngo+"Button").style.backgroundColor = "#EE2A2B";
     }
+
+
+
+
+    // Hide all elements with class="tabcontent" by default */
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Show the specific tab content
+    if(ngo != null) {
+        console.log("ngoselected: " + ngo);
+        document.getElementById(ngo).style.display = "block";
+    }
+}
+/*document.getElementById("defaultOpen").click();*/
+
+
+function openView() {
+
+
 }
 
 //redraw()

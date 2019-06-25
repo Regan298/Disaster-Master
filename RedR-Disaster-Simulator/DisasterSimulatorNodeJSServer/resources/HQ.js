@@ -112,7 +112,7 @@ function loadScenarioHeader(){
                 var url = document.URL.split('/');
                 url = url[2] + "/ngo";
 
-                var htmlContent = "<h1>Scenario: " + simTitle + "</h1>" +
+                var htmlContent = "<h1 class='scenarioHeaderText'>Scenario: " + simTitle + "</h1>" +
                     "<h2> Please inform your NGO's to go to this page: " + url + "</h2>";
 
                 $(htmlContent).appendTo(".header");
