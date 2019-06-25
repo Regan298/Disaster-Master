@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="49695245-0bfd-4e8e-ac0b-a4ae2f8b4c6d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/resources/disaster-sim-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/disaster-sim-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/run-simulation.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/run-simulation.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -14,12 +15,30 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/disaster-sim-style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="481">
-              <caret line="198" column="17" selection-start-line="198" selection-start-column="17" selection-end-line="198" selection-end-column="17" />
+            <state relative-caret-position="942">
+              <caret line="250" column="17" selection-start-line="250" selection-start-column="17" selection-end-line="250" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/run-simulation.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="867">
+              <caret line="157" column="30" selection-start-line="157" selection-start-column="22" selection-end-line="157" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="674">
+              <caret line="87" selection-start-line="87" selection-end-line="87" />
             </state>
           </provider>
         </entry>
@@ -30,8 +49,8 @@
     <findStrings>
       <find>navbar</find>
       <find>navbar-dark</find>
-      <find>fixed-bottom</find>
       <find>messaging</find>
+      <find>fixed-bottom</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -69,7 +88,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -86,6 +104,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -130,13 +149,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12084000" />
+    <option name="totallyTimeSpent" value="13094000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.33333334" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24980299" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -166,12 +185,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hq-run-simulation.html" />
-    <entry file="file://$PROJECT_DIR$/resources/run-simulation.js" />
+    <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="674">
+          <caret line="87" selection-start-line="87" selection-end-line="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/run-simulation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="157" column="30" selection-start-line="157" selection-start-column="22" selection-end-line="157" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/disaster-sim-style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="198" column="17" selection-start-line="198" selection-start-column="17" selection-end-line="198" selection-end-column="17" />
+        <state relative-caret-position="942">
+          <caret line="250" column="17" selection-start-line="250" selection-start-column="17" selection-end-line="250" selection-end-column="17" />
         </state>
       </provider>
     </entry>

@@ -190,22 +190,17 @@ body {
 }
 
 .messagingContent {
-  display: table;
+  display: inline;
   float: right;
   width: 70%;
   overflow-y: auto;
   height: 80%;
   margin-bottom: 5%;
   font-size: 1rem;
-  
   border-left: black;
   border-right: black;
   border-bottom: black;
-
   border-width: 1px;
-
-
-
 }
 
 .messagingContent ul {
@@ -236,20 +231,25 @@ body {
   color: black;
   border-radius: 0.25rem;
   max-width: 50%;
-
-
 }
 
-
-
-.messagingContent{
-  display: inline;
-
-
-
-
+#messageingForm{
+  position: absolute;
+  bottom: 0px;
+  width: 50%;
+  margin-bottom: 2%;
 }
 
+#messageingForm textarea {
+  float: left;
+  width: 50%;
+}
+
+#messageingForm input {
+  float: left;
+  margin-left: 1%;
+  margin-top: 1%;
+}
 
 [tabindex="-1"]:focus {
   outline: 0 !important;

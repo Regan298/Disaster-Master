@@ -152,6 +152,14 @@ console.log("ngo");
                 "\n" +
                 "</div>");
 
+
+    $(".messagingContent").append("<div id=\"messageingForm\">\n" +
+        "          <form action=\"\" id=\"messageHQ\">\n" +
+        "            <textarea form=\"messageHQ\" id=\"input\"></textarea>\n" +
+        "            <input type=\"submit\" value=\"Send\" class=\"button\"/>\n" +
+        "          </form>\n" +
+        "        </div>");
+
     switchNGOChat();
 
    /* }*/
