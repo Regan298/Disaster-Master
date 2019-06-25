@@ -158,11 +158,12 @@ body {
 
 .messagingElement {
   margin-top: 1%;
-  width: 45%;
+  width: 50%;
   height: 45%;
   border-style: solid;
   border-width: 1px;
   display: table;
+
 
 
 }
@@ -170,6 +171,7 @@ body {
 .messagingButtons {
   float: left;
   max-height: 100%;
+  max-width: 25%;
 }
 
 .messagingButtons button {
@@ -188,18 +190,20 @@ body {
 }
 
 .messagingContent {
-
+  display: table;
   float: right;
-  width: 65%;
+  width: 70%;
   overflow-y: auto;
   height: 80%;
   margin-bottom: 5%;
+  font-size: 1rem;
   
   border-left: black;
   border-right: black;
   border-bottom: black;
 
   border-width: 1px;
+
 
 
 }
