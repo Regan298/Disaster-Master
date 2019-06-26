@@ -158,49 +158,69 @@ body {
 
 .messagingElement {
   margin-top: 1%;
-  width: 50%;
-  height: 45%;
+  max-width: 50%;
+  max-height: 45%;
   border-style: solid;
   border-width: 1px;
-  display: table;
+  float: left;
+  margin: auto;
+  position: relative;
+  display: flex;
+
+  width: 50%;
+
+
+  /*position: relative;*/
 
 
 
 }
 
 .messagingButtons {
-  float: left;
+
   max-height: 100%;
   max-width: 25%;
+  align-self: stretch;
+
 }
 
 .messagingButtons button {
   margin-bottom: 15%;
-  float: left;
-  clear: both;
+
+
   max-width: 100%;
   min-width: 100%;
   text-align: center;
   padding-left: 1%;
   padding-right: 2%;
-
-
-
-
 }
 
+#ngo1, #ngo2, #ngo3, #ngo4, #ngo5, #ngo6, #ngo7, #ngo8{
+  visibility: hidden;
+}
+
+
 .messagingContent {
-  display: inline;
-  float: right;
-  width: 70%;
+  display: inline-block;
   overflow-y: auto;
-  height: 80%;
+  max-height: 80%;
+
+
+
+  /*display: inline;
+
+  overflow-y: auto;
+
+  float: right;
+
+  max-width: 30%;
+  max-height: 80%;
   margin-bottom: 5%;
   font-size: 1rem;
   border-left: black;
   border-right: black;
   border-bottom: black;
-  border-width: 1px;
+  border-width: 1px;*/
 }
 
 .messagingContent ul {
@@ -210,45 +230,92 @@ body {
 
 
 
-.messagingContent li:nth-child(odd){
+.messagingContent li#origin{
   clear: both;
   float: right;
   margin-top: 5%;
   list-style: none;
   background-color: red;
-  border-radius: 0.25rem;
   color: white;
+  border-radius: 0.25rem;
   max-width: 50%;
+  padding: 1em;
+  word-wrap: break-word;
 
 }
 
-.messagingContent li:nth-child(even){
-  clear: both;
+.messagingContent li#nonOrigin{
   float: left;
-  margin-top: 1%;
+  clear: both;
+  margin-top: 5%;
   list-style: none;
   background-color: #cacaca;
   color: black;
   border-radius: 0.25rem;
   max-width: 50%;
+  padding: 1em;
+  word-wrap: break-word;
+
+
+
 }
 
 #messageingForm{
-  position: absolute;
-  bottom: 0px;
+  display: inline;
+
+
   width: 50%;
-  margin-bottom: 2%;
+  float: left;
+
 }
 
-#messageingForm textarea {
+#messageHQ{
+
+
+  width: 90%;
+
+  margin-bottom: 1%;
+
+
   float: left;
-  width: 50%;
+
+
+
+
 }
 
-#messageingForm input {
+#messageHQ textarea {
+  resize: none;
   float: left;
-  margin-left: 1%;
-  margin-top: 1%;
+  width: 90%;
+
+
+  margin-bottom: 10%;
+
+  max-height: 5%;
+}
+
+#messageHQ input {
+  display: inline;
+
+
+  /*position: absolute;
+  right: 0;
+  left: 0;*/
+  /*float: right;*/
+
+  margin-top: 2%;
+
+
+}
+
+.inboxElement {
+  display: inline-block;
+
+  width: 50%;
+  height: 45%;
+  border: black;
+  border-style: solid;
 }
 
 [tabindex="-1"]:focus {

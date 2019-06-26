@@ -167,22 +167,23 @@ io.on('connection', function (socket) {
 
     socket.on('join', function (msg) {
         console.log("detect user send")
-        //if (ipCurrent != hostIP) {
+        if (ipCurrent != hostIP) {
 
             var found = false;
-            /*for (var i = 0; i < ngoUsers.length; i++) {
+            for (var i = 0; i < ngoUsers.length; i++) {
                 if (ngoUsers[i].ip == ipCurrent) {
                     found = true;
                     break;
                 }
-            }*/
+            }
 
             //if (!found) {
 
 
                 var ngo = {
                     ip: ipCurrent,
-                    name: msg
+                    name: msg,
+                    id: ngoUsers.length+1
                 }
 
                 console.log(ngo.ip);
@@ -193,7 +194,7 @@ io.on('connection', function (socket) {
             //}
 
 
-       // }
+        }
 
     });
 
