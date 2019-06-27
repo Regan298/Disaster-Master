@@ -10,6 +10,8 @@ var selectedNGOChat;
 //Load Page Elements
 //loadCommunication();
 loadScenarioHeader();
+//testing:
+getTempPDF();
 
 //handleNGOS();
 
@@ -82,8 +84,10 @@ function switchNGOChat(ngo) {
 }
 
 
-//Handle Messaging and Events
+//Once Page Loaded
 $(function () {
+    //Load PDF
+    PDFObject.embed("/files/test.pdf", "#emailViewer");
     //Needed to auto hide placeholder messaging content
     switchNGOChat();
     $('#messageHQ').submit(function (e) {
@@ -176,6 +180,10 @@ function loadEvents() {
 function getPDF(cellValue) {
     console.log(cellValue);
     PDFObject.embed(events[cellValue - 1].Location, "#outboxPdf");/*change my-container to pdf*/
+}
+
+function getTempPDF(){
+
 }
 
 function loadCommunication() {
