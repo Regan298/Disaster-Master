@@ -1,3 +1,13 @@
+var numDays=20;
+
+var startDate = new Date('2019-01-01 00:00:00');
+var endDate = startDate;
+endDate.setDate(endDate.getDate()+numDays);
+//endDate.setHours('24');
+//endDate.setMinutes();
+//endDate.setSeconds();
+
+
 var groups = new vis.DataSet([
     {id: 1, content: 'Group 1'},
     {id: 2, content: 'Group 2'},
@@ -21,9 +31,13 @@ var options = {
   verticalScroll: true,
   maxHeight: timelineHeight,
   orientation: 'bottom',
-  min: new Date('2019-01-01 00:00:00'),
-  max: new Date('2019-01-05 24:00:00'),
-  zoomMin: 9000000,
+  
+  
+  min: startDate,
+  //max: endDate,
+  
+  
+  //zoomMin: 9000000,
   margin: {
       item: 10,
       axis: 5
