@@ -207,9 +207,7 @@ body {
 .messagingContent {
     /*display: inline-block;*/
     overflow-y: auto;
-    max-height: 40vh;
-
-
+    max-height: 35vh;
 }
 
 .messagingContent ul {
@@ -257,20 +255,26 @@ body {
 
     /* left: 25%; */
 
-    min-width: 45%;
+    min-width: 100%;
 
-    float: left;
+    /* float: left; */
 
     /* vertical-align: top; */
 
-    top: 40%;
+    /* top: 40%; */
+
+    bottom: 0;
+
+    /* margin-left: 25%; */
+
+    padding-left: 30%;
 }
 
 #messageHQ {
     min-width: 100%;
     margin-bottom: 1%;
     float: left;
-    margin-left: 25%;
+    /* margin-left: 25%; */
 }
 
 #messageHQ textarea {
@@ -279,7 +283,7 @@ body {
     /* width: 65%; */
     max-height: 100%;
     /* MIN-HEIGHT: 100%; */
-    min-width: 50%;
+    min-width: 80%;
     margin-right: 5%;
 }
 

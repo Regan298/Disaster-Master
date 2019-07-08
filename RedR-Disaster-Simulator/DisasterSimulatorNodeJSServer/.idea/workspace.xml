@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="49695245-0bfd-4e8e-ac0b-a4ae2f8b4c6d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/hq-run-simulation.html" beforeDir="false" afterPath="$PROJECT_DIR$/hq-run-simulation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/styles/disaster-sim-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/styles/disaster-sim-style.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -33,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1031">
-              <caret line="197" selection-start-line="197" selection-end-line="197" />
+            <state relative-caret-position="861">
+              <caret line="187" column="63" selection-start-line="187" selection-start-column="63" selection-end-line="187" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -60,11 +60,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/styles/disaster-sim-style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187264">
-              <caret line="11149" column="41" selection-start-line="11149" selection-start-column="41" selection-end-line="11149" selection-end-column="41" />
+            <state relative-caret-position="1201">
+              <caret line="11153" column="41" selection-start-line="11153" selection-start-column="41" selection-end-line="11153" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -104,8 +104,8 @@
         <option value="$PROJECT_DIR$/NGOConfig.html" />
         <option value="$PROJECT_DIR$/NGO.html" />
         <option value="$PROJECT_DIR$/resources/js/run-simulation.js" />
-        <option value="$PROJECT_DIR$/resources/styles/disaster-sim-style.css" />
         <option value="$PROJECT_DIR$/hq-run-simulation.html" />
+        <option value="$PROJECT_DIR$/resources/styles/disaster-sim-style.css" />
       </list>
     </option>
   </component>
@@ -198,12 +198,12 @@
       <workItem from="1561503895710" duration="9991000" />
       <workItem from="1561604091704" duration="13048000" />
       <workItem from="1562548201533" duration="5947000" />
-      <workItem from="1562581852115" duration="34000" />
+      <workItem from="1562581852115" duration="638000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62902000" />
+    <option name="totallyTimeSpent" value="63506000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
@@ -285,17 +285,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/styles/disaster-sim-style.css">
+    <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187264">
-          <caret line="11149" column="41" selection-start-line="11149" selection-start-column="41" selection-end-line="11149" selection-end-column="41" />
+        <state relative-caret-position="861">
+          <caret line="187" column="63" selection-start-line="187" selection-start-column="63" selection-end-line="187" selection-end-column="63" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
+    <entry file="file://$PROJECT_DIR$/resources/styles/disaster-sim-style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1031">
-          <caret line="197" selection-start-line="197" selection-end-line="197" />
+        <state relative-caret-position="1201">
+          <caret line="11153" column="41" selection-start-line="11153" selection-start-column="41" selection-end-line="11153" selection-end-column="41" />
         </state>
       </provider>
     </entry>
