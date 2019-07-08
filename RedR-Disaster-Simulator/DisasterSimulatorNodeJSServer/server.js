@@ -20,8 +20,10 @@ var formidable = require('formidable');
 //ngoCount gets updated when file parsed
 const simData = {
     ready: false,
-    title: "Sebadoah",
-    ngoCount: 99
+    title: "",
+    ngoCount: 999,
+    ngoNames: []
+
 };
 
 
@@ -96,6 +98,7 @@ function parseXMLForLoading() {
     try {
         var name;
         var ngoCount;
+        var ngosArray;
         var eventsArray;
 
 
@@ -104,6 +107,13 @@ function parseXMLForLoading() {
             parser.parseString(data, function (err, result) {
                 simData.title = result['scenario']['name'].toString();
                 simData.ngoCount = result['scenario']['ngoCount'].toString();
+                ngosArray = result['scenario']['ngo'];
+                for (var i = 0; i < ngosArray.length; i++) {
+                    var currentNGOName = ngosArray[i].name;
+                    simData.ngoNames.push(currentNGOName);
+                }
+
+
                 eventsArray = result['scenario']['event'];
 
 

@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scenario name="Sebadoah" ngoCount="5">
+<scenario>
 	<name>Sebadoah</name>
 	<ngoCount>5</ngoCount>
+
+	<ngo>
+		<name>People First</name>
+
+	</ngo>
+
+	<ngo>
+		<name>We Care</name>
+
+	</ngo>
+
+	<ngo>
+		<name>EWB</name>
+
+	</ngo>
+
+	<ngo>
+		<name>Red Heart</name>
+
+	</ngo>
+
+	<ngo>
+		<name>Peacedoves</name>
+
+	</ngo>
+
+	<ngo>
+		<name>Reach Up</name>
+
+	</ngo>	
 	
 	<event>
 		<recipient>Test</recipient>
