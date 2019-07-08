@@ -295,10 +295,12 @@ body {
     /* float: right; */
     /* margin-left: 1%; */
     margin-top: 2%;
-    /* width: 10%; */
+    width: 10%;
     display: inline-block;
     vertical-align: top;
     float: left;
+    font-size: 100%;
+    padding: 0;
 }
 
 .inboxElement {
