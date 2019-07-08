@@ -166,7 +166,8 @@ body {
 .messagingElement {
     margin-top: 1%;
     max-width: 50%;
-    max-height: 45%;
+    max-height: 25%;
+    min-height: 25%;
     border-style: solid;
     border-width: 1px;
     float: left;
@@ -205,9 +206,10 @@ body {
 
 
 .messagingContent {
-    /*display: inline-block;*/
+    /* display: inline-block; */
     overflow-y: auto;
-    max-height: 35vh;
+    height: inherit;
+    margin-bottom: 16%;
 }
 
 .messagingContent ul {
