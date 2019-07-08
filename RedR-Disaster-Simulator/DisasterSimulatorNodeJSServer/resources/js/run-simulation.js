@@ -71,7 +71,7 @@ function switchNGOChat(ngo) {
     messagingContent = document.getElementsByClassName("messagingContent");
 
     for (i = 0; i < messagingContent.length; i++) {
-        messagingContent[i].style.visibility = "hidden";
+        messagingContent[i].style.display = "none";
     }
 
 
@@ -79,7 +79,7 @@ function switchNGOChat(ngo) {
     // Show the specific message content
     if (ngo != null) {
         console.log("ngoselected: " + ngo);
-        document.getElementById(ngo+"Content").style.visibility = "visible";
+        document.getElementById(ngo+"Content").style.display = "inline-block";
     }
 }
 
