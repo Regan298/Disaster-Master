@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="49695245-0bfd-4e8e-ac0b-a4ae2f8b4c6d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/hq-run-simulation.html" beforeDir="false" afterPath="$PROJECT_DIR$/hq-run-simulation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/run-simulation.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/run-simulation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/styles/disaster-sim-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/styles/disaster-sim-style.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -35,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="322" column="18" selection-start-line="322" selection-start-column="18" selection-end-line="322" selection-end-column="18" />
+            <state relative-caret-position="1031">
+              <caret line="197" selection-start-line="197" selection-end-line="197" />
             </state>
           </provider>
         </entry>
@@ -56,33 +54,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/js/run-simulation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="81" column="76" selection-start-line="81" selection-start-column="76" selection-end-line="81" selection-end-column="76" />
+            <state relative-caret-position="1377">
+              <caret line="81" column="78" selection-start-line="81" selection-start-column="78" selection-end-line="81" selection-end-column="78" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/styles/disaster-sim-style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
+            <state relative-caret-position="187264">
               <caret line="11149" column="41" selection-start-line="11149" selection-start-column="41" selection-end-line="11149" selection-end-column="41" />
-              <folding>
-                <element signature="e#41512#41746#2" expanded="true" />
-                <element signature="e#42667#42820#1" expanded="true" />
-                <element signature="e#42862#43096#1" expanded="true" />
-                <element signature="e#46535#46811#2" expanded="true" />
-                <element signature="e#47760#47913#1" expanded="true" />
-                <element signature="e#47955#48231#1" expanded="true" />
-                <element signature="e#83715#83902#2" expanded="true" />
-                <element signature="e#84163#84299#2" expanded="true" />
-                <element signature="e#84760#84893#2" expanded="true" />
-                <element signature="e#86657#86810#1" expanded="true" />
-                <element signature="e#102422#102652#2" expanded="true" />
-                <element signature="e#103688#103924#2" expanded="true" />
-                <element signature="e#141759#141936#2" expanded="true" />
-                <element signature="e#141993#142170#2" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -122,8 +104,8 @@
         <option value="$PROJECT_DIR$/NGOConfig.html" />
         <option value="$PROJECT_DIR$/NGO.html" />
         <option value="$PROJECT_DIR$/resources/js/run-simulation.js" />
-        <option value="$PROJECT_DIR$/hq-run-simulation.html" />
         <option value="$PROJECT_DIR$/resources/styles/disaster-sim-style.css" />
+        <option value="$PROJECT_DIR$/hq-run-simulation.html" />
       </list>
     </option>
   </component>
@@ -138,7 +120,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="170" />
     <option name="y" value="91" />
     <option name="width" value="1026" />
@@ -150,7 +132,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -173,6 +154,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -216,17 +198,18 @@
       <workItem from="1561503895710" duration="9991000" />
       <workItem from="1561604091704" duration="13048000" />
       <workItem from="1562548201533" duration="5947000" />
+      <workItem from="1562581852115" duration="34000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62868000" />
+    <option name="totallyTimeSpent" value="62902000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24925596" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24901497" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -295,40 +278,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="322" column="18" selection-start-line="322" selection-start-column="18" selection-end-line="322" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/run-simulation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="81" column="76" selection-start-line="81" selection-start-column="76" selection-end-line="81" selection-end-column="76" />
+        <state relative-caret-position="1377">
+          <caret line="81" column="78" selection-start-line="81" selection-start-column="78" selection-end-line="81" selection-end-column="78" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/styles/disaster-sim-style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
+        <state relative-caret-position="187264">
           <caret line="11149" column="41" selection-start-line="11149" selection-start-column="41" selection-end-line="11149" selection-end-column="41" />
-          <folding>
-            <element signature="e#41512#41746#2" expanded="true" />
-            <element signature="e#42667#42820#1" expanded="true" />
-            <element signature="e#42862#43096#1" expanded="true" />
-            <element signature="e#46535#46811#2" expanded="true" />
-            <element signature="e#47760#47913#1" expanded="true" />
-            <element signature="e#47955#48231#1" expanded="true" />
-            <element signature="e#83715#83902#2" expanded="true" />
-            <element signature="e#84163#84299#2" expanded="true" />
-            <element signature="e#84760#84893#2" expanded="true" />
-            <element signature="e#86657#86810#1" expanded="true" />
-            <element signature="e#102422#102652#2" expanded="true" />
-            <element signature="e#103688#103924#2" expanded="true" />
-            <element signature="e#141759#141936#2" expanded="true" />
-            <element signature="e#141993#142170#2" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1031">
+          <caret line="197" selection-start-line="197" selection-end-line="197" />
         </state>
       </provider>
     </entry>
