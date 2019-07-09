@@ -22,7 +22,7 @@ const simData = {
     ready: false,
     title: "",
     ngoCount: 999,
-    ngoNames: []
+    ngoList: []
 
 };
 
@@ -110,7 +110,17 @@ function parseXMLForLoading() {
                 ngosArray = result['scenario']['ngo'];
                 for (var i = 0; i < ngosArray.length; i++) {
                     var currentNGOName = ngosArray[i].name;
-                    simData.ngoNames.push(currentNGOName);
+                    var currentNGOPasskey = ngosArray[i].passkey;
+                    var ngo = {
+                        name: currentNGOName,
+                        passkey: currentNGOPasskey
+                    }
+                    simData.ngoList.push(ngo);
+                }
+
+                //debug the ngo ids
+                for (var i = 0; i < simData.ngoList.length; i++) {
+                    console.log(simData.ngoList[i].id);
                 }
 
 
@@ -188,12 +198,21 @@ io.on('connection', function (socket) {
             }
 
             //if (!found) {
+            var ngoName;
+
+                for (var i = 0; i < simData.ngoList.length; i++) {
+
+                    if(simData.ngoList[i].passkey == msg){
+                        ngoName = simData.ngoList[i].name;
+                    }
+
+                }
 
 
                 var ngo = {
                     ip: ipCurrent,
-                    name: msg,
-                    id: ngoUsers.length+1
+                    id: msg,
+                    name: ngoName
                 }
 
                 console.log(ngo.ip);
@@ -210,6 +229,7 @@ io.on('connection', function (socket) {
 
     //socket.emit('ngoName', ngoTemp.name);
 
+    //Send NGO Name To Relevant NGO
     for(var i = 0; i < ngoUsers.length; i++){
         ngoTemp = ngoUsers[i];
         if(ngoTemp.ip == ipCurrent){
@@ -220,6 +240,18 @@ io.on('connection', function (socket) {
         }
     }
 
+    //Send each NGO name to HQ
+
+    //Make an array that contains every ngo name
+    var ngoNames = [];
+    for(var i=0; i < simData.ngoList.length; i++){
+        ngoNames.push(simData.ngoList[i].name);
+    }
+    console.log("ngoNames: " + ngoNames.length);
+    io.emit('currentNGONames', {ngoNames});
+
+
+    //dk wat this does rn:
     io.emit('users', {ngoUsers});
 
     if(simData.ready){

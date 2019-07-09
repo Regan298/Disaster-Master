@@ -5,6 +5,7 @@ var started;
 var events = [];
 var rowCount = 0;
 var selectedNGOChat;
+var ngoNames;
 
 
 //Load Page Elements
@@ -12,6 +13,9 @@ var selectedNGOChat;
 loadScenarioHeader();
 //testing:
 getTempPDF();
+//getNGONames();
+
+
 
 //handleNGOS();
 
@@ -41,12 +45,26 @@ socket.on('ngoList', function (data) {
     handleNGOS();
 });
 
+/*function getNGONames() {*/
+
+    socket.on('currentNGONames', function (data) {
+        console.log("got names");
+        ngoNames = data.ngoNames;
+
+
+    });
+
+/*}*/
+
+
 function handleNGOS() {
-    //Change placeholder button text to be actual ngo name and set this button to visible
+    //Find ngo button and reveal it
     if (ngos != null) {
         let currentNGOName = ngos[ngos.length - 1].name;
-        document.getElementById("ngo" + ngos.length).innerHTML = currentNGOName;
-        document.getElementById("ngo"+ngos.length).style.visibility = "visible";
+
+        console.log("id: " + ngos[ngos.length - 1].id);
+
+        document.getElementById(ngos[ngos.length - 1].id).style.visibility = "visible";
     }
 }
 
@@ -75,17 +93,18 @@ function switchNGOChat(ngo) {
     }
 
 
-
     // Show the specific message content
     if (ngo != null) {
         console.log("ngoselected: " + ngo);
-        document.getElementById(ngo+"Content").style.display = "inline-block";
+        document.getElementById(ngo + "Content").style.display = "inline-block";
     }
 }
 
 
 //Once Page Loaded
 $(function () {
+    //Update Communication Buttons
+    fillCommunicationButtons();
     //Load PDF
     PDFObject.embed("/files/test.pdf", "#emailViewer");
     //Needed to auto hide placeholder messaging content
@@ -93,7 +112,7 @@ $(function () {
     $('#messageHQ').submit(function (e) {
         e.preventDefault(); // prevents page reloading
         // Add send message to ngo conversation
-        console.log(selectedNGOChat);
+
         addToConversation($('#input').val(), true, null);
 
         //Find actual Name of NGO
@@ -116,7 +135,7 @@ $(function () {
 
         var from = msg.recievedMessage.from;
         var to = msg.recievedMessage.to;
-        if(from != "HQ"){
+        if (from != "HQ") {
             addToConversation(msg.recievedMessage.content, false, from);
         }
 
@@ -128,53 +147,34 @@ function addToConversation(content, isOrigin, from) {
 
     console.log("to" + from);
 
-    if(isOrigin) {
+    if (isOrigin) {
         $("#" + selectedNGOChat + "Content").append("<li id='origin'>" + content + "</li>");
     } else {
 
         var ngoId;
 
 
-
-
-
-        for(i = 0; i < ngos.length; i++){
-            if(ngos[i].name == from){
+        for (i = 0; i < ngos.length; i++) {
+            if (ngos[i].name == from) {
                 ngoId = ngos[i].id;
             }
         }
 
         console.log(ngoId);
 
-        $("#" + "ngo" + ngoId + "Content").append("<li id='nonOrigin'>" + content + "</li>");
+        $("#" + ngoId + "Content").append("<li id='nonOrigin'>" + content + "</li>");
     }
 }
 
-function loadEvents() {
+function fillCommunicationButtons() {
 
-
-    var table = document.getElementById("outboxTable");
-    //adds cells as well as the titles of cells into the cells
-    while (table.hasChildNodes()) {
-        table.removeChild(table.firstChild);
+    var buttons = document.getElementsByClassName("btn btn-secondary");
+    console.log("buttonL: " + buttons.length);
+    console.log("ngonamesL: " + ngoNames.length);
+    for (i = 0; i < buttons.length; i++) {
+        buttons[i].innerHTML = ngoNames[i];
     }
 
-
-    for (var i = 0; i < events.length; i++) {
-        var row = table.insertRow(i);
-        var cell1 = row.insertCell(0);
-        cell1.innerHTML = "HQ" + " " + "Subject" + " " + events[i].Time;
-        table.rows[i].cells[0].onclick = function () {
-            rIndex = this.parentElement.rowIndex;
-            cIndex = this.cellIndex;
-            //console.log("Row : "+rIndex+" , Cell : "+cIndex);
-            var cellValue = (table.rows[rIndex].cells[cIndex].innerHTML);
-            getPDF(i);
-        };
-    }
-
-    //rowCount++;
-    //$(htmlContent).appendTo(".events");
 }
 
 function getPDF(cellValue) {
@@ -182,7 +182,7 @@ function getPDF(cellValue) {
     PDFObject.embed(events[cellValue - 1].Location, "#outboxPdf");/*change my-container to pdf*/
 }
 
-function getTempPDF(){
+function getTempPDF() {
 
 }
 

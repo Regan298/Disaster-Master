@@ -186,7 +186,10 @@ body {
 
     align-self: stretch;
 
-    border: solid;
+
+
+    border-right: solid;
+    border-width: 1px;
 }
 
 .messagingButtons button {
@@ -210,6 +213,7 @@ body {
     overflow-y: auto;
     height: inherit;
     margin-bottom: 16%;
+    min-width: 75%;
 }
 
 .messagingContent ul {
