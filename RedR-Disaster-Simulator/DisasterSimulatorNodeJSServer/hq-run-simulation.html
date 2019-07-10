@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Redr Disaster Simulator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="styles/disaster-sim-style.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/run-simulation.js"></script>
+<script src="js/PDFObject/pdfobject.js"></script>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
+    <div class="container">
+        <a class="navbar-brand"><img src="assets/redr-aus-logo.png" alt="" he></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="help">Help</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center" id="mainContent">
+            <!--Scenario Title Gets Updated In Socket-->
+            <div class="scenarioTitle"></div>
+
+            <!--Play/Pause-->
+            <div class="timeControl">
+                <img src="assets/play.png">
+            </div>
+
+
+            <!--Timer-->
+            <div id="timeManagement">
+                <script src="js/countdownTimer.js"></script>
+            </div>
+
+            <!--Timeline-->
+            <div id="timeline" class="timeline">
+
+                <div id="eventOverlay" onclick="off()"><!-- container for overlay -->
+
+                    <div id=overlayText>
+                        <h3 id="eventViewRecipiant" style="margin: 0; padding:0;">Recipiant: name</h3>
+                        <h3 id="eventViewSubject" style="margin: 0; padding:0;">Subject: Day 5 Report</h3>
+                        <h3 id="eventViewSchedule" style="margin: 0; padding:0;">Scheduled Time: Day 2 14:33</h3>
+                    </div>
+
+
+                    <div id="overlayPdf"></div>
+                    <script src="js/PDFObject/pdfobject.js"></script>
+                    <script>PDFObject.embed("pdftest.pdf", "#overlayPdf");</script>
+
+                </div>
+
+
+                <div id="visualization"></div><!-- container for timeline -->
+
+                <script src="js/vis-4.21.0/dist/vis.js"></script>
+                <link href="js/vis-4.21.0/dist/vis.css" rel="stylesheet" type="text/css"/>
+                <script type="text/javascript" src="js/timelineComponents.js"></script>
+
+                <script type="text/javascript">//initialises timeline object
+                var container = document.getElementById('visualization');
+                var timeline = new vis.Timeline(container, items, groups, options);
+                </script>
+
+                <script>
+                    socket.on('timelineEvents', function (events) {
+                        console.log("got " + events.result);
+
+                        for (var i = 0; i < events.result.length; i++) {
+                            console.log(events.result[i]);
+                            items.push({
+                                id: events.result[i].id,
+                                group: 1,
+                                content: events.result[i].Location,
+                                start: '2019-05-10 ' + events.result[i].Time
+                            });
+                        }
+                        timeline.setItems(items);
+                        //timeline.redraw();
+                    });
+
+                    $(function () {
+                        var msg = 'hi';
+                        socket.emit('timelineReady', {
+                            msg
+                        });
+                    });
+                </script>
+
+
+                <script>//functions for activating/disabling overlay
+                timeline.on('select', function on() {
+                    document.getElementById("eventOverlay").style.display = "block";
+                });
+
+                function off() {
+                    document.getElementById("eventOverlay").style.display = "none";
+                }
+                </script>
+
+            </div>
+
+            <!--Messaging Title-->
+            <div id="messagingTitle" class="messagingTitle">
+                <h1 class="titles"><span>Communication</span></h1>
+            </div>
+
+            <!--Email Title-->
+            <div id="inboxTitle" class="inboxTitle">
+                <h1 class="titles"><span>Inbox</span></h1>
+            </div>
+
+            <!--Messaging Element-->
+            <div id="messagingElement" class="messagingElement">
+
+
+                <!--add buttons-->
+                <div id="messagingButtons" class='messagingButtons'>
+                    <button class="btn btn-secondary" onclick="switchNGOChat('ngo1')" id="ngo1">ngongongo</button>
+                    <button class="btn btn-secondary" onclick="switchNGOChat('ngo2')" id="ngo2">ngongongo</button>
+                    <button class="btn btn-secondary" onclick="switchNGOChat('ngo3')" id="ngo3">ngongongo</button>
+                    <button class="btn btn-secondary" onclick="switchNGOChat('ngo4')" id="ngo4">ngongongo</button>
+                    <button class="btn btn-secondary" onclick="switchNGOChat('ngo5')" id="ngo5">ngongongo</button>
+                    <button class="btn btn-secondary" onclick="switchNGOChat('ngo6')" id="ngo6">ngongongo</button>
+                    <button class="btn btn-secondary" onclick="switchNGOChat('ngo7')" id="ngo7">ngongongo</button>
+                    <button class="btn btn-secondary" onclick="switchNGOChat('ngo8')" id="ngo8">ngongongo</button>
+
+                </div>
+
+
+                <!--add div for each NGO conversation-->
+                <div class='messagingContent' id="ngo1Content">
+                    <ul></ul>
+                </div>
+                <div class='messagingContent' id='ngo2Content'>
+                    <ul></ul>
+                </div>
+                <div class='messagingContent' id='ngo3Content'>
+                    <ul></ul>
+                </div>
+                <div class='messagingContent' id='ngo4Content'>
+                    <ul></ul>
+                </div>
+                <div class='messagingContent' id='ngo5Content'>
+                    <ul></ul>
+                </div>
+                <div class='messagingContent' id='ngo6Content'>
+                    <ul></ul>
+                </div>
+                <div class='messagingContent' id='ngo7Content'>
+                    <ul></ul>
+                </div>
+                <div class='messagingContent' id='ngo8Content'>
+                    <ul></ul>
+                </div>
+
+                <div id="messageingForm">
+                    <form action="" id="messageHQ">
+                        <textarea form="messageHQ" id="input"></textarea>
+                        <input type="submit" value="Send" class="button"/>
+                    </form>
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+            <div id="inboxElement" class="inboxElement">
+                <div id="inboxEmails" class="inboxEmails">
+                    <ul>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+                        <li>
+                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                                <p class="emailTime">3:00PM</p></button>
+                        </li>
+
+
+                    </ul>
+                </div>
+
+                <!--Placeholder for PDF Viewer-->
+                <div id="emailViewer" class="emailViewer">
+
+
+                </div>
+
+            </div>
+
+
+
+            <!--add messaging form-->
+
+
+
+        </div>
+    </div>
+</div>
+
+<footer class="bg-light fixed-bottom">
+    <div class="container text-center">
+        <span class="text-center">Victoria University Of Wellington 2019</span>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<!-- <script src="vendor/jquery/jquery.slim.min.js"></script>
+ <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+
+
+</body>
+
+</html>

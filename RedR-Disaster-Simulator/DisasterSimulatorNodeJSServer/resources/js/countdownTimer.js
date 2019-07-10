@@ -1,4 +1,7 @@
+//should be from server:
 var countdownDuration = 10000000;
+
+//Add Play Button
 
 
 //get current time + countdown Duration
@@ -20,14 +23,14 @@ var time = setInterval(function() {
 
  //display remaining time
  if(hours==0){
-	 document.getElementById("countdownTimer").innerHTML = minutes + "m " + seconds + "s ";
+	 document.getElementById("timeManagement").innerHTML = minutes + "m " + seconds + "s ";
  } else {
-	 document.getElementById("countdownTimer").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+	 document.getElementById("timeManagement").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
  }
 
   // When time up display text 
   if (remainingTime < 0) {
     clearInterval(time);
-    document.getElementById("countdownTimer").innerHTML = "EXPIRED";
+    document.getElementById("timeManagement").innerHTML = "EXPIRED";
   }
 }, 1000);

@@ -194,13 +194,13 @@
         var style = "";
 
         if(targetSelector && targetSelector !== document.body){
-            style = "width: " + width + "; height: " + height + ";";
+            style = "width: " + width + "; min-height: " + height + ";";
         } else {
             style = "position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%;";
         }
 
         targetNode.className += " pdfobject-container";
-        targetNode.innerHTML = "<embed " + id + " class='pdfobject' src='" + url + pdfOpenFragment + "' type='application/pdf' style='overflow: auto; " + style + "'/>";
+        targetNode.innerHTML = "<embed " + id + " class='pdfobject' src='" + url + pdfOpenFragment + "' type='application/pdf' '/>";
 
         return targetNode.getElementsByTagName("embed")[0];
 

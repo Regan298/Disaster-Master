@@ -20,8 +20,10 @@ var formidable = require('formidable');
 //ngoCount gets updated when file parsed
 const simData = {
     ready: false,
-    title: "Sebadoah",
-    ngoCount: 99
+    title: "",
+    ngoCount: 999,
+    ngoList: []
+
 };
 
 
@@ -33,13 +35,15 @@ const worker = new Worker('./autoevents.js');
 app.use(express.static('resources'));
 
 app.get('/', function (req, res) {
-    console.log('request:kj ' + req.url);
-    res.sendFile(__dirname + '/HQConfig.html');
+    res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/hq', function (req, res) {
-    console.log('request:kj ' + req.url);
-    res.sendFile(__dirname + '/HQ.html');
+app.get('/hq-config', function (req, res) {
+    res.sendFile(__dirname + '/hq-config.html');
+});
+
+app.get('/hq-run-simulation', function (req, res) {
+    res.sendFile(__dirname + '/hq-run-simulation.html');
 });
 
 
@@ -55,59 +59,98 @@ app.get('/ngoMain', function (req, res) {
 
 app.post('/upload', function (req, res) {
 
-    //TODO: Suss File Properly
-    if (req.files) {
-        console.log("file stuff");
-
+    if (req.files != null) {
+        console.log("filereq");
 
         let simFileTemp = req.files.simFile;
 
         simFileTemp.mv(__dirname + '/currentScenario.xml', function (err) {
-            if(err)
+            if(err) {
                 return res.status(500).send(err);
+            }
 
         });
-        simData.ready = true;
-        parseXMLForLoading();
 
+
+        let validFile = parseXMLForLoading();
+
+        if(!validFile){
+            return res.status(500).send("Bad File, Please Input A Valid File :)");
+        } else {
+            res.redirect('hq-run-simulation');
+            res.end("File Sent");
+
+
+
+        }
+        simData.ready = true;
+
+
+
+    } else {
+        return res.status(500).send("Bad File, Please Input A Valid File :)");
     }
 
 });
 
 function parseXMLForLoading() {
-    var name;
-    var ngoCount;
-    var eventsArray;
+
+    try {
+        var name;
+        var ngoCount;
+        var ngosArray;
+        var eventsArray;
 
 
+        var parser = new xml2js.Parser();
+        fs.readFile(__dirname + '/currentScenario.xml', function (err, data) {
+            parser.parseString(data, function (err, result) {
+                simData.title = result['scenario']['name'].toString();
+                simData.ngoCount = result['scenario']['ngoCount'].toString();
+                ngosArray = result['scenario']['ngo'];
+                for (var i = 0; i < ngosArray.length; i++) {
+                    var currentNGOName = ngosArray[i].name;
+                    var currentNGOPasskey = ngosArray[i].passkey;
+                    var ngo = {
+                        name: currentNGOName,
+                        passkey: currentNGOPasskey
+                    }
+                    simData.ngoList.push(ngo);
+                }
 
-    var parser = new xml2js.Parser();
-    fs.readFile(__dirname + '/currentScenario.xml', function(err, data) {
-        parser.parseString(data, function (err, result) {
-            simData.title = result['scenario']['name'].toString();
-            simData.ngoCount = result['scenario']['ngoCount'].toString();
-            eventsArray = result['scenario']['event'];
-
-
-
-            for(var i = 0; i < eventsArray.length; i++){
-                var currentEventRecipient = eventsArray[i].recipient;
-                var currentEventTime = eventsArray[i].time;
-                var currentEventType = eventsArray[i].type;
-                var currentEventLocation = eventsArray[i].location;
-
-                var sql = "INSERT INTO timelineevents (Recipient, Time, Type, Location)" +
-                    " VALUES (" + "'" + currentEventRecipient  + "', '" + currentEventTime + "', '" + currentEventType + "', '"
-                    + currentEventLocation + "') ";
-                pool.query(sql, function (err, result) {
-                    if (err) throw err;
-                    console.log("timeline event loaded from file");
-                });
-            }
+                //debug the ngo ids
+                for (var i = 0; i < simData.ngoList.length; i++) {
+                    console.log(simData.ngoList[i].id);
+                }
 
 
+                eventsArray = result['scenario']['event'];
+
+
+                for (var i = 0; i < eventsArray.length; i++) {
+                    var currentEventRecipient = eventsArray[i].recipient;
+                    var currentEventTime = eventsArray[i].time;
+                    var currentEventType = eventsArray[i].type;
+                    var currentEventLocation = eventsArray[i].location;
+
+                    var sql = "INSERT INTO timelineevents (Recipient, Time, Type, Location)" +
+                        " VALUES (" + "'" + currentEventRecipient + "', '" + currentEventTime + "', '" + currentEventType + "', '"
+                        + currentEventLocation + "') ";
+                    pool.query(sql, function (err, result) {
+                        if (err) throw err;
+                        console.log("timeline event loaded from file");
+                    });
+                }
+
+
+            });
         });
-    });
+
+    } catch (e) {
+        return false;
+    }
+
+    return true;
 
 
 
@@ -144,22 +187,32 @@ io.on('connection', function (socket) {
 
     socket.on('join', function (msg) {
         console.log("detect user send")
-        //if (ipCurrent != hostIP) {
+        if (ipCurrent != hostIP) {
 
             var found = false;
-            /*for (var i = 0; i < ngoUsers.length; i++) {
+            for (var i = 0; i < ngoUsers.length; i++) {
                 if (ngoUsers[i].ip == ipCurrent) {
                     found = true;
                     break;
                 }
-            }*/
+            }
 
             //if (!found) {
+            var ngoName;
+
+                for (var i = 0; i < simData.ngoList.length; i++) {
+
+                    if(simData.ngoList[i].passkey == msg){
+                        ngoName = simData.ngoList[i].name;
+                    }
+
+                }
 
 
                 var ngo = {
                     ip: ipCurrent,
-                    name: msg
+                    id: msg,
+                    name: ngoName
                 }
 
                 console.log(ngo.ip);
@@ -170,12 +223,13 @@ io.on('connection', function (socket) {
             //}
 
 
-       // }
+        }
 
     });
 
     //socket.emit('ngoName', ngoTemp.name);
 
+    //Send NGO Name To Relevant NGO
     for(var i = 0; i < ngoUsers.length; i++){
         ngoTemp = ngoUsers[i];
         if(ngoTemp.ip == ipCurrent){
@@ -186,6 +240,18 @@ io.on('connection', function (socket) {
         }
     }
 
+    //Send each NGO name to HQ
+
+    //Make an array that contains every ngo name
+    var ngoNames = [];
+    for(var i=0; i < simData.ngoList.length; i++){
+        ngoNames.push(simData.ngoList[i].name);
+    }
+    console.log("ngoNames: " + ngoNames.length);
+    io.emit('currentNGONames', {ngoNames});
+
+
+    //dk wat this does rn:
     io.emit('users', {ngoUsers});
 
     if(simData.ready){
@@ -242,7 +308,7 @@ var pool = mysql.createPool({
 	connectionLimit: 50
 });
 
-wait(5000);
+wait(3000);
 
 pool.getConnection(function (err, conn) {
 	if (err) throw err;
