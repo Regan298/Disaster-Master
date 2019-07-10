@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scenario name="Sebadoah" ngoCount="5">
+<scenario>
 	<name>Sebadoah</name>
 	<ngoCount>5</ngoCount>
+
+	<ngo>
+		<name>People First</name>
+		<passkey>ngo1</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>We Care</name>
+		<passkey>ngo2</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>EWB</name>
+		<passkey>ngo3</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>Red Heart</name>
+		<passkey>ngo4</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>Peacedoves</name>
+		<passkey>ngo5</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>Reach Up</name>
+		<passkey>ngo6</passkey>
+
+	</ngo>	
 	
     <event>
 		<recipient>Test</recipient>
