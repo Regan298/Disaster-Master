@@ -63,7 +63,11 @@ body {
     text-align: left;
     background-color: #fff;
     min-width: 500px;
-    height: 100%;
+    /*min-height: 100%;
+    max-height: 125%;*/
+
+    padding-bottom: 5%;
+
 
 }
 
@@ -211,7 +215,7 @@ body {
 .messagingContent {
     /* display: inline-block; */
     overflow-y: auto;
-    height: inherit;
+    max-height: 50vh;
     margin-bottom: 16%;
     min-width: 75%;
 }
@@ -322,7 +326,7 @@ body {
 .inboxEmails {
     float: left;
     max-width: 30%;
-    max-height: 100%;
+    max-height: 60vh;
     min-width: 30%;
     overflow-y: auto;
     padding-right: 2%;
@@ -338,6 +342,8 @@ body {
 
     float: left;
     list-style: none;
+    max-height: inherit;
+    min-height: inherit;
 }
 
 .inboxEmails li {
@@ -361,7 +367,7 @@ body {
 
 .pdfobject {
 
-    min-height: 75vh;
+    min-height: 60vh;
     overflow: auto;
     width: 100%;
     float: right;
