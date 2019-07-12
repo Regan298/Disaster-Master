@@ -2,9 +2,607 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="49695245-0bfd-4e8e-ac0b-a4ae2f8b4c6d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/FileSaver.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/js/PDFObject/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/js/PDFObject/bower.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/js/PDFObject/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/js/PDFObject/pdfobject.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/js/PDFObject/pdfobject.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/js/PDFObject/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/js/countdownTimer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/pdftest.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/review/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/review/FileSaver.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/review/review.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/review/scripts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/review/xml.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/.babelrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/.codeclimate.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/.csslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/.github/ISSUE_TEMPLATE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/.github/PULL_REQUEST_TEMPLATE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/.mdlrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/CONTRIBUTING.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/HISTORY.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/LICENSE-APACHE-2.0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/LICENSE-MIT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/bower.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/img/network/acceptDeleteIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/img/network/addNodeIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/img/network/backIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/img/network/connectIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/img/network/cross.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/img/network/cross2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/img/network/deleteIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/img/network/downArrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/img/network/editIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/img/network/leftArrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/img/network/minus.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/img/network/plus.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/img/network/rightArrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/img/network/upArrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/img/network/zoomExtends.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/vis-graph3d.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/vis-network.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/vis-network.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/vis-timeline-graph2d.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/vis-timeline-graph2d.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/vis.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/vis.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/vis.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/vis.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/vis.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/dist/vis.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/css/bootstrap-theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/css/bootstrap-theme.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/css/bootstrap-theme.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/css/bootstrap.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/css/carousel.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/css/prettify.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/css/tipuesearch.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/data/dataset.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/data/dataview.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/data/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/graph2d/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/graph3d/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/img/arrow.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/img/crossword.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/img/crosswordStrong.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/img/external-link-icons/external-link-icon-white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/img/external-link-icons/external-link-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/img/external-link-icons/license.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/img/graph/graph.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/img/graph/graph120x60.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/img/graph3d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/img/graph3d120x60.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/img/timeline/timeline.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/img/timeline/timeline120x60.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/img/vis_overview.odg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/img/vis_overview.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/docs.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/googleAnalytics.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/ie-emulation-modes-warning.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/ie10-viewport-bug-workaround.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/jquery.highlight.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/jquery.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/jquery.url.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/prettify/lang-apollo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/prettify/lang-css.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/prettify/lang-hs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/prettify/lang-lisp.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/prettify/lang-lua.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/prettify/lang-ml.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/prettify/lang-proto.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/prettify/lang-scala.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/prettify/lang-sql.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/prettify/lang-vb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/prettify/lang-vhdl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/prettify/lang-wiki.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/prettify/lang-yaml.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/prettify/prettify.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/prettify/prettify.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/smooth-scroll.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/tipuesearch.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/tipuesearch.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/tipuesearch.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/js/toggleTable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/network/configure.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/network/edges.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/network/groups.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/network/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/network/interaction.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/network/layout.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/network/manipulation.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/network/nodes.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/network/physics.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/docs/timeline/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/01_basic.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/02_bars.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/03_groups.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/04_rightAxis.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/05_bothAxis.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/06_interpolation.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/07_scrollingAndSorting.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/08_performance.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/09_external_legend.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/10_barsSideBySide.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/11_barsSideBySideGroups.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/12_customRange.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/13_localization.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/14_toggleGroups.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/15_streaming_data.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/16_bothAxisTitles.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/17_dynamicStyling.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/18_scatterplot.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/19_labels.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/20_shading.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/21_barsWithEnd.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph2d/default.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/01_basics.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/02_camera.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/03_filter_data.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/04_animation.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/05_line.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/06_moving_dots.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/07_dot_cloud_colors.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/08_dot_cloud_size.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/09_mobile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/10_styling.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/11_tooltips.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/12_custom_labels.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/default.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/csv2array.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/csv2datatable.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/datasource.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/datasource.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/playground.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/playground.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/prettify/lang-apollo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/prettify/lang-css.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/prettify/lang-hs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/prettify/lang-lisp.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/prettify/lang-lua.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/prettify/lang-ml.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/prettify/lang-proto.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/prettify/lang-scala.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/prettify/lang-sql.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/prettify/lang-vb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/prettify/lang-vhdl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/prettify/lang-wiki.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/prettify/lang-yaml.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/prettify/prettify.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/graph3d/playground/prettify/prettify.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/basicUsage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/datasets.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/data/cellular_automata.gv.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/data/computer_network.gv.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/data/simple.gv.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/dotEdgeStyles.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/dotLanguage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/dotPlayground.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/graphvizGallery/fsm.gv.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/graphvizGallery/hello.gv.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/graphvizGallery/process.gv.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/graphvizGallery/screenshots/fsm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/graphvizGallery/screenshots/hello.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/graphvizGallery/screenshots/softmaint.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/graphvizGallery/screenshots/traffic_lights.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/graphvizGallery/siblings.gv.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/graphvizGallery/softmaint.gv.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/graphvizGallery/traffic_lights.gv.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/graphvizGallery/transparency.gv.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/graphvizGallery/twopi2.gv.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/graphvizGallery/unix.gv.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dotLanguage/graphvizGallery/world.gv.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/dynamicData.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/importingFromGephi.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/scalingCustom.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/scalingNodesEdges.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/data/scalingNodesEdgesLabels.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/datasources/WorldCup2014.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/datasources/WorldCup2014.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/datasources/largeHierarchicalDataset.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/edgeStyles/arrowTypes.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/edgeStyles/arrows.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/edgeStyles/colors.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/edgeStyles/dashes.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/edgeStyles/smooth.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/edgeStyles/smoothWorldCup.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/events/interactionEvents.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/events/physicsEvents.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/events/renderEvents.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/exampleApplications/disassemblerExample.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/exampleApplications/disassemblerExample.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/exampleApplications/lesMiserables.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/exampleApplications/loadingBar.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/exampleApplications/neighbourhoodHighlight.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/exampleApplications/nodeLegend.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/exampleApplications/worldCupPerformance.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/exampleUtil.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/imageSelected/broken-image.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/imageSelected/imageSelected.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/imageSelected/selected.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/imageSelected/unselected.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/indonesia/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/indonesia/10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/indonesia/11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/indonesia/12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/indonesia/13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/indonesia/14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/indonesia/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/indonesia/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/indonesia/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/indonesia/5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/indonesia/6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/indonesia/7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/indonesia/8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/indonesia/9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/refresh-cl/Hardware-Fax-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/refresh-cl/Hardware-Laptop-1-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/refresh-cl/Hardware-Mobile-Phone-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/refresh-cl/Hardware-My-Computer-3-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/refresh-cl/Hardware-My-PDA-02-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/refresh-cl/Hardware-My-PDA-04-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/refresh-cl/Hardware-My-PDA-05-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/refresh-cl/Hardware-My-Phone-Picture-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/refresh-cl/Hardware-Printer-Blue-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/refresh-cl/Misc-Scanner-default-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/refresh-cl/Network-Drive-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/refresh-cl/Network-Internet-Connection-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/refresh-cl/Network-Pipe-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/refresh-cl/System-Firewall-2-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/refresh-cl/System-Globe-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/refresh-cl/license.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/Document-icon24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/Document-icon32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/Document-icon48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/Email-icon24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/Email-icon32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/Email-icon48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/Folder-icon24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/Folder-icon32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/Folder-icon48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/Folder-icon64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/Smiley-Angry-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/Smiley-Grin-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/User-Administrator-Blue-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/User-Administrator-Green-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/User-Coat-Blue-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/User-Coat-Green-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/User-Coat-Red-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/User-Executive-Green-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/User-Preppy-Blue-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/User-Preppy-Red-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/img/soft-scraps-icons/license.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/labels/labelAlignment.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/labels/labelBackground.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/labels/labelColorAndSize.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/labels/labelMargins.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/labels/labelMultifont.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/labels/labelStroke.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/labels/multilineText.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/layout/demo.jsonp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/layout/demo_big.jsonp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/layout/hierarchicalLayout.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/layout/hierarchicalLayoutBigUserDefined.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/layout/hierarchicalLayoutMethods.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/layout/hierarchicalLayoutUserdefined.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/layout/hierarchicalLayoutWithoutPhysics.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/layout/randomSeed.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/nodeStyles/HTMLInNodes.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/nodeStyles/circularImages.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/nodeStyles/colors.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/nodeStyles/customGroups.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/nodeStyles/groups.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/nodeStyles/icons.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/nodeStyles/images.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/nodeStyles/imagesWithBorders.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/nodeStyles/shadows.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/nodeStyles/shapes.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/nodeStyles/shapesWithDashedBorders.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/nodeStyles/widthHeight.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/other/animationShowcase.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/other/changingClusteredEdgesNodes.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/other/chosen.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/other/clustering.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/other/clusteringByZoom.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/other/clustersOfclusters.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/other/configuration.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/other/cursorChange.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/other/manipulation.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/other/manipulationEditEdgeNoDrag.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/other/navigation.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/other/onLoadAnimation.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/other/performance.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/other/saveAndLoad.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/network/physics/physicsConfiguration.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/basicUsage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/dataHandling/dataSerialization.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/dataHandling/loadExternalData.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/editing/customSnappingOfItems.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/editing/editingItems.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/editing/editingItemsCallbacks.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/editing/individualEditableItems.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/editing/itemsAlwaysDraggable.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/editing/overrideEditingItems.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/editing/tooltipOnItemChange.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/editing/updateDataOnEvent.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/groups/groups.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/groups/groupsEditable.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/groups/groupsOrdering.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/groups/nestedGroups.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/groups/subgroups.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/groups/verticalItemsHide.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/interaction/animateWindow.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/interaction/clickToUse.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/interaction/eventListeners.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/interaction/limitMoveAndZoom.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/interaction/navigationMenu.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/interaction/rollingMode.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/interaction/setSelection.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/items/backgroundAreas.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/items/backgroundAreasWithGroups.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/items/expectedVsActualTimesItems.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/items/htmlContents.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/items/itemOrdering.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/items/pointItems.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/items/rangeOverflowItem.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/items/tooltip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/items/visibleFrameTemplateContent.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/customTimeBars.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/customTimeBarsTooltip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/dataAttributes.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/dataAttributesAll.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/drag&amp;drop.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/functionLabelFormats.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/groupsPerformance.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/hidingPeriods.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/horizontalScroll.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/localization.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/performance.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/requirejs/requirejs_example.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/requirejs/scripts/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/requirejs/scripts/require.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/rtl.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/stressPerformance.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/timezone.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/usingReact.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/other/verticalScroll.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/resources/data/basic.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/resources/data/wk2014.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/resources/img/Hardware-Mobile-Phone-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/resources/img/attachment-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/resources/img/blog-post-edit-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/resources/img/comments-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/resources/img/community-users-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/resources/img/license.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/resources/img/license_aesthetica-2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/resources/img/license_refresh-cl.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/resources/img/mail-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/resources/img/notes-edit-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/resources/img/product-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/resources/img/truck-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/styling/axisOrientation.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/styling/customCss.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/styling/gridStyling.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/styling/itemClassNames.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/styling/itemTemplates.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/examples/timeline/styling/weekStyling.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/gulpfile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/index-graph3d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/index-network.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/index-timeline-graph2d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/DOMutil.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/DataSet.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/DataView.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/Queue.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/graph3d/Camera.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/graph3d/DataGroup.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/graph3d/Filter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/graph3d/Graph3d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/graph3d/Point2d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/graph3d/Point3d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/graph3d/Range.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/graph3d/Settings.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/graph3d/Slider.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/graph3d/StepNumber.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/graph3d/options.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/hammerUtil.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/header.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/module/hammer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/module/moment.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/module/uuid.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/CachedImage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/Images.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/Network.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/NetworkUtil.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/css/network-colorpicker.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/css/network-manipulation.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/css/network-navigation.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/dotparser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/gephiParser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/img/acceptDeleteIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/img/addNodeIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/img/backIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/img/connectIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/img/cross.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/img/cross2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/img/deleteIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/img/downArrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/img/editIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/img/leftArrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/img/minus.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/img/plus.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/img/rightArrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/img/upArrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/img/zoomExtends.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/locales.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/Canvas.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/CanvasRenderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/Clustering.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/EdgesHandler.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/Groups.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/InteractionHandler.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/KamadaKawai.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/LayoutEngine.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/ManipulationSystem.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/NodesHandler.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/PhysicsEngine.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/SelectionHandler.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/View.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/DirectionStrategy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/Edge.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/NavigationHandler.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/Node.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/algorithms/FloydWarshall.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/edges/BezierEdgeDynamic.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/edges/BezierEdgeStatic.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/edges/CubicBezierEdge.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/edges/StraightEdge.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/edges/util/BezierEdgeBase.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/edges/util/CubicBezierEdgeBase.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/edges/util/EdgeBase.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/edges/util/EndPoints.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/Cluster.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/shapes/Box.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/shapes/Circle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/shapes/CircularImage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/shapes/Database.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/shapes/Diamond.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/shapes/Dot.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/shapes/Ellipse.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/shapes/Hexagon.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/shapes/Icon.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/shapes/Image.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/shapes/Square.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/shapes/Star.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/shapes/Text.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/shapes/Triangle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/shapes/TriangleDown.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/util/CircleImageBase.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/util/NodeBase.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/nodes/util/ShapeBase.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/physics/BarnesHutSolver.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/physics/CentralGravitySolver.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/physics/FA2BasedCentralGravitySolver.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/physics/FA2BasedRepulsionSolver.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/physics/HierarchicalRepulsionSolver.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/physics/HierarchicalSpringSolver.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/physics/RepulsionSolver.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/physics/SpringSolver.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/shared/ComponentUtil.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/shared/Label.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/shared/LabelAccumulator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/modules/components/shared/LabelSplitter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/options.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/network/shapes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/shared/Activator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/shared/ColorPicker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/shared/Configurator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/shared/Popup.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/shared/Validator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/shared/activator.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/shared/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/shared/configuration.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/shared/tooltip.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/Core.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/DateUtil.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/Graph2d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/Range.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/Stack.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/TimeStep.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/Timeline.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/BackgroundGroup.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/Component.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/CurrentTime.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/CustomTime.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/DataAxis.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/DataScale.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/GraphGroup.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/Group.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/ItemSet.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/Legend.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/LineGraph.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/TimeAxis.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/css/animation.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/css/currenttime.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/css/customtime.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/css/dataaxis.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/css/item.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/css/itemset.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/css/labelset.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/css/panel.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/css/pathStyles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/css/timeaxis.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/css/timeline.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/graph2d_types/bar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/graph2d_types/line.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/graph2d_types/points.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/item/BackgroundItem.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/item/BoxItem.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/item/Item.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/item/PointItem.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/component/item/RangeItem.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/locales.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/optionsGraph2d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/timeline/optionsTimeline.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/lib/util.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/misc/RELEASE_CHECKLIST_TEMPLATE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/misc/how_to_help.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/misc/labels.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/misc/we_need_help.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/misc/we_need_help.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/DataSet.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/DataView.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/Graph3d.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/Label.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/Network.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/PointItem.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/Queue.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/TestSupport.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/TimeStep.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/TimelineItemSet.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/TimelineRange.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/Validator.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/dataset.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/dot.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/dotparser.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/graph2dTest.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/network/basicUsage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/network/maximumWidthEdgeCase.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/networkTest.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/network_unittests.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/timeline.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/timeline_groups.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/timestep.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Development/FrontEnd/vis-4.21.0/test/util.test.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/hq-config.html" beforeDir="false" afterPath="$PROJECT_DIR$/hq-config.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hq-run-simulation.html" beforeDir="false" afterPath="$PROJECT_DIR$/hq-run-simulation.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/styles/disaster-sim-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/styles/disaster-sim-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -17,11 +615,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="912">
-              <caret line="58" column="38" selection-start-line="58" selection-start-column="38" selection-end-line="58" selection-end-column="38" />
+            <state relative-caret-position="561">
+              <caret line="33" column="64" lean-forward="true" selection-end-line="47" />
             </state>
           </provider>
         </entry>
@@ -29,8 +627,44 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hq-config.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="912">
-              <caret line="66" column="38" selection-start-line="66" selection-start-column="38" selection-end-line="66" selection-end-column="38" />
+            <state relative-caret-position="782">
+              <caret line="46" column="2" selection-start-line="46" selection-start-column="2" selection-end-line="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/header.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="714">
+              <caret line="64" column="35" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/about.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="26" selection-start-line="26" selection-end-line="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/help.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="26" selection-start-line="26" selection-end-line="26" />
             </state>
           </provider>
         </entry>
@@ -38,8 +672,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="864">
-              <caret line="335" column="36" selection-start-line="335" selection-start-column="15" selection-end-line="335" selection-end-column="36" />
+            <state relative-caret-position="5389">
+              <caret line="317" selection-start-line="317" selection-end-line="317" />
             </state>
           </provider>
         </entry>
@@ -47,7 +681,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/styles/disaster-sim-style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="605">
+            <state relative-caret-position="1139">
               <caret line="67" selection-start-line="67" selection-end-line="67" />
             </state>
           </provider>
@@ -103,11 +737,15 @@
         <option value="$PROJECT_DIR$/scenarioExample.xml" />
         <option value="$PROJECT_DIR$/resources/js/run-simulation.js" />
         <option value="$PROJECT_DIR$/test.yml" />
-        <option value="$PROJECT_DIR$/server.js" />
-        <option value="$PROJECT_DIR$/hq-run-simulation.html" />
         <option value="$PROJECT_DIR$/resources/styles/disaster-sim-style.css" />
+        <option value="$PROJECT_DIR$/resources/header.html" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/resources/footer.html" />
         <option value="$PROJECT_DIR$/hq-config.html" />
+        <option value="$PROJECT_DIR$/hq-run-simulation.html" />
+        <option value="$PROJECT_DIR$/server.js" />
+        <option value="$PROJECT_DIR$/about.html" />
+        <option value="$PROJECT_DIR$/help.html" />
       </list>
     </option>
   </component>
@@ -123,6 +761,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -145,7 +784,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -192,11 +830,12 @@
       <workItem from="1562581852115" duration="2204000" />
       <workItem from="1562623692205" duration="3346000" />
       <workItem from="1562815144330" duration="7669000" />
+      <workItem from="1562972023734" duration="1420000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88121000" />
+    <option name="totallyTimeSpent" value="89541000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
@@ -264,13 +903,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2879">
-          <caret line="106" column="32" selection-start-line="106" selection-start-column="32" selection-end-line="106" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/run-simulation.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-40">
@@ -280,29 +912,64 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/styles/disaster-sim-style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="605">
+        <state relative-caret-position="1139">
           <caret line="67" selection-start-line="67" selection-end-line="67" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
+    <entry file="file://$PROJECT_DIR$/resources/footer.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="864">
-          <caret line="335" column="36" selection-start-line="335" selection-start-column="15" selection-end-line="335" selection-end-column="36" />
+        <state relative-caret-position="34">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hq-config.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="912">
-          <caret line="66" column="38" selection-start-line="66" selection-start-column="38" selection-end-line="66" selection-end-column="38" />
+        <state relative-caret-position="782">
+          <caret line="46" column="2" selection-start-line="46" selection-start-column="2" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5389">
+          <caret line="317" selection-start-line="317" selection-end-line="317" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="64" column="35" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="912">
-          <caret line="58" column="38" selection-start-line="58" selection-start-column="38" selection-end-line="58" selection-end-column="38" />
+        <state relative-caret-position="561">
+          <caret line="33" column="64" lean-forward="true" selection-end-line="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/about.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/help.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
         </state>
       </provider>
     </entry>

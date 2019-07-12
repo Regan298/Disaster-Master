@@ -57,6 +57,14 @@ app.get('/ngoMain', function (req, res) {
     res.sendFile(__dirname + '/NGO.html');
 });
 
+app.get('/about', function (req, res) {
+    res.sendFile(__dirname + '/about.html');
+});
+
+app.get('/help', function (req, res) {
+    res.sendFile(__dirname + '/help.html');
+});
+
 app.post('/upload', function (req, res) {
 
     if (req.files != null) {
