@@ -6,6 +6,10 @@ var events = [];
 var rowCount = 0;
 var selectedNGOChat;
 var ngoNames;
+var running = false;
+var currentTime = 0;
+var updateClockProcess;
+var simulationDuration = 300000;
 
 
 //Load Page Elements
@@ -15,70 +19,52 @@ loadScenarioHeader();
 getTempPDF();
 
 
+function runClock() {
+    function updateClock() {
+        currentTime = currentTime + 1000;
+        var timerElement = document.getElementById("timeManagement");
+        var timeRemaining = simulationDuration - currentTime;
+        displayRemainingTime(timerElement, timeRemaining);
 
-var simulationDuration = 1000000;
-var current_time = Date.parse(new Date());
-var deadline = new Date(current_time + simulationDuration);
-
-
-var timeinterval;
-
-function run_clock(endtime) {
-    var clock = document.getElementById("timeManagement");
-
-    function update_clock() {
-        var t = time_remaining(endtime);
-        clock.innerHTML = t.hours + "h" + t.minutes + "m" + t.seconds + "s";
-        if (t.total <= 0) {
-            clearInterval(timeinterval);
+        if (timeRemaining == 0) {
+            clearInterval(updateClockProcess);
         }
     }
 
-    update_clock(); // run function once at first to avoid delay
-    timeinterval = setInterval(update_clock, 1000);
+    updateClockProcess = setInterval(updateClock, 1000);
 }
 
-function time_remaining(endtime) {
-    var t = Date.parse(endtime) - Date.parse(new Date());
-    var seconds = Math.floor((t / 1000) % 60);
-    var minutes = Math.floor((t / 1000 / 60) % 60);
-    var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-    var days = Math.floor(t / (1000 * 60 * 60 * 24));
-    return {'total': t, 'days': days, 'hours': hours, 'minutes': minutes, 'seconds': seconds};
-}
+function startStopSim() {
 
-var paused = false; // is the clock paused?
-var time_left; // time left on the clock when paused
-
-function playPauseTime() {
-
-    if (!paused) {
-        pause_clock();
-        document.getElementById("playPauseSwitch").innerHTML="&#9205";
-    } else {
-        resume_clock();
+    if (!running) {
+        running = true;
+        doPlay();
         document.getElementById("playPauseSwitch").innerHTML="&#10074 &#10074";
+    } else {
+        running = false;
+        doPause();
+        document.getElementById("playPauseSwitch").innerHTML="&#9205";
     }
 
 }
 
-function pause_clock() {
-    paused = true;
-    clearInterval(timeinterval); // stop the clock
-    time_left = time_remaining(deadline).total; // preserve remaining time
+function displayRemainingTime(timerElement, timeRemaining) {
+
+    var seconds = Math.floor((timeRemaining / 1000) % 60);
+    var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
+    var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
+
+
+    timerElement.innerHTML = hours + "h" + minutes + "m" + seconds + "s";
 
 }
 
-function resume_clock() {
+function doPause() {
+    clearInterval(updateClockProcess);
+}
 
-    paused = false;
-
-    // update the deadline to preserve the amount of time remaining
-    deadline = new Date(Date.parse(new Date()) + time_left);
-
-    // start the clock
-    run_clock(deadline);
-
+function doPlay() {
+    runClock();
 }
 
 
@@ -166,7 +152,9 @@ function switchNGOChat(ngo) {
 
 //Once Page Loaded
 $(function () {
-    run_clock(deadline);
+    var timerElement = document.getElementById("timeManagement");
+    displayRemainingTime(timerElement, simulationDuration);
+
     //Update Communication Buttons
     fillCommunicationButtons();
     //Load PDF
@@ -265,4 +253,18 @@ function wait(ms) {
         end = new Date().getTime();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

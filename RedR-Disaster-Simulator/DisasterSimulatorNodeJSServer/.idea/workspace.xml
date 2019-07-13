@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="49695245-0bfd-4e8e-ac0b-a4ae2f8b4c6d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hq-run-simulation.html" beforeDir="false" afterPath="$PROJECT_DIR$/hq-run-simulation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/countdownTimer.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/run-simulation.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/run-simulation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/styles/disaster-sim-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/styles/disaster-sim-style.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -49,35 +46,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
+            <state relative-caret-position="1088">
               <caret line="64" column="35" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="37" column="100" selection-start-line="37" selection-start-column="100" selection-end-line="37" selection-end-column="100" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/js/run-simulation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-306">
-              <caret line="3" column="12" lean-forward="true" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/js/dfghb.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="41" selection-start-line="41" selection-end-line="51" selection-end-column="1" />
+            <state relative-caret-position="663">
+              <caret line="45" column="68" selection-start-line="45" selection-start-column="62" selection-end-line="45" selection-end-column="68" />
             </state>
           </provider>
         </entry>
@@ -87,6 +66,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="643">
               <caret line="100" column="20" selection-start-line="100" selection-start-column="20" selection-end-line="100" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="629">
+              <caret line="37" column="89" selection-start-line="37" selection-start-column="89" selection-end-line="37" selection-end-column="89" />
             </state>
           </provider>
         </entry>
@@ -156,8 +144,8 @@
         <option value="$PROJECT_DIR$/about.html" />
         <option value="$PROJECT_DIR$/help.html" />
         <option value="$PROJECT_DIR$/resources/js/dfghb.js" />
-        <option value="$PROJECT_DIR$/resources/js/run-simulation.js" />
         <option value="$PROJECT_DIR$/resources/styles/disaster-sim-style.css" />
+        <option value="$PROJECT_DIR$/resources/js/run-simulation.js" />
         <option value="$PROJECT_DIR$/hq-run-simulation.html" />
       </list>
     </option>
@@ -243,12 +231,12 @@
       <workItem from="1562581852115" duration="2204000" />
       <workItem from="1562623692205" duration="3346000" />
       <workItem from="1562815144330" duration="7669000" />
-      <workItem from="1562972023734" duration="26571000" />
+      <workItem from="1562972023734" duration="31297000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114692000" />
+    <option name="totallyTimeSpent" value="119418000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
@@ -391,17 +379,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="64" column="35" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/dfghb.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="697">
           <caret line="41" selection-start-line="41" selection-end-line="51" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1088">
+          <caret line="64" column="35" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -412,17 +400,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
+    <entry file="file://$PROJECT_DIR$/resources/js/run-simulation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="100" selection-start-line="37" selection-start-column="100" selection-end-line="37" selection-end-column="100" />
+        <state relative-caret-position="663">
+          <caret line="45" column="68" selection-start-line="45" selection-start-column="62" selection-end-line="45" selection-end-column="68" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/run-simulation.js">
+    <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-306">
-          <caret line="3" column="12" lean-forward="true" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+        <state relative-caret-position="629">
+          <caret line="37" column="89" selection-start-line="37" selection-start-column="89" selection-end-line="37" selection-end-column="89" />
         </state>
       </provider>
     </entry>
