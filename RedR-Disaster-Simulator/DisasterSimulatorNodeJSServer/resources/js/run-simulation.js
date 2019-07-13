@@ -13,11 +13,74 @@ var ngoNames;
 loadScenarioHeader();
 //testing:
 getTempPDF();
-//getNGONames();
 
 
 
-//handleNGOS();
+var simulationDuration = 1000000;
+var current_time = Date.parse(new Date());
+var deadline = new Date(current_time + simulationDuration);
+
+
+var timeinterval;
+
+function run_clock(endtime) {
+    var clock = document.getElementById("timeManagement");
+
+    function update_clock() {
+        var t = time_remaining(endtime);
+        clock.innerHTML = t.hours + "h" + t.minutes + "m" + t.seconds + "s";
+        if (t.total <= 0) {
+            clearInterval(timeinterval);
+        }
+    }
+
+    update_clock(); // run function once at first to avoid delay
+    timeinterval = setInterval(update_clock, 1000);
+}
+
+function time_remaining(endtime) {
+    var t = Date.parse(endtime) - Date.parse(new Date());
+    var seconds = Math.floor((t / 1000) % 60);
+    var minutes = Math.floor((t / 1000 / 60) % 60);
+    var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+    var days = Math.floor(t / (1000 * 60 * 60 * 24));
+    return {'total': t, 'days': days, 'hours': hours, 'minutes': minutes, 'seconds': seconds};
+}
+
+var paused = false; // is the clock paused?
+var time_left; // time left on the clock when paused
+
+function playPauseTime() {
+
+    if (!paused) {
+        pause_clock();
+        document.getElementById("playPauseSwitch").innerHTML="&#9205";
+    } else {
+        resume_clock();
+        document.getElementById("playPauseSwitch").innerHTML="&#10074 &#10074";
+    }
+
+}
+
+function pause_clock() {
+    paused = true;
+    clearInterval(timeinterval); // stop the clock
+    time_left = time_remaining(deadline).total; // preserve remaining time
+
+}
+
+function resume_clock() {
+
+    paused = false;
+
+    // update the deadline to preserve the amount of time remaining
+    deadline = new Date(Date.parse(new Date()) + time_left);
+
+    // start the clock
+    run_clock(deadline);
+
+}
+
 
 function loadScenarioHeader() {
 
@@ -47,12 +110,12 @@ socket.on('ngoList', function (data) {
 
 /*function getNGONames() {*/
 
-    socket.on('currentNGONames', function (data) {
-        console.log("got names");
-        ngoNames = data.ngoNames;
+socket.on('currentNGONames', function (data) {
+    console.log("got names");
+    ngoNames = data.ngoNames;
 
 
-    });
+});
 
 /*}*/
 
@@ -103,6 +166,7 @@ function switchNGOChat(ngo) {
 
 //Once Page Loaded
 $(function () {
+    run_clock(deadline);
     //Update Communication Buttons
     fillCommunicationButtons();
     //Load PDF

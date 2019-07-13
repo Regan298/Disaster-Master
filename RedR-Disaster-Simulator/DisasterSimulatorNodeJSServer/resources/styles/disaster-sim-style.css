@@ -82,7 +82,25 @@ body {
 
 .timeControl {
     display: inline;
+    cursor: pointer;
+    display: inline;
+    border-style: solid;
+    border-width: medium;
+    background-color: red;
+    border-color: red;
+    color: white;
+    font-size: 2rem;
+    vertical-align: text-bottom;
+    border-radius: 0.25rem;
     margin: 1rem;
+
+}
+
+.timeControl span {
+    color: white;
+    font-size: 2rem;
+
+
 }
 
 .scenarioTitle {
@@ -98,7 +116,7 @@ body {
     border-color: red;
     color: white;
     font-size: 2rem;
-    vertical-align: middle;
+    vertical-align: text-bottom;
     border-radius: 0.25rem;
     margin: 1rem;
 }
