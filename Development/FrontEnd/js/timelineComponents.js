@@ -1,12 +1,12 @@
 var numDays=20;
 
 var startDate = new Date('2019-01-01 00:00:00');
-var endDate = startDate;
-endDate.setDate(endDate.getDate()+numDays);
+//var endDate = startDate;
+//endDate.setDate(endDate.getDate()+numDays);
 //endDate.setHours('24');
 //endDate.setMinutes();
 //endDate.setSeconds();
-
+var endDate = new Date('2019-01-14 24:00:00');
 
 var groups = new vis.DataSet([
     {id: 1, content: 'Group 1'},
@@ -34,7 +34,7 @@ var options = {
   
   
   min: startDate,
-  //max: endDate,
+  max: endDate,
   
   
   //zoomMin: 9000000,
@@ -45,49 +45,47 @@ var options = {
     
     
     
-    
-    
-    
-    
-    
-    
     format: {
-      //minorLabels: function(date, scale, step) {
-        //var now = new Date();
-        //var ago = now - date;
-        //var divider;
-        //switch (scale) {
-         // case 'millisecond':
-         //   divider = 1;
-         //   break;
-         // case 'second':
-         //   divider = 1000;
-          //  break;
-          //case 'minute':
-          //  divider = 1000 * 60;
-          //  break;
-          //case 'hour':
-          //  divider = 1000 * 60 * 60;
-          //  break;
-          //case 'day':
-          //  divider = 1000 * 60 * 60 * 24;
-          //  break;
-          //case 'weekday':
-          //  divider = 1000 * 60 * 60 * 24 * 7;
-          //  break;
-          //case 'month':
-           // divider = 1000 * 60 * 60 * 24 * 30;
-          //  break;
-          //case 'year':
-           // divider = 1000 * 60 * 60 * 24 * 365;
-          //  break;
-         // default:
-        //    return new Date(date);
-       // } 
-       // return  (Math.round(ago * step / divider)) + " " + scale + "s ago" 
-     // },
+        minorLabels: function(date, scale, step) {
+
+            var minorLabel='';
+            switch (scale) {
+            case 'millisecond':
+
+                break;
+            case 'second':
+
+                break;
+            case 'minute':
+                    var tempDate = new Date(date);
+                    minorLabel = ("0" + tempDate.getHours()).slice(-2) + ":" + ("0" + tempDate.getMinutes()).slice(-2);
+                break;
+            case 'hour':
+                var tempDate = new Date(date);
+                minorLabel = ("0" + tempDate.getHours()).slice(-2) + ":" + ("0" + tempDate.getMinutes()).slice(-2);
+                break;
+            case 'day':
+
+                break;
+            case 'weekday':
+                var res = Math.abs(startDate - date) / 1000;
+                var days = Math.floor(res / 86400)+1;
+                minorLabel="Day "+days;
+                break;
+            case 'month':
+
+                break;
+            case 'year':
+
+                break;
+            default:
+                return ("ERROR: minorLabels");
+        } 
+        return  minorLabel;
+     },
+
         majorLabels: function(date, scale, step) {
-            var label="";
+            var majorLabel='';
           
             switch (scale) {
             case 'millisecond':
@@ -97,10 +95,18 @@ var options = {
 
                 break;
             case 'minute':
-                label="Day x";
+
+                var res = Math.abs(startDate - date) / 1000;
+                var days = Math.floor(res / 86400)+1;
+                majorLabel="Day "+days;
+
                 break;
             case 'hour':
-                label="Day x";
+                
+                var res = Math.abs(startDate - date) / 1000;
+                var days = Math.floor(res / 86400)+1;
+                majorLabel="Day "+days;
+
                 break;
             case 'day':
                 
@@ -117,24 +123,38 @@ var options = {
             default:
                 return ("ERROR: majorLabels");
             }
-            return (label);
+            return (majorLabel);
         }
     }
     
-    //  majorLabels: {
-    //millisecond:'HH:mm:ss',
-    //second:     'D MMMM HH:mm',
-    //minute:     'ddd D MMMM',
-    //hour:       'ddd D MMMM',
-    //weekday:    'MMMM YYYY',
-    //day:        'MMMM YYYY',
-    //week:       'MMMM YYYY',
-    //month:      'YYYY',
-    //year:       ''
-  //}
-//}
+
+
+
+
+
+    // {
+    //     minorLabels: {
+    //       millisecond:'SSS',
+    //       second:     's',
+    //       minute:     'HH:mm',
+    //       hour:       'HH:mm',
+    //       weekday:    'ddd D',
+    //       day:        'D',
+    //       week:       'w',
+    //       month:      'MMM',
+    //       year:       'YYYY'
+    //     },
+    //     majorLabels: {
+    //       millisecond:'HH:mm:ss',
+    //       second:     'D MMMM HH:mm',
+    //       minute:     'ddd D MMMM',
+    //       hour:       'ddd D MMMM',
+    //       weekday:    'MMMM YYYY',
+    //       day:        'MMMM YYYY',
+    //       week:       'MMMM YYYY',
+    //       month:      'YYYY',
+    //       year:       ''
+    //     }
+    //   }
     
 };
-
-//redraw()
-//getSelection()
