@@ -238,7 +238,7 @@ io.on('connection', function (socket) {
     //socket.emit('ngoName', ngoTemp.name);
 
     //Send NGO Name To Relevant NGO
-    socket.on('nameRequest', function (msg) {
+
         for (var i = 0; i < ngoUsers.length; i++) {
             ngoTemp = ngoUsers[i];
             if (ngoTemp.ip == ipCurrent) {
@@ -248,7 +248,7 @@ io.on('connection', function (socket) {
                 }
             }
         }
-    });
+
 
     //Send each NGO name to HQ
 
@@ -261,7 +261,7 @@ io.on('connection', function (socket) {
     io.emit('currentNGONames', {ngoNames});
 
 
-    //dk wat this does rn:
+
     io.emit('users', {ngoUsers});
 
     if(simData.ready){

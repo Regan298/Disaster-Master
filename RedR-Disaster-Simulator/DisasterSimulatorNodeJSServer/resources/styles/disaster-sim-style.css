@@ -313,11 +313,11 @@ body {
 }
 
 #messageHQ {
-    min-width: 100%;
-    margin-bottom: 1%;
-    float: left;
-    /* margin-left: 25%; */
-}
+     min-width: 100%;
+     margin-bottom: 1%;
+     float: left;
+     /* margin-left: 25%; */
+ }
 
 #messageHQ textarea {
     resize: none;
@@ -331,6 +331,37 @@ body {
 
 
 #messageHQ input {
+    /* display: inline; */
+    /* float: right; */
+    /* margin-left: 1%; */
+    margin-top: 2%;
+    width: 10%;
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+    font-size: 100%;
+    padding: 0;
+}
+
+#messageNGO {
+    min-width: 100%;
+    margin-bottom: 1%;
+    float: left;
+    /* margin-left: 25%; */
+}
+
+#messageNGO textarea {
+    resize: none;
+    float: left;
+    /* width: 65%; */
+    max-height: 100%;
+    /* MIN-HEIGHT: 100%; */
+    min-width: 80%;
+    margin-right: 5%;
+}
+
+
+#messageNGO input {
     /* display: inline; */
     /* float: right; */
     /* margin-left: 1%; */

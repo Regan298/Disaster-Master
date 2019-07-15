@@ -17,6 +17,7 @@ var simulationDuration = 300000;
 loadScenarioHeader();
 //testing:
 getTempPDF();
+handleNGOS();
 
 
 function runClock() {
@@ -87,12 +88,7 @@ function loadScenarioHeader() {
     });
 }
 
-//New NGOS
-socket.on('ngoList', function (data) {
-    console.log("new ngo");
-    ngos = data.ngoUsers;
-    handleNGOS();
-});
+
 
 /*function getNGONames() {*/
 
@@ -101,14 +97,22 @@ socket.on('ngoList', function (data) {
 
 
 function handleNGOS() {
-    //Find ngo button and reveal it
-    if (ngos != null) {
-        let currentNGOName = ngos[ngos.length - 1].name;
 
-        console.log("id: " + ngos[ngos.length - 1].id);
+    //New NGOS
+    socket.on('ngoList', function (data) {
 
-        document.getElementById(ngos[ngos.length - 1].id).style.visibility = "visible";
-    }
+        ngos = data.ngoUsers;
+        if (ngos != null) {
+            let currentNGOName = ngos[ngos.length - 1].name;
+
+            console.log("id: " + ngos[ngos.length - 1].id);
+
+            document.getElementById(ngos[ngos.length - 1].id).style.visibility = "visible";
+        }
+
+    });
+
+
 }
 
 
@@ -138,7 +142,7 @@ function switchNGOChat(ngo) {
 
     // Show the specific message content
     if (ngo != null) {
-        console.log("ngoselected: " + ngo);
+
         document.getElementById(ngo + "Content").style.display = "inline-block";
     }
 }
@@ -151,6 +155,7 @@ $(function () {
 
     //Update Communication Buttons
     fillCommunicationButtons();
+
     //Load PDF
     PDFObject.embed("/files/test.pdf", "#emailViewer");
     //Needed to auto hide placeholder messaging content
@@ -164,7 +169,7 @@ $(function () {
         //Find actual Name of NGO
         let name = document.getElementById(selectedNGOChat).innerHTML;
 
-        console.log("actualname" + name);
+
 
         var message = {
             from: 'HQ',
@@ -215,13 +220,12 @@ function addToConversation(content, isOrigin, from) {
 function fillCommunicationButtons() {
 
     socket.on('currentNGONames', function (data) {
-        console.log("got names");
+
         ngoNames = data.ngoNames;
 
 
         var buttons = document.getElementsByClassName("btn btn-secondary");
-        console.log("buttonL: " + buttons.length);
-        console.log("ngonamesL: " + ngoNames.length);
+
         for (i = 0; i < buttons.length; i++) {
             buttons[i].innerHTML = ngoNames[i];
         }

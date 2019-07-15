@@ -75,10 +75,10 @@
 
                 <script>
                     socket.on('timelineEvents', function (events) {
-                        console.log("got " + events.result);
+
 
                         for (var i = 0; i < events.result.length; i++) {
-                            console.log(events.result[i]);
+
                             items.push({
                                 id: events.result[i].id,
                                 group: 1,

@@ -7,6 +7,7 @@ var inboxRowCount = 0;
 var outboxRowCount = 0;
 var simulationDuration = 50000;
 var ngoNames;
+var selectedNGOChat;
 
 
 loadNGOTitle();
@@ -15,7 +16,6 @@ handleNGOS();
 runClock();
 
 currentTime = 0;
-
 
 
 function runClock() {
@@ -44,6 +44,7 @@ function displayRemainingTime(timerElement, timeRemaining) {
     timerElement.innerHTML = hours + "h" + minutes + "m" + seconds + "s";
 
 }
+
 
 function switchNGOChat(ngo) {
 
@@ -77,28 +78,47 @@ function switchNGOChat(ngo) {
 }
 
 function fillCommunicationButtons() {
-
+    var buttons = document.getElementsByClassName("btn btn-secondary");
+    buttons[0].innerHTML = "HQ";
 
 
     socket.on('currentNGONames', function (data) {
         console.log("got names");
         ngoNames = data.ngoNames;
-
-        var buttons = document.getElementsByClassName("btn btn-secondary");
         console.log("buttonL: " + buttons.length);
         console.log("ngonamesL: " + ngoNames.length);
-        for (i = 0; i < buttons.length; i++) {
+        for (i = 1; i < buttons.length; i++) {
             buttons[i].innerHTML = ngoNames[i];
         }
     });
+}
+
+
+function handleNGOS() {
+
+    socket.on('users', function (data) {
+
+        users = data.ngoUsers;
+        console.log(users.length);
 
 
 
+        if (users != null) {
+            let currentNGOName = users[users.length - 1].name;
 
+            console.log("id: " + users[users.length - 1].id);
+            console.log("ngoname: " + currentNGOName);
+            console.log("name: " + name);
+
+            if(currentNGOName != name) {
+                document.getElementById(users[users.length - 1].id).style.visibility = "visible";
+            }
+        }
+
+    });
 
 
 }
-
 
 
 //Handle Messaging and Events
@@ -111,13 +131,14 @@ $(function () {
         console.log("TEST");
         e.preventDefault(); // prevents page reloading
         console.log("submitmessage");
+        addToConversation($('#input').val(), true, null);
+        let recipient = document.getElementById(selectedNGOChat).innerHTML;
 
 
-        console.log($('#ngoRecipient').val());
 
         var message = {
             from: name,
-            to: $('#ngoRecipient').val(),
+            to: recipient,
             content: $('#input').val()
         }
 
@@ -135,18 +156,14 @@ $(function () {
         $('#' + to).append($('<li>').text(msg.recievedMessage.content));
         $('#' + from).append($('<li>').text(msg.recievedMessage.content));
 
-        $('<style>'+
+        $('<style>' +
             "#" + to + " li:nth-child(odd){ " +
             "    text-align: center;\n" +
             "    color: red;\n" +
             "    font-weight: bold;\n" +
             "}"
 
-            +'</style>').appendTo(document.head);
-
-
-
-
+            + '</style>').appendTo(document.head);
 
 
         /*if(from === name) {
@@ -170,62 +187,57 @@ $(function () {
 
     });
 
-	//TODO: load completed events
-	
+    //TODO: load completed events
+
 
     //on receive event
-	socket.on('event', function (evnt) {
-		console.log('got events');
-		inboxEvents = [];
-		for(var i = 0; i<evnt.msg.length; i++){
-			var to = evnt.msg[i].Recipient;
-			if(to === name){
-				//$('#eventList').append($('<li>').text(evnt.recievedEvent.contentLocation));
-				inboxEvents.push(evnt.msg[i]);
-				
-				//loadOutboxEvents();
-			}
-		}
-		console.log(inboxEvents);
-		loadInboxEvents(inboxEvents);
-        
+    socket.on('event', function (evnt) {
+        //console.log('got events');
+        inboxEvents = [];
+        for (var i = 0; i < evnt.msg.length; i++) {
+            var to = evnt.msg[i].Recipient;
+            if (to === name) {
+                //$('#eventList').append($('<li>').text(evnt.recievedEvent.contentLocation));
+                inboxEvents.push(evnt.msg[i]);
+
+                //loadOutboxEvents();
+            }
+        }
+        //console.log(inboxEvents);
+        //loadInboxEvents(inboxEvents);
+
     });
 
 
 });
 
-function handleNGOS(){
-    socket.on('users', function (data) {
+function addToConversation(content, isOrigin, from) {
 
-        users = data.ngoUsers;
+    console.log("to" + from);
+
+    if (isOrigin) {
+        $("#" + selectedNGOChat + "Content").append("<li id='origin'>" + content + "</li>");
+    } else {
+
+        var ngoId;
 
 
-        for(var i = 0; i < users.length; i++) {
-            var currentName = users[i].name;
-            // if name not itself and ngo element does not exist
-            console.log("ngoname" + name);
-            if(currentName !== name && ($('#'+currentName).length == 0)) {
-                console.log(currentName);
-                $('#ngoList').append("<ul id='" + users[i].name + "'>" + "NGO: " + users[i].name + "</ul>");
-
-                $('#ngoRecipient').append($('<option>', {
-                    value: users[i].name,
-                    text: users[i].name
-
-                }));
+        for (i = 0; i < ngos.length; i++) {
+            if (ngos[i].name == from) {
+                ngoId = ngos[i].id;
             }
         }
 
-    });
+        console.log(ngoId);
 
-
+        $("#" + ngoId + "Content").append("<li id='nonOrigin'>" + content + "</li>");
+    }
 }
-
 
 
 function loadNGOTitle() {
     //Ask Server For Name
-    socket.emit('nameRequest', "");
+
     socket.on('nameRequest', function (data) {
         name = data;
         var htmlContent = "<h1 class='titles'><span>NGO: " + name + "</span></h1>";
@@ -233,87 +245,85 @@ function loadNGOTitle() {
     });
 
 
-
 }
 
-function loadInboxEvents(inboxEvents){
-	
-	/*var htmlContent = "<h1>Events</h1>\n" +
+/*function loadInboxEvents(inboxEvents) {
+
+    /!*var htmlContent = "<h1>Events</h1>\n" +
         "<ul id=\"eventList\">\n" +
         "\n" +
-	"</ul>\n";*/
-	var table = document.getElementById("inboxTable");
-	//adds cells as well as the titles of cells into the cells
-	//console.log(inboxEvents[inboxRowCount]);
-	//console.log(inboxRowCount);
-	
-	while(table.hasChildNodes()){
-		table.removeChild(table.firstChild);
-	}
-	
-	
-	for(var i = 0; i<inboxEvents.length; i++){
-		var row = table.insertRow(i);
-		var cell1 = row.insertCell(0);
-		cell1.innerHTML = "HQ" + " " + "Subject" + " " + inboxEvents[i].Time;
-		table.rows[i].cells[0].onclick = function () {
-			rIndex = this.parentElement.rowIndex;
-			cIndex = this.cellIndex;
-			//console.log("Row : "+rIndex+" , Cell : "+cIndex);
-			var cellValue = (table.rows[rIndex].cells[cIndex].innerHTML);
-			getInboxPDF(i);
-		};
-	}
-	
-	
+    "</ul>\n";*!/
+    var table = document.getElementById("inboxTable");
+    //adds cells as well as the titles of cells into the cells
+    //console.log(inboxEvents[inboxRowCount]);
+    //console.log(inboxRowCount);
 
-	//inboxRowCount++;
+    while (table.hasChildNodes()) {
+        table.removeChild(table.firstChild);
+    }
+
+
+    for (var i = 0; i < inboxEvents.length; i++) {
+        var row = table.insertRow(i);
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = "HQ" + " " + "Subject" + " " + inboxEvents[i].Time;
+        table.rows[i].cells[0].onclick = function () {
+            rIndex = this.parentElement.rowIndex;
+            cIndex = this.cellIndex;
+            //console.log("Row : "+rIndex+" , Cell : "+cIndex);
+            var cellValue = (table.rows[rIndex].cells[cIndex].innerHTML);
+            getInboxPDF(i);
+        };
+    }
+
+
+    //inboxRowCount++;
+    //$(htmlContent).appendTo(".events");
+}*/
+
+function loadOutboxEvents() {
+
+    /*var htmlContent = "<h1>Events</h1>\n" +
+        "<ul id=\"eventList\">\n" +
+        "\n" +
+    "</ul>\n";*/
+    var table = document.getElementById("outboxTable");
+    //adds cells as well as the titles of cells into the cells
+    while (table.hasChildNodes()) {
+        table.removeChild(table.firstChild);
+    }
+
+
+    for (var i = 0; i < outboxEvents.length; i++) {
+        var row = table.insertRow(i);
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = "HQ" + " " + "Subject" + " " + outboxEvents[i].Time;
+        table.rows[i].cells[0].onclick = function () {
+            rIndex = this.parentElement.rowIndex;
+            cIndex = this.cellIndex;
+            //console.log("Row : "+rIndex+" , Cell : "+cIndex);
+            var cellValue = (table.rows[rIndex].cells[cIndex].innerHTML);
+            getOutboxPDF(i);
+        };
+    }
+
+
+    //outboxRowCount++;
     //$(htmlContent).appendTo(".events");
 }
 
-function loadOutboxEvents(){
-	
-	/*var htmlContent = "<h1>Events</h1>\n" +
-        "<ul id=\"eventList\">\n" +
-        "\n" +
-	"</ul>\n";*/
-	var table = document.getElementById("outboxTable");
-	//adds cells as well as the titles of cells into the cells
-	while(table.hasChildNodes()){
-		table.removeChild(table.firstChild);
-	}
-	
-	
-	for(var i = 0; i<outboxEvents.length; i++){
-		var row = table.insertRow(i);
-		var cell1 = row.insertCell(0);
-		cell1.innerHTML = "HQ" + " " + "Subject" + " " + outboxEvents[i].Time;
-		table.rows[i].cells[0].onclick = function () {
-			rIndex = this.parentElement.rowIndex;
-			cIndex = this.cellIndex;
-			//console.log("Row : "+rIndex+" , Cell : "+cIndex);
-			var cellValue = (table.rows[rIndex].cells[cIndex].innerHTML);
-			getOutboxPDF(i);
-		};
-	}
-	
-
-	//outboxRowCount++;
-    //$(htmlContent).appendTo(".events");
+function getInboxPDF(cellValue) {
+    console.log(cellValue);
+    PDFObject.embed(inboxEvents[cellValue - 1].Location, "#inboxPdf");/*change my-container to pdf*/
 }
 
-function getInboxPDF(cellValue){
-	console.log(cellValue);
-    PDFObject.embed(inboxEvents[cellValue-1].Location, "#inboxPdf");/*change my-container to pdf*/
-}
-
-function getOutboxPDF(cellValue){
-	console.log(cellValue);
-    PDFObject.embed(outboxEvents[cellValue-1].Location, "#outboxPdf");/*change my-container to pdf*/
+function getOutboxPDF(cellValue) {
+    console.log(cellValue);
+    PDFObject.embed(outboxEvents[cellValue - 1].Location, "#outboxPdf");/*change my-container to pdf*/
 }
 
 
-function loadCommunication(){
+function loadCommunication() {
 
     var htmlContent = "<h1>Communication</h1><br>\n" +
         "\n" +
