@@ -1,0 +1,36 @@
+image: node:latest
+
+stages:
+  - build
+  - test
+
+services:
+  - mysql:latest
+
+variables:
+  # Configure mysql environment variables (https://hub.docker.com/_/mysql/)
+  MYSQL_DATABASE: simulationData
+  MYSQL_ROOT_PASSWORD: root
+
+#Host: mysql
+#User: root
+#Password: root
+#Database: simulationData
+
+cache:
+  paths:
+    - node_modules/
+
+install_dependencies:
+  stage: build
+  script:
+    - npm install
+  artifacts:
+    paths:
+      - node_modules/
+
+testing_testing:
+  stage: test
+  script:
+  - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
+  - node server.js
