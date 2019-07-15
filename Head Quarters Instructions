@@ -1,0 +1,39 @@
+RedR Australia Disaster Simulator Instruction Manual
+
+Flash Drive Edition Beta 0.0.1
+
+WINDOWS 10 ONLY
+CHROME IS RECOMMENED 
+
+1. Download from Flash Drive:
+(Optional to download from flash drive into the computer)
+Insert the flash drive into the USB port on a computer. In the flash drive there is the main file containing all the contents of the RedR Australia Disaster 
+Simulator. Select the main folder 'RedR-Disaster-Simulator' and copy it into the desired location on the computer.
+
+2. Start Disaster Simulator:
+If the Disaster Simulator is being run from a flash drive, go to 2.1. If the Disaster Simulator is being run from a computer location go to 2.2.
+
+2.1. From Flash Drive:
+Insert the flash drive into the computer and go to the flash drives files. Find the 'RedR-Disaster-Simulator' folder and click into it. Inside the folder is a file
+called 'RedR Disaster Simulator.bat'. This bash script can be double clicked on to execute the RedR Disaster Simulator. This may take a moment as the files and 
+server is loaded and ready to use. A new web browser will load with the Head Quarters perspective, if the web browser is not Chrome, copy the URL from the current 
+browser and open Chrome and enter the URL into the URL address area. If this does not work go to 5.1.
+
+2.2. From Downloaded Files in PC:
+After downloading the Disaster Simulator from the flash drive, find the 'RedR-Disaster-Simulator' folder in the desired location it was downloaded to and click 
+into it. Inside the folder is a file called 'RedR Disaster Simulator.bat'. This bash script can be double clicked on to execute the RedR Disaster Simulator. This 
+may take a moment as the files and server is loaded and ready to use. A new web browser will load with the Head Quarters perspective, if the web browser is not 
+Chrome, copy the URL from the current browser and open Chrome and enter the URL into the URL address area. If this does not work go to 5.1.
+
+3. Run the Simulation:
+Once the Head Quarters perspective has been opened, go to select file and select the desired scenario file that will be simulated. Then click begin. The perspective 
+should change and have the title of the scenario as the header of the page.
+
+4. Exiting Simulator: 
+After a simulation is completed or an immediate exit is necessary, simply close the browser and close the command line terminal(s).
+
+5. Trouble Shooting:
+If there are any problems in the software, please email riley.grice.uni@gmail.com
+
+5.1. Simulation not Starting Up:
+If the Simulation does not open the web browser with the Head Quarter's perspective after click the bash script, please restart your computer and try again.
