@@ -5,16 +5,106 @@ var inboxEvents = [];
 var outboxEvents = [];
 var inboxRowCount = 0;
 var outboxRowCount = 0;
+var simulationDuration = 50000;
+var ngoNames;
 
 
 loadNGOTitle();
 //loadCommunication();
 handleNGOS();
+runClock();
+
+currentTime = 0;
+
+
+
+function runClock() {
+    function updateClock() {
+        currentTime = currentTime + 1000;
+        var timerElement = document.getElementById("timeManagement");
+        var timeRemaining = simulationDuration - currentTime;
+        displayRemainingTime(timerElement, timeRemaining);
+
+        if (timeRemaining == 0) {
+            clearInterval(updateClockProcess);
+        }
+    }
+
+    updateClockProcess = setInterval(updateClock, 1000);
+}
+
+
+function displayRemainingTime(timerElement, timeRemaining) {
+
+    var seconds = Math.floor((timeRemaining / 1000) % 60);
+    var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
+    var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
+
+
+    timerElement.innerHTML = hours + "h" + minutes + "m" + seconds + "s";
+
+}
+
+function switchNGOChat(ngo) {
+
+    //Highlight selected button and unlight non selected
+    if (ngo != null) {
+
+        buttons = document.getElementsByClassName("btn btn-secondary");
+        for (i = 0; i < buttons.length; i++) {
+            buttons[i].style.backgroundColor = "#b5b5b5";
+        }
+
+        document.getElementById(ngo).style.backgroundColor = "#EE2A2B";
+        selectedNGOChat = ngo;
+    }
+
+
+    // Hide all elements with class="messaging content" by default */
+    var i, tabcontent, tablinks;
+    messagingContent = document.getElementsByClassName("messagingContent");
+
+    for (i = 0; i < messagingContent.length; i++) {
+        messagingContent[i].style.display = "none";
+    }
+
+
+    // Show the specific message content
+    if (ngo != null) {
+        console.log("ngoselected: " + ngo);
+        document.getElementById(ngo + "Content").style.display = "inline-block";
+    }
+}
+
+function fillCommunicationButtons() {
+
+
+
+    socket.on('currentNGONames', function (data) {
+        console.log("got names");
+        ngoNames = data.ngoNames;
+
+        var buttons = document.getElementsByClassName("btn btn-secondary");
+        console.log("buttonL: " + buttons.length);
+        console.log("ngonamesL: " + ngoNames.length);
+        for (i = 0; i < buttons.length; i++) {
+            buttons[i].innerHTML = ngoNames[i];
+        }
+    });
+
+
+
+
+
+
+}
 
 
 
 //Handle Messaging and Events
 $(function () {
+    switchNGOChat();
+    fillCommunicationButtons();
 
     //New message form
     $('#messageNGO').submit(function (e) {
@@ -134,12 +224,12 @@ function handleNGOS(){
 
 
 function loadNGOTitle() {
-
-    socket.on('ngoName', function (data) {
+    //Ask Server For Name
+    socket.emit('nameRequest', "");
+    socket.on('nameRequest', function (data) {
         name = data;
-        var htmlContent = "<h1>NGO: " + name + "</h1>";
-
-        $(htmlContent).appendTo(".header");
+        var htmlContent = "<h1 class='titles'><span>NGO: " + name + "</span></h1>";
+        $(htmlContent).appendTo(".ngoTitle");
     });
 
 

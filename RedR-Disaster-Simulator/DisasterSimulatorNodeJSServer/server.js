@@ -49,12 +49,12 @@ app.get('/hq-run-simulation', function (req, res) {
 
 app.get('/ngo', function (req, res) {
     console.log('request: ' + req.url);
-    res.sendFile(__dirname + '/ngoConfig.html');
+    res.sendFile(__dirname + '/ngo-config.html');
 });
 
-app.get('/ngoMain', function (req, res) {
+app.get('/ngo-simulation', function (req, res) {
     console.log('request: ' + req.url);
-    res.sendFile(__dirname + '/NGO.html');
+    res.sendFile(__dirname + '/ngo-simulation.html');
 });
 
 app.get('/about', function (req, res) {
@@ -226,7 +226,7 @@ io.on('connection', function (socket) {
                 console.log(ngo.ip);
                 console.log(ngo.name);
                 ngoUsers.push(ngo);
-
+                socket.emit('loginState', 'accepted');
                 io.emit('ngoList', {ngoUsers});
             //}
 
@@ -238,15 +238,17 @@ io.on('connection', function (socket) {
     //socket.emit('ngoName', ngoTemp.name);
 
     //Send NGO Name To Relevant NGO
-    for(var i = 0; i < ngoUsers.length; i++){
-        ngoTemp = ngoUsers[i];
-        if(ngoTemp.ip == ipCurrent){
-            if(!ngoTemp.name.includes("HQ")) {
-                console.log(ngoTemp.name);
-                socket.emit('ngoName', ngoTemp.name);
+    socket.on('nameRequest', function (msg) {
+        for (var i = 0; i < ngoUsers.length; i++) {
+            ngoTemp = ngoUsers[i];
+            if (ngoTemp.ip == ipCurrent) {
+                if (!ngoTemp.name.includes("HQ")) {
+                    console.log(ngoTemp.name);
+                    socket.emit('nameRequest', ngoTemp.name);
+                }
             }
         }
-    }
+    });
 
     //Send each NGO name to HQ
 

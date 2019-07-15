@@ -96,12 +96,6 @@ socket.on('ngoList', function (data) {
 
 /*function getNGONames() {*/
 
-socket.on('currentNGONames', function (data) {
-    console.log("got names");
-    ngoNames = data.ngoNames;
-
-
-});
 
 /*}*/
 
@@ -220,12 +214,21 @@ function addToConversation(content, isOrigin, from) {
 
 function fillCommunicationButtons() {
 
-    var buttons = document.getElementsByClassName("btn btn-secondary");
-    console.log("buttonL: " + buttons.length);
-    console.log("ngonamesL: " + ngoNames.length);
-    for (i = 0; i < buttons.length; i++) {
-        buttons[i].innerHTML = ngoNames[i];
-    }
+    socket.on('currentNGONames', function (data) {
+        console.log("got names");
+        ngoNames = data.ngoNames;
+
+
+        var buttons = document.getElementsByClassName("btn btn-secondary");
+        console.log("buttonL: " + buttons.length);
+        console.log("ngonamesL: " + ngoNames.length);
+        for (i = 0; i < buttons.length; i++) {
+            buttons[i].innerHTML = ngoNames[i];
+        }
+
+    });
+
+
 
 }
 

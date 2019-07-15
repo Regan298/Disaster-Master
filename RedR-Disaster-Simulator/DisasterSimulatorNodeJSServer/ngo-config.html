@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Redr Disaster Simulator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="styles/disaster-sim-style.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<script src="js/jquery.js"></script>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top " id="header">
+    <script>$("#header").load("header.html");</script>
+</nav>
+
+<!-- Page Content -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center" id="mainContent">
+            <h1 class="titles">
+                <span>NGO Landing</span>
+            </h1>
+            <p class="lead">Please Specify Your NGO Passkey</p>
+
+            <div class="ngoNamefield">
+                <form id="ngoName" action="" onsubmit="">
+                    <input type="text" id="input"/>
+                    <input type="submit" value="Send"/>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <footer class="bg-light fixed-bottom" id="footer">
+        <script>$("#footer").load("footer.html");</script>
+    </footer>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/jquery.js"></script>
+<script>
+    const socket = io();
+
+
+    $('#ngoName').submit(function (e) {
+        e.preventDefault();
+        console.log("TEST");
+        socket.emit('join', $('#input').val());
+
+    });
+
+    socket.on('loginState', function (data) {
+        if(data === "accepted"){
+            location.href = "ngo-simulation";
+        }
+    });
+
+
+</script>
+
+</body>
+
+</html>
+
+
+
+
