@@ -31,6 +31,8 @@ install_dependencies:
 
 testing_testing:
   stage: test
+  tags:
+  - docker
   script:
   - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
   - node server.js
