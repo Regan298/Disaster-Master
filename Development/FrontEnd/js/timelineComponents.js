@@ -1,14 +1,9 @@
-var numDays=20;
+var numDays=10;
 
 var startDate = new Date('2019-01-01 00:00:00');
-//var endDate = startDate;
-//endDate.setDate(endDate.getDate()+numDays);
-//endDate.setHours('24');
-//endDate.setMinutes();
-//endDate.setSeconds();
-//var endDate = new Date();
-//endDate.setDate(startDate.getDate);
-//alert(endDate.getDate);
+var endDate = new Date('2019-01-01 00:00:00');
+endDate.setDate(startDate.getDate()+numDays-1);
+endDate.setHours('24');
 
 var groups = new vis.DataSet([
     {id: 1, content: 'Group 1'},
@@ -35,7 +30,7 @@ var options = {
   
   
   min: startDate,
-  //max: endDate,
+  max: endDate,
   
   
   zoomMin: 9000000,
