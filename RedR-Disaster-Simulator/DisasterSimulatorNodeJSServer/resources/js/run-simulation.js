@@ -205,6 +205,7 @@ $(function () {
     });
 
     socket.on('message', function (msg) {
+        console.log("messagerecieved");
 
         var from = msg.recievedMessage.from;
         var to = msg.recievedMessage.to;
@@ -217,7 +218,7 @@ $(function () {
 });
 
 function addToConversation(content, isOrigin, from) {
-
+    console.log(from);
     console.log("to" + from);
 
     if (isOrigin) {

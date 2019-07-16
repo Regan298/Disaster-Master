@@ -157,41 +157,13 @@ $(function () {
 
     //on receive message
     socket.on('message', function (msg) {
-        console.log(msg.recievedMessage.content);
+        console.log("messagerecieved");
+
         var from = msg.recievedMessage.from;
         var to = msg.recievedMessage.to;
 
-        $('#' + to).append($('<li>').text(msg.recievedMessage.content));
-        $('#' + from).append($('<li>').text(msg.recievedMessage.content));
+            addToConversation(msg.recievedMessage.content, false, from);
 
-        $('<style>' +
-            "#" + to + " li:nth-child(odd){ " +
-            "    text-align: center;\n" +
-            "    color: red;\n" +
-            "    font-weight: bold;\n" +
-            "}"
-
-            + '</style>').appendTo(document.head);
-
-
-        /*if(from === name) {
-            //message came from self
-           console.log('#' + to);
-           $('#' + to).append($('<li>').text(msg.recievedMessage.content));
-        }
-        if(to === name){
-            $('#' + from).append($('<li>').text(msg.recievedMessage.content));
-
-            $('<style>'+
-                "#" + from + "li:nth-child(odd) { font-size: 30px;\n" +
-                "    display: inline;\n" +
-                "    text-align: center;\n" +
-                "    color: red;\n" +
-                "    font-weight: bold;\n" +
-                "}"
-
-                +'</style>').appendTo(document.head);
-        }*/
 
     });
 
@@ -221,7 +193,12 @@ $(function () {
 
 function addToConversation(content, isOrigin, from) {
 
-    console.log("to" + from);
+    console.log("from" + from);
+
+
+    if(from == "HQ"){
+        from = "HQ";
+    }
 
     if (isOrigin) {
         $("#" + selectedNGOChat + "Content").append("<li id='origin'>" + content + "</li>");
@@ -230,9 +207,14 @@ function addToConversation(content, isOrigin, from) {
         var ngoId;
 
 
-        for (i = 0; i < ngos.length; i++) {
-            if (ngos[i].name == from) {
-                ngoId = ngos[i].id;
+        for (i = 0; i < users.length; i++) {
+            console.log("users: "  + users[i].name);
+            if (users[i].name == from) {
+                if(from == "HQ"){
+                    ngoId = "ngo0"
+                } else {
+                    ngoId = users[i].id;
+                }
             }
         }
 
