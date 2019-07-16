@@ -98,6 +98,20 @@
                 </script>
 
                 <script>
+                    socket.on('ngos', function (ngos) {
+                        console.log("got " + ngos.result);
+
+                        for (var i = 0; i < ngos.result.length; i++) {
+                            console.log(ngos.result[i]);
+                            groups.push({
+                                id: ngos.result[i].id,
+                                content: ngos.result[i].name
+                            });
+                        }
+                        timeline.setGroups(groups);
+                        //timeline.setItems(items);
+                        //timeline.redraw();
+                    });
                     socket.on('timelineEvents', function (events) {
                         console.log("got " + events.result);
 
