@@ -33,6 +33,16 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12 text-center" id="mainContent">
+			<div id="eventOverlay" onclick="displayPDFOff()"><!-- container for overlay -->
+
+
+
+
+				<div id="overlayPdf"></div>
+				<script src="js/PDFObject/pdfobject.js"></script>
+				<script>PDFObject.embed("files/test.pdf", "#overlayPdf");</script>
+
+			</div>
 			<!--Scenario Title Gets Updated In Socket-->
 					<div class="ngoTitle"></div>
 			<!--Timer-->
@@ -112,6 +122,52 @@
 
 
 
+
+			</div>
+
+			<div id="inboxElementNGO" class="inboxElementNGO">
+				<div id="inboxEmails" class="inboxEmails">
+
+                        <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                            <p class="emailTime">3:00PM</p></button>
+
+				</div>
+
+
+				<div id="emailViewer" class="emailViewer">
+					<div id="eventDetails">
+						<p>Peacedoves Budget Request, 3:00pm</p>
+						<button id="displayPDFButton" onclick="displayPDF()">View Event</button>
+
+
+
+					</div>
+
+					<div class="eventResponseContent">
+						<p>
+							Hi HQ<br>
+
+
+							I dont like  the way u have only given me $100 i need $101<br>
+
+							Regards, Peace Doves
+						</p>
+					</div>
+
+					<div class="eventResponseContent">
+						<p>
+							Hi Peace Doves<br>
+
+
+							Boi hell na<br>
+
+							Regards, HQ
+						</p>
+					</div>
+
+
+
+				</div>
 
 			</div>
 

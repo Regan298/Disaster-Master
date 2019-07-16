@@ -147,17 +147,39 @@ function switchNGOChat(ngo) {
     }
 }
 
+function updateEventList() {
+    socket.on('timelineEvents', function (events) {
+        eventList = events.result;
+        console.log("eventSize: " + eventList.length);
+        for (var i = 0; i < eventList.length; i++) {
+            var fileReference = eventList[i].Location;
+
+
+            var htmlContent = "<button class=\"emailObject\"><p class=\"emailTitle\">Peacedoves Budget Request </p>\n" +
+                "                                <p class=\"emailTime\">3:00PM</p></button>";
+
+            $(htmlContent).appendTo(".inboxEmails");
+            //For Demo
+            break;
+
+        }
+
+    });
+
+}
+
 
 //Once Page Loaded
 $(function () {
     var timerElement = document.getElementById("timeManagement");
     displayRemainingTime(timerElement, simulationDuration);
-
+    updateEventList();
     //Update Communication Buttons
+
     fillCommunicationButtons();
 
     //Load PDF
-    PDFObject.embed("/files/test.pdf", "#emailViewer");
+    //PDFObject.embed("/files/test.pdf", "#emailViewer");
     //Needed to auto hide placeholder messaging content
     switchNGOChat();
     $('#messageHQ').submit(function (e) {
@@ -234,6 +256,14 @@ function fillCommunicationButtons() {
 
 
 
+}
+
+function displayPDF(){
+    document.getElementById("eventOverlay").style.display = "block";
+}
+
+function displayPDFOff() {
+    document.getElementById("eventOverlay").style.display = "none";
 }
 
 function getPDF(cellValue) {

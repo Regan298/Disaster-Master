@@ -120,6 +120,14 @@ function handleNGOS() {
 
 }
 
+function displayPDF(){
+    document.getElementById("eventOverlay").style.display = "block";
+}
+
+function displayPDFOff() {
+    document.getElementById("eventOverlay").style.display = "none";
+}
+
 
 //Handle Messaging and Events
 $(function () {
