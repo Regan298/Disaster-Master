@@ -23,54 +23,41 @@
 <script src="js/PDFObject/pdfobject.js"></script>
 
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
-    <div class="container">
-        <a class="navbar-brand"><img src="assets/redr-aus-logo.png" alt="" he></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="help">Help</a>
-                </li>
-
-            </ul>
-        </div>
-    </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top "id="header">
+    <script>$("#header").load("header.html");</script>
 </nav>
 
 <!-- Page Content -->
 <div class="container">
     <div class="row">
         <div class="col-lg-12 text-center" id="mainContent">
+            <div id="eventOverlay" onclick="displayPDFOff()"> {
+
+
+
+
+
+                <div id="overlayPdf"></div>
+                <script src="js/PDFObject/pdfobject.js"></script>
+                <script>PDFObject.embed("files/test.pdf", "#overlayPdf");</script>
+
+            </div>
             <!--Scenario Title Gets Updated In Socket-->
             <div class="scenarioTitle"></div>
 
             <!--Play/Pause-->
-            <div class="timeControl">
-                <img src="assets/play.png">
-            </div>
+            <div class="timeControl" id="playPauseSwitch" onclick="startStopSim()">&#9205</div>
 
 
             <!--Timer-->
             <div id="timeManagement">
-                <script src="js/countdownTimer.js"></script>
+
             </div>
 
             <!--Timeline-->
             <div id="timeline" class="timeline">
 
-                <div id="eventOverlay" onclick="off()"><!-- container for overlay -->
+                <!--<div id="eventOverlay" onclick="off()">&lt;!&ndash; container for overlay &ndash;&gt;
 
                     <div id=overlayText>
                         <h3 id="eventViewRecipiant" style="margin: 0; padding:0;">Recipiant: name</h3>
@@ -83,7 +70,7 @@
                     <script src="js/PDFObject/pdfobject.js"></script>
                     <script>PDFObject.embed("pdftest.pdf", "#overlayPdf");</script>
 
-                </div>
+                </div>-->
 
 
                 <div id="visualization"></div><!-- container for timeline -->
@@ -99,10 +86,10 @@
 
                 <script>
                     socket.on('timelineEvents', function (events) {
-                        console.log("got " + events.result);
+
 
                         for (var i = 0; i < events.result.length; i++) {
-                            console.log(events.result[i]);
+
                             items.push({
                                 id: events.result[i].id,
                                 group: 1,
@@ -128,9 +115,7 @@
                     document.getElementById("eventOverlay").style.display = "block";
                 });
 
-                function off() {
-                    document.getElementById("eventOverlay").style.display = "none";
-                }
+
                 </script>
 
             </div>
@@ -146,7 +131,7 @@
             </div>
 
             <!--Messaging Element-->
-            <div id="messagingElement" class="messagingElement">
+            <div id="messagingElementHQ" class="messagingElementHQ">
 
 
                 <!--add buttons-->
@@ -207,119 +192,64 @@
 
 
 
-            <div id="inboxElement" class="inboxElement">
+            <div id="inboxElementHQ" class="inboxElementHQ">
                 <div id="inboxEmails" class="inboxEmails">
-                    <ul>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
-                        <li>
-                            <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                                <p class="emailTime">3:00PM</p></button>
-                        </li>
+                    <!--<ul class="eventButtonList">-->
+
+                    <!--<li>
+                        <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
+                            <p class="emailTime">3:00PM</p></button>
+                    </li>-->
 
 
-                    </ul>
+                    <!--</ul>-->
                 </div>
 
-                <!--Placeholder for PDF Viewer-->
+
                 <div id="emailViewer" class="emailViewer">
+                    <div id="eventDetails">
+                        <p>Peacedoves Budget Request, 3:00pm</p>
+                        <button id="displayPDFButton" onclick="displayPDF()">View Event</button>
+
+
+
+                    </div>
+
+                    <div class="eventResponseContent">
+                        <p>
+                            Hi HQ<br>
+
+
+                            I dont like  the way u have only given me $100 i need $101<br>
+
+                            Regards, Peace Doves
+                        </p>
+                    </div>
+
+                    <div class="eventResponseContent">
+                        <p>
+                            Hi Peace Doves<br>
+
+
+                            Boi hell na<br>
+
+                            Regards, HQ
+                        </p>
+                    </div>
+
+
 
 
                 </div>
+
+                <div id="emailResponse">
+                    <form action="" id="emailResponseForm">
+                        <textarea form="emailResponseForm" id="emailResponseFormInput"></textarea>
+                        <input type="submit" value="Send" class="button"/>
+                    </form>
+
+                </div>
+
 
             </div>
 
@@ -333,15 +263,12 @@
     </div>
 </div>
 
-<footer class="bg-light fixed-bottom">
-    <div class="container text-center">
-        <span class="text-center">Victoria University Of Wellington 2019</span>
-    </div>
+<!-- Footer -->
+<footer class="bg-light fixed-bottom" id="footer">
+    <script>$("#footer").load("footer.html");</script>
 </footer>
 
-<!-- Bootstrap core JavaScript -->
-<!-- <script src="vendor/jquery/jquery.slim.min.js"></script>
- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+
 
 
 </body>

@@ -82,7 +82,25 @@ body {
 
 .timeControl {
     display: inline;
+    cursor: pointer;
+    display: inline;
+    border-style: solid;
+    border-width: medium;
+    background-color: red;
+    border-color: red;
+    color: white;
+    font-size: 2rem;
+    vertical-align: text-bottom;
+    border-radius: 0.25rem;
     margin: 1rem;
+
+}
+
+.timeControl span {
+    color: white;
+    font-size: 2rem;
+
+
 }
 
 .scenarioTitle {
@@ -98,7 +116,7 @@ body {
     border-color: red;
     color: white;
     font-size: 2rem;
-    vertical-align: middle;
+    vertical-align: text-bottom;
     border-radius: 0.25rem;
     margin: 1rem;
 }
@@ -126,7 +144,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 3;
     cursor: pointer;
@@ -137,8 +155,9 @@ body {
     top: 10vh;
     right: 20vw;
     left: 20vw;
-    height: 85vh;
-    border: 1rem solid rgba(0, 0, 0, .1);
+    bottom: 20vh;
+    height: 100vh;
+
 }
 
 #overlayText {
@@ -167,10 +186,24 @@ body {
     padding-left: 5%;
 }
 
-.messagingElement {
+.messagingElementHQ {
     margin-top: 1%;
     max-width: 50%;
     max-height: 25%;
+    min-height: 25%;
+    border-style: solid;
+    border-width: 1px;
+    float: left;
+    margin: auto;
+    position: relative;
+    display: flex;
+    width: 45%;
+    /*position: relative;*/
+}
+
+.messagingElementNGO {
+    margin-top: 1%;
+    max-width: 50%;
     min-height: 25%;
     border-style: solid;
     border-width: 1px;
@@ -311,28 +344,45 @@ body {
     padding: 0;
 }
 
-.inboxElement {
-    display: inline-block;
-    width: 50%;
-    height: 45%;
-    border: black;
+
+
+
+.inboxElementHQ {
+    max-width: 50%;
+    max-height: 60vh;
+    min-height: 60vh;
     border-style: solid;
     border-width: 1px;
-    max-height: 40%;
-    min-height: 40%;
-    margin-left: 5%;
+    float: right;
+    margin: auto;
+    display: flex;
+    width: 45%;
+    position: relative;
+}
+
+.inboxElementNGO {
+    max-width: 50%;
+
+    min-height: 25%;
+    border-style: solid;
+    border-width: 1px;
+    float: right;
+    margin: auto;
+    display: flex;
+    width: 45%;
+    position: relative;
 }
 
 .inboxEmails {
     float: left;
     max-width: 30%;
     max-height: 60vh;
-    min-width: 30%;
+    min-width: 40%;
     overflow-y: auto;
-    padding-right: 2%;
-
-
+    align-self: stretch;
 }
+
+
 
 .inboxEmails ul {
 
@@ -367,10 +417,10 @@ body {
 
 .pdfobject {
 
-    min-height: 60vh;
+    min-height: 75vh;
     overflow: auto;
     width: 100%;
-    float: right;
+
 
 }
 
@@ -391,14 +441,66 @@ body {
 }
 
 .emailViewer {
-    border-style: solid;
-    border-style: solid;
+    border-left: solid;
+    border-bottom: solid;
     display: inline-block;
-    min-width: 70%;
+    min-width: 60%;
     min-height: 100%;
     max-height: 100%;
     border-width: thin;
-    padding-left: 2%;
+
+}
+
+#eventDetails{
+
+    border-bottom: solid;
+    border-width: 1px;
+
+}
+
+.eventResponseContent{
+    border-bottom: solid;
+    border-width: 1px;
+
+}
+
+
+
+#emailResponse{
+    position: absolute;
+    bottom: 0;
+    padding-left: 45%;
+    min-width: 100%;
+}
+
+#emailResponseForm{
+    float: left;
+    min-width: 100%;
+}
+
+#emailResponseFormInput{
+    resize: none;
+    float: left;
+    /* width: 75%; */
+    max-height: 100%;
+    /* MIN-HEIGHT: 100%; */
+    min-width: 80%;
+    margin-right: 5%;
+    margin-bottom: 2%;
+}
+
+#emailResponseForm input{
+    margin-top: 2%;
+    width: 13%;
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+    font-size: 100%;
+    padding: 0;
+}
+
+#displayPDFButton{
+
 }
 
 [tabindex="-1"]:focus {
