@@ -31,6 +31,18 @@ install_dependencies:
     paths:
       - node_modules/
 
+connect:
+  image: mysql
+  stage: build
+  tags:
+  - docker
+  script:
+  - service mysql start
+  - echo mysql -u root
+  - echo "SELECT 'OK';" | mysql -uroot -p"$MYSQL_ROOT_PASSWORD" -h mysql "$MYSQL_DATABASE"
+  - mysql -uroot -p"$MYSQL_ROOT_PASSWORD" -h localhost < "data/db/scripts/create-db.sql"
+  - mysql -uroot -p"$MYSQL_ROOT_PASSWORD" -h localhost < "data/db/scripts/init-db-tables.sql"
+
 testing_testing:
   stage: test
   tags:
