@@ -40,13 +40,13 @@
 	</ngo>	
 	
     <event>
-		<recipient>Test</recipient>
+		<recipient>Peacedoves</recipient>
 		<time>00:00:30</time>
 		<type>pdf</type>
 		<location>/files/test.pdf</location>
 	</event>
     <event>
-		<recipient>Test</recipient>
+		<recipient>Red Heart</recipient>
 		<time>00:00:35</time>
 		<type>pdf</type>
 		<location>/files/test.pdf</location>
