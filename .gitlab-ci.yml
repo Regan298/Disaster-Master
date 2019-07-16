@@ -30,17 +30,10 @@ install_dependencies:
     paths:
       - node_modules/
 
-connect:
+testing_testing:
   stage: test
   services:
   - mysql:latest
-  tags:
-  - docker
-  script:
-  - service mysql start
-
-testing_testing:
-  stage: test
   tags:
   - docker
   script:
