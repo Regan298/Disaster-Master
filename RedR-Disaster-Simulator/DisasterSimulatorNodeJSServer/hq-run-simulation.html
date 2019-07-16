@@ -96,23 +96,33 @@
                             });
                         }
                         timeline.setGroups(groups);
-                        //timeline.setItems(items);
-                        //timeline.redraw();
                     });
-                    socket.on('timelineEvents', function (events) {
 
+                    socket.on('timelineEvents', function (events) {
 
                         for (var i = 0; i < events.result.length; i++) {
 
-                            items.push({
-                                id: events.result[i].id,
-                                group: 1,
-                                content: events.result[i].Location,
-                                start: '2019-05-10 ' + events.result[i].Time
-                            });
+
+                            var id;
+
+                            var ngoName = events.result[i].Recipient;
+                            for(var k=0; k<groups.length; k++){
+                                if(groups[k].content===ngoName){
+                                    id = groups[k].id;
+                                    console.log("found matching ngo id");
+                                    items.push({
+                                        id: events.result[i].id,
+                                        group: id,
+                                        content: events.result[i].Location,
+                                        start: '2019-05-10 ' + events.result[i].Time
+                                    });
+                                    break;
+                                }
+                            }
+
+                            
                         }
                         timeline.setItems(items);
-                        //timeline.redraw();
                     });
 
                     $(function () {
