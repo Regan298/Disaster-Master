@@ -6,6 +6,10 @@ var events = [];
 var rowCount = 0;
 var selectedNGOChat;
 var ngoNames;
+var running = false;
+var currentTime = 0;
+var updateClockProcess;
+var simulationDuration = 300000;
 
 
 //Load Page Elements
@@ -13,11 +17,57 @@ var ngoNames;
 loadScenarioHeader();
 //testing:
 getTempPDF();
-//getNGONames();
+handleNGOS();
 
 
+function runClock() {
+    function updateClock() {
+        currentTime = currentTime + 1000;
+        var timerElement = document.getElementById("timeManagement");
+        var timeRemaining = simulationDuration - currentTime;
+        displayRemainingTime(timerElement, timeRemaining);
 
-//handleNGOS();
+        if (timeRemaining == 0) {
+            clearInterval(updateClockProcess);
+        }
+    }
+
+    updateClockProcess = setInterval(updateClock, 1000);
+}
+
+function startStopSim() {
+
+    if (!running) {
+        running = true;
+        doPlay();
+        document.getElementById("playPauseSwitch").innerHTML="&#10074 &#10074";
+    } else {
+        running = false;
+        doPause();
+        document.getElementById("playPauseSwitch").innerHTML="&#9205";
+    }
+
+}
+
+function displayRemainingTime(timerElement, timeRemaining) {
+
+    var seconds = Math.floor((timeRemaining / 1000) % 60);
+    var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
+    var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
+
+
+    timerElement.innerHTML = hours + "h" + minutes + "m" + seconds + "s";
+
+}
+
+function doPause() {
+    clearInterval(updateClockProcess);
+}
+
+function doPlay() {
+    runClock();
+}
+
 
 function loadScenarioHeader() {
 
@@ -38,34 +88,31 @@ function loadScenarioHeader() {
     });
 }
 
-//New NGOS
-socket.on('ngoList', function (data) {
-    console.log("new ngo");
-    ngos = data.ngoUsers;
-    handleNGOS();
-});
+
 
 /*function getNGONames() {*/
 
-    socket.on('currentNGONames', function (data) {
-        console.log("got names");
-        ngoNames = data.ngoNames;
-
-
-    });
 
 /*}*/
 
 
 function handleNGOS() {
-    //Find ngo button and reveal it
-    if (ngos != null) {
-        let currentNGOName = ngos[ngos.length - 1].name;
 
-        console.log("id: " + ngos[ngos.length - 1].id);
+    //New NGOS
+    socket.on('ngoList', function (data) {
 
-        document.getElementById(ngos[ngos.length - 1].id).style.visibility = "visible";
-    }
+        ngos = data.ngoUsers;
+        if (ngos != null) {
+            let currentNGOName = ngos[ngos.length - 1].name;
+
+            console.log("id: " + ngos[ngos.length - 1].id);
+
+            document.getElementById(ngos[ngos.length - 1].id).style.visibility = "visible";
+        }
+
+    });
+
+
 }
 
 
@@ -95,18 +142,44 @@ function switchNGOChat(ngo) {
 
     // Show the specific message content
     if (ngo != null) {
-        console.log("ngoselected: " + ngo);
+
         document.getElementById(ngo + "Content").style.display = "inline-block";
     }
+}
+
+function updateEventList() {
+    socket.on('timelineEvents', function (events) {
+        eventList = events.result;
+        console.log("eventSize: " + eventList.length);
+        for (var i = 0; i < eventList.length; i++) {
+            var fileReference = eventList[i].Location;
+
+
+            var htmlContent = "<button class=\"emailObject\"><p class=\"emailTitle\">Peacedoves Budget Request </p>\n" +
+                "                                <p class=\"emailTime\">3:00PM</p></button>";
+
+            $(htmlContent).appendTo(".inboxEmails");
+            //For Demo
+            break;
+
+        }
+
+    });
+
 }
 
 
 //Once Page Loaded
 $(function () {
+    var timerElement = document.getElementById("timeManagement");
+    displayRemainingTime(timerElement, simulationDuration);
+    updateEventList();
     //Update Communication Buttons
+
     fillCommunicationButtons();
+
     //Load PDF
-    PDFObject.embed("/files/test.pdf", "#emailViewer");
+    //PDFObject.embed("/files/test.pdf", "#emailViewer");
     //Needed to auto hide placeholder messaging content
     switchNGOChat();
     $('#messageHQ').submit(function (e) {
@@ -118,7 +191,7 @@ $(function () {
         //Find actual Name of NGO
         let name = document.getElementById(selectedNGOChat).innerHTML;
 
-        console.log("actualname" + name);
+
 
         var message = {
             from: 'HQ',
@@ -132,6 +205,7 @@ $(function () {
     });
 
     socket.on('message', function (msg) {
+        console.log("messagerecieved");
 
         var from = msg.recievedMessage.from;
         var to = msg.recievedMessage.to;
@@ -144,7 +218,7 @@ $(function () {
 });
 
 function addToConversation(content, isOrigin, from) {
-
+    console.log(from);
     console.log("to" + from);
 
     if (isOrigin) {
@@ -168,13 +242,29 @@ function addToConversation(content, isOrigin, from) {
 
 function fillCommunicationButtons() {
 
-    var buttons = document.getElementsByClassName("btn btn-secondary");
-    console.log("buttonL: " + buttons.length);
-    console.log("ngonamesL: " + ngoNames.length);
-    for (i = 0; i < buttons.length; i++) {
-        buttons[i].innerHTML = ngoNames[i];
-    }
+    socket.on('currentNGONames', function (data) {
 
+        ngoNames = data.ngoNames;
+
+
+        var buttons = document.getElementsByClassName("btn btn-secondary");
+
+        for (i = 0; i < buttons.length; i++) {
+            buttons[i].innerHTML = ngoNames[i];
+        }
+
+    });
+
+
+
+}
+
+function displayPDF(){
+    document.getElementById("eventOverlay").style.display = "block";
+}
+
+function displayPDFOff() {
+    document.getElementById("eventOverlay").style.display = "none";
 }
 
 function getPDF(cellValue) {
@@ -201,4 +291,18 @@ function wait(ms) {
         end = new Date().getTime();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
