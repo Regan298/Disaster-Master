@@ -116,6 +116,12 @@ function parseXMLForLoading() {
                         passkey: currentNGOPasskey
                     }
                     simData.ngoList.push(ngo);
+                    var sql = "INSERT INTO ngos (name, Passcode)" +
+                        " VALUES (" + "'" + currentNGOName + "', '" + currentNGOPasskey + "') ";
+                    pool.query(sql, function (err, result) {
+                        if (err) throw err;
+                        console.log("ngo loaded from file");
+                    });
                 }
 
                 //debug the ngo ids
@@ -284,8 +290,13 @@ io.on('connection', function (socket) {
     });
 
     socket.on('timelineReady', function(msg){
-        //get all events from database
-        var sql = "SELECT * FROM timelineevents";
+        //get all events from database then send to timeline
+        var sql = "SELECT * FROM ngos";
+        connection.query(sql, function (err,result){
+            if(err) throw err;
+            socket.emit('ngos', {result});
+        })
+        sql = "SELECT * FROM timelineevents";
         connection.query(sql, function (err, result) {
             if (err) throw err;
             socket.emit('timelineEvents', {result});

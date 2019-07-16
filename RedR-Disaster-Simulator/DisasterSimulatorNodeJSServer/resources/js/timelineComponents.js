@@ -1,11 +1,5 @@
 //const socket = io();
-
-var groups = new vis.DataSet([
-    {id: 1, content: 'Group 1'},
-    {id: 2, content: 'Group 2'},
-    {id: 3, content: 'Group 3'},
-    {id: 4, content: 'Group 4'}
-]);
+var groups = [];
 
 var items = []
 
