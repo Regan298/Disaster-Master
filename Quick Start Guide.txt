@@ -1,6 +1,6 @@
 RedR Australia Disaster Simulator Quick Start Guide
 
-Flash Drive Edition Beta 0.0.1
+Flash Drive Edition Beta 0.2.4
 
 WINDOWS 10 ONLY
 CHROME IS RECOMMENDED
@@ -24,7 +24,7 @@ This will land you on the HQ page. Have a go at clicking on events on the timeli
 Connect an NGO:
 1. Open up a browser on a seperate device connected to the same network
 2. Enter the URL displayed below the scenario header at the top of the HQ page
-3. Enter the key "ngo1"
+3. Enter the key "ngo1" then click "Send"
 
 This will land the seperate device on the NGO page.
 Back on the HQ page, a conversation called "People First" will have appeared in the Communication box. You can click on the conversation and send messages to the connected NGO, the NGO is also able to send messages back to the HQ in the same fashion.
