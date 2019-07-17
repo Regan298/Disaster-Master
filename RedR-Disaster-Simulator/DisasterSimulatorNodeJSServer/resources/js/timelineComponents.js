@@ -1,33 +1,100 @@
-//const socket = io();
+var numDays=7;
+var startDate = new Date('2019-01-01 00:00:00');
+var endDate = new Date('2019-01-01 00:00:00');
+endDate.setDate(startDate.getDate()+numDays-1);
+endDate.setHours('24');
+
 var groups = [];
 
 var items = []
 
-//var items = new vis.DataSet(events);
-
-var timelineHeight = window.innerHeight/1.5;
-// Config for Timeline
 var options = {
+
   editable: false,
-  
-  //for making timeline scrollable
+  showCurrentTime: false,
   verticalScroll: true,
-  maxHeight: timelineHeight,
-  
+  maxHeight: window.innerHeight/1.5,
   orientation: 'bottom',
-  //(d.getFullYear() + "/" + (d.getMonth()+1)  + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds())
-  min: new Date('2019-05-10 00:00:00'),
-  max: new Date('2019-05-15 24:00:00'),
-  zoomMin: 60000,
+  
+  
+  min: startDate,
+  max: endDate,
+  
+  
+  zoomMin: 9000000,
+  zoomMax: 3000000000,
   margin: {
       item: 10,
       axis: 5
-    }
+    },
+    
+    
+    format: {
+        minorLabels: function(date, scale, step) {
+
+            var minorLabel='';
+            switch (scale) {
+            case 'millisecond':
+                break;
+            case 'second':
+                break;
+            case 'minute':
+                    var tempDate = new Date(date);
+                    minorLabel = ("0" + tempDate.getHours()).slice(-2) + ":" + ("0" + tempDate.getMinutes()).slice(-2);
+                break;
+            case 'hour':
+                var tempDate = new Date(date);
+                minorLabel = ("0" + tempDate.getHours()).slice(-2) + ":" + ("0" + tempDate.getMinutes()).slice(-2);
+                break;
+            case 'day':
+                var res = Math.abs(startDate - date) / 1000;
+                var days = Math.floor(res / 86400)+1;
+                minorLabel="Day "+days;
+                break;
+            case 'weekday':
+                var res = Math.abs(startDate - date) / 1000;
+                var days = Math.floor(res / 86400)+1;
+                minorLabel="Day "+days;
+                break;
+            case 'month':
+                break;
+            case 'year':
+                break;
+            default:
+                return ("ERROR: minorLabels");
+        } 
+        return  minorLabel;
+     },
+
+        majorLabels: function(date, scale, step) {
+            var majorLabel='';
+            switch (scale) {
+            case 'millisecond':
+                break;
+            case 'second':
+                break;
+            case 'minute':
+                var res = Math.abs(startDate - date) / 1000;
+                var days = Math.floor(res / 86400)+1;
+                majorLabel="Day "+days;
+                break;
+            case 'hour':
+                var res = Math.abs(startDate - date) / 1000;
+                var days = Math.floor(res / 86400)+1;
+                majorLabel="Day "+days;
+                break;
+            case 'day':
+                break;
+            case 'weekday':
+                break;
+            case 'month':
+                break;
+            case 'year':
+                break;
+            default:
+                return ("ERROR: majorLabels");
+            }
+            return (majorLabel);
+        }
+    }   
 };
-
-
-
-
-
-//redraw()
-//getSelection()

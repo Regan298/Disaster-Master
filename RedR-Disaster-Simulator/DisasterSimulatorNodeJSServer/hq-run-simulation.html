@@ -104,6 +104,9 @@
 
 
                             var id;
+                            var randDay = Math.floor((Math.random() * 7) + 1);
+                            var randHour = Math.floor((Math.random() * 24) + 1);
+                            var randMinute = Math.floor((Math.random() * 60) + 1);
 
                             var ngoName = events.result[i].Recipient;
                             for(var k=0; k<groups.length; k++){
@@ -114,7 +117,8 @@
                                         id: events.result[i].id,
                                         group: id,
                                         content: events.result[i].Location,
-                                        start: '2019-05-10 ' + events.result[i].Time
+                                        start: '2019-01-0'+randDay+' '+randHour+':'+randMinute+':00'
+                                        //start: '2019-01-01 ' + events.result[i].Time
                                     });
                                     break;
                                 }
