@@ -33,6 +33,9 @@
     --breakpoint-xl: 1200px;
     --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+    
+    --main-color:#EE2A2B;
 }
 
 *,
@@ -3033,14 +3036,14 @@ fieldset:disabled a.btn {
 
 .btn-primary {
     color: #fff;
-    background-color: #EE2A2B;
-    border-color: #EE2A2B;
+    background-color: var(--main-color);
+    border-color: var(--main-color);
 }
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #EE2A2B;
-    border-color: #EE2A2B;
+    background-color: var(--main-color);
+    border-color: var(--main-color);
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -3049,15 +3052,15 @@ fieldset:disabled a.btn {
 
 .btn-primary.disabled, .btn-primary:disabled {
     color: #fff;
-    background-color: #EE2A2B;
-    border-color: #EE2A2B;
+    background-color: var(--main-color);
+    border-color: var(--main-color);
 }
 
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle {
     color: #fff;
-    background-color: #EE2A2B;
-    border-color: #EE2A2B;
+    background-color: var(--main-color);
+    border-color: var(--main-color);
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
