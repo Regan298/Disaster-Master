@@ -146,10 +146,11 @@ function parseXMLForLoading() {
                     var currentEventTime = eventsArray[i].time;
                     var currentEventType = eventsArray[i].type;
                     var currentEventLocation = eventsArray[i].location;
+                    var currentEventSubject = eventsArray[i].subject;
 
-                    var sql = "INSERT INTO timelineevents (Recipient, Time, Type, Location)" +
+                    var sql = "INSERT INTO timelineevents (Recipient, Time, Type, Location, Subject)" +
                         " VALUES (" + "'" + currentEventRecipient + "', '" + currentEventTime + "', '" + currentEventType + "', '"
-                        + currentEventLocation + "') ";
+                + currentEventLocation + "', '" + currentEventSubject + "') ";
                     pool.query(sql, function (err, result) {
                         if (err) throw err;
                         console.log("timeline event loaded from file");

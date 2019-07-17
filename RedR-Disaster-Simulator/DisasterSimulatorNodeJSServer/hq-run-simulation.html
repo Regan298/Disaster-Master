@@ -39,7 +39,15 @@
 
                 <div id="overlayPdf"></div>
                 <script src="js/PDFObject/pdfobject.js"></script>
-                <script>PDFObject.embed("files/test.pdf", "#overlayPdf");</script>
+                <script>
+                    function onSelect(properties){
+                        console.log(items);
+                        console.log(properties.items[0]-1);
+                        console.log(items[properties.items[0]-1].location);
+                        PDFObject.embed(items[properties.items[0]-1].location, "#overlayPdf");
+                        document.getElementById("eventOverlay").style.display = "block";
+                    }
+                </script>
 
             </div>
             <!--Scenario Title Gets Updated In Socket-->
@@ -116,7 +124,8 @@
                                     items.push({
                                         id: events.result[i].id,
                                         group: id,
-                                        content: events.result[i].Location,
+                                        content: events.result[i].Subject,
+                                        location: events.result[i].Location,
                                         start: '2019-01-0'+randDay+' '+randHour+':'+randMinute+':00'
                                         //start: '2019-01-01 ' + events.result[i].Time
                                     });
@@ -139,9 +148,7 @@
 
 
                 <script>//functions for activating/disabling overlay
-                timeline.on('select', function on() {
-                    document.getElementById("eventOverlay").style.display = "block";
-                });
+                timeline.on('select', onSelect);
 
 
                 </script>
