@@ -3,7 +3,7 @@ RedR Australia Disaster Simulator Instruction Manual
 Flash Drive Edition Beta 0.0.1
 
 WINDOWS 10 ONLY
-CHROME IS RECOMMENED 
+CHROME IS RECOMMENDED 
 
 1. Download from Flash Drive:
 (Optional to download from flash drive into the computer)

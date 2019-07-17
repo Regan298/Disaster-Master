@@ -1,0 +1,39 @@
+RedR Australia Disaster Simulator Quick Start Guide
+
+Flash Drive Edition Beta 0.0.1
+
+WINDOWS 10 ONLY
+CHROME IS RECOMMENDED
+
+Launch the program:
+1. Navigate to /RedR-Disaster-Simulator
+2. Double click on "RedR Disaster Simulator"
+3. Wait for the program to open in your browser
+    - If it does not open in Chrome, copy the URL and paste it into Chrome
+
+On the left-hand side of the screen is an example of a colour changer to adapt the program for any origanisation. To select the colour just click on the box and the colour picker will popup. This feature does not yet carry your selection over to other pages.
+
+Load an example scenario:
+1. Click on "Start A New Scenario"
+2. Click on "Choose file"
+    - Navigate to the flash drive, click on "scenarioExample" then "Open"
+3. Click on "Begin"
+
+This will land you on the HQ page. Have a go at clicking on events on the timeline to view them. Further down the page is a communication messaging box, any connected NGOs will create a communication channel to send messages back and forth. Next to that is the Inbox, this is where sent events and their responses are displayed.
+
+Connect an NGO:
+1. Open up a browser on a seperate device connected to the same network
+2. Enter the URL displayed below the scenario header at the top of the HQ page
+3. Enter the key "ngo1"
+
+This will land the seperate device on the NGO page.
+Back on the HQ page, a conversation called "People First" will have appeared in the Communication box. You can click on the conversation and send messages to the connected NGO, the NGO is also able to send messages back to the HQ in the same fashion.
+
+Stop the simulation and close the program:
+1. Close the Chrome tab
+2. Close the 2 console windows
+
+For Assistance Contact:
+Tom Buurmans
+tom.buurmans@gmail.com
++642040243729

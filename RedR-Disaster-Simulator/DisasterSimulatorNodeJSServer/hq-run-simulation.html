@@ -31,7 +31,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12 text-center" id="mainContent">
-            <div id="eventOverlay" onclick="displayPDFOff()"> {
+            <div id="eventOverlay" onclick="displayPDFOff()"> 
 
 
 
@@ -239,7 +239,13 @@
 
                     <!--</ul>-->
                 </div>
-
+ 
+                <script>//Dummy script for displaying example pdf
+                    function displayPDF(){
+                        PDFObject.embed("/files/test.pdf", "#overlayPdf");
+                        document.getElementById("eventOverlay").style.display = "block";
+                    }
+                </script>
 
                 <div id="emailViewer" class="emailViewer">
                     <div id="eventDetails">
@@ -255,7 +261,7 @@
                             Hi HQ<br>
 
 
-                            I dont like  the way u have only given me $100 i need $101<br>
+                            Thank you for your email, what is the timeframe for this event?<br>
 
                             Regards, Peace Doves
                         </p>
@@ -266,7 +272,7 @@
                             Hi Peace Doves<br>
 
 
-                            Boi hell na<br>
+                            This is a matter of urgency, please make it your top priority<br>
 
                             Regards, HQ
                         </p>
