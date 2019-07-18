@@ -148,8 +148,8 @@ function switchNGOChat(ngo) {
 }
 
 function updateEventList() {
-    socket.on('timelineEvents', function (events) {
-        eventList = events.result;
+    socket.on('timelineEvents', function (received) {
+        eventList = received.events;
         console.log("eventSize: " + eventList.length);
         for (var i = 0; i < eventList.length; i++) {
             var fileReference = eventList[i].Location;

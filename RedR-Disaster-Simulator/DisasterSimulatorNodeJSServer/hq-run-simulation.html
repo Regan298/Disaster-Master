@@ -42,9 +42,9 @@
                 <script>
                     function onSelect(properties){
                         console.log(items);
-                        console.log(properties.items[0]-1);
-                        console.log(items[properties.items[0]-1].location);
-                        PDFObject.embed(items[properties.items[0]-1].location, "#overlayPdf");
+                        console.log(properties.items[0]);
+                        console.log(items[properties.items[0]].location);
+                        PDFObject.embed(items[properties.items[0]].location, "#overlayPdf");
                         document.getElementById("eventOverlay").style.display = "block";
                     }
                 </script>
@@ -93,41 +93,42 @@
                 </script>
 
                 <script>
-                    socket.on('ngos', function (ngos) {
-                        console.log("got " + ngos.result);
+                    socket.on('ngos', function (received) {
+                        console.log("got " + received.ngos);
 
-                        for (var i = 0; i < ngos.result.length; i++) {
-                            console.log(ngos.result[i]);
+                        for (var i = 0; i < received.ngos.length; i++) {
+                            console.log(received.ngos[i]);
                             groups.push({
-                                id: ngos.result[i].id,
-                                content: ngos.result[i].name
+                                id: received.ngos[i].id,
+                                content: received.ngos[i].name[0]
                             });
                         }
+                        console.log(groups);
                         timeline.setGroups(groups);
                     });
 
-                    socket.on('timelineEvents', function (events) {
-
-                        for (var i = 0; i < events.result.length; i++) {
-
+                    socket.on('timelineEvents', function (received) {
+                        console.log("got "+received.events.length+" events");
+                        for (var i = 0; i < received.events.length; i++) {
+                            console.log(received.events[i]);
 
                             var id;
                             var randDay = Math.floor((Math.random() * 7) + 1);
                             var randHour = Math.floor((Math.random() * 24) + 1);
                             var randMinute = Math.floor((Math.random() * 60) + 1);
 
-                            var ngoName = events.result[i].Recipient;
+                            var ngoName = received.events[i].recipient[0];
                             for(var k=0; k<groups.length; k++){
                                 if(groups[k].content===ngoName){
                                     id = groups[k].id;
                                     console.log("found matching ngo id");
                                     items.push({
-                                        id: events.result[i].id,
+                                        id: received.events[i].id,
                                         group: id,
-                                        content: events.result[i].Subject,
-                                        location: events.result[i].Location,
+                                        content: received.events[i].subject[0],
+                                        location: received.events[i].location[0],
                                         start: '2019-01-0'+randDay+' '+randHour+':'+randMinute+':00'
-                                        //start: '2019-01-01 ' + events.result[i].Time
+                                        //start: '2019-01-01 ' + received.events[i].Time
                                     });
                                     break;
                                 }
