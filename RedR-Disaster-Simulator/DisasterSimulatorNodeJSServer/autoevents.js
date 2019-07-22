@@ -2,48 +2,49 @@ var Stopwatch = require("statman-stopwatch");
 var TimeFormat = require('hh-mm-ss');
 const util = require('util');
 var simLength;
-var events = [];
+var pastEvents = [];
+var eventList = [];
 const { parentPort } = require('worker_threads');
-var mysql = require('promise-mysql');
-var con;
 
 const stopwatch = new Stopwatch();
 
-parentPort.on('message', (msg) => {
-	console.log(msg);
-	simLength = msg;
+parentPort.on('message', (length, msg) => {
+	simLength = length;
+	eventList = msg;
 	stopwatch.start();
 	grabEvent();
 });
 
 function grabEvent(){
-	mysql.createConnection({
-		host: "localhost",
-		user: "root",
-		password: "root",
-		database: "simulationData"
-	}).then(function loop(conn){
-		con = conn;
+	if(stopwatch.read() < simLength){
+		wait(1000);
 		
-		if(stopwatch.read() < simLength){
-			wait(1000);
-			
-			var result = con.query("SELECT * FROM timelineevents WHERE Time = '"+(TimeFormat.fromMs(stopwatch.read(), 'hh:mm:ss'))+"'").then(function(rows){
-				for(var i=0; i<rows.length; i++){
-					events.push(rows[i]);
-				}
-				parentPort.postMessage(events);
-				loop(conn);
-			});
+		var t = TimeFormat.fromMs(stopwatch.read(), 'hh:mm:ss');
+		var now = new Date();
+		t = t.split(":");
+		now.setHours(t[0]);
+		now.setMinutes(t[1]);
+		now.setSeconds(t[2]);
 
-			//console.log(count);
-		}else{
-            
-			conn.end();
-			endSim();
+		var eventTime;
+
+		for(var i=0; i<eventList; i++){
+			t = eventList[i].time.split(":");
+			eventTime = new Date();
+			eventTime.setHours(t[0]);
+			eventTime.setMinutes(t[1]);
+			eventTime.setSeconds(t[2]);
+
+			if(eventTime < now){
+				pastEvents.push(eventList[i]);
+			}
 		}
-		
-	});
+		parentPort.postMessage(pastEvents);
+
+		//console.log(count);
+	}else{
+		endSim();
+	}
 }
 	
 function endSim(){

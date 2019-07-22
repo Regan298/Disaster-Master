@@ -1,7 +1,6 @@
 const fs = require('fs');
 var ip = require('ip');
 var opn = require('opn');
-var mysql = require('mysql');
 var express = require('express');
 var app = require('express')();
 var http = require('http').createServer(app);
@@ -14,7 +13,6 @@ var xml2js = require('xml2js');
 var parser = new xml2js.Parser();
 app.use(fileUpload());
 var simFile;
-var connection;
 var formidable = require('formidable');
 
 //ngoCount gets updated when file parsed
@@ -22,7 +20,9 @@ const simData = {
     ready: false,
     title: "",
     ngoCount: 999,
-    ngoList: []
+    ngoList: [],
+    eventsList: [],
+    messageList: []
 
 };
 
@@ -120,16 +120,11 @@ function parseXMLForLoading() {
                     var currentNGOName = ngosArray[i].name;
                     var currentNGOPasskey = ngosArray[i].passkey;
                     var ngo = {
+                        id: i,
                         name: currentNGOName,
                         passkey: currentNGOPasskey
                     }
                     simData.ngoList.push(ngo);
-                    var sql = "INSERT INTO ngos (name, Passcode)" +
-                        " VALUES (" + "'" + currentNGOName + "', '" + currentNGOPasskey + "') ";
-                    pool.query(sql, function (err, result) {
-                        if (err) throw err;
-                        console.log("ngo loaded from file");
-                    });
                 }
 
                 //debug the ngo ids
@@ -148,19 +143,22 @@ function parseXMLForLoading() {
                     var currentEventLocation = eventsArray[i].location;
                     var currentEventSubject = eventsArray[i].subject;
 
-                    var sql = "INSERT INTO timelineevents (Recipient, Time, Type, Location, Subject)" +
-                        " VALUES (" + "'" + currentEventRecipient + "', '" + currentEventTime + "', '" + currentEventType + "', '"
-                + currentEventLocation + "', '" + currentEventSubject + "') ";
-                    pool.query(sql, function (err, result) {
-                        if (err) throw err;
-                        console.log("timeline event loaded from file");
-                    });
+                    var event = {
+                        id: i,
+                        recipient: currentEventRecipient,
+                        time: currentEventTime,
+                        type: currentEventType,
+                        location: currentEventLocation,
+                        subject: currentEventSubject
+                    }
+                    console.log(event);
+                    simData.eventsList.push(event);
                 }
 
 
             });
         });
-
+        runSim(1000000);
     } catch (e) {
         return false;
     }
@@ -290,69 +288,37 @@ io.on('connection', function (socket) {
 		//send to DB
         var d = new Date();
         var date = dateFormat(d, "HH:MM:ss")
-        var sql = "INSERT INTO messages (Recipient, Sender, Time, Content) VALUES ('" + msg.message.to + "', '" + msg.message.from + "', '" + date + "', '" + msg.message.content + "') ";
-        console.log(sql);
-        connection.query(sql, function (err, result) {
-            if (err) throw err;
-            console.log("message saved");
-        });
+        var message = {
+            recipient: msg.message.to,
+            sender: msg.message.from,
+            time: date,
+            content: msg.message.content
+        }
+        simData.messageList.push(message);
 		
         io.emit('message', {recievedMessage});
     });
 
     socket.on('timelineReady', function(msg){
-        //get all events from database then send to timeline
-        var sql = "SELECT * FROM ngos";
-        connection.query(sql, function (err,result){
-            if(err) throw err;
-            socket.emit('ngos', {result});
-        })
-        sql = "SELECT * FROM timelineevents";
-        connection.query(sql, function (err, result) {
-            if (err) throw err;
-            socket.emit('timelineEvents', {result});
-        });
-        
+        //send all events & ngos to timeline
+        console.log("timeline ready");
+        var ngos = simData.ngoList;
+        socket.emit('ngos', {ngos});
 
+        var events = simData.eventsList;
+        socket.emit('timelineEvents', {events});
         
     });
 
 });
-
-wait(2000);
-
-var pool = mysql.createPool({
-	host: "localhost",
-	user: "root",
-	password: "root",
-	database: "simulationData",
-    multipleStatements: true,
-	connectionLimit: 50
-});
-
-wait(3000);
-
-pool.getConnection(function (err, conn) {
-	if (err) throw err;
-	connection = conn;
-	console.log("Connected!");
-    runSim(1000000);
-});
-
-
 
 function runSim(endSimTime) {
-    //clear DB
-    connection.query("TRUNCATE TABLE timelineevents; TRUNCATE TABLE messages; TRUNCATE TABLE ngos", function (err, result){
-        if(err) throw err;
-        console.log("DB cleared");
-    });
 	worker.on('message', (msg) => {
-		//console.log("got events");
+		console.log("got events");
 
         io.emit('event', {msg});
 	});
-	worker.postMessage(endSimTime);
+	worker.postMessage(endSimTime, simData.eventsList);
 }
 
 function wait(ms) {
