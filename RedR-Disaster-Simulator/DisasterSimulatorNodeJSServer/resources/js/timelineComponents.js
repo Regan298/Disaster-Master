@@ -39,22 +39,15 @@ var options = {
             case 'second':
                 break;
             case 'minute':
-                    var tempDate = new Date(date);
-                    minorLabel = ("0" + tempDate.getHours()).slice(-2) + ":" + ("0" + tempDate.getMinutes()).slice(-2);
+                return new Date(date).getMinutes()-startDate.getMinutes()+"min";
                 break;
             case 'hour':
-                var tempDate = new Date(date);
-                minorLabel = ("0" + tempDate.getHours()).slice(-2) + ":" + ("0" + tempDate.getMinutes()).slice(-2);
+                return new Date(date).getMinutes()-startDate.getMinutes() +"min";
                 break;
             case 'day':
-                var res = Math.abs(startDate - date) / 1000;
-                var days = Math.floor(res / 86400)+1;
-                minorLabel="Day "+days;
                 break;
             case 'weekday':
-                var res = Math.abs(startDate - date) / 1000;
-                var days = Math.floor(res / 86400)+1;
-                minorLabel="Day "+days;
+
                 break;
             case 'month':
                 break;
@@ -63,8 +56,7 @@ var options = {
             default:
                 return ("ERROR: minorLabels");
         } 
-        //return  minorLabel;
-        return "";
+        return  minorLabel;
      },
 
         majorLabels: function(date, scale, step) {
@@ -95,8 +87,7 @@ var options = {
             default:
                 return ("ERROR: majorLabels");
             }
-            //return (majorLabel);
-            return "";
+            return (majorLabel);
         }
-    }   
+    }  
 };
