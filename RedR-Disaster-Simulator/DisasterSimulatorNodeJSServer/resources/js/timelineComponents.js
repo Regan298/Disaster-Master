@@ -8,86 +8,99 @@ var groups = [];
 
 var items = []
 
-var options = {
+  var options = {
 
-  editable: false,
-  showCurrentTime: true,
-  verticalScroll: true,
-  maxHeight: window.innerHeight/1.5,
-  orientation: 'bottom',
-  
-  
-  min: startDate,
-  max: endDate,
-  
-  
-  //zoomMin: 9000000,
-  //zoomMax: 3000000000,
-  margin: {
-      item: 10,
-      axis: 5
-    },
+    editable: false,
+    showCurrentTime: true,
+    verticalScroll: true,
+    maxHeight: window.innerHeight/1.5,
+    orientation: 'bottom',
+    showMajorLabels: false,
+    showMinorLabels: true,
+    
+    min: startDate,
+    //max: endDate,
     
     
-    format: {
-        minorLabels: function(date, scale, step) {
+    //zoomMin: 9000000,
+    //zoomMax: 3000000000,
+    margin: {
+        item: 10,
+        axis: 5
+      },
+      
 
-            var minorLabel='';
-            switch (scale) {
-            case 'millisecond':
-                break;
-            case 'second':
-                break;
-            case 'minute':
-                return new Date(date).getMinutes()-startDate.getMinutes()+"min";
-                break;
-            case 'hour':
-                return new Date(date).getMinutes()-startDate.getMinutes() +"min";
-                break;
-            case 'day':
-                break;
-            case 'weekday':
+      format: {
+          minorLabels: function(date, scale, step) {
+  
+              var minorLabel='';
+              switch (scale) {
+              case 'millisecond':
+                  break;
+              case 'second':
+                  break;
+              case 'minute':
+                    var dt2 = new Date(date);
+                    var minute = dt2.getMinutes()-startDate.getMinutes();
+                    if(minute == 0) {
 
-                break;
-            case 'month':
-                break;
-            case 'year':
-                break;
-            default:
-                return ("ERROR: minorLabels");
-        } 
-        return  minorLabel;
-     },
+                        var diff =(dt2.getTime() - startDate.getTime()) / 1000;
+                        diff /= (60 * 60);
+                        return "0 min\n Day "+ (Math.abs(Math.round(diff))+1);
 
-        majorLabels: function(date, scale, step) {
-            var majorLabel='';
-            switch (scale) {
-            case 'millisecond':
-                break;
-            case 'second':
-                break;
-            case 'minute':
-                var res = Math.abs(startDate - date) / 1000;
-                var days = Math.floor(res / 86400)+1;
-                majorLabel="Day "+days;
-                break;
-            case 'hour':
-                var res = Math.abs(startDate - date) / 1000;
-                var days = Math.floor(res / 86400)+1;
-                majorLabel="Day "+days;
-                break;
-            case 'day':
-                break;
-            case 'weekday':
-                break;
-            case 'month':
-                break;
-            case 'year':
-                break;
-            default:
-                return ("ERROR: majorLabels");
-            }
-            return (majorLabel);
-        }
-    }  
-};
+                    } else {
+                        return minute+"min";
+                    }
+                  break;
+              case 'hour':
+                  return new Date(date).getMinutes()-startDate.getMinutes() +"min";
+                  break;
+              case 'day':
+                  break;
+              case 'weekday':
+  
+                  break;
+              case 'month':
+                  break;
+              case 'year':
+                  break;
+              default:
+                  return ("ERROR: minorLabels");
+          } 
+          return  minorLabel;
+       },
+  
+          majorLabels: function(date, scale, step) {
+              var majorLabel='';
+              switch (scale) {
+              case 'millisecond':
+                  break;
+              case 'second':
+                  break;
+              case 'minute':
+                    var dt2 = new Date(date);
+                    var diff =(dt2.getTime() - startDate.getTime()) / 1000;
+                    diff /= (60 * 60);
+                    return "Day " + Math.abs(Math.round(diff));
+                  break;
+              case 'hour':
+                    var dt2 = new Date(date);
+                    var diff =(dt2.getTime() - startDate.getTime()) / 1000;
+                    diff /= (60 * 60);
+                    return "Day " + Math.abs(Math.round(diff));
+                    break;
+              case 'day':
+                  break;
+              case 'weekday':
+                  break;
+              case 'month':
+                  break;
+              case 'year':
+                  break;
+              default:
+                  return ("ERROR: majorLabels");
+              }
+              return (majorLabel);
+          }
+      }  
+  };
