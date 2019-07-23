@@ -125,7 +125,7 @@
                                     items.push({
                                         id: received.events[i].id,
                                         group: id,
-                                        content: received.events[i].subject[0],
+                                        content: received.events[i].time[0] + "\n" + received.events[i].subject[0],
                                         location: received.events[i].location[0],
                                         start: '2019-01-0'+randDay+' '+randHour+':'+randMinute+':00'
                                         //start: '2019-01-01 ' + received.events[i].Time

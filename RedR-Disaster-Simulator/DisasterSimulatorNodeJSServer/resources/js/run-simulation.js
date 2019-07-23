@@ -40,10 +40,17 @@ function startStopSim() {
     if (!running) {
         running = true;
         doPlay();
+        timeline.options['showCurrentTime'] = true;
+        timeline.setOptions(options);
+        timeline.setCurrentTime(startDate);
         document.getElementById("playPauseSwitch").innerHTML="&#10074 &#10074";
     } else {
         running = false;
         doPause();
+        timeline.options['showCurrentTime'] = false;
+        timeline.setOptions(options);
+        timeline.redraw();
+        console.log(timeline.options['showCurrentTime']);
         document.getElementById("playPauseSwitch").innerHTML="&#9205";
     }
 

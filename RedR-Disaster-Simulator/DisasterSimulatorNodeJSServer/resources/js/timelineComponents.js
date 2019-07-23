@@ -11,7 +11,7 @@ var items = []
 var options = {
 
   editable: false,
-  showCurrentTime: false,
+  showCurrentTime: true,
   verticalScroll: true,
   maxHeight: window.innerHeight/1.5,
   orientation: 'bottom',
@@ -21,8 +21,8 @@ var options = {
   max: endDate,
   
   
-  zoomMin: 9000000,
-  zoomMax: 3000000000,
+  //zoomMin: 9000000,
+  //zoomMax: 3000000000,
   margin: {
       item: 10,
       axis: 5
@@ -63,7 +63,8 @@ var options = {
             default:
                 return ("ERROR: minorLabels");
         } 
-        return  minorLabel;
+        //return  minorLabel;
+        return "";
      },
 
         majorLabels: function(date, scale, step) {
@@ -94,7 +95,8 @@ var options = {
             default:
                 return ("ERROR: majorLabels");
             }
-            return (majorLabel);
+            //return (majorLabel);
+            return "";
         }
     }   
 };
