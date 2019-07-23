@@ -22,8 +22,9 @@ const simData = {
     ngoCount: 999,
     ngoList: [],
     eventsList: [],
-    messageList: []
-
+    messageList: [],
+    durationMs: 0,
+    started: false
 };
 
 
@@ -91,7 +92,7 @@ app.post('/upload', function (req, res) {
 
 
         }
-        simData.ready = true;
+        
 
 
 
@@ -155,19 +156,15 @@ function parseXMLForLoading() {
                     simData.eventsList.push(event);
                 }
 
-
+                simData.durationMs = result['scenario']['duration'];
             });
+            simData.ready = true;
         });
-        runSim(1000000);
     } catch (e) {
         return false;
     }
 
     return true;
-
-
-
-
 
 }
 
@@ -309,16 +306,32 @@ io.on('connection', function (socket) {
         socket.emit('timelineEvents', {events});
         
     });
+    
+    socket.emit('duration', simData.durationMs);
+    
+    //Listen for play/pause
+    socket.on('play', function(){
+        if(!simData.started){
+            runSim();
+            simData.started = true;
+        }else{
+            worker.postMessage('play', '');
+        }
+    });
+    socket.on('pause', function(){
+        worker.postMessage('pause', '');
+    });
 
 });
 
-function runSim(endSimTime) {
+function runSim() {
 	worker.on('message', (msg) => {
 		console.log("got events");
 
         io.emit('event', {msg});
 	});
-	worker.postMessage(endSimTime, simData.eventsList);
+    console.log(simData.eventsList);
+    worker.postMessage('init', simData);
 }
 
 function wait(ms) {

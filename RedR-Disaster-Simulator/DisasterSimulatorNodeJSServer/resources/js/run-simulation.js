@@ -39,13 +39,17 @@ function startStopSim() {
 
     if (!running) {
         running = true;
+        socket.emit('play', true);
         doPlay();
         timeline.options['showCurrentTime'] = true;
         timeline.setOptions(options);
         timeline.setCurrentTime(startDate);
+        timeline.redraw();
+        console.log(timeline.options['showCurrentTime']);
         document.getElementById("playPauseSwitch").innerHTML="&#10074 &#10074";
     } else {
         running = false;
+        socket.emit('pause', true);
         doPause();
         timeline.options['showCurrentTime'] = false;
         timeline.setOptions(options);
@@ -221,6 +225,10 @@ $(function () {
         }
 
     });
+    
+    socket.on('duration', function(duration){
+        simulationDuration = duration.durationMs;
+    });
 
 });
 
@@ -298,18 +306,3 @@ function wait(ms) {
         end = new Date().getTime();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

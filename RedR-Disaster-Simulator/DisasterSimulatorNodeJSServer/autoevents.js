@@ -8,11 +8,18 @@ const { parentPort } = require('worker_threads');
 
 const stopwatch = new Stopwatch();
 
-parentPort.on('message', (length, msg) => {
-	simLength = length;
-	eventList = msg;
+parentPort.on('init', (simData) => {
+	simLength = simData.durationMs;
+	eventList = simData.eventList;
 	stopwatch.start();
 	grabEvent();
+});
+
+parentPort.on('pause', () => {
+    stopwatch.stop();
+});
+parentPort.on('play', () => {
+    stopwatch.start();
 });
 
 function grabEvent(){
