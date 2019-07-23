@@ -2,6 +2,7 @@
 <scenario>
 	<name>Sebadoah</name>
 	<ngoCount>5</ngoCount>
+    <duration>19800000</duration>
 
 	<ngo>
 		<name>People First</name>
