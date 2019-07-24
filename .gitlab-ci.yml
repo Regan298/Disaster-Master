@@ -27,5 +27,4 @@ testing_testing:
     - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
     - npm install
   script:
-  - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
   - npm test
