@@ -15,6 +15,8 @@ app.use(fileUpload());
 var simFile;
 var formidable = require('formidable');
 
+var occurredEvents = [];
+
 //ngoCount gets updated when file parsed
 const simData = {
     ready: false,
@@ -31,7 +33,7 @@ const simData = {
 var ngoUsers = [];
 
 
-const worker = new Worker('./autoevents.js');
+var worker;
 
 app.use(express.static('resources'));
 
@@ -312,26 +314,32 @@ io.on('connection', function (socket) {
     //Listen for play/pause
     socket.on('play', function(){
         if(!simData.started){
+            var data = simData;
+            worker = new Worker('./autoevents.js', {workerData: data});
             runSim();
             simData.started = true;
         }else{
-            worker.postMessage('play', '');
+            console.log('play');
+            worker.postMessage('play');
         }
     });
     socket.on('pause', function(){
-        worker.postMessage('pause', '');
+        console.log('pause');
+        worker.postMessage('pause');
     });
 
 });
 
 function runSim() {
 	worker.on('message', (msg) => {
-		console.log("got events");
+		console.log(msg);
 
-        io.emit('event', {msg});
+        occurredEvents = msg;
+        io.emit('occurredEvents', occurredEvents);
 	});
-    console.log(simData.eventsList);
-    worker.postMessage('init', simData);
+    console.log("init server");
+    
+    //worker.postMessage('init', workerData);
 }
 
 function wait(ms) {

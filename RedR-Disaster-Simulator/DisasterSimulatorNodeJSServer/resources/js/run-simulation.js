@@ -159,19 +159,18 @@ function switchNGOChat(ngo) {
 }
 
 function updateEventList() {
-    socket.on('timelineEvents', function (received) {
+    socket.on('occurredEvents', function (received) {
         eventList = received.events;
         console.log("eventSize: " + eventList.length);
         for (var i = 0; i < eventList.length; i++) {
             var fileReference = eventList[i].Location;
 
 
-            var htmlContent = "<button class=\"emailObject\"><p class=\"emailTitle\">Peacedoves Budget Request </p>\n" +
-                "                                <p class=\"emailTime\">3:00PM</p></button>";
+            var htmlContent = "<button class=\"emailObject\"><p class=\"emailTitle\">"+eventList[i].subject[0]+"</p>\n" +
+                "                                <p class=\"emailTime\">"+eventList[i].time[0]+"</p></button>";
 
             $(htmlContent).appendTo(".inboxEmails");
             //For Demo
-            break;
 
         }
 
