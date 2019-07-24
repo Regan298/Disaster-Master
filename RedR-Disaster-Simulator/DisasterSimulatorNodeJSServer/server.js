@@ -34,6 +34,10 @@ const worker = new Worker('./autoevents.js');
 
 app.use(express.static('resources'));
 
+//testing
+
+app.listen()
+
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
@@ -175,6 +179,7 @@ function parseXMLForLoading() {
 
 http.listen(80, function () {
     console.log('running');
+    app.emit("appStarted");
 });
 
 

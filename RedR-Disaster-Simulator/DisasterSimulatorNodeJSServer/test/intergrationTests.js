@@ -6,6 +6,11 @@ var should = require("should");
 var server = supertest.agent("http://localhost:80");
 
 // UNIT test begin
+before(function (done) {
+    app.on("appStarted", function(){
+        done();
+    });
+});
 
 describe("SAMPLE unit test",function(){
 
