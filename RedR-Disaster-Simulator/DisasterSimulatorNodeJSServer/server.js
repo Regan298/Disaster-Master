@@ -177,7 +177,7 @@ function parseXMLForLoading() {
 
 
 
-http.listen(80, function () {
+app.listen(80, function () {
     console.log('running');
     app.emit("appStarted");
 });
