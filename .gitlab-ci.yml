@@ -17,11 +17,18 @@ install_dependencies:
     paths:
       - node_modules/
 
+run_server:
+  stage: test
+  tags:
+    - docker
+  script:
+    - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
+    - node server.js
+
 testing_testing:
   stage: test
   tags:
   - docker
   script:
   - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
-  - node server.js
   - npm test
