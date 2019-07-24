@@ -37,7 +37,7 @@
 
 
 
-                <div id="overlayPdf"></div>
+                <div id="eventMediaDisplay"></div>
                 <script src="js/PDFObject/pdfobject.js"></script>
                 <script>
                     function onSelect(properties){
@@ -240,18 +240,29 @@
 
                     <!--</ul>-->
                 </div>
- 
                 <script>//Dummy script for displaying example pdf
-                    function displayPDF(){
-                        PDFObject.embed("/files/test.pdf", "#overlayPdf");
-                        document.getElementById("eventOverlay").style.display = "block";
+                    function displayEvent(type){
+						if(type=="mp4"){
+
+							document.getElementById("videoOverlay").style.display = "block";
+						}
+						if (type=="pdf"){
+							PDFObject.embed("/files/test.pdf", "#eventMediaDisplay");
+							document.getElementById("eventOverlay").style.display = "block";
+						}
+						if(type=="mp3"){
+						
+						}
+						if(type=="jpg"){
+						
+						}
                     }
                 </script>
 
                 <div id="emailViewer" class="emailViewer">
                     <div id="eventDetails">
                         <p>Peacedoves Budget Request, 3:00pm</p>
-                        <button id="displayPDFButton" onclick="displayPDF()">View Event</button>
+                        <button id="displayEventButton" onclick="displayEvent("mp4")">View Event</button>
 
 
 
@@ -304,6 +315,39 @@
         </div>
     </div>
 </div>
+
+<button onclick()="displayVideo()"> Overlay for Video</button>
+<script>
+	function displayVideo(){
+		document.getElementById("videoOverlay").style.display = "block";
+	}
+</script>
+
+<div id="videoOverlay" onclick="videoOverlayOff()">
+	<div>
+	<button onclick="pausePlay()">Play/Pause</button>
+	<br><br>
+	<video id = "video" width="500" height="500">
+	<source src="/files/video-1.mp4" type="video/mp4">
+	</video>
+	</div>
+	<script>
+		var video = document.getElementById("video");
+		function pausePlay(){
+		if(video.paused){
+			video.play();
+		} else {
+			video.pause();
+		}
+	}
+	</script>
+</div>
+
+<script>
+function videoOverlayOff(){
+document.getElementById("videoOverlay").style.display = "none";
+}
+</script>
 
 <!-- Footer -->
 <footer class="bg-light fixed-bottom" id="footer">
