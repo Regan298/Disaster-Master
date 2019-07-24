@@ -1,44 +1,3 @@
-var request = require("supertest");
-
-
-app = require('../server');
-var agent = request.agent(app);
-
-before(function (done) {
-    app.on("appStarted", function(){
-        done();
-    });
-});
-
-describe("Add config",function(){
-    it("Add a new connection",function(done){
-        agent
-            .post("/add_config")
-            .expect(200)
-            .expect("Config successfully added", done);
-    });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var supertest = require("supertest");
 var should = require("should");
 
@@ -52,10 +11,14 @@ app = require('../server');
 var server = supertest.agent(app);
 
 before(function (done) {
-    app.on("appStarted", function(){
-        done();
-    });
+    var serverNotReady = true;
+    while(serverNotReady){
+        if(server != null){
+            serverNotReady = false;
+        }
+    }
 });
+
 
 describe("SAMPLE unit test",function(){
 
