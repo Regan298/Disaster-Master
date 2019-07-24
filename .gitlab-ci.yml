@@ -14,9 +14,9 @@ run_server:
     - docker
 
   before_script:
+    - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
     - npm install
   script:
-    - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
     - node server.js
 
 testing_testing:
@@ -24,6 +24,7 @@ testing_testing:
   tags:
   - docker
   before_script:
+    - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
     - npm install
   script:
   - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
