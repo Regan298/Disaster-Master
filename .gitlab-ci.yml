@@ -1,26 +1,20 @@
 image: node:latest
 
 stages:
-  - build
   - test
 cache:
   paths:
     - node_modules/
 
-install_dependencies:
-  stage: build
-  tags:
-  - docker
-  script:
-    - npm install
-  artifacts:
-    paths:
-      - node_modules/
+
 
 run_server:
   stage: test
   tags:
     - docker
+
+  before_script:
+    - npm install
   script:
     - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
     - node server.js
@@ -29,6 +23,8 @@ testing_testing:
   stage: test
   tags:
   - docker
+  before_script:
+    - npm install
   script:
   - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
   - npm test
