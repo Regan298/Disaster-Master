@@ -1,42 +1,16 @@
-var supertest = require("supertest");
-var should = require("should");
+var app = require('../server');
+var chai = require('chai');
+var request = require('supertest');
 
+var expect = chai.expect;
 
-// This agent refers to PORT where program is runninng.
-
-var server = supertest.agent("http://localhost:80");
-
-// UNIT test begin
-app = require('../server');
-var server = supertest.agent(app);
-
-before(function (done) {
-    var serverNotReady = true;
-    while(serverNotReady){
-        if(server != null){
-            serverNotReady = false;
-        }
-    }
-});
-
-
-describe("SAMPLE unit test",function(){
-
-    // #1 should return home page
-
-    it("should return home page",function(done){
-
-        // calling home page api
-        server
-            .get("/")
-            .expect(200) // THis is HTTP response
-            .end(function(err,res){
-                // HTTP status should be 200
-                res.status.should.equal(200);
-                // Error key should be false.
-
+describe('API Tests', function() {
+    it('should return version number', function(done) {
+        request(app)
+            .get('/testing')
+            .end(function(err, res) {
+                expect(res.statusCode).to.equal(200);
                 done();
             });
     });
-
 });

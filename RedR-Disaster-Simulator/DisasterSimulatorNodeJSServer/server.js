@@ -34,6 +34,14 @@ const worker = new Worker('./autoevents.js');
 
 app.use(express.static('resources'));
 
+app.get('/testing', function(req, res) {
+    res.send({
+        version: '1.0.0'
+    });
+});
+
+module.exports = app;
+
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
