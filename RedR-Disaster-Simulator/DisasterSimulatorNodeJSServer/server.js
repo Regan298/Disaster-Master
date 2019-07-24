@@ -46,6 +46,8 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
+
+
 app.get('/hq-config', function (req, res) {
     res.sendFile(__dirname + '/hq-config.html');
 });
@@ -335,4 +337,9 @@ function wait(ms) {
     while (end < start + ms) {
         end = new Date().getTime();
     }
+}
+
+
+function shutdown() {
+    process.exit();
 }
