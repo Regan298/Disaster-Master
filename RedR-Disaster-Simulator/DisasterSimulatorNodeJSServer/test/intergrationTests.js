@@ -14,3 +14,8 @@ describe('API Tests', function() {
             });
     });
 });
+
+after(function() {
+    // runs after all tests in this block
+    app.close();
+});
