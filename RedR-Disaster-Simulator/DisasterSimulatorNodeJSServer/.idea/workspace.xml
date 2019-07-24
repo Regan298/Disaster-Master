@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="49695245-0bfd-4e8e-ac0b-a4ae2f8b4c6d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/intergrationTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/intergrationTests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.gitlab-ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitlab-ci.yml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -39,8 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../../.gitlab-ci.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+            <state relative-caret-position="153">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
@@ -112,8 +109,8 @@
       <find>opn</find>
       <find>--main</find>
       <find>--main-color</find>
-      <find>mysql</find>
       <find>listen</find>
+      <find>mysql</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -145,10 +142,10 @@
         <option value="$PROJECT_DIR$/resources/styles/disaster-sim-style.css" />
         <option value="$PROJECT_DIR$/test/intergrationTest.js" />
         <option value="$PROJECT_DIR$/test/intergrationTests.ts" />
-        <option value="$PROJECT_DIR$/../../.gitlab-ci.yml" />
         <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/test/intergrationTests.js" />
+        <option value="$PROJECT_DIR$/../../.gitlab-ci.yml" />
       </list>
     </option>
   </component>
@@ -251,12 +248,12 @@
       <workItem from="1563270351932" duration="4043000" />
       <workItem from="1563311760657" duration="3237000" />
       <workItem from="1563832715383" duration="6255000" />
-      <workItem from="1563921256207" duration="19293000" />
+      <workItem from="1563921256207" duration="19462000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="174324000" />
+    <option name="totallyTimeSpent" value="174493000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -464,8 +461,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../.gitlab-ci.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+        <state relative-caret-position="153">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>

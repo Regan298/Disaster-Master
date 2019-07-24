@@ -8,16 +8,6 @@ cache:
 
 
 
-run_server:
-  stage: test
-  tags:
-    - docker
-
-  before_script:
-    - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
-    - npm install
-  script:
-    - node server.js
 
 testing_testing:
   stage: test
