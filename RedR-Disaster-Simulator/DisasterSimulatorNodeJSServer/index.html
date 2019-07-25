@@ -16,12 +16,28 @@
 </head>
 
 <body>
+
+
+
 <script src="js/jquery.js"></script>
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light static-top "id="header">
-    <script>$("#header").load("header.html");</script>
+
+    <!--Colour Changer-->
+    <script>
+      $("#header").load("header.html", function (response,
+                                                  status, http){
+        document.getElementById("colourChooser").setAttribute("value", document.cookie);
+      });
+      document.documentElement.style.setProperty("--main-color", document.cookie);
+    </script>
   </nav>
+
+
+<script>
+
+</script>
 
   <!-- Page Content -->
   <div class="container">
@@ -36,25 +52,6 @@
   </div>
   </div>
   
-  <div class = "colour">
-      <input type="color" name="picker" value="#e66465">
-      <!-- <input type="color" id="head" name="head" value="#">  -->
-      <label for="body">Colour</label>
-  </div>
-
-  <script>
-      document.getElementsByName("picker")[0].addEventListener("change",changeColour);
-
-      function changeColour(){
-        // console.log(document.getElementsByName("picker")[0].value);
-        //if(name[0]!='-') name = '--'+name //allow passing with or without --
-        var value = document.getElementsByName("picker")[0].value;
-        document.documentElement.style.setProperty("--main-color", value)
-        
-      }
-  </script>
-
-
 
   <!-- Footer -->
   <footer class="bg-light fixed-bottom" id="footer">
