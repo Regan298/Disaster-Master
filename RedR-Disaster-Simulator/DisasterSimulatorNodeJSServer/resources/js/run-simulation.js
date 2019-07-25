@@ -160,17 +160,16 @@ function switchNGOChat(ngo) {
 
 function updateEventList() {
     socket.on('occurredEvents', function (received) {
-        eventList = received.events;
+        eventList = received;
         console.log("eventSize: " + eventList.length);
+        $(".inboxEmails").empty();
         for (var i = 0; i < eventList.length; i++) {
             var fileReference = eventList[i].Location;
-
 
             var htmlContent = "<button class=\"emailObject\"><p class=\"emailTitle\">"+eventList[i].subject[0]+"</p>\n" +
                 "                                <p class=\"emailTime\">"+eventList[i].time[0]+"</p></button>";
 
             $(htmlContent).appendTo(".inboxEmails");
-            //For Demo
 
         }
 

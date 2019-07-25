@@ -1,4 +1,4 @@
-var Stopwatch = require("statman-stopwatch");
+var Stopwatch = require('statman-stopwatch');
 var TimeFormat = require('hh-mm-ss');
 const util = require('util');
 var simLength;
@@ -8,54 +8,66 @@ const { parentPort, workerData } = require('worker_threads');
 
 const stopwatch = new Stopwatch();
 
-parentPort.on('message', (msg) => {
-    if (msg === 'pause') {
-			console.log('Pause');
-			stopwatch.stop();
-		} else {
-			console.log('Play');
-			stopwatch.start();
-		}
-	});
-
 console.log("init");
 simLength = workerData.durationMs;
-eventList = workerData.eventList;
+eventList = workerData.eventsList;
 stopwatch.start();
 
-while (stopwatch.read() < simLength) {
-    
-	console.log(stopwatch.read());
-    console.log("tick");
-	parentPort.postMessage(pastEvents);
-	wait(1000);
-
-	var t = TimeFormat.fromMs(stopwatch.read(), 'hh:mm:ss');
-	var now = new Date();
-	t = t.split(":");
-	now.setHours(t[0]);
-	now.setMinutes(t[1]);
-	now.setSeconds(t[2]);
-
-	var eventTime;
-
-	for (var i = 0; i < eventList; i++) {
-		t = eventList[i].time.split(":");
-		eventTime = new Date();
-		eventTime.setHours(t[0]);
-		eventTime.setMinutes(t[1]);
-		eventTime.setSeconds(t[2]);
-
-		if (eventTime < now) {
-			pastEvents.push(eventList[i]);
-		}
+parentPort.on('message', (msg) => {
+	if (msg === 'pause') {
+		console.log('Pause');
+		stopwatch.stop();
+	} else {
+		console.log('Play');
+		stopwatch.start();
 	}
+});
 
-	//console.log(count);
+var t = setInterval(getEvents,1000);
+
+function getEvents(){
+	if (stopwatch.read() < simLength) {
+
+		pastEvents = [];
+
+		console.log(stopwatch.read());
+	
+		var t = TimeFormat.fromMs(stopwatch.read(), 'hh:mm:ss');
+		var now = new Date();
+		t = t.split(":");
+		now.setHours(t[0]);
+		now.setMinutes(t[1]);
+		now.setSeconds(t[2]);
+	
+		var eventTime;
+	
+		for (var i = 0; i < eventList.length; i++) {
+			var et = eventList[i].time+''
+			t = et.split(":");
+			eventTime = new Date();
+			eventTime.setHours(t[0]);
+			eventTime.setMinutes(t[1]);
+			eventTime.setSeconds(t[2]);
+
+			if (eventTime < now) {
+				// console.log('found past event');
+				pastEvents.push(eventList[i]);
+			}
+		}
+	
+		parentPort.postMessage(pastEvents);
+		//console.log(count);
+	}else{
+		clearInterval(t);
+		endSim();
+	}
 }
-stopwatch.stop();
-stopwatch.reset();
-console.log("end of simulation");
+
+function endSim(){
+	stopwatch.stop();
+	stopwatch.reset();
+	console.log("end of simulation");
+}
 
 function wait(ms) {
     var start = new Date().getTime();

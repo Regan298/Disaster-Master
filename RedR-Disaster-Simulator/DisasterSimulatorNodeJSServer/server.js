@@ -332,7 +332,7 @@ io.on('connection', function (socket) {
 
 function runSim() {
 	worker.on('message', (msg) => {
-		console.log(msg);
+		// console.log(msg);
 
         occurredEvents = msg;
         io.emit('occurredEvents', occurredEvents);
