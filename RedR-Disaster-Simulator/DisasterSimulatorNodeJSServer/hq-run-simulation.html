@@ -88,8 +88,8 @@
                 <script type="text/javascript" src="js/timelineComponents.js"></script>
 
                 <script type="text/javascript">//initialises timeline object
-                var container = document.getElementById('visualization');
-                var timeline = new vis.Timeline(container, items, groups, options);
+                    var container = document.getElementById('visualization');
+                    var timeline = new vis.Timeline(container, items, groups, options);
                 </script>
 
                 <script>
@@ -149,7 +149,7 @@
 
 
                 <script>//functions for activating/disabling overlay
-                timeline.on('select', onSelect);
+                    timeline.on('select', onSelect);
 
 
                 </script>
@@ -223,15 +223,7 @@
 
             <div id="inboxElementHQ" class="inboxElementHQ">
                 <div id="inboxEmails" class="inboxEmails">
-                    <!--<ul class="eventButtonList">-->
-
-                    <!--<li>
-                        <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                            <p class="emailTime">3:00PM</p></button>
-                    </li>-->
-
-
-                    <!--</ul>-->
+                    <!--Events are dynamically loaded into here-->
                 </div>
  
                 <script>//Dummy script for displaying example pdf
@@ -271,10 +263,6 @@
                             Regards, HQ
                         </p>
                     </div>
-
-
-
-
                 </div>
 
                 <div id="emailResponse">
