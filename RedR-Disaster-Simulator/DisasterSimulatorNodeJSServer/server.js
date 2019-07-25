@@ -38,9 +38,19 @@ var worker;
 
 app.use(express.static('resources'));
 
+app.get('/testing', function(req, res) {
+    res.send({
+        version: '1.0.0'
+    });
+});
+
+module.exports = app;
+
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
+
+
 
 app.get('/hq-config', function (req, res) {
     res.sendFile(__dirname + '/hq-config.html');
@@ -349,4 +359,9 @@ function wait(ms) {
     while (end < start + ms) {
         end = new Date().getTime();
     }
+}
+
+
+function shutdown() {
+    process.exit();
 }
