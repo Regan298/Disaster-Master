@@ -9,7 +9,7 @@ var ngoNames;
 var running = false;
 var currentTime = 0;
 var updateClockProcess;
-var simulationDuration = 300000;
+var simulationDuration = 0;
 
 
 //Load Page Elements
@@ -39,11 +39,22 @@ function startStopSim() {
 
     if (!running) {
         running = true;
+        socket.emit('play', true);
         doPlay();
+        timeline.options['showCurrentTime'] = true;
+        timeline.setOptions(options);
+        timeline.setCurrentTime(startDate);
+        timeline.redraw();
+        console.log(timeline.options['showCurrentTime']);
         document.getElementById("playPauseSwitch").innerHTML="&#10074 &#10074";
     } else {
         running = false;
+        socket.emit('pause', true);
         doPause();
+        timeline.options['showCurrentTime'] = false;
+        timeline.setOptions(options);
+        timeline.redraw();
+        console.log(timeline.options['showCurrentTime']);
         document.getElementById("playPauseSwitch").innerHTML="&#9205";
     }
 
@@ -148,19 +159,17 @@ function switchNGOChat(ngo) {
 }
 
 function updateEventList() {
-    socket.on('timelineEvents', function (received) {
-        eventList = received.events;
+    socket.on('occurredEvents', function (received) {
+        eventList = received;
         console.log("eventSize: " + eventList.length);
+        $(".inboxEmails").empty();
         for (var i = 0; i < eventList.length; i++) {
             var fileReference = eventList[i].Location;
 
-
-            var htmlContent = "<button class=\"emailObject\"><p class=\"emailTitle\">Peacedoves Budget Request </p>\n" +
-                "                                <p class=\"emailTime\">3:00PM</p></button>";
+            var htmlContent = "<button class=\"emailObject\"><p class=\"emailTitle\">"+eventList[i].subject[0]+"</p>\n" +
+                "                                <p class=\"emailTime\">"+eventList[i].time[0]+"</p></button>";
 
             $(htmlContent).appendTo(".inboxEmails");
-            //For Demo
-            break;
 
         }
 
@@ -171,8 +180,6 @@ function updateEventList() {
 
 //Once Page Loaded
 $(function () {
-    var timerElement = document.getElementById("timeManagement");
-    displayRemainingTime(timerElement, simulationDuration);
     updateEventList();
     //Update Communication Buttons
 
@@ -213,6 +220,13 @@ $(function () {
             addToConversation(msg.recievedMessage.content, false, from);
         }
 
+    });
+    
+    socket.on('duration', function(duration){
+        simulationDuration = duration;
+        console.log(simulationDuration);
+        var timerElement = document.getElementById("timeManagement");
+        displayRemainingTime(timerElement, simulationDuration);
     });
 
 });
@@ -291,18 +305,3 @@ function wait(ms) {
         end = new Date().getTime();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

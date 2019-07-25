@@ -15,6 +15,9 @@ app.use(fileUpload());
 var simFile;
 var formidable = require('formidable');
 
+var currentTimeMs;
+var occurredEvents = [];
+
 //ngoCount gets updated when file parsed
 const simData = {
     ready: false,
@@ -22,15 +25,16 @@ const simData = {
     ngoCount: 999,
     ngoList: [],
     eventsList: [],
-    messageList: []
-
+    messageList: [],
+    durationMs: 0,
+    started: false
 };
 
 
 var ngoUsers = [];
 
 
-const worker = new Worker('./autoevents.js');
+var worker;
 
 app.use(express.static('resources'));
 
@@ -101,7 +105,7 @@ app.post('/upload', function (req, res) {
 
 
         }
-        simData.ready = true;
+        
 
 
 
@@ -165,19 +169,15 @@ function parseXMLForLoading() {
                     simData.eventsList.push(event);
                 }
 
-
+                simData.durationMs = result['scenario']['duration'];
             });
+            simData.ready = true;
         });
-        runSim(1000000);
     } catch (e) {
         return false;
     }
 
     return true;
-
-
-
-
 
 }
 
@@ -318,17 +318,39 @@ io.on('connection', function (socket) {
         var events = simData.eventsList;
         socket.emit('timelineEvents', {events});
         
+        socket.emit('duration', simData.durationMs);
+    });
+    
+    //Listen for play/pause
+    socket.on('play', function(){
+        if(!simData.started){
+            var data = simData;
+            worker = new Worker('./autoevents.js', {workerData: data});
+            runSim();
+            simData.started = true;
+        }else{
+            console.log('play');
+            worker.postMessage('play');
+        }
+    });
+    socket.on('pause', function(){
+        console.log('pause');
+        worker.postMessage('pause');
     });
 
 });
 
-function runSim(endSimTime) {
+function runSim() {
 	worker.on('message', (msg) => {
-		console.log("got events");
-
-        io.emit('event', {msg});
+		// console.log(msg);
+        currentTimeMs = simData.durationMs-msg.timeMs;
+        occurredEvents = msg.events;
+        io.emit('currentTime', currentTimeMs);
+        io.emit('occurredEvents', occurredEvents);
 	});
-	worker.postMessage(endSimTime, simData.eventsList);
+    console.log("init server");
+    
+    //worker.postMessage('init', workerData);
 }
 
 function wait(ms) {

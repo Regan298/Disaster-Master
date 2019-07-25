@@ -5,7 +5,7 @@ var inboxEvents = [];
 var outboxEvents = [];
 var inboxRowCount = 0;
 var outboxRowCount = 0;
-var simulationDuration = 50000;
+var simulationDuration = 0;
 var ngoNames;
 var selectedNGOChat;
 
@@ -13,25 +13,25 @@ var selectedNGOChat;
 loadNGOTitle();
 //loadCommunication();
 handleNGOS();
-runClock();
+// runClock();
 
 currentTime = 0;
 
 
-function runClock() {
-    function updateClock() {
-        currentTime = currentTime + 1000;
-        var timerElement = document.getElementById("timeManagement");
-        var timeRemaining = simulationDuration - currentTime;
-        displayRemainingTime(timerElement, timeRemaining);
+// function runClock() {
+//     function updateClock() {
+//         currentTime = currentTime + 1000;
+//         var timerElement = document.getElementById("timeManagement");
+//         var timeRemaining = simulationDuration - currentTime;
+//         displayRemainingTime(timerElement, timeRemaining);
 
-        if (timeRemaining == 0) {
-            clearInterval(updateClockProcess);
-        }
-    }
+//         if (timeRemaining == 0) {
+//             clearInterval(updateClockProcess);
+//         }
+//     }
 
-    updateClockProcess = setInterval(updateClock, 1000);
-}
+//     updateClockProcess = setInterval(updateClock, 1000);
+// }
 
 
 function displayRemainingTime(timerElement, timeRemaining) {
@@ -188,6 +188,11 @@ $(function () {
 
     });
 
+    socket.on('currentTime', function (time){
+        simulationDuration = time;
+        var timerElement = document.getElementById("timeManagement");
+        displayRemainingTime(timerElement, simulationDuration);
+    });
 
 });
 
