@@ -61,7 +61,11 @@ function getEvents(){
 			}
 		}
 	
-		parentPort.postMessage(pastEvents);
+		var data = {
+			events: pastEvents,
+			timeMs: timeS*1000
+		}
+		parentPort.postMessage(data);
 		//console.log(count);
 	}else{
 		clearInterval(t);

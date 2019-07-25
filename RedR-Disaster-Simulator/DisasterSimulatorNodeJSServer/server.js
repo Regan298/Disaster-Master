@@ -15,6 +15,7 @@ app.use(fileUpload());
 var simFile;
 var formidable = require('formidable');
 
+var currentTimeMs;
 var occurredEvents = [];
 
 //ngoCount gets updated when file parsed
@@ -307,9 +308,8 @@ io.on('connection', function (socket) {
         var events = simData.eventsList;
         socket.emit('timelineEvents', {events});
         
+        socket.emit('duration', simData.durationMs);
     });
-    
-    socket.emit('duration', simData.durationMs);
     
     //Listen for play/pause
     socket.on('play', function(){
@@ -333,8 +333,9 @@ io.on('connection', function (socket) {
 function runSim() {
 	worker.on('message', (msg) => {
 		// console.log(msg);
-
-        occurredEvents = msg;
+        currentTimeMs = simData.durationMs-msg.timeMs;
+        occurredEvents = msg.events;
+        io.emit('currentTime', currentTimeMs);
         io.emit('occurredEvents', occurredEvents);
 	});
     console.log("init server");

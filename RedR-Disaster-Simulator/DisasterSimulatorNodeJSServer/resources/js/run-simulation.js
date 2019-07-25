@@ -9,7 +9,7 @@ var ngoNames;
 var running = false;
 var currentTime = 0;
 var updateClockProcess;
-var simulationDuration = 300000;
+var simulationDuration = 0;
 
 
 //Load Page Elements
@@ -180,8 +180,6 @@ function updateEventList() {
 
 //Once Page Loaded
 $(function () {
-    var timerElement = document.getElementById("timeManagement");
-    displayRemainingTime(timerElement, simulationDuration);
     updateEventList();
     //Update Communication Buttons
 
@@ -225,7 +223,10 @@ $(function () {
     });
     
     socket.on('duration', function(duration){
-        simulationDuration = duration.durationMs;
+        simulationDuration = duration;
+        console.log(simulationDuration);
+        var timerElement = document.getElementById("timeManagement");
+        displayRemainingTime(timerElement, simulationDuration);
     });
 
 });
