@@ -1,4 +1,4 @@
-var Stopwatch = require('statman-stopwatch');
+// var Stopwatch = require('statman-stopwatch');
 var TimeFormat = require('hh-mm-ss');
 const util = require('util');
 var simLength;
@@ -6,33 +6,39 @@ var pastEvents = [];
 var eventList = [];
 const { parentPort, workerData } = require('worker_threads');
 
-const stopwatch = new Stopwatch();
+// const stopwatch = new Stopwatch();
 
 console.log("init");
 simLength = workerData.durationMs;
 eventList = workerData.eventsList;
-stopwatch.start();
+// stopwatch.start();
+var timeS = 0;
+var t;
 
 parentPort.on('message', (msg) => {
 	if (msg === 'pause') {
 		console.log('Pause');
-		stopwatch.stop();
+		// stopwatch.stop();
+		clearInterval(t);
 	} else {
 		console.log('Play');
-		stopwatch.start();
+		// stopwatch.start();
+		t = setInterval(getEvents,1000);
 	}
 });
 
-var t = setInterval(getEvents,1000);
+t = setInterval(getEvents,1000);
 
 function getEvents(){
-	if (stopwatch.read() < simLength) {
+	timeS++;
+	if ((timeS*1000) < simLength) {
 
 		pastEvents = [];
 
-		console.log(stopwatch.read());
+		// console.log(stopwatch.read());
+		console.log(timeS);
 	
-		var t = TimeFormat.fromMs(stopwatch.read(), 'hh:mm:ss');
+		var t = TimeFormat.fromMs((timeS*1000), 'hh:mm:ss');
 		var now = new Date();
 		t = t.split(":");
 		now.setHours(t[0]);
@@ -64,8 +70,8 @@ function getEvents(){
 }
 
 function endSim(){
-	stopwatch.stop();
-	stopwatch.reset();
+	// stopwatch.stop();
+	// stopwatch.reset();
 	console.log("end of simulation");
 }
 
