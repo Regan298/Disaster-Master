@@ -138,12 +138,8 @@
 
                                     var ms = (h*60*60*1000)+(m*60*1000)+(s*1000);
 
-                                    console.log(ms);
-                                    console.log(ms*timeScale);
                                     var scaledTime = timelineStartDate.getTime() + (ms*timeScale);
-                                    console.log(scaledTime);
                                     scaledTime = new Date(scaledTime);
-                                    console.log(scaledTime);
 
                                     id = groups[k].id;
                                     console.log("found matching ngo id");

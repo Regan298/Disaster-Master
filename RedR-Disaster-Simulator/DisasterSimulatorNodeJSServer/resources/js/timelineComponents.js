@@ -11,7 +11,7 @@ var items = []
 var options = {
 
   editable: false,
-  showCurrentTime: false,
+  showCurrentTime: true,
   verticalScroll: true,
   maxHeight: window.innerHeight/1.5,
   orientation: 'bottom',

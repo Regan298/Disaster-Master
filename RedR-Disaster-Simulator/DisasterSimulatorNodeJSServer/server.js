@@ -351,9 +351,10 @@ function runSim() {
 	worker.on('message', (msg) => {
 		// console.log(msg);
         currentTimeMs = simData.durationMs-msg.timeMs;
+        var time = msg.timeMs;
         occurredEvents = msg.events;
         io.emit('currentTime', currentTimeMs);
-        io.emit('occurredEvents', occurredEvents);
+        io.emit('occurredEvents', {occurredEvents, time});
 	});
     console.log("init server");
     

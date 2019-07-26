@@ -161,7 +161,14 @@ function switchNGOChat(ngo) {
 
 function updateEventList() {
     socket.on('occurredEvents', function (received) {
-        eventList = received;
+
+        var timelineStartDate = new Date('2019', '01' - 1, '01', '00', '00', '00');
+        var scaledTime = timelineStartDate.getTime() + (received.time*timeScale);
+        scaledTime = new Date(scaledTime);
+        timeline.setCurrentTime(scaledTime);
+        timeline.redraw();
+        
+        eventList = received.occurredEvents;
         console.log("eventSize: " + eventList.length);
         $(".inboxEmails").empty();
         for (var i = 0; i < eventList.length; i++) {
