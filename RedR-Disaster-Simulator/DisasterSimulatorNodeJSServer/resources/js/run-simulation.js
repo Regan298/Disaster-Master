@@ -10,6 +10,7 @@ var running = false;
 var currentTime = 0;
 var updateClockProcess;
 var simulationDuration = 0;
+var timeScale = 0;
 
 
 //Load Page Elements
@@ -229,6 +230,9 @@ $(function () {
         displayRemainingTime(timerElement, simulationDuration);
     });
 
+    socket.on('timeScale', function(scale){
+        timeScale = scale;
+    });
 });
 
 function addToConversation(content, isOrigin, from) {
