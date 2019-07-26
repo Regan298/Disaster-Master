@@ -2,6 +2,7 @@ const socket = io();
 var simTitle;
 var ngos = [];
 var started;
+var initStart = true;
 var events = [];
 var rowCount = 0;
 var selectedNGOChat;
@@ -11,6 +12,7 @@ var currentTime = 0;
 var updateClockProcess;
 var simulationDuration = 0;
 var timeScale = 0;
+var pauseTimeline;
 
 
 //Load Page Elements
@@ -37,25 +39,21 @@ function runClock() {
 }
 
 function startStopSim() {
-
+    if(initStart){
+        console.log('initial start');
+        timeline.setCurrentTime(startDate);
+        timeline.redraw();
+        initStart = false;
+    }
     if (!running) {
         running = true;
         socket.emit('play', true);
         doPlay();
-        timeline.options['showCurrentTime'] = true;
-        timeline.setOptions(options);
-        timeline.setCurrentTime(startDate);
-        timeline.redraw();
-        console.log(timeline.options['showCurrentTime']);
         document.getElementById("playPauseSwitch").innerHTML="&#10074 &#10074";
     } else {
         running = false;
         socket.emit('pause', true);
         doPause();
-        timeline.options['showCurrentTime'] = false;
-        timeline.setOptions(options);
-        timeline.redraw();
-        console.log(timeline.options['showCurrentTime']);
         document.getElementById("playPauseSwitch").innerHTML="&#9205";
     }
 
@@ -74,9 +72,16 @@ function displayRemainingTime(timerElement, timeRemaining) {
 
 function doPause() {
     clearInterval(updateClockProcess);
+    pauseTimeline = setInterval(pauseTimeline, 100);
+}
+
+function pauseTimeline(){
+    timeline.setCurrentTime(startDate);
+    timeline.redraw();
 }
 
 function doPlay() {
+    clearInterval(pauseTimeline);
     runClock();
 }
 
