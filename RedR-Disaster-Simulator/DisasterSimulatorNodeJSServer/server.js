@@ -319,9 +319,9 @@ io.on('connection', function (socket) {
         var ngos = simData.ngoList;
         socket.emit('ngos', {ngos});
 
-        socket.emit('duration', simData.durationMs);
-
         socket.emit('timeScale', simData.timeScale);
+
+        socket.emit('duration', simData.durationMs);
 
         var events = simData.eventsList;
         socket.emit('timelineEvents', {events});

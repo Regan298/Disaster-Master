@@ -237,7 +237,15 @@ $(function () {
     
     socket.on('duration', function(duration){
         simulationDuration = duration;
-        console.log(simulationDuration);
+        var d = new Date(startDate.getTime()+(simulationDuration*timeScale));
+        endDate = d;
+        timeline.redraw();
+        // console.log(startDate.getTime());
+        // console.log(timeScale);
+        // console.log(simulationDuration);
+        console.log(startDate);
+        console.log(endDate);
+        //endDate.setHours('24');
         var timerElement = document.getElementById("timeManagement");
         displayRemainingTime(timerElement, simulationDuration);
     });

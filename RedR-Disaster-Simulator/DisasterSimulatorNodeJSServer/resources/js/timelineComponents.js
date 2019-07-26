@@ -1,8 +1,5 @@
-var numDays=7;
 var startDate = new Date('2019-01-01 00:00:00');
-var endDate = new Date('2019-01-01 00:00:00');
-endDate.setDate(startDate.getDate()+numDays-1);
-endDate.setHours('24');
+var endDate;
 
 var groups = [];
 
