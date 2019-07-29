@@ -38,28 +38,33 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12 text-center" id="mainContent">
+
+
             <div id="eventOverlay" onclick="displayPDFOff()"> 
-
-
-
-
-
                 <div id="overlayPdf"></div>
                 <script src="js/PDFObject/pdfobject.js"></script>
                 <script>
                     function onSelect(properties){
-                        console.log(items);
-                        console.log(properties.items[0]);
-                        console.log(items[properties.items[0]].location);
-                        PDFObject.embed(items[properties.items[0]].location, "#overlayPdf");
+                        //console.log(items);
+                        //console.log(properties.items[0]);
+                        //console.log(items[properties.items[0]].location);
+                        //PDFObject.embed(items[properties.items[0]].location, "#overlayPdf");
                         document.getElementById("eventOverlay").style.display = "block";
                     }
                 </script>
 
             </div>
+
             <!--Scenario Title Gets Updated In Socket-->
             <div class="scenarioTitle"></div>
 
+
+            <!-- timeline mode-->
+            <select id="groupToggle" onchange="replaceTimeline(this.value)"> <!-- loads selected timeline when selected-->
+                <option value="0">Group View</option>
+                <option value="1">Full View</option>
+            </select>
+            
             <!--Timeline-->
             <div id="timeline" class="timeline">
 
@@ -67,83 +72,66 @@
 
                 <script src="js/vis-4.21.0/dist/vis.js"></script>
                 <link href="js/vis-4.21.0/dist/vis.css" rel="stylesheet" type="text/css"/>
-                <script type="text/javascript" src="js/timelineComponentsReview.js"></script>
+                <script type="text/javascript" src="js/timelineComponents.js"></script>
+
+
+                <script>//temp script for testing
+                groups = new vis.DataSet([
+                    {id: 1, content: 'Group 1'},
+                    {id: 2, content: 'Group 2'},
+                    {id: 3, content: 'Group 3'},
+                    {id: 4, content: 'Group 4'}
+                ]);
+
+                items = new vis.DataSet([{
+                id: 5,
+                group: 4,
+                content: 'item 5',
+                start: '2019-01-03 00:00:00'
+                }]);//temp ends here
+                </script>
 
                 <script type="text/javascript">//initialises timeline object
                     var container = document.getElementById('visualization');
                     var timeline = new vis.Timeline(container, items, groups, options);
                 </script>
 
-                <script>
-                    socket.on('ngos', function (received) {
-                        console.log("got " + received.ngos);
-
-                        for (var i = 0; i < received.ngos.length; i++) {
-                            console.log(received.ngos[i]);
-                            groups.push({
-                                id: received.ngos[i].id,
-                                content: received.ngos[i].name[0]
-                            });
-                        }
-                        console.log(groups);
-                        timeline.setGroups(groups);
-                    });
-
-                    socket.on('timelineEvents', function (received) {
-                        console.log("got "+received.events.length+" events");
-                        for (var i = 0; i < received.events.length; i++) {
-                            console.log(received.events[i]);
-
-                            var id;
-                            var randDay = Math.floor((Math.random() * 7) + 1);
-                            var randHour = Math.floor((Math.random() * 24) + 1);
-                            var randMinute = Math.floor((Math.random() * 60) + 1);
-
-                            var ngoName = received.events[i].recipient[0];
-                            for(var k=0; k<groups.length; k++){
-                                if(groups[k].content===ngoName){
-                                    id = groups[k].id;
-                                    console.log("found matching ngo id");
-                                    items.push({
-                                        id: received.events[i].id,
-                                        group: id,
-                                        content: received.events[i].time[0] + "\n" + received.events[i].subject[0],
-                                        location: received.events[i].location[0],
-                                        start: '2019-01-0'+randDay+' '+randHour+':'+randMinute+':00'
-                                        //start: '2019-01-01 ' + received.events[i].Time
-                                    });
-                                    break;
-                                }
-                            }
-
-                            
-                        }
-                        timeline.setItems(items);
-                    });
-
-                    $(function () {
-                        var msg = 'hi';
-                        socket.emit('timelineReady', {
-                            msg
-                        });
-                    });
-                </script>
 
 
                 <script>//functions for activating/disabling overlay
                     timeline.on('select', onSelect);
-                </script>
 
-            </div>
 
-    
- 
-                <script>//Delete if not used for overlay
-                    function displayPDF(){
-                        PDFObject.embed("/files/test.pdf", "#overlayPdf");
-                        document.getElementById("eventOverlay").style.display = "block";
+
+                    function replaceTimeline(mode){//deletes current timeline then calls loadTimeline
+                    var elem = document.getElementById("visualization");
+                    while (elem.firstChild) {
+                        elem.removeChild(elem.firstChild);
+                    }
+
+                loadTimeline(mode);
+            }
+            
+                    function loadTimeline(mode){//function loads timline javascript library from directory
+                            if(mode == 0){
+                                var timeline = new vis.Timeline(container, items, groups, options);
+                                timeline.on('select', function (properties) {
+                                    document.getElementById("eventOverlay").style.display = "block";
+                                    //properties.items
+                                });
+                            } else{
+                                var timeline = new vis.Timeline(container, items, options);
+                                timeline.on('select', function on() {
+                                    document.getElementById("eventOverlay").style.display = "block";
+                                    //properties.items
+                                });
+                            }
                     }
                 </script>
+
+                
+
+            </div>
 
         </div>
     </div>
