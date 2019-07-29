@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="49695245-0bfd-4e8e-ac0b-a4ae2f8b4c6d" name="Default Changelist" comment="" />
+    <list default="true" id="49695245-0bfd-4e8e-ac0b-a4ae2f8b4c6d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/currentScenario.xml" beforeDir="false" afterPath="$PROJECT_DIR$/currentScenario.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/FileSaver.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/HQ.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/HQ.js.orig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/assets/test.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/assets/test.pdf.orig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/dfghb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/styles/NGO.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MySQLdb.zip" beforeDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -16,8 +26,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+            <state relative-caret-position="289">
+              <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -27,6 +37,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-2992">
               <caret line="415" column="39" selection-start-line="415" selection-start-column="39" selection-end-line="415" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/js/run-simulation.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="461">
+              <caret line="172" selection-start-line="172" selection-end-line="172" />
             </state>
           </provider>
         </entry>
@@ -49,20 +68,28 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/intergrationTests.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/js/jquery.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret lean-forward="true" />
+            <state relative-caret-position="529">
+              <caret line="143" column="7" selection-start-line="143" selection-start-column="7" selection-end-line="143" selection-end-column="7" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="342" column="17" selection-start-line="342" selection-start-column="9" selection-end-line="342" selection-end-column="17" />
+            <state relative-caret-position="177">
+              <caret line="83" column="17" selection-start-line="83" selection-start-column="17" selection-end-line="83" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -79,7 +106,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>runClock</find>
       <find>messagingel</find>
       <find>switchNGOChat</find>
       <find>ngoname</find>
@@ -109,6 +135,7 @@
       <find>--main-color</find>
       <find>listen</find>
       <find>mysql</find>
+      <find>filesaver</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -147,7 +174,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="615" />
     <option name="y" value="11" />
     <option name="width" value="697" />
@@ -246,12 +273,12 @@
       <workItem from="1563270351932" duration="4043000" />
       <workItem from="1563311760657" duration="3237000" />
       <workItem from="1563832715383" duration="6255000" />
-      <workItem from="1563921256207" duration="21481000" />
+      <workItem from="1563921256207" duration="21979000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="176512000" />
+    <option name="totallyTimeSpent" value="177010000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -301,7 +328,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/HQ.js" />
     <entry file="file://$PROJECT_DIR$/resources/run-simulation.js" />
     <entry file="file://$PROJECT_DIR$/resources/disaster-sim-style.css" />
     <entry file="file://$PROJECT_DIR$/resources/stylesheet.css" />
@@ -336,7 +362,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/dfghb.js" />
     <entry file="file://$PROJECT_DIR$/resources/js/timelineComponents.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-102" />
@@ -349,13 +374,6 @@
           <folding>
             <element signature="n#style#0;n#textarea#0;n#form#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/run-simulation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2550">
-          <caret line="150" column="50" selection-start-line="150" selection-start-column="42" selection-end-line="150" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -430,24 +448,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="458">
           <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="342" column="17" selection-start-line="342" selection-start-column="9" selection-end-line="342" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -458,10 +462,67 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/dfghb.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="17" lean-forward="true" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/intergrationTests.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/jquery.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="143" column="7" selection-start-line="143" selection-start-column="7" selection-end-line="143" selection-end-column="7" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/run-simulation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="172" selection-start-line="172" selection-end-line="172" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/FileSaver.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret lean-forward="true" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/HQ.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="59" selection-start-line="59" selection-end-line="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/hq_review.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="83" column="17" selection-start-line="83" selection-start-column="17" selection-end-line="83" selection-end-column="17" />
         </state>
       </provider>
     </entry>
