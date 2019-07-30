@@ -28,3 +28,7 @@ any ide that I have seen before.
 - merging any branch into the currently selected branch, example is merging a different branch into master
 
 ![merge branches](RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/resources/js/vis-4.21.0/examples/network/img/soft-scraps-icons/merge%20branches.png)
+
+- [Markdown and pdf printing support extension for jetbrains IDE's](https://plugins.jetbrains.com/plugin/7896-markdown-navigator) . This is definitely worth paying for
+
+![markdown navigator](RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/resources/js/vis-4.21.0/examples/network/img/soft-scraps-icons/markdown%20navigator.png)
