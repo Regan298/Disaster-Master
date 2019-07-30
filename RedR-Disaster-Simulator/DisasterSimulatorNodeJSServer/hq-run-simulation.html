@@ -24,7 +24,14 @@
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light static-top "id="header">
-    <script>$("#header").load("header.html");</script>
+    <!--Colour Changer-->
+    <script>
+        $("#header").load("header.html", function (response,
+                                                   status, http){
+            document.getElementById("colourChooser").setAttribute("value", document.cookie);
+        });
+        document.documentElement.style.setProperty("--main-color", document.cookie);
+    </script>
 </nav>
 
 <!-- Page Content -->
@@ -88,8 +95,8 @@
                 <script type="text/javascript" src="js/timelineComponents.js"></script>
 
                 <script type="text/javascript">//initialises timeline object
-                var container = document.getElementById('visualization');
-                var timeline = new vis.Timeline(container, items, groups, options);
+                    var container = document.getElementById('visualization');
+                    var timeline = new vis.Timeline(container, items, groups, options);
                 </script>
 
                 <script>
@@ -125,7 +132,7 @@
                                     items.push({
                                         id: received.events[i].id,
                                         group: id,
-                                        content: received.events[i].subject[0],
+                                        content: received.events[i].time[0] + "\n" + received.events[i].subject[0],
                                         location: received.events[i].location[0],
                                         start: '2019-01-0'+randDay+' '+randHour+':'+randMinute+':00'
                                         //start: '2019-01-01 ' + received.events[i].Time
@@ -149,7 +156,7 @@
 
 
                 <script>//functions for activating/disabling overlay
-                timeline.on('select', onSelect);
+                    timeline.on('select', onSelect);
 
 
                 </script>
@@ -217,28 +224,13 @@
                     </form>
                 </div>
 
-
-
-
-
-
-
-
             </div>
 
 
 
             <div id="inboxElementHQ" class="inboxElementHQ">
                 <div id="inboxEmails" class="inboxEmails">
-                    <!--<ul class="eventButtonList">-->
-
-                    <!--<li>
-                        <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                            <p class="emailTime">3:00PM</p></button>
-                    </li>-->
-
-
-                    <!--</ul>-->
+                    <!--Events are dynamically loaded into here-->
                 </div>
                 <script>//Dummy script for displaying example pdf
                     function displayEvent(type){
@@ -300,10 +292,6 @@
                             Regards, HQ
                         </p>
                     </div>
-
-
-
-
                 </div>
 
                 <div id="emailResponse">

@@ -89,8 +89,8 @@ body {
     display: inline;
     border-style: solid;
     border-width: medium;
-    background-color: red;
-    border-color: red;
+    background-color: var(--main-color);
+    border-color: var(--main-color);
     color: white;
     font-size: 2rem;
     vertical-align: text-bottom;
@@ -115,8 +115,8 @@ body {
     display: inline;
     border-style: solid;
     border-width: medium;
-    background-color: red;
-    border-color: red;
+    background-color: var(--main-color);
+    border-color: var(--main-color);
     color: white;
     font-size: 2rem;
     vertical-align: text-bottom;
@@ -131,8 +131,8 @@ body {
 .titles span {
     border-style: solid;
     border-width: medium;
-    background-color: red;
-    border-color: red;
+    background-color: var(--main-color);
+    border-color: var(--main-color);
     color: white;
     font-size: 2rem;
     border-radius: 0.25rem;
@@ -312,7 +312,7 @@ body {
     float: right;
     margin-top: 5%;
     list-style: none;
-    background-color: red;
+    background-color: var(--main-color);
     color: white;
     border-radius: 0.25rem;
     max-width: 50%;
@@ -456,7 +456,7 @@ body {
 }
 
 .emailObject:hover {
-    background-color: red;
+    background-color: var(--main-color);
     color: white;
 
 }

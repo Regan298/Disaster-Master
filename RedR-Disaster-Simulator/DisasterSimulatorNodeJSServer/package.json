@@ -1,21 +1,36 @@
 {
-    "name": "disaster-simulator",
-    "version": "0.0.1",
-    "private": true,
-    "dependencies": {
-        "opn": ">=1.0.0",
-        "clone-deep": ">=4.0.1",
-        "dateformat": ">=3.0.3",
-        "express": ">=4.17.1",
-        "express-fileupload": ">=1.1.5",
-        "formidable": ">=1.2.1",
-        "hh-mm-ss": ">=1.2.0",
-        "ip": ">=1.1.5",
-        "mysql": ">=2.17.1",
-        "path": ">=0.12.7",
-        "promise-mysql": ">=4.0.4",
-        "socket.io": ">=2.2.0",
-        "statman-stopwatch": ">=2.8.2",
-        "xml2js": ">=0.4.19"
+    "name":"disaster-simulator",
+    "version":"0.0.1",
+    "private":true,
+    "dependencies":{
+		"opn":">=1.0.0",
+        "clone-deep":">=4.0.1",
+        "dateformat":">=3.0.3",
+        "express":">=4.17.1",
+        "express-fileupload":">=1.1.5",
+        "formidable":">=1.2.1",
+        "hh-mm-ss":">=1.2.0",
+        "ip":">=1.1.5",
+        "mysql":">=2.17.1",
+        "path":">=0.12.7",
+        "promise-mysql":">=4.0.4",
+        "socket.io":">=2.2.0",
+        "statman-stopwatch":">=2.8.2",
+        "xml2js":">=0.4.19"
+
+
+    },
+
+    "devDependencies": {
+        "mocha": ">=6.2.0",
+        "should": "^7.0.2",
+        "supertest": "^1.0.1",
+        "chai": "^4.2.0"
+
+    },
+    "scripts": {
+
+        "test": "mocha"
     }
 }
+        
