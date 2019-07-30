@@ -95,8 +95,8 @@
                 <script type="text/javascript" src="js/timelineComponents.js"></script>
 
                 <script type="text/javascript">//initialises timeline object
-                    var container = document.getElementById('visualization');
-                    var timeline = new vis.Timeline(container, items, groups, options);
+                    // var container = document.getElementById('visualization');
+                    // var timeline = new vis.Timeline(container, items, groups, options);
                 </script>
 
                 <script>
@@ -111,7 +111,9 @@
                             });
                         }
                         console.log(groups);
-                        timeline.setGroups(groups);
+                        if(!initDraw){
+                            timeline.setGroups(groups);
+                        }
                     });
 
                     socket.on('timelineEvents', function (received) {
@@ -120,21 +122,35 @@
                             console.log(received.events[i]);
 
                             var id;
-                            var randDay = Math.floor((Math.random() * 7) + 1);
-                            var randHour = Math.floor((Math.random() * 24) + 1);
-                            var randMinute = Math.floor((Math.random() * 60) + 1);
+                            // var randDay = Math.floor((Math.random() * 7) + 1);
+                            // var randHour = Math.floor((Math.random() * 24) + 1);
+                            // var randMinute = Math.floor((Math.random() * 60) + 1);
+                            var timelineStartDate = new Date('2019', '01' - 1, '01', '00', '00', '00');
 
                             var ngoName = received.events[i].recipient[0];
                             for(var k=0; k<groups.length; k++){
                                 if(groups[k].content===ngoName){
+
+                                    var t = received.events[i].time+'';
+		                            t = t.split(":");
+                                    
+                                    var h = parseInt(t[0], 10)
+                                    var m = parseInt(t[1], 10)
+                                    var s = parseInt(t[2], 10)
+
+                                    var ms = (h*60*60*1000)+(m*60*1000)+(s*1000);
+
+                                    var scaledTime = timelineStartDate.getTime() + (ms*timeScale);
+                                    scaledTime = new Date(scaledTime);
+
                                     id = groups[k].id;
                                     console.log("found matching ngo id");
                                     items.push({
                                         id: received.events[i].id,
                                         group: id,
-                                        content: received.events[i].time[0] + "\n" + received.events[i].subject[0],
+                                        content: received.events[i].subject[0],
                                         location: received.events[i].location[0],
-                                        start: '2019-01-0'+randDay+' '+randHour+':'+randMinute+':00'
+                                        start: '2019-01-'+scaledTime.getDate()+' '+scaledTime.getHours()+':'+scaledTime.getMinutes()+':'+scaledTime.getSeconds()
                                         //start: '2019-01-01 ' + received.events[i].Time
                                     });
                                     break;
@@ -143,7 +159,9 @@
 
                             
                         }
-                        timeline.setItems(items);
+                        if(!initDraw){
+                            timeline.setItems(items);
+                        }
                     });
 
                     $(function () {
@@ -156,9 +174,10 @@
 
 
                 <script>//functions for activating/disabling overlay
-                    timeline.on('select', onSelect);
-
-
+                    if(!initDraw){
+                        timeline.on('select', onSelect);
+                    }
+                    
                 </script>
 
             </div>

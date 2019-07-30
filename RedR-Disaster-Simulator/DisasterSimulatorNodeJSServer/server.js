@@ -27,6 +27,7 @@ const simData = {
     eventsList: [],
     messageList: [],
     durationMs: 0,
+    timeScale: 0,
     started: false
 };
 
@@ -166,6 +167,9 @@ function parseXMLForLoading() {
                 }
 
                 simData.durationMs = result['scenario']['duration'];
+                var hoursInDay = result['scenario']['hoursInDay'];
+
+                simData.timeScale = 24/hoursInDay;
             });
             simData.ready = true;
         });
@@ -311,10 +315,13 @@ io.on('connection', function (socket) {
         var ngos = simData.ngoList;
         socket.emit('ngos', {ngos});
 
+        socket.emit('timeScale', simData.timeScale);
+
+        socket.emit('duration', simData.durationMs);
+
         var events = simData.eventsList;
         socket.emit('timelineEvents', {events});
         
-        socket.emit('duration', simData.durationMs);
     });
     
     //Listen for play/pause
@@ -340,9 +347,10 @@ function runSim() {
 	worker.on('message', (msg) => {
 		// console.log(msg);
         currentTimeMs = simData.durationMs-msg.timeMs;
+        var time = msg.timeMs;
         occurredEvents = msg.events;
         io.emit('currentTime', currentTimeMs);
-        io.emit('occurredEvents', occurredEvents);
+        io.emit('occurredEvents', {occurredEvents, time});
 	});
     console.log("init server");
     
