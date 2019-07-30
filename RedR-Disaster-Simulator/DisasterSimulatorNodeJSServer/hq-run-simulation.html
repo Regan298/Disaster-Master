@@ -337,16 +337,14 @@
 </script>
 
 <div id="videoOverlay" >
-	<div style="text-align:center;">
-	<button style="text-align:center;" onclick="videoPausePlay()">Play/Pause</button>
 	<br>
-	<button style="text-align:center;" onclick="videoOverlayOff()">Exit Video</button>
+	<div style="text-align:center;">
+		<button style="text-align:center;" onclick="videoOverlayOff()">Exit Video</button>
 	</div>
-	<br>
 	<div style="text-align:center;">
-	<video id="videoID" style="text-align:center;" width="500" height="500">
-	<source src="/files/testmp4.mp4" type="video/mp4">
-	</video>
+		<video id="videoID" style="text-align:center;" width="500" height="500">
+			<source src="/files/testmp4.mp4" type="video/mp4">
+		</video>
 	</div>
 	<script>
 		var video = document.getElementById("videoID");
@@ -358,6 +356,9 @@
 		}
 	}
 	</script>
+	<div style="text-align:center;">
+		<button style="text-align:center;" onclick="videoPausePlay()">Play/Pause</button>
+	</div>
 </div>
 
 <script>
@@ -377,8 +378,10 @@ document.getElementById("videoOverlay").style.display = "none";
 </script>
 
 <div id="audioOverlay" >
+	<br>
 	<div style="text-align:center;">
 	<button style="text-align:center;" onclick="audioPausePlay()">Play/Pause</button>
+	<br>
 	<br>
 	<button style="text-align:center;" onclick="audioOverlayOff()">Exit Audio</button>
 	</div>
@@ -415,7 +418,7 @@ document.getElementById("audioOverlay").style.display = "none";
 		document.getElementById("imageOverlay").style.display = "block";
 	}
 </script>
-
+<br>
 <div id="imageOverlay" onclick="imageOverlayOff()">
 	<br>
 	<div style="text-align:center;">
