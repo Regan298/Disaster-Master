@@ -40,9 +40,7 @@ var worker;
 app.use(express.static('resources'));
 
 app.get('/testing', function(req, res) {
-    res.send({
-        version: '1.0.0'
-    });
+    res.sendStatus(200);
 });
 
 module.exports = app;
@@ -81,15 +79,15 @@ app.get('/help', function (req, res) {
 });
 
 app.post('/upload', function (req, res) {
-
+    console.log("upload req");
     if (req.files != null) {
-        console.log("filereq");
+
 
         let simFileTemp = req.files.simFile;
 
         simFileTemp.mv(__dirname + '/currentScenario.xml', function (err) {
             if(err) {
-                return res.status(500).send(err);
+                return res.status(400).send(err);
             }
 
         });
@@ -98,20 +96,18 @@ app.post('/upload', function (req, res) {
         let validFile = parseXMLForLoading();
 
         if(!validFile){
-            return res.status(500).send("Bad File, Please Input A Valid File :)");
+            return res.status(400).send("Bad File, Please Input A Valid File :)");
         } else {
             res.redirect('hq-run-simulation');
             res.end("File Sent");
-
-
-
         }
         
 
 
 
     } else {
-        return res.status(500).send("Bad File, Please Input A Valid File :)");
+        console.log("no file");
+        return res.status(400).send("Bad File, Please Input A Valid File :)");
     }
 
 });
@@ -166,7 +162,7 @@ function parseXMLForLoading() {
                         location: currentEventLocation,
                         subject: currentEventSubject
                     }
-                    console.log(event);
+
                     simData.eventsList.push(event);
                 }
 
