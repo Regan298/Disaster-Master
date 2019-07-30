@@ -2,6 +2,8 @@
 <scenario>
 	<name>Sebadoah</name>
 	<ngoCount>5</ngoCount>
+    <duration>19800000</duration>
+    <hoursInDay>1</hoursInDay>
 
 	<ngo>
 		<name>People First</name>
@@ -40,188 +42,53 @@
 	</ngo>	
 	
     <event>
-		<recipient>Test</recipient>
+		<recipient>Peacedoves</recipient>
+        <subject>HQ Daily Sit Rep Request</subject>
 		<time>00:00:30</time>
 		<type>pdf</type>
-		<location>/files/test.pdf</location>
+		<location>/files/003PD.pdf</location>
 	</event>
     <event>
-		<recipient>Test</recipient>
+		<recipient>Red Heart</recipient>
+        <subject>HQ Daily Sit Rep Request</subject>
 		<time>00:00:35</time>
 		<type>pdf</type>
-		<location>/files/test.pdf</location>
+		<location>/files/003RH.pdf</location>
 	</event>
     <event>
-		<recipient>Test</recipient>
+		<recipient>People First</recipient>
+        <subject>HQ Daily Sit Rep Request</subject>
 		<time>00:00:40</time>
 		<type>pdf</type>
-		<location>/files/test.pdf</location>
+		<location>/files/003P1st.pdf</location>
 	</event>
     <event>
-		<recipient>Test</recipient>
+		<recipient>We Care</recipient>
+        <subject>HQ Daily Sit Rep Request</subject>
 		<time>00:00:41</time>
 		<type>pdf</type>
-		<location>/files/test.pdf</location>
+		<location>/files/003WC.pdf</location>
 	</event>
     <event>
-		<recipient>Test</recipient>
+		<recipient>EWB</recipient>
+        <subject>HQ Daily Sit Rep Request</subject>
 		<time>00:01:00</time>
 		<type>pdf</type>
-		<location>/files/test.pdf</location>
+		<location>/files/003EWB.pdf</location>
 	</event>
 	<event>
-		<recipient>Test</recipient>
+		<recipient>Reach Up</recipient>
+        <subject>HQ Daily Sit Rep Request</subject>
 		<time>00:00:45</time>
 		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-	<event>
-		<recipient>Test</recipient>
-		<time>00:00:59</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
+		<location>/files/003RU.pdf</location>
 	</event>
     <event>
-		<recipient>Test</recipient>
-		<time>00:01:10</time>
+		<recipient>Reach Up</recipient>
+        <subject>HQ Daily Sit Rep Request</subject>
+		<time>02:00:00</time>
 		<type>pdf</type>
-		<location>/files/test.pdf</location>
+		<location>/files/003RU.pdf</location>
 	</event>
-    <event>
-		<recipient>Test</recipient>
-		<time>00:01:15</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Test</recipient>
-		<time>00:01:20</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event><event>
-		<recipient>Test</recipient>
-		<time>00:01:25</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Test</recipient>
-		<time>00:01:30</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Test</recipient>
-		<time>00:01:35</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Test</recipient>
-		<time>00:01:40</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Test</recipient>
-		<time>00:01:45</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Test</recipient>
-		<time>00:01:50</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Test</recipient>
-		<time>00:01:55</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Test</recipient>
-		<time>00:01:30</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Test</recipient>
-		<time>00:01:45</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Test</recipient>
-		<time>00:02:00</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Test</recipient>
-		<time>00:02:10</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Test</recipient>
-		<time>00:02:20</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Test</recipient>
-		<time>00:02:30</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Test</recipient>
-		<time>00:03:00</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event><event>
-		<recipient>Test</recipient>
-		<time>00:03:10</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event><event>
-		<recipient>Test</recipient>
-		<time>00:03:20</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event><event>
-		<recipient>Test</recipient>
-		<time>00:03:40</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Test</recipient>
-		<time>00:03:50</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Test</recipient>
-		<time>00:04:10</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event><event>
-		<recipient>Test</recipient>
-		<time>00:04:20</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event><event>
-		<recipient>Test</recipient>
-		<time>00:04:40</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event><event>
-		<recipient>Test</recipient>
-		<time>00:05:00</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
+	
 </scenario>

@@ -3,6 +3,7 @@
 	<name>Sebadoah</name>
 	<ngoCount>5</ngoCount>
     <duration>19800000</duration>
+    <hoursInDay>1</hoursInDay>
 
 	<ngo>
 		<name>People First</name>
@@ -79,6 +80,13 @@
 		<recipient>Reach Up</recipient>
         <subject>HQ Daily Sit Rep Request</subject>
 		<time>00:00:45</time>
+		<type>pdf</type>
+		<location>/files/003RU.pdf</location>
+	</event>
+    <event>
+		<recipient>Reach Up</recipient>
+        <subject>HQ Daily Sit Rep Request</subject>
+		<time>02:00:00</time>
 		<type>pdf</type>
 		<location>/files/003RU.pdf</location>
 	</event>

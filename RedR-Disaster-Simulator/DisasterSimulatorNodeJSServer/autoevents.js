@@ -55,7 +55,7 @@ function getEvents(){
 			eventTime.setMinutes(t[1]);
 			eventTime.setSeconds(t[2]);
 
-			if (eventTime < now) {
+			if (eventTime <= now) {
 				// console.log('found past event');
 				pastEvents.push(eventList[i]);
 			}
