@@ -24,3 +24,7 @@ any ide that I have seen before.
 
 - viewing the git history visually for a selected file or directory
 - ![visual git history, top level of project](RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/resources/js/vis-4.21.0/examples/network/img/soft-scraps-icons/visual%20git%20history%2C%20top%20level%20of%20project.png)
+
+- merging any branch into the currently selected branch, example is merging a different branch into master
+
+![merge branches](RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/resources/js/vis-4.21.0/examples/network/img/soft-scraps-icons/merge%20branches.png)
