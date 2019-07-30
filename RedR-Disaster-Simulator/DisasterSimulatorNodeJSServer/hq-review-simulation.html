@@ -19,7 +19,7 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="js/jquery.js"></script>
-<script src="js/run-simulation.js"></script>
+<!--<script src="js/run-simulation.js"></script>-->
 <script src="js/PDFObject/pdfobject.js"></script>
 
 <!-- Navigation -->
@@ -60,7 +60,7 @@
 
 
             <!-- timeline mode-->
-            <select id="groupToggle" onchange="replaceTimeline(this.value)"> <!-- loads selected timeline when selected-->
+            <select id="TimelineToggle" onchange="replaceTimeline(this.value)"> <!-- loads selected timeline when selected-->
                 <option value="0">Group View</option>
                 <option value="1">Full View</option>
             </select>
@@ -75,7 +75,7 @@
                 <script type="text/javascript" src="js/timelineComponents.js"></script>
 
 
-                <script>//temp script for testing
+                <script>//temp script for adding events/groups to timeline
                 groups = new vis.DataSet([
                     {id: 1, content: 'Group 1'},
                     {id: 2, content: 'Group 2'},
@@ -89,28 +89,28 @@
                 content: 'item 5',
                 start: '2019-01-03 00:00:00'
                 }]);//temp ends here
+                
                 </script>
 
                 <script type="text/javascript">//initialises timeline object
                     var container = document.getElementById('visualization');
                     var timeline = new vis.Timeline(container, items, groups, options);
+                    timeline.on('select', onSelect);
                 </script>
 
 
 
-                <script>//functions for activating/disabling overlay
-                    timeline.on('select', onSelect);
+                <script>
 
-
-
+                    //functions for NGO/Group filter
                     function replaceTimeline(mode){//deletes current timeline then calls loadTimeline
-                    var elem = document.getElementById("visualization");
-                    while (elem.firstChild) {
-                        elem.removeChild(elem.firstChild);
-                    }
+                        var elem = document.getElementById("visualization");
+                        while (elem.firstChild) {
+                            elem.removeChild(elem.firstChild);
+                        }
 
-                loadTimeline(mode);
-            }
+                        loadTimeline(mode);
+                    }
             
                     function loadTimeline(mode){//function loads timline javascript library from directory
                             if(mode == 0){
@@ -129,8 +129,6 @@
                     }
                 </script>
 
-                
-
             </div>
 
         </div>
@@ -142,9 +140,5 @@
     <script>$("#footer").load("footer.html");</script>
 </footer>
 
-
-
-
 </body>
-
 </html>
