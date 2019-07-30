@@ -55,6 +55,10 @@ app.get('/hq-config', function (req, res) {
     res.sendFile(__dirname + '/hq-config.html');
 });
 
+app.get('/hq-review', function (req, res) {
+    res.sendFile(__dirname + '/hq-review-simulation.html');
+});
+
 app.get('/hq-run-simulation', function (req, res) {
     res.sendFile(__dirname + '/hq-run-simulation.html');
 });
