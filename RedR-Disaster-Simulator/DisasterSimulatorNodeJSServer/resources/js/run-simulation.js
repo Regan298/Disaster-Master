@@ -13,6 +13,7 @@ var updateClockProcess;
 var simulationDuration = 0;
 var timeScale = 0;
 var pauseTimeline;
+var timeline;
 
 
 //Load Page Elements
@@ -238,8 +239,10 @@ $(function () {
     socket.on('duration', function(duration){
         simulationDuration = duration;
         var d = new Date(startDate.getTime()+(simulationDuration*timeScale));
-        endDate = d;
-        timeline.redraw();
+        options.max = d;
+        var container = document.getElementById('visualization');
+        timeline = new vis.Timeline(container, items, groups, options);
+        initDraw = false;
         // console.log(startDate.getTime());
         // console.log(timeScale);
         // console.log(simulationDuration);

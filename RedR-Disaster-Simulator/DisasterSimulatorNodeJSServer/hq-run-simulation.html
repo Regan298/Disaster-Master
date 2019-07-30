@@ -95,8 +95,8 @@
                 <script type="text/javascript" src="js/timelineComponents.js"></script>
 
                 <script type="text/javascript">//initialises timeline object
-                    var container = document.getElementById('visualization');
-                    var timeline = new vis.Timeline(container, items, groups, options);
+                    // var container = document.getElementById('visualization');
+                    // var timeline = new vis.Timeline(container, items, groups, options);
                 </script>
 
                 <script>
@@ -111,7 +111,9 @@
                             });
                         }
                         console.log(groups);
-                        timeline.setGroups(groups);
+                        if(!initDraw){
+                            timeline.setGroups(groups);
+                        }
                     });
 
                     socket.on('timelineEvents', function (received) {
@@ -157,7 +159,9 @@
 
                             
                         }
-                        timeline.setItems(items);
+                        if(!initDraw){
+                            timeline.setItems(items);
+                        }
                     });
 
                     $(function () {
@@ -170,9 +174,10 @@
 
 
                 <script>//functions for activating/disabling overlay
-                    timeline.on('select', onSelect);
-
-
+                    if(!initDraw){
+                        timeline.on('select', onSelect);
+                    }
+                    
                 </script>
 
             </div>

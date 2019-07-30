@@ -1,5 +1,7 @@
 var startDate = new Date('2019-01-01 00:00:00');
-var endDate;
+var endDate = new Date('2019-01-01 00:00:00');
+
+var initDraw = true;
 
 var groups = [];
 
@@ -12,7 +14,7 @@ var options = {
   verticalScroll: true,
   maxHeight: window.innerHeight/1.5,
   orientation: 'bottom',
-  
+  autoResize: true,
   
   min: startDate,
   max: endDate,
