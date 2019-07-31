@@ -29,6 +29,7 @@ any ide that I have seen before.
 
 ![merge branches](RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/resources/js/vis-4.21.0/examples/network/img/soft-scraps-icons/merge%20branches.png)
 
-- [Markdown and pdf printing support extension for jetbrains IDE's](https://plugins.jetbrains.com/plugin/7896-markdown-navigator) . This is definitely worth paying for
+- [Markdown and pdf printing support extension for jetbrains IDE's](https://plugins.jetbrains.com/plugin/7896-markdown-navigator) .
+  - This is definitely worth paying for and makes working entirely from the IDE possible
 
 ![markdown navigator](RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/resources/js/vis-4.21.0/examples/network/img/soft-scraps-icons/markdown%20navigator.png)
