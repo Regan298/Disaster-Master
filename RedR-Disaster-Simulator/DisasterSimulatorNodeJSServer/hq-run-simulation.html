@@ -39,11 +39,6 @@
     <div class="row">
         <div class="col-lg-12 text-center" id="mainContent">
             <div id="eventOverlay" onclick="displayPDFOff()"> 
-
-
-
-
-
                 <div id="overlayPdf"></div>
                 <script src="js/PDFObject/pdfobject.js"></script>
                 <script>
@@ -55,7 +50,6 @@
                         document.getElementById("eventOverlay").style.display = "block";
                     }
                 </script>
-
             </div>
             <!--Scenario Title Gets Updated In Socket-->
             <div class="scenarioTitle"></div>
@@ -66,7 +60,14 @@
 
             <!--Timer-->
             <div id="timeManagement">
+                <div id="realTime"></div>
+                <div id="simTime"></div>
+            </div>
 
+            <div class="toggle">
+                <div class="toggle-label toggle-label-off">Simulation Time Countdown</div>
+                <div class="toggle-switch"></div>
+                <div class="toggle-label toggle-label-on">Real Time Countdown</div>
             </div>
 
             <!--Timeline-->
@@ -161,7 +162,7 @@
                     if(!initDraw){
                         timeline.on('select', onSelect);
                     }
-                    
+
                 </script>
 
             </div>
