@@ -67,7 +67,7 @@ function realDisplayRemainingTime(timerElement, timeRemaining) {
     var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
     var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
 
-    timerElement.innerHTML = hours + "h" + minutes + "m" + seconds + "s";
+    timerElement.innerHTML = hours + "h" + minutes + "m" + seconds + "s remaining";
 
 }
 
@@ -79,7 +79,7 @@ function simDisplayRemainingTime(timerElement, timeRemaining) {
     var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
     var days = Math.floor((timeRemaining / (1000 * 60 * 60)) / 24);
 
-    timerElement.innerHTML = "Day: "+days+" "+hours + "h" + minutes + "m" + seconds + "s";
+    timerElement.innerHTML = "Day: "+days+" "+hours + "h" + minutes + "m" + seconds + "s remaining";
 
 }
 
