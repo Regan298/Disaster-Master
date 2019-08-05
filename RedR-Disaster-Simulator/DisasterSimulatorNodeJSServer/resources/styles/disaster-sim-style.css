@@ -110,8 +110,60 @@ body {
     margin-top: 2.5%;
 }
 
+.toggle-switch {
+    background: #ccc;
+    width: 80px;
+    height: 30px;
+    overflow: hidden;
+    border-radius: 3px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 10px;
+}
+.toggle-switch:after {
+    content: " ";
+    display: block;
+    width: 40px;
+    height: 30px;
+    background-color: #3498DB;
+    border: 3px solid #fff;
+    border-top: 0;
+    border-bottom: 0;
+    margin-left: -3px;
+    transition: all 0.1s ease-in-out;
+}
+.active .toggle-switch:after {
+    margin-left: 40px;
+}
+.toggle-label {
+    display: inline-block;
+    line-height: 30px;
+}
+.toggle-label-off {
+    color: #3498DB;
+}
+.active .toggle-label-off {
+    color: #000;
+}
+.active .toggle-label-on {
+    color: #3498DB;
+}
 
-#timeManagement {
+
+#realTime {
+    display: inline;
+    border-style: solid;
+    border-width: medium;
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+    color: white;
+    font-size: 2rem;
+    vertical-align: text-bottom;
+    border-radius: 0.25rem;
+    margin: 1rem;
+}
+
+#simTime {
     display: inline;
     border-style: solid;
     border-width: medium;
@@ -389,9 +441,6 @@ body {
     font-size: 100%;
     padding: 0;
 }
-
-
-
 
 .inboxElementHQ {
     max-width: 50%;

@@ -2,6 +2,7 @@ const socket = io();
 var simTitle;
 var ngos = [];
 var started;
+var initStart = true;
 var events = [];
 var rowCount = 0;
 var selectedNGOChat;
@@ -10,6 +11,10 @@ var running = false;
 var currentTime = 0;
 var updateClockProcess;
 var simulationDuration = 0;
+var timeScale = 0;
+var pauseTimeline;
+var timeline;
+var realCountdown = false;
 
 
 //Load Page Elements
@@ -20,63 +25,77 @@ getTempPDF();
 handleNGOS();
 
 
-function runClock() {
-    function updateClock() {
-        currentTime = currentTime + 1000;
-        var timerElement = document.getElementById("timeManagement");
-        var timeRemaining = simulationDuration - currentTime;
-        displayRemainingTime(timerElement, timeRemaining);
+// function runClock() {
+//     function updateClock() {
+//         currentTime = currentTime + 1000;
+//         var timerElement = document.getElementById("timeManagement");
+//         var timeRemaining = simulationDuration - currentTime;
+//         displayRemainingTime(timerElement, timeRemaining);
 
-        if (timeRemaining == 0) {
-            clearInterval(updateClockProcess);
-        }
-    }
+//         if (timeRemaining == 0) {
+//             clearInterval(updateClockProcess);
+//         }
+//     }
 
-    updateClockProcess = setInterval(updateClock, 1000);
-}
+//     updateClockProcess = setInterval(updateClock, 1000);
+// }
 
 function startStopSim() {
-
+    if(initStart){
+        console.log('initial start');
+        timeline.setCurrentTime(startDate);
+        timeline.redraw();
+        initStart = false;
+    }
     if (!running) {
         running = true;
         socket.emit('play', true);
         doPlay();
-        timeline.options['showCurrentTime'] = true;
-        timeline.setOptions(options);
-        timeline.setCurrentTime(startDate);
-        timeline.redraw();
-        console.log(timeline.options['showCurrentTime']);
         document.getElementById("playPauseSwitch").innerHTML="&#10074 &#10074";
     } else {
         running = false;
         socket.emit('pause', true);
         doPause();
-        timeline.options['showCurrentTime'] = false;
-        timeline.setOptions(options);
-        timeline.redraw();
-        console.log(timeline.options['showCurrentTime']);
         document.getElementById("playPauseSwitch").innerHTML="&#9205";
     }
 
 }
-
-function displayRemainingTime(timerElement, timeRemaining) {
+//real time countdown
+function realDisplayRemainingTime(timerElement, timeRemaining) {
 
     var seconds = Math.floor((timeRemaining / 1000) % 60);
     var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
     var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
 
+    timerElement.innerHTML = hours + "h" + minutes + "m" + seconds + "s remaining";
 
-    timerElement.innerHTML = hours + "h" + minutes + "m" + seconds + "s";
+}
+
+//sim time countdown
+function simDisplayRemainingTime(timerElement, timeRemaining) {
+
+    var seconds = Math.floor((timeRemaining / 1000) % 60);
+    var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
+    var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
+    var days = Math.floor((timeRemaining / (1000 * 60 * 60)) / 24);
+
+    timerElement.innerHTML = "Day: "+days+" "+hours + "h" + minutes + "m" + seconds + "s remaining";
 
 }
 
 function doPause() {
-    clearInterval(updateClockProcess);
+    //clearInterval(updateClockProcess);
+    pauseTimeline = setInterval(pauseTimeline, 100);
+}
+
+function pauseTimeline(){
+    timeline.setCurrentTime(startDate);
+    timeline.redraw();
 }
 
 function doPlay() {
-    runClock();
+    clearInterval(pauseTimeline);
+    //runClock();
 }
 
 
@@ -160,7 +179,14 @@ function switchNGOChat(ngo) {
 
 function updateEventList() {
     socket.on('occurredEvents', function (received) {
-        eventList = received;
+
+        var timelineStartDate = new Date('2019', '01' - 1, '01', '00', '00', '00');
+        var scaledTime = timelineStartDate.getTime() + (received.time*timeScale);
+        scaledTime = new Date(scaledTime);
+        timeline.setCurrentTime(scaledTime);
+        timeline.redraw();
+        
+        eventList = received.occurredEvents;
         console.log("eventSize: " + eventList.length);
         $(".inboxEmails").empty();
         for (var i = 0; i < eventList.length; i++) {
@@ -182,6 +208,29 @@ function updateEventList() {
 $(function () {
     updateEventList();
     //Update Communication Buttons
+
+    document.getElementById('simTime').style.display = 'inline';
+    document.getElementById('realTime').style.display = 'none';
+
+    $('.toggle').on('click', function(event){
+        event.preventDefault();
+        $(this).toggleClass('active');
+        console.log(event);
+        if(realCountdown){
+            realCountdown = false;
+            document.getElementById('simTime').style.display = 'inline';
+            document.getElementById('realTime').style.display = 'none';
+            timerElement = document.getElementById("simTime");
+            simDisplayRemainingTime(timerElement, simulationDuration*timeScale);
+        }else{
+            realCountdown = true;
+            document.getElementById('simTime').style.display = 'none';
+            document.getElementById('realTime').style.display = 'inline';
+            timerElement = document.getElementById("realTime");
+            realDisplayRemainingTime(timerElement, simulationDuration);
+        }
+        
+    });
 
     fillCommunicationButtons();
 
@@ -224,11 +273,39 @@ $(function () {
     
     socket.on('duration', function(duration){
         simulationDuration = duration;
-        console.log(simulationDuration);
-        var timerElement = document.getElementById("timeManagement");
-        displayRemainingTime(timerElement, simulationDuration);
+        var d = new Date(startDate.getTime()+(simulationDuration*timeScale));
+        options.max = d;
+        var container = document.getElementById('visualization');
+        timeline = new vis.Timeline(container, items, groups, options);
+        initDraw = false;
+        // console.log(startDate.getTime());
+        // console.log(timeScale);
+        // console.log(simulationDuration);
+        console.log(startDate);
+        console.log(endDate);
+        //endDate.setHours('24');
+        var timerElement;
+        timerElement = document.getElementById("realTime");
+        realDisplayRemainingTime(timerElement, simulationDuration);
+        timerElement = document.getElementById("simTime");
+        simDisplayRemainingTime(timerElement, simulationDuration*timeScale);
+        
     });
 
+    socket.on('timeScale', function(scale){
+        timeScale = scale;
+    });
+
+    socket.on('currentTime', function (time){
+        simulationDuration = time;
+        if(realCountdown){
+            timerElement = document.getElementById("realTime");
+            realDisplayRemainingTime(timerElement, simulationDuration);
+        }else{
+            timerElement = document.getElementById("simTime");
+            simDisplayRemainingTime(timerElement, simulationDuration*timeScale);
+        }
+    });
 });
 
 function addToConversation(content, isOrigin, from) {

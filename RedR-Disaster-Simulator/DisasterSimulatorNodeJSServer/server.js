@@ -27,6 +27,7 @@ const simData = {
     eventsList: [],
     messageList: [],
     durationMs: 0,
+    timeScale: 0,
     started: false
 };
 
@@ -39,9 +40,7 @@ var worker;
 app.use(express.static('resources'));
 
 app.get('/testing', function(req, res) {
-    res.send({
-        version: '1.0.0'
-    });
+    res.sendStatus(200);
 });
 
 module.exports = app;
@@ -54,6 +53,10 @@ app.get('/', function (req, res) {
 
 app.get('/hq-config', function (req, res) {
     res.sendFile(__dirname + '/hq-config.html');
+});
+
+app.get('/hq-review', function (req, res) {
+    res.sendFile(__dirname + '/hq-review-simulation.html');
 });
 
 app.get('/hq-run-simulation', function (req, res) {
@@ -80,15 +83,15 @@ app.get('/help', function (req, res) {
 });
 
 app.post('/upload', function (req, res) {
-
+    console.log("upload req");
     if (req.files != null) {
-        console.log("filereq");
+
 
         let simFileTemp = req.files.simFile;
 
         simFileTemp.mv(__dirname + '/currentScenario.xml', function (err) {
             if(err) {
-                return res.status(500).send(err);
+                return res.status(400).send(err);
             }
 
         });
@@ -97,20 +100,18 @@ app.post('/upload', function (req, res) {
         let validFile = parseXMLForLoading();
 
         if(!validFile){
-            return res.status(500).send("Bad File, Please Input A Valid File :)");
+            return res.status(400).send("Bad File, Please Input A Valid File :)");
         } else {
             res.redirect('hq-run-simulation');
             res.end("File Sent");
-
-
-
         }
         
 
 
 
     } else {
-        return res.status(500).send("Bad File, Please Input A Valid File :)");
+        console.log("no file");
+        return res.status(400).send("Bad File, Please Input A Valid File :)");
     }
 
 });
@@ -165,11 +166,14 @@ function parseXMLForLoading() {
                         location: currentEventLocation,
                         subject: currentEventSubject
                     }
-                    console.log(event);
+
                     simData.eventsList.push(event);
                 }
 
                 simData.durationMs = result['scenario']['duration'];
+                var hoursInDay = result['scenario']['hoursInDay'];
+
+                simData.timeScale = 24/hoursInDay;
             });
             simData.ready = true;
         });
@@ -315,10 +319,13 @@ io.on('connection', function (socket) {
         var ngos = simData.ngoList;
         socket.emit('ngos', {ngos});
 
+        socket.emit('timeScale', simData.timeScale);
+
+        socket.emit('duration', simData.durationMs);
+
         var events = simData.eventsList;
         socket.emit('timelineEvents', {events});
         
-        socket.emit('duration', simData.durationMs);
     });
     
     //Listen for play/pause
@@ -344,9 +351,10 @@ function runSim() {
 	worker.on('message', (msg) => {
 		// console.log(msg);
         currentTimeMs = simData.durationMs-msg.timeMs;
+        var time = msg.timeMs;
         occurredEvents = msg.events;
         io.emit('currentTime', currentTimeMs);
-        io.emit('occurredEvents', occurredEvents);
+        io.emit('occurredEvents', {occurredEvents, time});
 	});
     console.log("init server");
     

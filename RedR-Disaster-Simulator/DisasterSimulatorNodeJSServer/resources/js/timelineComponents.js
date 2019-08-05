@@ -1,8 +1,7 @@
-var numDays=7;
 var startDate = new Date('2019-01-01 00:00:00');
 var endDate = new Date('2019-01-01 00:00:00');
-endDate.setDate(startDate.getDate()+numDays-1);
-endDate.setHours('24');
+
+var initDraw = true;
 
 var groups = [];
 
@@ -11,11 +10,11 @@ var items = []
 var options = {
 
   editable: false,
-  showCurrentTime: false,
+  showCurrentTime: true,
   verticalScroll: true,
   maxHeight: window.innerHeight/1.5,
   orientation: 'bottom',
-  
+  autoResize: true,
   
   min: startDate,
   max: endDate,
