@@ -340,3 +340,87 @@ function loadCommunication() {
 
     $(htmlContent).appendTo(".messaging");
 }
+
+function displayEvent(type){
+    if(type=="mp4"){
+        displayVideo();
+        document.getElementById("eventOverlay").style.display = "none";
+        document.getElementById("audioOverlay").style.display = "none";
+        document.getElementById("imageOverlay").style.display = "none";
+    }
+    else if (type=="pdf"){
+        PDFObject.embed("/files/test.pdf", "#eventMediaDisplay");
+        document.getElementById("eventOverlay").style.display = "block";
+        document.getElementById("videoOverlay").style.display = "none";
+        document.getElementById("audioOverlay").style.display = "none";
+        document.getElementById("imageOverlay").style.display = "none";
+    }
+    else if(type=="mp3"){
+        displayAudio();
+        document.getElementById("eventOverlay").style.display = "none";
+        document.getElementById("videoOverlay").style.display = "none";
+        document.getElementById("imageOverlay").style.display = "none";
+    }
+    else if(type=="jpg"){
+        displayImage();
+        document.getElementById("eventOverlay").style.display = "none";
+        document.getElementById("videoOverlay").style.display = "none";
+        document.getElementById("audioOverlay").style.display = "none";
+    }
+}
+
+//video functions for display
+function displayVideo(){
+    console.log("display video is called");
+    document.getElementById("videoOverlay").style.display = "block";
+}
+
+
+
+function videoPausePlay(){
+    var video = document.getElementById("videoID");
+    if(video.paused){
+        video.play();
+    } else {
+        video.pause();
+    }
+}
+
+
+
+function videoOverlayOff(){
+    var video = document.getElementById("videoID");
+    video.pause();
+    document.getElementById("videoOverlay").style.display = "none";
+}
+
+//audio display code
+function displayAudio(){
+    console.log("display audio is called");
+    document.getElementById("audioOverlay").style.display = "block";
+}
+
+function audioPausePlay(){
+    var audio = document.getElementById("audioID");
+    if(audio.paused){
+        audio.play();
+    } else {
+        audio.pause();
+    }
+}
+
+function audioOverlayOff(){
+    var audio = document.getElementById("audioID");
+    audio.pause();
+    document.getElementById("audioOverlay").style.display = "none";
+}
+
+//image display code
+function displayImage(){
+    console.log("display image is called");
+    document.getElementById("imageOverlay").style.display = "block";
+}
+
+function imageOverlayOff(){
+    document.getElementById("imageOverlay").style.display = "none";
+}

@@ -39,7 +39,12 @@
     <div class="row">
         <div class="col-lg-12 text-center" id="mainContent">
             <div id="eventOverlay" onclick="displayPDFOff()"> 
-                <div id="overlayPdf"></div>
+
+
+
+
+
+                <div id="eventMediaDisplay"></div>
                 <script src="js/PDFObject/pdfobject.js"></script>
                 <script>
                     function onSelect(properties){
@@ -236,18 +241,11 @@
                 <div id="inboxEmails" class="inboxEmails">
                     <!--Events are dynamically loaded into here-->
                 </div>
- 
-                <script>//Dummy script for displaying example pdf
-                    function displayPDF(){
-                        PDFObject.embed("/files/test.pdf", "#overlayPdf");
-                        document.getElementById("eventOverlay").style.display = "block";
-                    }
-                </script>
 
                 <div id="emailViewer" class="emailViewer">
                     <div id="eventDetails">
                         <p>Peacedoves Budget Request, 3:00pm</p>
-                        <button id="displayPDFButton" onclick="displayPDF()">View Event</button>
+                        <button id="displayEventButton" onclick="displayEvent('mp4')">View Event</button>
 
 
 
@@ -296,6 +294,50 @@
         </div>
     </div>
 </div>
+
+
+<!-- Video displaying code -->
+<div id="videoOverlay" >
+	<br>
+	<div style="text-align:center;">
+		<button style="text-align:center;" onclick="videoOverlayOff()">Exit Video</button>
+	</div>
+	<div style="text-align:center;">
+		<video id="videoID" style="text-align:center;" width="500" height="500">
+			<source src="/files/testmp4.mp4" type="video/mp4">
+		</video>
+	</div>
+	<div style="text-align:center;">
+		<button style="text-align:center;" onclick="videoPausePlay()">Play/Pause</button>
+	</div>
+</div>
+
+<!-- Audio displaying code -->
+<div id="audioOverlay" >
+	<br>
+	<div style="text-align:center;">
+	<button style="text-align:center;" onclick="audioPausePlay()">Play/Pause</button>
+	<br>
+	<br>
+	<button style="text-align:center;" onclick="audioOverlayOff()">Exit Audio</button>
+	</div>
+	<br>
+	<div style="text-align:center;">
+	<audio id="audioID">
+	<source src="/files/testmp3.mp3" type="audio/mpeg">
+	</audio>
+	</div>
+</div>
+
+<!-- Image overlay code -->
+<br>
+<div id="imageOverlay" onclick="imageOverlayOff()">
+	<br>
+	<div style="text-align:center;">
+		<image src="/files/testjpg.jpg"  width=500 height=500> 
+	</div>
+</div>
+
 
 <!-- Footer -->
 <footer class="bg-light fixed-bottom" id="footer">
