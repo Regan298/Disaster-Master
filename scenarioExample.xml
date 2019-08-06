@@ -8,19 +8,16 @@
 	<ngo>
 		<name>People First</name>
 		<passkey>ngo1</passkey>
-
 	</ngo>
 
 	<ngo>
 		<name>We Care</name>
 		<passkey>ngo2</passkey>
-
 	</ngo>
 
 	<ngo>
 		<name>EWB</name>
 		<passkey>ngo3</passkey>
-
 	</ngo>
 
 	<ngo>
@@ -38,7 +35,6 @@
 	<ngo>
 		<name>Reach Up</name>
 		<passkey>ngo6</passkey>
-
 	</ngo>	
 	
     <event>
