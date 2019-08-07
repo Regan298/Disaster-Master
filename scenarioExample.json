@@ -1,0 +1,85 @@
+﻿{
+	"scenario": {
+		"name": "Sebadoah",
+		"ngoCount": "5",
+		"duration": "19800000",
+		"hoursInDay": "1",
+		"ngo": [
+			{
+				"name": "People First",
+				"passkey": "ngo1"
+			},
+			{
+				"name": "We Care",
+				"passkey": "ngo2"
+			},
+			{
+				"name": "EWB",
+				"passkey": "ngo3"
+			},
+			{
+				"name": "Red Heart",
+				"passkey": "ngo4"
+			},
+			{
+				"name": "Peacedoves",
+				"passkey": "ngo5"
+			},
+			{
+				"name": "Reach Up",
+				"passkey": "ngo6"
+			}
+		],
+		"event": [
+			{
+				"recipient": "Peacedoves",
+				"subject": "HQ Daily Sit Rep Request",
+				"time": "00:00:30",
+				"type": "pdf",
+				"location": "/files/003PD.pdf"
+			},
+			{
+				"recipient": "Red Heart",
+				"subject": "HQ Daily Sit Rep Request",
+				"time": "00:00:35",
+				"type": "pdf",
+				"location": "/files/003RH.pdf"
+			},
+			{
+				"recipient": "People First",
+				"subject": "HQ Daily Sit Rep Request",
+				"time": "00:00:40",
+				"type": "pdf",
+				"location": "/files/003P1st.pdf"
+			},
+			{
+				"recipient": "We Care",
+				"subject": "HQ Daily Sit Rep Request",
+				"time": "00:00:41",
+				"type": "pdf",
+				"location": "/files/003WC.pdf"
+			},
+			{
+				"recipient": "EWB",
+				"subject": "HQ Daily Sit Rep Request",
+				"time": "00:01:00",
+				"type": "pdf",
+				"location": "/files/003EWB.pdf"
+			},
+			{
+				"recipient": "Reach Up",
+				"subject": "HQ Daily Sit Rep Request",
+				"time": "00:00:45",
+				"type": "pdf",
+				"location": "/files/003RU.pdf"
+			},
+			{
+				"recipient": "Reach Up",
+				"subject": "HQ Daily Sit Rep Request",
+				"time": "02:00:00",
+				"type": "pdf",
+				"location": "/files/003RU.pdf"
+			}
+		]
+	}
+}
