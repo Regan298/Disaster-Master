@@ -63,6 +63,17 @@ app.get('/hq-run-simulation', function (req, res) {
     res.sendFile(__dirname + '/hq-run-simulation.html');
 });
 
+app.get('/hq-create', function (req, res) {
+    res.sendFile(__dirname + '/scenario-edit-home.html');
+})
+
+app.get('/scenario-create', function (req, res) {
+    res.sendFile(__dirname + '/scenario-edit.html');
+})
+
+app.get('/scenario-edit', function (req, res) {
+    res.sendFile(__dirname + '/scenario-upload.html');
+})
 
 app.get('/ngo', function (req, res) {
     console.log('request: ' + req.url);
@@ -80,6 +91,40 @@ app.get('/about', function (req, res) {
 
 app.get('/help', function (req, res) {
     res.sendFile(__dirname + '/help.html');
+});
+
+app.post('/editor-upload', function (req, res) {
+    console.log("upload req");
+    if (req.files != null) {
+
+
+        let simFileTemp = req.files.simFile;
+
+        simFileTemp.mv(__dirname + '/currentScenario.xml', function (err) {
+            if(err) {
+                return res.status(400).send(err);
+            }
+
+        });
+
+
+        let validFile = parseXMLForLoading();
+
+        if(!validFile){
+            return res.status(400).send("Bad File, Please Input A Valid File :)");
+        } else {
+            res.redirect('scenario-create');
+            res.end("File Sent");
+        }
+        
+
+
+
+    } else {
+        console.log("no file");
+        return res.status(400).send("Bad File, Please Input A Valid File :)");
+    }
+
 });
 
 app.post('/upload', function (req, res) {
