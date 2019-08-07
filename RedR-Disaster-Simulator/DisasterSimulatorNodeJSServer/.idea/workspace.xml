@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="49695245-0bfd-4e8e-ac0b-a4ae2f8b4c6d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../.gitlab-ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitlab-ci.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/currentScenario.xml" beforeDir="false" afterPath="$PROJECT_DIR$/currentScenario.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hq-run-simulation.html" beforeDir="false" afterPath="$PROJECT_DIR$/hq-run-simulation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/ngo-simulation.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/ngo-simulation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/run-simulation.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/run-simulation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/intergrationTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/intergrationTests.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,55 +21,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ngo-config.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="31" column="6" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/intergrationTests.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="6" lean-forward="true" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../.gitlab-ci.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="342" column="36" lean-forward="true" selection-start-line="342" selection-start-column="36" selection-end-line="342" selection-end-column="36" />
+            <state relative-caret-position="3118">
+              <caret line="262" column="5" lean-forward="true" selection-start-line="262" selection-start-column="5" selection-end-line="262" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hq-config.html">
+        <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="43" column="46" selection-start-line="43" selection-start-column="39" selection-end-line="43" selection-end-column="46" />
+            <state relative-caret-position="-1598">
+              <caret line="80" selection-start-line="80" selection-end-line="80" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/package.json">
+        <entry file="file://$PROJECT_DIR$/resources/js/run-simulation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="32" column="40" lean-forward="true" selection-start-line="32" selection-start-column="40" selection-end-line="32" selection-end-column="40" />
+            <state relative-caret-position="-3443">
+              <caret line="347" column="39" selection-start-line="347" selection-start-column="39" selection-end-line="347" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -85,26 +59,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ngoname</find>
-      <find>ngonames</find>
-      <find>socket.on</find>
-      <find>timerele</find>
-      <find>fillCommunicationButtons</find>
-      <find>currentNGONames</find>
-      <find>ngoNames</find>
-      <find>ngoList</find>
-      <find>handleNGOS</find>
-      <find>console</find>
-      <find>users</find>
-      <find>ngor</find>
-      <find>hidden</find>
-      <find>selectedNGOChat</find>
-      <find>overlayPdf</find>
-      <find>inboxemails</find>
-      <find>emailViewer</find>
-      <find>messagingElementNGO</find>
-      <find>inboxElement</find>
-      <find>displaypdf</find>
       <find>emailv</find>
       <find>off</find>
       <find>opn</find>
@@ -115,7 +69,30 @@
       <find>filesaver</find>
       <find>work</find>
       <find>console.log</find>
+      <find>ngoUsers</find>
+      <find>socket</find>
+      <find>loadNGOTitle</find>
+      <find>console.</find>
+      <find>loadScenarioHeader</find>
+      <find>socket.emit</find>
+      <find>currentNGONames</find>
+      <find>users</find>
+      <find>emit</find>
+      <find>fillCommunicationButtons</find>
+      <find>handleNGOS</find>
+      <find>fill</find>
+      <find>socket.on('users</find>
+      <find>timeline</find>
+      <find>ngolist</find>
+      <find>initDraw</find>
+      <find>simstate</find>
+      <find>duration</find>
+      <find>socket.on('ngos'</find>
+      <find>ready</find>
     </findStrings>
+    <replaceStrings>
+      <replace>connectedUsers</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -133,23 +110,23 @@
         <option value="$PROJECT_DIR$/resources/footer.html" />
         <option value="$PROJECT_DIR$/resources/js/dfghb.js" />
         <option value="$PROJECT_DIR$/NGO.html" />
-        <option value="$PROJECT_DIR$/resources/js/run-simulation.js" />
-        <option value="$PROJECT_DIR$/resources/js/ngo-simulation.js" />
         <option value="$PROJECT_DIR$/resources/header.html" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/help.html" />
         <option value="$PROJECT_DIR$/about.html" />
         <option value="$PROJECT_DIR$/ngo-simulation.html" />
-        <option value="$PROJECT_DIR$/hq-run-simulation.html" />
         <option value="$PROJECT_DIR$/resources/styles/disaster-sim-style.css" />
         <option value="$PROJECT_DIR$/test/intergrationTest.js" />
         <option value="$PROJECT_DIR$/test/intergrationTests.ts" />
         <option value="$PROJECT_DIR$/ngo-config.html" />
         <option value="$PROJECT_DIR$/../../.gitlab-ci.yml" />
         <option value="$PROJECT_DIR$/hq-config.html" />
-        <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/test/intergrationTests.js" />
         <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/resources/js/ngo-simulation.js" />
+        <option value="$PROJECT_DIR$/hq-run-simulation.html" />
+        <option value="$PROJECT_DIR$/server.js" />
+        <option value="$PROJECT_DIR$/resources/js/run-simulation.js" />
       </list>
     </option>
   </component>
@@ -170,6 +147,17 @@
             <path>
               <item name="DisasterSimulatorNodeJSServer" type="b2602c69:ProjectViewProjectNode" />
               <item name="DisasterSimulatorNodeJSServer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DisasterSimulatorNodeJSServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DisasterSimulatorNodeJSServer" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DisasterSimulatorNodeJSServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DisasterSimulatorNodeJSServer" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="DisasterSimulatorNodeJSServer" type="b2602c69:ProjectViewProjectNode" />
@@ -236,21 +224,22 @@
       <workItem from="1563832715383" duration="6255000" />
       <workItem from="1563921256207" duration="21979000" />
       <workItem from="1564436727659" duration="10325000" />
+      <workItem from="1565047056047" duration="18203000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="187335000" />
+    <option name="totallyTimeSpent" value="205538000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13616072" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13842663" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -263,7 +252,7 @@
       <window_info anchor="bottom" id="TypeScript" order="11" weight="0.11620294" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24962178" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13616072" />
@@ -329,16 +318,6 @@
         <state relative-caret-position="-102" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/ngo-simulation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="192" selection-start-line="192" selection-end-line="192" />
-          <folding>
-            <element signature="n#style#0;n#textarea#0;n#form#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/header.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -373,24 +352,10 @@
     <entry file="file://$PROJECT_DIR$/resources/FileSaver.js" />
     <entry file="file://$PROJECT_DIR$/resources/HQ.js" />
     <entry file="file://$PROJECT_DIR$/resources/hq_review.html" />
-    <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/styles/disaster-sim-style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7055">
           <caret line="415" column="39" selection-start-line="415" selection-start-column="39" selection-end-line="415" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/run-simulation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2924">
-          <caret line="172" selection-start-line="172" selection-end-line="172" />
         </state>
       </provider>
     </entry>
@@ -411,31 +376,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ngo-config.html">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="31" column="6" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="6" />
+        <state relative-caret-position="476">
+          <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hq-config.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="43" column="46" selection-start-line="43" selection-start-column="39" selection-end-line="43" selection-end-column="46" />
+        <state relative-caret-position="461">
+          <caret line="51" column="8" lean-forward="true" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
+    <entry file="file://$PROJECT_DIR$/resources/js/ngo-simulation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="342" column="36" lean-forward="true" selection-start-line="342" selection-start-column="36" selection-end-line="342" selection-end-column="36" />
+        <state relative-caret-position="119">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="22" />
+          <folding>
+            <element signature="n#style#0;n#textarea#0;n#form#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ngo-config.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="69" column="47" lean-forward="true" selection-start-line="69" selection-start-column="47" selection-end-line="69" selection-end-column="47" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/intergrationTests.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="8" column="6" lean-forward="true" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -446,10 +421,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
+    <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="32" column="40" lean-forward="true" selection-start-line="32" selection-start-column="40" selection-end-line="32" selection-end-column="40" />
+        <state relative-caret-position="3118">
+          <caret line="262" column="5" lean-forward="true" selection-start-line="262" selection-start-column="5" selection-end-line="262" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1598">
+          <caret line="80" selection-start-line="80" selection-end-line="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/run-simulation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3443">
+          <caret line="347" column="39" selection-start-line="347" selection-start-column="39" selection-end-line="347" selection-end-column="39" />
         </state>
       </provider>
     </entry>

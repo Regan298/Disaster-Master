@@ -38,12 +38,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12 text-center" id="mainContent">
-            <div id="eventOverlay" onclick="displayPDFOff()"> 
-
-
-
-
-
+            <div id="eventOverlay" onclick="displayPDFOff()">
                 <div id="eventMediaDisplay"></div>
                 <script src="js/PDFObject/pdfobject.js"></script>
                 <script>
@@ -84,83 +79,8 @@
                 <link href="js/vis-4.21.0/dist/vis.css" rel="stylesheet" type="text/css"/>
                 <script type="text/javascript" src="js/timelineComponents.js"></script>
 
-                <script type="text/javascript">//initialises timeline object
-                    // var container = document.getElementById('visualization');
-                    // var timeline = new vis.Timeline(container, items, groups, options);
-                </script>
 
-                <script>
-                    socket.on('ngos', function (received) {
-                        console.log("got " + received.ngos);
 
-                        for (var i = 0; i < received.ngos.length; i++) {
-                            console.log(received.ngos[i]);
-                            groups.push({
-                                id: received.ngos[i].id,
-                                content: received.ngos[i].name[0]
-                            });
-                        }
-                        console.log(groups);
-                        if(!initDraw){
-                            timeline.setGroups(groups);
-                        }
-                    });
-
-                    socket.on('timelineEvents', function (received) {
-                        console.log("got "+received.events.length+" events");
-                        for (var i = 0; i < received.events.length; i++) {
-                            console.log(received.events[i]);
-
-                            var id;
-                            // var randDay = Math.floor((Math.random() * 7) + 1);
-                            // var randHour = Math.floor((Math.random() * 24) + 1);
-                            // var randMinute = Math.floor((Math.random() * 60) + 1);
-                            var timelineStartDate = new Date('2019', '01' - 1, '01', '00', '00', '00');
-
-                            var ngoName = received.events[i].recipient[0];
-                            for(var k=0; k<groups.length; k++){
-                                if(groups[k].content===ngoName){
-
-                                    var t = received.events[i].time+'';
-		                            t = t.split(":");
-                                    
-                                    var h = parseInt(t[0], 10)
-                                    var m = parseInt(t[1], 10)
-                                    var s = parseInt(t[2], 10)
-
-                                    var ms = (h*60*60*1000)+(m*60*1000)+(s*1000);
-
-                                    var scaledTime = timelineStartDate.getTime() + (ms*timeScale);
-                                    scaledTime = new Date(scaledTime);
-
-                                    id = groups[k].id;
-                                    console.log("found matching ngo id");
-                                    items.push({
-                                        id: received.events[i].id,
-                                        group: id,
-                                        content: received.events[i].subject[0],
-                                        location: received.events[i].location[0],
-                                        start: '2019-01-'+scaledTime.getDate()+' '+scaledTime.getHours()+':'+scaledTime.getMinutes()+':'+scaledTime.getSeconds()
-                                        //start: '2019-01-01 ' + received.events[i].Time
-                                    });
-                                    break;
-                                }
-                            }
-
-                            
-                        }
-                        if(!initDraw){
-                            timeline.setItems(items);
-                        }
-                    });
-
-                    $(function () {
-                        var msg = 'hi';
-                        socket.emit('timelineReady', {
-                            msg
-                        });
-                    });
-                </script>
 
 
                 <script>//functions for activating/disabling overlay

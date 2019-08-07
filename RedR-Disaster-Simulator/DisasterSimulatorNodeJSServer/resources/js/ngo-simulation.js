@@ -8,11 +8,15 @@ var outboxRowCount = 0;
 var simulationDuration = 0;
 var ngoNames;
 var selectedNGOChat;
+var nameNotRecieved = true;
 
 
-loadNGOTitle();
+
 //loadCommunication();
+console.log("start");
+
 handleNGOS();
+loadNGOTitle();
 // runClock();
 
 currentTime = 0;
@@ -96,7 +100,7 @@ function fillCommunicationButtons() {
 
 function handleNGOS() {
 
-    socket.on('users', function (data) {
+    socket.on('ngoList', function (data) {
 
         users = data.ngoUsers;
         console.log(users.length);
@@ -129,10 +133,12 @@ function displayPDFOff() {
 }
 
 
-//Handle Messaging and Events
+//On Page Load
 $(function () {
     switchNGOChat();
     fillCommunicationButtons();
+
+
 
     //New message form
     $('#messageNGO').submit(function (e) {
@@ -232,12 +238,15 @@ function addToConversation(content, isOrigin, from) {
 
 function loadNGOTitle() {
     //Ask Server For Name
+        socket.on('nameRequest', function (data) {
+            if(nameNotRecieved) {
+                name = data;
+                var htmlContent = "<h1 class='titles'><span>NGO: " + name + "</span></h1>";
+                $(htmlContent).appendTo(".ngoTitle");
+                nameNotRecieved = false;
+            }
+        });
 
-    socket.on('nameRequest', function (data) {
-        name = data;
-        var htmlContent = "<h1 class='titles'><span>NGO: " + name + "</span></h1>";
-        $(htmlContent).appendTo(".ngoTitle");
-    });
 
 
 }

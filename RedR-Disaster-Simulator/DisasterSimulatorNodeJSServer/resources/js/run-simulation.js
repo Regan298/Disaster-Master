@@ -16,32 +16,120 @@ var pauseTimeline;
 var timeline;
 var realCountdown = false;
 
+var simData;
 
-//Load Page Elements
-//loadCommunication();
-loadScenarioHeader();
+
 //testing:
 getTempPDF();
 handleNGOS();
 
+function getScenarioDataAndUpdateTimeline() {
 
-// function runClock() {
-//     function updateClock() {
-//         currentTime = currentTime + 1000;
-//         var timerElement = document.getElementById("timeManagement");
-//         var timeRemaining = simulationDuration - currentTime;
-//         displayRemainingTime(timerElement, timeRemaining);
+    socket.emit('simState', "request", function (callbackData) {
 
-//         if (timeRemaining == 0) {
-//             clearInterval(updateClockProcess);
-//         }
-//     }
+        simData = callbackData.simData;
+        if (!started) {
+            console.log("HERE");
+            started = true;
+            simTitle = callbackData.simData.title;
+            var url = document.URL.split('/');
+            url = url[2] + "/ngo";
 
-//     updateClockProcess = setInterval(updateClock, 1000);
-// }
+            var htmlContent = "<h1 class='titles'><span>Scenario: " + simTitle + "</span></h1>" +
+                "<p class='lead'> Please inform your NGO's to go to this page: " + url + "</p>";
+
+            $(htmlContent).appendTo(".scenarioTitle");
+
+        }
+
+
+        simulationDuration = simData.durationMs;
+        var d = new Date(startDate.getTime() + (simulationDuration * timeScale));
+        options.max = d;
+        var container = document.getElementById('visualization');
+        timeline = new vis.Timeline(container, items, groups, options);
+        initDraw = false;
+        // console.log(startDate.getTime());
+        // console.log(timeScale);
+        // console.log(simulationDuration);
+        console.log(startDate);
+        console.log(endDate);
+        //endDate.setHours('24');
+        var timerElement;
+        timerElement = document.getElementById("realTime");
+        realDisplayRemainingTime(timerElement, simulationDuration);
+        timerElement = document.getElementById("simTime");
+        simDisplayRemainingTime(timerElement, simulationDuration * timeScale);
+
+
+        console.log("timelineRequest");
+
+        console.log("got " + simData.ngoList);
+
+        for (var i = 0; i < simData.ngoList.length; i++) {
+            console.log(simData.ngoList[i]);
+            groups.push({
+                id: simData.ngoList[i].id,
+                content: simData.ngoList[i].name[0]
+            });
+        }
+        console.log(groups);
+        if (!initDraw) {
+            timeline.setGroups(groups);
+        }
+
+
+        for (var i = 0; i < simData.eventsList.length; i++) {
+            var currentEvent = simData.eventsList[i];
+
+            var id;
+            // var randDay = Math.floor((Math.random() * 7) + 1);
+            // var randHour = Math.floor((Math.random() * 24) + 1);
+            // var randMinute = Math.floor((Math.random() * 60) + 1);
+            var timelineStartDate = new Date('2019', '01' - 1, '01', '00', '00', '00');
+
+            var ngoName = currentEvent.recipient[0];
+            for (var k = 0; k < groups.length; k++) {
+                if (groups[k].content === ngoName) {
+
+                    var t = currentEvent.time + '';
+                    t = t.split(":");
+
+                    var h = parseInt(t[0], 10)
+                    var m = parseInt(t[1], 10)
+                    var s = parseInt(t[2], 10)
+
+                    var ms = (h * 60 * 60 * 1000) + (m * 60 * 1000) + (s * 1000);
+
+                    var scaledTime = timelineStartDate.getTime() + (ms * timeScale);
+                    scaledTime = new Date(scaledTime);
+
+                    id = groups[k].id;
+                    console.log("found matching ngo id");
+                    items.push({
+                        id: currentEvent.id,
+                        group: id,
+                        content: currentEvent.subject[0],
+                        location: currentEvent.location[0],
+                        start: '2019-01-' + scaledTime.getDate() + ' ' + scaledTime.getHours() + ':' + scaledTime.getMinutes() + ':' + scaledTime.getSeconds()
+                        //start: '2019-01-01 ' + received.events[i].Time
+                    });
+                    break;
+                }
+            }
+
+
+        }
+        if (!initDraw) {
+            timeline.setItems(items);
+        }
+
+    });
+
+}
 
 function startStopSim() {
-    if(initStart){
+    if (initStart) {
         console.log('initial start');
         timeline.setCurrentTime(startDate);
         timeline.redraw();
@@ -51,15 +139,16 @@ function startStopSim() {
         running = true;
         socket.emit('play', true);
         doPlay();
-        document.getElementById("playPauseSwitch").innerHTML="&#10074 &#10074";
+        document.getElementById("playPauseSwitch").innerHTML = "&#10074 &#10074";
     } else {
         running = false;
         socket.emit('pause', true);
         doPause();
-        document.getElementById("playPauseSwitch").innerHTML="&#9205";
+        document.getElementById("playPauseSwitch").innerHTML = "&#9205";
     }
 
 }
+
 //real time countdown
 function realDisplayRemainingTime(timerElement, timeRemaining) {
 
@@ -79,7 +168,7 @@ function simDisplayRemainingTime(timerElement, timeRemaining) {
     var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
     var days = Math.floor((timeRemaining / (1000 * 60 * 60)) / 24);
 
-    timerElement.innerHTML = "Day: "+days+" "+hours + "h" + minutes + "m" + seconds + "s remaining";
+    timerElement.innerHTML = "Day: " + days + " " + hours + "h" + minutes + "m" + seconds + "s remaining";
 
 }
 
@@ -88,7 +177,7 @@ function doPause() {
     pauseTimeline = setInterval(pauseTimeline, 100);
 }
 
-function pauseTimeline(){
+function pauseTimeline() {
     timeline.setCurrentTime(startDate);
     timeline.redraw();
 }
@@ -99,45 +188,27 @@ function doPlay() {
 }
 
 
-function loadScenarioHeader() {
+function loadScenarioInformation() {
 
-    socket.on('simState', function (data) {
-        if (!started) {
-            console.log("HERE");
-            started = true;
-            simTitle = data.simData.title;
-            var url = document.URL.split('/');
-            url = url[2] + "/ngo";
 
-            var htmlContent = "<h1 class='titles'><span>Scenario: " + simTitle + "</span></h1>" +
-                "<p class='lead'> Please inform your NGO's to go to this page: " + url + "</p>";
+    /*socket.on('simState', function (data) {
 
-            $(htmlContent).appendTo(".scenarioTitle");
 
-        }
-    });
+
+    });*/
 }
-
-
-
-/*function getNGONames() {*/
-
-
-/*}*/
-
 
 function handleNGOS() {
 
     //New NGOS
     socket.on('ngoList', function (data) {
-
-        ngos = data.ngoUsers;
+        ngos = data.connectedUsers;
         if (ngos != null) {
-            let currentNGOName = ngos[ngos.length - 1].name;
-
-            console.log("id: " + ngos[ngos.length - 1].id);
-
-            document.getElementById(ngos[ngos.length - 1].id).style.visibility = "visible";
+            let currentUserName = ngos[ngos.length - 1].name;
+            if (currentUserName !== "HQ") {
+                console.log("id: " + ngos[ngos.length - 1].id);
+                document.getElementById(ngos[ngos.length - 1].id).style.visibility = "visible";
+            }
         }
 
     });
@@ -181,19 +252,19 @@ function updateEventList() {
     socket.on('occurredEvents', function (received) {
 
         var timelineStartDate = new Date('2019', '01' - 1, '01', '00', '00', '00');
-        var scaledTime = timelineStartDate.getTime() + (received.time*timeScale);
+        var scaledTime = timelineStartDate.getTime() + (received.time * timeScale);
         scaledTime = new Date(scaledTime);
         timeline.setCurrentTime(scaledTime);
         timeline.redraw();
-        
+
         eventList = received.occurredEvents;
         console.log("eventSize: " + eventList.length);
         $(".inboxEmails").empty();
         for (var i = 0; i < eventList.length; i++) {
             var fileReference = eventList[i].Location;
 
-            var htmlContent = "<button class=\"emailObject\"><p class=\"emailTitle\">"+eventList[i].subject[0]+"</p>\n" +
-                "                                <p class=\"emailTime\">"+eventList[i].time[0]+"</p></button>";
+            var htmlContent = "<button class=\"emailObject\"><p class=\"emailTitle\">" + eventList[i].subject[0] + "</p>\n" +
+                "                                <p class=\"emailTime\">" + eventList[i].time[0] + "</p></button>";
 
             $(htmlContent).appendTo(".inboxEmails");
 
@@ -203,33 +274,99 @@ function updateEventList() {
 
 }
 
+function handleTimelineDynamic() {
+    console.log("timelineRequest");
+    socket.on('ngos', function (received) {
+        console.log("got " + received.ngos);
+
+        for (var i = 0; i < received.ngos.length; i++) {
+            console.log(received.ngos[i]);
+            groups.push({
+                id: received.ngos[i].id,
+                content: received.ngos[i].name[0]
+            });
+        }
+        console.log(groups);
+        if (!initDraw) {
+            timeline.setGroups(groups);
+        }
+    });
+
+    socket.on('timelineEvents', function (received) {
+        console.log("got " + received.events.length + " events");
+        for (var i = 0; i < received.events.length; i++) {
+            console.log(received.events[i]);
+
+            var id;
+            // var randDay = Math.floor((Math.random() * 7) + 1);
+            // var randHour = Math.floor((Math.random() * 24) + 1);
+            // var randMinute = Math.floor((Math.random() * 60) + 1);
+            var timelineStartDate = new Date('2019', '01' - 1, '01', '00', '00', '00');
+
+            var ngoName = received.events[i].recipient[0];
+            for (var k = 0; k < groups.length; k++) {
+                if (groups[k].content === ngoName) {
+
+                    var t = received.events[i].time + '';
+                    t = t.split(":");
+
+                    var h = parseInt(t[0], 10)
+                    var m = parseInt(t[1], 10)
+                    var s = parseInt(t[2], 10)
+
+                    var ms = (h * 60 * 60 * 1000) + (m * 60 * 1000) + (s * 1000);
+
+                    var scaledTime = timelineStartDate.getTime() + (ms * timeScale);
+                    scaledTime = new Date(scaledTime);
+
+                    id = groups[k].id;
+                    console.log("found matching ngo id");
+                    items.push({
+                        id: received.events[i].id,
+                        group: id,
+                        content: received.events[i].subject[0],
+                        location: received.events[i].location[0],
+                        start: '2019-01-' + scaledTime.getDate() + ' ' + scaledTime.getHours() + ':' + scaledTime.getMinutes() + ':' + scaledTime.getSeconds()
+                        //start: '2019-01-01 ' + received.events[i].Time
+                    });
+                    break;
+                }
+            }
+
+
+        }
+        if (!initDraw) {
+            timeline.setItems(items);
+        }
+    });
+}
+
 
 //Once Page Loaded
 $(function () {
     updateEventList();
-    //Update Communication Buttons
-
+    getScenarioDataAndUpdateTimeline();
     document.getElementById('simTime').style.display = 'inline';
     document.getElementById('realTime').style.display = 'none';
 
-    $('.toggle').on('click', function(event){
+    $('.toggle').on('click', function (event) {
         event.preventDefault();
         $(this).toggleClass('active');
         console.log(event);
-        if(realCountdown){
+        if (realCountdown) {
             realCountdown = false;
             document.getElementById('simTime').style.display = 'inline';
             document.getElementById('realTime').style.display = 'none';
             timerElement = document.getElementById("simTime");
-            simDisplayRemainingTime(timerElement, simulationDuration*timeScale);
-        }else{
+            simDisplayRemainingTime(timerElement, simulationDuration * timeScale);
+        } else {
             realCountdown = true;
             document.getElementById('simTime').style.display = 'none';
             document.getElementById('realTime').style.display = 'inline';
             timerElement = document.getElementById("realTime");
             realDisplayRemainingTime(timerElement, simulationDuration);
         }
-        
+
     });
 
     fillCommunicationButtons();
@@ -246,7 +383,6 @@ $(function () {
 
         //Find actual Name of NGO
         let name = document.getElementById(selectedNGOChat).innerHTML;
-
 
 
         var message = {
@@ -270,40 +406,20 @@ $(function () {
         }
 
     });
-    
-    socket.on('duration', function(duration){
-        simulationDuration = duration;
-        var d = new Date(startDate.getTime()+(simulationDuration*timeScale));
-        options.max = d;
-        var container = document.getElementById('visualization');
-        timeline = new vis.Timeline(container, items, groups, options);
-        initDraw = false;
-        // console.log(startDate.getTime());
-        // console.log(timeScale);
-        // console.log(simulationDuration);
-        console.log(startDate);
-        console.log(endDate);
-        //endDate.setHours('24');
-        var timerElement;
-        timerElement = document.getElementById("realTime");
-        realDisplayRemainingTime(timerElement, simulationDuration);
-        timerElement = document.getElementById("simTime");
-        simDisplayRemainingTime(timerElement, simulationDuration*timeScale);
-        
-    });
 
-    socket.on('timeScale', function(scale){
+
+    socket.on('timeScale', function (scale) {
         timeScale = scale;
     });
 
-    socket.on('currentTime', function (time){
+    socket.on('currentTime', function (time) {
         simulationDuration = time;
-        if(realCountdown){
+        if (realCountdown) {
             timerElement = document.getElementById("realTime");
             realDisplayRemainingTime(timerElement, simulationDuration);
-        }else{
+        } else {
             timerElement = document.getElementById("simTime");
-            simDisplayRemainingTime(timerElement, simulationDuration*timeScale);
+            simDisplayRemainingTime(timerElement, simulationDuration * timeScale);
         }
     });
 });
@@ -333,24 +449,18 @@ function addToConversation(content, isOrigin, from) {
 
 function fillCommunicationButtons() {
 
-    socket.on('currentNGONames', function (data) {
-
-        ngoNames = data.ngoNames;
+    var buttons = document.getElementsByClassName("btn btn-secondary");
 
 
-        var buttons = document.getElementsByClassName("btn btn-secondary");
-
-        for (i = 0; i < buttons.length; i++) {
-            buttons[i].innerHTML = ngoNames[i];
+    for (i = 0; i < ngos.length; i++) {
+        if (ngos[i].name != "HQ") {
+            buttons[i].innerHTML = ngos[i].name;
         }
 
-    });
-
-
-
+    }
 }
 
-function displayPDF(){
+function displayPDF() {
     document.getElementById("eventOverlay").style.display = "block";
 }
 
@@ -383,27 +493,24 @@ function wait(ms) {
     }
 }
 
-function displayEvent(type){
-    if(type=="mp4"){
+function displayEvent(type) {
+    if (type == "mp4") {
         displayVideo();
         document.getElementById("eventOverlay").style.display = "none";
         document.getElementById("audioOverlay").style.display = "none";
         document.getElementById("imageOverlay").style.display = "none";
-    }
-    else if (type=="pdf"){
+    } else if (type == "pdf") {
         PDFObject.embed("/files/test.pdf", "#eventMediaDisplay");
         document.getElementById("eventOverlay").style.display = "block";
         document.getElementById("videoOverlay").style.display = "none";
         document.getElementById("audioOverlay").style.display = "none";
         document.getElementById("imageOverlay").style.display = "none";
-    }
-    else if(type=="mp3"){
+    } else if (type == "mp3") {
         displayAudio();
         document.getElementById("eventOverlay").style.display = "none";
         document.getElementById("videoOverlay").style.display = "none";
         document.getElementById("imageOverlay").style.display = "none";
-    }
-    else if(type=="jpg"){
+    } else if (type == "jpg") {
         displayImage();
         document.getElementById("eventOverlay").style.display = "none";
         document.getElementById("videoOverlay").style.display = "none";
@@ -412,16 +519,15 @@ function displayEvent(type){
 }
 
 //video functions for display
-function displayVideo(){
+function displayVideo() {
     console.log("display video is called");
     document.getElementById("videoOverlay").style.display = "block";
 }
 
 
-
-function videoPausePlay(){
+function videoPausePlay() {
     var video = document.getElementById("videoID");
-    if(video.paused){
+    if (video.paused) {
         video.play();
     } else {
         video.pause();
@@ -429,41 +535,40 @@ function videoPausePlay(){
 }
 
 
-
-function videoOverlayOff(){
+function videoOverlayOff() {
     var video = document.getElementById("videoID");
     video.pause();
     document.getElementById("videoOverlay").style.display = "none";
 }
 
 //audio display code
-function displayAudio(){
+function displayAudio() {
     console.log("display audio is called");
     document.getElementById("audioOverlay").style.display = "block";
 }
 
-function audioPausePlay(){
+function audioPausePlay() {
     var audio = document.getElementById("audioID");
-    if(audio.paused){
+    if (audio.paused) {
         audio.play();
     } else {
         audio.pause();
     }
 }
 
-function audioOverlayOff(){
+function audioOverlayOff() {
     var audio = document.getElementById("audioID");
     audio.pause();
     document.getElementById("audioOverlay").style.display = "none";
 }
 
 //image display code
-function displayImage(){
+function displayImage() {
     console.log("display image is called");
     document.getElementById("imageOverlay").style.display = "block";
 }
 
-function imageOverlayOff(){
+function imageOverlayOff() {
     document.getElementById("imageOverlay").style.display = "none";
 }
 

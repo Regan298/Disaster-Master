@@ -41,27 +41,6 @@
 
 	</ngo>	
 	
-	    <event>
-		<recipient>Peacedoves</recipient>
-        <subject>TestJPG</subject>
-		<time>00:00:35</time>
-		<type>jpg</type>
-		<location>/files/testjpg.JPG</location>
-	</event>
-	    <event>
-		<recipient>Peacedoves</recipient>
-        <subject>Testmp3</subject>
-		<time>00:00:30</time>
-		<type>mp3</type>
-		<location>/files/testmp3.mp3</location>
-	</event>
-	    <event>
-		<recipient>Peacedoves</recipient>
-        <subject>Testmp4</subject>
-		<time>00:00:25</time>
-		<type>mp4</type>
-		<location>/files/testmp4.mp4</location>
-	</event>
     <event>
 		<recipient>Peacedoves</recipient>
         <subject>HQ Daily Sit Rep Request</subject>
