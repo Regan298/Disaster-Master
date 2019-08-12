@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario>
+	<name>Sebadoah</name>
+	<ngoCount>5</ngoCount>
+	<duration>19800000</duration>
+	<hoursInDay>1</hoursInDay>
+
+	<ngo>
+		<name>People First</name>
+		<passkey>ngo1</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>We Care</name>
+		<passkey>ngo2</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>EWB</name>
+		<passkey>ngo3</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>Red Heart</name>
+		<passkey>ngo4</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>Peacedoves</name>
+		<passkey>ngo5</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>Reach Up</name>
+		<passkey>ngo6</passkey>
+
+	</ngo>	
+	
+	<event>
+		<recipient>Peacedoves</recipient>
+        <subject>Set up</subject>
+		<time>00:00:05</time>
+		<type>pdf</type>
+		<location>/FileLibrary/000 Needs assessment letter.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Introduction into Sebadoah</subject>
+		<time>00:00:10</time>
+		<type>pdf</type>
+		<location>/FileLibrary/001 Activation of Cluster System.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>President of Sebadoah</subject>
+		<time>00:00:15</time>
+		<type>pdf</type>
+		<location>/FileLibrary/002 Purchase from Umbala.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>SitRep Request</subject>
+		<time>00:00:20</time>
+		<type>pdf</type>
+		<location>/FileLibrary/003 HQ Daily SitRep Request.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Budget Request</subject>
+		<time>00:00:25</time>
+		<type>pdf</type>
+		<location>/FileLibrary/004 HQ Budget Request.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Flood Update</subject>
+		<time>00:00:30</time>
+		<type>pdf</type>
+		<location>/FileLibrary/005 DisCom Flood Update.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Request Cluster SitReps</subject>
+		<time>00:00:35</time>
+		<type>pdf</type>
+		<location>/FileLibrary/006 Request Cluster SitReps.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Request SitReps</subject>
+		<time>00:00:40</time>
+		<type>pdf</type>
+		<location>/FileLibrary/007 HQ No Daily SitRep.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Budget</subject>
+		<time>00:00:45</time>
+		<type>pdf</type>
+		<location>/FileLibrary/008 HQ No Budget.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Sit Reps Request</subject>
+		<time>00:00:50</time>
+		<type>pdf</type>
+		<location>/FileLibrary/009 No Daily Cluster SitReps.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Information Request</subject>
+		<time>00:00:55</time>
+		<type>pdf</type>
+		<location>/FileLibrary/010 HQ Site Info Request.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Planning Request</subject>
+		<time>00:01:00</time>
+		<type>pdf</type>
+		<location>/FileLibrary/011 HQ Planning Request.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Kidnapping</subject>
+		<time>00:01:05</time>
+		<type>pdf</type>
+		<location>/FileLibrary/012 HQ Kidnapping.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Kidnapping</subject>
+		<time>00:01:10</time>
+		<type>pdf</type>
+		<location>/FileLibrary/012 HQ Kidnapping.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Reminder Flash Appeal</subject>
+		<time>00:01:15</time>
+		<type>pdf</type>
+		<location>/FileLibrary/013 Reminder - Flash Appeal.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Gender Audit</subject>
+		<time>00:01:20</time>
+		<type>pdf</type>
+		<location>/FileLibrary/014 HQ Gender Audit.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>DayinLife Request</subject>
+		<time>00:01:25</time>
+		<type>pdf</type>
+		<location>/FileLibrary/015 HQ DayinLife Request.pdf</location>
+	</event>
+</scenario>
