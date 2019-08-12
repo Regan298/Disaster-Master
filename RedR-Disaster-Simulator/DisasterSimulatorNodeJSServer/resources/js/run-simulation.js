@@ -42,7 +42,8 @@ function loadScenarioHeader() {
 
 function updateTimeline() {
     console.log("loadtimeline");
-    simulationDuration = simData.durationMs;
+    simulationDuration = simData.durationMs[0];
+    timeScale = simData.timeScale;
     var d = new Date(startDate.getTime() + (simulationDuration * timeScale));
     options.max = d;
     var container = document.getElementById('visualization');
@@ -117,6 +118,7 @@ function fillCommunicationButtons() {
 function processScenarioData() {
     socket.emit('simState', "request", function (callbackData) {
         simData = callbackData.simData;
+        console.log(simData);
         loadScenarioHeader();
         updateTimeline();
         fillCommunicationButtons();
