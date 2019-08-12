@@ -23,7 +23,7 @@ http.listen(80, function () {
 });
 
 //ngoCount gets updated when file parsed
-const simData = {
+var simData = {
     ready: false,
     title: "",
     ngoCount: 999,
@@ -96,10 +96,28 @@ app.get('/help', function (req, res) {
     res.sendFile(__dirname + '/help.html');
 });
 
+function clearSimData() {
+    simData = {
+        ready: false,
+        title: "",
+        ngoCount: 999,
+        ngoList: [],
+        eventsList: [],
+        messageList: [],
+        durationMs: 0,
+        timeScale: 0,
+        started: false,
+        modeOnline: true,
+        occurredEvents: []
+    };
+}
+
 //Process Sceanrio File For Uploading
 app.post('/upload', function (req, res) {
 
     if (req.files != null) {
+        clearSimData();
+
         let simFileTemp = req.files.simFile;
         simFileTemp.mv(__dirname + '/currentScenario.xml', function (err) {
             if (err) {
@@ -227,8 +245,10 @@ io.on('connection', function (socket) {
             }
 
 
+            //Add new ngo to connected users
             connectedUsers.push(ngo);
             socket.emit('loginState', 'accepted');
+            //resend connectedusers to ngo as new ngo joined
             io.emit('ngoList', {connectedUsers});
         }
 
@@ -237,14 +257,16 @@ io.on('connection', function (socket) {
 
 
 //Send NGO Name To Relevant NGO
-    for (var i = 0; i < connectedUsers.length; i++) {
-        ngoTemp = connectedUsers[i];
-        if (ngoTemp.ip == ipCurrent) {
-            if (!ngoTemp.name.includes("HQ")) {
-                io.emit('nameRequest', ngoTemp.name);
+    socket.on('nameRequest', function (msg, callback) {
+        for (var i = 0; i < connectedUsers.length; i++) {
+            ngoTemp = connectedUsers[i];
+            if (ngoTemp.ip == ipCurrent) {
+                if (!ngoTemp.name.includes("HQ")) {
+                    callback(ngoTemp.name);
+                }
             }
         }
-    }
+    });
 
 
 //Send each NGO name to HQ and to NGO
@@ -254,24 +276,13 @@ io.on('connection', function (socket) {
 // Trigger for Run simulation displaying of sceanrio title and timeline view update
     if (simData.ready) {
 
-        socket.on('simState', function(msg, callback) {
-            console.log('event received: '+msg);
+        socket.on('simState', function (msg, callback) {
+            console.log('event received: ' + msg);
             callback({simData});
         });
         //io.emit('simState', {simData});
 
     }
-
-    //When HQ Page loads requests for timeline data
-    /*socket.on('timelineReady', function (msg) {
-        console.log("timeline ready");
-        var ngos = simData.ngoList;
-        socket.emit('ngos', {ngos});
-        socket.emit('timeScale', simData.timeScale);
-        socket.emit('duration', simData.durationMs);
-        var events = simData.eventsList;
-        socket.emit('timelineEvents', {events});
-    });*/
 
 //Messaging Handling
     socket.on('message', function (msg) {
@@ -281,7 +292,7 @@ io.on('connection', function (socket) {
             content: msg.message.content
         }
 
-        //send to DB
+        //store in simdata
         var d = new Date();
         var date = dateFormat(d, "HH:MM:ss")
         var message = {
@@ -315,7 +326,7 @@ function runSim() {
     worker.on('message', (msg) => {
         currentTimeMs = simData.durationMs - msg.timeMs;
         var time = msg.timeMs;
-        occurredEvents = msg.events;
+        var occurredEvents = msg.events;
         io.emit('currentTime', currentTimeMs);
         io.emit('occurredEvents', {occurredEvents, time});
     });

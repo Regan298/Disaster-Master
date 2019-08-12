@@ -16,7 +16,7 @@ var nameNotRecieved = true;
 console.log("start");
 
 handleNGOS();
-loadNGOTitle();
+
 // runClock();
 
 currentTime = 0;
@@ -100,26 +100,26 @@ function fillCommunicationButtons() {
 
 function handleNGOS() {
 
-    socket.on('ngoList', function (data) {
-
-        users = data.ngoUsers;
-        console.log(users.length);
-
-
-
-        if (users != null) {
-            let currentNGOName = users[users.length - 1].name;
-
-            console.log("id: " + users[users.length - 1].id);
-            console.log("ngoname: " + currentNGOName);
-            console.log("name: " + name);
-
-            if(currentNGOName != name) {
-                document.getElementById(users[users.length - 1].id).style.visibility = "visible";
-            }
-        }
-
-    });
+    // socket.on('ngoList', function (data) {
+    //
+    //     users = data.ngoUsers;
+    //     console.log(users.length);
+    //
+    //
+    //
+    //     if (users != null) {
+    //         let currentNGOName = users[users.length - 1].name;
+    //
+    //         console.log("id: " + users[users.length - 1].id);
+    //         console.log("ngoname: " + currentNGOName);
+    //         console.log("name: " + name);
+    //
+    //         if(currentNGOName != name) {
+    //             document.getElementById(users[users.length - 1].id).style.visibility = "visible";
+    //         }
+    //     }
+    //
+    // });
 
 
 }
@@ -137,6 +137,7 @@ function displayPDFOff() {
 $(function () {
     switchNGOChat();
     fillCommunicationButtons();
+    loadNGOTitle();
 
 
 
@@ -238,14 +239,15 @@ function addToConversation(content, isOrigin, from) {
 
 function loadNGOTitle() {
     //Ask Server For Name
-        socket.on('nameRequest', function (data) {
-            if(nameNotRecieved) {
-                name = data;
-                var htmlContent = "<h1 class='titles'><span>NGO: " + name + "</span></h1>";
-                $(htmlContent).appendTo(".ngoTitle");
-                nameNotRecieved = false;
-            }
-        });
+    console.log("getTitle");
+    socket.emit('nameRequest', "request", function (callbackData) {
+        name = callbackData;
+        console.log(name);
+        var htmlContent = "<h1 class='titles'><span>NGO: " + name + "</span></h1>";
+        $(htmlContent).appendTo(".ngoTitle");
+        nameNotRecieved = false;
+
+    });
 
 
 
