@@ -8,19 +8,16 @@
 	<ngo>
 		<name>People First</name>
 		<passkey>ngo1</passkey>
-
 	</ngo>
 
 	<ngo>
 		<name>We Care</name>
 		<passkey>ngo2</passkey>
-
 	</ngo>
 
 	<ngo>
 		<name>EWB</name>
 		<passkey>ngo3</passkey>
-
 	</ngo>
 
 	<ngo>
@@ -38,50 +35,9 @@
 	<ngo>
 		<name>Reach Up</name>
 		<passkey>ngo6</passkey>
-
 	</ngo>	
 	
-	<event>
-		<recipient>Peacedoves</recipient>
-        <subject>Set up</subject>
-		<time>00:00:05</time>
-		<type>pdf</type>
-		<location>/FileLibrary/000 Needs assessment letter.pdf</location>
-	</event>
-
-	<event>
-		<recipient>Peacedoves</recipient>
-		<subject>Introduction into Sebadoah</subject>
-		<time>00:00:10</time>
-		<type>pdf</type>
-		<location>/FileLibrary/001 Activation of Cluster System.pdf</location>
-	</event>
-
-	<event>
-		<recipient>Peacedoves</recipient>
-		<subject>President of Sebadoah</subject>
-		<time>00:00:15</time>
-		<type>pdf</type>
-		<location>/FileLibrary/002 Purchase from Umbala.pdf</location>
-	</event>
-
-	<event>
-		<recipient>Peacedoves</recipient>
-		<subject>SitRep Request</subject>
-		<time>00:00:20</time>
-		<type>pdf</type>
-		<location>/FileLibrary/003 HQ Daily SitRep Request.pdf</location>
-	</event>
-
-	<event>
-		<recipient>Peacedoves</recipient>
-		<subject>Budget Request</subject>
-		<time>00:00:25</time>
-		<type>pdf</type>
-		<location>/FileLibrary/004 HQ Budget Request.pdf</location>
-	</event>
-
-	<event>
+    <event>
 		<recipient>Peacedoves</recipient>
 		<subject>Flood Update</subject>
 		<time>00:00:30</time>
