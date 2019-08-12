@@ -96,7 +96,7 @@ app.get('/help', function (req, res) {
 app.post('/editor-upload', function (req, res) {
     console.log("upload req");
     if (req.files != null) {
-
+        simData.eventsList = [];
 
         let simFileTemp = req.files.simFile;
 
