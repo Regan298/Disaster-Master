@@ -322,7 +322,7 @@ function displayEvent(type) {
     if (type == "mp4") {
         document.getElementById("videoOverlay").style.display = "block";
     } else if (type == "pdf") {
-        PDFObject.embed("/files/test.pdf", "#eventMediaDisplay");
+        PDFObject.embed("/files/test.pdf", "#pdfOverlay");
         document.getElementById("pdfOverlay").style.display = "block";
     } else if (type == "mp3") {
         document.getElementById("audioOverlay").style.display = "block";
