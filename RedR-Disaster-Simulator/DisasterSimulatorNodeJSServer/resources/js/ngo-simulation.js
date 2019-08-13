@@ -18,8 +18,7 @@ function handleNewNGOJoining() {
     socket.on('ngoList', function (data) {
         var ngoTemp = data.connectedUsers;
         let currentUserName = new String(ngoTemp[ngoTemp.length - 1].name).trim();
-
-
+        console.log(currentUserName);
         if (currentUserName === name) {
             return;
         }
@@ -27,12 +26,12 @@ function handleNewNGOJoining() {
 
 
         processNGOData(data.connectedUsers, function () {
+            for (var i = 0; i < ngos.length; i++) {
+                console.log(ngos[i].name);
+            }
             if (ngos[ngos.length - 1].name !== "HQ") {
-                console.log("newngo");
-                console.log(ngos[ngos.length - 1].id);
-                var ngoNum = parseInt(ngos[ngos.length - 1].id.substr(3, 1)) - 1 ;
-                console.log("ngo" + ngoNum);
-                document.getElementById("ngo" + ngoNum).style.visibility = "visible";
+                let currentUserName = new String(ngos[ngos.length-1].name).trim();
+                document.getElementById(currentUserName).style.visibility = "visible";
             }
 
         });
@@ -57,16 +56,13 @@ function processConnectedUsers() {
     console.log(ngos.length);
 
     for (var i = 0; i < ngos.length; i++) {
-        console.log(ngos[i].name);
+        console.log(ngos[i].id);
     }
 
     for (var i = 0; i < ngos.length; i++) {
         let currentUserName = new String(ngos[i].name).trim();
-        console.log("currentuser" + currentUserName);
         if (currentUserName !== "HQ") {
-            console.log("not me and not hq");
-            var ngoNum = parseInt(ngos[ngos.length - 1].id.substr(3, 1)) - 1;
-            document.getElementById("ngo" + ngoNum).style.visibility = "visible";
+            document.getElementById(currentUserName).style.visibility = "visible";
         }
     }
 }
@@ -92,26 +88,22 @@ function processNGOData(recievedNGOs, callback) {
 function fillCommunicationButtons() {
     var buttons = document.getElementsByClassName("btn btn-secondary");
     buttons[0].innerHTML = "HQ";
-    var ngosTemp = simData.ngoList;
-    for (var i = 0; i < ngosTemp.length; i++) {
-        let currentUserName = new String(ngosTemp[i].name).trim();
-        if (currentUserName === name) {
-            ngosTemp.splice(i, 1);
+    var ngosTemp = [];
+    for (var i = 0; i < simData.ngoList.length; i++) {
+        let currentUserName = new String(simData.ngoList[i].name).trim();
+        if (currentUserName !== name) {
+            ngosTemp.push(simData.ngoList[i]);
         }
     }
 
-    for (var i = 0; i < ngosTemp.length; i++) {
-        console.log(ngosTemp[i].name);
-    }
 
     for (var i = 1; i <= ngosTemp.length; i++) {
         let currentUserName = new String(ngosTemp[i - 1].name).trim();
         buttons[i].innerHTML = currentUserName;
+        buttons[i].id = currentUserName;
+        buttons[i].style.visibility = "hidden";
     }
 
-    for (var i = 0; i < ngosTemp.length; i++) {
-        ngoNameToID.set(i, )
-    }
 }
 
 
