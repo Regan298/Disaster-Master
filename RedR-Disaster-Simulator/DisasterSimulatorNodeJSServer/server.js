@@ -255,6 +255,11 @@ io.on('connection', function (socket) {
 
     });
 
+    //Send connectedusers to ngo upon ngo request
+    socket.on('getConnected', function (msg, callback) {
+        callback({connectedUsers});
+    });
+
 
 //Send NGO Name To Relevant NGO
     socket.on('nameRequest', function (msg, callback) {
@@ -270,6 +275,7 @@ io.on('connection', function (socket) {
 
 
 //Send each NGO name to HQ and to NGO
+
     io.emit('ngoList', {connectedUsers});
 
 

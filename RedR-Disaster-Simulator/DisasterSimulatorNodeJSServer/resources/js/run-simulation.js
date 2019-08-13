@@ -31,6 +31,7 @@ function handleNGOS() {
         }
     });
 }
+
 function loadScenarioHeader() {
     simTitle = simData.title;
     var url = document.URL.split('/');
