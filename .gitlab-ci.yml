@@ -16,5 +16,6 @@ testing_testing:
   before_script:
     - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
     - npm install
+    - npm install supertest
   script:
   - npm test
