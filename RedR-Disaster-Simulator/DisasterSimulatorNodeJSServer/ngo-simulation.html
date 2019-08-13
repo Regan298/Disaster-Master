@@ -26,7 +26,14 @@
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light static-top "id="header">
-	<script>$("#header").load("header.html");</script>
+	<!--Colour Changer-->
+	<script>
+		$("#header").load("header.html", function (response,
+												   status, http){
+			document.getElementById("colourChooser").setAttribute("value", document.cookie);
+		});
+		document.documentElement.style.setProperty("--main-color", document.cookie);
+	</script>
 </nav>
 
 <!-- Page Content -->
@@ -137,7 +144,7 @@
 				<div id="emailViewer" class="emailViewer">
 					<div id="eventDetails">
 						<p>Peacedoves Budget Request, 3:00pm</p>
-						<button id="displayPDFButton" onclick="displayPDF()">View Event</button>
+						<button id="displayPDFButton" onclick="displayEvent('mp4')">View Event</button>
 
 
 
@@ -179,7 +186,50 @@
 	</div>
 </div>
 
+<div id="videoOverlay" >
+	<br>
+	<div style="text-align:center;">
+		<button style="text-align:center;" onclick="videoOverlayOff()">Exit Video</button>
+	</div>
+	<div style="text-align:center;">
+		<video id="videoID" style="text-align:center;" width="500" height="500">
+			<source src="/files/testmp4.mp4" type="video/mp4">
+		</video>
+	</div>
+	<div style="text-align:center;">
+		<button style="text-align:center;" onclick="videoPausePlay()">Play/Pause</button>
+	</div>
+</div>
 
+<!-- Audio displaying code -->
+
+<div id="audioOverlay" >
+	<br>
+	<div style="text-align:center;">
+		<button style="text-align:center;" onclick="audioPausePlay()">Play/Pause</button>
+		<br>
+		<br>
+		<button style="text-align:center;" onclick="audioOverlayOff()">Exit Audio</button>
+	</div>
+	<br>
+	<div style="text-align:center;">
+		<audio id="audioID">
+			<source src="/files/testmp3.mp3" type="audio/mpeg">
+		</audio>
+	</div>
+
+</div>
+
+
+<!-- Image overlay code -->
+
+<br>
+<div id="imageOverlay" onclick="imageOverlayOff()">
+	<br>
+	<div style="text-align:center;">
+		<image src="/files/testjpg.jpg"  width=500 height=500>
+	</div>
+</div>
 
 <!-- Footer -->
 <footer class="bg-light fixed-bottom" id="footer">

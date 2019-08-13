@@ -16,11 +16,24 @@
 </head>
 
 <body>
+<!--Change Colour Using Last Cookie Colour Update-->
+<script>
+    document.documentElement.style.setProperty("--main-color", document.cookie);
+</script>
+
 <script src="js/jquery.js"></script>
+
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light static-top "id="header">
-    <script>$("#header").load("header.html");</script>
+    <!--Colour Changer-->
+    <script>
+        $("#header").load("header.html", function (response,
+                                                   status, http){
+            document.getElementById("colourChooser").setAttribute("value", document.cookie);
+        });
+        document.documentElement.style.setProperty("--main-color", document.cookie);
+    </script>
 </nav>
 
 <!-- Page Content -->

@@ -2,23 +2,22 @@
 <scenario>
 	<name>Sebadoah</name>
 	<ngoCount>5</ngoCount>
+	<duration>19800000</duration>
+	<hoursInDay>1</hoursInDay>
 
 	<ngo>
 		<name>People First</name>
 		<passkey>ngo1</passkey>
-
 	</ngo>
 
 	<ngo>
 		<name>We Care</name>
 		<passkey>ngo2</passkey>
-
 	</ngo>
 
 	<ngo>
 		<name>EWB</name>
 		<passkey>ngo3</passkey>
-
 	</ngo>
 
 	<ngo>
@@ -36,134 +35,101 @@
 	<ngo>
 		<name>Reach Up</name>
 		<passkey>ngo6</passkey>
-
 	</ngo>	
 	
     <event>
 		<recipient>Peacedoves</recipient>
-        <subject>HQ Daily Sit Rep Request</subject>
+		<subject>Flood Update</subject>
 		<time>00:00:30</time>
 		<type>pdf</type>
-		<location>/files/003PD.pdf</location>
+		<location>/FileLibrary/005 DisCom Flood Update.pdf</location>
 	</event>
-    <event>
-		<recipient>Red Heart</recipient>
-        <subject>HQ Daily Sit Rep Request</subject>
-		<time>00:00:35</time>
-		<type>pdf</type>
-		<location>/files/003RH.pdf</location>
-	</event>
-    <event>
-		<recipient>People First</recipient>
-        <subject>HQ Daily Sit Rep Request</subject>
-		<time>00:00:40</time>
-		<type>pdf</type>
-		<location>/files/003P1st.pdf</location>
-	</event>
-    <event>
-		<recipient>We Care</recipient>
-        <subject>HQ Daily Sit Rep Request</subject>
-		<time>00:00:41</time>
-		<type>pdf</type>
-		<location>/files/003WC.pdf</location>
-	</event>
-    <event>
-		<recipient>EWB</recipient>
-        <subject>HQ Daily Sit Rep Request</subject>
-		<time>00:01:00</time>
-		<type>pdf</type>
-		<location>/files/003EWB.pdf</location>
-	</event>
+
 	<event>
-		<recipient>Reach Up</recipient>
-        <subject>HQ Daily Sit Rep Request</subject>
-		<time>00:00:45</time>
-		<type>pdf</type>
-		<location>/files/003RU.pdf</location>
-	</event>
-	    <event>
 		<recipient>Peacedoves</recipient>
-        <subject>Test</subject>
-		<time>00:00:30</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Red Heart</recipient>
-        <subject>Test</subject>
+		<subject>Request Cluster SitReps</subject>
 		<time>00:00:35</time>
 		<type>pdf</type>
-		<location>/files/test.pdf</location>
+		<location>/FileLibrary/006 Request Cluster SitReps.pdf</location>
 	</event>
-    <event>
-		<recipient>People First</recipient>
-        <subject>Test</subject>
-		<time>00:00:40</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>We Care</recipient>
-        <subject>Test</subject>
-		<time>00:00:41</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>EWB</recipient>
-        <subject>Test</subject>
-		<time>00:01:00</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
+
 	<event>
-		<recipient>Reach Up</recipient>
-        <subject>Test</subject>
-		<time>00:00:45</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-	    <event>
 		<recipient>Peacedoves</recipient>
-        <subject>Test</subject>
-		<time>00:00:30</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Red Heart</recipient>
-        <subject>Test</subject>
-		<time>00:00:35</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>People First</recipient>
-        <subject>Test</subject>
+		<subject>Request SitReps</subject>
 		<time>00:00:40</time>
 		<type>pdf</type>
-		<location>/files/test.pdf</location>
+		<location>/FileLibrary/007 HQ No Daily SitRep.pdf</location>
 	</event>
-    <event>
-		<recipient>We Care</recipient>
-        <subject>Test</subject>
-		<time>00:00:41</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>EWB</recipient>
-        <subject>Test</subject>
-		<time>00:01:00</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
+
 	<event>
-		<recipient>Reach Up</recipient>
-        <subject>Test</subject>
+		<recipient>Peacedoves</recipient>
+		<subject>Budget</subject>
 		<time>00:00:45</time>
 		<type>pdf</type>
-		<location>/files/test.pdf</location>
+		<location>/FileLibrary/008 HQ No Budget.pdf</location>
 	</event>
-	
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Sit Reps Request</subject>
+		<time>00:00:50</time>
+		<type>pdf</type>
+		<location>/FileLibrary/009 No Daily Cluster SitReps.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Information Request</subject>
+		<time>00:00:55</time>
+		<type>pdf</type>
+		<location>/FileLibrary/010 HQ Site Info Request.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Planning Request</subject>
+		<time>00:01:00</time>
+		<type>pdf</type>
+		<location>/FileLibrary/011 HQ Planning Request.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Kidnapping</subject>
+		<time>00:01:05</time>
+		<type>pdf</type>
+		<location>/FileLibrary/012 HQ Kidnapping.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Kidnapping</subject>
+		<time>00:01:10</time>
+		<type>pdf</type>
+		<location>/FileLibrary/012 HQ Kidnapping.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Reminder Flash Appeal</subject>
+		<time>00:01:15</time>
+		<type>pdf</type>
+		<location>/FileLibrary/013 Reminder - Flash Appeal.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Gender Audit</subject>
+		<time>00:01:20</time>
+		<type>pdf</type>
+		<location>/FileLibrary/014 HQ Gender Audit.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>DayinLife Request</subject>
+		<time>00:01:25</time>
+		<type>pdf</type>
+		<location>/FileLibrary/015 HQ DayinLife Request.pdf</location>
+	</event>
 </scenario>

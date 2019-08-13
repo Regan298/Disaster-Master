@@ -5,33 +5,37 @@ var inboxEvents = [];
 var outboxEvents = [];
 var inboxRowCount = 0;
 var outboxRowCount = 0;
-var simulationDuration = 50000;
+var simulationDuration = 0;
 var ngoNames;
 var selectedNGOChat;
+var nameNotRecieved = true;
 
 
-loadNGOTitle();
+
 //loadCommunication();
+console.log("start");
+
 handleNGOS();
-runClock();
+
+// runClock();
 
 currentTime = 0;
 
 
-function runClock() {
-    function updateClock() {
-        currentTime = currentTime + 1000;
-        var timerElement = document.getElementById("timeManagement");
-        var timeRemaining = simulationDuration - currentTime;
-        displayRemainingTime(timerElement, timeRemaining);
+// function runClock() {
+//     function updateClock() {
+//         currentTime = currentTime + 1000;
+//         var timerElement = document.getElementById("timeManagement");
+//         var timeRemaining = simulationDuration - currentTime;
+//         displayRemainingTime(timerElement, timeRemaining);
 
-        if (timeRemaining == 0) {
-            clearInterval(updateClockProcess);
-        }
-    }
+//         if (timeRemaining == 0) {
+//             clearInterval(updateClockProcess);
+//         }
+//     }
 
-    updateClockProcess = setInterval(updateClock, 1000);
-}
+//     updateClockProcess = setInterval(updateClock, 1000);
+// }
 
 
 function displayRemainingTime(timerElement, timeRemaining) {
@@ -96,26 +100,26 @@ function fillCommunicationButtons() {
 
 function handleNGOS() {
 
-    socket.on('users', function (data) {
-
-        users = data.ngoUsers;
-        console.log(users.length);
-
-
-
-        if (users != null) {
-            let currentNGOName = users[users.length - 1].name;
-
-            console.log("id: " + users[users.length - 1].id);
-            console.log("ngoname: " + currentNGOName);
-            console.log("name: " + name);
-
-            if(currentNGOName != name) {
-                document.getElementById(users[users.length - 1].id).style.visibility = "visible";
-            }
-        }
-
-    });
+    // socket.on('ngoList', function (data) {
+    //
+    //     users = data.ngoUsers;
+    //     console.log(users.length);
+    //
+    //
+    //
+    //     if (users != null) {
+    //         let currentNGOName = users[users.length - 1].name;
+    //
+    //         console.log("id: " + users[users.length - 1].id);
+    //         console.log("ngoname: " + currentNGOName);
+    //         console.log("name: " + name);
+    //
+    //         if(currentNGOName != name) {
+    //             document.getElementById(users[users.length - 1].id).style.visibility = "visible";
+    //         }
+    //     }
+    //
+    // });
 
 
 }
@@ -129,10 +133,13 @@ function displayPDFOff() {
 }
 
 
-//Handle Messaging and Events
+//On Page Load
 $(function () {
     switchNGOChat();
     fillCommunicationButtons();
+    loadNGOTitle();
+
+
 
     //New message form
     $('#messageNGO').submit(function (e) {
@@ -188,6 +195,11 @@ $(function () {
 
     });
 
+    socket.on('currentTime', function (time){
+        simulationDuration = time;
+        var timerElement = document.getElementById("timeManagement");
+        displayRemainingTime(timerElement, simulationDuration);
+    });
 
 });
 
@@ -227,12 +239,16 @@ function addToConversation(content, isOrigin, from) {
 
 function loadNGOTitle() {
     //Ask Server For Name
-
-    socket.on('nameRequest', function (data) {
-        name = data;
+    console.log("getTitle");
+    socket.emit('nameRequest', "request", function (callbackData) {
+        name = callbackData;
+        console.log(name);
         var htmlContent = "<h1 class='titles'><span>NGO: " + name + "</span></h1>";
         $(htmlContent).appendTo(".ngoTitle");
+        nameNotRecieved = false;
+
     });
+
 
 
 }
@@ -334,4 +350,88 @@ function loadCommunication() {
 
 
     $(htmlContent).appendTo(".messaging");
+}
+
+function displayEvent(type){
+    if(type=="mp4"){
+        displayVideo();
+        document.getElementById("eventOverlay").style.display = "none";
+        document.getElementById("audioOverlay").style.display = "none";
+        document.getElementById("imageOverlay").style.display = "none";
+    }
+    else if (type=="pdf"){
+        PDFObject.embed("/files/test.pdf", "#eventMediaDisplay");
+        document.getElementById("eventOverlay").style.display = "block";
+        document.getElementById("videoOverlay").style.display = "none";
+        document.getElementById("audioOverlay").style.display = "none";
+        document.getElementById("imageOverlay").style.display = "none";
+    }
+    else if(type=="mp3"){
+        displayAudio();
+        document.getElementById("eventOverlay").style.display = "none";
+        document.getElementById("videoOverlay").style.display = "none";
+        document.getElementById("imageOverlay").style.display = "none";
+    }
+    else if(type=="jpg"){
+        displayImage();
+        document.getElementById("eventOverlay").style.display = "none";
+        document.getElementById("videoOverlay").style.display = "none";
+        document.getElementById("audioOverlay").style.display = "none";
+    }
+}
+
+//video functions for display
+function displayVideo(){
+    console.log("display video is called");
+    document.getElementById("videoOverlay").style.display = "block";
+}
+
+
+
+function videoPausePlay(){
+    var video = document.getElementById("videoID");
+    if(video.paused){
+        video.play();
+    } else {
+        video.pause();
+    }
+}
+
+
+
+function videoOverlayOff(){
+    var video = document.getElementById("videoID");
+    video.pause();
+    document.getElementById("videoOverlay").style.display = "none";
+}
+
+//audio display code
+function displayAudio(){
+    console.log("display audio is called");
+    document.getElementById("audioOverlay").style.display = "block";
+}
+
+function audioPausePlay(){
+    var audio = document.getElementById("audioID");
+    if(audio.paused){
+        audio.play();
+    } else {
+        audio.pause();
+    }
+}
+
+function audioOverlayOff(){
+    var audio = document.getElementById("audioID");
+    audio.pause();
+    document.getElementById("audioOverlay").style.display = "none";
+}
+
+//image display code
+function displayImage(){
+    console.log("display image is called");
+    document.getElementById("imageOverlay").style.display = "block";
+}
+
+function imageOverlayOff(){
+    document.getElementById("imageOverlay").style.display = "none";
 }

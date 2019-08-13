@@ -2,23 +2,22 @@
 <scenario>
 	<name>Sebadoah</name>
 	<ngoCount>5</ngoCount>
+    <duration>19800000</duration>
+    <hoursInDay>1</hoursInDay>
 
 	<ngo>
 		<name>People First</name>
 		<passkey>ngo1</passkey>
-
 	</ngo>
 
 	<ngo>
 		<name>We Care</name>
 		<passkey>ngo2</passkey>
-
 	</ngo>
 
 	<ngo>
 		<name>EWB</name>
 		<passkey>ngo3</passkey>
-
 	</ngo>
 
 	<ngo>
@@ -36,7 +35,6 @@
 	<ngo>
 		<name>Reach Up</name>
 		<passkey>ngo6</passkey>
-
 	</ngo>	
 	
     <event>
@@ -81,89 +79,12 @@
 		<type>pdf</type>
 		<location>/files/003RU.pdf</location>
 	</event>
-	    <event>
-		<recipient>Peacedoves</recipient>
-        <subject>Test</subject>
-		<time>00:00:30</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
     <event>
-		<recipient>Red Heart</recipient>
-        <subject>Test</subject>
-		<time>00:00:35</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>People First</recipient>
-        <subject>Test</subject>
-		<time>00:00:40</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>We Care</recipient>
-        <subject>Test</subject>
-		<time>00:00:41</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>EWB</recipient>
-        <subject>Test</subject>
-		<time>00:01:00</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-	<event>
 		<recipient>Reach Up</recipient>
-        <subject>Test</subject>
-		<time>00:00:45</time>
+        <subject>HQ Daily Sit Rep Request</subject>
+		<time>02:00:00</time>
 		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-	    <event>
-		<recipient>Peacedoves</recipient>
-        <subject>Test</subject>
-		<time>00:00:30</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>Red Heart</recipient>
-        <subject>Test</subject>
-		<time>00:00:35</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>People First</recipient>
-        <subject>Test</subject>
-		<time>00:00:40</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>We Care</recipient>
-        <subject>Test</subject>
-		<time>00:00:41</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-    <event>
-		<recipient>EWB</recipient>
-        <subject>Test</subject>
-		<time>00:01:00</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
-	</event>
-	<event>
-		<recipient>Reach Up</recipient>
-        <subject>Test</subject>
-		<time>00:00:45</time>
-		<type>pdf</type>
-		<location>/files/test.pdf</location>
+		<location>/files/003RU.pdf</location>
 	</event>
 	
 </scenario>

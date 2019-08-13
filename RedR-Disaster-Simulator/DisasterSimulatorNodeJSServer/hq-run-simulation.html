@@ -8,6 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+
     <title>Redr Disaster Simulator</title>
 
     <!-- Bootstrap core CSS -->
@@ -21,35 +22,27 @@
 <script src="js/jquery.js"></script>
 <script src="js/run-simulation.js"></script>
 <script src="js/PDFObject/pdfobject.js"></script>
+<script src="js/vis-4.21.0/dist/vis.js"></script>
+<link href="js/vis-4.21.0/dist/vis.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="js/timelineComponents.js"></script>
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light static-top "id="header">
-    <script>$("#header").load("header.html");</script>
+    <!--Colour Changer-->
+    <script>
+        $("#header").load("header.html", function (response,
+                                                   status, http){
+            document.getElementById("colourChooser").setAttribute("value", document.cookie);
+        });
+        document.documentElement.style.setProperty("--main-color", document.cookie);
+    </script>
 </nav>
 
 <!-- Page Content -->
 <div class="container">
     <div class="row">
         <div class="col-lg-12 text-center" id="mainContent">
-            <div id="eventOverlay" onclick="displayPDFOff()"> 
 
-
-
-
-
-                <div id="overlayPdf"></div>
-                <script src="js/PDFObject/pdfobject.js"></script>
-                <script>
-                    function onSelect(properties){
-                        console.log(items);
-                        console.log(properties.items[0]);
-                        console.log(items[properties.items[0]].location);
-                        PDFObject.embed(items[properties.items[0]].location, "#overlayPdf");
-                        document.getElementById("eventOverlay").style.display = "block";
-                    }
-                </script>
-
-            </div>
             <!--Scenario Title Gets Updated In Socket-->
             <div class="scenarioTitle"></div>
 
@@ -59,101 +52,19 @@
 
             <!--Timer-->
             <div id="timeManagement">
+                <div id="realTime"></div>
+                <div id="simTime"></div>
+            </div>
 
+            <div class="toggle">
+                <div class="toggle-label toggle-label-off">Simulation Time Countdown</div>
+                <div class="toggle-switch"></div>
+                <div class="toggle-label toggle-label-on">Real Time Countdown</div>
             </div>
 
             <!--Timeline-->
             <div id="timeline" class="timeline">
-
-                <!--<div id="eventOverlay" onclick="off()">&lt;!&ndash; container for overlay &ndash;&gt;
-
-                    <div id=overlayText>
-                        <h3 id="eventViewRecipiant" style="margin: 0; padding:0;">Recipiant: name</h3>
-                        <h3 id="eventViewSubject" style="margin: 0; padding:0;">Subject: Day 5 Report</h3>
-                        <h3 id="eventViewSchedule" style="margin: 0; padding:0;">Scheduled Time: Day 2 14:33</h3>
-                    </div>
-
-
-                    <div id="overlayPdf"></div>
-                    <script src="js/PDFObject/pdfobject.js"></script>
-                    <script>PDFObject.embed("pdftest.pdf", "#overlayPdf");</script>
-
-                </div>-->
-
-
                 <div id="visualization"></div><!-- container for timeline -->
-
-                <script src="js/vis-4.21.0/dist/vis.js"></script>
-                <link href="js/vis-4.21.0/dist/vis.css" rel="stylesheet" type="text/css"/>
-                <script type="text/javascript" src="js/timelineComponents.js"></script>
-
-                <script type="text/javascript">//initialises timeline object
-                var container = document.getElementById('visualization');
-                var timeline = new vis.Timeline(container, items, groups, options);
-                </script>
-
-                <script>
-                    socket.on('ngos', function (received) {
-                        console.log("got " + received.ngos);
-
-                        for (var i = 0; i < received.ngos.length; i++) {
-                            console.log(received.ngos[i]);
-                            groups.push({
-                                id: received.ngos[i].id,
-                                content: received.ngos[i].name[0]
-                            });
-                        }
-                        console.log(groups);
-                        timeline.setGroups(groups);
-                    });
-
-                    socket.on('timelineEvents', function (received) {
-                        console.log("got "+received.events.length+" events");
-                        for (var i = 0; i < received.events.length; i++) {
-                            console.log(received.events[i]);
-
-                            var id;
-                            var randDay = Math.floor((Math.random() * 7) + 1);
-                            var randHour = Math.floor((Math.random() * 24) + 1);
-                            var randMinute = Math.floor((Math.random() * 60) + 1);
-
-                            var ngoName = received.events[i].recipient[0];
-                            for(var k=0; k<groups.length; k++){
-                                if(groups[k].content===ngoName){
-                                    id = groups[k].id;
-                                    console.log("found matching ngo id");
-                                    items.push({
-                                        id: received.events[i].id,
-                                        group: id,
-                                        content: received.events[i].subject[0],
-                                        location: received.events[i].location[0],
-                                        start: '2019-01-0'+randDay+' '+randHour+':'+randMinute+':00'
-                                        //start: '2019-01-01 ' + received.events[i].Time
-                                    });
-                                    break;
-                                }
-                            }
-
-                            
-                        }
-                        timeline.setItems(items);
-                    });
-
-                    $(function () {
-                        var msg = 'hi';
-                        socket.emit('timelineReady', {
-                            msg
-                        });
-                    });
-                </script>
-
-
-                <script>//functions for activating/disabling overlay
-                timeline.on('select', onSelect);
-
-
-                </script>
-
             </div>
 
             <!--Messaging Title-->
@@ -217,41 +128,19 @@
                     </form>
                 </div>
 
-
-
-
-
-
-
-
             </div>
 
 
 
             <div id="inboxElementHQ" class="inboxElementHQ">
                 <div id="inboxEmails" class="inboxEmails">
-                    <!--<ul class="eventButtonList">-->
-
-                    <!--<li>
-                        <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                            <p class="emailTime">3:00PM</p></button>
-                    </li>-->
-
-
-                    <!--</ul>-->
+                    <!--Events are dynamically loaded into here-->
                 </div>
- 
-                <script>//Dummy script for displaying example pdf
-                    function displayPDF(){
-                        PDFObject.embed("/files/test.pdf", "#overlayPdf");
-                        document.getElementById("eventOverlay").style.display = "block";
-                    }
-                </script>
 
                 <div id="emailViewer" class="emailViewer">
                     <div id="eventDetails">
                         <p>Peacedoves Budget Request, 3:00pm</p>
-                        <button id="displayPDFButton" onclick="displayPDF()">View Event</button>
+                        <button id="displayEventButton" onclick="displayEvent('mp4')">View Event</button>
 
 
 
@@ -278,10 +167,6 @@
                             Regards, HQ
                         </p>
                     </div>
-
-
-
-
                 </div>
 
                 <div id="emailResponse">
@@ -305,14 +190,57 @@
     </div>
 </div>
 
+<!--PDF Displayer-->
+<div id="pdfOverlay" class="mediaOverlay" onclick="displayPDFOff()">
+</div>
+
+<!-- Video displaying code -->
+<div id="videoOverlay" class="mediaOverlay">
+	<br>
+	<div style="text-align:center;">
+		<button style="text-align:center;" onclick="videoOverlayOff()">Exit Video</button>
+	</div>
+	<div style="text-align:center;">
+		<video id="videoID" style="text-align:center;" width="500" height="500">
+			<source src="/files/testmp4.mp4" type="video/mp4">
+		</video>
+	</div>
+	<div style="text-align:center;">
+		<button style="text-align:center;" onclick="videoPausePlay()">Play/Pause</button>
+	</div>
+</div>
+
+<!-- Audio displaying code -->
+<div id="audioOverlay" class="mediaOverlay">
+	<br>
+	<div style="text-align:center;">
+	<button style="text-align:center;" onclick="audioPausePlay()">Play/Pause</button>
+	<br>
+	<br>
+	<button style="text-align:center;" onclick="audioOverlayOff()">Exit Audio</button>
+	</div>
+	<br>
+	<div style="text-align:center;">
+	<audio id="audioID">
+	<source src="/files/testmp3.mp3" type="audio/mpeg">
+	</audio>
+	</div>
+</div>
+
+<!-- Image overlay code -->
+<br>
+<div id="imageOverlay" class="mediaOverlay" onclick="imageOverlayOff()">
+	<br>
+	<div style="text-align:center;">
+		<img src="/files/testjpg.jpg"  width=500 height=500>
+	</div>
+</div>
+
+
 <!-- Footer -->
 <footer class="bg-light fixed-bottom" id="footer">
     <script>$("#footer").load("footer.html");</script>
 </footer>
-
-
-
-
 </body>
 
 </html>
