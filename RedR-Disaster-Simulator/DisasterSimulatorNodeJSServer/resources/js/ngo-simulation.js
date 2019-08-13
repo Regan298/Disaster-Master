@@ -211,12 +211,18 @@ function recieveCurrentTime() {
     });
 }
 
+function displayDisclaimer(){
+    alert("The purpose of this tool is for training please keep this in mind throughout this simulation");
+}
+
 //On Page Load
 $(function () {
+    displayDisclaimer();
     processScenarioData();
     switchNGOChat();
     recieveEvents();
     recieveCurrentTime();
+
 
     //New message form
     $('#messageNGO').submit(function (e) {
