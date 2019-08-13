@@ -3,73 +3,26 @@ var name;
 var ngos = [];
 var inboxEvents = [];
 var simulationDuration = 0;
-var ngoNames;
 var selectedNGOChat;
 var nameNotRecieved = true;
 var simData;
-var ngoNameToID = new Map();
 
-handleNewNGOJoining();
-
-
-//Runs in Background and gets new users
-function handleNewNGOJoining() {
-    //New NGO joining
-    socket.on('ngoList', function (data) {
-        var ngoTemp = data.connectedUsers;
-        let currentUserName = new String(ngoTemp[ngoTemp.length - 1].name).trim();
-        console.log(currentUserName);
-        if (currentUserName === name) {
-            return;
-        }
-        //data.connectedUsers[data.connectedUsers.length-1].name.trim() === name;
-
-
-        processNGOData(data.connectedUsers, function () {
-            for (var i = 0; i < ngos.length; i++) {
-                console.log(ngos[i].name);
-            }
-            if (ngos[ngos.length - 1].name !== "HQ") {
-                let currentUserName = new String(ngos[ngos.length-1].name).trim();
+//Runs in Background and gets new and past users on a period
+function handleNGOJoining() {
+    socket.emit('getConnected', "request", function (callbackData) {
+        processNGOData(callbackData.connectedUsers);
+        for (var i = 0; i < ngos.length; i++) {
+            let currentUserName = new String(ngos[i].name).trim();
+            if (currentUserName !== "HQ") {
                 document.getElementById(currentUserName).style.visibility = "visible";
             }
-
-        });
-
-    });
-}
-
-// Gets prior connected users
-function getCurrentConnectedNGOs() {
-    socket.emit('getConnected', "request", function (callbackData) {
-        console.log(callbackData);
-        processNGOData(callbackData.connectedUsers);
-        processConnectedUsers();
-    });
-
-}
-
-
-//Processes prior connected users
-function processConnectedUsers() {
-    console.log("connectedprocess");
-    console.log(ngos.length);
-
-    for (var i = 0; i < ngos.length; i++) {
-        console.log(ngos[i].id);
-    }
-
-    for (var i = 0; i < ngos.length; i++) {
-        let currentUserName = new String(ngos[i].name).trim();
-        if (currentUserName !== "HQ") {
-            document.getElementById(currentUserName).style.visibility = "visible";
         }
-    }
+
+    });
 }
 
 //Sets ngos after removing this as a user
-function processNGOData(recievedNGOs, callback) {
-    console.log("processngo");
+function processNGOData(recievedNGOs) {
     ngos = [];
     for (var i = 0; i < recievedNGOs.length; i++) {
         let currentUserName = new String(recievedNGOs[i].name).trim();
@@ -77,14 +30,9 @@ function processNGOData(recievedNGOs, callback) {
             ngos.push(recievedNGOs[i]);
         }
     }
-
-
-    if (callback != null) {
-        callback();
-    }
 }
 
-
+//Fill the communication button value and ids to be ngo name and id
 function fillCommunicationButtons() {
     var buttons = document.getElementsByClassName("btn btn-secondary");
     buttons[0].innerHTML = "HQ";
@@ -107,49 +55,25 @@ function fillCommunicationButtons() {
 }
 
 
-// function runClock() {
-//     function updateClock() {
-//         currentTime = currentTime + 1000;
-//         var timerElement = document.getElementById("timeManagement");
-//         var timeRemaining = simulationDuration - currentTime;
-//         displayRemainingTime(timerElement, timeRemaining);
-
-//         if (timeRemaining == 0) {
-//             clearInterval(updateClockProcess);
-//         }
-//     }
-
-//     updateClockProcess = setInterval(updateClock, 1000);
-// }
-
-
-function displayRemainingTime(timerElement, timeRemaining) {
-
+function displayRemainingTime(timerElement, timeRemaining){
     var seconds = Math.floor((timeRemaining / 1000) % 60);
     var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
     var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
-
-
     timerElement.innerHTML = hours + "h" + minutes + "m" + seconds + "s";
 
 }
 
-
+//Switch the chat recipient based on what chat is selctected
 function switchNGOChat(ngo) {
-
     //Highlight selected button and unlight non selected
     if (ngo != null) {
-
         buttons = document.getElementsByClassName("btn btn-secondary");
         for (i = 0; i < buttons.length; i++) {
             buttons[i].style.backgroundColor = "#b5b5b5";
         }
-
         document.getElementById(ngo).style.backgroundColor = "#EE2A2B";
         selectedNGOChat = ngo;
     }
-
-
     // Hide all elements with class="messaging content" by default */
     var i, tabcontent, tablinks;
     messagingContent = document.getElementsByClassName("messagingContent");
@@ -158,7 +82,6 @@ function switchNGOChat(ngo) {
         messagingContent[i].style.display = "none";
     }
 
-
     // Show the specific message content
     if (ngo != null) {
         console.log("ngoselected: " + ngo);
@@ -166,23 +89,12 @@ function switchNGOChat(ngo) {
     }
 }
 
-
 function addToConversation(content, isOrigin, from) {
-
-    console.log("from" + from);
-
-
-    if (from == "HQ") {
-        from = "HQ";
-    }
 
     if (isOrigin) {
         $("#" + selectedNGOChat + "Content").append("<li id='origin'>" + content + "</li>");
     } else {
-
         var ngoId;
-
-
         for (i = 0; i < users.length; i++) {
             console.log("users: " + users[i].name);
             if (users[i].name == from) {
@@ -193,26 +105,19 @@ function addToConversation(content, isOrigin, from) {
                 }
             }
         }
-
-        console.log(ngoId);
-
         $("#" + ngoId + "Content").append("<li id='nonOrigin'>" + content + "</li>");
     }
 }
 
 
 function loadNGOTitle() {
-
     socket.emit('nameRequest', "request", function (callbackData) {
         name = callbackData;
         console.log(name);
         var htmlContent = "<h1 class='titles'><span>NGO: " + name + "</span></h1>";
         $(htmlContent).appendTo(".ngoTitle");
         nameNotRecieved = false;
-
     });
-
-
 }
 
 
@@ -221,9 +126,8 @@ function processScenarioData() {
         simData = callbackData.simData;
         loadNGOTitle();
         fillCommunicationButtons();
-        getCurrentConnectedNGOs();
+        setInterval(handleNGOJoining,1000);
     });
-
 }
 
 
@@ -285,10 +189,34 @@ function imageOverlayOff() {
     document.getElementById("imageOverlay").style.display = "none";
 }
 
+function recieveEvents(){
+    //on receive event
+    socket.on('event', function (evnt) {
+
+        inboxEvents = [];
+        for (var i = 0; i < evnt.msg.length; i++) {
+            var to = evnt.msg[i].Recipient;
+            if (to === name) {
+                inboxEvents.push(evnt.msg[i]);
+            }
+        }
+    });
+}
+
+function recieveCurrentTime() {
+    socket.on('currentTime', function (time) {
+        simulationDuration = time;
+        var timerElement = document.getElementById("timeManagement");
+        displayRemainingTime(timerElement, simulationDuration);
+    });
+}
+
 //On Page Load
 $(function () {
     processScenarioData();
     switchNGOChat();
+    recieveEvents();
+    recieveCurrentTime();
 
     //New message form
     $('#messageNGO').submit(function (e) {
@@ -313,40 +241,10 @@ $(function () {
     //on receive message
     socket.on('message', function (msg) {
         console.log("messagerecieved");
-
         var from = msg.recievedMessage.from;
         var to = msg.recievedMessage.to;
-
-        addToConversation(msg.recievedMessage.content, false, from);
-
-
+        addToConversation(msg.recievedMessage.content, false, from)
     });
 
-    //TODO: load completed events
-
-
-    //on receive event
-    socket.on('event', function (evnt) {
-        //console.log('got events');
-        inboxEvents = [];
-        for (var i = 0; i < evnt.msg.length; i++) {
-            var to = evnt.msg[i].Recipient;
-            if (to === name) {
-                //$('#eventList').append($('<li>').text(evnt.recievedEvent.contentLocation));
-                inboxEvents.push(evnt.msg[i]);
-
-                //loadOutboxEvents();
-            }
-        }
-        //console.log(inboxEvents);
-        //loadInboxEvents(inboxEvents);
-
-    });
-
-    socket.on('currentTime', function (time) {
-        simulationDuration = time;
-        var timerElement = document.getElementById("timeManagement");
-        displayRemainingTime(timerElement, simulationDuration);
-    });
 
 });
