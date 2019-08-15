@@ -111,6 +111,16 @@ function fillCommunicationButtons() {
     for (var i = 0; i < simData.ngoList.length; i++) {
         if (simData.ngoList[i].name != "HQ") {
             buttons[i].innerHTML = simData.ngoList[i].name;
+            buttons[i].style.borderWidth = "medium";
+            switch (i) {
+                case 0 :  buttons[i].style.borderColor = "orange"; break;
+                case 1 :  buttons[i].style.borderColor = "blue"; break;
+                case 2 :  buttons[i].style.borderColor = "red"; break;
+                case 3 :  buttons[i].style.borderColor = "green"; break;
+                case 4 :  buttons[i].style.borderColor = "yellow"; break;
+                case 5 :  buttons[i].style.borderColor = "pink"; break;
+            }
+
         }
     }
 }
