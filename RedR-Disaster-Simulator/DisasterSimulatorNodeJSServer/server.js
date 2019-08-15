@@ -274,9 +274,6 @@ io.on('connection', function (socket) {
     });
 
 
-//Send each NGO name to HQ and to NGO
-
-    io.emit('ngoList', {connectedUsers});
 
 
 // Trigger for Run simulation displaying of sceanrio title and timeline view update

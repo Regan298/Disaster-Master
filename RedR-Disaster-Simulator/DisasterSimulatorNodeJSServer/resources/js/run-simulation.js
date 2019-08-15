@@ -15,20 +15,18 @@ var realCountdown = false;
 var simData;
 
 
-//Function Loops In Background And adds new ngos when they join
-handleNGOS();
-
-function handleNGOS() {
+function handleNGOJoining() {
     //New NGOS
-    socket.on('ngoList', function (data) {
-        ngos = data.connectedUsers;
-        if (ngos != null) {
-            let currentUserName = ngos[ngos.length - 1].name;
+    socket.emit('getConnected', "request", function (callbackData) {
+        ngos = [];
+        ngos = callbackData.connectedUsers;
+        for (var i = 0; i < ngos.length; i++) {
+            let currentUserName = new String(ngos[i].name).trim();
             if (currentUserName !== "HQ") {
-                console.log("id: " + ngos[ngos.length - 1].id);
-                document.getElementById(ngos[ngos.length - 1].id).style.visibility = "visible";
+                document.getElementById(ngos[i].id).style.visibility = "visible";
             }
         }
+
     });
 }
 
@@ -106,22 +104,40 @@ function updateTimeline() {
 }
 
 
-function fillCommunicationButtons() {
+function handleCommunicationButtons() {
     var buttons = document.getElementsByClassName("btn btn-secondary");
     for (var i = 0; i < simData.ngoList.length; i++) {
         if (simData.ngoList[i].name != "HQ") {
             buttons[i].innerHTML = simData.ngoList[i].name;
-            buttons[i].style.borderWidth = "medium";
+            buttons[i].style.borderWidth = "thin";
+            buttons[i].style.visibility = "hidden";
             switch (i) {
-                case 0 :  buttons[i].style.borderColor = "orange"; break;
-                case 1 :  buttons[i].style.borderColor = "blue"; break;
-                case 2 :  buttons[i].style.borderColor = "red"; break;
-                case 3 :  buttons[i].style.borderColor = "green"; break;
-                case 4 :  buttons[i].style.borderColor = "yellow"; break;
-                case 5 :  buttons[i].style.borderColor = "pink"; break;
+                case 0 :
+                    buttons[i].style.borderColor = "orange";
+                    break;
+                case 1 :
+                    buttons[i].style.borderColor = "blue";
+                    break;
+                case 2 :
+                    buttons[i].style.borderColor = "red";
+                    break;
+                case 3 :
+                    buttons[i].style.borderColor = "green";
+                    break;
+                case 4 :
+                    buttons[i].style.borderColor = "yellow";
+                    break;
+                case 5 :
+                    buttons[i].style.borderColor = "pink";
+                    break;
             }
 
         }
+    }
+
+    //remove extra buttons
+    for (var j = simData.ngoList.length; j < buttons.length; j++) {
+        buttons[j].remove();
     }
 }
 
@@ -132,7 +148,8 @@ function processScenarioData() {
         console.log(simData);
         loadScenarioHeader();
         updateTimeline();
-        fillCommunicationButtons();
+        handleCommunicationButtons();
+        setInterval(handleNGOJoining, 1000);
     });
 
 }
@@ -206,7 +223,7 @@ function switchNGOChat(ngo) {
             buttons[i].style.backgroundColor = "#b5b5b5";
         }
 
-        document.getElementById(ngo).style.backgroundColor = "#EE2A2B";
+        document.getElementById(ngo).style.backgroundColor = document.getElementById(ngo).style.borderColor;
         selectedNGOChat = ngo;
     }
 

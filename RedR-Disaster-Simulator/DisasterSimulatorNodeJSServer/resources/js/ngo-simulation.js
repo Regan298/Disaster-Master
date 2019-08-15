@@ -14,6 +14,7 @@ function handleNGOJoining() {
         for (var i = 0; i < ngos.length; i++) {
             let currentUserName = new String(ngos[i].name).trim();
             if (currentUserName !== "HQ") {
+
                 document.getElementById(currentUserName).style.visibility = "visible";
             }
         }
@@ -32,9 +33,11 @@ function processNGOData(recievedNGOs) {
     }
 }
 
-//Fill the communication button value and ids to be ngo name and id
-function fillCommunicationButtons() {
+
+//handle the communication button value and ids to be ngo name and id
+function handleCommunicationButtonsAndMessages() {
     var buttons = document.getElementsByClassName("btn btn-secondary");
+    var messagingChats = document.getElementsByClassName("messagingContent");
     buttons[0].innerHTML = "HQ";
     var ngosTemp = [];
     for (var i = 0; i < simData.ngoList.length; i++) {
@@ -49,8 +52,28 @@ function fillCommunicationButtons() {
         let currentUserName = new String(ngosTemp[i - 1].name).trim();
         buttons[i].innerHTML = currentUserName;
         buttons[i].id = currentUserName;
+        buttons[i].setAttribute("onclick", "switchNGOChat('" +  currentUserName + "')")
+
+        //buttons[i] = "switchNGOChat('" + currentUserName + "')";
         buttons[i].style.visibility = "hidden";
     }
+
+
+    for (var i = 1; i <= ngosTemp.length; i++) {
+        messagingChats[i].id = new String(ngosTemp[i-1].name).trim()+"Content";
+    }
+
+    //remove extra buttons
+    console.log(ngosTemp.length);
+
+    var buttonsCount = buttons.length;
+
+    for (var j = ngosTemp.length; j < buttonsCount-1; j++) {
+        buttons[ngosTemp.length+1].remove();
+        messagingChats[ngosTemp.length+1].remove();
+    }
+
+
 
 }
 
@@ -65,6 +88,7 @@ function displayRemainingTime(timerElement, timeRemaining){
 
 //Switch the chat recipient based on what chat is selctected
 function switchNGOChat(ngo) {
+    console.log("switch");
     //Highlight selected button and unlight non selected
     if (ngo != null) {
         buttons = document.getElementsByClassName("btn btn-secondary");
@@ -85,27 +109,38 @@ function switchNGOChat(ngo) {
     // Show the specific message content
     if (ngo != null) {
         console.log("ngoselected: " + ngo);
-        document.getElementById(ngo + "Content").style.display = "inline-block";
+        var value;
+        if (ngo == "HQ"){
+            value = "ngo0Content";
+        } else {
+            value = ngo+"Content";
+        }
+        document.getElementById(value).style.display = "inline-block";
     }
 }
 
 function addToConversation(content, isOrigin, from) {
+    console.log(content);
+    console.log(isOrigin);
+    console.log(from);
 
     if (isOrigin) {
         $("#" + selectedNGOChat + "Content").append("<li id='origin'>" + content + "</li>");
     } else {
         var ngoId;
-        for (i = 0; i < users.length; i++) {
-            console.log("users: " + users[i].name);
-            if (users[i].name == from) {
+        for (i = 0; i < ngos.length; i++) {
+            var value;
+            if (ngos[i].name == from) {
                 if (from == "HQ") {
-                    ngoId = "ngo0"
+                    value = "ngo0Content"
+
                 } else {
-                    ngoId = users[i].id;
+                    value = from+"Content";
                 }
             }
         }
-        $("#" + ngoId + "Content").append("<li id='nonOrigin'>" + content + "</li>");
+        console.log(value);
+        $("#" + value).append("<li id='nonOrigin'>" + content + "</li>");
     }
 }
 
@@ -125,7 +160,7 @@ function processScenarioData() {
     socket.emit('simState', "request", function (callbackData) {
         simData = callbackData.simData;
         loadNGOTitle();
-        fillCommunicationButtons();
+        handleCommunicationButtonsAndMessages();
         setInterval(handleNGOJoining,1000);
     });
 }
@@ -212,7 +247,18 @@ function recieveCurrentTime() {
 }
 
 function displayDisclaimer(){
-    alert("The purpose of this tool is for training please keep this in mind throughout this simulation");
+    //alert("The purpose of this tool is for training please keep this in mind throughout this simulation");
+}
+
+function handleMessageRecieving() {
+    //on receive message
+    socket.on('message', function (msg) {
+        console.log("recieved")
+        var from = msg.recievedMessage.from;
+        var to = msg.recievedMessage.to;
+        addToConversation(msg.recievedMessage.content, false, from)
+    });
+
 }
 
 //On Page Load
@@ -222,6 +268,7 @@ $(function () {
     switchNGOChat();
     recieveEvents();
     recieveCurrentTime();
+    handleMessageRecieving();
 
 
     //New message form
@@ -244,13 +291,6 @@ $(function () {
 
     });
 
-    //on receive message
-    socket.on('message', function (msg) {
-        console.log("messagerecieved");
-        var from = msg.recievedMessage.from;
-        var to = msg.recievedMessage.to;
-        addToConversation(msg.recievedMessage.content, false, from)
-    });
 
 
 });
