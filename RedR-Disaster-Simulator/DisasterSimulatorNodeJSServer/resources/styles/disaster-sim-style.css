@@ -246,6 +246,113 @@ body {
     /*position: relative;*/
 }
 
+
+.messagingButtonsHQ {
+    max-height: 100%;
+    max-width: 25%;
+    align-self: stretch;
+    border-right: solid;
+    border-width: 1px;
+}
+
+.messagingButtonsHQ button {
+    margin-bottom: 15%;
+    max-width: 100%;
+    min-width: 100%;
+    text-align: center;
+    padding-left: 1%;
+    padding-right: 2%;
+}
+
+/*#ngo1, #ngo2, #ngo3, #ngo4, #ngo5, #ngo6, #ngo7, #ngo8 {
+    visibility: hidden;
+}*/
+
+
+.messagingContentHQ {
+    /* display: inline-block; */
+    overflow-y: auto;
+    max-height: 50%;
+    margin-bottom: 16%;
+    min-width: 75%;
+}
+
+.messagingContentHQ ul {
+    margin-right: 10%;
+    max-height: inherit;
+    min-height: inherit;
+
+}
+
+
+.messagingContentHQ li#origin {
+    clear: both;
+    float: right;
+    margin-top: 5%;
+    list-style: none;
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 0.25rem;
+    max-width: 50%;
+    padding: 1em;
+    word-wrap: break-word;
+
+}
+
+.messagingContentHQ li#nonOrigin {
+    float: left;
+    clear: both;
+    margin-top: 5%;
+    list-style: none;
+    background-color: #cacaca;
+    color: black;
+    border-radius: 0.25rem;
+    max-width: 50%;
+    padding: 1em;
+    word-wrap: break-word;
+
+
+}
+
+
+#messageingFormDivHQ {
+    position: absolute;
+    min-width: 100%;
+    bottom: 0;
+
+}
+
+#messageHQForm {
+    min-width: 100%;
+    margin-bottom: 1%;
+    float: left;
+    /* margin-left: 25%; */
+}
+
+#messageHQForm textarea {
+    resize: none;
+    float: left;
+    /* width: 65%; */
+    max-height: 100%;
+    /* MIN-HEIGHT: 100%; */
+    min-width: 80%;
+    margin-right: 5%;
+}
+
+
+#messageHQForm input {
+    /* display: inline; */
+    /* float: right; */
+    /* margin-left: 1%; */
+    margin-top: 2%;
+    width: 10%;
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+    font-size: 100%;
+    padding: 0;
+}
+
 .messagingElementNGO {
     margin-top: 1%;
     max-width: 50%;
@@ -261,7 +368,7 @@ body {
     /*position: relative;*/
 }
 
-.messagingButtons {
+.messagingButtonsNGO {
     max-height: 100%;
     max-width: 25%;
     align-self: stretch;
@@ -269,7 +376,7 @@ body {
     border-width: 1px;
 }
 
-.messagingButtons button {
+.messagingButtonsNGO button {
     margin-bottom: 15%;
     max-width: 100%;
     min-width: 100%;
@@ -278,60 +385,10 @@ body {
     padding-right: 2%;
 }
 
-/*#ngo1, #ngo2, #ngo3, #ngo4, #ngo5, #ngo6, #ngo7, #ngo8 {
-    visibility: hidden;
-}*/
-
-
-.messagingContent {
-    /* display: inline-block; */
-    overflow-y: auto;
-    max-height: 50%;
-    margin-bottom: 16%;
-    min-width: 75%;
-}
-
-.messagingContent ul {
-    margin-right: 10%;
-    max-height: inherit;
-    min-height: inherit;
-
-}
-
-
-.messagingContent li#origin {
-    clear: both;
-    float: right;
-    margin-top: 5%;
-    list-style: none;
-    background-color: var(--main-color);
-    color: white;
-    border-radius: 0.25rem;
-    max-width: 50%;
-    padding: 1em;
-    word-wrap: break-word;
-
-}
-
-.messagingContent li#nonOrigin {
-    float: left;
-    clear: both;
-    margin-top: 5%;
-    list-style: none;
-    background-color: #cacaca;
-    color: black;
-    border-radius: 0.25rem;
-    max-width: 50%;
-    padding: 1em;
-    word-wrap: break-word;
-
-
-}
-
 .messagingContentNGO {
     /* display: inline-block; */
     overflow-y: auto;
-    max-height: 50vh;
+    max-height: 50%;
     margin-bottom: 16%;
     min-width: 75%;
 }
@@ -373,45 +430,8 @@ body {
 
 }
 
-#messageingFormHQ {
-    position: absolute;
-    min-width: 100%;
-    bottom: 0;
 
-}
-
-#messageHQ {
-    min-width: 100%;
-    margin-bottom: 1%;
-    float: left;
-    /* margin-left: 25%; */
-}
-
-#messageHQ textarea {
-    resize: none;
-    float: left;
-    /* width: 65%; */
-    max-height: 100%;
-    /* MIN-HEIGHT: 100%; */
-    min-width: 80%;
-    margin-right: 5%;
-}
-
-
-#messageHQ input {
-    /* display: inline; */
-    /* float: right; */
-    /* margin-left: 1%; */
-    margin-top: 2%;
-    width: 10%;
-    display: inline-block;
-    vertical-align: top;
-    float: left;
-    font-size: 100%;
-    padding: 0;
-}
-
-#messageingFormNGO {
+#messageingFormDivNGO {
     position: absolute;
     min-width: 100%;
     bottom: 0;
@@ -419,13 +439,13 @@ body {
 
 }
 
-#messageNGO {
+#messageNGOForm {
     min-width: 100%;
     margin-bottom: 1%;
     float: left;
 }
 
-#messageNGO textarea {
+#messageNGOForm textarea {
     resize: none;
     float: left;
     max-height: 100%;
@@ -434,7 +454,7 @@ body {
 }
 
 
-#messageNGO input {
+#messageNGOForm input {
     margin-top: 2%;
     width: 10%;
     display: inline-block;
