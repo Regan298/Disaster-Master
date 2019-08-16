@@ -136,8 +136,9 @@ function addToConversation(content, isOrigin, from, to) {
 
     if (isOrigin) {
         to = to.trim().replace(" ", "_") + "Content";
+        var childUl = $("#" + to).find('.messageList');
         console.log(to);
-        $("#" + to).append("<li id='origin'>" + content + "</li>");
+        $(childUl).append("<li id='origin'>" + content + "</li>");
     } else {
         var value;
 
@@ -148,14 +149,17 @@ function addToConversation(content, isOrigin, from, to) {
                     value = "ngo0Content"
 
                 } else {
-                    console.log("gotmessage");
+
                     value = from.replace(" ", "_")+"Content";
                 }
                 break;
             }
         }
 
-        $("#" + value).append("<li id='nonOrigin'>" + content + "</li>");
+
+        var childUl = $("#" + value).find('.messageList');
+
+        $(childUl).append("<li id='nonOrigin'>" + content + "</li>");
     }
 }
 
