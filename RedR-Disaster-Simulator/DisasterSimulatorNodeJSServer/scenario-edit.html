@@ -37,7 +37,24 @@
 
     <!-- Page Content -->
     <div class="container">
-        <ul id="events"></ul>
+      <h5>Scenario Details:</h5>
+      <div id="details"></div>
+
+      <h5>Events:</h5>
+      <ul id="events"></ul>
+
+      <h5>New Event:</h5>
+      <form id='addForm' enctype='multipart/form-data'></form>
+      NGO Recipient: <input form='addForm' type='text' name='recipient'><br>
+      Subject: <input form='addForm' type='text' name='subject'><br>
+      Time: <input form='addForm' type='text' name='time'><br>
+      Type: <select form='addForm' name='type'>
+      <option value='pdf'>PDF</option>
+      <option value='video'>Video</option>
+      <option value='audio'>Audio</option>
+      </select><br>
+      File: <br><input form='addForm' type='file' name='eventFile'>
+      <input form='addForm' type='button' onclick=addEvent() value='Submit'>
     </div>
   
 
