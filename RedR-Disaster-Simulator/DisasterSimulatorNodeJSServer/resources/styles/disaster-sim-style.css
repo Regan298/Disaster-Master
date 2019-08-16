@@ -335,6 +335,51 @@ body {
 
 }
 
+.messagingContentNGO {
+    /* display: inline-block; */
+    overflow-y: auto;
+    max-height: 50vh;
+    margin-bottom: 16%;
+    min-width: 75%;
+}
+
+.messagingContentNGO ul {
+    margin-right: 10%;
+    max-height: inherit;
+    min-height: inherit;
+
+}
+
+
+.messagingContentNGO li#origin {
+    clear: both;
+    float: right;
+    margin-top: 5%;
+    list-style: none;
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 0.25rem;
+    max-width: 50%;
+    padding: 1em;
+    word-wrap: break-word;
+
+}
+
+.messagingContentNGO li#nonOrigin {
+    float: left;
+    clear: both;
+    margin-top: 5%;
+    list-style: none;
+    background-color: #cacaca;
+    color: black;
+    border-radius: 0.25rem;
+    max-width: 50%;
+    padding: 1em;
+    word-wrap: break-word;
+
+
+}
+
 #messageingForm {
 
     /* bottom: 0; */

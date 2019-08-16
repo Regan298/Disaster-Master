@@ -255,6 +255,12 @@ io.on('connection', function (socket) {
 
     });
 
+    //Send past messages to NGOs upon request
+    socket.on('getPastMessages', function (msg, callback) {
+        var pastMessages = simData.messageList;
+        callback({pastMessages});
+    });
+
     //Send connectedusers to ngo upon ngo request
     socket.on('getConnected', function (msg, callback) {
         callback({connectedUsers});
