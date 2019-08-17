@@ -24,7 +24,12 @@
         "supertest": "^1.0.1",
         "chai": "^4.2.0"
     },
+    "engines": {
+        "node": "12.3.1",
+        "npm": "6.9.0"
+    },
     "scripts": {
-        "test": "mocha"
+        "test": "mocha",
+        "start": "node server.js"
     }
 }
