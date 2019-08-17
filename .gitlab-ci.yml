@@ -1,21 +1,33 @@
 image: node:latest
 
 stages:
-  - test
+  - Test
+  - Deploy
 cache:
   paths:
     - node_modules/
 
 
-
-
 testing_testing:
-  stage: test
+  stage: Test
   tags:
-  - docker
+    - docker
   before_script:
     - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
     - npm install
     - npm install supertest
   script:
-  - npm test
+    - npm test
+
+production:
+  type: deploy
+  stage: Deploy
+  image: ruby:latest
+  script:
+  - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
+  - apt-get update -qy
+  - apt-get install -y ruby-dev
+  - gem install dpl
+  - dpl --provider=heroku --redr-disaster-simulator=node-heroku-dpl --api-key$HEROKU_API_KEY
+  only:
+    - master
