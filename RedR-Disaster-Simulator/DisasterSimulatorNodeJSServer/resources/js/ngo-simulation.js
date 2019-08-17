@@ -15,7 +15,6 @@ function handleNGOJoining() {
         for (var i = 0; i < ngos.length; i++) {
             let currentUserName = new String(ngos[i].name).trim().replace(" ", "_");
             if (currentUserName !== "HQ" && currentUserName !== name) {
-                console.log(currentUserName);
                 document.getElementById(currentUserName).style.visibility = "visible";
             }
         }
@@ -34,7 +33,6 @@ function processNGOData(recievedNGOs) {
     ngos = [];
     for (var i = 0; i < recievedNGOs.length; i++) {
         let currentUserName = new String(recievedNGOs[i].name).trim();
-        console.log(currentUserName);
         if (currentUserName !== name) {
             ngos.push(recievedNGOs[i]);
             //console.log(ngos[i].name);
@@ -54,8 +52,12 @@ function handleCommunicationButtonsAndMessages(callback) {
     var ngosTemp = [];
     for (var i = 0; i < simData.ngoList.length; i++) {
         let currentUserName = new String(simData.ngoList[i].name).trim().replace(" ", "_");
+        console.log(name);
         if (currentUserName !== name) {
+
             ngosTemp.push(simData.ngoList[i]);
+        } else {
+            console.log("skippedmyname");
         }
     }
 
@@ -134,11 +136,6 @@ function switchNGOChat(ngo) {
 }
 
 function addToConversation(content, isOrigin, from, to) {
-    console.log(content);
-    console.log(isOrigin);
-    console.log(from);
-    console.log(to);
-
 
 
     if (isOrigin) {
@@ -149,7 +146,7 @@ function addToConversation(content, isOrigin, from, to) {
         }
 
         var childUl = $("#" + to).find('.messageList');
-        console.log(to);
+
         $(childUl).append("<li id='origin'>" + content + "</li>");
     } else {
 
@@ -190,6 +187,11 @@ function loadNGOTitle() {
         var htmlContent = "<h1 class='titles'><span>NGO: " + name + "</span></h1>";
         $(htmlContent).appendTo(".ngoTitle");
         nameNotRecieved = false;
+
+        handleCommunicationButtonsAndMessages(function () {
+            setInterval(handleNGOJoining,1000);
+
+        });
     });
 }
 
@@ -198,10 +200,6 @@ function processScenarioData() {
     socket.emit('simState', "request", function (callbackData) {
         simData = callbackData.simData;
         loadNGOTitle();
-        handleCommunicationButtonsAndMessages(function () {
-        setInterval(handleNGOJoining,1000);
-
-        });
 
     });
 }
@@ -338,7 +336,7 @@ $(function () {
     $('#messageNGOForm').submit(function (e) {
 
         e.preventDefault(); // prevents page reloading
-        console.log(selectedNGOChat);
+
         addToConversation($('#input').val(), true, null, selectedNGOChat);
         let recipient = document.getElementById(selectedNGOChat).innerHTML;
 
