@@ -23,9 +23,13 @@
         "mocha": ">=6.2.0",
         "should": "^7.0.2"
     },
+    "engines": {
+        "node": "12.3.1",
+        "npm": "6.9.0"
+    },
     "scripts": {
         "test": "mocha",
-        "postinstall": "node server.js"
+        "start": "node server.js"
     }
 }
         
