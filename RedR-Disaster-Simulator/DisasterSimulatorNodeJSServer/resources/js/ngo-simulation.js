@@ -15,7 +15,7 @@ function handleNGOJoining() {
         for (var i = 0; i < ngos.length; i++) {
             let currentUserName = new String(ngos[i].name).trim().replace(" ", "_");
             if (currentUserName !== "HQ" && currentUserName !== name) {
-
+                console.log(currentUserName);
                 document.getElementById(currentUserName).style.visibility = "visible";
             }
         }
@@ -34,9 +34,11 @@ function processNGOData(recievedNGOs) {
     ngos = [];
     for (var i = 0; i < recievedNGOs.length; i++) {
         let currentUserName = new String(recievedNGOs[i].name).trim();
+        console.log(currentUserName);
         if (currentUserName !== name) {
             ngos.push(recievedNGOs[i]);
-            ngos[i].name = new String(ngos[i].name).trim().replace(" ", "_");
+            //console.log(ngos[i].name);
+            ngos[ngos.length-1].name = new String(ngos[ngos.length-1].name).trim().replace(" ", "_");
         }
     }
 }
@@ -132,24 +134,36 @@ function switchNGOChat(ngo) {
 }
 
 function addToConversation(content, isOrigin, from, to) {
+    console.log(content);
+    console.log(isOrigin);
+    console.log(from);
+    console.log(to);
+
 
 
     if (isOrigin) {
-        to = to.trim().replace(" ", "_") + "Content";
+        if (to == "HQ") {
+            to = "ngo0Content";
+        } else {
+            to = to.trim().replace(" ", "_") + "Content";
+        }
+
         var childUl = $("#" + to).find('.messageList');
         console.log(to);
         $(childUl).append("<li id='origin'>" + content + "</li>");
     } else {
+
+        if(to !== name){
+            return;
+        }
         var value;
 
         for (i = 0; i < ngos.length; i++) {
 
             if (ngos[i].name == from) {
                 if (from == "HQ") {
-                    value = "ngo0Content"
-
+                    value = "ngo0Content";
                 } else {
-
                     value = from.replace(" ", "_")+"Content";
                 }
                 break;
@@ -165,10 +179,14 @@ function addToConversation(content, isOrigin, from, to) {
 
 
 function loadNGOTitle() {
-    socket.emit('nameRequest', "request", function (callbackData) {
+
+    var url = window.location.href; // or window.location.href for current url
+    var key = /key=([^&]+)/.exec(url)[1]; // Value is in [1] ('384' in our case)
+
+
+    socket.emit('nameRequest', key.toString(), function (callbackData) {
         name = callbackData;
         name = name.trim().replace(" ", "_");
-
         var htmlContent = "<h1 class='titles'><span>NGO: " + name + "</span></h1>";
         $(htmlContent).appendTo(".ngoTitle");
         nameNotRecieved = false;
@@ -317,7 +335,7 @@ $(function () {
 
 
     //New message form
-    $('#messageNGO').submit(function (e) {
+    $('#messageNGOForm').submit(function (e) {
 
         e.preventDefault(); // prevents page reloading
         console.log(selectedNGOChat);

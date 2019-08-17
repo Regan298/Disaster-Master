@@ -13,30 +13,79 @@ var pauseTimeline;
 var timeline;
 var realCountdown = false;
 var simData;
+var haveProcessedPastMessages = false;
 
 
 function handleNGOJoining() {
     //New NGOS
     socket.emit('getConnected', "request", function (callbackData) {
-        ngos = [];
-        ngos = callbackData.connectedUsers;
+        processNGOData(callbackData.connectedUsers);
         for (var i = 0; i < ngos.length; i++) {
-            let currentUserName = new String(ngos[i].name).trim();
+            let currentUserName = new String(ngos[i].name).trim().replace(" ", "_");;
             if (currentUserName !== "HQ") {
-                document.getElementById(ngos[i].id).style.visibility = "visible";
+                document.getElementById(currentUserName).style.visibility = "visible";
             }
+        }
+
+        //handle past messages after ngo list recieved
+        if(!haveProcessedPastMessages) {
+            handlePersistentMessages();
+            haveProcessedPastMessages = true;
         }
 
     });
 }
 
+//Sets ngos after removing this as a user
+function processNGOData(recievedNGOs) {
+    ngos = [];
+    for (var i = 0; i < recievedNGOs.length; i++) {
+        ngos.push(recievedNGOs[i]);
+        ngos[i].name = new String(ngos[i].name).trim().replace(" ", "_");
+    }
+}
+
+function handlePersistentMessages(){
+    socket.emit('getPastMessages', "request", function (callbackData) {
+        if(callbackData.pastMessages != null) {
+
+            for(var i = 0; i < callbackData.pastMessages.length; i++){
+                let currentPastMessage = callbackData.pastMessages[i];
+                var isOrigin;
+                if(currentPastMessage.sender.replace(" ", "_") === "HQ"){
+                    isOrigin = true;
+                } else {
+                    isOrigin = false;
+                }
+                addToConversation(currentPastMessage.content, isOrigin, currentPastMessage.sender.replace(" ", "_"), currentPastMessage.recipient.replace(" ", "_") );
+
+            }
+        }
+
+
+    });
+
+}
+
+
 function loadScenarioHeader() {
     simTitle = simData.title;
     var url = document.URL.split('/');
     url = url[2] + "/ngo";
-    var htmlContent = "<h1 class='titles'><span>Scenario: " + simTitle + "</span></h1>" +
-        "<p class='lead'> Please inform your NGO's to go to this page: " + url + "</p>";
+    var htmlContent;
+    console.log(url);
+
+    if(simData.modeOnline) {
+        htmlContent = "<h1 class='titles'><span>Scenario: " + simTitle + "</span></h1>" +
+            "<p class='lead'> [Online Mode]: Please inform your NGO's to go to this page: " + url + "</p>";
+    } else {
+        htmlContent = "<h1 class='titles'><span>Scenario: " + simTitle + "</span></h1>" +
+            "<p class='lead'> [Offline Mode]: Please Open a New Tab For Each NGO: " + "</p>" + "<a href='" + "/ngo" + "'>" + url + "</a>";
+
+    }
     $(htmlContent).appendTo(".scenarioTitle");
+
+
 }
 
 function updateTimeline() {
@@ -105,39 +154,60 @@ function updateTimeline() {
 
 
 function handleCommunicationButtons() {
-    var buttons = document.getElementsByClassName("btn btn-secondary");
-    for (var i = 0; i < simData.ngoList.length; i++) {
-        if (simData.ngoList[i].name != "HQ") {
-            buttons[i].innerHTML = simData.ngoList[i].name;
-            buttons[i].style.borderWidth = "thin";
-            buttons[i].style.visibility = "hidden";
-            switch (i) {
-                case 0 :
-                    buttons[i].style.borderColor = "orange";
-                    break;
-                case 1 :
-                    buttons[i].style.borderColor = "blue";
-                    break;
-                case 2 :
-                    buttons[i].style.borderColor = "red";
-                    break;
-                case 3 :
-                    buttons[i].style.borderColor = "green";
-                    break;
-                case 4 :
-                    buttons[i].style.borderColor = "yellow";
-                    break;
-                case 5 :
-                    buttons[i].style.borderColor = "pink";
-                    break;
-            }
 
+
+    var buttons = document.getElementsByClassName("btn btn-secondary");
+    var messagingChats = document.getElementsByClassName("messagingContentHQ");
+
+
+    for (var i = 0; i < simData.ngoList.length; i++) {
+        let currentUserName = new String(simData.ngoList[i].name).trim().replace(" ", "_");
+
+        buttons[i].innerHTML = currentUserName;
+        buttons[i].id = currentUserName;
+        buttons[i].setAttribute("onclick", "switchNGOChat('" + currentUserName + "')")
+
+        //buttons[i] = "switchNGOChat('" + currentUserName + "')";
+        buttons[i].style.borderWidth = "thin";
+        buttons[i].style.visibility = "hidden";
+        switch (i) {
+            case 0 :
+                buttons[i].style.borderColor = "orange";
+                break;
+            case 1 :
+                buttons[i].style.borderColor = "blue";
+                break;
+            case 2 :
+                buttons[i].style.borderColor = "red";
+                break;
+            case 3 :
+                buttons[i].style.borderColor = "green";
+                break;
+            case 4 :
+                buttons[i].style.borderColor = "yellow";
+                break;
+            case 5 :
+                buttons[i].style.borderColor = "pink";
+                break;
         }
     }
 
-    //remove extra buttons
-    for (var j = simData.ngoList.length; j < buttons.length; j++) {
-        buttons[j].remove();
+
+    for (var i = 0; i < simData.ngoList.length; i++) {
+        messagingChats[i].id = new String(simData.ngoList[i].name).trim().replace(" ", "_") + "Content";
+    }
+
+    //remove extra buttons and chats
+
+
+    var buttonsCount = buttons.length;
+
+    console.log(simData.ngoList.length); // 6
+    console.log(buttonsCount); // 7
+
+    for (var j = simData.ngoList.length+1; j <= buttonsCount; j++) {
+        buttons[simData.ngoList.length].remove();
+        messagingChats[simData.ngoList.length].remove();
     }
 }
 
@@ -229,8 +299,8 @@ function switchNGOChat(ngo) {
 
 
     // Hide all elements with class="messaging content" by default */
-    var i, tabcontent, tablinks;
-    messagingContent = document.getElementsByClassName("messagingContent");
+
+    var messagingContent = document.getElementsByClassName("messagingContentHQ");
 
     for (i = 0; i < messagingContent.length; i++) {
         messagingContent[i].style.display = "none";
@@ -312,20 +382,30 @@ function handleTimeSwitcher() {
 
 }
 
-function addToConversation(content, isOrigin, from) {
+function addToConversation(content, isOrigin, from, to) {
+
     console.log(from);
-    console.log("to" + from);
     if (isOrigin) {
-        $("#" + selectedNGOChat + "Content").append("<li id='origin'>" + content + "</li>");
+        to = to.trim().replace(" ", "_") + "Content";
+        console.log(to);
+        var childUl = $("#" + to).find('.messageList');
+        $(childUl).append("<li id='origin'>" + content + "</li>");
     } else {
-        var ngoId;
+        if(to !== "HQ"){
+            return;
+        }
+        var value;
         for (i = 0; i < ngos.length; i++) {
-            if (ngos[i].name == from) {
-                ngoId = ngos[i].id;
+            if (ngos[i].name === from) {
+                value = from.replace(" ", "_")+"Content";
+                break;
             }
         }
-        console.log(ngoId);
-        $("#" + ngoId + "Content").append("<li id='nonOrigin'>" + content + "</li>");
+
+        console.log(value);
+        var childUl = $("#" + value).find('.messageList');
+
+        $(childUl).append("<li id='nonOrigin'>" + content + "</li>");
     }
 }
 
@@ -397,6 +477,16 @@ function imageOverlayOff() {
 }
 
 
+function handleNewMessages() {
+    socket.on('message', function (msg) {
+        var from = msg.recievedMessage.from;
+        var to = msg.recievedMessage.to;
+        if (from != "HQ") {
+            addToConversation(msg.recievedMessage.content, false, from, to);
+        }
+    });
+}
+
 //Once Page Loaded
 $(function () {
     updateEventList();
@@ -404,13 +494,14 @@ $(function () {
     updateCurrentTime();
     handleTimeSwitcher();
     switchNGOChat();
+    handleNewMessages();
 
     //Handle Messages
 
-    $('#messageHQ').submit(function (e) {
+    $('#messageHQForm').submit(function (e) {
         e.preventDefault(); // prevents page reloading
         // Add send message to ngo conversation
-        addToConversation($('#input').val(), true, null);
+        addToConversation($('#input').val(), true, null, selectedNGOChat);
         //Find actual Name of NGO
         let name = document.getElementById(selectedNGOChat).innerHTML;
         var message = {
@@ -422,14 +513,6 @@ $(function () {
         socket.emit('message', {message});
     });
 
-    socket.on('message', function (msg) {
-        console.log("messagerecieved");
-        var from = msg.recievedMessage.from;
-        var to = msg.recievedMessage.to;
-        if (from != "HQ") {
-            addToConversation(msg.recievedMessage.content, false, from);
-        }
-    });
 });
 
 

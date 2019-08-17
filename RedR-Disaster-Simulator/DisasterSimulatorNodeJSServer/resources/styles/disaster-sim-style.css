@@ -234,17 +234,18 @@ body {
 .messagingElementHQ {
     margin-top: 1%;
     max-width: 50%;
-    max-height: 25%;
-    min-height: 25%;
+    height: 30%;
     border-style: solid;
     border-width: 1px;
     float: left;
     margin: auto;
-    position: relative;
+    position: absolute;
     display: flex;
     width: 45%;
     /*position: relative;*/
 }
+
+
 
 
 .messagingButtonsHQ {
@@ -272,7 +273,7 @@ body {
 .messagingContentHQ {
     /* display: inline-block; */
     overflow-y: auto;
-    max-height: 50%;
+    height: 80%;
     margin-bottom: 16%;
     min-width: 75%;
 }
@@ -319,6 +320,7 @@ body {
     position: absolute;
     min-width: 100%;
     bottom: 0;
+    padding-left: 26%;
 
 }
 
@@ -356,15 +358,14 @@ body {
 .messagingElementNGO {
     margin-top: 1%;
     max-width: 50%;
-    min-height: 75%;
-    max-height: 75%;
+    height: 100%;
     border-style: solid;
     border-width: 1px;
     float: left;
     margin: auto;
     position: absolute;
     display: flex;
-    width: 45%;
+    width: 50%;
     /*position: relative;*/
 }
 
@@ -388,7 +389,7 @@ body {
 .messagingContentNGO {
     /* display: inline-block; */
     overflow-y: auto;
-    max-height: 50%;
+    height: 80%;
     margin-bottom: 16%;
     min-width: 75%;
 }
