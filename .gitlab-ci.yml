@@ -21,6 +21,7 @@ testing_testing:
 
 production:
   type: deploy
+  tags: - deploy
   stage: Deploy
   image: ruby:latest
   script:
