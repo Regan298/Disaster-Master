@@ -14,11 +14,13 @@ var parser = new xml2js.Parser();
 app.use(fileUpload());
 var formidable = require('formidable');
 var worker; //auto events worker
+const port = process.env.PORT || 80;
+
 
 module.exports = app;
 app.use(express.static('resources'));
 
-http.listen(80, function () {
+http.listen(port, function () {
     console.log('Simulation Run Invoked');
 });
 
