@@ -26,9 +26,9 @@ production:
   stage: Deploy
   image: ruby:latest
   script:
-  - apt-get update -qy
-  - apt-get install -y ruby-dev
-  - gem install dpl
+  - sudo apt-get update -qy
+  - sudo apt-get install -y ruby-dev
+  - sudo gem install dpl
   - dpl --provider=heroku --app=redr-disaster-simulator --api-key=$HEROKU_API_KEY
   only:
   - master
