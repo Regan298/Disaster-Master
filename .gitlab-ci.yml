@@ -27,9 +27,7 @@ production:
   image: ruby:latest
   script:
   - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
-  - sudo apt-get update -qy
-  - sudo apt-get install -y ruby-dev
-  - sudo gem install dpl
+  - gem install dpl
   - dpl --provider=heroku --app=redr-disaster-simulator --api-key$HEROKU_API_KEY
   only:
     - master
