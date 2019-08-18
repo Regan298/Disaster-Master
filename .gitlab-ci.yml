@@ -27,6 +27,8 @@ production:
   image: ruby:latest
   script:
   - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
+  - apk update
+  - apk add
   - apt-get update -qy
   - apt-get install -y ruby-dev
   - gem install dpl
