@@ -15,7 +15,11 @@ function handleNGOJoining() {
         for (var i = 0; i < ngos.length; i++) {
             let currentUserName = new String(ngos[i].name).trim().replace(" ", "_");
             if (currentUserName !== "HQ" && currentUserName !== name) {
-                document.getElementById(currentUserName).style.visibility = "visible";
+                try {
+                    document.getElementById(currentUserName).style.visibility = "visible";
+                } catch (e) {
+                    console.log(currentUserName);
+                }
             }
         }
 
