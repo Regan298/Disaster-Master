@@ -112,6 +112,7 @@ function clearSimData() {
         modeOnline: true,
         occurredEvents: []
     };
+    connectedUsers = [];
 }
 
 //Process Sceanrio File For Uploading
