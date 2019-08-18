@@ -26,6 +26,7 @@ production:
   stage: Deploy
   script:
   - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/redr-disaster-simulator.git
-  - git subtree push --prefix RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer heroku master
+  - git add RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
+  - git push heroku master
   only:
     - master
