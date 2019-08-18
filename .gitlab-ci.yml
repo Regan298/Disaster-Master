@@ -29,6 +29,6 @@ production:
   - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
   - git add .
   - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/redr-disaster-simulator.git || true
-  - git push -f heroku master
+  - git push heroku HEAD:master
   only:
     - master
