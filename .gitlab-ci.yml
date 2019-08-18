@@ -1,21 +1,13 @@
 image: node:latest
 
 stages:
-  - Test
   - Deploy
 cache:
   paths:
     - node_modules/
 
 
-testing_testing:
-  stage: Test
-  before_script:
-    - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
-    - npm install
-    - npm install supertest
-  script:
-    - npm test
+
 
 production:
   type: deploy
