@@ -22,7 +22,7 @@ testing_testing:
 production:
   type: deploy
   tags:
-    - deploy
+    - shell
   stage: Deploy
   image: ruby:latest
   script:
