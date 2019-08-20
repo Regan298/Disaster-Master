@@ -149,14 +149,14 @@ app.post('/upload-event-file', upload.single('upload'), function (req, res, next
     console.log(req);
     if (req.files != null) {
 
-        let simFileTemp = req.files.file;
+        let simFileTemp = req.files.upload;
         console.log(simFileTemp);
 
-        // simFileTemp.mv(__dirname + '/resources/files/'+simFileTemp.name, function (err) {
-        //     if(err) {
-        //         return res.status(400).send(err);
-        //     }
-        // });
+        simFileTemp.mv(__dirname + '/resources/files/'+simFileTemp.name, function (err) {
+            if(err) {
+                return res.status(400).send(err);
+            }
+        });
         res.end();
     } else {
         console.log("no file");

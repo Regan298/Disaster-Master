@@ -94,26 +94,6 @@ function updateEvent(eventNum){
     let file = frmData.elements[4].files[0];
     console.log(file);
     uploadFiles(file);
-    // var formData = new FormData();
-    // formData.append('file', file);
-
-    // var request = new XMLHttpRequest();
-    // request.open("POST", "/upload-event-file");
-    // request.send(formData);
-
-    // $.post("/upload-event-file", {file: file}, function(result){
-    //     console.log('uploaded');
-    // });
-    // $.ajax({
-    //     url: '/upload-event-file',
-    //     type: 'POST',
-    //     contentType: 'multipart/form-data',
-    //     ProceData: false, /// Add this line without processing parameters
-    //     data: frmData,
-    //     success: function (result) {
-    //       console.log(result);
-    //     }
-    // });
 
     data.eventsList[eventNum].recipient = frmData.elements[0].value;
     data.eventsList[eventNum].subject = frmData.elements[1].value;
@@ -127,9 +107,8 @@ function updateEvent(eventNum){
 function uploadFiles(file) {
     var xhr = new XMLHttpRequest();
     var formData = new FormData();
-    // xhr.onload = successfullyUploaded;
     xhr.open("POST", "/upload-event-file", true);
     xhr.setRequestHeader('X-Requested-With','XMLHttpRequest');
-    formData.append("upload", file.data);
+    formData.append("upload", file);
     xhr.send(formData);
 }
