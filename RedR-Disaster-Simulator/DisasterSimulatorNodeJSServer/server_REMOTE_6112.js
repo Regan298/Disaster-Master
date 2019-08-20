@@ -7,8 +7,6 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 const {Worker, isMainThread, parentPort} = require('worker_threads');
 const fileUpload = require('express-fileupload');
-var multer  = require('multer');
-var upload = multer({ dest: 'library/' });
 var TimeFormat = require('hh-mm-ss');
 var dateFormat = require('dateformat');
 var xml2js = require('xml2js');
@@ -100,62 +98,24 @@ app.get('/help', function (req, res) {
     res.sendFile(__dirname + '/help.html');
 });
 
-app.post('/editor-upload', function (req, res) {
-    console.log("upload req");
-    if (req.files != null) {
-        simData.eventsList = [];
-
-        let simFileTemp = req.files.simFile;
-
-        simFileTemp.mv(__dirname + '/currentScenario.xml', function (err) {
-            if(err) {
-                return res.status(400).send(err);
-            }
-
-        });
-
-
-        let validFile = parseXMLForLoading();
-
-        if(!validFile){
-            return res.status(400).send("Bad File, Please Input A Valid File :)");
-        } else {
-            res.redirect('scenario-create');
-            res.end("File Sent");
-        }
-        
-
-
-
-    } else {
-        console.log("no file");
-        return res.status(400).send("Bad File, Please Input A Valid File :)");
+function clearSimData() {
+    simData = {
+        ready: false,
+        title: "",
+        ngoCount: 999,
+        ngoList: [],
+        eventsList: [],
+        messageList: [],
+        durationMs: 0,
+        timeScale: 0,
+        started: false,
+        modeOnline: true,
+        occurredEvents: []
+    };
+    connectedUsers = [];
 }
 
-});
-
-app.post('/upload-event-file', upload.single('upload'), function (req, res, next) {
-    console.log(req);
-    if (req.files != null) {
-
-        let simFileTemp = req.files.file;
-        console.log(simFileTemp);
-
-        // simFileTemp.mv(__dirname + '/resources/files/'+simFileTemp.name, function (err) {
-        //     if(err) {
-        //         return res.status(400).send(err);
-        //     }
-        // });
-        res.end();
-    } else {
-        console.log("no file");
-        return res.status(400).send("Bad File, Please Input A Valid File :)");
-    }
-})
-
-=======
 //Process Sceanrio File For Uploading
->>>>>>> .merge_file_a01452
 app.post('/upload', function (req, res) {
 
     if (req.files != null) {

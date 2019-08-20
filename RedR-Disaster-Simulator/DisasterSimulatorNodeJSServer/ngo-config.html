@@ -62,18 +62,19 @@
 <script src="js/jquery.js"></script>
 <script>
     const socket = io();
+    var key;
 
 
     $('#ngoName').submit(function (e) {
         e.preventDefault();
-        console.log("TEST");
+        key = $('#input').val();
         socket.emit('join', $('#input').val());
 
     });
 
     socket.on('loginState', function (data) {
         if(data === "accepted"){
-            location.href = "ngo-simulation";
+            location.href = "ngo-simulation?key="+key;
         }
     });
 

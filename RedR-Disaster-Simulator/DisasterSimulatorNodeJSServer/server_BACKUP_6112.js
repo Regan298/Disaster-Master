@@ -100,40 +100,24 @@ app.get('/help', function (req, res) {
     res.sendFile(__dirname + '/help.html');
 });
 
-app.post('/editor-upload', function (req, res) {
-    console.log("upload req");
-    if (req.files != null) {
-        simData.eventsList = [];
-
-        let simFileTemp = req.files.simFile;
-
-        simFileTemp.mv(__dirname + '/currentScenario.xml', function (err) {
-            if(err) {
-                return res.status(400).send(err);
-            }
-
-        });
-
-
-        let validFile = parseXMLForLoading();
-
-        if(!validFile){
-            return res.status(400).send("Bad File, Please Input A Valid File :)");
-        } else {
-            res.redirect('scenario-create');
-            res.end("File Sent");
-        }
-        
-
-
-
-    } else {
-        console.log("no file");
-        return res.status(400).send("Bad File, Please Input A Valid File :)");
+function clearSimData() {
+    simData = {
+        ready: false,
+        title: "",
+        ngoCount: 999,
+        ngoList: [],
+        eventsList: [],
+        messageList: [],
+        durationMs: 0,
+        timeScale: 0,
+        started: false,
+        modeOnline: true,
+        occurredEvents: []
+    };
+    connectedUsers = [];
 }
 
-});
-
+<<<<<<< HEAD
 app.post('/upload-event-file', upload.single('upload'), function (req, res, next) {
     console.log(req);
     if (req.files != null) {
@@ -155,7 +139,7 @@ app.post('/upload-event-file', upload.single('upload'), function (req, res, next
 
 =======
 //Process Sceanrio File For Uploading
->>>>>>> .merge_file_a01452
+>>>>>>> 8f810a6343330b4d0a4a685d36c121b7e91016aa
 app.post('/upload', function (req, res) {
 
     if (req.files != null) {

@@ -1,147 +1,348 @@
 const socket = io();
 var name;
-var users = [];
+var ngos = [];
 var inboxEvents = [];
-var outboxEvents = [];
-var inboxRowCount = 0;
-var outboxRowCount = 0;
 var simulationDuration = 0;
-var ngoNames;
 var selectedNGOChat;
+var nameNotRecieved = true;
+var simData;
+var haveProcessedPastMessages = false;
+
+//Runs in Background and gets new and past users on a period
+function handleNGOJoining() {
+    socket.emit('getConnected', "request", function (callbackData) {
+        processNGOData(callbackData.connectedUsers);
+        for (var i = 0; i < ngos.length; i++) {
+            let currentUserName = new String(ngos[i].name).trim().replace(" ", "_");
+            if (currentUserName !== "HQ" && currentUserName !== name) {
+                try {
+                    document.getElementById(currentUserName).style.visibility = "visible";
+                } catch (e) {
+                    console.log(currentUserName);
+                }
+            }
+        }
+
+        //handle past messages after ngo list recieved
+        if(!haveProcessedPastMessages) {
+            handlePersistentMessages();
+            haveProcessedPastMessages = true;
+        }
+
+    });
+}
+
+//Sets ngos after removing this as a user
+function processNGOData(recievedNGOs) {
+    ngos = [];
+    for (var i = 0; i < recievedNGOs.length; i++) {
+        let currentUserName = new String(recievedNGOs[i].name).trim();
+        if (currentUserName !== name) {
+            ngos.push(recievedNGOs[i]);
+            //console.log(ngos[i].name);
+            ngos[ngos.length-1].name = new String(ngos[ngos.length-1].name).trim().replace(" ", "_");
+        }
+    }
+}
 
 
-loadNGOTitle();
-//loadCommunication();
-handleNGOS();
-// runClock();
+//handle the communication button value and ids to be ngo name and id
+function handleCommunicationButtonsAndMessages(callback) {
+    var buttons = document.getElementsByClassName("btn btn-secondary");
+    var messagingChats = document.getElementsByClassName("messagingContentNGO");
+    buttons[0].innerHTML = "HQ";
+    buttons[0].id = "HQ";
+    buttons[0].setAttribute("onclick", "switchNGOChat('" +  "HQ" + "')")
+    var ngosTemp = [];
+    for (var i = 0; i < simData.ngoList.length; i++) {
+        let currentUserName = new String(simData.ngoList[i].name).trim().replace(" ", "_");
+        console.log(name);
+        if (currentUserName !== name) {
 
-currentTime = 0;
-
-
-// function runClock() {
-//     function updateClock() {
-//         currentTime = currentTime + 1000;
-//         var timerElement = document.getElementById("timeManagement");
-//         var timeRemaining = simulationDuration - currentTime;
-//         displayRemainingTime(timerElement, timeRemaining);
-
-//         if (timeRemaining == 0) {
-//             clearInterval(updateClockProcess);
-//         }
-//     }
-
-//     updateClockProcess = setInterval(updateClock, 1000);
-// }
+            ngosTemp.push(simData.ngoList[i]);
+        } else {
+            console.log("skippedmyname");
+        }
+    }
 
 
-function displayRemainingTime(timerElement, timeRemaining) {
+    for (var i = 1; i <= ngosTemp.length; i++) {
+        let currentUserName = new String(ngosTemp[i - 1].name).trim().replace(" ", "_");
 
-    var seconds = Math.floor((timeRemaining / 1000) % 60);
-    var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
-    var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
+        buttons[i].innerHTML = currentUserName;
+        buttons[i].id = currentUserName;
+        buttons[i].setAttribute("onclick", "switchNGOChat('" +  currentUserName + "')")
+
+        //buttons[i] = "switchNGOChat('" + currentUserName + "')";
+        buttons[i].style.visibility = "hidden";
+    }
 
 
-    timerElement.innerHTML = hours + "h" + minutes + "m" + seconds + "s";
+    for (var i = 1; i <= ngosTemp.length; i++) {
+        messagingChats[i].id = new String(ngosTemp[i-1].name).trim().replace(" ", "_")+"Content";
+    }
+
+    //remove extra buttons and chats
+
+
+    var buttonsCount = buttons.length;
+
+    for (var j = ngosTemp.length; j < buttonsCount-1; j++) {
+        buttons[ngosTemp.length+1].remove();
+        messagingChats[ngosTemp.length+1].remove();
+    }
+
+    //Start lisening for ngos joining
+    callback();
 
 }
 
 
+function displayRemainingTime(timerElement, timeRemaining){
+    var seconds = Math.floor((timeRemaining / 1000) % 60);
+    var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
+    var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
+    timerElement.innerHTML = hours + "h" + minutes + "m" + seconds + "s";
+
+}
+
+//Switch the chat recipient based on what chat is selctected
 function switchNGOChat(ngo) {
 
     //Highlight selected button and unlight non selected
     if (ngo != null) {
-
         buttons = document.getElementsByClassName("btn btn-secondary");
-        for (i = 0; i < buttons.length; i++) {
+        for (var i = 0; i < buttons.length; i++) {
             buttons[i].style.backgroundColor = "#b5b5b5";
         }
-
         document.getElementById(ngo).style.backgroundColor = "#EE2A2B";
         selectedNGOChat = ngo;
     }
-
-
     // Hide all elements with class="messaging content" by default */
-    var i, tabcontent, tablinks;
-    messagingContent = document.getElementsByClassName("messagingContent");
+
+    var messagingContent = document.getElementsByClassName("messagingContentNGO");
 
     for (i = 0; i < messagingContent.length; i++) {
         messagingContent[i].style.display = "none";
     }
 
-
     // Show the specific message content
     if (ngo != null) {
-        console.log("ngoselected: " + ngo);
-        document.getElementById(ngo + "Content").style.display = "inline-block";
+
+        var value;
+        if (ngo == "HQ"){
+            value = "ngo0Content";
+        } else {
+            value = ngo+"Content";
+        }
+        document.getElementById(value).style.display = "inline-block";
     }
 }
 
-function fillCommunicationButtons() {
-    var buttons = document.getElementsByClassName("btn btn-secondary");
-    buttons[0].innerHTML = "HQ";
+function addToConversation(content, isOrigin, from, to) {
 
 
-    socket.on('currentNGONames', function (data) {
-        console.log("got names");
-        ngoNames = data.ngoNames;
-        console.log("buttonL: " + buttons.length);
-        console.log("ngonamesL: " + ngoNames.length);
-        for (i = 1; i < buttons.length; i++) {
-            buttons[i].innerHTML = ngoNames[i];
+    if (isOrigin) {
+        if (to == "HQ") {
+            to = "ngo0Content";
+        } else {
+            to = to.trim().replace(" ", "_") + "Content";
         }
-    });
-}
 
+        var childUl = $("#" + to).find('.messageList');
 
-function handleNGOS() {
+        $(childUl).append("<li id='origin'>" + content + "</li>");
+    } else {
 
-    socket.on('users', function (data) {
+        if(to !== name){
+            return;
+        }
+        var value;
 
-        users = data.ngoUsers;
-        console.log(users.length);
+        for (i = 0; i < ngos.length; i++) {
 
-
-
-        if (users != null) {
-            let currentNGOName = users[users.length - 1].name;
-
-            console.log("id: " + users[users.length - 1].id);
-            console.log("ngoname: " + currentNGOName);
-            console.log("name: " + name);
-
-            if(currentNGOName != name) {
-                document.getElementById(users[users.length - 1].id).style.visibility = "visible";
+            if (ngos[i].name == from) {
+                if (from == "HQ") {
+                    value = "ngo0Content";
+                } else {
+                    value = from.replace(" ", "_")+"Content";
+                }
+                break;
             }
         }
 
+
+        var childUl = $("#" + value).find('.messageList');
+
+        $(childUl).append("<li id='nonOrigin'>" + content + "</li>");
+    }
+}
+
+
+function loadNGOTitle() {
+
+    var url = window.location.href; // or window.location.href for current url
+    var key = /key=([^&]+)/.exec(url)[1]; // Value is in [1] ('384' in our case)
+
+
+    socket.emit('nameRequest', key.toString(), function (callbackData) {
+        name = callbackData;
+        name = name.trim().replace(" ", "_");
+        var htmlContent = "<h1 class='titles'><span>NGO: " + name + "</span></h1>";
+        $(htmlContent).appendTo(".ngoTitle");
+        nameNotRecieved = false;
+
+        handleCommunicationButtonsAndMessages(function () {
+            setInterval(handleNGOJoining,1000);
+
+        });
+    });
+}
+
+
+function processScenarioData() {
+    socket.emit('simState', "request", function (callbackData) {
+        simData = callbackData.simData;
+        loadNGOTitle();
+
+    });
+}
+
+function handlePersistentMessages(){
+    socket.emit('getPastMessages', "request", function (callbackData) {
+        if(callbackData.pastMessages != null) {
+
+            for(var i = 0; i < callbackData.pastMessages.length; i++){
+                let currentPastMessage = callbackData.pastMessages[i];
+                var isOrigin;
+                if(currentPastMessage.sender.replace(" ", "_") === name){
+                    isOrigin = true;
+                } else {
+                    isOrigin = false;
+                }
+                addToConversation(currentPastMessage.content, isOrigin, currentPastMessage.sender.replace(" ", "_"), currentPastMessage.recipient.replace(" ", "_") );
+
+            }
+        }
+
+
     });
 
-
 }
 
-function displayPDF(){
-    document.getElementById("eventOverlay").style.display = "block";
-}
 
 function displayPDFOff() {
-    document.getElementById("eventOverlay").style.display = "none";
+    document.getElementById("pdfOverlay").style.display = "none";
+}
+
+function displayEvent(type) {
+    document.getElementById("pdfOverlay").style.display = "none";
+    document.getElementById("audioOverlay").style.display = "none";
+    document.getElementById("imageOverlay").style.display = "none";
+    document.getElementById("videoOverlay").style.display = "none";
+
+    if (type == "mp4") {
+        document.getElementById("videoOverlay").style.display = "block";
+    } else if (type == "pdf") {
+        PDFObject.embed("/files/test.pdf", "#pdfOverlay");
+        document.getElementById("pdfOverlay").style.display = "block";
+    } else if (type == "mp3") {
+        document.getElementById("audioOverlay").style.display = "block";
+    } else if (type == "jpg") {
+        document.getElementById("imageOverlay").style.display = "block";
+    }
 }
 
 
-//Handle Messaging and Events
+function videoPausePlay() {
+    var video = document.getElementById("videoID");
+    if (video.paused) {
+        video.play();
+    } else {
+        video.pause();
+    }
+}
+
+function videoOverlayOff() {
+    var video = document.getElementById("videoID");
+    video.pause();
+    document.getElementById("videoOverlay").style.display = "none";
+}
+
+
+function audioPausePlay() {
+    var audio = document.getElementById("audioID");
+    if (audio.paused) {
+        audio.play();
+    } else {
+        audio.pause();
+    }
+}
+
+function audioOverlayOff() {
+    var audio = document.getElementById("audioID");
+    audio.pause();
+    document.getElementById("audioOverlay").style.display = "none";
+}
+
+function imageOverlayOff() {
+    document.getElementById("imageOverlay").style.display = "none";
+}
+
+function recieveEvents(){
+    //on receive event
+    socket.on('event', function (evnt) {
+
+        inboxEvents = [];
+        for (var i = 0; i < evnt.msg.length; i++) {
+            var to = evnt.msg[i].Recipient;
+            if (to === name) {
+                inboxEvents.push(evnt.msg[i]);
+            }
+        }
+    });
+}
+
+function recieveCurrentTime() {
+    socket.on('currentTime', function (time) {
+        simulationDuration = time;
+        var timerElement = document.getElementById("timeManagement");
+        displayRemainingTime(timerElement, simulationDuration);
+    });
+}
+
+function displayDisclaimer(){
+    //alert("The purpose of this tool is for training please keep this in mind throughout this simulation");
+}
+
+function handleMessageRecieving() {
+    //on receive message
+    socket.on('message', function (msg) {
+
+        var from = msg.recievedMessage.from;
+        var to = msg.recievedMessage.to;
+        addToConversation(msg.recievedMessage.content, false, from, to)
+    });
+
+}
+
+//On Page Load
 $(function () {
+    displayDisclaimer();
+    processScenarioData();
     switchNGOChat();
-    fillCommunicationButtons();
+    recieveEvents();
+    recieveCurrentTime();
+    handleMessageRecieving();
+
 
     //New message form
-    $('#messageNGO').submit(function (e) {
-        console.log("TEST");
-        e.preventDefault(); // prevents page reloading
-        console.log("submitmessage");
-        addToConversation($('#input').val(), true, null);
-        let recipient = document.getElementById(selectedNGOChat).innerHTML;
+    $('#messageNGOForm').submit(function (e) {
 
+        e.preventDefault(); // prevents page reloading
+
+        addToConversation($('#input').val(), true, null, selectedNGOChat);
+        let recipient = document.getElementById(selectedNGOChat).innerHTML;
 
 
         var message = {
@@ -155,272 +356,6 @@ $(function () {
 
     });
 
-    //on receive message
-    socket.on('message', function (msg) {
-        console.log("messagerecieved");
 
-        var from = msg.recievedMessage.from;
-        var to = msg.recievedMessage.to;
-
-            addToConversation(msg.recievedMessage.content, false, from);
-
-
-    });
-
-    //TODO: load completed events
-
-
-    //on receive event
-    socket.on('event', function (evnt) {
-        //console.log('got events');
-        inboxEvents = [];
-        for (var i = 0; i < evnt.msg.length; i++) {
-            var to = evnt.msg[i].Recipient;
-            if (to === name) {
-                //$('#eventList').append($('<li>').text(evnt.recievedEvent.contentLocation));
-                inboxEvents.push(evnt.msg[i]);
-
-                //loadOutboxEvents();
-            }
-        }
-        //console.log(inboxEvents);
-        //loadInboxEvents(inboxEvents);
-
-    });
-
-    socket.on('currentTime', function (time){
-        simulationDuration = time;
-        var timerElement = document.getElementById("timeManagement");
-        displayRemainingTime(timerElement, simulationDuration);
-    });
 
 });
-
-function addToConversation(content, isOrigin, from) {
-
-    console.log("from" + from);
-
-
-    if(from == "HQ"){
-        from = "HQ";
-    }
-
-    if (isOrigin) {
-        $("#" + selectedNGOChat + "Content").append("<li id='origin'>" + content + "</li>");
-    } else {
-
-        var ngoId;
-
-
-        for (i = 0; i < users.length; i++) {
-            console.log("users: "  + users[i].name);
-            if (users[i].name == from) {
-                if(from == "HQ"){
-                    ngoId = "ngo0"
-                } else {
-                    ngoId = users[i].id;
-                }
-            }
-        }
-
-        console.log(ngoId);
-
-        $("#" + ngoId + "Content").append("<li id='nonOrigin'>" + content + "</li>");
-    }
-}
-
-
-function loadNGOTitle() {
-    //Ask Server For Name
-
-    socket.on('nameRequest', function (data) {
-        name = data;
-        var htmlContent = "<h1 class='titles'><span>NGO: " + name + "</span></h1>";
-        $(htmlContent).appendTo(".ngoTitle");
-    });
-
-
-}
-
-/*function loadInboxEvents(inboxEvents) {
-
-    /!*var htmlContent = "<h1>Events</h1>\n" +
-        "<ul id=\"eventList\">\n" +
-        "\n" +
-    "</ul>\n";*!/
-    var table = document.getElementById("inboxTable");
-    //adds cells as well as the titles of cells into the cells
-    //console.log(inboxEvents[inboxRowCount]);
-    //console.log(inboxRowCount);
-
-    while (table.hasChildNodes()) {
-        table.removeChild(table.firstChild);
-    }
-
-
-    for (var i = 0; i < inboxEvents.length; i++) {
-        var row = table.insertRow(i);
-        var cell1 = row.insertCell(0);
-        cell1.innerHTML = "HQ" + " " + "Subject" + " " + inboxEvents[i].Time;
-        table.rows[i].cells[0].onclick = function () {
-            rIndex = this.parentElement.rowIndex;
-            cIndex = this.cellIndex;
-            //console.log("Row : "+rIndex+" , Cell : "+cIndex);
-            var cellValue = (table.rows[rIndex].cells[cIndex].innerHTML);
-            getInboxPDF(i);
-        };
-    }
-
-
-    //inboxRowCount++;
-    //$(htmlContent).appendTo(".events");
-}*/
-
-function loadOutboxEvents() {
-
-    /*var htmlContent = "<h1>Events</h1>\n" +
-        "<ul id=\"eventList\">\n" +
-        "\n" +
-    "</ul>\n";*/
-    var table = document.getElementById("outboxTable");
-    //adds cells as well as the titles of cells into the cells
-    while (table.hasChildNodes()) {
-        table.removeChild(table.firstChild);
-    }
-
-
-    for (var i = 0; i < outboxEvents.length; i++) {
-        var row = table.insertRow(i);
-        var cell1 = row.insertCell(0);
-        cell1.innerHTML = "HQ" + " " + "Subject" + " " + outboxEvents[i].Time;
-        table.rows[i].cells[0].onclick = function () {
-            rIndex = this.parentElement.rowIndex;
-            cIndex = this.cellIndex;
-            //console.log("Row : "+rIndex+" , Cell : "+cIndex);
-            var cellValue = (table.rows[rIndex].cells[cIndex].innerHTML);
-            getOutboxPDF(i);
-        };
-    }
-
-
-    //outboxRowCount++;
-    //$(htmlContent).appendTo(".events");
-}
-
-function getInboxPDF(cellValue) {
-    console.log(cellValue);
-    PDFObject.embed(inboxEvents[cellValue - 1].Location, "#inboxPdf");/*change my-container to pdf*/
-}
-
-function getOutboxPDF(cellValue) {
-    console.log(cellValue);
-    PDFObject.embed(outboxEvents[cellValue - 1].Location, "#outboxPdf");/*change my-container to pdf*/
-}
-
-
-function loadCommunication() {
-
-    var htmlContent = "<h1>Communication</h1><br>\n" +
-        "\n" +
-        "<ul id=\"ngoList\">\n" +
-        "\n" +
-        "</ul>\n" +
-        "<label for=\"ngoRecipient\"> Recipient:  </label>\n" +
-        "<select form = \"messageNGO\" id=\"ngoRecipient\">\n" +
-        "\n" +
-        "</select>\n" +
-        "\n" +
-        "<br>\n" +
-        "Message:<br>\n" +
-        "<form action=\"\" id=\"messageNGO\">\n" +
-        "\t<textarea style=\"resize:none;height:400px;width:800px\" maxlength=\"10000\" form=\"messageNGO\" id=\"input\"></textarea>\n" +
-        "\t<input type=\"submit\" value=\"Send\" class=\"button\"/>\n" +
-        "</form>";
-
-
-    $(htmlContent).appendTo(".messaging");
-}
-
-function displayEvent(type){
-    if(type=="mp4"){
-        displayVideo();
-        document.getElementById("eventOverlay").style.display = "none";
-        document.getElementById("audioOverlay").style.display = "none";
-        document.getElementById("imageOverlay").style.display = "none";
-    }
-    else if (type=="pdf"){
-        PDFObject.embed("/files/test.pdf", "#eventMediaDisplay");
-        document.getElementById("eventOverlay").style.display = "block";
-        document.getElementById("videoOverlay").style.display = "none";
-        document.getElementById("audioOverlay").style.display = "none";
-        document.getElementById("imageOverlay").style.display = "none";
-    }
-    else if(type=="mp3"){
-        displayAudio();
-        document.getElementById("eventOverlay").style.display = "none";
-        document.getElementById("videoOverlay").style.display = "none";
-        document.getElementById("imageOverlay").style.display = "none";
-    }
-    else if(type=="jpg"){
-        displayImage();
-        document.getElementById("eventOverlay").style.display = "none";
-        document.getElementById("videoOverlay").style.display = "none";
-        document.getElementById("audioOverlay").style.display = "none";
-    }
-}
-
-//video functions for display
-function displayVideo(){
-    console.log("display video is called");
-    document.getElementById("videoOverlay").style.display = "block";
-}
-
-
-
-function videoPausePlay(){
-    var video = document.getElementById("videoID");
-    if(video.paused){
-        video.play();
-    } else {
-        video.pause();
-    }
-}
-
-
-
-function videoOverlayOff(){
-    var video = document.getElementById("videoID");
-    video.pause();
-    document.getElementById("videoOverlay").style.display = "none";
-}
-
-//audio display code
-function displayAudio(){
-    console.log("display audio is called");
-    document.getElementById("audioOverlay").style.display = "block";
-}
-
-function audioPausePlay(){
-    var audio = document.getElementById("audioID");
-    if(audio.paused){
-        audio.play();
-    } else {
-        audio.pause();
-    }
-}
-
-function audioOverlayOff(){
-    var audio = document.getElementById("audioID");
-    audio.pause();
-    document.getElementById("audioOverlay").style.display = "none";
-}
-
-//image display code
-function displayImage(){
-    console.log("display image is called");
-    document.getElementById("imageOverlay").style.display = "block";
-}
-
-function imageOverlayOff(){
-    document.getElementById("imageOverlay").style.display = "none";
-}

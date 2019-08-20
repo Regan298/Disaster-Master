@@ -191,7 +191,7 @@ body {
 
 }
 
-#videoOverlay {
+.mediaOverlay {
     position: fixed;
     display: none;
     width: 100%;
@@ -204,59 +204,6 @@ body {
     z-index: 3;
     cursor: pointer;
   }
-  
-  #audioOverlay {
-    position: fixed;
-    display: none;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 3;
-    cursor: pointer;
-  }
-  
-   #imageOverlay {
-    position: fixed;
-    display: none;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 3;
-    cursor: pointer;
-  }
-
-
-#eventOverlay {
-    position: fixed;
-    display: none;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 3;
-    cursor: pointer;
-}
-
-#overlayPdf {
-    position: absolute;
-    top: 10vh;
-    right: 20vw;
-    left: 20vw;
-    bottom: 20vh;
-    height: 100vh;
-
-}
 
 #overlayText {
     position: absolute;
@@ -287,50 +234,30 @@ body {
 .messagingElementHQ {
     margin-top: 1%;
     max-width: 50%;
-    max-height: 25%;
-    min-height: 25%;
+    height: 30%;
     border-style: solid;
     border-width: 1px;
     float: left;
     margin: auto;
-    position: relative;
+    position: absolute;
     display: flex;
     width: 45%;
     /*position: relative;*/
 }
 
-.messagingElementNGO {
-    margin-top: 1%;
-    max-width: 50%;
-    min-height: 25%;
-    border-style: solid;
-    border-width: 1px;
-    float: left;
-    margin: auto;
-    position: relative;
-    display: flex;
-    width: 45%;
-    /*position: relative;*/
-}
 
-.messagingButtons {
 
+
+.messagingButtonsHQ {
     max-height: 100%;
-
     max-width: 25%;
-
     align-self: stretch;
-
-
-
     border-right: solid;
     border-width: 1px;
 }
 
-.messagingButtons button {
+.messagingButtonsHQ button {
     margin-bottom: 15%;
-
-
     max-width: 100%;
     min-width: 100%;
     text-align: center;
@@ -338,20 +265,20 @@ body {
     padding-right: 2%;
 }
 
-#ngo1, #ngo2, #ngo3, #ngo4, #ngo5, #ngo6, #ngo7, #ngo8 {
+/*#ngo1, #ngo2, #ngo3, #ngo4, #ngo5, #ngo6, #ngo7, #ngo8 {
     visibility: hidden;
-}
+}*/
 
 
-.messagingContent {
+.messagingContentHQ {
     /* display: inline-block; */
     overflow-y: auto;
-    max-height: 50vh;
+    height: 80%;
     margin-bottom: 16%;
     min-width: 75%;
 }
 
-.messagingContent ul {
+.messagingContentHQ ul {
     margin-right: 10%;
     max-height: inherit;
     min-height: inherit;
@@ -359,7 +286,7 @@ body {
 }
 
 
-.messagingContent li#origin {
+.messagingContentHQ li#origin {
     clear: both;
     float: right;
     margin-top: 5%;
@@ -373,7 +300,7 @@ body {
 
 }
 
-.messagingContent li#nonOrigin {
+.messagingContentHQ li#nonOrigin {
     float: left;
     clear: both;
     margin-top: 5%;
@@ -388,37 +315,23 @@ body {
 
 }
 
-#messageingForm {
 
-    /* bottom: 0; */
-
+#messageingFormDivHQ {
     position: absolute;
-
-    /* left: 25%; */
-
     min-width: 100%;
-
-    /* float: left; */
-
-    /* vertical-align: top; */
-
-    /* top: 40%; */
-
     bottom: 0;
+    padding-left: 26%;
 
-    /* margin-left: 25%; */
-
-    padding-left: 30%;
 }
 
-#messageHQ {
+#messageHQForm {
     min-width: 100%;
     margin-bottom: 1%;
     float: left;
     /* margin-left: 25%; */
 }
 
-#messageHQ textarea {
+#messageHQForm textarea {
     resize: none;
     float: left;
     /* width: 65%; */
@@ -429,10 +342,120 @@ body {
 }
 
 
-#messageHQ input {
+#messageHQForm input {
     /* display: inline; */
     /* float: right; */
     /* margin-left: 1%; */
+    margin-top: 2%;
+    width: 10%;
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+    font-size: 100%;
+    padding: 0;
+}
+
+.messagingElementNGO {
+    margin-top: 1%;
+    max-width: 50%;
+    height: 100%;
+    border-style: solid;
+    border-width: 1px;
+    float: left;
+    margin: auto;
+    position: absolute;
+    display: flex;
+    width: 50%;
+    /*position: relative;*/
+}
+
+.messagingButtonsNGO {
+    max-height: 100%;
+    max-width: 25%;
+    align-self: stretch;
+    border-right: solid;
+    border-width: 1px;
+}
+
+.messagingButtonsNGO button {
+    margin-bottom: 15%;
+    max-width: 100%;
+    min-width: 100%;
+    text-align: center;
+    padding-left: 1%;
+    padding-right: 2%;
+}
+
+.messagingContentNGO {
+    /* display: inline-block; */
+    overflow-y: auto;
+    height: 80%;
+    margin-bottom: 16%;
+    min-width: 75%;
+}
+
+.messagingContentNGO ul {
+    margin-right: 10%;
+    max-height: inherit;
+    min-height: inherit;
+
+}
+
+
+.messagingContentNGO li#origin {
+    clear: both;
+    float: right;
+    margin-top: 5%;
+    list-style: none;
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 0.25rem;
+    max-width: 50%;
+    padding: 1em;
+    word-wrap: break-word;
+
+}
+
+.messagingContentNGO li#nonOrigin {
+    float: left;
+    clear: both;
+    margin-top: 5%;
+    list-style: none;
+    background-color: #cacaca;
+    color: black;
+    border-radius: 0.25rem;
+    max-width: 50%;
+    padding: 1em;
+    word-wrap: break-word;
+
+
+}
+
+
+#messageingFormDivNGO {
+    position: absolute;
+    min-width: 100%;
+    bottom: 0;
+    padding-left: 26%;
+
+}
+
+#messageNGOForm {
+    min-width: 100%;
+    margin-bottom: 1%;
+    float: left;
+}
+
+#messageNGOForm textarea {
+    resize: none;
+    float: left;
+    max-height: 100%;
+    min-width: 80%;
+    margin-right: 5%;
+}
+
+
+#messageNGOForm input {
     margin-top: 2%;
     width: 10%;
     display: inline-block;

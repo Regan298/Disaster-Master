@@ -4,16 +4,16 @@
 	<ngoCount>5</ngoCount>
 	<duration>19800000</duration>
 	<hoursInDay>1</hoursInDay>
-	<mode>online</mode>
+	<mode>offline</mode>
 
 	<ngo>
-		<name>People First</name>
+		<name>People_First</name>
 		<passkey>ngo1</passkey>
 
 	</ngo>
 
 	<ngo>
-		<name>We Care</name>
+		<name>We_Care</name>
 		<passkey>ngo2</passkey>
 
 	</ngo>
@@ -25,7 +25,7 @@
 	</ngo>
 
 	<ngo>
-		<name>Red Heart</name>
+		<name>Red_Heart</name>
 		<passkey>ngo4</passkey>
 
 	</ngo>
@@ -37,7 +37,7 @@
 	</ngo>
 
 	<ngo>
-		<name>Reach Up</name>
+		<name>Reach_Up</name>
 		<passkey>ngo6</passkey>
 
 	</ngo>	

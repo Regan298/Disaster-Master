@@ -40,59 +40,27 @@
 		<name>UN LEAD</name>
 		<passkey>ngo6</passkey>
 
-	</ngo>	
-	
-	<event>
-		<recipient>Peacedoves</recipient>
-        <subject>Set up</subject>
-		<time>00:00:10</time>
-		<type>pdf</type>
-		<location>/FileLibrary/000 Needs assessment letter.pdf</location>
-	</event>
+	</ngo>
 
+	<ngo>
+		<name>Reach Up</name>
+		<passkey>ngo7</passkey>
+
+	</ngo>
+
+<!--	Day One Begins	-->
+	<!--	Introduction to Sebadoah-->
 	<event>
 		<recipient>Peacedoves</recipient>
 		<subject>Introduction into Sebadoah</subject>
-		<time>00:02:00</time>
-		<type>pdf</type>
-		<location>/FileLibrary/001 Activation of Cluster System.pdf</location>
-	</event>
-
-	<event>
-		<recipient>Peacedoves</recipient>
-		<subject>President of Sebadoah</subject>
-		<time>00:04:00</time>
-		<type>pdf</type>
-		<location>/FileLibrary/002 Purchase from Umbala.pdf</location>
-	</event>
-
-	<event>
-		<recipient>Peacedoves</recipient>
-		<subject>SitRep Request</subject>
-		<time>00:06:00</time>
-		<type>pdf</type>
-		<location>/FileLibrary/003 HQ Daily SitRep Request.pdf</location>
-	</event>
-
-	<event>
-		<recipient>Peacedoves</recipient>
-		<subject>Budget Request</subject>
-		<time>00:08:00</time>
-		<type>pdf</type>
-		<location>/FileLibrary/004 HQ Budget Request.pdf</location>
-	</event>
-
-	<event>
-		<recipient>Peacedoves</recipient>
-		<subject>Flood Update</subject>
-		<time>00:10:00</time>
+		<time>00:00:00</time>
 		<type>pdf</type>
 		<location>/FileLibrary/001 Activation of Cluster System.pdf</location>
 	</event>
 	<event>
-		<recipient>Peacedoves</recipient>
-		<subject>Request Cluster SitReps</subject>
-		<time>00:12:00</time>
+		<recipient>We Care</recipient>
+		<subject>Introduction into Sebadoah</subject>
+		<time>00:00:00</time>
 		<type>pdf</type>
 		<location>/FileLibrary/001 Activation of Cluster System.pdf</location>
 	</event>
@@ -135,8 +103,50 @@
 	<!--	President of  Sebadoah-->
 	<event>
 		<recipient>Peacedoves</recipient>
-		<subject>Request SitReps</subject>
-		<time>00:14:00</time>
+		<subject>President of Sebadoah</subject>
+		<time>00:00:00</time>
+		<type>pdf</type>
+		<location>/FileLibrary/002 Purchase from Umbala.pdf</location>
+	</event>
+	<event>
+		<recipient>We Care</recipient>
+		<subject>President of Sebadoah</subject>
+		<time>00:00:00</time>
+		<type>pdf</type>
+		<location>/FileLibrary/002 Purchase from Umbala.pdf</location>
+	</event>
+	<event>
+		<recipient>People First</recipient>
+		<subject>President of Sebadoah</subject>
+		<time>00:00:00</time>
+		<type>pdf</type>
+		<location>/FileLibrary/002 Purchase from Umbala.pdf</location>
+	</event>
+	<event>
+		<recipient>EWB</recipient>
+		<subject>President of Sebadoah</subject>
+		<time>00:00:00</time>
+		<type>pdf</type>
+		<location>/FileLibrary/002 Purchase from Umbala.pdf</location>
+	</event>
+	<event>
+		<recipient>Red Heart</recipient>
+		<subject>President of Sebadoah</subject>
+		<time>00:00:00</time>
+		<type>pdf</type>
+		<location>/FileLibrary/002 Purchase from Umbala.pdf</location>
+	</event>
+	<event>
+		<recipient>Reach Up</recipient>
+		<subject>President of Sebadoah</subject>
+		<time>00:00:00</time>
+		<type>pdf</type>
+		<location>/FileLibrary/002 Purchase from Umbala.pdf</location>
+	</event>
+	<event>
+		<recipient>UN LEAD</recipient>
+		<subject>President of Sebadoah</subject>
+		<time>00:00:00</time>
 		<type>pdf</type>
 		<location>/FileLibrary/002 Purchase from Umbala.pdf</location>
 	</event>
@@ -144,8 +154,36 @@
 	<!--	Set up		-->
 	<event>
 		<recipient>Peacedoves</recipient>
-		<subject>Budget</subject>
-		<time>00:16:00</time>
+        <subject>Set up</subject>
+		<time>00:00:00</time>
+		<type>pdf</type>
+		<location>/FileLibrary/000 Needs assessment letter.pdf</location>
+	</event>
+	<event>
+		<recipient>People First</recipient>
+		<subject>Set up</subject>
+		<time>00:00:00</time>
+		<type>pdf</type>
+		<location>/FileLibrary/000 Needs assessment letter.pdf</location>
+	</event>
+	<event>
+		<recipient>We Care</recipient>
+		<subject>Set up</subject>
+		<time>00:00:00</time>
+		<type>pdf</type>
+		<location>/FileLibrary/000 Needs assessment letter.pdf</location>
+	</event>
+	<event>
+		<recipient>EWB</recipient>
+		<subject>Set up</subject>
+		<time>00:00:00</time>
+		<type>pdf</type>
+		<location>/FileLibrary/000 Needs assessment letter.pdf</location>
+	</event>
+	<event>
+		<recipient>Red Heart</recipient>
+		<subject>Set up</subject>
+		<time>00:00:00</time>
 		<type>pdf</type>
 		<location>/FileLibrary/000 Needs assessment letter.pdf</location>
 	</event>
@@ -168,8 +206,8 @@
 <!--Flood Update	-->
 	<event>
 		<recipient>Peacedoves</recipient>
-		<subject>Sit Reps Request</subject>
-		<time>00:18:00</time>
+		<subject>Flood Update</subject>
+		<time>01:00:00</time>
 		<type>pdf</type>
 		<location>/FileLibrary/005 DisCom Flood Update.pdf</location>
 	</event>
@@ -219,8 +257,8 @@
 <!--	Sit Rep Request	-->
 	<event>
 		<recipient>Peacedoves</recipient>
-		<subject>Information Request</subject>
-		<time>00:20:00</time>
+		<subject>SitRep Request</subject>
+		<time>01:00:00</time>
 		<type>pdf</type>
 		<location>/FileLibrary/003 HQ Daily SitRep Request.pdf</location>
 	</event>
@@ -270,8 +308,8 @@
 <!--	Budget Request	-->
 	<event>
 		<recipient>Peacedoves</recipient>
-		<subject>Planning Request</subject>
-		<time>00:22:00</time>
+		<subject>Budget Request</subject>
+		<time>01:00:00</time>
 		<type>pdf</type>
 		<location>/FileLibrary/004 HQ Budget Request.pdf</location>
 	</event>
@@ -321,8 +359,8 @@
 <!--	Request Cluster Sit Reps-->
 	<event>
 		<recipient>Peacedoves</recipient>
-		<subject>Kidnapping</subject>
-		<time>00:24:00</time>
+		<subject>Request Cluster SitReps</subject>
+		<time>01:30:00</time>
 		<type>pdf</type>
 		<location>/FileLibrary/006 Request Cluster SitReps.pdf</location>
 	</event>
@@ -382,8 +420,8 @@
 	<!--	Sit Rep Request	-->
 	<event>
 		<recipient>Peacedoves</recipient>
-		<subject>Kidnapping</subject>
-		<time>00:26:00</time>
+		<subject>SitRep Request</subject>
+		<time>02:00:00</time>
 		<type>pdf</type>
 		<location>/FileLibrary/003 HQ Daily SitRep Request.pdf</location>
 	</event>
@@ -441,8 +479,8 @@
 	<!--	Request Cluster Sit Reps-->
 	<event>
 		<recipient>Peacedoves</recipient>
-		<subject>Reminder Flash Appeal</subject>
-		<time>00:28:00</time>
+		<subject>Request Cluster SitReps</subject>
+		<time>02:30:00</time>
 		<type>pdf</type>
 		<location>/FileLibrary/006 Request Cluster SitReps.pdf</location>
 	</event>
@@ -498,9 +536,9 @@
 <!--	</event>-->
 
 	<event>
-		<recipient>Peacedoves</recipient>
-		<subject>Gender Audit</subject>
-		<time>00:30:00</time>
+		<recipient>UN LEAD</recipient>
+		<subject>Information Request</subject>
+		<time>02:45:00</time>
 		<type>pdf</type>
 		<location>/FileLibrary/010 HQ Site Info Request.pdf</location>
 	</event>
@@ -509,8 +547,8 @@
 	<!--	Sit Rep Request	-->
 	<event>
 		<recipient>Peacedoves</recipient>
-		<subject>DayinLife Request</subject>
-		<time>00:32:00</time>
+		<subject>SitRep Request</subject>
+		<time>03:00:00</time>
 		<type>pdf</type>
 		<location>/FileLibrary/003 HQ Daily SitRep Request.pdf</location>
 	</event>
