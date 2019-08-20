@@ -26,6 +26,7 @@ http.listen(port, function () {
 
 //ngoCount gets updated when file parsed
 var simData = {
+    loaded: false,
     ready: false,
     title: "",
     ngoCount: 999,
@@ -100,6 +101,7 @@ app.get('/help', function (req, res) {
 
 function clearSimData() {
     simData = {
+        loaded: false,
         ready: false,
         title: "",
         ngoCount: 999,
@@ -113,13 +115,17 @@ function clearSimData() {
         occurredEvents: []
     };
     connectedUsers = [];
+    connectedUsers.push(host);
 }
 
 //Process Sceanrio File For Uploading
 app.post('/upload', function (req, res) {
 
     if (req.files != null) {
-        clearSimData();
+
+        if(simData.loaded) {
+            clearSimData();
+        }
 
         let simFileTemp = req.files.simFile;
         simFileTemp.mv(__dirname + '/currentScenario.xml', function (err) {
@@ -208,6 +214,7 @@ function parseXMLForLoading() {
                 simData.timeScale = 24 / hoursInDay;
             });
             simData.ready = true;
+            simData.loaded = true;
         });
     } catch (e) {
         return false;
@@ -264,6 +271,7 @@ socket.on('getPastMessages', function (msg, callback) {
 
 //Send connectedusers to ngo upon ngo request
 socket.on('getConnected', function (msg, callback) {
+    console.log(connectedUsers.length);
     callback({connectedUsers});
 });
 
@@ -299,6 +307,9 @@ socket.on('message', function (msg) {
         to: msg.message.to,
         content: msg.message.content
     }
+
+    console.log(recievedMessage);
+
 
     //store in simdata
     var d = new Date();
