@@ -3,7 +3,7 @@ const socket = io();
 var data;
 
 // Retrieve the simulation data from server
-socket.on('simState', function (simdata) {
+socket.emit('simState', 'request', function (simdata) {
     data = simdata.simData;
     console.log(data);
     drawDetails(data);
@@ -21,7 +21,7 @@ function editTitle(){
     $('#editTitle').append("<form id='titleForm'></form>" +
                             "Title: <input form='titleForm' type='text' name='recipient' value='"+data.title+"'><br>"+
                             "<input form='titleForm' type='button' onclick='updateTitle()' value='Submit'>" +
-                            "<button type='button' onclick='cancelEdit('editTitle')'>Cancel</button>");
+                            "<button type='button' onclick=cancelEdit('#editTitle')>Cancel</button>");
 }
 
 function updateTitle(){
@@ -63,10 +63,11 @@ function editEvent(eventNum){
                                     "<br><input form='frm"+eventNum+"' type='file' name='eventFile'>" +
                                     // "<input form='upload' type='submit' value='Change File'><br>" +
                                     "<input form='frm"+eventNum+"' type='button' onclick='updateEvent("+eventNum+")' value='Submit'>" +
-                                    "<button type='button' onclick='cancelEdit(frm"+eventNum+")'>Cancel</button>");
+                                    "<button type='button' onclick=cancelEdit('#editForm"+eventNum+"')>Cancel</button>");
 }
 
 function cancelEdit(form) {
+    console.log(form);
     $(form).empty();
 }
 

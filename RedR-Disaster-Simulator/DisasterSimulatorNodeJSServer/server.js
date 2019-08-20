@@ -81,6 +81,17 @@ app.get('/hq-run-simulation', function (req, res) {
     res.sendFile(__dirname + '/hq-run-simulation.html');
 });
 
+app.get('/hq-create', function (req, res) {
+    res.sendFile(__dirname + '/scenario-edit-home.html');
+});
+
+app.get('/scenario-create', function (req, res) {
+    res.sendFile(__dirname + '/scenario-edit.html');
+});
+
+app.get('/scenario-edit', function (req, res) {
+    res.sendFile(__dirname + '/scenario-upload.html');
+});
 
 app.get('/ngo', function (req, res) {
 
@@ -153,9 +164,7 @@ app.post('/upload-event-file', upload.single('upload'), function (req, res, next
     }
 })
 
-=======
 //Process Sceanrio File For Uploading
->>>>>>> .merge_file_a01452
 app.post('/upload', function (req, res) {
 
     if (req.files != null) {

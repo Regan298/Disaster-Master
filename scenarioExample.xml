@@ -4,6 +4,7 @@
 	<ngoCount>5</ngoCount>
     <duration>19800000</duration>
     <hoursInDay>1</hoursInDay>
+    <mode>online</mode>
 
 	<ngo>
 		<name>People First</name>
