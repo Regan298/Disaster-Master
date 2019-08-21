@@ -2,7 +2,7 @@ const fs = require('fs');
 var ip = require('ip');
 var opn = require('opn');
 var express = require('express');
-var app = require('express')();
+var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 const {Worker, isMainThread, parentPort} = require('worker_threads');
@@ -16,6 +16,7 @@ var parser = new xml2js.Parser();
 app.use(fileUpload());
 var formidable = require('formidable');
 var xmlBuilder = require('xmlbuilder');
+var path = require('path');
 var worker; //auto events worker
 const port = process.env.PORT || 80;
 
@@ -112,6 +113,13 @@ app.get('/help', function (req, res) {
     res.sendFile(__dirname + '/help.html');
 });
 
+app.get('/download-save', function (req, res) {
+    // console.log(req);
+    const file = `${__dirname}\\generatedScenario\\scenario.xml`;
+    console.log(file);
+    res.download(path.resolve(file), 'generatedScenario.xml');
+});
+
 app.post('/editor-upload', function (req, res) {
     console.log("upload req");
     if (req.files != null) {
@@ -163,7 +171,26 @@ app.post('/upload-event-file', upload.single('upload'), function (req, res, next
         console.log("no file");
         return res.status(400).send("Bad File, Please Input A Valid File :)");
     }
-})
+});
+
+function clearSimData() {
+    simData = {
+        loaded: false,
+        ready: false,
+        title: "",
+        ngoCount: 999,
+        ngoList: [],
+        eventsList: [],
+        messageList: [],
+        durationMs: 0,
+        timeScale: 0,
+        started: false,
+        modeOnline: true,
+        occurredEvents: []
+    };
+    connectedUsers = [];
+    connectedUsers.push(host);
+}
 
 //Process Sceanrio File For Uploading
 app.post('/upload', function (req, res) {
@@ -319,7 +346,6 @@ socket.on('getConnected', function (msg, callback) {
 
 //Save XML from scenario editor
 socket.on('exportXML', function (data) {
-    // console.log(data);
 
     var root = xmlBuilder.create('scenario');
 
@@ -347,14 +373,15 @@ socket.on('exportXML', function (data) {
     }
 
     var xml = root.end({ pretty: true});
- 
-    fs.writeFile("./"+data.title+"Scenario.xml", xml, function(err) {
+
+    fs.writeFile("./generatedScenario/scenario.xml", xml, function(err) {
         if(err) {
             return console.log(err);
         }
     
-        console.log("The file was saved!");
-    }); 
+        console.log('File generated');
+        socket.emit('xmlSaved');
+    });
 });
 
 

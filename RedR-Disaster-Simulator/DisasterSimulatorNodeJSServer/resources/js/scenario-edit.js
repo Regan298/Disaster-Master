@@ -270,4 +270,11 @@ function uploadFiles(file) {
 
 function saveXML() {
     socket.emit('exportXML', data);
+    socket.on('xmlSaved', function () {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/download-save", true);
+        xhr.setRequestHeader('X-Requested-With','XMLHttpRequest');
+        xhr.send();
+        window.open('/download-save');
+    });
 }
