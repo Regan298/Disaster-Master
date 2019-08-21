@@ -307,6 +307,8 @@ function displayEvent(eventId){
     $("#inboxElementNGO").append("<div id=\"eventViewer\" class=\"eventViewer\"></div>");
 
 
+
+
     var eventButtonElement = document.getElementById(eventId);
     var currentEventSubject = eventButtonElement.getAttribute("subject");
     var currentEventTime = eventButtonElement.getAttribute("time");
@@ -316,6 +318,8 @@ function displayEvent(eventId){
     $("#eventViewer").append("<h1> " + currentEventSubject + "</h1>" + "<h2> " + currentEventTime + "</h2>"
     + "<button id='displayEventButton' onclick=displayEventMedia(" + "'" + currentEventType + "'" + "," + "'" +
         currentEventLocation + "'" + ")" + ">View Event</button>");
+
+    $("#eventViewer").append("<div id=\"eventResponseViewer\" class=\"eventResponseViewer\"></div>");
 
 
 
@@ -348,7 +352,7 @@ function processEvents() {
 
         }
 
-        $("#inboxEventList").append("<button id='event" + i + "' class='eventObject'><p class='eventTitle'>" + subject + "</p> " +
+        $("#inboxEventListNGO").append("<button id='event" + i + "' class='eventObject'><p class='eventTitle'>" + subject + "</p> " +
             "<p class='emailTime'>" + eventTimeFormat + "</p></button>");
 
         //Add event attribute to each event button
