@@ -1,12 +1,14 @@
 const socket = io();
 var name;
 var ngos = [];
-var inboxEvents = [];
+var eventList = [];
 var simulationDuration = 0;
 var selectedNGOChat;
 var nameNotRecieved = true;
 var simData;
 var haveProcessedPastMessages = false;
+var startDuration;
+var firstTimeReccieve = true;
 
 //Runs in Background and gets new and past users on a period
 function handleNGOJoining() {
@@ -56,7 +58,7 @@ function handleCommunicationButtonsAndMessages(callback) {
     var ngosTemp = [];
     for (var i = 0; i < simData.ngoList.length; i++) {
         let currentUserName = new String(simData.ngoList[i].name).trim().replace(" ", "_");
-        console.log(name);
+
         if (currentUserName !== name) {
 
             ngosTemp.push(simData.ngoList[i]);
@@ -71,7 +73,7 @@ function handleCommunicationButtonsAndMessages(callback) {
 
         buttons[i].innerHTML = currentUserName;
         buttons[i].id = currentUserName;
-        buttons[i].setAttribute("onclick", "switchNGOChat('" +  currentUserName + "')")
+        buttons[i].setAttribute("onclick", "switchNGOChat('" +  currentUserName + "')");
 
         //buttons[i] = "switchNGOChat('" + currentUserName + "')";
         buttons[i].style.visibility = "hidden";
@@ -203,6 +205,7 @@ function loadNGOTitle() {
 function processScenarioData() {
     socket.emit('simState', "request", function (callbackData) {
         simData = callbackData.simData;
+        recieveEvents();
         loadNGOTitle();
 
     });
@@ -235,20 +238,27 @@ function displayPDFOff() {
     document.getElementById("pdfOverlay").style.display = "none";
 }
 
-function displayEvent(type) {
+function displayEventMedia(type, name) {
+
+    //pdf
+    //image
+    //audio
+    //video
+    console.log(type);
+    console.log(name);
     document.getElementById("pdfOverlay").style.display = "none";
     document.getElementById("audioOverlay").style.display = "none";
     document.getElementById("imageOverlay").style.display = "none";
     document.getElementById("videoOverlay").style.display = "none";
 
-    if (type == "mp4") {
+    if (type == "video") {
         document.getElementById("videoOverlay").style.display = "block";
     } else if (type == "pdf") {
         PDFObject.embed("/files/test.pdf", "#pdfOverlay");
         document.getElementById("pdfOverlay").style.display = "block";
-    } else if (type == "mp3") {
+    } else if (type == "audio") {
         document.getElementById("audioOverlay").style.display = "block";
-    } else if (type == "jpg") {
+    } else if (type == "image") {
         document.getElementById("imageOverlay").style.display = "block";
     }
 }
@@ -289,22 +299,103 @@ function imageOverlayOff() {
     document.getElementById("imageOverlay").style.display = "none";
 }
 
+function displayEvent(eventId){
+
+    var eventViewerElement = document.getElementById("eventViewer");
+    eventViewerElement.parentNode.removeChild(eventViewerElement);
+
+    $("#inboxElementNGO").append("<div id=\"eventViewer\" class=\"eventViewer\"></div>");
+
+
+    var eventButtonElement = document.getElementById(eventId);
+    var currentEventSubject = eventButtonElement.getAttribute("subject");
+    var currentEventTime = eventButtonElement.getAttribute("time");
+    var currentEventType = eventButtonElement.getAttribute("type");
+    var currentEventLocation = eventButtonElement.getAttribute("location");
+
+    $("#eventViewer").append("<h1> " + currentEventSubject + "</h1>" + "<h2> " + currentEventTime + "</h2>"
+    + "<button id='displayEventButton' onclick=displayEventMedia(" + "'" + currentEventType + "'" + "," + "'" +
+        currentEventLocation + "'" + ")" + ">View Event</button>");
+
+
+
+}
+
+function processEvents() {
+
+    $("button.eventObject").remove();
+    for (var i = 0; i < eventList.length; i++) {
+        let currentEvent = eventList[i];
+        let location = currentEvent.location;
+        let subject = currentEvent.subject;
+        let time = currentEvent.time;
+        let type = currentEvent.type;
+
+        //convert time string into ms for manipulation
+        var timeSplit = time.toString().split(":");
+        var h = parseInt(timeSplit[0], 10);
+        var m = parseInt(timeSplit[1], 10);
+        var s = parseInt(timeSplit[2], 10);
+        var timeInMS = (h * 60 * 60 * 1000) + (m * 60 * 1000) + (s * 1000);
+        var timeStamp = simData.durationMs - timeInMS;
+        //convert ms back into string for display
+        var seconds = Math.floor((timeStamp / 1000) % 60);
+        var minutes = Math.floor((timeStamp / 1000 / 60) % 60);
+        var hours = Math.floor((timeStamp / (1000 * 60 * 60)) % 24);
+        var eventTimeFormat = hours + "h" + minutes + "m" + seconds + "s remaining";
+
+        if(type.toString().trim() === "pdf"){
+
+        }
+
+        $("#inboxEventList").append("<button id='event" + i + "' class='eventObject'><p class='eventTitle'>" + subject + "</p> " +
+            "<p class='emailTime'>" + eventTimeFormat + "</p></button>");
+
+        //Add event attribute to each event button
+
+        var eventButton = document.getElementById("event" + i);
+        eventButton.setAttribute("onclick", "displayEvent('event" + i + "')");
+        eventButton.setAttribute("location", location);
+        eventButton.setAttribute("subject", subject);
+        eventButton.setAttribute("time", time);
+        eventButton.setAttribute("type", type);
+
+    }
+
+    //pdf
+    //image
+    //audio
+    //video
+
+    //server sends all events to ngo, ngo needs to display new events as well as past events that arnt displayed
+
+}
+
 function recieveEvents(){
     //on receive event
-    socket.on('event', function (evnt) {
 
-        inboxEvents = [];
-        for (var i = 0; i < evnt.msg.length; i++) {
-            var to = evnt.msg[i].Recipient;
-            if (to === name) {
-                inboxEvents.push(evnt.msg[i]);
+    socket.on('occurredEvents', function (evnt) {
+
+        eventList = [];
+        for (var i = 0; i < evnt.occurredEvents.length; i++) {
+            let currentEvent = evnt.occurredEvents[i];
+            let to = currentEvent.recipient;
+            if (to.toString().trim() === name) {
+                eventList.push(currentEvent);
             }
         }
+
+        processEvents();
+
     });
 }
 
 function recieveCurrentTime() {
     socket.on('currentTime', function (time) {
+        if(firstTimeReccieve){
+            startDuration = time;
+            firstTimeReccieve = false;
+        }
         simulationDuration = time;
         var timerElement = document.getElementById("timeManagement");
         displayRemainingTime(timerElement, simulationDuration);
@@ -331,7 +422,6 @@ $(function () {
     displayDisclaimer();
     processScenarioData();
     switchNGOChat();
-    recieveEvents();
     recieveCurrentTime();
     handleMessageRecieving();
 

@@ -44,10 +44,10 @@
 	
 	<event>
 		<recipient>Peacedoves</recipient>
-        <subject>Set up</subject>
+        	<subject>Set up</subject>
 		<time>00:00:10</time>
 		<type>pdf</type>
-		<location>/FileLibrary/000 Needs assessment letter.pdf</location>
+		<location>000_Needs_assessment_letter.pdf</location>
 	</event>
 
 	<event>
@@ -55,7 +55,7 @@
 		<subject>Introduction into Sebadoah</subject>
 		<time>00:02:00</time>
 		<type>pdf</type>
-		<location>/FileLibrary/001 Activation of Cluster System.pdf</location>
+		<location>000_Needs_assessment_letter.pdf</location>
 	</event>
 
 	<event>

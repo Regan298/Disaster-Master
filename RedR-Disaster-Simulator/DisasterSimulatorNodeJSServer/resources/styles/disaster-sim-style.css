@@ -488,7 +488,19 @@ body {
     margin: auto;
     display: flex;
     width: 45%;
-    position: relative;
+
+
+    position: absolute;
+    margin-left: 50%;
+}
+
+.inboxEventList{
+    max-height: 50vh;
+    max-width: 25%;
+    align-self: stretch;
+    border-right: solid;
+    border-width: 1px;
+    overflow-y: auto;
 }
 
 .inboxEmails {
@@ -518,12 +530,20 @@ body {
     min-width: 100%;
 }
 
-.emailObject {
+.eventObject {
     min-width: 100%;
     color: black;
     background-color: #cacaca;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-weight: lighter;
+    font-size: 1vw;
+    text-align: left;
+}
+
+#inboxFormDivNGO{
+    position: absolute;
+    padding-left: 26%;
+    bottom: 0;
 
 }
 
@@ -543,7 +563,7 @@ body {
 }
 
 
-.emailTitle {
+/*.eventTitle {
 
     font-size: 0.75vw;
     text-align: left;
@@ -556,7 +576,7 @@ body {
     font-size: 0.75vw;
     display: block;
     text-align: left;
-}
+}*/
 
 .emailViewer {
     border-left: solid;
