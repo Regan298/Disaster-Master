@@ -15,6 +15,7 @@ var xml2js = require('xml2js');
 var parser = new xml2js.Parser();
 app.use(fileUpload());
 var formidable = require('formidable');
+var xmlBuilder = require('xmlbuilder');
 var worker; //auto events worker
 const port = process.env.PORT || 80;
 
@@ -314,6 +315,11 @@ socket.on('getPastMessages', function (msg, callback) {
 //Send connectedusers to ngo upon ngo request
 socket.on('getConnected', function (msg, callback) {
     callback({connectedUsers});
+});
+
+//Save XML from scenario editor
+socket.on('exportXML', function (data) {
+    console.log(data);
 });
 
 
