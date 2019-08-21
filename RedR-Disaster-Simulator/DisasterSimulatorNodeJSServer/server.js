@@ -319,7 +319,42 @@ socket.on('getConnected', function (msg, callback) {
 
 //Save XML from scenario editor
 socket.on('exportXML', function (data) {
-    console.log(data);
+    // console.log(data);
+
+    var root = xmlBuilder.create('scenario');
+
+    root.ele('name', data.title).end({ pretty: true});
+    root.ele('ngoCount', data.ngoList.length).end({ pretty: true});
+    root.ele('duration', ''+data.durationMs).end({ pretty: true});
+    root.ele('hoursInDay', ''+24/data.timeScale).end({ pretty: true});
+    root.ele('mode', data.modeOnline).end({ pretty: true});
+    
+    for(var i = 0; i < data.ngoList.length; i++) {
+        var item = root.ele('ngo');
+        item.ele('name', ''+data.ngoList[i].name).end({ pretty: true});
+        item.ele('passkey', ''+data.ngoList[i].passkey).end({ pretty: true});
+        item.end({ pretty: true});
+    }
+
+    for(var i = 0; i < data.eventsList.length; i++) {
+        var item = root.ele('event');
+        item.ele('recipient', ''+data.eventsList[i].recipient).end({ pretty: true});
+        item.ele('subject', ''+data.eventsList[i].subject).end({ pretty: true});
+        item.ele('time', ''+data.eventsList[i].time).end({ pretty: true});
+        item.ele('type', ''+data.eventsList[i].type).end({ pretty: true});
+        item.ele('location', ''+data.eventsList[i].location).end({ pretty: true});
+        item.end({ pretty: true});
+    }
+
+    var xml = root.end({ pretty: true});
+ 
+    fs.writeFile("./"+data.title+"Scenario.xml", xml, function(err) {
+        if(err) {
+            return console.log(err);
+        }
+    
+        console.log("The file was saved!");
+    }); 
 });
 
 
