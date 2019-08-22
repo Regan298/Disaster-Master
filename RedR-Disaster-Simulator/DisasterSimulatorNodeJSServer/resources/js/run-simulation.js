@@ -14,6 +14,7 @@ var timeline;
 var realCountdown = false;
 var simData;
 var haveProcessedPastMessages = false;
+var selectedEvent;
 
 
 function handleNGOJoining() {
@@ -21,7 +22,8 @@ function handleNGOJoining() {
     socket.emit('getConnected', "request", function (callbackData) {
         processNGOData(callbackData.connectedUsers);
         for (var i = 0; i < ngos.length; i++) {
-            let currentUserName = new String(ngos[i].name).trim().replace(" ", "_");;
+            let currentUserName = new String(ngos[i].name).trim().replace(" ", "_");
+            ;
             if (currentUserName !== "HQ") {
                 try {
                     document.getElementById(currentUserName).style.visibility = "visible";
@@ -32,7 +34,7 @@ function handleNGOJoining() {
         }
 
         //handle past messages after ngo list recieved
-        if(!haveProcessedPastMessages) {
+        if (!haveProcessedPastMessages) {
             handlePersistentMessages();
             haveProcessedPastMessages = true;
         }
@@ -49,19 +51,19 @@ function processNGOData(recievedNGOs) {
     }
 }
 
-function handlePersistentMessages(){
+function handlePersistentMessages() {
     socket.emit('getPastMessages', "request", function (callbackData) {
-        if(callbackData.pastMessages != null) {
+        if (callbackData.pastMessages != null) {
 
-            for(var i = 0; i < callbackData.pastMessages.length; i++){
+            for (var i = 0; i < callbackData.pastMessages.length; i++) {
                 let currentPastMessage = callbackData.pastMessages[i];
                 var isOrigin;
-                if(currentPastMessage.sender.replace(" ", "_") === "HQ"){
+                if (currentPastMessage.sender.replace(" ", "_") === "HQ") {
                     isOrigin = true;
                 } else {
                     isOrigin = false;
                 }
-                addToConversation(currentPastMessage.content, isOrigin, currentPastMessage.sender.replace(" ", "_"), currentPastMessage.recipient.replace(" ", "_") );
+                addToConversation(currentPastMessage.content, isOrigin, currentPastMessage.sender.replace(" ", "_"), currentPastMessage.recipient.replace(" ", "_"));
 
             }
         }
@@ -79,7 +81,7 @@ function loadScenarioHeader() {
     var htmlContent;
     console.log(url);
 
-    if(simData.modeOnline) {
+    if (simData.modeOnline) {
         htmlContent = "<h1 class='titles'><span>Scenario: " + simTitle + "</span></h1>" +
             "<p class='lead'> [Online Mode]: Please inform your NGO's to go to this page: " + url + "</p>";
     } else {
@@ -209,21 +211,111 @@ function handleCommunicationButtons() {
     console.log(simData.ngoList.length); // 6
     console.log(buttonsCount); // 7
 
-    for (var j = simData.ngoList.length+1; j <= buttonsCount; j++) {
+    for (var j = simData.ngoList.length + 1; j <= buttonsCount; j++) {
         buttons[simData.ngoList.length].remove();
         messagingChats[simData.ngoList.length].remove();
     }
 }
 
+function addMessageToEventResponse(responses) {
+    for(var i=0; i < responses.length; i++) {
+        var valSplit = responses[i].split("\n");
+        console.log(valSplit.length);
+
+        for (var j = 0; j < valSplit.length; j++) {
+            $("#eventResponseViewerHQ").append(valSplit[j] + "<br>");
+        }
+
+        $("#eventResponseViewerHQ").append("<hr>");
+    }
+}
+
+function displayEvent(eventId){
+    console.log(eventId);
+    selectedEvent = eventId;
+
+    var eventViewerElement = document.getElementById("eventViewerHQ");
+    eventViewerElement.parentNode.removeChild(eventViewerElement);
+
+    $("#inboxElementHQ").append("<div id=\"eventViewerHQ\" class=\"eventViewerHQ\"></div>");
+
+    var eventButtonElement = document.getElementById(eventId);
+    var currentEventSubject = eventButtonElement.getAttribute("subject");
+    var currentEventTime = eventButtonElement.getAttribute("time");
+    var currentEventType = eventButtonElement.getAttribute("type");
+    var currentEventLocation = eventButtonElement.getAttribute("location");
+
+    $("#eventViewerHQ").append("<h1> " + currentEventSubject + "</h1>" + "<h2> " + currentEventTime + "</h2>"
+        + "<button id='displayEventButton' onclick=displayEventMedia(" + "'" + currentEventType + "'" + "," + "'" +
+        currentEventLocation + "'" + ")" + ">View Event</button>");
+
+    $("#eventViewerHQ").append("<div id=\"eventResponseViewerHQ\" class=\"eventResponseViewerHQ\"></div>");
+
+    socket.emit('pastEventResponses', {selectedEvent}, function (callbackData) {
+        let pastEventResponseList = callbackData.pastEventResponseList;
+        addMessageToEventResponse(pastEventResponseList);
+
+    });
+}
+
+
+function displayNGOEventResponse(ngoEventResponse) {
+
+
+
+    let id = ngoEventResponse.id;
+    let location = ngoEventResponse.location;
+    let subject = ngoEventResponse.subject;
+    let time = ngoEventResponse.time;
+    let type = ngoEventResponse.type;
+    let recipient = ngoEventResponse.recipient;
+
+    //convert time string into ms for manipulation
+
+    var timeSplit = time.toString().split(":");
+    var h = parseInt(timeSplit[0], 10);
+    var m = parseInt(timeSplit[1], 10);
+    var s = parseInt(timeSplit[2], 10);
+    var timeInMS = (h * 60 * 60 * 1000) + (m * 60 * 1000) + (s * 1000);
+    var timeStamp = simData.durationMs - timeInMS;
+    //convert ms back into string for display
+    var seconds = Math.floor((timeStamp / 1000) % 60);
+    var minutes = Math.floor((timeStamp / 1000 / 60) % 60);
+    var hours = Math.floor((timeStamp / (1000 * 60 * 60)) % 24);
+    var eventTimeFormat = hours + "h" + minutes + "m" + seconds ;
+
+    var buttonHTMLString = "<button id='event" + id + "' class='eventObject'><p class='eventTitle'>" + "RE: " + subject
+        + "<br>" + recipient + "</p> " +
+        "<p class='emailTime'>" + eventTimeFormat + "</p></button>";
+
+    $(buttonHTMLString).insertAfter("#ngoFilterHQ");
+
+    //Add event attribute to each event button
+
+    var eventButton = document.getElementById("event" + id);
+    eventButton.setAttribute("onclick", "displayEvent('event" + id + "')");
+    eventButton.setAttribute("location", location);
+    eventButton.setAttribute("subject", subject);
+    eventButton.setAttribute("time", time);
+    eventButton.setAttribute("type", type);
+}
+
+function handleEventResponseListening() {
+    socket.on('hqEventResponseRecieving', function (received) {
+        displayNGOEventResponse(received.eventForSending);
+    });
+
+}
 
 function processScenarioData() {
     socket.emit('simState', "request", function (callbackData) {
         simData = callbackData.simData;
-        console.log(simData);
         loadScenarioHeader();
         updateTimeline();
+        updateEventList();
         handleCommunicationButtons();
         setInterval(handleNGOJoining, 1000);
+        handleEventResponseListening();
     });
 
 }
@@ -329,18 +421,6 @@ function updateEventList() {
         timeline.redraw();
 
         eventList = received.occurredEvents;
-        console.log("eventSize: " + eventList.length);
-        $(".inboxEmails").empty();
-        for (var i = 0; i < eventList.length; i++) {
-            var fileReference = eventList[i].Location;
-
-            var htmlContent = "<button class=\"emailObject\"><p class=\"emailTitle\">" + eventList[i].subject[0] + "</p>\n" +
-                "                                <p class=\"emailTime\">" + eventList[i].time[0] + "</p></button>";
-
-            $(htmlContent).appendTo(".inboxEmails");
-
-        }
-
     });
 
 }
@@ -395,13 +475,13 @@ function addToConversation(content, isOrigin, from, to) {
         var childUl = $("#" + to).find('.messageList');
         $(childUl).append("<li id='origin'>" + content + "</li>");
     } else {
-        if(to !== "HQ"){
+        if (to !== "HQ") {
             return;
         }
         var value;
         for (i = 0; i < ngos.length; i++) {
             if (ngos[i].name === from) {
-                value = from.replace(" ", "_")+"Content";
+                value = from.replace(" ", "_") + "Content";
                 break;
             }
         }
@@ -426,7 +506,7 @@ function displayPDFOff() {
     document.getElementById("pdfOverlay").style.display = "none";
 }
 
-function displayEvent(type) {
+function displayEventMedia(type) {
     document.getElementById("pdfOverlay").style.display = "none";
     document.getElementById("audioOverlay").style.display = "none";
     document.getElementById("imageOverlay").style.display = "none";
@@ -493,7 +573,7 @@ function handleNewMessages() {
 
 //Once Page Loaded
 $(function () {
-    updateEventList();
+
     processScenarioData();
     updateCurrentTime();
     handleTimeSwitcher();
@@ -515,6 +595,28 @@ $(function () {
         }
         $('#input').val('');
         socket.emit('message', {message});
+    });
+
+
+
+    //New Event Response Form
+    $('#inboxHQForm').submit(function (e) {
+        console.log("responsesent");
+
+        e.preventDefault(); // prevents page reloading
+        //Function takes array by default so add turn single message into array
+        var responseAsArray = [];
+        responseAsArray.push($('#inputEmailResponseHQ').val());
+        addMessageToEventResponse(responseAsArray);
+        var response = {
+            from: 'HQ',
+            event: selectedEvent,
+            content: $('#inputEmailResponseHQ').val()
+        }
+
+        $('#inputEmailResponseHQ').val('');
+        socket.emit('newEventResponse', {response});
+
     });
 
 });

@@ -36,7 +36,7 @@ function getEvents(){
 		pastEvents = [];
 
 		// console.log(stopwatch.read());
-		console.log(timeS);
+
 	
 		var t = TimeFormat.fromMs((timeS*1000), 'hh:mm:ss');
 		var now = new Date();

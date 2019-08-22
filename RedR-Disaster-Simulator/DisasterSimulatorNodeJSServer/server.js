@@ -167,7 +167,7 @@ function parseXMLForLoading() {
                     simData.modeOnline = false;
                 }
 
-                console.log(simData.modeOnline);
+
                 ngosArray = result['scenario']['ngo'];
                 for (var i = 0; i < ngosArray.length; i++) {
                     var currentNGOName = ngosArray[i].name;
@@ -202,7 +202,8 @@ function parseXMLForLoading() {
                         time: currentEventTime,
                         type: currentEventType,
                         location: currentEventLocation,
-                        subject: currentEventSubject
+                        subject: currentEventSubject,
+                        responses: []
                     }
 
                     simData.eventsList.push(event);
@@ -271,7 +272,6 @@ socket.on('getPastMessages', function (msg, callback) {
 
 //Send connectedusers to ngo upon ngo request
 socket.on('getConnected', function (msg, callback) {
-    console.log(connectedUsers.length);
     callback({connectedUsers});
 });
 
@@ -293,7 +293,6 @@ socket.on('nameRequest', function (msg, callback) {
 if (simData.ready) {
 
     socket.on('simState', function (msg, callback) {
-        console.log('event received: ' + msg);
         callback({simData});
     });
     //io.emit('simState', {simData});
@@ -308,8 +307,6 @@ socket.on('message', function (msg) {
         content: msg.message.content
     }
 
-    console.log(recievedMessage);
-
 
     //store in simdata
     var d = new Date();
@@ -323,6 +320,51 @@ socket.on('message', function (msg) {
     simData.messageList.push(message);
     io.emit('message', {recievedMessage});
 });
+
+socket.on('newEventResponse', function (msg) {
+    //Get event id
+    var event = msg.response.event.toString();
+    var eventID = parseInt(event.substring(5, event.length), 10);
+
+    //Find event in list of events
+    var eventForSending;
+    for(var i = 0; i < simData.eventsList.length; i++){
+        if(simData.eventsList[i].id === eventID ){
+            simData.eventsList[i].responses.push(msg.response.content);
+            eventForSending = simData.eventsList[i];
+        }
+    }
+
+    if(msg.response.from === "HQ") {
+        io.emit('ngoEventResponseRecieving', {eventForSending});
+    } else {
+        io.emit('hqEventResponseRecieving', {eventForSending});
+    }
+});
+
+socket.on('pastEventResponses', function (msg, callback) {
+
+    var event = msg.selectedEvent.toString();
+    var eventID = parseInt(event.substring(5, event.length), 10);
+    console.log("eventid" + eventID);
+    //do lookup of events response data
+    console.log(simData.eventsList.length);
+    var pastEventResponseList;
+    for(var i = 0; i < simData.eventsList.length; i++){
+        if(simData.eventsList[i].id === eventID ){
+            pastEventResponseList = simData.eventsList[i].responses;
+            console.log("response" + pastEventResponseList.length);
+            for(var j = 0; j < pastEventResponseList.length; j++){
+                console.log(pastEventResponseList[j]);
+            }
+
+        }
+    }
+
+    callback({pastEventResponseList});
+
+});
+
 
 //Listen for play/pause
 socket.on('play', function () {
@@ -339,8 +381,7 @@ socket.on('pause', function () {
     worker.postMessage('pause');
 });
 
-})
-;
+});
 
 function runSim() {
     worker.on('message', (msg) => {
