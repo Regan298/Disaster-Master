@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="49695245-0bfd-4e8e-ac0b-a4ae2f8b4c6d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autoevents.js" beforeDir="false" afterPath="$PROJECT_DIR$/autoevents.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/currentScenario.xml" beforeDir="false" afterPath="$PROJECT_DIR$/currentScenario.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/ngo-simulation.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/ngo-simulation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/run-simulation.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/run-simulation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/styles/disaster-sim-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/styles/disaster-sim-style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Resourses/Relevant Contextual Files/~$enario Timeline - Ops Centre Emails timeline.docx" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,8 +22,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="844">
-              <caret line="361" column="13" selection-start-line="361" selection-start-column="13" selection-end-line="361" selection-end-column="13" />
+            <state relative-caret-position="425">
+              <caret line="340" column="94" lean-forward="true" selection-start-line="340" selection-start-column="94" selection-end-line="340" selection-end-column="94" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/autoevents.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="181">
+              <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -31,17 +40,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/js/ngo-simulation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="748">
-              <caret line="398" column="19" selection-start-line="398" selection-start-column="19" selection-end-line="398" selection-end-column="19" />
+            <state relative-caret-position="949">
+              <caret line="446" column="38" selection-start-line="446" selection-start-column="38" selection-end-line="446" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/js/run-simulation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1054">
-              <caret line="311" column="19" selection-start-line="311" selection-start-column="19" selection-end-line="311" selection-end-column="19" />
+            <state relative-caret-position="136">
+              <caret line="272" selection-start-line="272" selection-end-line="272" />
             </state>
           </provider>
         </entry>
@@ -59,18 +68,9 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/autoevents.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1326">
-              <caret line="78" column="11" selection-start-line="78" selection-start-column="4" selection-end-line="78" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ngo-simulation.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2193">
+            <state relative-caret-position="708">
               <caret line="129" column="27" selection-start-line="126" selection-start-column="19" selection-end-line="129" selection-end-column="27" />
             </state>
           </provider>
@@ -79,8 +79,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/styles/disaster-sim-style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193834">
-              <caret line="11402" column="41" selection-start-line="11402" selection-start-column="41" selection-end-line="11402" selection-end-column="41" />
+            <state relative-caret-position="435">
+              <caret line="561" column="13" selection-start-line="561" selection-start-column="13" selection-end-line="561" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -97,9 +97,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>emailObject</find>
-      <find>emailTitle</find>
-      <find>inboxeventlist</find>
       <find>started</find>
       <find>displayeventm</find>
       <find>overflow</find>
@@ -120,16 +117,20 @@
       <find>newEventResponse</find>
       <find>handleEventResponseListening</find>
       <find>processEvents</find>
-      <find>console</find>
       <find>displayNGOEventResponse</find>
       <find>ngoEventResponseRecieving</find>
       <find>selectedEvent</find>
       <find>pastevent</find>
       <find>pastEventResponses</find>
+      <find>eventCounter</find>
+      <find>.inboxEventListNGO</find>
       <find>eventResponseList</find>
+      <find>console</find>
+      <find>auto</find>
     </findStrings>
     <replaceStrings>
       <replace>connectedUsers</replace>
+      <replace>eventDisplayCounter</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -161,21 +162,21 @@
         <option value="$PROJECT_DIR$/../../tempyml" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/../../.gitlab-ci.yml" />
-        <option value="$PROJECT_DIR$/autoevents.js" />
         <option value="$PROJECT_DIR$/ngo-simulation.html" />
         <option value="$PROJECT_DIR$/hq-run-simulation.html" />
+        <option value="$PROJECT_DIR$/resources/js/run-simulation.js" />
         <option value="$PROJECT_DIR$/resources/styles/disaster-sim-style.css" />
+        <option value="$PROJECT_DIR$/autoevents.js" />
         <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/resources/js/ngo-simulation.js" />
-        <option value="$PROJECT_DIR$/resources/js/run-simulation.js" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="66" />
-    <option name="y" value="-20" />
-    <option name="width" value="1386" />
-    <option name="height" value="788" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1296" />
+    <option name="height" value="1416" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -285,18 +286,18 @@
       <workItem from="1566340749960" duration="17741000" />
       <workItem from="1566381740372" duration="3235000" />
       <workItem from="1566419901883" duration="32293000" />
-      <workItem from="1566530671149" duration="4128000" />
+      <workItem from="1566530671149" duration="21794000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="360993000" />
+    <option name="totallyTimeSpent" value="378659000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
+    <frame x="-8" y="-8" width="2576" height="1416" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24546887" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24761526" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -313,7 +314,7 @@
       <window_info anchor="bottom" id="TypeScript" order="11" weight="0.11620294" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24962178" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24960254" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -446,27 +447,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/autoevents.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1326">
-          <caret line="78" column="11" selection-start-line="78" selection-start-column="4" selection-end-line="78" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ngo-simulation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2193">
-          <caret line="129" column="27" selection-start-line="126" selection-start-column="19" selection-end-line="129" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/styles/disaster-sim-style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193834">
-          <caret line="11402" column="41" selection-start-line="11402" selection-start-column="41" selection-end-line="11402" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hq-run-simulation.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="725">
@@ -477,24 +457,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
+    <entry file="file://$PROJECT_DIR$/resources/styles/disaster-sim-style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="844">
-          <caret line="361" column="13" selection-start-line="361" selection-start-column="13" selection-end-line="361" selection-end-column="13" />
+        <state relative-caret-position="435">
+          <caret line="561" column="13" selection-start-line="561" selection-start-column="13" selection-end-line="561" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/ngo-simulation.js">
+    <entry file="file://$PROJECT_DIR$/ngo-simulation.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="398" column="19" selection-start-line="398" selection-start-column="19" selection-end-line="398" selection-end-column="19" />
+        <state relative-caret-position="708">
+          <caret line="129" column="27" selection-start-line="126" selection-start-column="19" selection-end-line="129" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/run-simulation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="311" column="19" selection-start-line="311" selection-start-column="19" selection-end-line="311" selection-end-column="19" />
+        <state relative-caret-position="136">
+          <caret line="272" selection-start-line="272" selection-end-line="272" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/ngo-simulation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="949">
+          <caret line="446" column="38" selection-start-line="446" selection-start-column="38" selection-end-line="446" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="340" column="94" lean-forward="true" selection-start-line="340" selection-start-column="94" selection-end-line="340" selection-end-column="94" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/autoevents.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
         </state>
       </provider>
     </entry>

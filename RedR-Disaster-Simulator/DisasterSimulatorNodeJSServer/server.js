@@ -17,6 +17,7 @@ var worker; //auto events worker
 const port = process.env.PORT || 80;
 
 
+
 module.exports = app;
 app.use(express.static('resources'));
 
@@ -37,7 +38,8 @@ var simData = {
     timeScale: 0,
     started: false,
     modeOnline: true,
-    occurredEvents: []
+    occurredEvents: [],
+    startTimeMS: 0
 };
 
 
@@ -112,7 +114,8 @@ function clearSimData() {
         timeScale: 0,
         started: false,
         modeOnline: true,
-        occurredEvents: []
+        occurredEvents: [],
+        startTimeMS: 0
     };
     connectedUsers = [];
     connectedUsers.push(host);
@@ -203,8 +206,9 @@ function parseXMLForLoading() {
                         type: currentEventType,
                         location: currentEventLocation,
                         subject: currentEventSubject,
-                        responses: []
-                    }
+                        responses: [],
+                        latestUpdateTime: 0
+                    };
 
                     simData.eventsList.push(event);
                 }
@@ -216,6 +220,7 @@ function parseXMLForLoading() {
             });
             simData.ready = true;
             simData.loaded = true;
+            simData.startTimeMS = new Date().getTime();
         });
     } catch (e) {
         return false;
@@ -333,8 +338,11 @@ socket.on('newEventResponse', function (msg) {
     var eventForSending;
     for(var i = 0; i < simData.eventsList.length; i++){
         if(simData.eventsList[i].id === eventID ){
-            simData.eventsList[i].responses.push(msg.response.content);
+            simData.eventsList[i].responses.push({content: msg.response.content, sender: msg.response.from});
+            simData.eventsList[i].latestUpdateTime = new Date().getTime();
             eventForSending = simData.eventsList[i];
+
+            worker.postMessage(simData);
         }
     }
 

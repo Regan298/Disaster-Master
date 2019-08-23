@@ -46,7 +46,7 @@
 		<id>0</id>
 		<recipient>Peacedoves</recipient>
         	<subject>Set up</subject>
-		<time>00:00:10</time>
+		<time>00:00:5</time>
 		<type>pdf</type>
 		<location>000_Needs_assessment_letter.pdf</location>
 	</event>
@@ -55,7 +55,7 @@
 		<id>1</id>
 		<recipient>Peacedoves</recipient>
 		<subject>Introduction into Sebadoah</subject>
-		<time>00:00:20</time>
+		<time>00:00:10</time>
 		<type>pdf</type>
 		<location>000_Needs_assessment_letter.pdf</location>
 	</event>
@@ -64,7 +64,7 @@
 		<id>2</id>
 		<recipient>Peacedoves</recipient>
 		<subject>President of Sebadoah</subject>
-		<time>00:00:30</time>
+		<time>00:00:15</time>
 		<type>pdf</type>
 		<location>/FileLibrary/002 Purchase from Umbala.pdf</location>
 	</event>
@@ -73,7 +73,7 @@
 		<id>3</id>
 		<recipient>Peacedoves</recipient>
 		<subject>SitRep Request</subject>
-		<time>00:06:00</time>
+		<time>00:00:30</time>
 		<type>pdf</type>
 		<location>/FileLibrary/003 HQ Daily SitRep Request.pdf</location>
 	</event>

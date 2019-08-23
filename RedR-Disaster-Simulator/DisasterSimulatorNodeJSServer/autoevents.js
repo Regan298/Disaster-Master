@@ -15,7 +15,15 @@ eventList = workerData.eventsList;
 var timeS = 0;
 var t;
 
+function updadeEvents(msg) {
+	eventList = msg.eventsList;
+}
+
 parentPort.on('message', (msg) => {
+	if(typeof msg === "object"){
+		updadeEvents(msg);
+		return;
+	}
 	if (msg === 'pause') {
 		console.log('Pause');
 		// stopwatch.stop();

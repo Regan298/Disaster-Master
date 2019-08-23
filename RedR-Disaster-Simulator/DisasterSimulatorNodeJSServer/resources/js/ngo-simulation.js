@@ -10,7 +10,7 @@ var simData;
 var haveProcessedPastMessages = false;
 var startDuration;
 var firstTimeReccieve = true;
-var eventCounter = 0;
+var eventDisplayCounter = 0;
 var eventResponseList = [];
 
 //Runs in Background and gets new and past users on a period
@@ -210,7 +210,7 @@ function processScenarioData() {
         simData = callbackData.simData;
         recieveEvents();
         loadNGOTitle();
-        handleEventResponseListening();
+        //handleEventResponseListening();
 
     });
 }
@@ -302,12 +302,15 @@ function imageOverlayOff() {
     document.getElementById("imageOverlay").style.display = "none";
 }
 
+/*
 function handleEventResponseListening() {
     socket.on('ngoEventResponseRecieving', function (received) {
+        received.eventForSending.timeRecieved = new Date().getTime();
         eventResponseList.push(received.eventForSending);
         console.log(received.eventForSending);
     });
 }
+*/
 
 function displayEvent(eventId) {
     selectedEvent = document.getElementById(eventId).getAttribute("eventID");
@@ -361,10 +364,6 @@ function processEvent(event) {
     let time = currentEvent.time;
     let type = currentEvent.type;
 
-    if(event.responses.length > 0) {
-        console.log(currentEvent);
-    }
-
     //convert time string into ms for manipulation
     var timeSplit = time.toString().split(":");
     var h = parseInt(timeSplit[0], 10);
@@ -376,27 +375,29 @@ function processEvent(event) {
     var seconds = Math.floor((timeStamp / 1000) % 60);
     var minutes = Math.floor((timeStamp / 1000 / 60) % 60);
     var hours = Math.floor((timeStamp / (1000 * 60 * 60)) % 24);
-    var eventTimeFormat = hours + "h" + minutes + "m" + seconds ;
+    var eventTimeFormat = hours + "h" + minutes + "m" + seconds;
 
     var potentialReplyValue = "";
-    if(event.responses.length > 0){
-        potentialReplyValue = "RE: ";
-    }
 
-    $("#inboxEventListNGO").prepend("<button id='event" + eventCounter + "' class='eventObject'><p class='eventTitle'>" + potentialReplyValue + subject + "</p> " +
+    if(currentEvent.displayAsResponse) {
+        if (event.responses[currentEvent.responses.length - 1].sender === "HQ") {
+            potentialReplyValue = "RE: ";
+        }
+    }
+    $("#inboxEventListNGO").prepend("<button id='event" + eventDisplayCounter + "' class='eventObject'><p class='eventTitle'>" + potentialReplyValue + subject + "</p> " +
         "<p class='emailTime'>" + eventTimeFormat + "</p></button>");
 
     //Add event attribute to each event button
 
-    var eventButton = document.getElementById("event" + eventCounter);
+    var eventButton = document.getElementById("event" + eventDisplayCounter);
     eventButton.setAttribute("eventID", id);
-    eventButton.setAttribute("onclick", "displayEvent('event" + eventCounter + "')");
+    eventButton.setAttribute("onclick", "displayEvent('event" + eventDisplayCounter + "')");
     eventButton.setAttribute("location", location);
     eventButton.setAttribute("subject", potentialReplyValue + subject);
     eventButton.setAttribute("time", time);
     eventButton.setAttribute("type", type);
 
-    eventCounter++;
+    eventDisplayCounter++;
 }
 
 function recieveEvents() {
@@ -405,23 +406,43 @@ function recieveEvents() {
     socket.on('occurredEvents', function (evnt) {
 
         eventList = [];
+        var respondedEvents = [];
         //add occured events
         for (var i = 0; i < evnt.occurredEvents.length; i++) {
             let currentEvent = evnt.occurredEvents[i];
             let to = currentEvent.recipient;
             if (to.toString().trim() === name) {
+
+                if(currentEvent.responses[currentEvent.responses.length-1] != null) {
+                    if (currentEvent.responses[currentEvent.responses.length - 1].sender === "HQ") {
+                        var eventCopy = $.extend(true, {}, currentEvent);
+                        eventCopy.displayAsResponse = true;
+                        eventList.push(eventCopy);
+                    }
+                }
+
+
+                var timeSplit = currentEvent.time.toString().split(":");
+                var h = parseInt(timeSplit[0], 10);
+                var m = parseInt(timeSplit[1], 10);
+                var s = parseInt(timeSplit[2], 10);
+                var timeInMS = (h * 60 * 60 * 1000) + (m * 60 * 1000) + (s * 1000);
+                currentEvent.latestUpdateTime = timeInMS + simData.startTimeMS;
+
                 eventList.push(currentEvent);
             }
         }
 
-        //add events that have been reponded to
-        for (var i = 0; i < eventResponseList.length; i++) {
-
-            eventList.push(eventResponseList[i]);
+        for (var i = 0; i < eventList.length; i++) {
+            console.log(eventList[i]);
         }
+        //sort events for displaying
+        eventList.sort(eventComparator);
+
 
 
         $("button.eventObject").remove();
+        eventDisplayCounter = 0;
         for (var i = 0; i < eventList.length; i++) {
             console.log(eventList[i]);
             processEvent(eventList[i]);
@@ -429,6 +450,16 @@ function recieveEvents() {
 
 
     });
+}
+
+function eventComparator(e1, e2) {
+    if (e1.latestUpdateTime < e2.latestUpdateTime) {
+        return -1;
+    }
+    if (e1.latestUpdateTime > e2.latestUpdateTime) {
+        return 1;
+    }
+    return 0;
 }
 
 function recieveCurrentTime() {
