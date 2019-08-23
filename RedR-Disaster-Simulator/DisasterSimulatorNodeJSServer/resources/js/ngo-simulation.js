@@ -11,6 +11,7 @@ var haveProcessedPastMessages = false;
 var startDuration;
 var firstTimeReccieve = true;
 var eventCounter = 0;
+var eventResponseList = [];
 
 //Runs in Background and gets new and past users on a period
 function handleNGOJoining() {
@@ -303,13 +304,13 @@ function imageOverlayOff() {
 
 function handleEventResponseListening() {
     socket.on('ngoEventResponseRecieving', function (received) {
-        console.log("eventresponsefromhqincomming");
-        processEvent(received.eventForSending, true);
+        eventResponseList.push(received.eventForSending);
+        console.log(received.eventForSending);
     });
 }
 
 function displayEvent(eventId) {
-    selectedEvent = eventId;
+    selectedEvent = document.getElementById(eventId).getAttribute("eventID");
 
     var eventViewerElement = document.getElementById("eventViewerNGO");
     eventViewerElement.parentNode.removeChild(eventViewerElement);
@@ -350,7 +351,7 @@ function addMessageToEventResponse(responses) {
     }
 }
 
-function processEvent(event, isResponse) {
+function processEvent(event) {
 
 
     let currentEvent = event;
@@ -360,7 +361,7 @@ function processEvent(event, isResponse) {
     let time = currentEvent.time;
     let type = currentEvent.type;
 
-    if(isResponse) {
+    if(event.responses.length > 0) {
         console.log(currentEvent);
     }
 
@@ -378,7 +379,7 @@ function processEvent(event, isResponse) {
     var eventTimeFormat = hours + "h" + minutes + "m" + seconds ;
 
     var potentialReplyValue = "";
-    if(isResponse){
+    if(event.responses.length > 0){
         potentialReplyValue = "RE: ";
     }
 
@@ -404,6 +405,7 @@ function recieveEvents() {
     socket.on('occurredEvents', function (evnt) {
 
         eventList = [];
+        //add occured events
         for (var i = 0; i < evnt.occurredEvents.length; i++) {
             let currentEvent = evnt.occurredEvents[i];
             let to = currentEvent.recipient;
@@ -412,9 +414,17 @@ function recieveEvents() {
             }
         }
 
+        //add events that have been reponded to
+        for (var i = 0; i < eventResponseList.length; i++) {
+
+            eventList.push(eventResponseList[i]);
+        }
+
+
         $("button.eventObject").remove();
         for (var i = 0; i < eventList.length; i++) {
-            processEvent(eventList[i], false);
+            console.log(eventList[i]);
+            processEvent(eventList[i]);
         }
 
 

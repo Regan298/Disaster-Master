@@ -323,9 +323,12 @@ socket.on('message', function (msg) {
 
 socket.on('newEventResponse', function (msg) {
     //Get event id
-    var event = msg.response.event.toString();
-    var eventID = parseInt(event.substring(5, event.length), 10);
 
+    var event = msg.response.event.toString();
+    console.log(event);
+    var eventID = parseInt(event, 10);
+
+    console.log(eventID);
     //Find event in list of events
     var eventForSending;
     for(var i = 0; i < simData.eventsList.length; i++){
@@ -345,7 +348,7 @@ socket.on('newEventResponse', function (msg) {
 socket.on('pastEventResponses', function (msg, callback) {
 
     var event = msg.selectedEvent.toString();
-    var eventID = parseInt(event.substring(5, event.length), 10);
+    var eventID = parseInt(event, 10);
     console.log("eventid" + eventID);
     //do lookup of events response data
     console.log(simData.eventsList.length);
@@ -357,7 +360,6 @@ socket.on('pastEventResponses', function (msg, callback) {
             for(var j = 0; j < pastEventResponseList.length; j++){
                 console.log(pastEventResponseList[j]);
             }
-
         }
     }
 

@@ -15,6 +15,8 @@ var realCountdown = false;
 var simData;
 var haveProcessedPastMessages = false;
 var selectedEvent;
+var eventResponseList = [];
+var eventCounter;
 
 
 function handleNGOJoining() {
@@ -232,7 +234,7 @@ function addMessageToEventResponse(responses) {
 
 function displayEvent(eventId){
     console.log(eventId);
-    selectedEvent = eventId;
+    selectedEvent = document.getElementById(eventId).getAttribute("eventID");
 
     var eventViewerElement = document.getElementById("eventViewerHQ");
     eventViewerElement.parentNode.removeChild(eventViewerElement);
@@ -258,9 +260,16 @@ function displayEvent(eventId){
     });
 }
 
+function handleEventResponseListening() {
+    socket.on('hqEventResponseRecieving', function (received) {
+        eventResponseList.push(received.eventForSending);
+        displayNGOEventResponse(received.eventForSending);
+    });
+
+}
 
 function displayNGOEventResponse(ngoEventResponse) {
-
+    console.log(ngoEventResponse);
 
 
     let id = ngoEventResponse.id;
@@ -284,7 +293,7 @@ function displayNGOEventResponse(ngoEventResponse) {
     var hours = Math.floor((timeStamp / (1000 * 60 * 60)) % 24);
     var eventTimeFormat = hours + "h" + minutes + "m" + seconds ;
 
-    var buttonHTMLString = "<button id='event" + id + "' class='eventObject'><p class='eventTitle'>" + "RE: " + subject
+    var buttonHTMLString = "<button id='event" + eventCounter + "' class='eventObject'><p class='eventTitle'>" + "RE: " + subject
         + "<br>" + recipient + "</p> " +
         "<p class='emailTime'>" + eventTimeFormat + "</p></button>";
 
@@ -292,20 +301,18 @@ function displayNGOEventResponse(ngoEventResponse) {
 
     //Add event attribute to each event button
 
-    var eventButton = document.getElementById("event" + id);
-    eventButton.setAttribute("onclick", "displayEvent('event" + id + "')");
+    var eventButton = document.getElementById("event" + eventCounter);
+    eventButton.setAttribute("eventID", id);
+    eventButton.setAttribute("onclick", "displayEvent('event" + eventCounter + "')");
     eventButton.setAttribute("location", location);
     eventButton.setAttribute("subject", subject);
     eventButton.setAttribute("time", time);
     eventButton.setAttribute("type", type);
+
+    eventCounter++;
 }
 
-function handleEventResponseListening() {
-    socket.on('hqEventResponseRecieving', function (received) {
-        displayNGOEventResponse(received.eventForSending);
-    });
 
-}
 
 function processScenarioData() {
     socket.emit('simState', "request", function (callbackData) {
@@ -608,6 +615,7 @@ $(function () {
         var responseAsArray = [];
         responseAsArray.push($('#inputEmailResponseHQ').val());
         addMessageToEventResponse(responseAsArray);
+        console.log(selectedEvent);
         var response = {
             from: 'HQ',
             event: selectedEvent,
