@@ -17,10 +17,12 @@ var t;
 
 function updadeEvents(msg) {
 	eventList = msg.eventsList;
+	t = setInterval(getEvents,1000);
 }
 
 parentPort.on('message', (msg) => {
 	if(typeof msg === "object"){
+		clearInterval(t);
 		updadeEvents(msg);
 		return;
 	}
