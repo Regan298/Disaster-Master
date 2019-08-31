@@ -42,6 +42,8 @@ var simData = {
     startTimeMS: 0
 };
 
+var currentRunningInstance;
+
 
 var currentTimeMs;
 
@@ -119,6 +121,9 @@ function clearSimData() {
     };
     connectedUsers = [];
     connectedUsers.push(host);
+    worker.terminate();
+
+
 }
 
 //Process Sceanrio File For Uploading
@@ -381,12 +386,13 @@ socket.on('play', function () {
     if (!simData.started) {
         var data = simData;
         worker = new Worker('./autoevents.js', {workerData: data});
-        runSim();
+        currentRunningInstance = runSim();
         simData.started = true;
     } else {
         worker.postMessage('play');
     }
 });
+
 socket.on('pause', function () {
     worker.postMessage('pause');
 });
@@ -395,10 +401,12 @@ socket.on('pause', function () {
 
 function runSim() {
     worker.on('message', (msg) => {
+
         currentTimeMs = simData.durationMs - msg.timeMs;
         var time = msg.timeMs;
         var occurredEvents = msg.events;
         io.emit('currentTime', currentTimeMs);
         io.emit('occurredEvents', {occurredEvents, time});
     });
+
 }
