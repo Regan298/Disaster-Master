@@ -343,8 +343,8 @@ socket.on('newEventResponse', function (msg) {
     var eventForSending;
     for(var i = 0; i < simData.eventsList.length; i++){
         if(simData.eventsList[i].id === eventID ){
-            simData.eventsList[i].responses.push({content: msg.response.content, sender: msg.response.from});
-            simData.eventsList[i].latestUpdateTime = new Date().getTime();
+            let responseTime = new Date().getTime();
+            simData.eventsList[i].responses.push({content: msg.response.content, sender: msg.response.from, time: responseTime});
             eventForSending = simData.eventsList[i];
 
             worker.postMessage(simData);

@@ -201,6 +201,7 @@ body {
     left: 0;
     right: 0;
 
+
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 3;
     cursor: pointer;
@@ -584,12 +585,16 @@ body {
 
 #eventViewerNGO{
     min-width: 75%;
+    max-height: 60vh;
+
 }
 
 #eventResponseViewerNGO{
+    overflow-y: auto;
     border-style: solid;
     border-width: 1px;
-    height: 30vh;
+    height: 40vh;
+    min-width: 100%;
     margin-left: 2%;
     margin-right: 2%;
     margin-top: 2%;
@@ -597,10 +602,11 @@ body {
 
 #inboxFormDivNGO{
     position: absolute;
-    margin-left: 26%;
+    margin-left: 20%;
     bottom: 0;
     width: 75%;
     padding-bottom: 2%;
+    padding-left: 2%;
 }
 
 
@@ -609,7 +615,7 @@ body {
     resize: none;
     float: left;
     max-height: 100%;
-    min-width: 80%;
+    min-width: 85%;
     margin-right: 5%;
     min-height: 10vh;
 }
@@ -628,6 +634,9 @@ body {
 
 
 .pdfobject {
+    margin-top: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
     min-height: 75vh;
     overflow: auto;
     width: 100%;

@@ -249,6 +249,8 @@ function displayEventMedia(type, name) {
     //audio
     //video
 
+    console.log(name);
+
     document.getElementById("pdfOverlay").style.display = "none";
     document.getElementById("audioOverlay").style.display = "none";
     document.getElementById("imageOverlay").style.display = "none";
@@ -257,7 +259,7 @@ function displayEventMedia(type, name) {
     if (type == "video") {
         document.getElementById("videoOverlay").style.display = "block";
     } else if (type == "pdf") {
-        PDFObject.embed("/files/test.pdf", "#pdfOverlay");
+        PDFObject.embed("/files/" + name, "#pdfOverlay");
         document.getElementById("pdfOverlay").style.display = "block";
     } else if (type == "audio") {
         document.getElementById("audioOverlay").style.display = "block";
@@ -323,10 +325,23 @@ function displayEvent(eventId) {
     var eventButtonElement = document.getElementById(eventId);
     var currentEventSubject = eventButtonElement.getAttribute("subject");
     var currentEventTime = eventButtonElement.getAttribute("time");
+
+    var timeSplit = currentEventTime.toString().split(":");
+    var h = parseInt(timeSplit[0], 10);
+    var m = parseInt(timeSplit[1], 10);
+    var s = parseInt(timeSplit[2], 10);
+    var timeInMS = (h * 60 * 60 * 1000) + (m * 60 * 1000) + (s * 1000);
+    var timeStamp = simData.durationMs - timeInMS;
+    //convert ms back into string for display
+    var seconds = Math.floor((timeStamp / 1000) % 60);
+    var minutes = Math.floor((timeStamp / 1000 / 60) % 60);
+    var hours = Math.floor((timeStamp / (1000 * 60 * 60)) % 24);
+    var eventTimeFormat = hours + "h" + minutes + "m" + seconds;
+
     var currentEventType = eventButtonElement.getAttribute("type");
     var currentEventLocation = eventButtonElement.getAttribute("location");
 
-    $("#eventViewerNGO").append("<h1> " + currentEventSubject + "</h1>" + "<h2> " + currentEventTime + "</h2>"
+    $("#eventViewerNGO").append("<h1> " + currentEventSubject + "</h1>" + "<h2> " + eventTimeFormat + "</h2>"
         + "<button id='displayEventButton' onclick=displayEventMedia(" + "'" + currentEventType + "'" + "," + "'" +
         currentEventLocation + "'" + ")" + ">View Event</button>");
 
@@ -334,18 +349,20 @@ function displayEvent(eventId) {
 
     socket.emit('pastEventResponses', {selectedEvent}, function (callbackData) {
         let pastEventResponseList = callbackData.pastEventResponseList;
-        addMessageToEventResponse(pastEventResponseList);
+        addMessageToEventResponse(pastEventResponseList, false);
 
     });
 }
 
-function addMessageToEventResponse(responses) {
-
+function addMessageToEventResponse(responses, isorigin) {
 
     for (var i = 0; i < responses.length; i++) {
-        var valSplit = responses[i].split("\n");
-
-
+        var valSplit;
+        if(isorigin){
+            valSplit = responses[i].split("\n");
+        } else {
+            valSplit = responses[i].content.split("\n");
+        }
         for (var j = 0; j < valSplit.length; j++) {
             $("#eventResponseViewerNGO").append(valSplit[j] + "<br>");
         }
@@ -363,6 +380,7 @@ function processEvent(event) {
     let subject = currentEvent.subject;
     let time = currentEvent.time;
     let type = currentEvent.type;
+    let latestTime = currentEvent.latestUpdateTime;
 
     //convert time string into ms for manipulation
     var timeSplit = time.toString().split(":");
@@ -396,6 +414,7 @@ function processEvent(event) {
     eventButton.setAttribute("subject", potentialReplyValue + subject);
     eventButton.setAttribute("time", time);
     eventButton.setAttribute("type", type);
+    eventButton.setAttribute("latestTime", latestTime);
 
     eventDisplayCounter++;
 }
@@ -414,10 +433,25 @@ function recieveEvents() {
             if (to.toString().trim() === name) {
 
                 if(currentEvent.responses[currentEvent.responses.length-1] != null) {
-                    if (currentEvent.responses[currentEvent.responses.length - 1].sender === "HQ") {
-                        var eventCopy = $.extend(true, {}, currentEvent);
-                        eventCopy.displayAsResponse = true;
-                        eventList.push(eventCopy);
+                    let processingResponseData = true;
+                    let i = 1;
+
+                    while(processingResponseData) {
+                        if (currentEvent.responses[currentEvent.responses.length - i].sender === "HQ") {
+                            var eventCopy = $.extend(true, {}, currentEvent);
+                            eventCopy.displayAsResponse = true;
+                            eventCopy.latestUpdateTime = eventCopy.responses[currentEvent.responses.length - i].time;
+                            eventList.push(eventCopy);
+                        }
+                        if(currentEvent.responses[currentEvent.responses.length-i-1] != null) {
+                            if (currentEvent.responses[currentEvent.responses.length - i - 1].sender === "HQ") {
+                                i++;
+                            } else {
+                                processingResponseData = false;
+                            }
+                        } else {
+                            processingResponseData = false;
+                        }
                     }
                 }
 
@@ -433,9 +467,7 @@ function recieveEvents() {
             }
         }
 
-        for (var i = 0; i < eventList.length; i++) {
-            console.log(eventList[i]);
-        }
+
         //sort events for displaying
         eventList.sort(eventComparator);
 
@@ -444,7 +476,7 @@ function recieveEvents() {
         $("button.eventObject").remove();
         eventDisplayCounter = 0;
         for (var i = 0; i < eventList.length; i++) {
-            console.log(eventList[i]);
+
             processEvent(eventList[i]);
         }
 
@@ -526,7 +558,7 @@ $(function () {
         //Function takes array by default so add turn single message into array
         var responseAsArray = [];
         responseAsArray.push($('#inputEmailResponseNGO').val());
-        addMessageToEventResponse(responseAsArray);
+        addMessageToEventResponse(responseAsArray, true);
         var response = {
             from: name,
             event: selectedEvent,
