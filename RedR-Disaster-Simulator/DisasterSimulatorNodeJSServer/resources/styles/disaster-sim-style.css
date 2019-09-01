@@ -236,7 +236,7 @@ body {
 .messagingElementHQ {
     margin-top: 1%;
     max-width: 50%;
-    height: 30%;
+    height: 50vh;
     border-style: solid;
     border-width: 1px;
     float: left;
@@ -469,8 +469,8 @@ body {
 
 .inboxElementHQ {
     max-width: 50%;
-    max-height: 60vh;
-    min-height: 60vh;
+    max-height: 70vh;
+    min-height: 70vh;
     border-style: solid;
     border-width: 1px;
     float: right;
@@ -492,7 +492,8 @@ body {
 }
 
 .inboxEventListHQ{
-    min-height: 55vh;
+    max-height: 70vh;
+    min-height: 70vh;
     width: 20%;
     border-right: solid;
     border-width: 1px;
@@ -508,8 +509,19 @@ body {
 .eventViewerHQ{
     align-self: flex-start;
     min-width: 80%;
-    height: 50vh;
+    height: 60vh;
     overflow-y: auto;
+}
+
+#eventResponseViewerHQ{
+    overflow-y: auto;
+    border-style: solid;
+    border-width: 1px;
+    height: 40vh;
+    min-width: 90%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 2%;
 }
 
 .inboxFormDivHQ{

@@ -358,7 +358,7 @@ function addMessageToEventResponse(responses, isorigin) {
 
     for (var i = 0; i < responses.length; i++) {
         var valSplit;
-        if(isorigin){
+        if (isorigin) {
             valSplit = responses[i].split("\n");
         } else {
             valSplit = responses[i].content.split("\n");
@@ -397,10 +397,8 @@ function processEvent(event) {
 
     var potentialReplyValue = "";
 
-    if(currentEvent.displayAsResponse) {
-        if (event.responses[currentEvent.responses.length - 1].sender === "HQ") {
-            potentialReplyValue = "RE: ";
-        }
+    if (currentEvent.displayAsResponse) {
+        potentialReplyValue = "RE: ";
     }
     $("#inboxEventListNGO").prepend("<button id='event" + eventDisplayCounter + "' class='eventObject'><p class='eventTitle'>" + potentialReplyValue + subject + "</p> " +
         "<p class='emailTime'>" + eventTimeFormat + "</p></button>");
@@ -424,64 +422,56 @@ function recieveEvents() {
 
     socket.on('occurredEvents', function (evnt) {
 
-        eventList = [];
-        var respondedEvents = [];
-        //add occured events
-        for (var i = 0; i < evnt.occurredEvents.length; i++) {
-            let currentEvent = evnt.occurredEvents[i];
-            let to = currentEvent.recipient;
-            if (to.toString().trim() === name) {
+            eventList = [];
+            for (var i = 0; i < evnt.occurredEvents.length; i++) {
+                let currentEvent = evnt.occurredEvents[i];
 
-                if(currentEvent.responses[currentEvent.responses.length-1] != null) {
-                    let processingResponseData = true;
-                    let i = 1;
+                let to = currentEvent.recipient;
+                if (to.toString().trim() === name) {
 
-                    while(processingResponseData) {
-                        if (currentEvent.responses[currentEvent.responses.length - i].sender === "HQ") {
+                    //loop through all of the response data
+
+
+                    for (var j = 0; j < currentEvent.responses.length; j++) {
+                        //if event response is from opposite entity type add to event list
+                        if (currentEvent.responses[j].sender === "HQ") {
+
+
+                            //make copy of event for every response
                             var eventCopy = $.extend(true, {}, currentEvent);
                             eventCopy.displayAsResponse = true;
-                            eventCopy.latestUpdateTime = eventCopy.responses[currentEvent.responses.length - i].time;
+                            eventCopy.latestUpdateTime = eventCopy.responses[j].time;
                             eventList.push(eventCopy);
                         }
-                        if(currentEvent.responses[currentEvent.responses.length-i-1] != null) {
-                            if (currentEvent.responses[currentEvent.responses.length - i - 1].sender === "HQ") {
-                                i++;
-                            } else {
-                                processingResponseData = false;
-                            }
-                        } else {
-                            processingResponseData = false;
-                        }
                     }
+
+                    var timeSplit = currentEvent.time.toString().split(":");
+                    var h = parseInt(timeSplit[0], 10);
+                    var m = parseInt(timeSplit[1], 10);
+                    var s = parseInt(timeSplit[2], 10);
+                    var timeInMS = (h * 60 * 60 * 1000) + (m * 60 * 1000) + (s * 1000);
+                    currentEvent.latestUpdateTime = timeInMS + simData.startTimeMS;
+
+                    eventList.push(currentEvent);
+
                 }
-
-
-                var timeSplit = currentEvent.time.toString().split(":");
-                var h = parseInt(timeSplit[0], 10);
-                var m = parseInt(timeSplit[1], 10);
-                var s = parseInt(timeSplit[2], 10);
-                var timeInMS = (h * 60 * 60 * 1000) + (m * 60 * 1000) + (s * 1000);
-                currentEvent.latestUpdateTime = timeInMS + simData.startTimeMS;
-
-                eventList.push(currentEvent);
             }
+
+
+            //sort events for displaying
+            eventList.sort(eventComparator);
+
+
+            $("button.eventObject").remove();
+            eventDisplayCounter = 0;
+            for (var i = 0; i < eventList.length; i++) {
+
+                processEvent(eventList[i]);
+            }
+
+
         }
-
-
-        //sort events for displaying
-        eventList.sort(eventComparator);
-
-
-
-        $("button.eventObject").remove();
-        eventDisplayCounter = 0;
-        for (var i = 0; i < eventList.length; i++) {
-
-            processEvent(eventList[i]);
-        }
-
-
-    });
+    );
 }
 
 function eventComparator(e1, e2) {

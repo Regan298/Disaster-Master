@@ -133,8 +133,9 @@
             <div id="inboxElementHQ" class="inboxElementHQ">
 
                 <div id="inboxEventListHQ" class="inboxEventListHQ">
-                    <select id="ngoFilterHQ">
-                        <option value="Peacedoves">Peacedoves</option>
+                    <select id="ngoFilterHQ" onchange="filterEvents()" >
+                        <option hidden value="default" >Events From All NGO's</option>
+
                     </select>
                 </div>
                 <div id="eventViewerHQ" class="eventViewerHQ"></div>

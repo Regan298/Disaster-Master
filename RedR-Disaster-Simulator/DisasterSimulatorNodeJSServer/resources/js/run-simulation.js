@@ -16,7 +16,8 @@ var simData;
 var haveProcessedPastMessages = false;
 var selectedEvent;
 var eventResponseList = [];
-var eventCounter;
+var eventCounter = 0;
+var selectNGOFilter = 'default';
 
 
 function handleNGOJoining() {
@@ -219,10 +220,14 @@ function handleCommunicationButtons() {
     }
 }
 
-function addMessageToEventResponse(responses) {
-    for(var i=0; i < responses.length; i++) {
-        var valSplit = responses[i].split("\n");
-        console.log(valSplit.length);
+function addMessageToEventResponse(responses, isOrigin) {
+    for (var i = 0; i < responses.length; i++) {
+        var valSplit;
+        if (isOrigin) {
+            valSplit = responses[i].split("\n");
+        } else {
+            valSplit = responses[i].content.split("\n");
+        }
 
         for (var j = 0; j < valSplit.length; j++) {
             $("#eventResponseViewerHQ").append(valSplit[j] + "<br>");
@@ -232,7 +237,7 @@ function addMessageToEventResponse(responses) {
     }
 }
 
-function displayEvent(eventId){
+function displayEvent(eventId) {
     console.log(eventId);
     selectedEvent = document.getElementById(eventId).getAttribute("eventID");
 
@@ -255,64 +260,34 @@ function displayEvent(eventId){
 
     socket.emit('pastEventResponses', {selectedEvent}, function (callbackData) {
         let pastEventResponseList = callbackData.pastEventResponseList;
-        addMessageToEventResponse(pastEventResponseList);
+        addMessageToEventResponse(pastEventResponseList, false);
 
     });
 }
 
-function handleEventResponseListening() {
-    socket.on('hqEventResponseRecieving', function (received) {
-        eventResponseList.push(received.eventForSending);
-        displayNGOEventResponse(received.eventForSending);
-    });
+
+function fillInNGOFilter() {
+    $("#ngoFilterHQ").append("<option value= 'default' > Events From All NGO's </option>");
+    for(var i = 0; i < simData.ngoList.length; i++) {
+        $("#ngoFilterHQ").append("<option value= " + simData.ngoList[i].name + ">" + simData.ngoList[i].name + "</option>");
+    }
 
 }
 
-function displayNGOEventResponse(ngoEventResponse) {
-    console.log(ngoEventResponse);
+function filterEvents() {
+    selectNGOFilter = document.getElementById("ngoFilterHQ").value;
+    var eventButtons = document.getElementsByClassName('eventObject');
 
+    for(var i = 0; i < eventButtons.length; i++){
+        document.getElementById(eventButtons[i].getAttribute('id')).style.display = 'block';
 
-    let id = ngoEventResponse.id;
-    let location = ngoEventResponse.location;
-    let subject = ngoEventResponse.subject;
-    let time = ngoEventResponse.time;
-    let type = ngoEventResponse.type;
-    let recipient = ngoEventResponse.recipient;
+        if(eventButtons[i].getAttribute('recipient') !== selectNGOFilter && selectNGOFilter !== 'default'   ){
+            document.getElementById(eventButtons[i].getAttribute('id')).style.display = 'none';
+        }
 
-    //convert time string into ms for manipulation
+    }
 
-    var timeSplit = time.toString().split(":");
-    var h = parseInt(timeSplit[0], 10);
-    var m = parseInt(timeSplit[1], 10);
-    var s = parseInt(timeSplit[2], 10);
-    var timeInMS = (h * 60 * 60 * 1000) + (m * 60 * 1000) + (s * 1000);
-    var timeStamp = simData.durationMs - timeInMS;
-    //convert ms back into string for display
-    var seconds = Math.floor((timeStamp / 1000) % 60);
-    var minutes = Math.floor((timeStamp / 1000 / 60) % 60);
-    var hours = Math.floor((timeStamp / (1000 * 60 * 60)) % 24);
-    var eventTimeFormat = hours + "h" + minutes + "m" + seconds ;
-
-    var buttonHTMLString = "<button id='event" + eventCounter + "' class='eventObject'><p class='eventTitle'>" + "RE: " + subject
-        + "<br>" + recipient + "</p> " +
-        "<p class='emailTime'>" + eventTimeFormat + "</p></button>";
-
-    $(buttonHTMLString).insertAfter("#ngoFilterHQ");
-
-    //Add event attribute to each event button
-
-    var eventButton = document.getElementById("event" + eventCounter);
-    eventButton.setAttribute("eventID", id);
-    eventButton.setAttribute("onclick", "displayEvent('event" + eventCounter + "')");
-    eventButton.setAttribute("location", location);
-    eventButton.setAttribute("subject", subject);
-    eventButton.setAttribute("time", time);
-    eventButton.setAttribute("type", type);
-
-    eventCounter++;
 }
-
-
 
 function processScenarioData() {
     socket.emit('simState', "request", function (callbackData) {
@@ -322,7 +297,7 @@ function processScenarioData() {
         updateEventList();
         handleCommunicationButtons();
         setInterval(handleNGOJoining, 1000);
-        handleEventResponseListening();
+        fillInNGOFilter();
     });
 
 }
@@ -417,6 +392,87 @@ function switchNGOChat(ngo) {
     }
 }
 
+function displayNGOEventResponse(ngoEventResponse) {
+    let id = ngoEventResponse.id;
+    let location = ngoEventResponse.location;
+    let subject = ngoEventResponse.subject;
+    let time = ngoEventResponse.time;
+    let type = ngoEventResponse.type;
+    let recipient = ngoEventResponse.recipient;
+
+    //convert time string into ms for manipulation
+
+    var timeSplit = time.toString().split(":");
+    var h = parseInt(timeSplit[0], 10);
+    var m = parseInt(timeSplit[1], 10);
+    var s = parseInt(timeSplit[2], 10);
+    var timeInMS = (h * 60 * 60 * 1000) + (m * 60 * 1000) + (s * 1000);
+    var timeStamp = simData.durationMs - timeInMS;
+    //convert ms back into string for display
+    var seconds = Math.floor((timeStamp / 1000) % 60);
+    var minutes = Math.floor((timeStamp / 1000 / 60) % 60);
+    var hours = Math.floor((timeStamp / (1000 * 60 * 60)) % 24);
+    var eventTimeFormat = hours + "h" + minutes + "m" + seconds;
+
+    var buttonHTMLString = "<button id='event" + eventCounter + "' class='eventObject'><p class='eventTitle'>" + "RE: " + subject
+        + "<br>" + recipient + "</p> " +
+        "<p class='emailTime'>" + eventTimeFormat + "</p></button>";
+
+    $(buttonHTMLString).insertAfter("#ngoFilterHQ");
+
+    //Add event attribute to each event button
+
+    var eventButton = document.getElementById("event" + eventCounter);
+    eventButton.setAttribute("eventID", id);
+    eventButton.setAttribute("onclick", "displayEvent('event" + eventCounter + "')");
+    eventButton.setAttribute("location", location);
+    eventButton.setAttribute("subject", subject);
+    eventButton.setAttribute("time", time);
+    eventButton.setAttribute("type", type);
+    eventButton.setAttribute("recipient", recipient);
+
+    eventCounter++;
+}
+
+function handleNGOResponseEvents(occuredEvents) {
+
+    eventList = [];
+    //add occured events
+    for (var i = 0; i < occuredEvents.length; i++) {
+        let currentEvent = occuredEvents[i];
+        for (var j = 0; j < currentEvent.responses.length; j++) {
+            //if event response is from opposite entity type add to event list
+            if (currentEvent.responses[j].sender !== "HQ") {
+                //make copy of event for every response
+                var eventCopy = $.extend(true, {}, currentEvent);
+                eventCopy.displayAsResponse = true;
+                eventCopy.latestUpdateTime = eventCopy.responses[j].time;
+                eventList.push(eventCopy);
+            }
+        }
+    }
+
+    eventList.sort(eventComparator);
+    $("button.eventObject").remove();
+    eventCounter = 0;
+    for (var i = 0; i < eventList.length; i++) {
+        displayNGOEventResponse(eventList[i]);
+    }
+    filterEvents();
+
+
+}
+
+function eventComparator(e1, e2) {
+    if (e1.latestUpdateTime < e2.latestUpdateTime) {
+        return -1;
+    }
+    if (e1.latestUpdateTime > e2.latestUpdateTime) {
+        return 1;
+    }
+    return 0;
+}
+
 //Runs in background
 function updateEventList() {
     socket.on('occurredEvents', function (received) {
@@ -426,8 +482,8 @@ function updateEventList() {
         scaledTime = new Date(scaledTime);
         timeline.setCurrentTime(scaledTime);
         timeline.redraw();
+        handleNGOResponseEvents(received.occurredEvents);
 
-        eventList = received.occurredEvents;
     });
 
 }
@@ -605,7 +661,6 @@ $(function () {
     });
 
 
-
     //New Event Response Form
     $('#inboxHQForm').submit(function (e) {
         console.log("responsesent");
@@ -614,7 +669,7 @@ $(function () {
         //Function takes array by default so add turn single message into array
         var responseAsArray = [];
         responseAsArray.push($('#inputEmailResponseHQ').val());
-        addMessageToEventResponse(responseAsArray);
+        addMessageToEventResponse(responseAsArray, true);
         console.log(selectedEvent);
         var response = {
             from: 'HQ',

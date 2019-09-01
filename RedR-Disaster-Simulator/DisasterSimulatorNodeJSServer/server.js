@@ -335,26 +335,15 @@ socket.on('newEventResponse', function (msg) {
     //Get event id
 
     var event = msg.response.event.toString();
-    console.log(event);
     var eventID = parseInt(event, 10);
-
-    console.log(eventID);
     //Find event in list of events
-    var eventForSending;
+    var responseTime = new Date().getTime();
+    console.log("RT: " + responseTime);
     for(var i = 0; i < simData.eventsList.length; i++){
         if(simData.eventsList[i].id === eventID ){
-            let responseTime = new Date().getTime();
             simData.eventsList[i].responses.push({content: msg.response.content, sender: msg.response.from, time: responseTime});
-            eventForSending = simData.eventsList[i];
-
             worker.postMessage(simData);
         }
-    }
-
-    if(msg.response.from === "HQ") {
-        io.emit('ngoEventResponseRecieving', {eventForSending});
-    } else {
-        io.emit('hqEventResponseRecieving', {eventForSending});
     }
 });
 
