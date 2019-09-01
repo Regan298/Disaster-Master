@@ -131,49 +131,24 @@
 
 
             <div id="inboxElementHQ" class="inboxElementHQ">
-                <div id="inboxEmails" class="inboxEmails">
-                    <!--Events are dynamically loaded into here-->
+
+                <div id="inboxEventListHQ" class="inboxEventListHQ">
+                    <select id="ngoFilterHQ" onchange="filterEvents()" >
+                        <option hidden value="default" >Events From All NGO's</option>
+
+                    </select>
                 </div>
+                <div id="eventViewerHQ" class="eventViewerHQ"></div>
 
-                <div id="emailViewer" class="emailViewer">
-                    <div id="eventDetails">
-                        <p>Peacedoves Budget Request, 3:00pm</p>
-                        <button id="displayEventButton" onclick="displayEvent('mp4')">View Event</button>
-
-
-
-                    </div>
-
-                    <div class="eventResponseContent">
-                        <p>
-                            Hi HQ<br>
-
-
-                            Thank you for your email, what is the timeframe for this event?<br>
-
-                            Regards, Peace Doves
-                        </p>
-                    </div>
-
-                    <div class="eventResponseContent">
-                        <p>
-                            Hi Peace Doves<br>
-
-
-                            This is a matter of urgency, please make it your top priority<br>
-
-                            Regards, HQ
-                        </p>
-                    </div>
-                </div>
-
-                <div id="emailResponse">
-                    <form action="" id="emailResponseForm">
-                        <textarea form="emailResponseForm" id="emailResponseFormInput"></textarea>
+                <div id="inboxFormDivHQ" class="inboxFormDivHQ">
+                    <form action="" id="inboxHQForm">
+                        <textarea form="inboxHQForm" id="inputEmailResponseHQ"></textarea>
                         <input type="submit" value="Send" class="button"/>
                     </form>
-
                 </div>
+
+
+
 
 
             </div>
@@ -236,9 +211,9 @@
 
 
 <!-- Footer -->
-<footer class="bg-light fixed-bottom" id="footer">
+<!--<footer class="bg-light fixed-bottom" id="footer">
     <script>$("#footer").load("footer.html");</script>
-</footer>
+</footer>-->
 </body>
 
 </html>
