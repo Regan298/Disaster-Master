@@ -15,17 +15,7 @@ eventList = workerData.eventsList;
 var timeS = 0;
 var t;
 
-function updadeEvents(msg) {
-	eventList = msg.eventsList;
-	t = setInterval(getEvents,1000);
-}
-
 parentPort.on('message', (msg) => {
-	if(typeof msg === "object"){
-		clearInterval(t);
-		updadeEvents(msg);
-		return;
-	}
 	if (msg === 'pause') {
 		console.log('Pause');
 		// stopwatch.stop();
@@ -46,7 +36,7 @@ function getEvents(){
 		pastEvents = [];
 
 		// console.log(stopwatch.read());
-
+		console.log(timeS);
 	
 		var t = TimeFormat.fromMs((timeS*1000), 'hh:mm:ss');
 		var now = new Date();
