@@ -7,13 +7,13 @@
 	<mode>offline</mode>
 
 	<ngo>
-		<name>People_First</name>
+		<name>People First</name>
 		<passkey>ngo1</passkey>
 
 	</ngo>
 
 	<ngo>
-		<name>We_Care</name>
+		<name>We Care</name>
 		<passkey>ngo2</passkey>
 
 	</ngo>
@@ -25,7 +25,7 @@
 	</ngo>
 
 	<ngo>
-		<name>Red_Heart</name>
+		<name>Red Heart</name>
 		<passkey>ngo4</passkey>
 
 	</ngo>
@@ -37,7 +37,7 @@
 	</ngo>
 
 	<ngo>
-		<name>Reach_Up</name>
+		<name>Reach Up</name>
 		<passkey>ngo6</passkey>
 
 	</ngo>	

@@ -324,6 +324,45 @@ socket.on('message', function (msg) {
     io.emit('message', {recievedMessage});
 });
 
+socket.on('newEventResponse', function (msg) {
+    //Get event id bjh
+
+    var event = msg.response.event.toString();
+    var eventID = parseInt(event, 10);
+    //Find event in list of events
+    var responseTime = new Date().getTime();
+    console.log("RT: " + responseTime);
+    for(var i = 0; i < simData.eventsList.length; i++){
+        if(simData.eventsList[i].id === eventID ){
+            simData.eventsList[i].responses.push({content: msg.response.content, sender: msg.response.from, time: responseTime});
+            worker.postMessage(simData);
+        }
+    }
+});
+
+socket.on('pastEventResponses', function (msg, callback) {
+
+    var event = msg.selectedEvent.toString();
+    var eventID = parseInt(event, 10);
+    console.log("eventid" + eventID);
+    //do lookup of events response data
+    console.log(simData.eventsList.length);
+    var pastEventResponseList;
+    for(var i = 0; i < simData.eventsList.length; i++){
+        if(simData.eventsList[i].id === eventID ){
+            pastEventResponseList = simData.eventsList[i].responses;
+            console.log("response" + pastEventResponseList.length);
+            for(var j = 0; j < pastEventResponseList.length; j++){
+                console.log(pastEventResponseList[j]);
+            }
+        }
+    }
+
+    callback({pastEventResponseList});
+
+});
+
+
 //Listen for play/pause
 socket.on('play', function () {
     if (!simData.started) {
