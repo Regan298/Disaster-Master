@@ -17,6 +17,7 @@ app.use(fileUpload());
 var formidable = require('formidable');
 var xmlBuilder = require('xmlbuilder');
 var path = require('path');
+var zipFolder = require('zip-folder');
 var worker; //auto events worker
 const port = process.env.PORT || 80;
 
@@ -87,6 +88,11 @@ app.get('/hq-create', function (req, res) {
     res.sendFile(__dirname + '/scenario-edit-home.html');
 });
 
+app.get('/scenario-create-new', function (req, res) {
+    clearSimData();
+    res.sendFile(__dirname + '/scenario-edit.html');
+});
+
 app.get('/scenario-create', function (req, res) {
     res.sendFile(__dirname + '/scenario-edit.html');
 });
@@ -115,9 +121,18 @@ app.get('/help', function (req, res) {
 
 app.get('/download-save', function (req, res) {
     // console.log(req);
-    const file = `${__dirname}\\generatedScenario\\scenario.xml`;
-    console.log(file);
-    res.download(path.resolve(file), 'generatedScenario.xml');
+
+    zipFolder(__dirname + '/generatedScenario', __dirname + '/scenario.zip', function(err) {
+        if(err) {
+            console.log('oh no!', err);
+            res.end();
+        } else {
+            console.log('zipped');
+            res.download(__dirname + '/scenario.zip', 'scenario.zip');
+        }
+    });
+
+    
 });
 
 app.post('/editor-upload', function (req, res) {
@@ -155,18 +170,26 @@ app.post('/editor-upload', function (req, res) {
 });
 
 app.post('/upload-event-file', upload.single('upload'), function (req, res, next) {
-    console.log(req);
+    // console.log(req);
     if (req.files != null) {
 
         let simFileTemp = req.files.upload;
         console.log(simFileTemp);
 
-        simFileTemp.mv(__dirname + '/resources/files/'+simFileTemp.name, function (err) {
+        if (!fs.existsSync(__dirname + '/generatedScenario/files/')){
+            fs.mkdirSync(__dirname + '/generatedScenario/files/');
+        }
+
+        simFileTemp.mv(__dirname + '/generatedScenario/files/'+simFileTemp.name, function (err) {
             if(err) {
-                return res.status(400).send(err);
+                console.log(err);
+                res.status(400).send(err);
+                res.end();
+            }else {
+                console.log('moved')
+                res.end();
             }
         });
-        res.end();
     } else {
         console.log("no file");
         return res.status(400).send("Bad File, Please Input A Valid File :)");

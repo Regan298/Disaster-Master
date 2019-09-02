@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <scenario>
-  <name>Test</name>
+  <name>Sebadoah</name>
   <ngoCount>6</ngoCount>
   <duration>19800000</duration>
   <hoursInDay>1</hoursInDay>
-  <mode>true</mode>
+  <mode>false</mode>
   <ngo>
-    <name>People First</name>
+    <name>People_First</name>
     <passkey>ngo1</passkey>
   </ngo>
   <ngo>
-    <name>We Care</name>
+    <name>We_Care</name>
     <passkey>ngo2</passkey>
   </ngo>
   <ngo>
@@ -18,7 +18,7 @@
     <passkey>ngo3</passkey>
   </ngo>
   <ngo>
-    <name>Red Heart</name>
+    <name>Red_Heart</name>
     <passkey>ngo4</passkey>
   </ngo>
   <ngo>
@@ -26,15 +26,15 @@
     <passkey>ngo5</passkey>
   </ngo>
   <ngo>
-    <name>Reach Up</name>
+    <name>Reach_Up</name>
     <passkey>ngo6</passkey>
   </ngo>
   <event>
-    <recipient>Peacedoves</recipient>
+    <recipient>People_First</recipient>
     <subject>Set up</subject>
     <time>00:00:10</time>
     <type>pdf</type>
-    <location>/FileLibrary/000 Needs assessment letter.pdf</location>
+    <location>/resources/files/feedback (1).pdf</location>
   </event>
   <event>
     <recipient>Peacedoves</recipient>
