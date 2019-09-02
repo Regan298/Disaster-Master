@@ -17,7 +17,6 @@ var worker; //auto events worker
 const port = process.env.PORT || 80;
 
 
-
 module.exports = app;
 app.use(express.static('resources'));
 
@@ -38,11 +37,8 @@ var simData = {
     timeScale: 0,
     started: false,
     modeOnline: true,
-    occurredEvents: [],
-    startTimeMS: 0
+    occurredEvents: []
 };
-
-var currentRunningInstance;
 
 
 var currentTimeMs;
@@ -116,14 +112,10 @@ function clearSimData() {
         timeScale: 0,
         started: false,
         modeOnline: true,
-        occurredEvents: [],
-        startTimeMS: 0
+        occurredEvents: []
     };
     connectedUsers = [];
     connectedUsers.push(host);
-    worker.terminate();
-
-
 }
 
 //Process Sceanrio File For Uploading
@@ -175,7 +167,7 @@ function parseXMLForLoading() {
                     simData.modeOnline = false;
                 }
 
-
+                console.log(simData.modeOnline);
                 ngosArray = result['scenario']['ngo'];
                 for (var i = 0; i < ngosArray.length; i++) {
                     var currentNGOName = ngosArray[i].name;
@@ -210,10 +202,8 @@ function parseXMLForLoading() {
                         time: currentEventTime,
                         type: currentEventType,
                         location: currentEventLocation,
-                        subject: currentEventSubject,
-                        responses: [],
-                        latestUpdateTime: 0
-                    };
+                        subject: currentEventSubject
+                    }
 
                     simData.eventsList.push(event);
                 }
@@ -225,7 +215,6 @@ function parseXMLForLoading() {
             });
             simData.ready = true;
             simData.loaded = true;
-            simData.startTimeMS = new Date().getTime();
         });
     } catch (e) {
         return false;
@@ -282,6 +271,7 @@ socket.on('getPastMessages', function (msg, callback) {
 
 //Send connectedusers to ngo upon ngo request
 socket.on('getConnected', function (msg, callback) {
+    console.log(connectedUsers.length);
     callback({connectedUsers});
 });
 
@@ -303,6 +293,7 @@ socket.on('nameRequest', function (msg, callback) {
 if (simData.ready) {
 
     socket.on('simState', function (msg, callback) {
+        console.log('event received: ' + msg);
         callback({simData});
     });
     //io.emit('simState', {simData});
@@ -316,6 +307,8 @@ socket.on('message', function (msg) {
         to: msg.message.to,
         content: msg.message.content
     }
+
+    console.log(recievedMessage);
 
 
     //store in simdata
@@ -331,71 +324,30 @@ socket.on('message', function (msg) {
     io.emit('message', {recievedMessage});
 });
 
-socket.on('newEventResponse', function (msg) {
-    //Get event id
-
-    var event = msg.response.event.toString();
-    var eventID = parseInt(event, 10);
-    //Find event in list of events
-    var responseTime = new Date().getTime();
-    console.log("RT: " + responseTime);
-    for(var i = 0; i < simData.eventsList.length; i++){
-        if(simData.eventsList[i].id === eventID ){
-            simData.eventsList[i].responses.push({content: msg.response.content, sender: msg.response.from, time: responseTime});
-            worker.postMessage(simData);
-        }
-    }
-});
-
-socket.on('pastEventResponses', function (msg, callback) {
-
-    var event = msg.selectedEvent.toString();
-    var eventID = parseInt(event, 10);
-    console.log("eventid" + eventID);
-    //do lookup of events response data
-    console.log(simData.eventsList.length);
-    var pastEventResponseList;
-    for(var i = 0; i < simData.eventsList.length; i++){
-        if(simData.eventsList[i].id === eventID ){
-            pastEventResponseList = simData.eventsList[i].responses;
-            console.log("response" + pastEventResponseList.length);
-            for(var j = 0; j < pastEventResponseList.length; j++){
-                console.log(pastEventResponseList[j]);
-            }
-        }
-    }
-
-    callback({pastEventResponseList});
-
-});
-
-
 //Listen for play/pause
 socket.on('play', function () {
     if (!simData.started) {
         var data = simData;
         worker = new Worker('./autoevents.js', {workerData: data});
-        currentRunningInstance = runSim();
+        runSim();
         simData.started = true;
     } else {
         worker.postMessage('play');
     }
 });
-
 socket.on('pause', function () {
     worker.postMessage('pause');
 });
 
-});
+})
+;
 
 function runSim() {
     worker.on('message', (msg) => {
-
         currentTimeMs = simData.durationMs - msg.timeMs;
         var time = msg.timeMs;
         var occurredEvents = msg.events;
         io.emit('currentTime', currentTimeMs);
         io.emit('occurredEvents', {occurredEvents, time});
     });
-
 }
