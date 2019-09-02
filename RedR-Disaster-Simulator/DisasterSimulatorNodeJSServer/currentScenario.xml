@@ -7,13 +7,13 @@
 	<mode>offline</mode>
 
 	<ngo>
-		<name>People_First</name>
+		<name>People First</name>
 		<passkey>ngo1</passkey>
 
 	</ngo>
 
 	<ngo>
-		<name>We_Care</name>
+		<name>We Care</name>
 		<passkey>ngo2</passkey>
 
 	</ngo>
@@ -25,7 +25,7 @@
 	</ngo>
 
 	<ngo>
-		<name>Red_Heart</name>
+		<name>Red Heart</name>
 		<passkey>ngo4</passkey>
 
 	</ngo>
@@ -37,22 +37,20 @@
 	</ngo>
 
 	<ngo>
-		<name>Reach_Up</name>
+		<name>Reach Up</name>
 		<passkey>ngo6</passkey>
 
 	</ngo>	
 	
 	<event>
-		<id>0</id>
 		<recipient>Peacedoves</recipient>
         	<subject>Set up</subject>
 		<time>00:00:5</time>
 		<type>pdf</type>
-		<location>000_Needs_assessment_letter.pdf</location>
+		<location>/FileLibrary/000 Needs assessment letter.pdf</location>
 	</event>
 
 	<event>
-		<id>1</id>
 		<recipient>Peacedoves</recipient>
 		<subject>Introduction into Sebadoah</subject>
 		<time>00:00:10</time>
@@ -61,7 +59,6 @@
 	</event>
 
 	<event>
-		<id>2</id>
 		<recipient>Peacedoves</recipient>
 		<subject>President of Sebadoah</subject>
 		<time>00:00:15</time>
@@ -70,7 +67,6 @@
 	</event>
 
 	<event>
-		<id>3</id>
 		<recipient>Peacedoves</recipient>
 		<subject>SitRep Request</subject>
 		<time>00:00:30</time>
