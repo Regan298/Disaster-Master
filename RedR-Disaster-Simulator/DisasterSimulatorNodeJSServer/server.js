@@ -332,7 +332,7 @@ socket.on('message', function (msg) {
 });
 
 socket.on('newEventResponse', function (msg) {
-    //Get event id
+    //Get event id bjh
 
     var event = msg.response.event.toString();
     var eventID = parseInt(event, 10);
