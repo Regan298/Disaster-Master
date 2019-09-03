@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a18e796e-85e9-463b-a138-161eebbdcd48" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autoevents.js" beforeDir="false" afterPath="$PROJECT_DIR$/autoevents.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/currentScenario.xml" beforeDir="false" afterPath="$PROJECT_DIR$/currentScenario.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/intergrationTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/intergrationTests.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -35,11 +34,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1836">
               <caret line="216" lean-forward="true" selection-start-line="216" selection-end-line="216" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/intergrationTests.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="50" column="22" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -114,7 +122,6 @@
         <option value="$PROJECT_DIR$/test/intergrationTest.js" />
         <option value="$PROJECT_DIR$/test/intergrationTests.ts" />
         <option value="$PROJECT_DIR$/hq-config.html" />
-        <option value="$PROJECT_DIR$/test/intergrationTests.js" />
         <option value="$PROJECT_DIR$/temp-timelineoverlay.js" />
         <option value="$PROJECT_DIR$/ngo-config.html" />
         <option value="$PROJECT_DIR$/ngo-simulation.html" />
@@ -126,6 +133,7 @@
         <option value="$PROJECT_DIR$/resources/js/run-simulation.js" />
         <option value="$PROJECT_DIR$/resources/js/ngo-simulation.js" />
         <option value="$PROJECT_DIR$/server.js" />
+        <option value="$PROJECT_DIR$/test/intergrationTests.js" />
       </list>
     </option>
   </component>
@@ -159,6 +167,11 @@
               <item name="DisasterSimulatorNodeJSServer" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DisasterSimulatorNodeJSServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DisasterSimulatorNodeJSServer" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -234,7 +247,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="306074000" />
+    <option name="totallyTimeSpent" value="306650000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -338,13 +351,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
           <caret line="48" column="97" selection-start-line="48" selection-start-column="97" selection-end-line="48" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/intergrationTests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -455,6 +461,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1836">
           <caret line="216" lean-forward="true" selection-start-line="216" selection-end-line="216" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/intergrationTests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="50" column="22" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="22" />
         </state>
       </provider>
     </entry>
