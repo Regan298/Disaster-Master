@@ -128,7 +128,7 @@ app.get('/download-save', function (req, res) {
 
     zipFolder(__dirname + '/generatedScenario', __dirname + '/scenario.zip', function(err) {
         if(err) {
-            console.log('oh no!', err);
+            console.log('failed to zip', err);
             res.end();
         } else {
             console.log('zipped');
@@ -150,7 +150,6 @@ app.post('/editor-upload', function (req, res) {
         }
 
         let simFileTemp = req.files.simFile;
-        console.log(simFileTemp);
         simFileTemp.mv(__dirname + '/' + simFileTemp.name, function (err) {
             if (err) {
                 console.log(err);
@@ -185,7 +184,6 @@ app.post('/upload-event-file', upload.single('upload'), function (req, res, next
     if (req.files != null) {
 
         let simFileTemp = req.files.upload;
-        console.log(simFileTemp);
 
         if (!fs.existsSync(__dirname + '/generatedScenario/files/')){
             fs.mkdirSync(__dirname + '/generatedScenario/files/');
@@ -197,7 +195,6 @@ app.post('/upload-event-file', upload.single('upload'), function (req, res, next
                 res.status(400).send(err);
                 res.end();
             }else {
-                console.log('moved')
                 res.end();
             }
         });
@@ -246,7 +243,6 @@ app.post('/upload', function (req, res) {
         }
 
         let simFileTemp = req.files.simFile;
-        console.log(simFileTemp);
         simFileTemp.mv(__dirname + '/' + simFileTemp.name, function (err) {
             if (err) {
                 console.log(err);
