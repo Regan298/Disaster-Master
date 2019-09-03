@@ -222,7 +222,7 @@ body {
     margin-top: 2.5%;
     max-width: 45%;
     min-width: 45%;
-    padding-right: 10%;
+    /*padding-right: 10%;*/
 }
 
 .inboxTitle {
@@ -236,7 +236,7 @@ body {
 .messagingElementHQ {
     margin-top: 1%;
     max-width: 50%;
-    height: 50vh;
+    height: 60vh;
     border-style: solid;
     border-width: 1px;
     float: left;
@@ -360,7 +360,7 @@ body {
 .messagingElementNGO {
     margin-top: 1%;
     max-width: 50%;
-    height: 40vh;
+    height: 60vh;
     border-style: solid;
     border-width: 1px;
     float: left;
@@ -368,6 +368,7 @@ body {
     position: absolute;
     display: flex;
     width: 45%;
+    margin-left: 2%;
     /*position: relative;*/
 }
 
@@ -469,8 +470,8 @@ body {
 
 .inboxElementHQ {
     max-width: 50%;
-    max-height: 70vh;
-    min-height: 70vh;
+    max-height: 75vh;
+    min-height: 75vh;
     border-style: solid;
     border-width: 1px;
     float: right;
@@ -483,6 +484,14 @@ body {
 
 }
 
+.inboxElementHQ h1 {
+    font-size: 2rem;
+}
+
+.inboxElementHQ h2 {
+    font-size: 1rem;
+}
+
 .ngoEventFilterDiv{
     border-style: solid;
     border-width: 1px;
@@ -492,8 +501,8 @@ body {
 }
 
 .inboxEventListHQ{
-    max-height: 70vh;
-    min-height: 70vh;
+    max-height: 75vh;
+    min-height: 75vh;
     width: 20%;
     border-right: solid;
     border-width: 1px;
@@ -510,7 +519,6 @@ body {
     align-self: flex-start;
     min-width: 80%;
     height: 60vh;
-    overflow-y: auto;
 }
 
 #eventResponseViewerHQ{
@@ -521,7 +529,7 @@ body {
     min-width: 90%;
     margin-left: 2%;
     margin-right: 2%;
-    margin-top: 2%;
+    margin-top: 5%;
 }
 
 .inboxFormDivHQ{
@@ -556,22 +564,20 @@ body {
 
 .inboxElementNGO {
     max-width: 50%;
-
-    min-height: 25%;
     border-style: solid;
     border-width: 1px;
     float: right;
     margin: auto;
     display: flex;
     width: 45%;
-    height: 70vh;
+    height: 75vh;
 
     position: absolute;
     margin-left: 50%;
 }
 
 .inboxEventListNGO{
-    max-height: 70vh;
+    height: 100%;
     width: 20%;
     align-self: stretch;
     border-right: solid;
@@ -601,6 +607,14 @@ body {
 
 }
 
+#eventViewerNGO h1{
+    font-size: 2rem;
+}
+
+#eventViewerNGO h2{
+    font-size: 1rem;
+}
+
 #eventResponseViewerNGO{
     overflow-y: auto;
     border-style: solid;
@@ -609,7 +623,7 @@ body {
     min-width: 100%;
     margin-left: 2%;
     margin-right: 2%;
-    margin-top: 2%;
+    margin-top: 5%;
 }
 
 #inboxFormDivNGO{
