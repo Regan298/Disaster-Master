@@ -210,6 +210,7 @@ function processScenarioData() {
         simData = callbackData.simData;
         recieveEvents();
         loadNGOTitle();
+
         //handleEventResponseListening();
 
     });
@@ -318,7 +319,9 @@ function handleEventResponseListening() {
 */
 
 function displayEvent(eventId) {
+    console.log(eventId);
     selectedEvent = document.getElementById(eventId).getAttribute("eventID");
+    //selectedEvent = eventId;
 
     var eventViewerElement = document.getElementById("eventViewerNGO");
     eventViewerElement.parentNode.removeChild(eventViewerElement);
@@ -468,7 +471,6 @@ function recieveEvents() {
             $("button.eventObject").remove();
             eventDisplayCounter = 0;
             for (var i = 0; i < eventList.length; i++) {
-
                 processEvent(eventList[i]);
             }
 
@@ -494,13 +496,14 @@ function recieveCurrentTime() {
             firstTimeReccieve = false;
         }
         simulationDuration = time;
-        var timerElement = document.getElementById("timeManagement");
+        var timerElement = document.getElementById("simTime");
         displayRemainingTime(timerElement, simulationDuration);
     });
 }
 
 function displayDisclaimer() {
     //alert("The purpose of this tool is for training please keep this in mind throughout this simulation");
+
 }
 
 function handleMessageRecieving() {
