@@ -101,6 +101,7 @@ app.get('/scenario-create', function (req, res) {
 });
 
 app.get('/scenario-edit', function (req, res) {
+    clearSimData();
     clearGeneratedScenario();
     res.sendFile(__dirname + '/scenario-upload.html');
 });
@@ -136,17 +137,15 @@ app.get('/download-save', function (req, res) {
         }
     });
 
-    
 });
 
 app.post('/editor-upload', function (req, res) {
     console.log("upload req");
 
     if (req.files != null) {
-        clearSimData();
 
-        if (!fs.existsSync(__dirname + '/currentScenario/')){
-            fs.mkdirSync(__dirname + '/currentScenario/');
+        if (!fs.existsSync(__dirname + '/generatedScenario/')){
+            fs.mkdirSync(__dirname + '/generatedScenario/');
         }
 
         let simFileTemp = req.files.simFile;
@@ -158,11 +157,12 @@ app.post('/editor-upload', function (req, res) {
         });
 
         extract(__dirname + '/' + simFileTemp.name, {dir: __dirname + '/generatedScenario/'}, function (err) {
+            console.log('extracted');
             fs.unlink(__dirname + '/' + simFileTemp.name, (err) => {
                 if (err) throw err;
                 console.log('successfully deleted zip');
             });
-            let validFile = parseXMLForLoading();
+            let validFile = parseXMLForLoading('generatedScenario');
             if (!validFile) {
                 return res.status(400).send("Bad File, Please Input A Valid File :)");
             } else {
@@ -234,9 +234,8 @@ function clearSimData() {
 
 //Process Sceanrio File For Uploading
 app.post('/upload', function (req, res) {
-
+    clearSimData();
     if (req.files != null) {
-        clearSimData();
 
         if (!fs.existsSync(__dirname + '/currentScenario/')){
             fs.mkdirSync(__dirname + '/currentScenario/');
@@ -255,7 +254,7 @@ app.post('/upload', function (req, res) {
                 if (err) throw err;
                 console.log('successfully deleted zip');
             });
-            let validFile = parseXMLForLoading();
+            let validFile = parseXMLForLoading('currentScenario');
             if (!validFile) {
                 return res.status(400).send("Bad File, Please Input A Valid File :)");
             } else {
@@ -274,15 +273,17 @@ app.post('/upload', function (req, res) {
 
 //End Route Handling
 
-function parseXMLForLoading() {
+function parseXMLForLoading(directory) {
 
+    console.log('parsing');
     try {
         var name;
         var ngoCount;
         var ngosArray;
         var eventsArray;
         var parser = new xml2js.Parser();
-        fs.readFile(__dirname + '/currentScenario/scenario.xml', function (err, data) {
+
+        fs.readFile(__dirname + '/'+directory+'/scenario.xml', function (err, data) {
             parser.parseString(data, function (err, result) {
                 simData.title = result['scenario']['name'].toString();
                 simData.ngoCount = result['scenario']['ngoCount'].toString();
@@ -453,7 +454,7 @@ socket.on('nameRequest', function (msg, callback) {
 
 
 // Trigger for Run simulation displaying of sceanrio title and timeline view update
-if (simData.ready) {
+// if (simData.ready) {
 
     socket.on('simState', function (msg, callback) {
         console.log('event received: ' + msg);
@@ -461,7 +462,7 @@ if (simData.ready) {
     });
     //io.emit('simState', {simData});
 
-}
+// }
 
 //Messaging Handling
 socket.on('message', function (msg) {

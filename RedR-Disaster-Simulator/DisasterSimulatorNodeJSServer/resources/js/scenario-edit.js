@@ -29,7 +29,10 @@ function drawDetails(data){
                         "<button onclick='editType()'>Edit</button><div id='editType'></div>");
     $('#details').append("<h6>Title: "+data.title+"</h6>" +
                         "<button onclick='editTitle()'>Edit</button><div id='editTitle'></div>");
-    $('#details').append("<h6>Duration: "+data.durationMs+"</h6>" +
+
+    var minutes = Math.floor((data.durationMs / 1000 / 60) % 60);
+    var hours = Math.floor((data.durationMs / (1000 * 60 * 60)) % 24);
+    $('#details').append("<h6>Duration: "+hours+"hrs "+minutes+"mins</h6>" +
                         "<button onclick='editDuration()'>Edit</button><div id='editDuration'></div>");
     $('#details').append("<h6>Hours in a Simulation Day: "+24/data.timeScale+"</h6>" +
                         "<button onclick='editScale()'>Edit</button><div id='editScale'></div>");
