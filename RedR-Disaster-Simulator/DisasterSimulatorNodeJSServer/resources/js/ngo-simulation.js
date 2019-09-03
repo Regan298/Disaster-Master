@@ -287,10 +287,13 @@ function videoOverlayOff() {
 
 function audioPausePlay() {
     var audio = document.getElementById("audioID");
+    var audioButton = document.getElementById("audioButton");
     if (audio.paused) {
         audio.play();
+        audioButton.innerHTML = "Playing";
     } else {
         audio.pause();
+        audioButton.innerHTML = "Paused";
     }
 }
 
