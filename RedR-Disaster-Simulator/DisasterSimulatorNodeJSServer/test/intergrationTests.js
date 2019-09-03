@@ -45,20 +45,20 @@ describe('Server Tests', function() {
             .expect(200, done);
     });
 
-    it('upload correctly formed sim file should return status 302', function(done) {
-        request(app)
-            .post('/upload')
-            .type('file')
-            .attach('simFile', 'scenarioExample.xml')
-            .expect(302, done);
-    });
+   // it('upload correctly formed sim file should return status 302', function(done) {
+   //     request(app)
+   //         .post('/upload')
+   //         .type('file')
+   //         .attach('simFile', 'scenarioExample.xml')
+   //         .expect(302, done);
+   // });
 
-    it('upload non correctly formed sim file should return status 400', function(done) {
-        request(app)
-            .post('/upload')
-            .type('file')
-            .expect(400, done);
-    });
+   // it('upload non correctly formed sim file should return status 400', function(done) {
+   //     request(app)
+   //         .post('/upload')
+   //         .type('file')
+   //         .expect(400, done);
+   // });
 
 
 
