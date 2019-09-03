@@ -18,6 +18,8 @@ var formidable = require('formidable');
 var xmlBuilder = require('xmlbuilder');
 var path = require('path');
 var zipFolder = require('zip-folder');
+var extract = require('extract-zip');
+var rimraf = require("rimraf");
 var worker; //auto events worker
 const port = process.env.PORT || 80;
 
@@ -90,6 +92,7 @@ app.get('/hq-create', function (req, res) {
 
 app.get('/scenario-create-new', function (req, res) {
     clearSimData();
+    clearGeneratedScenario();
     res.sendFile(__dirname + '/scenario-edit.html');
 });
 
@@ -98,6 +101,7 @@ app.get('/scenario-create', function (req, res) {
 });
 
 app.get('/scenario-edit', function (req, res) {
+    clearGeneratedScenario();
     res.sendFile(__dirname + '/scenario-upload.html');
 });
 
@@ -137,40 +141,47 @@ app.get('/download-save', function (req, res) {
 
 app.post('/editor-upload', function (req, res) {
     console.log("upload req");
+
     if (req.files != null) {
-        simData.eventsList = [];
+        clearSimData();
+
+        if (!fs.existsSync(__dirname + '/currentScenario/')){
+            fs.mkdirSync(__dirname + '/currentScenario/');
+        }
 
         let simFileTemp = req.files.simFile;
-
-        simFileTemp.mv(__dirname + '/currentScenario.xml', function (err) {
-            if(err) {
+        console.log(simFileTemp);
+        simFileTemp.mv(__dirname + '/' + simFileTemp.name, function (err) {
+            if (err) {
+                console.log(err);
                 return res.status(400).send(err);
             }
-
         });
 
-
-        let validFile = parseXMLForLoading();
-
-        if(!validFile){
-            return res.status(400).send("Bad File, Please Input A Valid File :)");
-        } else {
-            res.redirect('scenario-create');
-            res.end("File Sent");
-        }
+        extract(__dirname + '/' + simFileTemp.name, {dir: __dirname + '/generatedScenario/'}, function (err) {
+            fs.unlink(__dirname + '/' + simFileTemp.name, (err) => {
+                if (err) throw err;
+                console.log('successfully deleted zip');
+            });
+            let validFile = parseXMLForLoading();
+            if (!validFile) {
+                return res.status(400).send("Bad File, Please Input A Valid File :)");
+            } else {
+                res.redirect('scenario-create');
+                res.end("File Sent");
+            }
+        });
         
-
-
-
     } else {
-        console.log("no file");
+
         return res.status(400).send("Bad File, Please Input A Valid File :)");
-}
+    }
 
 });
 
 app.post('/upload-event-file', upload.single('upload'), function (req, res, next) {
     // console.log(req);
+
     if (req.files != null) {
 
         let simFileTemp = req.files.upload;
@@ -196,7 +207,16 @@ app.post('/upload-event-file', upload.single('upload'), function (req, res, next
     }
 });
 
+function clearGeneratedScenario() {
+    rimraf(__dirname + "/generatedScenario", function () { console.log("deleted generated scenario"); });
+}
+
+function clearCurrentScenario() {
+    rimraf(__dirname + "/currentScenario", function () { console.log("deleted current scenario"); });
+}
+
 function clearSimData() {
+    clearCurrentScenario();
     simData = {
         loaded: false,
         ready: false,
@@ -221,20 +241,35 @@ app.post('/upload', function (req, res) {
     if (req.files != null) {
         clearSimData();
 
+        if (!fs.existsSync(__dirname + '/currentScenario/')){
+            fs.mkdirSync(__dirname + '/currentScenario/');
+        }
+
         let simFileTemp = req.files.simFile;
-        simFileTemp.mv(__dirname + '/currentScenario.xml', function (err) {
+        console.log(simFileTemp);
+        simFileTemp.mv(__dirname + '/' + simFileTemp.name, function (err) {
             if (err) {
+                console.log(err);
                 return res.status(400).send(err);
             }
-
         });
-        let validFile = parseXMLForLoading();
-        if (!validFile) {
-            return res.status(400).send("Bad File, Please Input A Valid File :)");
-        } else {
-            res.redirect('hq-run-simulation');
-            res.end("File Sent");
-        }
+
+        extract(__dirname + '/' + simFileTemp.name, {dir: __dirname + '/currentScenario/'}, function (err) {
+            fs.unlink(__dirname + '/' + simFileTemp.name, (err) => {
+                if (err) throw err;
+                console.log('successfully deleted zip');
+            });
+            let validFile = parseXMLForLoading();
+            if (!validFile) {
+                return res.status(400).send("Bad File, Please Input A Valid File :)");
+            } else {
+                res.redirect('hq-run-simulation');
+                res.end("File Sent");
+            }
+        });
+
+        
+        
     } else {
 
         return res.status(400).send("Bad File, Please Input A Valid File :)");
@@ -251,7 +286,7 @@ function parseXMLForLoading() {
         var ngosArray;
         var eventsArray;
         var parser = new xml2js.Parser();
-        fs.readFile(__dirname + '/currentScenario.xml', function (err, data) {
+        fs.readFile(__dirname + '/currentScenario/scenario.xml', function (err, data) {
             parser.parseString(data, function (err, result) {
                 simData.title = result['scenario']['name'].toString();
                 simData.ngoCount = result['scenario']['ngoCount'].toString();

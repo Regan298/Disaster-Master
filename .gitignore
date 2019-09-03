@@ -13,5 +13,6 @@ RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/npx.cmd
 RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/install_tools.bat
 RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/.idea
 RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/currentScenario.xml
-
+RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/currentScenario/*
+RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/generatedScenario/*
 
