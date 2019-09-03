@@ -163,6 +163,103 @@
     </div>
 </div>
 
+
+
+
+
+
+
+
+<div id="modal" class="eventOverlay"> 
+    <div class="eventOverlayContent">
+        <div id="overlayHeader">
+
+        <span class="close">&times;</span>
+        
+        
+        <table border-collapse= "collapse" width= "100%">
+            <tr>
+              <th>Event Name</th>
+              <th>Recipient</th>
+              <th>Day</th>
+              <th>Event Content</th>
+            </tr>
+
+            <tr>
+                <td><input id="overlayName" type="text" name="subject" value="tempValue"></input></td>
+                <td>
+                    <select id="overlayRecipiants">
+                        <option value="group1">group1</option>
+                        <option value="group2">group2</option>
+                    </select>
+                </td>
+                <td>
+                    <input id="overlayDay" type="number" name="day" value="3" min="1" max="5"></input>
+                    <input id="overlayTime" type="time" name="time" value="12:44"></input>
+                </td>
+                <td>
+                    <input type="file" name="file" id="file" class="overlayinputfile" />
+                    <label for="file" >File Selector</label>
+                </td>
+                <td><button type="button">Submit</button></td>
+            </tr>
+          </table>
+          
+
+
+
+        
+        </div>
+
+        <div id="eventMediaDisplay"></div>
+    </div>
+</div>
+
+<script>
+
+    
+
+
+    var modal = document.getElementById("modal");
+    var span = document.getElementsByClassName("close")[0];
+    function onSelect(properties){
+
+        //setting field values
+        document.getElementById("overlayName").value = items[properties.items[0]].content;
+
+        //console.log(items);
+        //console.log(properties.items[0]);
+        //console.log(items[properties.items[0]].location);
+        //console.log(items[properties.items[0]].content);
+
+        PDFObject.embed(items[properties.items[0]].location, "#eventMediaDisplay");
+        
+        modal.style.display = "block";
+    }
+    span.onclick = function(){
+        modal.style.display = "none";
+        timeline.setSelection([]);
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--PDF Displayer-->
 <div id="pdfOverlay" class="mediaOverlay" onclick="displayPDFOff()">
 </div>
