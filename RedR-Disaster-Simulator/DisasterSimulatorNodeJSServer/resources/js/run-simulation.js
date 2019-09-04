@@ -149,7 +149,8 @@ function drawTimeline() {
                     group: id,
                     content: currentEvent.subject[0],
                     location: currentEvent.location[0],
-                    start: '2019-01-' + scaledTime.getDate() + ' ' + scaledTime.getHours() + ':' + scaledTime.getMinutes() + ':' + scaledTime.getSeconds()
+                    start: '2019-01-' + scaledTime.getDate() + ' ' + scaledTime.getHours() + ':' + scaledTime.getMinutes() + ':' + scaledTime.getSeconds(),
+                    type: currentEvent.type
 
                 });
                 break;
