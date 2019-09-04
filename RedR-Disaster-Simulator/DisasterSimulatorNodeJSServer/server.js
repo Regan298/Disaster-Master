@@ -43,7 +43,8 @@ var simData = {
     timeScale: 0,
     started: false,
     modeOnline: true,
-    occurredEvents: []
+    occurredEvents: [],
+    library: []
 };
 
 
@@ -162,8 +163,7 @@ app.post('/editor-upload', function (req, res) {
                 if (err) throw err;
                 console.log('successfully deleted zip');
             });
-            let validFile = parseXMLForLoading('generatedScenario');
-            if (!validFile) {
+            if (!parseXMLForLoading('generatedScenario')) {
                 return res.status(400).send("Bad File, Please Input A Valid File :)");
             } else {
                 res.redirect('scenario-create');
@@ -204,6 +204,32 @@ app.post('/upload-event-file', upload.single('upload'), function (req, res, next
     }
 });
 
+app.post('/upload-library-file', upload.single('upload'), function (req, res, next) {
+    // console.log(req);
+
+    if (req.files != null) {
+
+        let simFileTemp = req.files.upload;
+
+        if (!fs.existsSync(__dirname + '/generatedScenario/files/library')){
+            fs.mkdirSync(__dirname + '/generatedScenario/files/library');
+        }
+
+        simFileTemp.mv(__dirname + '/generatedScenario/files/library'+simFileTemp.name, function (err) {
+            if(err) {
+                console.log(err);
+                res.status(400).send(err);
+                res.end();
+            }else {
+                res.end();
+            }
+        });
+    } else {
+        console.log("no file");
+        return res.status(400).send("Bad File, Please Input A Valid File :)");
+    }
+});
+
 function clearGeneratedScenario() {
     rimraf(__dirname + "/generatedScenario", function () { console.log("deleted generated scenario"); });
 }
@@ -226,7 +252,8 @@ function clearSimData() {
         timeScale: 0,
         started: false,
         modeOnline: true,
-        occurredEvents: []
+        occurredEvents: [],
+        library: []
     };
     connectedUsers = [];
     connectedUsers.push(host);
@@ -254,8 +281,7 @@ app.post('/upload', function (req, res) {
                 if (err) throw err;
                 console.log('successfully deleted zip');
             });
-            let validFile = parseXMLForLoading('currentScenario');
-            if (!validFile) {
+            if (!parseXMLForLoading('currentScenario')) {
                 return res.status(400).send("Bad File, Please Input A Valid File :)");
             } else {
                 res.redirect('hq-run-simulation');
@@ -275,7 +301,7 @@ app.post('/upload', function (req, res) {
 
 function parseXMLForLoading(directory) {
 
-    console.log('parsing');
+    console.log(__dirname + '/'+directory+'/scenario.xml');
     try {
         var name;
         var ngoCount;
@@ -332,6 +358,23 @@ function parseXMLForLoading(directory) {
                     }
 
                     simData.eventsList.push(event);
+                }
+
+                libraryArray = result['scenario']['library'];
+
+                for (var i = 0; i < libraryArray.length; i++) {
+                    var currentEventType = eventsArray[i].type;
+                    var currentEventLocation = eventsArray[i].location;
+                    var currentEventSubject = eventsArray[i].subject;
+
+                    var libraryItem = {
+                        id: i,
+                        type: currentEventType,
+                        location: currentEventLocation,
+                        subject: currentEventSubject
+                    }
+
+                    simData.library.push(libraryItem);
                 }
 
                 simData.durationMs = result['scenario']['duration'];

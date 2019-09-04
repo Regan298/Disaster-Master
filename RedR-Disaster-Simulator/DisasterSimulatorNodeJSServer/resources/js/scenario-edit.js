@@ -17,10 +17,14 @@ socket.emit('simState', 'request', function (simdata) {
     //     timeScale: 0,
     //     started: false,
     //     modeOnline: true,
-    //     occurredEvents: []
+    //     occurredEvents: [],
+    //     library: []
     // };
-    drawDetails(data);
-    drawEvents(data.eventsList);
+    $(function () {
+        drawDetails(data);
+        drawEvents(data.eventsList);
+        drawLibrary(data.library);
+    });
 });
 
 function drawDetails(data){
@@ -266,14 +270,10 @@ function editEvent(eventNum){
                                     "<button type='button' onclick=cancelEdit('#editForm"+eventNum+"')>Cancel</button>");
 }
 
-function cancelEdit(form) {
-    $(form).empty();
-}
-
 function addEvent() {
     let frmData = document.getElementById("addForm");
     let file = frmData.elements[4].files[0];
-    uploadFiles(file);
+    uploadFiles(file, 'event');
 
     let newEvent = {
         recipient: frmData.elements[0].value,
@@ -301,10 +301,54 @@ function updateEvent(eventNum){
     drawEvents(data.eventsList);
 }
 
-function uploadFiles(file) {
+function drawLibrary(library){
+    $("#library").empty();
+    for(var i=0; i < library.length; i++){
+        $("#library").append("<li>"+library[i].subject+"<button onclick='editLibraryItem("+i+")'>Edit</button><div id='editLibraryItem"+i+"'></div></li>");
+    }
+
+    newLibraryItem();
+}
+
+function newLibraryItem() {
+    $('#newLibraryItem').empty();
+    $('#newLibraryItem').append("<form id='addLibraryItemForm' enctype='multipart/form-data'></form>" +
+                            "Subject: <input form='addLibraryItemForm' type='text' name='subject'><br>" +
+                            "Type: <select form='addLibraryItemForm' name='type'>" +
+                            "<option value='pdf'>PDF</option>" +
+                            "<option value='video'>Video</option>" +
+                            "<option value='audio'>Audio</option>" +
+                            "<option value='image'>Image</option>" +
+                            "</select><br>" +
+                            "File: <br><input form='addLibraryItemForm' type='file' name='eventFile'>" +
+                            "<input form='addLibraryItemForm' type='button' onclick=addLibraryItem() value='Submit'></input>");
+}
+
+function addLibraryItem() {
+    let frmData = document.getElementById("addLibraryItemForm");
+    let file = frmData.elements[2].files[0];
+    uploadFiles(file, 'library');
+
+    let newEvent = {
+        recipient: frmData.elements[0].value,
+        subject: frmData.elements[1].value,
+        time: frmData.elements[2].value,
+        type: frmData.elements[3].value,
+        location: '/resources/files/'+file.name
+    };
+    data.eventsList.push(newEvent);
+
+    drawEvents(data.eventsList);
+}
+
+function cancelEdit(form) {
+    $(form).empty();
+}
+
+function uploadFiles(file, request) {
     var xhr = new XMLHttpRequest();
     var formData = new FormData();
-    xhr.open("POST", "/upload-event-file", true);
+    xhr.open("POST", "/upload-"+request+"-file", true);
     xhr.setRequestHeader('X-Requested-With','XMLHttpRequest');
     formData.append("upload", file);
     xhr.send(formData);

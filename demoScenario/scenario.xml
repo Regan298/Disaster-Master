@@ -40,7 +40,7 @@
 		<name>Reach Up</name>
 		<passkey>ngo6</passkey>
 
-	</ngo>	
+	</ngo>
 	
 	<event>
 		<recipient>Peacedoves</recipient>
@@ -177,4 +177,10 @@
 		<type>pdf</type>
 		<location>/currentScenario/files/015 HQ DayinLife Request.pdf</location>
 	</event>
+    
+    <library>
+        <subject>Test</subject>
+        <type>pdf</pdf>
+        <location>/currentScenario/files/library/test.pdf</location>
+    </library>
 </scenario>
