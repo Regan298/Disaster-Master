@@ -97,7 +97,7 @@ function loadScenarioHeader() {
 
 }
 
-function updateTimeline() {
+function drawTimeline() {
     console.log("loadtimeline");
     simulationDuration = simData.durationMs[0];
     timeScale = simData.timeScale;
@@ -105,6 +105,7 @@ function updateTimeline() {
     options.max = d;
     var container = document.getElementById('visualization');
     timeline = new vis.Timeline(container, items, groups, options);
+    timeline.on('select', onSelect);
     initDraw = false;
     console.log(startDate);
     console.log(endDate);
@@ -293,7 +294,7 @@ function processScenarioData() {
     socket.emit('simState', "request", function (callbackData) {
         simData = callbackData.simData;
         loadScenarioHeader();
-        updateTimeline();
+        drawTimeline();
         updateEventList();
         handleCommunicationButtons();
         setInterval(handleNGOJoining, 1000);
