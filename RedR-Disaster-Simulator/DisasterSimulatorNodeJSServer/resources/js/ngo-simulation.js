@@ -104,10 +104,14 @@ function handleCommunicationButtonsAndMessages(callback) {
 
 
 function displayRemainingTime(timerElement, timeRemaining) {
-    var seconds = Math.floor((timeRemaining / 1000) % 60);
-    var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
-    var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
-    timerElement.innerHTML = hours + "h" + minutes + "m" + seconds + "s";
+    if(timeRemaining == 0){
+        timerElement.innerHTML = "Simulation Not Running"
+    } else {
+        var seconds = Math.floor((timeRemaining / 1000) % 60);
+        var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
+        var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
+        timerElement.innerHTML = hours + "h" + minutes + "m" + seconds + "s";
+    }
 
 }
 
@@ -529,6 +533,7 @@ $(function () {
     displayDisclaimer();
     processScenarioData();
     switchNGOChat();
+    displayRemainingTime(document.getElementById("simTime"), 0);
     recieveCurrentTime();
     handleMessageRecieving();
 
