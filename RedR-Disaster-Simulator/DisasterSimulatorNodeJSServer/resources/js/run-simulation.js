@@ -413,7 +413,7 @@ function displayNGOEventResponse(ngoEventResponse) {
     var seconds = Math.floor((timeStamp / 1000) % 60);
     var minutes = Math.floor((timeStamp / 1000 / 60) % 60);
     var hours = Math.floor((timeStamp / (1000 * 60 * 60)) % 24);
-    var eventTimeFormat = hours + "h" + minutes + "m" + seconds;
+    var eventTimeFormat = hours + "h" + minutes + "m" + seconds + "s";
 
     var buttonHTMLString = "<button id='event" + eventCounter + "' class='eventObject'><p class='eventTitle'>" + "RE: " + subject
         + "<br>" + recipient + "</p> " +

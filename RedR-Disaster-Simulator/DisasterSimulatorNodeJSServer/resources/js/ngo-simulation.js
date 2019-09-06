@@ -351,7 +351,7 @@ function displayEvent(eventId) {
     var seconds = Math.floor((timeStamp / 1000) % 60);
     var minutes = Math.floor((timeStamp / 1000 / 60) % 60);
     var hours = Math.floor((timeStamp / (1000 * 60 * 60)) % 24);
-    var eventTimeFormat = hours + "h" + minutes + "m" + seconds;
+    var eventTimeFormat = hours + "h" + minutes + "m" + seconds + "s";
 
     var currentEventType = eventButtonElement.getAttribute("type");
     var currentEventLocation = eventButtonElement.getAttribute("location");
@@ -408,7 +408,7 @@ function processEvent(event) {
     var seconds = Math.floor((timeStamp / 1000) % 60);
     var minutes = Math.floor((timeStamp / 1000 / 60) % 60);
     var hours = Math.floor((timeStamp / (1000 * 60 * 60)) % 24);
-    var eventTimeFormat = hours + "h" + minutes + "m" + seconds;
+    var eventTimeFormat = hours + "h" + minutes + "m" + seconds + "s";
 
     var potentialReplyValue = "";
 
