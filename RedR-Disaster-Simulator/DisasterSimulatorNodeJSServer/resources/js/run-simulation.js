@@ -638,6 +638,34 @@ function handleNewMessages() {
     });
 }
 
+function submitMessage(isForAll, content) {
+
+    // Add send message to ngo conversation
+    if(!isForAll) {
+        addToConversation(content, true, null, selectedNGOChat);
+    } else {
+        for(var i = 0; i < ngos.length; i++){
+            var currentName = ngos[i].name;
+            addToConversation(content, true, null, currentName);
+        }
+    }
+    //Find actual Name of NGO
+    var name;
+
+    if(!isForAll) {
+        name = document.getElementById(selectedNGOChat).innerHTML;
+    } else {
+        name = 'all';
+    }
+    var message = {
+        from: 'HQ',
+        to: name,
+        content: content
+    };
+    socket.emit('message', {message});
+
+}
+
 //Once Page Loaded
 $(function () {
 
@@ -649,21 +677,19 @@ $(function () {
 
     //Handle Messages
 
-    $('#messageHQForm').submit(function (e) {
+    $("#hqSendToNGO").click(function(e) {
         e.preventDefault(); // prevents page reloading
-        // Add send message to ngo conversation
-        addToConversation($('#input').val(), true, null, selectedNGOChat);
-        //Find actual Name of NGO
-        let name = document.getElementById(selectedNGOChat).innerHTML;
-        var message = {
-            from: 'HQ',
-            to: name,
-            content: $('#input').val()
+        if(selectedNGOChat != null) {
+            submitMessage(false, $('#input').val());
         }
         $('#input').val('');
-        socket.emit('message', {message});
     });
 
+    $("#hqSendToAll").click(function(e) {
+        e.preventDefault(); // prevents page reloading
+        submitMessage(true, $('#input').val());
+        $('#input').val('');
+    });
 
     //New Event Response Form
     $('#inboxHQForm').submit(function (e) {

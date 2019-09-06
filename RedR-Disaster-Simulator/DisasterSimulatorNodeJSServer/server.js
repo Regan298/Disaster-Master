@@ -91,7 +91,6 @@ app.get('/ngo', function (req, res) {
 });
 
 app.get('/ngo-simulation', function (req, res) {
-    console.log(req.query);
     res.sendFile(__dirname + '/ngo-simulation.html');
 });
 
@@ -315,7 +314,9 @@ socket.on('message', function (msg) {
         from: msg.message.from,
         to: msg.message.to,
         content: msg.message.content
-    }
+    };
+
+    console.log(recievedMessage);
 
 
     //store in simdata
@@ -326,7 +327,7 @@ socket.on('message', function (msg) {
         sender: msg.message.from,
         time: date,
         content: msg.message.content
-    }
+    };
     simData.messageList.push(message);
     io.emit('message', {recievedMessage});
 });
@@ -338,7 +339,6 @@ socket.on('newEventResponse', function (msg) {
     var eventID = parseInt(event, 10);
     //Find event in list of events
     var responseTime = new Date().getTime();
-    console.log("RT: " + responseTime);
     for(var i = 0; i < simData.eventsList.length; i++){
         if(simData.eventsList[i].id === eventID ){
             simData.eventsList[i].responses.push({content: msg.response.content, sender: msg.response.from, time: responseTime});
@@ -351,17 +351,11 @@ socket.on('pastEventResponses', function (msg, callback) {
 
     var event = msg.selectedEvent.toString();
     var eventID = parseInt(event, 10);
-    console.log("eventid" + eventID);
     //do lookup of events response data
-    console.log(simData.eventsList.length);
     var pastEventResponseList;
     for(var i = 0; i < simData.eventsList.length; i++){
         if(simData.eventsList[i].id === eventID ){
             pastEventResponseList = simData.eventsList[i].responses;
-            console.log("response" + pastEventResponseList.length);
-            for(var j = 0; j < pastEventResponseList.length; j++){
-                console.log(pastEventResponseList[j]);
-            }
         }
     }
 

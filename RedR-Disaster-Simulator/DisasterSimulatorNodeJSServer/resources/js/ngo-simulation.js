@@ -159,12 +159,17 @@ function addToConversation(content, isOrigin, from, to) {
         $(childUl).append("<li id='origin'>" + content + "</li>");
     } else {
 
-        if (to !== name) {
+        //Return if messages not adressed to self and not a broadcast
+        if (to !== name && to !== 'all') {
+            console.log(to);
             return;
+
         }
+
+
         var value;
 
-        for (i = 0; i < ngos.length; i++) {
+        for (var i = 0; i < ngos.length; i++) {
 
             if (ngos[i].name == from) {
                 if (from == "HQ") {
@@ -435,7 +440,8 @@ function recieveEvents() {
                 let to = currentEvent.recipient;
                 if (to.toString().trim() === name) {
 
-                    //loop through all of the response data
+                    //loop through all of the response data correctly
+
 
 
                     for (var j = 0; j < currentEvent.responses.length; j++) {
