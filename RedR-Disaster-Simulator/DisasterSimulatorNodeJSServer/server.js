@@ -14,6 +14,7 @@ var parser = new xml2js.Parser();
 app.use(fileUpload());
 var formidable = require('formidable');
 var worker; //auto events worker
+var productionMode = false;
 const port = process.env.PORT || 80;
 
 
@@ -125,14 +126,19 @@ function clearSimData() {
     if(worker != null) {
         worker.terminate();
     }
-
-
 }
 
 //Process Sceanrio File For Uploading
 app.post('/upload', function (req, res) {
 
     if (req.files != null) {
+
+        //todo: Enable Production Mode When Finished
+        if(productionMode && simData.loaded){
+            return res.status(400).send("Simulation Currently Already Running Please End Your Current Simulation and" +
+                " Go Back And Try Again");
+        }
+
 
         if(simData.loaded) {
             clearSimData();

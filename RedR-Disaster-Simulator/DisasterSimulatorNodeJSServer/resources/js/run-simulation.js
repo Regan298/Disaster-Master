@@ -19,6 +19,7 @@ var eventResponseList = [];
 var eventCounter = 0;
 var selectNGOFilter = 'default';
 
+//todo: Unccomment this when done
 window.onbeforeunload = function() {
     //return "Generic Message (Browsers Prevent Custom Message For Security Purposes)";
 };
@@ -685,6 +686,7 @@ function submitMessage(isForAll, content) {
     socket.emit('message', {message});
 
 }
+
 
 
 //Once Page Loaded
