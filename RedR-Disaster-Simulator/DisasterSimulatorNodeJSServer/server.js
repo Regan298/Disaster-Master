@@ -47,12 +47,9 @@ var simData = {
     started: false,
     modeOnline: true,
     occurredEvents: [],
-<<<<<<< HEAD
-    library: []
-=======
+    library: [],
     startTimeMS: 0,
     isRunning: false
->>>>>>> 2b8889869370cb2a8078e9d596722d6f4604ed90
 };
 
 var currentRunningInstance;
@@ -150,7 +147,7 @@ app.get('/download-save', function (req, res) {
 });
 
 app.post('/editor-upload', function (req, res) {
-    console.log("upload req");
+    console.log("upload editor req");
 
     if (req.files != null) {
 
@@ -172,7 +169,8 @@ app.post('/editor-upload', function (req, res) {
                 if (err) throw err;
                 console.log('successfully deleted zip');
             });
-            if (!parseXMLForLoading('generatedScenario')) {
+            var parse = parseXMLForLoading('generatedScenario');
+            if (!parse) {
                 return res.status(400).send("Bad File, Please Input A Valid File :)");
             } else {
                 res.redirect('scenario-create');
@@ -262,12 +260,7 @@ function clearSimData() {
         started: false,
         modeOnline: true,
         occurredEvents: [],
-<<<<<<< HEAD
-        library: []
-    };
-    connectedUsers = [];
-    connectedUsers.push(host);
-=======
+        library: [],
         startTimeMS: 0,
         isRunning: false
     };
@@ -276,7 +269,6 @@ function clearSimData() {
     if(worker != null) {
         worker.terminate();
     }
->>>>>>> 2b8889869370cb2a8078e9d596722d6f4604ed90
 }
 
 //Process Sceanrio File For Uploading
@@ -284,10 +276,9 @@ app.post('/upload', function (req, res) {
     clearSimData();
     if (req.files != null) {
 
-<<<<<<< HEAD
         if (!fs.existsSync(__dirname + '/currentScenario/')){
             fs.mkdirSync(__dirname + '/currentScenario/');
-=======
+        }
         //todo: Enable Production Mode When Finished
         if(productionMode && simData.loaded){
             return res.status(400).send("Simulation Currently Already Running Please End Your Current Simulation and" +
@@ -297,7 +288,6 @@ app.post('/upload', function (req, res) {
 
         if(simData.loaded) {
             clearSimData();
->>>>>>> 2b8889869370cb2a8078e9d596722d6f4604ed90
         }
 
         let simFileTemp = req.files.simFile;
@@ -313,7 +303,8 @@ app.post('/upload', function (req, res) {
                 if (err) throw err;
                 console.log('successfully deleted zip');
             });
-            if (!parseXMLForLoading('currentScenario')) {
+            var parse = parseXMLForLoading('currentScenario');
+            if (!parse) {
                 return res.status(400).send("Bad File, Please Input A Valid File :)");
             } else {
                 res.redirect('hq-run-simulation');

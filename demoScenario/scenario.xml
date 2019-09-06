@@ -1,4 +1,4 @@
-<?xml version="1/currentScenario0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <scenario>
 	<name>Sebadoah</name>
 	<ngoCount>5</ngoCount>
@@ -180,7 +180,7 @@
     
     <library>
         <subject>Test</subject>
-        <type>pdf</pdf>
+        <type>pdf</type>
         <location>/currentScenario/files/library/test.pdf</location>
     </library>
 </scenario>
