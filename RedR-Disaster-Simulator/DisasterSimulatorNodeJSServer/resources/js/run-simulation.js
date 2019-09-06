@@ -652,6 +652,10 @@ function handleNewMessages() {
 
 function submitMessage(isForAll, content) {
 
+    if(content.toString().length <= 0){
+        return;
+    }
+
     // Add send message to ngo conversation
     if(!isForAll) {
         addToConversation(content, true, null, selectedNGOChat);
@@ -709,18 +713,21 @@ $(function () {
 
     //New Event Response Form
     $('#inboxHQForm').submit(function (e) {
-        console.log("responsesent");
-
+        e.preventDefault(); // prevents page reloading
+        let content = $('#inputEmailResponseHQ').val();
+        if(content.length <= 0){
+            return;
+        }
         e.preventDefault(); // prevents page reloading
         //Function takes array by default so add turn single message into array
         var responseAsArray = [];
-        responseAsArray.push($('#inputEmailResponseHQ').val());
+        responseAsArray.push(content);
         addMessageToEventResponse(responseAsArray, true);
         console.log(selectedEvent);
         var response = {
             from: 'HQ',
             event: selectedEvent,
-            content: $('#inputEmailResponseHQ').val()
+            content: content
         }
 
         $('#inputEmailResponseHQ').val('');

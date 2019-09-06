@@ -543,15 +543,20 @@ $(function () {
     $('#messageNGOForm').submit(function (e) {
 
         e.preventDefault(); // prevents page reloading
+        var content = $('#input').val();
 
-        addToConversation($('#input').val(), true, null, selectedNGOChat);
+        if(content.length <= 0){
+            return;
+        }
+
+        addToConversation(content, true, null, selectedNGOChat);
         let recipient = document.getElementById(selectedNGOChat).innerHTML;
 
 
         var message = {
             from: name,
             to: recipient,
-            content: $('#input').val()
+            content: content
         }
 
         $('#input').val('');
@@ -563,15 +568,19 @@ $(function () {
     $('#inboxNGOForm').submit(function (e) {
 
         e.preventDefault(); // prevents page reloading
+        let content = $('#inputEmailResponseNGO').val();
+        if(content.length <= 0){
+            return;
+        }
         //Function takes array by default so add turn single message into array
         var responseAsArray = [];
-        responseAsArray.push($('#inputEmailResponseNGO').val());
+        responseAsArray.push(content);
         addMessageToEventResponse(responseAsArray, true);
         var response = {
             from: name,
             event: selectedEvent,
-            content: $('#inputEmailResponseNGO').val()
-        }
+            content: content
+        };
 
         $('#inputEmailResponseNGO').val('');
         socket.emit('newEventResponse', {response});
