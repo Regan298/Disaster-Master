@@ -29,7 +29,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light static-top " id="header">
     <!--Colour Changer-->
     <script>
-        $("#header").load("header.html", function (response,
+        $("#header").load("ngoHeader.html", function (response,
                                                    status, http) {
             document.getElementById("colourChooser").setAttribute("value", document.cookie);
         });
@@ -45,7 +45,7 @@
             <!--Scenario Title Gets Updated In Socket-->
             <div class="ngoTitle"></div>
             <!--Timer-->
-            <div id="timeManagement">
+            <div id="simTime">
 
             </div>
             <br>
@@ -116,43 +116,20 @@
             </div>
 
             <div id="inboxElementNGO" class="inboxElementNGO">
-                <div id="inboxEmails" class="inboxEmails">
-
-                    <button class="emailObject"><p class="emailTitle">Peacedoves Budget Request</p>
-                        <p class="emailTime">3:00PM</p></button>
+                <div id="inboxEventListNGO" class="inboxEventListNGO">
 
                 </div>
 
 
-                <div id="emailViewer" class="emailViewer">
-                    <div id="eventDetails">
-                        <p>Peacedoves Budget Request, 3:00pm</p>
-                        <button id="displayPDFButton" onclick="displayEvent('mp4')">View Event</button>
+                <div id="eventViewerNGO" class="eventViewerNGO"></div>
 
+                <div id="inboxFormDivNGO">
+                    <form action="" id="inboxNGOForm">
+                        <textarea form="inboxNGOForm" id="inputEmailResponseNGO"></textarea>
+                        <input type="submit" value="Send" class="button"/>
+                    </form>
+                </div>
 
-                    </div>
-
-                    <div class="eventResponseContent">
-                        <p>
-                            Hi HQ<br>
-
-
-                            I dont like the way u have only given me $100 i need $101<br>
-
-                            Regards, Peace Doves
-                        </p>
-                    </div>
-
-                    <div class="eventResponseContent">
-                        <p>
-                            Hi Peace Doves<br>
-
-
-                            Boi hell na<br>
-
-                            Regards, HQ
-                        </p>
-                    </div>
 
 
                 </div>
@@ -190,7 +167,7 @@
 <div id="audioOverlay" class="mediaOverlay" >
     <br>
     <div style="text-align:center;">
-        <button style="text-align:center;" onclick="audioPausePlay()">Play/Pause</button>
+        <button id="audioButton"style="text-align:center;" onclick="audioPausePlay()">Paused</button>
         <br>
         <br>
         <button style="text-align:center;" onclick="audioOverlayOff()">Exit Audio</button>
@@ -216,9 +193,9 @@
 </div>
 
 <!-- Footer -->
-<footer class="bg-light fixed-bottom" id="footer">
+<!--<footer class="bg-light fixed-bottom" id="footer">
     <script>$("#footer").load("footer.html");</script>
-</footer>
+</footer>-->
 
 </body>
 

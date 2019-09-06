@@ -122,7 +122,8 @@
                 <div id="messageingFormDivHQ">
                     <form action="" id="messageHQForm">
                         <textarea form="messageHQForm" id="input"></textarea>
-                        <input type="submit" value="Send" class="button"/>
+                        <button id="hqSendToNGO" type='submit' form='messageHQForm'>Send</button>
+                        <button id="hqSendToAll" type='submit' form='messageHQForm'>Send To All</button>
                     </form>
                 </div>
 
@@ -131,49 +132,24 @@
 
 
             <div id="inboxElementHQ" class="inboxElementHQ">
-                <div id="inboxEmails" class="inboxEmails">
-                    <!--Events are dynamically loaded into here-->
+
+                <div id="inboxEventListHQ" class="inboxEventListHQ">
+                    <select id="ngoFilterHQ" onchange="filterEvents()" >
+                        <option hidden value="default" >Events From All NGO's</option>
+
+                    </select>
                 </div>
+                <div id="eventViewerHQ" class="eventViewerHQ"></div>
 
-                <div id="emailViewer" class="emailViewer">
-                    <div id="eventDetails">
-                        <p>Peacedoves Budget Request, 3:00pm</p>
-                        <button id="displayEventButton" onclick="displayEvent('mp4')">View Event</button>
-
-
-
-                    </div>
-
-                    <div class="eventResponseContent">
-                        <p>
-                            Hi HQ<br>
-
-
-                            Thank you for your email, what is the timeframe for this event?<br>
-
-                            Regards, Peace Doves
-                        </p>
-                    </div>
-
-                    <div class="eventResponseContent">
-                        <p>
-                            Hi Peace Doves<br>
-
-
-                            This is a matter of urgency, please make it your top priority<br>
-
-                            Regards, HQ
-                        </p>
-                    </div>
-                </div>
-
-                <div id="emailResponse">
-                    <form action="" id="emailResponseForm">
-                        <textarea form="emailResponseForm" id="emailResponseFormInput"></textarea>
+                <div id="inboxFormDivHQ" class="inboxFormDivHQ">
+                    <form action="" id="inboxHQForm">
+                        <textarea form="inboxHQForm" id="inputEmailResponseHQ"></textarea>
                         <input type="submit" value="Send" class="button"/>
                     </form>
-
                 </div>
+
+
+
 
 
             </div>
@@ -187,6 +163,109 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+<div id="modal" class="eventOverlay"> 
+    <div class="eventOverlayContent">
+        <div id="overlayHeader">
+
+        <span class="close">&times;</span>
+        
+        
+        <table border-collapse= "collapse" width= "100%">
+            <tr>
+              <th>Event Name</th>
+              <th>Recipient</th>
+              <th>Day</th>
+              <th>Event Content</th>
+            </tr>
+
+            <tr>
+                <td><input id="overlayName" type="text" name="subject" value="tempValue"></input></td>
+                <td>
+                    <select id="overlayRecipiants">
+                        <option value="group1">group1</option>
+                        <option value="group2">group2</option>
+                    </select>
+                </td>
+                <td>
+                    <input id="overlayDay" type="number" name="day" value="3" min="1" max="5"></input>
+                    <input id="overlayTime" type="time" name="time" value="12:44"></input>
+                </td>
+                <td>
+                    <input type="file" name="file" id="file" class="overlayinputfile" />
+                    <label for="file" >File Selector</label>
+                </td>
+                <td>
+                    <button type="button">Update</button>
+                    
+                </td>
+                <td>
+                <button type="button" style="background-color:red; color:white;">Delete</button>
+                </td>
+            </tr>
+          </table>
+          
+
+
+
+        
+        </div>
+
+        <div id="eventMediaDisplay"></div>
+    </div>
+</div>
+
+<script>
+
+    
+
+
+    var modal = document.getElementById("modal");
+    var span = document.getElementsByClassName("close")[0];
+    function onSelect(properties){
+
+        //setting field values
+        document.getElementById("overlayName").value = items[properties.items[0]].content;
+
+        //console.log(items);
+        //console.log(properties.items[0]);
+        //console.log(items[properties.items[0]].location);
+        //console.log(items[properties.items[0]].content);
+
+        PDFObject.embed(items[properties.items[0]].location, "#eventMediaDisplay");
+        
+        modal.style.display = "block";
+    }
+    span.onclick = function(){
+        modal.style.display = "none";
+        timeline.setSelection([]);
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!--PDF Displayer-->
 <div id="pdfOverlay" class="mediaOverlay" onclick="displayPDFOff()">
@@ -212,7 +291,7 @@
 <div id="audioOverlay" class="mediaOverlay">
 	<br>
 	<div style="text-align:center;">
-	<button style="text-align:center;" onclick="audioPausePlay()">Play/Pause</button>
+	<button id="audioButton" style="text-align:center;" onclick="audioPausePlay()">Paused</button>
 	<br>
 	<br>
 	<button style="text-align:center;" onclick="audioOverlayOff()">Exit Audio</button>
@@ -236,9 +315,9 @@
 
 
 <!-- Footer -->
-<footer class="bg-light fixed-bottom" id="footer">
+<!--<footer class="bg-light fixed-bottom" id="footer">
     <script>$("#footer").load("footer.html");</script>
-</footer>
+</footer>-->
 </body>
 
 </html>

@@ -21,7 +21,9 @@ var zipFolder = require('zip-folder');
 var extract = require('extract-zip');
 var rimraf = require("rimraf");
 var worker; //auto events worker
+var productionMode = false;
 const port = process.env.PORT || 80;
+
 
 
 module.exports = app;
@@ -33,6 +35,7 @@ http.listen(port, function () {
 
 //ngoCount gets updated when file parsed
 var simData = {
+    loaded: false,
     ready: false,
     title: "",
     ngoCount: 999,
@@ -44,8 +47,15 @@ var simData = {
     started: false,
     modeOnline: true,
     occurredEvents: [],
+<<<<<<< HEAD
     library: []
+=======
+    startTimeMS: 0,
+    isRunning: false
+>>>>>>> 2b8889869370cb2a8078e9d596722d6f4604ed90
 };
+
+var currentRunningInstance;
 
 
 var currentTimeMs;
@@ -113,7 +123,6 @@ app.get('/ngo', function (req, res) {
 });
 
 app.get('/ngo-simulation', function (req, res) {
-    console.log(req.query);
     res.sendFile(__dirname + '/ngo-simulation.html');
 });
 
@@ -253,10 +262,21 @@ function clearSimData() {
         started: false,
         modeOnline: true,
         occurredEvents: [],
+<<<<<<< HEAD
         library: []
     };
     connectedUsers = [];
     connectedUsers.push(host);
+=======
+        startTimeMS: 0,
+        isRunning: false
+    };
+    connectedUsers = [];
+    connectedUsers.push(host);
+    if(worker != null) {
+        worker.terminate();
+    }
+>>>>>>> 2b8889869370cb2a8078e9d596722d6f4604ed90
 }
 
 //Process Sceanrio File For Uploading
@@ -264,8 +284,20 @@ app.post('/upload', function (req, res) {
     clearSimData();
     if (req.files != null) {
 
+<<<<<<< HEAD
         if (!fs.existsSync(__dirname + '/currentScenario/')){
             fs.mkdirSync(__dirname + '/currentScenario/');
+=======
+        //todo: Enable Production Mode When Finished
+        if(productionMode && simData.loaded){
+            return res.status(400).send("Simulation Currently Already Running Please End Your Current Simulation and" +
+                " Go Back And Try Again");
+        }
+
+
+        if(simData.loaded) {
+            clearSimData();
+>>>>>>> 2b8889869370cb2a8078e9d596722d6f4604ed90
         }
 
         let simFileTemp = req.files.simFile;
@@ -319,7 +351,7 @@ function parseXMLForLoading(directory) {
                     simData.modeOnline = false;
                 }
 
-                console.log(simData.modeOnline);
+
                 ngosArray = result['scenario']['ngo'];
                 for (var i = 0; i < ngosArray.length; i++) {
                     var currentNGOName = ngosArray[i].name;
@@ -354,8 +386,10 @@ function parseXMLForLoading(directory) {
                         time: currentEventTime,
                         type: currentEventType,
                         location: currentEventLocation,
-                        subject: currentEventSubject
-                    }
+                        subject: currentEventSubject,
+                        responses: [],
+                        latestUpdateTime: 0
+                    };
 
                     simData.eventsList.push(event);
                 }
@@ -383,6 +417,8 @@ function parseXMLForLoading(directory) {
                 simData.timeScale = 24 / hoursInDay;
             });
             simData.ready = true;
+            simData.loaded = true;
+            simData.startTimeMS = new Date().getTime();
         });
     } catch (e) {
         return false;
@@ -401,7 +437,7 @@ io.on('connection', function (socket) {
     socket.on('join', function (msg) {
 
         //Accept only if ngo not in sim yet
-        var ngoName;
+        var ngoName = 'notFound';
 
         for (var i = 0; i < simData.ngoList.length; i++) {
             if (simData.ngoList[i].passkey == msg) {
@@ -417,16 +453,17 @@ io.on('connection', function (socket) {
             }
         }
 
-        if(!isNGOPresent){
-
-        var ngo = {
-            id: msg,
-            name: ngoName
+        if(!isNGOPresent && ngoName !== 'notFound'){
+            let ngo = {
+                id: msg,
+                name: ngoName
+            };
+            //Add new ngo to connected users
+            connectedUsers.push(ngo);
+            socket.emit('loginState', 'accepted');
+        } else {
+            socket.emit('loginState', 'rejected');
         }
-        //Add new ngo to connected users
-        connectedUsers.push(ngo);
-        socket.emit('loginState', 'accepted');
-    }
 
 
 });
@@ -500,7 +537,6 @@ socket.on('nameRequest', function (msg, callback) {
 // if (simData.ready) {
 
     socket.on('simState', function (msg, callback) {
-        console.log('event received: ' + msg);
         callback({simData});
     });
     //io.emit('simState', {simData});
@@ -513,7 +549,10 @@ socket.on('message', function (msg) {
         from: msg.message.from,
         to: msg.message.to,
         content: msg.message.content
-    }
+    };
+
+    console.log(recievedMessage);
+
 
     //store in simdata
     var d = new Date();
@@ -523,35 +562,71 @@ socket.on('message', function (msg) {
         sender: msg.message.from,
         time: date,
         content: msg.message.content
-    }
+    };
     simData.messageList.push(message);
     io.emit('message', {recievedMessage});
 });
+
+socket.on('newEventResponse', function (msg) {
+    //Get event id
+
+    var event = msg.response.event.toString();
+    var eventID = parseInt(event, 10);
+    //Find event in list of events
+    var responseTime = new Date().getTime();
+    for(var i = 0; i < simData.eventsList.length; i++){
+        if(simData.eventsList[i].id === eventID ){
+            simData.eventsList[i].responses.push({content: msg.response.content, sender: msg.response.from, time: responseTime});
+            worker.postMessage(simData);
+        }
+    }
+});
+
+socket.on('pastEventResponses', function (msg, callback) {
+
+    var event = msg.selectedEvent.toString();
+    var eventID = parseInt(event, 10);
+    //do lookup of events response data
+    var pastEventResponseList;
+    for(var i = 0; i < simData.eventsList.length; i++){
+        if(simData.eventsList[i].id === eventID ){
+            pastEventResponseList = simData.eventsList[i].responses;
+        }
+    }
+
+    callback({pastEventResponseList});
+
+});
+
 
 //Listen for play/pause
 socket.on('play', function () {
     if (!simData.started) {
         var data = simData;
         worker = new Worker('./autoevents.js', {workerData: data});
-        runSim();
+        currentRunningInstance = runSim();
         simData.started = true;
     } else {
         worker.postMessage('play');
     }
-});
-socket.on('pause', function () {
-    worker.postMessage('pause');
+    simData.isRunning = true;
 });
 
-})
-;
+socket.on('pause', function () {
+    worker.postMessage('pause');
+    simData.isRunning = false;
+});
+
+});
 
 function runSim() {
     worker.on('message', (msg) => {
+
         currentTimeMs = simData.durationMs - msg.timeMs;
         var time = msg.timeMs;
         var occurredEvents = msg.events;
         io.emit('currentTime', currentTimeMs);
         io.emit('occurredEvents', {occurredEvents, time});
     });
+
 }

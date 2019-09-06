@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario>
+	<name>Sebadoah</name>
+	<ngoCount>5</ngoCount>
+	<duration>19800000</duration>
+	<hoursInDay>1</hoursInDay>
+	<mode>offline</mode>
+
+	<ngo>
+		<name>People_First</name>
+		<passkey>ngo1</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>We_Care</name>
+		<passkey>ngo2</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>EWB</name>
+		<passkey>ngo3</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>Red_Heart</name>
+		<passkey>ngo4</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>Peacedoves</name>
+		<passkey>ngo5</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>Reach_Up</name>
+		<passkey>ngo6</passkey>
+
+	</ngo>	
+	
+	<event>
+		<id>0</id>
+		<recipient>Peacedoves</recipient>
+        	<subject>Set up</subject>
+		<time>00:00:00</time>
+		<type>pdf</type>
+		<location>000_Needs_assessment_letter.pdf</location>
+	</event>
+
+	<event>
+		<id>1</id>
+		<recipient>Peacedoves</recipient>
+		<subject>Introduction into Sebadoah</subject>
+		<time>00:01:00</time>
+		<type>video</type>
+		<location>000_Needs_assessment_letter.pdf</location>
+	</event>
+
+	<event>
+		<id>2</id>
+		<recipient>Peacedoves</recipient>
+		<subject>President of Sebadoah</subject>
+		<time>00:02:00</time>
+		<type>audio</type>
+		<location>/FileLibrary/002_Purchase_from_Umbala.pdf</location>
+	</event>
+
+	<event>
+		<id>3</id>
+		<recipient>Peacedoves</recipient>
+		<subject>SitRep Request</subject>
+		<time>00:03:00</time>
+		<type>image</type>
+		<location>/FileLibrary/003_HQ_Daily_SitRep_Request.pdf</location>
+	</event>
+
+	<event>
+		<id>4</id>
+		<recipient>We_Care</recipient>
+        	<subject>Set up</subject>
+		<time>00:04:00</time>
+		<type>pdf</type>
+		<location>000_Needs_assessment_letter.pdf</location>
+	</event>
+
+	<event>
+		<id>5</id>
+		<recipient>We_Care</recipient>
+		<subject>Introduction into Sebadoah</subject>
+		<time>00:00:30</time>
+		<type>video</type>
+		<location>000_Needs_assessment_letter.pdf</location>
+	</event>
+
+	<event>
+		<id>6</id>
+		<recipient>We_Care</recipient>
+		<subject>President of Sebadoah</subject>
+		<time>00:01:00</time>
+		<type>audio</type>
+		<location>/FileLibrary/002_Purchase_from_Umbala.pdf</location>
+	</event>
+
+	<event>
+		<id>7</id>
+		<recipient>We_Care</recipient>
+		<subject>SitRep Request</subject>
+		<time>00:01:30</time>
+		<type>image</type>
+		<location>/FileLibrary/003_HQ_Daily_SitRep_Request.pdf</location>
+	</event>
+
+	
+
+</scenario>

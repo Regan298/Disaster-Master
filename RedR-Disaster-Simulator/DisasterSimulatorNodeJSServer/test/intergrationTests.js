@@ -45,7 +45,7 @@ describe('Server Tests', function() {
             .expect(200, done);
     });
 
-    it('upload correctly formed sim file should return status 302', function(done) {
+    /*it('upload correctly formed sim file should return status 302', function(done) {
         request(app)
             .post('/upload')
             .type('file')
@@ -58,7 +58,7 @@ describe('Server Tests', function() {
             .post('/upload')
             .type('file')
             .expect(400, done);
-    });
+    });*/
 
 
 

@@ -34,7 +34,7 @@
     --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
-    
+
     --main-color:#EE2A2B;
 }
 
@@ -49,7 +49,7 @@ html {
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    height: 100%;
+    height: 2000px;
 }
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
@@ -66,6 +66,7 @@ body {
     text-align: left;
     background-color: #fff;
     min-width: 500px;
+    height: 1200px;
     /*min-height: 100%;
     max-height: 125%;*/
 
@@ -200,10 +201,11 @@ body {
     left: 0;
     right: 0;
 
+
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 3;
     cursor: pointer;
-  }
+}
 
 #overlayText {
     position: absolute;
@@ -214,13 +216,124 @@ body {
     color: white;
 }
 
+
+
+
+
+
+
+/* stuff for the event overlay*/
+.eventOverlay {
+    display: none;
+    position: fixed;
+    z-index: 3;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.eventOverlayContent {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    top: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+#overlayHeader {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+/* overlay file input style*/
+.overlayinputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.overlayinputfile + label {
+    font-size: 1.00em;
+    font-weight: 400;
+    color: black;
+    background-color: white;
+    display: inline-block;
+    cursor: pointer;
+}
+
+
+.overlayinputfile + label:hover {
+    background-color: red;
+}
+
+.overlayHeaderTableRowCol {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#overlayPdf {
+    position: absolute;
+    top: 10vh;
+    right: 20vw;
+    left: 20vw;
+    bottom: 20vh;
+    height: 100vh;
+
+}
+
+
+
+
+
+
+
 .messagingTitle {
     display: inline-block;
     /* margin-right: 30%; */
     margin-top: 2.5%;
     max-width: 45%;
     min-width: 45%;
-    padding-right: 10%;
+    /*padding-right: 10%;*/
 }
 
 .inboxTitle {
@@ -234,7 +347,7 @@ body {
 .messagingElementHQ {
     margin-top: 1%;
     max-width: 50%;
-    height: 30%;
+    height: 60vh;
     border-style: solid;
     border-width: 1px;
     float: left;
@@ -332,22 +445,26 @@ body {
 }
 
 #messageHQForm textarea {
+    padding-top: 2%;
     resize: none;
     float: left;
-    /* width: 65%; */
-    max-height: 100%;
-    /* MIN-HEIGHT: 100%; */
     min-width: 80%;
-    margin-right: 5%;
+    margin-right: 2%;
 }
 
 
-#messageHQForm input {
-    /* display: inline; */
-    /* float: right; */
-    /* margin-left: 1%; */
-    margin-top: 2%;
-    width: 10%;
+#hqSendToNGO{
+    width: 15%;
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+    font-size: 100%;
+    padding: 0;
+    margin-bottom: 1%;
+}
+
+#hqSendToAll{
+    width: 15%;
     display: inline-block;
     vertical-align: top;
     float: left;
@@ -358,14 +475,15 @@ body {
 .messagingElementNGO {
     margin-top: 1%;
     max-width: 50%;
-    height: 100%;
+    height: 60vh;
     border-style: solid;
     border-width: 1px;
     float: left;
     margin: auto;
     position: absolute;
     display: flex;
-    width: 50%;
+    width: 45%;
+    margin-left: 2%;
     /*position: relative;*/
 }
 
@@ -467,159 +585,204 @@ body {
 
 .inboxElementHQ {
     max-width: 50%;
-    max-height: 60vh;
-    min-height: 60vh;
+    max-height: 75vh;
+    min-height: 75vh;
     border-style: solid;
     border-width: 1px;
     float: right;
-    margin: auto;
+    margin-left: 50%;
     display: flex;
     width: 45%;
-    position: relative;
+    position: absolute;
+    /*flex-direction: column;*/
+    flex-wrap: wrap;
+
 }
 
-.inboxElementNGO {
-    max-width: 50%;
+.inboxElementHQ h1 {
+    font-size: 2rem;
+}
 
-    min-height: 25%;
+.inboxElementHQ h2 {
+    font-size: 1rem;
+}
+
+.ngoEventFilterDiv{
     border-style: solid;
     border-width: 1px;
-    float: right;
-    margin: auto;
-    display: flex;
-    width: 45%;
-    position: relative;
+    min-width: 25%;
+    min-height: 5vh;
+    align-self: flex-start;
 }
 
-.inboxEmails {
-    float: left;
-    max-width: 30%;
-    max-height: 60vh;
-    min-width: 40%;
+.inboxEventListHQ{
+    max-height: 75vh;
+    min-height: 75vh;
+    min-width: 20%;
+    max-width: 20%;
+    border-right: solid;
+    border-width: 1px;
     overflow-y: auto;
     align-self: stretch;
 }
 
-
-
-.inboxEmails ul {
-
-    margin: 0;
-    padding: 0;
-    min-width: 100%;
-
-    float: left;
-    list-style: none;
-    max-height: inherit;
-    min-height: inherit;
-}
-
-.inboxEmails li {
-    min-width: 100%;
-}
-
-.emailObject {
-    min-width: 100%;
-    color: black;
-    background-color: #cacaca;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-weight: lighter;
-
-}
-
-.emailObject:hover {
-    background-color: var(--main-color);
-    color: white;
-
-}
-
-.pdfobject {
-
-    min-height: 75vh;
-    overflow: auto;
+#ngoFilterHQ{
     width: 100%;
-
-
+    height: 5%;
 }
 
-
-.emailTitle {
-
-    font-size: 0.75vw;
-    text-align: left;
-    float: left;
-    list-style: none;
-    white-space: pre;
+.eventViewerHQ{
+    max-width: 80%;
+    max-height: 60vh;
 }
 
-.emailTime {
-    font-size: 0.75vw;
-    display: block;
-    text-align: left;
-}
-
-.emailViewer {
-    border-left: solid;
-    border-bottom: solid;
-    display: inline-block;
-    min-width: 60%;
-    min-height: 100%;
-    max-height: 100%;
-    border-width: thin;
-
-}
-
-#eventDetails{
-
-    border-bottom: solid;
+#eventResponseViewerHQ{
+    overflow-y: auto;
+    border-style: solid;
     border-width: 1px;
-
+    height: 45vh;
+    max-width: 95%;
+    margin-left: 2%;
+    /* margin-right: 2%; */
+    margin-top: 5%;
 }
 
-.eventResponseContent{
-    border-bottom: solid;
-    border-width: 1px;
-
-}
-
-
-
-#emailResponse{
+.inboxFormDivHQ{
+    margin-left: 20%;
+    padding-left: 2%;
     position: absolute;
+    min-height: 5vh;
+    padding-bottom: 1%;
+    width: 80%;
     bottom: 0;
-    padding-left: 45%;
-    min-width: 100%;
 }
 
-#emailResponseForm{
-    float: left;
-    min-width: 100%;
-}
-
-#emailResponseFormInput{
+.inboxFormDivHQ textarea{
     resize: none;
     float: left;
-    /* width: 75%; */
     max-height: 100%;
-    /* MIN-HEIGHT: 100%; */
     min-width: 80%;
     margin-right: 5%;
-    margin-bottom: 2%;
+    min-height: 10vh;
+
 }
 
-#emailResponseForm input{
-    margin-top: 2%;
-    width: 13%;
+.inboxFormDivHQ input {
+    width: 10%;
     display: inline-block;
     vertical-align: top;
     float: left;
     font-size: 100%;
     padding: 0;
+    height: 10vh;
 }
 
-#displayPDFButton{
+.inboxElementNGO {
+    max-width: 50%;
+    border-style: solid;
+    border-width: 1px;
+    float: right;
+    margin: auto;
+    display: flex;
+    width: 45%;
+    height: 75vh;
+
+    position: absolute;
+    margin-left: 50%;
+}
+
+.inboxEventListNGO{
+    height: 100%;
+    max-width: 20%;
+    min-width: 20%;
+    align-self: stretch;
+    border-right: solid;
+    border-width: 1px;
+    overflow-y: auto;
+}
+
+.eventObject {
+    min-width: 100%;
+    color: black;
+    background-color: #cacaca;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: lighter;
+    font-size: 1vw;
+    text-align: left;
+}
+
+.eventObject:hover {
+    background-color: var(--main-color);
+    color: white;
 
 }
+
+#eventViewerNGO{
+    min-width: 75%;
+    max-height: 60vh;
+
+}
+
+#eventViewerNGO h1{
+    font-size: 2rem;
+}
+
+#eventViewerNGO h2{
+    font-size: 1rem;
+}
+
+#eventResponseViewerNGO{
+    overflow-y: auto;
+    border-style: solid;
+    border-width: 1px;
+    height: 45vh;
+    max-width: 100%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 5%;
+}
+
+#inboxFormDivNGO{
+    position: absolute;
+    margin-left: 20%;
+    bottom: 0;
+    width: 75%;
+    padding-bottom: 2%;
+    padding-left: 2%;
+}
+
+
+
+#inputEmailResponseNGO{
+    resize: none;
+    float: left;
+    max-height: 100%;
+    min-width: 85%;
+    margin-right: 5%;
+    min-height: 10vh;
+}
+
+
+#inboxNGOForm input {
+    /* margin-top: 2%; */
+    width: 10%;
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+    font-size: 100%;
+    padding: 0;
+    height: 10vh;
+}
+
+
+.pdfobject {
+    margin-top: 5%;
+    min-height: 75vh;
+    overflow: auto;
+    width: 100%;
+}
+
+
 
 [tabindex="-1"]:focus {
     outline: 0 !important;
@@ -823,6 +986,9 @@ button,
 [type="reset"],
 [type="submit"] {
     -webkit-appearance: button;
+    background-color: var(--main-color);
+    color: white;
+
 }
 
 button:not(:disabled),
