@@ -21,6 +21,8 @@ testing_testing:
     - npm install supertest
   script:
     - npm test
+  coverage:
+    '/Statements.*?(\d+(?:\.\d+)?)%/'
     
 deploytesting:
   type: deploy
