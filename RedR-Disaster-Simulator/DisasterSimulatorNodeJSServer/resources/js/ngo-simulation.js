@@ -12,6 +12,7 @@ var startDuration;
 var firstTimeReccieve = true;
 var eventDisplayCounter = 0;
 var eventResponseList = [];
+document.documentElement.style.height="1500px";
 
 //Runs in Background and gets new and past users on a period
 function handleNGOJoining() {
