@@ -19,6 +19,10 @@ var eventResponseList = [];
 var eventCounter = 0;
 var selectNGOFilter = 'default';
 
+window.onbeforeunload = function() {
+    //return "Generic Message (Browsers Prevent Custom Message For Security Purposes)";
+};
+
 
 function handleNGOJoining() {
     //New NGOS

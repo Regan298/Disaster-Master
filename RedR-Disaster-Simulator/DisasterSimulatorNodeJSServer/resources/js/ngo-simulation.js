@@ -14,6 +14,10 @@ var eventDisplayCounter = 0;
 var eventResponseList = [];
 document.documentElement.style.height="1500px";
 
+window.onbeforeunload = function() {
+    //return "Generic Message (Browsers Prevent Custom Message For Security Purposes)";
+};
+
 //Runs in Background and gets new and past users on a period
 function handleNGOJoining() {
     socket.emit('getConnected', "request", function (callbackData) {
