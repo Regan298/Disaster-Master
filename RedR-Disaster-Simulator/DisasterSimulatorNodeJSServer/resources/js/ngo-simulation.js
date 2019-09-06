@@ -435,7 +435,8 @@ function recieveEvents() {
                 let to = currentEvent.recipient;
                 if (to.toString().trim() === name) {
 
-                    //loop through all of the response data
+                    //loop through all of the response data correctly
+
 
 
                     for (var j = 0; j < currentEvent.responses.length; j++) {

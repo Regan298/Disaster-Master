@@ -445,22 +445,26 @@ body {
 }
 
 #messageHQForm textarea {
+    padding-top: 2%;
     resize: none;
     float: left;
-    /* width: 65%; */
-    max-height: 100%;
-    /* MIN-HEIGHT: 100%; */
     min-width: 80%;
-    margin-right: 5%;
+    margin-right: 2%;
 }
 
 
-#messageHQForm input {
-    /* display: inline; */
-    /* float: right; */
-    /* margin-left: 1%; */
-    margin-top: 2%;
-    width: 10%;
+#hqSendToNGO{
+    width: 15%;
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+    font-size: 100%;
+    padding: 0;
+    margin-bottom: 1%;
+}
+
+#hqSendToAll{
+    width: 15%;
     display: inline-block;
     vertical-align: top;
     float: left;
