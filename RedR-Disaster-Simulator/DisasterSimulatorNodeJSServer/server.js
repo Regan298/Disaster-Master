@@ -14,6 +14,7 @@ var parser = new xml2js.Parser();
 app.use(fileUpload());
 var formidable = require('formidable');
 var worker; //auto events worker
+var productionMode = false;
 const port = process.env.PORT || 80;
 
 
@@ -39,7 +40,8 @@ var simData = {
     started: false,
     modeOnline: true,
     occurredEvents: [],
-    startTimeMS: 0
+    startTimeMS: 0,
+    isRunning: false
 };
 
 var currentRunningInstance;
@@ -116,19 +118,27 @@ function clearSimData() {
         started: false,
         modeOnline: true,
         occurredEvents: [],
-        startTimeMS: 0
+        startTimeMS: 0,
+        isRunning: false
     };
     connectedUsers = [];
     connectedUsers.push(host);
-    worker.terminate();
-
-
+    if(worker != null) {
+        worker.terminate();
+    }
 }
 
 //Process Sceanrio File For Uploading
 app.post('/upload', function (req, res) {
 
     if (req.files != null) {
+
+        //todo: Enable Production Mode When Finished
+        if(productionMode && simData.loaded){
+            return res.status(400).send("Simulation Currently Already Running Please End Your Current Simulation and" +
+                " Go Back And Try Again");
+        }
+
 
         if(simData.loaded) {
             clearSimData();
@@ -243,7 +253,7 @@ io.on('connection', function (socket) {
     socket.on('join', function (msg) {
 
         //Accept only if ngo not in sim yet
-        var ngoName;
+        var ngoName = 'notFound';
 
         for (var i = 0; i < simData.ngoList.length; i++) {
             if (simData.ngoList[i].passkey == msg) {
@@ -259,16 +269,17 @@ io.on('connection', function (socket) {
             }
         }
 
-        if(!isNGOPresent){
-
-        var ngo = {
-            id: msg,
-            name: ngoName
+        if(!isNGOPresent && ngoName !== 'notFound'){
+            let ngo = {
+                id: msg,
+                name: ngoName
+            };
+            //Add new ngo to connected users
+            connectedUsers.push(ngo);
+            socket.emit('loginState', 'accepted');
+        } else {
+            socket.emit('loginState', 'rejected');
         }
-        //Add new ngo to connected users
-        connectedUsers.push(ngo);
-        socket.emit('loginState', 'accepted');
-    }
 
 
 });
@@ -374,10 +385,12 @@ socket.on('play', function () {
     } else {
         worker.postMessage('play');
     }
+    simData.isRunning = true;
 });
 
 socket.on('pause', function () {
     worker.postMessage('pause');
+    simData.isRunning = false;
 });
 
 });

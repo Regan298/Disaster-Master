@@ -36,6 +36,7 @@ deploytesting:
   - sudo dpl --provider=heroku --app=disaster-simulator-testing --api-key=$HEROKU_API_KEY
   only:
   - heroku-bug-fixes
+  - lachlan-features-part3
 
 
 production:

@@ -12,6 +12,11 @@ var startDuration;
 var firstTimeReccieve = true;
 var eventDisplayCounter = 0;
 var eventResponseList = [];
+document.documentElement.style.height="1500px";
+
+window.onbeforeunload = function() {
+    //return "Generic Message (Browsers Prevent Custom Message For Security Purposes)";
+};
 
 //Runs in Background and gets new and past users on a period
 function handleNGOJoining() {
@@ -104,10 +109,14 @@ function handleCommunicationButtonsAndMessages(callback) {
 
 
 function displayRemainingTime(timerElement, timeRemaining) {
-    var seconds = Math.floor((timeRemaining / 1000) % 60);
-    var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
-    var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
-    timerElement.innerHTML = hours + "h" + minutes + "m" + seconds + "s";
+    if(timeRemaining == 0){
+        timerElement.innerHTML = "Simulation Not Running"
+    } else {
+        var seconds = Math.floor((timeRemaining / 1000) % 60);
+        var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
+        var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
+        timerElement.innerHTML = hours + "h" + minutes + "m" + seconds + "s";
+    }
 
 }
 
@@ -347,7 +356,7 @@ function displayEvent(eventId) {
     var seconds = Math.floor((timeStamp / 1000) % 60);
     var minutes = Math.floor((timeStamp / 1000 / 60) % 60);
     var hours = Math.floor((timeStamp / (1000 * 60 * 60)) % 24);
-    var eventTimeFormat = hours + "h" + minutes + "m" + seconds;
+    var eventTimeFormat = hours + "h" + minutes + "m" + seconds + "s";
 
     var currentEventType = eventButtonElement.getAttribute("type");
     var currentEventLocation = eventButtonElement.getAttribute("location");
@@ -404,7 +413,7 @@ function processEvent(event) {
     var seconds = Math.floor((timeStamp / 1000) % 60);
     var minutes = Math.floor((timeStamp / 1000 / 60) % 60);
     var hours = Math.floor((timeStamp / (1000 * 60 * 60)) % 24);
-    var eventTimeFormat = hours + "h" + minutes + "m" + seconds;
+    var eventTimeFormat = hours + "h" + minutes + "m" + seconds + "s";
 
     var potentialReplyValue = "";
 
@@ -418,7 +427,7 @@ function processEvent(event) {
 
     var eventButton = document.getElementById("event" + eventDisplayCounter);
     eventButton.setAttribute("eventID", id);
-    eventButton.setAttribute("onclick", "displayEvent('event" + eventDisplayCounter + "')");
+    eventButton.setAttribute("onmousedown", "displayEvent('event" + eventDisplayCounter + "')");
     eventButton.setAttribute("location", location);
     eventButton.setAttribute("subject", potentialReplyValue + subject);
     eventButton.setAttribute("time", time);
@@ -529,6 +538,7 @@ $(function () {
     displayDisclaimer();
     processScenarioData();
     switchNGOChat();
+    displayRemainingTime(document.getElementById("simTime"), 0);
     recieveCurrentTime();
     handleMessageRecieving();
 
@@ -537,15 +547,20 @@ $(function () {
     $('#messageNGOForm').submit(function (e) {
 
         e.preventDefault(); // prevents page reloading
+        var content = $('#input').val();
 
-        addToConversation($('#input').val(), true, null, selectedNGOChat);
+        if(content.length <= 0){
+            return;
+        }
+
+        addToConversation(content, true, null, selectedNGOChat);
         let recipient = document.getElementById(selectedNGOChat).innerHTML;
 
 
         var message = {
             from: name,
             to: recipient,
-            content: $('#input').val()
+            content: content
         }
 
         $('#input').val('');
@@ -557,15 +572,19 @@ $(function () {
     $('#inboxNGOForm').submit(function (e) {
 
         e.preventDefault(); // prevents page reloading
+        let content = $('#inputEmailResponseNGO').val();
+        if(content.length <= 0){
+            return;
+        }
         //Function takes array by default so add turn single message into array
         var responseAsArray = [];
-        responseAsArray.push($('#inputEmailResponseNGO').val());
+        responseAsArray.push(content);
         addMessageToEventResponse(responseAsArray, true);
         var response = {
             from: name,
             event: selectedEvent,
-            content: $('#inputEmailResponseNGO').val()
-        }
+            content: content
+        };
 
         $('#inputEmailResponseNGO').val('');
         socket.emit('newEventResponse', {response});

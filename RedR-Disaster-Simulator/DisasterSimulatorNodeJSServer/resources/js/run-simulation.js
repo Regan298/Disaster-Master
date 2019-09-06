@@ -19,6 +19,11 @@ var eventResponseList = [];
 var eventCounter = 0;
 var selectNGOFilter = 'default';
 
+//todo: Unccomment this when done
+window.onbeforeunload = function() {
+    //return "Generic Message (Browsers Prevent Custom Message For Security Purposes)";
+};
+
 
 function handleNGOJoining() {
     //New NGOS
@@ -293,6 +298,10 @@ function filterEvents() {
 function processScenarioData() {
     socket.emit('simState', "request", function (callbackData) {
         simData = callbackData.simData;
+        if(simData.isRunning){
+            document.getElementById("playPauseSwitch").innerHTML = "&#10074 &#10074";
+            running = true;
+        }
         loadScenarioHeader();
         drawTimeline();
         updateEventList();
@@ -413,7 +422,7 @@ function displayNGOEventResponse(ngoEventResponse) {
     var seconds = Math.floor((timeStamp / 1000) % 60);
     var minutes = Math.floor((timeStamp / 1000 / 60) % 60);
     var hours = Math.floor((timeStamp / (1000 * 60 * 60)) % 24);
-    var eventTimeFormat = hours + "h" + minutes + "m" + seconds;
+    var eventTimeFormat = hours + "h" + minutes + "m" + seconds + "s";
 
     var buttonHTMLString = "<button id='event" + eventCounter + "' class='eventObject'><p class='eventTitle'>" + "RE: " + subject
         + "<br>" + recipient + "</p> " +
@@ -425,7 +434,7 @@ function displayNGOEventResponse(ngoEventResponse) {
 
     var eventButton = document.getElementById("event" + eventCounter);
     eventButton.setAttribute("eventID", id);
-    eventButton.setAttribute("onclick", "displayEvent('event" + eventCounter + "')");
+    eventButton.setAttribute("onmousedown", "displayEvent('event" + eventCounter + "')");
     eventButton.setAttribute("location", location);
     eventButton.setAttribute("subject", subject);
     eventButton.setAttribute("time", time);
@@ -494,10 +503,10 @@ function updateCurrentTime() {
     socket.on('currentTime', function (time) {
         simulationDuration = time;
         if (realCountdown) {
-            timerElement = document.getElementById("realTime");
+            let timerElement = document.getElementById("realTime");
             realDisplayRemainingTime(timerElement, simulationDuration);
         } else {
-            timerElement = document.getElementById("simTime");
+            let timerElement = document.getElementById("simTime");
             simDisplayRemainingTime(timerElement, simulationDuration * timeScale);
         }
     });
@@ -534,16 +543,24 @@ function addToConversation(content, isOrigin, from, to) {
 
     console.log(from);
     if (isOrigin) {
+        if(to === 'all'){
+            for (var i = 0; i < ngos.length; i++) {
+                console.log(ngos[i].name);
+                var childUl = $("#" + ngos[i].name + 'Content').find('.messageList');
+                $(childUl).append("<li id='origin'>" + content + "</li>");
+            }
+        }
         to = to.trim().replace(" ", "_") + "Content";
-        console.log(to);
         var childUl = $("#" + to).find('.messageList');
         $(childUl).append("<li id='origin'>" + content + "</li>");
     } else {
+
         if (to !== "HQ") {
             return;
         }
+
         var value;
-        for (i = 0; i < ngos.length; i++) {
+        for (var i = 0; i < ngos.length; i++) {
             if (ngos[i].name === from) {
                 value = from.replace(" ", "_") + "Content";
                 break;
@@ -640,6 +657,10 @@ function handleNewMessages() {
 
 function submitMessage(isForAll, content) {
 
+    if(content.toString().length <= 0){
+        return;
+    }
+
     // Add send message to ngo conversation
     if(!isForAll) {
         addToConversation(content, true, null, selectedNGOChat);
@@ -666,6 +687,8 @@ function submitMessage(isForAll, content) {
 
 }
 
+
+
 //Once Page Loaded
 $(function () {
 
@@ -674,6 +697,9 @@ $(function () {
     handleTimeSwitcher();
     switchNGOChat();
     handleNewMessages();
+
+
+
 
     //Handle Messages
 
@@ -693,18 +719,21 @@ $(function () {
 
     //New Event Response Form
     $('#inboxHQForm').submit(function (e) {
-        console.log("responsesent");
-
+        e.preventDefault(); // prevents page reloading
+        let content = $('#inputEmailResponseHQ').val();
+        if(content.length <= 0){
+            return;
+        }
         e.preventDefault(); // prevents page reloading
         //Function takes array by default so add turn single message into array
         var responseAsArray = [];
-        responseAsArray.push($('#inputEmailResponseHQ').val());
+        responseAsArray.push(content);
         addMessageToEventResponse(responseAsArray, true);
         console.log(selectedEvent);
         var response = {
             from: 'HQ',
             event: selectedEvent,
-            content: $('#inputEmailResponseHQ').val()
+            content: content
         }
 
         $('#inputEmailResponseHQ').val('');
