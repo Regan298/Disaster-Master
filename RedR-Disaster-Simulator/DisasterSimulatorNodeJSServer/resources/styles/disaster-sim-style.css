@@ -224,13 +224,13 @@ body {
 
 /* stuff for the event overlay*/
 .eventOverlay {
-    display: none; 
-    position: fixed; 
-    z-index: 3; 
+    display: none;
+    position: fixed;
+    z-index: 3;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
+    width: 100%;
+    height: 100%;
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -249,21 +249,21 @@ body {
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
-  }
+}
 
-  #overlayHeader {
-      padding: 2px 16px;
-      background-color: #5cb85c;
-      color: white;
-  }
+#overlayHeader {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
 /* overlay file input style*/
-  .overlayinputfile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+.overlayinputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }
 
 .overlayinputfile + label {
@@ -284,32 +284,32 @@ body {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
-  }
-  
-  /* Add Animation */
-  @-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0} 
-    to {top:0; opacity:1}
-  }
-  
-  @keyframes animatetop {
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
     from {top:-300px; opacity:0}
     to {top:0; opacity:1}
-  }
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
 
 .close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.close:hover,
+.close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
-  }
+}
 
 #overlayPdf {
     position: absolute;
@@ -618,7 +618,8 @@ body {
 .inboxEventListHQ{
     max-height: 75vh;
     min-height: 75vh;
-    width: 20%;
+    min-width: 20%;
+    max-width: 20%;
     border-right: solid;
     border-width: 1px;
     overflow-y: auto;
@@ -631,19 +632,18 @@ body {
 }
 
 .eventViewerHQ{
-    align-self: flex-start;
-    min-width: 80%;
-    height: 60vh;
+    max-width: 80%;
+    max-height: 60vh;
 }
 
 #eventResponseViewerHQ{
     overflow-y: auto;
     border-style: solid;
     border-width: 1px;
-    height: 40vh;
-    min-width: 90%;
+    height: 45vh;
+    max-width: 95%;
     margin-left: 2%;
-    margin-right: 2%;
+    /* margin-right: 2%; */
     margin-top: 5%;
 }
 
@@ -693,7 +693,8 @@ body {
 
 .inboxEventListNGO{
     height: 100%;
-    width: 20%;
+    max-width: 20%;
+    min-width: 20%;
     align-self: stretch;
     border-right: solid;
     border-width: 1px;
@@ -734,8 +735,8 @@ body {
     overflow-y: auto;
     border-style: solid;
     border-width: 1px;
-    height: 40vh;
-    min-width: 100%;
+    height: 45vh;
+    max-width: 100%;
     margin-left: 2%;
     margin-right: 2%;
     margin-top: 5%;

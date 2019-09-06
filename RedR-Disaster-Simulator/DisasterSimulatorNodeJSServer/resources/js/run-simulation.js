@@ -429,7 +429,7 @@ function displayNGOEventResponse(ngoEventResponse) {
 
     var eventButton = document.getElementById("event" + eventCounter);
     eventButton.setAttribute("eventID", id);
-    eventButton.setAttribute("onclick", "displayEvent('event" + eventCounter + "')");
+    eventButton.setAttribute("onmousedown", "displayEvent('event" + eventCounter + "')");
     eventButton.setAttribute("location", location);
     eventButton.setAttribute("subject", subject);
     eventButton.setAttribute("time", time);
