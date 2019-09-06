@@ -534,16 +534,24 @@ function addToConversation(content, isOrigin, from, to) {
 
     console.log(from);
     if (isOrigin) {
+        if(to === 'all'){
+            for (var i = 0; i < ngos.length; i++) {
+                console.log(ngos[i].name);
+                var childUl = $("#" + ngos[i].name + 'Content').find('.messageList');
+                $(childUl).append("<li id='origin'>" + content + "</li>");
+            }
+        }
         to = to.trim().replace(" ", "_") + "Content";
-        console.log(to);
         var childUl = $("#" + to).find('.messageList');
         $(childUl).append("<li id='origin'>" + content + "</li>");
     } else {
+
         if (to !== "HQ") {
             return;
         }
+
         var value;
-        for (i = 0; i < ngos.length; i++) {
+        for (var i = 0; i < ngos.length; i++) {
             if (ngos[i].name === from) {
                 value = from.replace(" ", "_") + "Content";
                 break;

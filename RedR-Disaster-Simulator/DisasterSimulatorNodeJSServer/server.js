@@ -243,7 +243,7 @@ io.on('connection', function (socket) {
     socket.on('join', function (msg) {
 
         //Accept only if ngo not in sim yet
-        var ngoName;
+        var ngoName = 'notFound';
 
         for (var i = 0; i < simData.ngoList.length; i++) {
             if (simData.ngoList[i].passkey == msg) {
@@ -259,16 +259,17 @@ io.on('connection', function (socket) {
             }
         }
 
-        if(!isNGOPresent){
-
-        var ngo = {
-            id: msg,
-            name: ngoName
+        if(!isNGOPresent && ngoName !== 'notFound'){
+            let ngo = {
+                id: msg,
+                name: ngoName
+            };
+            //Add new ngo to connected users
+            connectedUsers.push(ngo);
+            socket.emit('loginState', 'accepted');
+        } else {
+            socket.emit('loginState', 'rejected');
         }
-        //Add new ngo to connected users
-        connectedUsers.push(ngo);
-        socket.emit('loginState', 'accepted');
-    }
 
 
 });

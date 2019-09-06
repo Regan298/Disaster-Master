@@ -987,6 +987,9 @@ button,
 [type="reset"],
 [type="submit"] {
     -webkit-appearance: button;
+    background-color: var(--main-color);
+    color: white;
+
 }
 
 button:not(:disabled),

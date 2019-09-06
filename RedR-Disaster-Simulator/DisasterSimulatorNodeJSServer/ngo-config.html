@@ -75,6 +75,9 @@
     socket.on('loginState', function (data) {
         if(data === "accepted"){
             location.href = "ngo-simulation?key="+key;
+        } else {
+            alert("Invalid Key, either an NGO with this passkey is already present or this key does not appear in the" +
+                " simulation");
         }
     });
 
