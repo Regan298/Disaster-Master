@@ -159,12 +159,15 @@ function addToConversation(content, isOrigin, from, to) {
         $(childUl).append("<li id='origin'>" + content + "</li>");
     } else {
 
-        if (to !== name) {
+        if (to !== name && to !== 'all') {
+            console.log(to);
             return;
         }
+
+
         var value;
 
-        for (i = 0; i < ngos.length; i++) {
+        for (var i = 0; i < ngos.length; i++) {
 
             if (ngos[i].name == from) {
                 if (from == "HQ") {
