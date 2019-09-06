@@ -293,6 +293,10 @@ function filterEvents() {
 function processScenarioData() {
     socket.emit('simState', "request", function (callbackData) {
         simData = callbackData.simData;
+        if(simData.isRunning){
+            document.getElementById("playPauseSwitch").innerHTML = "&#10074 &#10074";
+            running = true;
+        }
         loadScenarioHeader();
         drawTimeline();
         updateEventList();
@@ -494,10 +498,10 @@ function updateCurrentTime() {
     socket.on('currentTime', function (time) {
         simulationDuration = time;
         if (realCountdown) {
-            timerElement = document.getElementById("realTime");
+            let timerElement = document.getElementById("realTime");
             realDisplayRemainingTime(timerElement, simulationDuration);
         } else {
-            timerElement = document.getElementById("simTime");
+            let timerElement = document.getElementById("simTime");
             simDisplayRemainingTime(timerElement, simulationDuration * timeScale);
         }
     });
@@ -674,6 +678,7 @@ function submitMessage(isForAll, content) {
 
 }
 
+
 //Once Page Loaded
 $(function () {
 
@@ -682,6 +687,9 @@ $(function () {
     handleTimeSwitcher();
     switchNGOChat();
     handleNewMessages();
+
+
+
 
     //Handle Messages
 

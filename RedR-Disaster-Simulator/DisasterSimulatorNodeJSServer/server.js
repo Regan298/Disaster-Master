@@ -39,7 +39,8 @@ var simData = {
     started: false,
     modeOnline: true,
     occurredEvents: [],
-    startTimeMS: 0
+    startTimeMS: 0,
+    isRunning: false
 };
 
 var currentRunningInstance;
@@ -116,7 +117,8 @@ function clearSimData() {
         started: false,
         modeOnline: true,
         occurredEvents: [],
-        startTimeMS: 0
+        startTimeMS: 0,
+        isRunning: false
     };
     connectedUsers = [];
     connectedUsers.push(host);
@@ -377,10 +379,12 @@ socket.on('play', function () {
     } else {
         worker.postMessage('play');
     }
+    simData.isRunning = true;
 });
 
 socket.on('pause', function () {
     worker.postMessage('pause');
+    simData.isRunning = false;
 });
 
 });
