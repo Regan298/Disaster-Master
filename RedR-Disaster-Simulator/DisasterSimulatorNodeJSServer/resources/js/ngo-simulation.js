@@ -159,9 +159,11 @@ function addToConversation(content, isOrigin, from, to) {
         $(childUl).append("<li id='origin'>" + content + "</li>");
     } else {
 
+        //Return if messages not adressed to self and not a broadcast
         if (to !== name && to !== 'all') {
             console.log(to);
             return;
+
         }
 
 
