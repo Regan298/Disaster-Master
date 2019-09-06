@@ -120,7 +120,9 @@ function clearSimData() {
     };
     connectedUsers = [];
     connectedUsers.push(host);
-    worker.terminate();
+    if(worker != null) {
+        worker.terminate();
+    }
 
 
 }
