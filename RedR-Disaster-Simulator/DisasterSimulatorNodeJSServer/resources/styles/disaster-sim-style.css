@@ -776,8 +776,6 @@ body {
 
 .pdfobject {
     margin-top: 5%;
-    padding-left: 5%;
-    padding-right: 5%;
     min-height: 75vh;
     overflow: auto;
     width: 100%;

@@ -422,7 +422,7 @@ function processEvent(event) {
 
     var eventButton = document.getElementById("event" + eventDisplayCounter);
     eventButton.setAttribute("eventID", id);
-    eventButton.setAttribute("onclick", "displayEvent('event" + eventDisplayCounter + "')");
+    eventButton.setAttribute("onmousedown", "displayEvent('event" + eventDisplayCounter + "')");
     eventButton.setAttribute("location", location);
     eventButton.setAttribute("subject", potentialReplyValue + subject);
     eventButton.setAttribute("time", time);
