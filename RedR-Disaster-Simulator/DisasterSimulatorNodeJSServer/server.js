@@ -182,7 +182,6 @@ app.post('/editor-upload', function (req, res) {
 
         return res.status(400).send("Bad File, Please Input A Valid File :)");
     }
-
 });
 
 app.post('/upload-event-file', upload.single('upload'), function (req, res, next) {
@@ -222,7 +221,7 @@ app.post('/upload-library-file', upload.single('upload'), function (req, res, ne
             fs.mkdirSync(__dirname + '/generatedScenario/files/library');
         }
 
-        simFileTemp.mv(__dirname + '/generatedScenario/files/library'+simFileTemp.name, function (err) {
+        simFileTemp.mv(__dirname + '/generatedScenario/files/library/'+simFileTemp.name, function (err) {
             if(err) {
                 console.log(err);
                 res.status(400).send(err);
@@ -367,7 +366,7 @@ function parseXMLForLoading(directory) {
                 for (var i = 0; i < eventsArray.length; i++) {
                     var currentEventRecipient = eventsArray[i].recipient;
                     var currentEventTime = eventsArray[i].time;
-                    var currentEventType = eventsArray[i].type;
+                    var currentEventType = eventsArray[i].type[0];
                     var currentEventLocation = eventsArray[i].location;
                     var currentEventSubject = eventsArray[i].subject;
 
@@ -388,15 +387,15 @@ function parseXMLForLoading(directory) {
                 libraryArray = result['scenario']['library'];
 
                 for (var i = 0; i < libraryArray.length; i++) {
-                    var currentEventType = eventsArray[i].type;
-                    var currentEventLocation = eventsArray[i].location;
-                    var currentEventSubject = eventsArray[i].subject;
+                    var currentLibraryType = libraryArray[i].type[0];
+                    var currentLibraryLocation = libraryArray[i].location;
+                    var currentLibrarySubject = libraryArray[i].subject;
 
                     var libraryItem = {
                         id: i,
-                        type: currentEventType,
-                        location: currentEventLocation,
-                        subject: currentEventSubject
+                        type: currentLibraryType,
+                        location: currentLibraryLocation,
+                        subject: currentLibrarySubject
                     }
 
                     simData.library.push(libraryItem);
@@ -473,6 +472,8 @@ socket.on('getConnected', function (msg, callback) {
 //Save XML from scenario editor
 socket.on('exportXML', function (data) {
 
+    simData = data;
+
     var root = xmlBuilder.create('scenario');
 
     root.ele('name', data.title).end({ pretty: true});
@@ -495,6 +496,14 @@ socket.on('exportXML', function (data) {
         item.ele('time', ''+data.eventsList[i].time).end({ pretty: true});
         item.ele('type', ''+data.eventsList[i].type).end({ pretty: true});
         item.ele('location', ''+data.eventsList[i].location).end({ pretty: true});
+        item.end({ pretty: true});
+    }
+
+    for(var i = 0; i < data.library.length; i++) {
+        var item = root.ele('library');
+        item.ele('subject', ''+data.library[i].subject).end({ pretty: true});
+        item.ele('type', ''+data.library[i].type).end({ pretty: true});
+        item.ele('location', ''+data.library[i].location).end({ pretty: true});
         item.end({ pretty: true});
     }
 

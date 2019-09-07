@@ -77,10 +77,15 @@ function addNgo() {
 
 function editType(){
     $('#editType').empty();
+    var options = '';
+    if(data.modeOnline){
+        options = "<option value=true selected>true</option>" + "<option value=false>false</option>";
+    }else {
+        options = "<option value=true>true</option>" + "<option value=false selected>false</option>";
+    }
     $('#editType').append("<form id='typeForm'></form>" +
                             "Type: <select form='typeForm' name='type' value='"+data.modeOnline+"'>" +
-                            "<option value='true'>true</option>" +
-                            "<option value='false'>false</option>" +
+                            options +
                             "</select><br>" +
                             "<input form='typeForm' type='button' onclick='updateType()' value='Submit'>" +
                             "<button type='button' onclick=cancelEdit('#editType')>Cancel</button>");
@@ -89,7 +94,7 @@ function editType(){
 function updateType(){
     let frmData = document.getElementById("typeForm");
 
-    data.modeOnline = frmData.elements[0].value;
+    data.modeOnline = (frmData.elements[0].value === 'true');
 
     $('#editType').empty();
     drawDetails(data);
@@ -171,7 +176,7 @@ function updateDuration(){
 function editScale(){
     $('#editScale').empty();
     $('#editScale').append("<form id='scaleForm'></form>" +
-                            "Scale: <input form='scaleForm' type='text' name='scale' value='"+24/data.timeScale+"'><br>"+
+                            "<input form='scaleForm' type='text' name='scale' value='"+24/data.timeScale+"'><br>"+
                             "<input form='scaleForm' type='button' onclick='updateScale()' value='Submit'>" +
                             "<button type='button' onclick=cancelEdit('#editScale')>Cancel</button>");
 }
@@ -191,7 +196,8 @@ function editNgo(ngoNum){
                             "NGO Name: <input form='ngoForm"+ngoNum+"' type='text' name='name' value='"+data.ngoList[ngoNum].name+"'><br>"+
                             "NGO Passkey: <input form='ngoForm"+ngoNum+"' type='text' name='passkey' value='"+data.ngoList[ngoNum].passkey+"'><br>"+
                             "<input form='ngoForm"+ngoNum+"' type='button' onclick='updateNgo("+ngoNum+")' value='Submit'>" +
-                            "<button type='button' onclick=cancelEdit('#ngoForm"+ngoNum+"')>Cancel</button>");
+                            "<button type='button' onclick=cancelEdit('#ngoForm"+ngoNum+"')>Cancel</button>" +
+                            "<button type='button' onclick=deleteNgo('"+ngoNum+"')>DELETE</button>");
 }
 
 function updateNgo(ngoNum){
@@ -202,6 +208,11 @@ function updateNgo(ngoNum){
 
     $('#ngoForm'+ngoNum).empty();
     drawDetails(data);
+}
+
+function deleteNgo(ngoNum){
+    data.ngoList.splice(ngoNum, 1);
+    drawNgos(data.ngoList);
 }
 
 // Display a list of events
@@ -237,10 +248,10 @@ function newEvent() {
                             "Subject: <input form='addForm' type='text' name='subject'><br>" +
                             "Time: <input form='addForm' type='text' name='time'><br>" +
                             "Type: <select form='addForm' name='type'>" +
-                            "<option value='pdf'>PDF</option>" +
-                            "<option value='video'>Video</option>" +
-                            "<option value='audio'>Audio</option>" +
-                            "<option value='image'>Image</option>" +
+                            "<option value='pdf'>pdf</option>" +
+                            "<option value='video'>video</option>" +
+                            "<option value='audio'>audio</option>" +
+                            "<option value='image'>image</option>" +
                             "</select><br>" +
                             "File: <br><input form='addForm' type='file' name='eventFile'>" +
                             "<input form='addForm' type='button' onclick=addEvent() value='Submit'></input>");
@@ -253,6 +264,16 @@ function editEvent(eventNum){
     for(var i=0; i < data.ngoList.length; i++){
         ngoOptions += "<option value='"+data.ngoList[i].name+"'>"+data.ngoList[i].name+"</option>";
     }
+    var options = '';
+    if (data.eventsList[eventNum].type === 'pdf'){
+        options = "<option value='pdf' selected>pdf</option><option value='video'>video</option><option value='audio'>audio</option><option value='image'>image</option>";
+    }else if (data.eventsList[eventNum].type === 'video'){
+        options = "<option value='pdf'>pdf</option><option value='video' selected>video</option><option value='audio'>audio</option><option value='image'>image</option>";
+    }else if (data.eventsList[eventNum].type === 'audio'){
+        options = "<option value='pdf'>pdf</option><option value='video'>video</option><option value='audio' selected>audio</option><option value='image'>image</option>";
+    }else if (data.eventsList[eventNum].type === 'image'){
+        options = "<option value='pdf'>pdf</option><option value='video'>video</option><option value='audio'>audio</option><option value='image' selected>image</option>";
+    }
     $("#editForm"+eventNum).append("<form id='frm"+eventNum+"' enctype='multipart/form-data'></form>" +
                                     "NGO Recipient: <select form='frm"+eventNum+"' name='type' value='"+data.eventsList[eventNum].recipient+"'>"+
                                     ngoOptions +
@@ -260,14 +281,13 @@ function editEvent(eventNum){
                                     "Subject: <input form='frm"+eventNum+"' type='text' name='subject' value='"+data.eventsList[eventNum].subject+"'><br>"+
                                     "Time: <input form='frm"+eventNum+"' type='text' name='time' value='"+data.eventsList[eventNum].time+"'><br>" +
                                     "Type: <select form='frm"+eventNum+"' name='type' value='"+data.eventsList[eventNum].type+"'>" +
-                                    "<option value='pdf'>PDF</option>" +
-                                    "<option value='video'>Video</option>" +
-                                    "<option value='audio'>Audio</option>" +
+                                    options +
                                     "</select><br>" +
                                     "File: "+ data.eventsList[eventNum].location +
                                     "<br><input form='frm"+eventNum+"' type='file' name='eventFile'>" +
                                     "<input form='frm"+eventNum+"' type='button' onclick='updateEvent("+eventNum+")' value='Submit'>" +
-                                    "<button type='button' onclick=cancelEdit('#editForm"+eventNum+"')>Cancel</button>");
+                                    "<button type='button' onclick=cancelEdit('#editForm"+eventNum+"')>Cancel</button>" +
+                                    "<button type='button' onclick=deleteEvent('"+eventNum+"')>DELETE</button>");
 }
 
 function addEvent() {
@@ -290,14 +310,19 @@ function addEvent() {
 function updateEvent(eventNum){
     let frmData = document.getElementById("frm"+eventNum);
     let file = frmData.elements[4].files[0];
-    uploadFiles(file);
+    uploadFiles(file, 'event');
 
     data.eventsList[eventNum].recipient = frmData.elements[0].value;
     data.eventsList[eventNum].subject = frmData.elements[1].value;
     data.eventsList[eventNum].time = frmData.elements[2].value;
     data.eventsList[eventNum].type = frmData.elements[3].value;
-    data.eventsList[eventNum].location = '/resources/files/'+file.name;
+    data.eventsList[eventNum].location = '/currentScenario/files/'+file.name;
 
+    drawEvents(data.eventsList);
+}
+
+function deleteEvent(eventNum){
+    data.eventsList.splice(eventNum, 1);
     drawEvents(data.eventsList);
 }
 
@@ -315,13 +340,36 @@ function newLibraryItem() {
     $('#newLibraryItem').append("<form id='addLibraryItemForm' enctype='multipart/form-data'></form>" +
                             "Subject: <input form='addLibraryItemForm' type='text' name='subject'><br>" +
                             "Type: <select form='addLibraryItemForm' name='type'>" +
-                            "<option value='pdf'>PDF</option>" +
-                            "<option value='video'>Video</option>" +
-                            "<option value='audio'>Audio</option>" +
-                            "<option value='image'>Image</option>" +
+                            "<option value='pdf'>pdf</option>" +
+                            "<option value='video'>video</option>" +
+                            "<option value='audio'>audio</option>" +
+                            "<option value='image'>image</option>" +
                             "</select><br>" +
                             "File: <br><input form='addLibraryItemForm' type='file' name='eventFile'>" +
                             "<input form='addLibraryItemForm' type='button' onclick=addLibraryItem() value='Submit'></input>");
+}
+
+function editLibraryItem(libNum){
+    $('#editLibraryItem'+libNum).empty();
+    var options = '';
+    if (data.library[libNum].type === 'pdf'){
+        options = "<option value='pdf' selected>pdf</option><option value='video'>video</option><option value='audio'>audio</option><option value='image'>image</option>";
+    }else if (data.library[libNum].type === 'video'){
+        options = "<option value='pdf'>pdf</option><option value='video' selected>video</option><option value='audio'>audio</option><option value='image'>image</option>";
+    }else if (data.library[libNum].type === 'audio'){
+        options = "<option value='pdf'>pdf</option><option value='video'>video</option><option value='audio' selected>audio</option><option value='image'>image</option>";
+    }else if (data.library[libNum].type === 'image'){
+        options = "<option value='pdf'>pdf</option><option value='video'>video</option><option value='audio'>audio</option><option value='image' selected>image</option>";
+    }
+    $("#editLibraryItem"+libNum).append("<form id='frmLib"+libNum+"' enctype='multipart/form-data'></form>" +
+                                    "Subject: <input form='frmLib"+libNum+"' type='text' name='subject' value="+data.library[libNum].subject+"><br>" +
+                                    "Type: <select form='frmLib"+libNum+"' name='type'>" +
+                                    options +
+                                    "</select><br>" +
+                                    "File: "+data.library[libNum].location+"<br><input form='frmLib"+libNum+"' type='file' name='eventFile'>" +
+                                    "<input form='frmLib"+libNum+"' type='button' onclick=updateLibraryItem("+libNum+") value='Submit'></input>"+
+                                    "<button type='button' onclick=cancelEdit('#editLibraryItem"+libNum+"')>Cancel</button>" +
+                                    "<button type='button' onclick=deleteLibraryItem('"+libNum+"')>DELETE</button>");
 }
 
 function addLibraryItem() {
@@ -329,16 +377,31 @@ function addLibraryItem() {
     let file = frmData.elements[2].files[0];
     uploadFiles(file, 'library');
 
-    let newEvent = {
-        recipient: frmData.elements[0].value,
-        subject: frmData.elements[1].value,
-        time: frmData.elements[2].value,
-        type: frmData.elements[3].value,
-        location: '/resources/files/'+file.name
+    let newLibItem = {
+        subject: frmData.elements[0].value,
+        type: frmData.elements[1].value,
+        location: '/currentScenario/files/library/'+file.name
     };
-    data.eventsList.push(newEvent);
+    data.library.push(newLibItem);
 
-    drawEvents(data.eventsList);
+    drawLibrary(data.library);
+}
+
+function updateLibraryItem(libNum){
+    let frmData = document.getElementById("frmLib"+libNum);
+    let file = frmData.elements[2].files[0];
+    uploadFiles(file, 'library');
+
+    data.eventsList[libNum].subject = frmData.elements[0].value;
+    data.eventsList[libNum].type = frmData.elements[1].value;
+    data.eventsList[libNum].location = '/currentScenario/files/'+file.name;
+
+    drawLibrary(data.library);
+}
+
+function deleteLibraryItem(libNum){
+    data.library.splice(libNum, 1);
+    drawLibrary(data.library);
 }
 
 function cancelEdit(form) {
