@@ -20,7 +20,7 @@
     },
     "devDependencies": {
         "chai": "^4.2.0",
-        "mocha": ">=6.2.0",
+        "jest": ">=24.9.0",
         "should": "^7.0.2"
     },
     "engines": {
@@ -28,7 +28,8 @@
         "npm": "6.9.0"
     },
     "scripts": {
-        "test": "mocha",
-        "start": "node server.js"
+        "start": "node server.js",
+        "test": "npm run jest",
+        "jest": "NODE_ENV=test jest --coverage test/intergrationTests.test.js"
     }
 }
