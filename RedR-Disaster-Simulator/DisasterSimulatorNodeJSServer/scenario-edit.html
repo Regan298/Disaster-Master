@@ -21,6 +21,9 @@
     <script src="js/jquery.js"></script>
     <script src="js/PDFObject/pdfobject.js"></script>
     <script src="js/scenario-edit.js"></script>
+    <script src="js/vis-4.21.0/dist/vis.js"></script>
+    <link href="js/vis-4.21.0/dist/vis.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="js/timelineComponents.js"></script>
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light static-top "id="header">
@@ -37,7 +40,29 @@
 
     <!-- Page Content -->
     <div class="container">
-        <ul id="events"></ul>
+      <table style="width:100%">
+        <tr>
+          <td style="vertical-align:top">
+            <h5>Scenario Details:</h5>
+            <div id="details"></div>
+          </td>
+          <td style="vertical-align:top">
+            <h5>Events:</h5>
+            <ul id="events"></ul>
+            <h5>New Event:</h5>
+            <div id="newEvent"></div>
+          </td>
+          <td style="vertical-align:top">
+            <h5>Library:</h5>
+            <div id="library"></div>
+            <br><h5>New Library Item:</h5>
+            <div id="newLibraryItem"></div>
+          </td>
+        </tr>
+        <tr>
+          <td><button onClick='saveXML()'>SAVE</button></td>
+        </tr>
+      </table>
     </div>
   
 

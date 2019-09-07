@@ -2,17 +2,24 @@ const fs = require('fs');
 var ip = require('ip');
 var opn = require('opn');
 var express = require('express');
-var app = require('express')();
+var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 const {Worker, isMainThread, parentPort} = require('worker_threads');
 const fileUpload = require('express-fileupload');
+var multer  = require('multer');
+var upload = multer({ dest: 'library/' });
 var TimeFormat = require('hh-mm-ss');
 var dateFormat = require('dateformat');
 var xml2js = require('xml2js');
 var parser = new xml2js.Parser();
 app.use(fileUpload());
 var formidable = require('formidable');
+var xmlBuilder = require('xmlbuilder');
+var path = require('path');
+var zipFolder = require('zip-folder');
+var extract = require('extract-zip');
+var rimraf = require("rimraf");
 var worker; //auto events worker
 var productionMode = false;
 const port = process.env.PORT || 80;
@@ -40,6 +47,7 @@ var simData = {
     started: false,
     modeOnline: true,
     occurredEvents: [],
+    library: [],
     startTimeMS: 0,
     isRunning: false
 };
@@ -86,6 +94,25 @@ app.get('/hq-run-simulation', function (req, res) {
     res.sendFile(__dirname + '/hq-run-simulation.html');
 });
 
+app.get('/hq-create', function (req, res) {
+    res.sendFile(__dirname + '/scenario-edit-home.html');
+});
+
+app.get('/scenario-create-new', function (req, res) {
+    clearSimData();
+    clearGeneratedScenario();
+    res.sendFile(__dirname + '/scenario-edit.html');
+});
+
+app.get('/scenario-create', function (req, res) {
+    res.sendFile(__dirname + '/scenario-edit.html');
+});
+
+app.get('/scenario-edit', function (req, res) {
+    clearSimData();
+    clearGeneratedScenario();
+    res.sendFile(__dirname + '/scenario-upload.html');
+});
 
 app.get('/ngo', function (req, res) {
 
@@ -104,7 +131,121 @@ app.get('/help', function (req, res) {
     res.sendFile(__dirname + '/help.html');
 });
 
+app.get('/download-save', function (req, res) {
+    // console.log(req);
+
+    zipFolder(__dirname + '/generatedScenario', __dirname + '/scenario.zip', function(err) {
+        if(err) {
+            console.log('failed to zip', err);
+            res.end();
+        } else {
+            console.log('zipped');
+            res.download(__dirname + '/scenario.zip', 'scenario.zip');
+        }
+    });
+
+});
+
+app.post('/editor-upload', function (req, res) {
+    console.log("upload editor req");
+
+    if (req.files != null) {
+
+        if (!fs.existsSync(__dirname + '/generatedScenario/')){
+            fs.mkdirSync(__dirname + '/generatedScenario/');
+        }
+
+        let simFileTemp = req.files.simFile;
+        simFileTemp.mv(__dirname + '/' + simFileTemp.name, function (err) {
+            if (err) {
+                console.log(err);
+                return res.status(400).send(err);
+            }
+        });
+
+        extract(__dirname + '/' + simFileTemp.name, {dir: __dirname + '/generatedScenario/'}, function (err) {
+            console.log('extracted');
+            fs.unlink(__dirname + '/' + simFileTemp.name, (err) => {
+                if (err) throw err;
+                console.log('successfully deleted zip');
+            });
+            var parse = parseXMLForLoading('generatedScenario');
+            if (!parse) {
+                return res.status(400).send("Bad File, Please Input A Valid File :)");
+            } else {
+                res.redirect('scenario-create');
+                res.end("File Sent");
+            }
+        });
+        
+    } else {
+
+        return res.status(400).send("Bad File, Please Input A Valid File :)");
+    }
+});
+
+app.post('/upload-event-file', upload.single('upload'), function (req, res, next) {
+    // console.log(req);
+
+    if (req.files != null) {
+
+        let simFileTemp = req.files.upload;
+
+        if (!fs.existsSync(__dirname + '/generatedScenario/files/')){
+            fs.mkdirSync(__dirname + '/generatedScenario/files/');
+        }
+
+        simFileTemp.mv(__dirname + '/generatedScenario/files/'+simFileTemp.name, function (err) {
+            if(err) {
+                console.log(err);
+                res.status(400).send(err);
+                res.end();
+            }else {
+                res.end();
+            }
+        });
+    } else {
+        console.log("no file");
+        return res.status(400).send("Bad File, Please Input A Valid File :)");
+    }
+});
+
+app.post('/upload-library-file', upload.single('upload'), function (req, res, next) {
+    // console.log(req);
+
+    if (req.files != null) {
+
+        let simFileTemp = req.files.upload;
+
+        if (!fs.existsSync(__dirname + '/generatedScenario/files/library')){
+            fs.mkdirSync(__dirname + '/generatedScenario/files/library');
+        }
+
+        simFileTemp.mv(__dirname + '/generatedScenario/files/library/'+simFileTemp.name, function (err) {
+            if(err) {
+                console.log(err);
+                res.status(400).send(err);
+                res.end();
+            }else {
+                res.end();
+            }
+        });
+    } else {
+        console.log("no file");
+        return res.status(400).send("Bad File, Please Input A Valid File :)");
+    }
+});
+
+function clearGeneratedScenario() {
+    rimraf(__dirname + "/generatedScenario", function () { console.log("deleted generated scenario"); });
+}
+
+function clearCurrentScenario() {
+    rimraf(__dirname + "/currentScenario", function () { console.log("deleted current scenario"); });
+}
+
 function clearSimData() {
+    clearCurrentScenario();
     simData = {
         loaded: false,
         ready: false,
@@ -118,6 +259,7 @@ function clearSimData() {
         started: false,
         modeOnline: true,
         occurredEvents: [],
+        library: [],
         startTimeMS: 0,
         isRunning: false
     };
@@ -130,9 +272,12 @@ function clearSimData() {
 
 //Process Sceanrio File For Uploading
 app.post('/upload', function (req, res) {
-
+    clearSimData();
     if (req.files != null) {
 
+        if (!fs.existsSync(__dirname + '/currentScenario/')){
+            fs.mkdirSync(__dirname + '/currentScenario/');
+        }
         //todo: Enable Production Mode When Finished
         if(productionMode && simData.loaded){
             return res.status(400).send("Simulation Currently Already Running Please End Your Current Simulation and" +
@@ -145,19 +290,29 @@ app.post('/upload', function (req, res) {
         }
 
         let simFileTemp = req.files.simFile;
-        simFileTemp.mv(__dirname + '/currentScenario.xml', function (err) {
+        simFileTemp.mv(__dirname + '/' + simFileTemp.name, function (err) {
             if (err) {
+                console.log(err);
                 return res.status(400).send(err);
             }
-
         });
-        let validFile = parseXMLForLoading();
-        if (!validFile) {
-            return res.status(400).send("Bad File, Please Input A Valid File :)");
-        } else {
-            res.redirect('hq-run-simulation');
-            res.end("File Sent");
-        }
+
+        extract(__dirname + '/' + simFileTemp.name, {dir: __dirname + '/currentScenario/'}, function (err) {
+            fs.unlink(__dirname + '/' + simFileTemp.name, (err) => {
+                if (err) throw err;
+                console.log('successfully deleted zip');
+            });
+            var parse = parseXMLForLoading('currentScenario');
+            if (!parse) {
+                return res.status(400).send("Bad File, Please Input A Valid File :)");
+            } else {
+                res.redirect('hq-run-simulation');
+                res.end("File Sent");
+            }
+        });
+
+        
+        
     } else {
 
         return res.status(400).send("Bad File, Please Input A Valid File :)");
@@ -166,15 +321,17 @@ app.post('/upload', function (req, res) {
 
 //End Route Handling
 
-function parseXMLForLoading() {
+function parseXMLForLoading(directory) {
 
+    console.log(__dirname + '/'+directory+'/scenario.xml');
     try {
         var name;
         var ngoCount;
         var ngosArray;
         var eventsArray;
         var parser = new xml2js.Parser();
-        fs.readFile(__dirname + '/currentScenario.xml', function (err, data) {
+
+        fs.readFile(__dirname + '/'+directory+'/scenario.xml', function (err, data) {
             parser.parseString(data, function (err, result) {
                 simData.title = result['scenario']['name'].toString();
                 simData.ngoCount = result['scenario']['ngoCount'].toString();
@@ -209,7 +366,7 @@ function parseXMLForLoading() {
                 for (var i = 0; i < eventsArray.length; i++) {
                     var currentEventRecipient = eventsArray[i].recipient;
                     var currentEventTime = eventsArray[i].time;
-                    var currentEventType = eventsArray[i].type;
+                    var currentEventType = eventsArray[i].type[0];
                     var currentEventLocation = eventsArray[i].location;
                     var currentEventSubject = eventsArray[i].subject;
 
@@ -225,6 +382,23 @@ function parseXMLForLoading() {
                     };
 
                     simData.eventsList.push(event);
+                }
+
+                libraryArray = result['scenario']['library'];
+
+                for (var i = 0; i < libraryArray.length; i++) {
+                    var currentLibraryType = libraryArray[i].type[0];
+                    var currentLibraryLocation = libraryArray[i].location;
+                    var currentLibrarySubject = libraryArray[i].subject;
+
+                    var libraryItem = {
+                        id: i,
+                        type: currentLibraryType,
+                        location: currentLibraryLocation,
+                        subject: currentLibrarySubject
+                    }
+
+                    simData.library.push(libraryItem);
                 }
 
                 simData.durationMs = result['scenario']['duration'];
@@ -295,6 +469,56 @@ socket.on('getConnected', function (msg, callback) {
     callback({connectedUsers});
 });
 
+//Save XML from scenario editor
+socket.on('exportXML', function (data) {
+
+    simData = data;
+
+    var root = xmlBuilder.create('scenario');
+
+    root.ele('name', data.title).end({ pretty: true});
+    root.ele('ngoCount', data.ngoList.length).end({ pretty: true});
+    root.ele('duration', ''+data.durationMs).end({ pretty: true});
+    root.ele('hoursInDay', ''+24/data.timeScale).end({ pretty: true});
+    root.ele('mode', data.modeOnline).end({ pretty: true});
+    
+    for(var i = 0; i < data.ngoList.length; i++) {
+        var item = root.ele('ngo');
+        item.ele('name', ''+data.ngoList[i].name).end({ pretty: true});
+        item.ele('passkey', ''+data.ngoList[i].passkey).end({ pretty: true});
+        item.end({ pretty: true});
+    }
+
+    for(var i = 0; i < data.eventsList.length; i++) {
+        var item = root.ele('event');
+        item.ele('recipient', ''+data.eventsList[i].recipient).end({ pretty: true});
+        item.ele('subject', ''+data.eventsList[i].subject).end({ pretty: true});
+        item.ele('time', ''+data.eventsList[i].time).end({ pretty: true});
+        item.ele('type', ''+data.eventsList[i].type).end({ pretty: true});
+        item.ele('location', ''+data.eventsList[i].location).end({ pretty: true});
+        item.end({ pretty: true});
+    }
+
+    for(var i = 0; i < data.library.length; i++) {
+        var item = root.ele('library');
+        item.ele('subject', ''+data.library[i].subject).end({ pretty: true});
+        item.ele('type', ''+data.library[i].type).end({ pretty: true});
+        item.ele('location', ''+data.library[i].location).end({ pretty: true});
+        item.end({ pretty: true});
+    }
+
+    var xml = root.end({ pretty: true});
+
+    fs.writeFile("./generatedScenario/scenario.xml", xml, function(err) {
+        if(err) {
+            return console.log(err);
+        }
+    
+        console.log('File generated');
+        socket.emit('xmlSaved');
+    });
+});
+
 
 //Send NGO Name To Relevant NGO
 socket.on('nameRequest', function (msg, callback) {
@@ -310,14 +534,14 @@ socket.on('nameRequest', function (msg, callback) {
 
 
 // Trigger for Run simulation displaying of sceanrio title and timeline view update
-if (simData.ready) {
+// if (simData.ready) {
 
     socket.on('simState', function (msg, callback) {
         callback({simData});
     });
     //io.emit('simState', {simData});
 
-}
+// }
 
 //Messaging Handling
 socket.on('message', function (msg) {

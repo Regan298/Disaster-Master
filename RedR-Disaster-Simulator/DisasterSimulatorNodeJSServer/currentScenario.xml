@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<scenario>
+  <name>Sebadoah</name>
+  <ngoCount>6</ngoCount>
+  <duration>19800000</duration>
+  <hoursInDay>1</hoursInDay>
+  <mode>true</mode>
+  <ngo>
+    <name>People First</name>
+    <passkey>ngo1</passkey>
+  </ngo>
+  <ngo>
+    <name>We Care</name>
+    <passkey>ngo2</passkey>
+  </ngo>
+  <ngo>
+    <name>EWB</name>
+    <passkey>ngo3</passkey>
+  </ngo>
+  <ngo>
+    <name>Red Heart</name>
+    <passkey>ngo4</passkey>
+  </ngo>
+  <ngo>
+    <name>Peacedoves</name>
+    <passkey>ngo5</passkey>
+  </ngo>
+  <ngo>
+    <name>Reach Up</name>
+    <passkey>ngo6</passkey>
+  </ngo>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>HQ Daily Sit Rep Request</subject>
+    <time>00:00:30</time>
+    <type>pdf</type>
+    <location>/files/003PD.pdf</location>
+  </event>
+  <event>
+    <recipient>Red Heart</recipient>
+    <subject>HQ Daily Sit Rep Request</subject>
+    <time>00:00:35</time>
+    <type>pdf</type>
+    <location>/files/003RH.pdf</location>
+  </event>
+  <event>
+    <recipient>People First</recipient>
+    <subject>HQ Daily Sit Rep Request</subject>
+    <time>00:00:40</time>
+    <type>pdf</type>
+    <location>/files/003P1st.pdf</location>
+  </event>
+  <event>
+    <recipient>We Care</recipient>
+    <subject>HQ Daily Sit Rep Request</subject>
+    <time>00:00:41</time>
+    <type>pdf</type>
+    <location>/files/003WC.pdf</location>
+  </event>
+  <event>
+    <recipient>EWB</recipient>
+    <subject>HQ Daily Sit Rep Request</subject>
+    <time>00:01:00</time>
+    <type>pdf</type>
+    <location>/files/003EWB.pdf</location>
+  </event>
+  <event>
+    <recipient>Reach Up</recipient>
+    <subject>HQ Daily Sit Rep Request</subject>
+    <time>00:00:45</time>
+    <type>pdf</type>
+    <location>/files/003RU.pdf</location>
+  </event>
+  <event>
+    <recipient>Reach Up</recipient>
+    <subject>HQ Daily Sit Rep Request</subject>
+    <time>02:00:00</time>
+    <type>pdf</type>
+    <location>/files/003RU.pdf</location>
+  </event>
+</scenario>
