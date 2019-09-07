@@ -29,9 +29,11 @@ const port = process.env.PORT || 80;
 module.exports = app;
 app.use(express.static('resources'));
 
-http.listen(port, function () {
-    console.log('Simulation Run Invoked');
-});
+if (process.env.NODE_ENV !== 'test') {
+    http.listen(port, function () {
+        console.log('Simulation Run Invoked');
+    });
+}
 
 //ngoCount gets updated when file parsed
 var simData = {
@@ -61,7 +63,10 @@ var currentTimeMs;
 var connectedUsers = [];
 
 var hostIP = ip.address();
-opn('http://' + hostIP);
+
+if (process.env.NODE_ENV !== 'test') {
+    opn('http://' + hostIP);
+}
 
 var host = {
     passkey: 'HQ',
