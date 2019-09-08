@@ -20,9 +20,12 @@ var path = require('path');
 var zipFolder = require('zip-folder');
 var extract = require('extract-zip');
 var rimraf = require("rimraf");
+
 var worker; //auto events worker
 var productionMode = false;
 const port = process.env.PORT || 80;
+
+var zip = require('cross-zip')
 
 
 module.exports = app;
@@ -271,7 +274,9 @@ function processZip(req, res, type) {
             }
 
             //extract input zip into current scenario dir
-            extract(__dirname + '/' + simFileTemp.name, {dir: __dirname + directoryForModification}, function (err) {
+
+            zip.unzip(__dirname + '/' + simFileTemp.name,  __dirname + directoryForModification, function (err) {
+            //extract(__dirname + '/' + simFileTemp.name, {dir: __dirname + directoryForModification}, function (err) {
                 if (err) console.log("unziperror: " + err);
 
                 if (fs.existsSync(__dirname + '/' + simFileTemp.name)) {

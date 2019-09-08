@@ -16,7 +16,7 @@
         "promise-mysql": ">=4.0.4",
         "socket.io": ">=2.2.0",
         "statman-stopwatch": ">=2.8.2",
-        "xml2js": ">=0.4.19"
+        "xml2js": ">=0.4.22"
     },
     "devDependencies": {
         "chai": "^4.2.0",
