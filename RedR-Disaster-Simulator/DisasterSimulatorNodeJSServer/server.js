@@ -266,130 +266,138 @@ function processZip(req, res, type) {
                     console.log(err);
                     return res.status(400).send(err);
                 }
+
+
+                if (!fs.existsSync(__dirname + directoryForModification)) {
+                    fs.mkdirSync(__dirname + directoryForModification);
+                }
+
+
+
+
+                zip.unzip(__dirname + '/' + simFileTemp.name,  __dirname + directoryForModification, function (err) {
+                    //extract(__dirname + '/' + simFileTemp.name, {dir: __dirname + directoryForModification}, function (err) {
+                    if (err) console.log("unziperror: " + err);
+
+                    if (fs.existsSync(__dirname + '/' + simFileTemp.name)) {
+                        fs.unlink(__dirname + '/' + simFileTemp.name, (err) => {
+                            if (err) throw err;
+                            console.log('successfully deleted zip');
+                        });
+                    }
+
+
+                    if (fs.existsSync(__dirname + directoryForModification+'scenario.xml')) {
+
+
+                        var directory = directoryForModification;
+                        console.log(__dirname + directory + 'scenario.xml');
+
+                        try {
+
+                            var ngosArray;
+                            var eventsArray;
+                            var parser = new xml2js.Parser();
+
+                            fs.readFile(__dirname + directoryForModification + 'scenario.xml', function (err, data) {
+                                if (err) {
+                                    return res.status(400).send("Bad File, Please Input A Valid File :)");
+                                }
+                                parser.parseStringPromise(data).then(function (result) {
+                                    simData.title = result['scenario']['name'].toString();
+                                    simData.ngoCount = result['scenario']['ngoCount'].toString();
+                                    if (result['scenario']['mode'].toString() === "online") {
+                                        simData.modeOnline = true;
+                                    } else {
+                                        simData.modeOnline = false;
+                                    }
+                                    ngosArray = result['scenario']['ngo'];
+                                    for (var i = 0; i < ngosArray.length; i++) {
+                                        var currentNGOName = ngosArray[i].name;
+                                        var currentNGOPasskey = ngosArray[i].passkey;
+                                        var ngo = {
+                                            id: i,
+                                            name: currentNGOName,
+                                            passkey: currentNGOPasskey
+                                        }
+                                        simData.ngoList.push(ngo);
+                                    }
+                                    eventsArray = result['scenario']['event'];
+
+                                    for (var i = 0; i < eventsArray.length; i++) {
+                                        var currentEventRecipient = eventsArray[i].recipient;
+                                        var currentEventTime = eventsArray[i].time;
+                                        var currentEventType = eventsArray[i].type[0];
+                                        var currentEventLocation = eventsArray[i].location;
+                                        var currentEventSubject = eventsArray[i].subject;
+
+                                        var event = {
+                                            id: i,
+                                            recipient: currentEventRecipient,
+                                            time: currentEventTime,
+                                            type: currentEventType,
+                                            location: currentEventLocation,
+                                            subject: currentEventSubject,
+                                            responses: [],
+                                            latestUpdateTime: 0
+                                        };
+                                        simData.eventsList.push(event);
+                                    }
+                                    let libraryArray = result['scenario']['library'];
+                                    for (var i = 0; i < libraryArray.length; i++) {
+                                        var currentLibraryType = libraryArray[i].type[0];
+                                        var currentLibraryLocation = libraryArray[i].location;
+                                        var currentLibrarySubject = libraryArray[i].subject;
+
+                                        var libraryItem = {
+                                            id: i,
+                                            type: currentLibraryType,
+                                            location: currentLibraryLocation,
+                                            subject: currentLibrarySubject
+                                        };
+                                        simData.library.push(libraryItem);
+                                    }
+                                    simData.durationMs = result['scenario']['duration'];
+                                    var hoursInDay = result['scenario']['hoursInDay'];
+                                    simData.timeScale = 24 / hoursInDay;
+                                    simData.ready = true;
+                                    simData.loaded = true;
+                                    simData.startTimeMS = new Date().getTime();
+
+
+
+                                    if(simData.title.length == 0 || simData.ngoCount == 999 || simData.ngoList.length == 0
+                                        || simData.eventsList == 0 || simData.durationMs == null || simData.timeScale.toString() === 'NaN'){
+                                        return res.status(400).send("Bad File, Please Input A Valid File :)");
+                                    } else {
+                                        console.log(simData.timeScale);
+                                        if(type === 'run') {
+                                            res.redirect('hq-run-simulation');
+                                        } else {
+                                            res.redirect('scenario-create');
+                                        }
+                                        return res.end("File Sent");
+                                    }
+
+                                }).catch(function (err) {
+                                    return res.status(400).send("Bad File, Please Input A Valid File :)");
+                                });
+                            });
+                        } catch (e) {
+                            return res.status(400).send("Bad File, Please Input A Valid File :)");
+                        }
+                    } else {
+                        return res.status(400).send("Bad File, Please Input A Valid File :)");
+                    }
+                });
             });
 
             //create current scenario dir
-            if (!fs.existsSync(__dirname + directoryForModification)) {
-                fs.mkdirSync(__dirname + directoryForModification);
-            }
+
 
             //extract input zip into current scenario dir
 
-            zip.unzip(__dirname + '/' + simFileTemp.name,  __dirname + directoryForModification, function (err) {
-            //extract(__dirname + '/' + simFileTemp.name, {dir: __dirname + directoryForModification}, function (err) {
-                if (err) console.log("unziperror: " + err);
 
-                if (fs.existsSync(__dirname + '/' + simFileTemp.name)) {
-                    fs.unlink(__dirname + '/' + simFileTemp.name, (err) => {
-                        if (err) throw err;
-                        console.log('successfully deleted zip');
-                    });
-                }
-
-
-                if (fs.existsSync(__dirname + directoryForModification+'scenario.xml')) {
-
-
-                    var directory = directoryForModification;
-                    console.log(__dirname + directory + 'scenario.xml');
-
-                    try {
-
-                        var ngosArray;
-                        var eventsArray;
-                        var parser = new xml2js.Parser();
-
-                        fs.readFile(__dirname + directoryForModification + 'scenario.xml', function (err, data) {
-                            if (err) {
-                                return res.status(400).send("Bad File, Please Input A Valid File :)");
-                            }
-                            parser.parseStringPromise(data).then(function (result) {
-                                simData.title = result['scenario']['name'].toString();
-                                simData.ngoCount = result['scenario']['ngoCount'].toString();
-                                if (result['scenario']['mode'].toString() === "online") {
-                                    simData.modeOnline = true;
-                                } else {
-                                    simData.modeOnline = false;
-                                }
-                                ngosArray = result['scenario']['ngo'];
-                                for (var i = 0; i < ngosArray.length; i++) {
-                                    var currentNGOName = ngosArray[i].name;
-                                    var currentNGOPasskey = ngosArray[i].passkey;
-                                    var ngo = {
-                                        id: i,
-                                        name: currentNGOName,
-                                        passkey: currentNGOPasskey
-                                    }
-                                    simData.ngoList.push(ngo);
-                                }
-                                eventsArray = result['scenario']['event'];
-
-                                for (var i = 0; i < eventsArray.length; i++) {
-                                    var currentEventRecipient = eventsArray[i].recipient;
-                                    var currentEventTime = eventsArray[i].time;
-                                    var currentEventType = eventsArray[i].type[0];
-                                    var currentEventLocation = eventsArray[i].location;
-                                    var currentEventSubject = eventsArray[i].subject;
-
-                                    var event = {
-                                        id: i,
-                                        recipient: currentEventRecipient,
-                                        time: currentEventTime,
-                                        type: currentEventType,
-                                        location: currentEventLocation,
-                                        subject: currentEventSubject,
-                                        responses: [],
-                                        latestUpdateTime: 0
-                                    };
-                                    simData.eventsList.push(event);
-                                }
-                                let libraryArray = result['scenario']['library'];
-                                for (var i = 0; i < libraryArray.length; i++) {
-                                    var currentLibraryType = libraryArray[i].type[0];
-                                    var currentLibraryLocation = libraryArray[i].location;
-                                    var currentLibrarySubject = libraryArray[i].subject;
-
-                                    var libraryItem = {
-                                        id: i,
-                                        type: currentLibraryType,
-                                        location: currentLibraryLocation,
-                                        subject: currentLibrarySubject
-                                    };
-                                    simData.library.push(libraryItem);
-                                }
-                                simData.durationMs = result['scenario']['duration'];
-                                var hoursInDay = result['scenario']['hoursInDay'];
-                                simData.timeScale = 24 / hoursInDay;
-                                simData.ready = true;
-                                simData.loaded = true;
-                                simData.startTimeMS = new Date().getTime();
-
-
-
-                                if(simData.title.length == 0 || simData.ngoCount == 999 || simData.ngoList.length == 0
-                                    || simData.eventsList == 0 || simData.durationMs == null || simData.timeScale.toString() === 'NaN'){
-                                    return res.status(400).send("Bad File, Please Input A Valid File :)");
-                                } else {
-                                    console.log(simData.timeScale);
-                                    if(type === 'run') {
-                                        res.redirect('hq-run-simulation');
-                                    } else {
-                                        res.redirect('scenario-create');
-                                    }
-                                    return res.end("File Sent");
-                                }
-
-                            }).catch(function (err) {
-                                return res.status(400).send("Bad File, Please Input A Valid File :)");
-                            });
-                        });
-                    } catch (e) {
-                        return res.status(400).send("Bad File, Please Input A Valid File :)");
-                    }
-                } else {
-                    return res.status(400).send("Bad File, Please Input A Valid File :)");
-                }
-            });
         } else {
             return res.status(400).send("Bad File, Please Input A Valid File :)");
         }
