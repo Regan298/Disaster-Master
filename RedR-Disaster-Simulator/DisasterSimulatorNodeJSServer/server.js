@@ -7,8 +7,8 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 const {Worker, isMainThread, parentPort} = require('worker_threads');
 const fileUpload = require('express-fileupload');
-var multer  = require('multer');
-var upload = multer({ dest: 'library/' });
+var multer = require('multer');
+var upload = multer({dest: 'library/'});
 var TimeFormat = require('hh-mm-ss');
 var dateFormat = require('dateformat');
 var xml2js = require('xml2js');
@@ -20,10 +20,12 @@ var path = require('path');
 var zipFolder = require('zip-folder');
 var extract = require('extract-zip');
 var rimraf = require("rimraf");
+
 var worker; //auto events worker
 var productionMode = false;
 const port = process.env.PORT || 80;
 
+var zip = require('cross-zip')
 
 
 module.exports = app;
@@ -77,9 +79,6 @@ var host = {
 connectedUsers.push(host);
 
 //Begin Route Handling
-app.get('/testing', function (req, res) {
-    res.sendStatus(200);
-});
 
 
 app.get('/', function (req, res) {
@@ -91,9 +90,9 @@ app.get('/hq-config', function (req, res) {
     res.sendFile(__dirname + '/hq-config.html');
 });
 
-app.get('/hq-review', function (req, res) {
+/*app.get('/hq-review', function (req, res) {
     res.sendFile(__dirname + '/hq-review-simulation.html');
-});
+});*/
 
 app.get('/hq-run-simulation', function (req, res) {
     res.sendFile(__dirname + '/hq-run-simulation.html');
@@ -139,8 +138,8 @@ app.get('/help', function (req, res) {
 app.get('/download-save', function (req, res) {
     // console.log(req);
 
-    zipFolder(__dirname + '/generatedScenario', __dirname + '/scenario.zip', function(err) {
-        if(err) {
+    zipFolder(__dirname + '/generatedScenario', __dirname + '/scenario.zip', function (err) {
+        if (err) {
             console.log('failed to zip', err);
             res.end();
         } else {
@@ -151,42 +150,9 @@ app.get('/download-save', function (req, res) {
 
 });
 
+
 app.post('/editor-upload', function (req, res) {
-    console.log("upload editor req");
-
-    if (req.files != null) {
-
-        if (!fs.existsSync(__dirname + '/generatedScenario/')){
-            fs.mkdirSync(__dirname + '/generatedScenario/');
-        }
-
-        let simFileTemp = req.files.simFile;
-        simFileTemp.mv(__dirname + '/' + simFileTemp.name, function (err) {
-            if (err) {
-                console.log(err);
-                return res.status(400).send(err);
-            }
-        });
-
-        extract(__dirname + '/' + simFileTemp.name, {dir: __dirname + '/generatedScenario/'}, function (err) {
-            console.log('extracted');
-            fs.unlink(__dirname + '/' + simFileTemp.name, (err) => {
-                if (err) throw err;
-                console.log('successfully deleted zip');
-            });
-            var parse = parseXMLForLoading('generatedScenario');
-            if (!parse) {
-                return res.status(400).send("Bad File, Please Input A Valid File :)");
-            } else {
-                res.redirect('scenario-create');
-                res.end("File Sent");
-            }
-        });
-        
-    } else {
-
-        return res.status(400).send("Bad File, Please Input A Valid File :)");
-    }
+    processZip(req, res, 'edit');
 });
 
 app.post('/upload-event-file', upload.single('upload'), function (req, res, next) {
@@ -196,16 +162,16 @@ app.post('/upload-event-file', upload.single('upload'), function (req, res, next
 
         let simFileTemp = req.files.upload;
 
-        if (!fs.existsSync(__dirname + '/generatedScenario/files/')){
+        if (!fs.existsSync(__dirname + '/generatedScenario/files/')) {
             fs.mkdirSync(__dirname + '/generatedScenario/files/');
         }
 
-        simFileTemp.mv(__dirname + '/generatedScenario/files/'+simFileTemp.name, function (err) {
-            if(err) {
+        simFileTemp.mv(__dirname + '/generatedScenario/files/' + simFileTemp.name, function (err) {
+            if (err) {
                 console.log(err);
                 res.status(400).send(err);
                 res.end();
-            }else {
+            } else {
                 res.end();
             }
         });
@@ -222,16 +188,16 @@ app.post('/upload-library-file', upload.single('upload'), function (req, res, ne
 
         let simFileTemp = req.files.upload;
 
-        if (!fs.existsSync(__dirname + '/generatedScenario/files/library')){
+        if (!fs.existsSync(__dirname + '/generatedScenario/files/library')) {
             fs.mkdirSync(__dirname + '/generatedScenario/files/library');
         }
 
-        simFileTemp.mv(__dirname + '/generatedScenario/files/library/'+simFileTemp.name, function (err) {
-            if(err) {
+        simFileTemp.mv(__dirname + '/generatedScenario/files/library/' + simFileTemp.name, function (err) {
+            if (err) {
                 console.log(err);
                 res.status(400).send(err);
                 res.end();
-            }else {
+            } else {
                 res.end();
             }
         });
@@ -242,15 +208,13 @@ app.post('/upload-library-file', upload.single('upload'), function (req, res, ne
 });
 
 function clearGeneratedScenario() {
-    rimraf(__dirname + "/generatedScenario", function () { console.log("deleted generated scenario"); });
+    rimraf(__dirname + "/generatedScenario", function () {
+        console.log("deleted generated scenario");
+    });
 }
 
-function clearCurrentScenario() {
-    rimraf(__dirname + "/currentScenario", function () { console.log("deleted current scenario"); });
-}
 
 function clearSimData() {
-    clearCurrentScenario();
     simData = {
         loaded: false,
         ready: false,
@@ -270,158 +234,183 @@ function clearSimData() {
     };
     connectedUsers = [];
     connectedUsers.push(host);
-    if(worker != null) {
+    if (worker != null) {
         worker.terminate();
     }
 }
 
+function processZip(req, res, type) {
+    let directoryForModification;
+    if(type === 'edit'){
+        directoryForModification = '/generatedScenario/';
+    } else {
+        directoryForModification = '/currentScenario/';
+    }
+
+    rimraf(__dirname + directoryForModification, function () {
+        console.log("deleted current scenario");
+
+        if (req.files != null) {
+            //todo: Enable Production Mode When Finished
+            if (productionMode && simData.loaded) {
+                return res.status(400).send("Simulation Currently Already Running Please End Your Current Simulation and" +
+                    " Go Back And Try Again");
+            }
+            if (simData.loaded) {
+                clearSimData();
+            }
+            //Move file into working dir
+            let simFileTemp = req.files.simFile;
+            simFileTemp.mv(__dirname + '/' + simFileTemp.name, function (err) {
+                if (err) {
+                    console.log(err);
+                    return res.status(400).send(err);
+                }
+
+
+                if (!fs.existsSync(__dirname + directoryForModification)) {
+                    fs.mkdirSync(__dirname + directoryForModification);
+                }
+
+
+
+
+                zip.unzip(__dirname + '/' + simFileTemp.name,  __dirname + directoryForModification, function (err) {
+                    //extract(__dirname + '/' + simFileTemp.name, {dir: __dirname + directoryForModification}, function (err) {
+                    if (err) console.log("unziperror: " + err);
+
+                    if (fs.existsSync(__dirname + '/' + simFileTemp.name)) {
+                        fs.unlink(__dirname + '/' + simFileTemp.name, (err) => {
+                            if (err) throw err;
+                            console.log('successfully deleted zip');
+                        });
+                    }
+
+
+                    if (fs.existsSync(__dirname + directoryForModification+'scenario.xml')) {
+
+
+                        var directory = directoryForModification;
+                        console.log(__dirname + directory + 'scenario.xml');
+
+                        try {
+
+                            var ngosArray;
+                            var eventsArray;
+                            var parser = new xml2js.Parser();
+
+                            fs.readFile(__dirname + directoryForModification + 'scenario.xml', function (err, data) {
+                                if (err) {
+                                    return res.status(400).send("Bad File, Please Input A Valid File :)");
+                                }
+                                parser.parseStringPromise(data).then(function (result) {
+                                    simData.title = result['scenario']['name'].toString();
+                                    simData.ngoCount = result['scenario']['ngoCount'].toString();
+                                    if (result['scenario']['mode'].toString() === "online") {
+                                        simData.modeOnline = true;
+                                    } else {
+                                        simData.modeOnline = false;
+                                    }
+                                    ngosArray = result['scenario']['ngo'];
+                                    for (var i = 0; i < ngosArray.length; i++) {
+                                        var currentNGOName = ngosArray[i].name;
+                                        var currentNGOPasskey = ngosArray[i].passkey;
+                                        var ngo = {
+                                            id: i,
+                                            name: currentNGOName,
+                                            passkey: currentNGOPasskey
+                                        }
+                                        simData.ngoList.push(ngo);
+                                    }
+                                    eventsArray = result['scenario']['event'];
+
+                                    for (var i = 0; i < eventsArray.length; i++) {
+                                        var currentEventRecipient = eventsArray[i].recipient;
+                                        var currentEventTime = eventsArray[i].time;
+                                        var currentEventType = eventsArray[i].type[0];
+                                        var currentEventLocation = eventsArray[i].location;
+                                        var currentEventSubject = eventsArray[i].subject;
+
+                                        var event = {
+                                            id: i,
+                                            recipient: currentEventRecipient,
+                                            time: currentEventTime,
+                                            type: currentEventType,
+                                            location: currentEventLocation,
+                                            subject: currentEventSubject,
+                                            responses: [],
+                                            latestUpdateTime: 0
+                                        };
+                                        simData.eventsList.push(event);
+                                    }
+                                    let libraryArray = result['scenario']['library'];
+                                    for (var i = 0; i < libraryArray.length; i++) {
+                                        var currentLibraryType = libraryArray[i].type[0];
+                                        var currentLibraryLocation = libraryArray[i].location;
+                                        var currentLibrarySubject = libraryArray[i].subject;
+
+                                        var libraryItem = {
+                                            id: i,
+                                            type: currentLibraryType,
+                                            location: currentLibraryLocation,
+                                            subject: currentLibrarySubject
+                                        };
+                                        simData.library.push(libraryItem);
+                                    }
+                                    simData.durationMs = result['scenario']['duration'];
+                                    var hoursInDay = result['scenario']['hoursInDay'];
+                                    simData.timeScale = 24 / hoursInDay;
+                                    simData.ready = true;
+                                    simData.loaded = true;
+                                    simData.startTimeMS = new Date().getTime();
+
+
+
+                                    if(simData.title.length == 0 || simData.ngoCount == 999 || simData.ngoList.length == 0
+                                        || simData.eventsList == 0 || simData.durationMs == null || simData.timeScale.toString() === 'NaN'){
+                                        return res.status(400).send("Bad File, Please Input A Valid File :)");
+                                    } else {
+                                        console.log(simData.timeScale);
+                                        if(type === 'run') {
+                                            res.redirect('hq-run-simulation');
+                                        } else {
+                                            res.redirect('scenario-create');
+                                        }
+                                        return res.end("File Sent");
+                                    }
+
+                                }).catch(function (err) {
+                                    return res.status(400).send("Bad File, Please Input A Valid File :)");
+                                });
+                            });
+                        } catch (e) {
+                            return res.status(400).send("Bad File, Please Input A Valid File :)");
+                        }
+                    } else {
+                        return res.status(400).send("Bad File, Please Input A Valid File :)");
+                    }
+                });
+            });
+
+            //create current scenario dir
+
+
+            //extract input zip into current scenario dir
+
+
+        } else {
+            return res.status(400).send("Bad File, Please Input A Valid File :)");
+        }
+    });
+
+}
+
 //Process Sceanrio File For Uploading
 app.post('/upload', function (req, res) {
-    clearSimData();
-    if (req.files != null) {
-
-        if (!fs.existsSync(__dirname + '/currentScenario/')){
-            fs.mkdirSync(__dirname + '/currentScenario/');
-        }
-        //todo: Enable Production Mode When Finished
-        if(productionMode && simData.loaded){
-            return res.status(400).send("Simulation Currently Already Running Please End Your Current Simulation and" +
-                " Go Back And Try Again");
-        }
-
-
-        if(simData.loaded) {
-            clearSimData();
-        }
-
-        let simFileTemp = req.files.simFile;
-        simFileTemp.mv(__dirname + '/' + simFileTemp.name, function (err) {
-            if (err) {
-                console.log(err);
-                return res.status(400).send(err);
-            }
-        });
-
-        extract(__dirname + '/' + simFileTemp.name, {dir: __dirname + '/currentScenario/'}, function (err) {
-            fs.unlink(__dirname + '/' + simFileTemp.name, (err) => {
-                if (err) throw err;
-                console.log('successfully deleted zip');
-            });
-            var parse = parseXMLForLoading('currentScenario');
-            if (!parse) {
-                return res.status(400).send("Bad File, Please Input A Valid File :)");
-            } else {
-                res.redirect('hq-run-simulation');
-                res.end("File Sent");
-            }
-        });
-
-        
-        
-    } else {
-
-        return res.status(400).send("Bad File, Please Input A Valid File :)");
-    }
+    processZip(req, res, 'run');
 });
 
 //End Route Handling
-
-function parseXMLForLoading(directory) {
-
-    console.log(__dirname + '/'+directory+'/scenario.xml');
-    try {
-        var name;
-        var ngoCount;
-        var ngosArray;
-        var eventsArray;
-        var parser = new xml2js.Parser();
-
-        fs.readFile(__dirname + '/'+directory+'/scenario.xml', function (err, data) {
-            parser.parseString(data, function (err, result) {
-                simData.title = result['scenario']['name'].toString();
-                simData.ngoCount = result['scenario']['ngoCount'].toString();
-                if (result['scenario']['mode'].toString() === "online") {
-                    simData.modeOnline = true;
-                } else {
-                    simData.modeOnline = false;
-                }
-
-
-                ngosArray = result['scenario']['ngo'];
-                for (var i = 0; i < ngosArray.length; i++) {
-                    var currentNGOName = ngosArray[i].name;
-                    var currentNGOPasskey = ngosArray[i].passkey;
-                    var ngo = {
-                        id: i,
-                        name: currentNGOName,
-                        passkey: currentNGOPasskey
-                    }
-                    simData.ngoList.push(ngo);
-                }
-
-                //debug the ngo ids
-                for (var i = 0; i < simData.ngoList.length; i++) {
-
-                }
-
-
-                eventsArray = result['scenario']['event'];
-
-
-                for (var i = 0; i < eventsArray.length; i++) {
-                    var currentEventRecipient = eventsArray[i].recipient;
-                    var currentEventTime = eventsArray[i].time;
-                    var currentEventType = eventsArray[i].type[0];
-                    var currentEventLocation = eventsArray[i].location;
-                    var currentEventSubject = eventsArray[i].subject;
-
-                    var event = {
-                        id: i,
-                        recipient: currentEventRecipient,
-                        time: currentEventTime,
-                        type: currentEventType,
-                        location: currentEventLocation,
-                        subject: currentEventSubject,
-                        responses: [],
-                        latestUpdateTime: 0
-                    };
-
-                    simData.eventsList.push(event);
-                }
-
-                libraryArray = result['scenario']['library'];
-
-                for (var i = 0; i < libraryArray.length; i++) {
-                    var currentLibraryType = libraryArray[i].type[0];
-                    var currentLibraryLocation = libraryArray[i].location;
-                    var currentLibrarySubject = libraryArray[i].subject;
-
-                    var libraryItem = {
-                        id: i,
-                        type: currentLibraryType,
-                        location: currentLibraryLocation,
-                        subject: currentLibrarySubject
-                    }
-
-                    simData.library.push(libraryItem);
-                }
-
-                simData.durationMs = result['scenario']['duration'];
-                var hoursInDay = result['scenario']['hoursInDay'];
-
-                simData.timeScale = 24 / hoursInDay;
-            });
-            simData.ready = true;
-            simData.loaded = true;
-            simData.startTimeMS = new Date().getTime();
-        });
-    } catch (e) {
-        return false;
-    }
-
-    return true;
-
-}
 
 // On connection for when an entity is using socket
 io.on('connection', function (socket) {
@@ -442,13 +431,13 @@ io.on('connection', function (socket) {
 
         var isNGOPresent = false;
         for (var i = 0; i < connectedUsers.length; i++) {
-            if(connectedUsers[i].name === ngoName) {
+            if (connectedUsers[i].name === ngoName) {
                 isNGOPresent = true;
                 break;
             }
         }
 
-        if(!isNGOPresent && ngoName !== 'notFound'){
+        if (!isNGOPresent && ngoName !== 'notFound') {
             let ngo = {
                 id: msg,
                 name: ngoName
@@ -461,81 +450,81 @@ io.on('connection', function (socket) {
         }
 
 
-});
+    });
 
 //Send past messages to NGOs upon request
-socket.on('getPastMessages', function (msg, callback) {
-    var pastMessages = simData.messageList;
-    callback({pastMessages});
-});
+    socket.on('getPastMessages', function (msg, callback) {
+        var pastMessages = simData.messageList;
+        callback({pastMessages});
+    });
 
 //Send connectedusers to ngo upon ngo request
-socket.on('getConnected', function (msg, callback) {
-    callback({connectedUsers});
-});
+    socket.on('getConnected', function (msg, callback) {
+        callback({connectedUsers});
+    });
 
 //Save XML from scenario editor
-socket.on('exportXML', function (data) {
+    socket.on('exportXML', function (data) {
 
-    simData = data;
+        simData = data;
 
-    var root = xmlBuilder.create('scenario');
+        var root = xmlBuilder.create('scenario');
 
-    root.ele('name', data.title).end({ pretty: true});
-    root.ele('ngoCount', data.ngoList.length).end({ pretty: true});
-    root.ele('duration', ''+data.durationMs).end({ pretty: true});
-    root.ele('hoursInDay', ''+24/data.timeScale).end({ pretty: true});
-    root.ele('mode', data.modeOnline).end({ pretty: true});
-    
-    for(var i = 0; i < data.ngoList.length; i++) {
-        var item = root.ele('ngo');
-        item.ele('name', ''+data.ngoList[i].name).end({ pretty: true});
-        item.ele('passkey', ''+data.ngoList[i].passkey).end({ pretty: true});
-        item.end({ pretty: true});
-    }
+        root.ele('name', data.title).end({pretty: true});
+        root.ele('ngoCount', data.ngoList.length).end({pretty: true});
+        root.ele('duration', '' + data.durationMs).end({pretty: true});
+        root.ele('hoursInDay', '' + 24 / data.timeScale).end({pretty: true});
+        root.ele('mode', data.modeOnline).end({pretty: true});
 
-    for(var i = 0; i < data.eventsList.length; i++) {
-        var item = root.ele('event');
-        item.ele('recipient', ''+data.eventsList[i].recipient).end({ pretty: true});
-        item.ele('subject', ''+data.eventsList[i].subject).end({ pretty: true});
-        item.ele('time', ''+data.eventsList[i].time).end({ pretty: true});
-        item.ele('type', ''+data.eventsList[i].type).end({ pretty: true});
-        item.ele('location', ''+data.eventsList[i].location).end({ pretty: true});
-        item.end({ pretty: true});
-    }
-
-    for(var i = 0; i < data.library.length; i++) {
-        var item = root.ele('library');
-        item.ele('subject', ''+data.library[i].subject).end({ pretty: true});
-        item.ele('type', ''+data.library[i].type).end({ pretty: true});
-        item.ele('location', ''+data.library[i].location).end({ pretty: true});
-        item.end({ pretty: true});
-    }
-
-    var xml = root.end({ pretty: true});
-
-    fs.writeFile("./generatedScenario/scenario.xml", xml, function(err) {
-        if(err) {
-            return console.log(err);
+        for (var i = 0; i < data.ngoList.length; i++) {
+            var item = root.ele('ngo');
+            item.ele('name', '' + data.ngoList[i].name).end({pretty: true});
+            item.ele('passkey', '' + data.ngoList[i].passkey).end({pretty: true});
+            item.end({pretty: true});
         }
-    
-        console.log('File generated');
-        socket.emit('xmlSaved');
+
+        for (var i = 0; i < data.eventsList.length; i++) {
+            var item = root.ele('event');
+            item.ele('recipient', '' + data.eventsList[i].recipient).end({pretty: true});
+            item.ele('subject', '' + data.eventsList[i].subject).end({pretty: true});
+            item.ele('time', '' + data.eventsList[i].time).end({pretty: true});
+            item.ele('type', '' + data.eventsList[i].type).end({pretty: true});
+            item.ele('location', '' + data.eventsList[i].location).end({pretty: true});
+            item.end({pretty: true});
+        }
+
+        for (var i = 0; i < data.library.length; i++) {
+            var item = root.ele('library');
+            item.ele('subject', '' + data.library[i].subject).end({pretty: true});
+            item.ele('type', '' + data.library[i].type).end({pretty: true});
+            item.ele('location', '' + data.library[i].location).end({pretty: true});
+            item.end({pretty: true});
+        }
+
+        var xml = root.end({pretty: true});
+
+        fs.writeFile("./generatedScenario/scenario.xml", xml, function (err) {
+            if (err) {
+                return console.log(err);
+            }
+
+            console.log('File generated');
+            socket.emit('xmlSaved');
+        });
     });
-});
 
 
 //Send NGO Name To Relevant NGO
-socket.on('nameRequest', function (msg, callback) {
-    for (var i = 0; i < connectedUsers.length; i++) {
-        ngoTemp = connectedUsers[i];
-        if (ngoTemp.id == msg) {
-            if (!ngoTemp.name.includes("HQ")) {
-                callback(ngoTemp.name);
+    socket.on('nameRequest', function (msg, callback) {
+        for (var i = 0; i < connectedUsers.length; i++) {
+            ngoTemp = connectedUsers[i];
+            if (ngoTemp.id == msg) {
+                if (!ngoTemp.name.includes("HQ")) {
+                    callback(ngoTemp.name);
+                }
             }
         }
-    }
-});
+    });
 
 
 // Trigger for Run simulation displaying of sceanrio title and timeline view update
@@ -549,78 +538,82 @@ socket.on('nameRequest', function (msg, callback) {
 // }
 
 //Messaging Handling
-socket.on('message', function (msg) {
-    var recievedMessage = {
-        from: msg.message.from,
-        to: msg.message.to,
-        content: msg.message.content
-    };
+    socket.on('message', function (msg) {
+        var recievedMessage = {
+            from: msg.message.from,
+            to: msg.message.to,
+            content: msg.message.content
+        };
 
-    console.log(recievedMessage);
+        console.log(recievedMessage);
 
 
-    //store in simdata
-    var d = new Date();
-    var date = dateFormat(d, "HH:MM:ss")
-    var message = {
-        recipient: msg.message.to,
-        sender: msg.message.from,
-        time: date,
-        content: msg.message.content
-    };
-    simData.messageList.push(message);
-    io.emit('message', {recievedMessage});
-});
+        //store in simdata
+        var d = new Date();
+        var date = dateFormat(d, "HH:MM:ss")
+        var message = {
+            recipient: msg.message.to,
+            sender: msg.message.from,
+            time: date,
+            content: msg.message.content
+        };
+        simData.messageList.push(message);
+        io.emit('message', {recievedMessage});
+    });
 
-socket.on('newEventResponse', function (msg) {
-    //Get event id
+    socket.on('newEventResponse', function (msg) {
+        //Get event id
 
-    var event = msg.response.event.toString();
-    var eventID = parseInt(event, 10);
-    //Find event in list of events
-    var responseTime = new Date().getTime();
-    for(var i = 0; i < simData.eventsList.length; i++){
-        if(simData.eventsList[i].id === eventID ){
-            simData.eventsList[i].responses.push({content: msg.response.content, sender: msg.response.from, time: responseTime});
-            worker.postMessage(simData);
+        var event = msg.response.event.toString();
+        var eventID = parseInt(event, 10);
+        //Find event in list of events
+        var responseTime = new Date().getTime();
+        for (var i = 0; i < simData.eventsList.length; i++) {
+            if (simData.eventsList[i].id === eventID) {
+                simData.eventsList[i].responses.push({
+                    content: msg.response.content,
+                    sender: msg.response.from,
+                    time: responseTime
+                });
+                worker.postMessage(simData);
+            }
         }
-    }
-});
+    });
 
-socket.on('pastEventResponses', function (msg, callback) {
+    socket.on('pastEventResponses', function (msg, callback) {
 
-    var event = msg.selectedEvent.toString();
-    var eventID = parseInt(event, 10);
-    //do lookup of events response data
-    var pastEventResponseList;
-    for(var i = 0; i < simData.eventsList.length; i++){
-        if(simData.eventsList[i].id === eventID ){
-            pastEventResponseList = simData.eventsList[i].responses;
+        var event = msg.selectedEvent.toString();
+        var eventID = parseInt(event, 10);
+        //do lookup of events response data
+        var pastEventResponseList;
+        for (var i = 0; i < simData.eventsList.length; i++) {
+            if (simData.eventsList[i].id === eventID) {
+                pastEventResponseList = simData.eventsList[i].responses;
+            }
         }
-    }
 
-    callback({pastEventResponseList});
+        callback({pastEventResponseList});
 
-});
+    });
 
 
 //Listen for play/pause
-socket.on('play', function () {
-    if (!simData.started) {
-        var data = simData;
-        worker = new Worker('./autoevents.js', {workerData: data});
-        currentRunningInstance = runSim();
-        simData.started = true;
-    } else {
-        worker.postMessage('play');
-    }
-    simData.isRunning = true;
-});
+    socket.on('play', function () {
+        if (!simData.started) {
+            var data = simData;
+            worker = new Worker('./autoevents.js', {workerData: data});
+            currentRunningInstance = runSim();
+            simData.started = true;
+        } else {
+            worker.postMessage('play');
+        }
+        simData.isRunning = true;
+    });
 
-socket.on('pause', function () {
-    worker.postMessage('pause');
-    simData.isRunning = false;
-});
+    socket.on('pause', function () {
+        worker.postMessage('pause');
+        simData.isRunning = false;
+    });
 
 });
 
