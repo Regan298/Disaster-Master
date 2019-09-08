@@ -14,7 +14,7 @@ cache:
 testing_testing:
   stage: Test
   tags:
-    - docker
+    - deploy
   before_script:
     - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
     - npm install
