@@ -1,7 +1,6 @@
 image: node:latest
 
-include:
-  - template: Code-Quality.gitlab-ci.yml
+
 
 
 
@@ -25,6 +24,8 @@ testing_testing:
   script:
     - npm test
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
+  include:
+  - template: Code-Quality.gitlab-ci.yml
   
     
 deploytesting:
