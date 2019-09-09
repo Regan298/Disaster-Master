@@ -61,7 +61,7 @@ production:
   - master
 
 include:
-  - template: Code-Quality.gitlab-ci.yml
+- template: Code-Quality.gitlab-ci.yml
   tags:
     - docker
   stage: CodeQuality
