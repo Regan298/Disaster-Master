@@ -24,8 +24,7 @@ testing_testing:
   script:
     - npm test
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
-  include:
-  - template: Code-Quality.gitlab-ci.yml
+
   
     
 deploytesting:
@@ -59,3 +58,6 @@ production:
   - sudo dpl --provider=heroku --app=redr-disaster-simulator --api-key=$HEROKU_API_KEY
   only:
   - master
+  
+include:
+  - template: Code-Quality.gitlab-ci.yml
