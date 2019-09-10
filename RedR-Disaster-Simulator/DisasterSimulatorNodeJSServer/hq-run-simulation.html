@@ -242,9 +242,12 @@
         //console.log(items[properties.items[0]]);
         console.log(items[properties.items[0]].contentType);
 
-        PDFObject.embed(items[properties.items[0]].location, "#eventMediaDisplay");
-        
+        if(items[properties.items[0]].contentType === 'pdf'){
 
+            PDFObject.embed(items[properties.items[0]].location, "#eventMediaDisplay");
+        }else {
+            $('#eventMediaDisplay').empty();
+        }
 
 
 
