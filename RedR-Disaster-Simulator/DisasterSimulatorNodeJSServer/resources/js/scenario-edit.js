@@ -193,18 +193,17 @@ function updateScale(){
 function editNgo(ngoNum){
     $('#ngoForm'+ngoNum).empty();
     $('#ngoForm'+ngoNum).append("<form id='ngoForm"+ngoNum+"'></form>" +
-                            "NGO Name: <input form='ngoForm"+ngoNum+"' type='text' name='name' value='"+data.ngoList[ngoNum].name+"'><br>"+
-                            "NGO Passkey: <input form='ngoForm"+ngoNum+"' type='text' name='passkey' value='"+data.ngoList[ngoNum].passkey+"'><br>"+
+                            "NGO Name: <input form='ngoForm"+ngoNum+"' type='text' id='ngoname' name='name' value='"+data.ngoList[ngoNum].name+"'><br>"+
+                            "NGO Passkey: <input form='ngoForm"+ngoNum+"' type='text' id='ngopasskey' name='passkey' value='"+data.ngoList[ngoNum].passkey+"'><br>"+
                             "<input form='ngoForm"+ngoNum+"' type='button' onclick='updateNgo("+ngoNum+")' value='Submit'>" +
                             "<button type='button' onclick=cancelEdit('#ngoForm"+ngoNum+"')>Cancel</button>" +
                             "<button type='button' onclick=deleteNgo('"+ngoNum+"')>DELETE</button>");
 }
 
 function updateNgo(ngoNum){
-    let frmData = document.getElementById("ngoForm");
-
-    data.ngoList[ngoNum].name = frmData.elements[0].value;
-    data.ngoList[ngoNum].passkey = frmData.elements[1].value;
+    //for some reason works only with jQuery and not with the regular document.getElementsById...
+    data.ngoList[ngoNum].name = $("#ngoname").val();
+    data.ngoList[ngoNum].passkey = $("#ngopasskey").val();
 
     $('#ngoForm'+ngoNum).empty();
     drawDetails(data);
