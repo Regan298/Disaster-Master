@@ -21,6 +21,7 @@ testing_testing:
     - npm install supertest
   script:
     - npm test
+  coverage: /All\sfiles.*?\s+(\d+.\d+)/
     
 deploytesting:
   type: deploy
