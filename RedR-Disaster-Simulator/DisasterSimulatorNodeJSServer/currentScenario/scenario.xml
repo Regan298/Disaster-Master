@@ -4,7 +4,7 @@
   <ngoCount>6</ngoCount>
   <duration>19800000</duration>
   <hoursInDay>1</hoursInDay>
-  <mode>false</mode>
+  <mode>true</mode>
   <ngo>
     <name>People First</name>
     <passkey>ngo1</passkey>
@@ -128,32 +128,25 @@
     <location>/currentScenario/files/012 HQ Kidnapping.pdf</location>
   </event>
   <event>
-    <recipient>Peacedoves</recipient>
-    <subject>Reminder Flash Appeal</subject>
+    <recipient>People First</recipient>
+    <subject>IMAGE</subject>
     <time>00:28:00</time>
-    <type>pdf</type>
-    <location>/currentScenario/files/013 Reminder - Flash Appeal.pdf</location>
-  </event>
-  <event>
-    <recipient>Peacedoves</recipient>
-    <subject>Gender Audit</subject>
-    <time>00:30:00</time>
-    <type>pdf</type>
-    <location>/currentScenario/files/014 HQ Gender Audit.pdf</location>
+    <type>image</type>
+    <location>/currentScenario/files/testjpg.jpg</location>
   </event>
   <event>
     <recipient>People First</recipient>
-    <subject>DayinLife Request</subject>
-    <time>00:32:00</time>
-    <type>pdf</type>
-    <location>/currentScenario/files/325-a1-report-millerdani1.pdf</location>
+    <subject>AUDIO</subject>
+    <time>00:30:00</time>
+    <type>audio</type>
+    <location>/currentScenario/files/testmp3.mp3</location>
   </event>
   <event>
-    <recipient>EWB</recipient>
-    <subject>not a pdf</subject>
-    <time>00:00:10</time>
-    <type>image</type>
-    <location>/resources/files/Take_OFF.png</location>
+    <recipient>People First</recipient>
+    <subject>VIDEO</subject>
+    <time>00:32:00</time>
+    <type>video</type>
+    <location>/currentScenario/files/testmp4.mp4</location>
   </event>
   <library>
     <subject>Test</subject>

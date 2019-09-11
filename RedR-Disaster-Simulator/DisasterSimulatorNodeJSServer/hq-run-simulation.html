@@ -234,19 +234,27 @@
         //setting field values
         document.getElementById("overlayName").value = items[properties.items[0]].content;
 
-        //console.log(items);
-        //console.log(properties.items[0]);
-        //console.log(items[properties.items[0]].location);
-        //console.log(items[properties.items[0]].content);
+ 
 
-        //console.log(items[properties.items[0]]);
-        console.log(items[properties.items[0]].contentType);
+        //console.log(items[properties.items[0]].contentType);
+
+        $('#eventMediaDisplay').empty();
 
         if(items[properties.items[0]].contentType === 'pdf'){
 
             PDFObject.embed(items[properties.items[0]].location, "#eventMediaDisplay");
-        }else {
-            $('#eventMediaDisplay').empty();
+
+        } else if(items[properties.items[0]].contentType === 'video'){
+            console.log(properties.items[0].location);
+            //document.getElementById("videosrc").setAttribute("src", properties.items[0].location);
+            var x = document.getElementById("videoOverlay").innerHTML;
+            document.getElementById("eventMediaDisplay").innerHTML = x;
+            document.getElementById("eventMediaDisplay").style.display = "block";
+            
+        } else if(items[properties.items[0]].contentType === 'audio'){
+            
+        } else if(items[properties.items[0]].contentType === 'image'){
+            
         }
 
 
@@ -278,9 +286,7 @@
 
 
 
-<!--PDF Displayer-->
-<div id="pdfOverlay" class="mediaOverlay" onclick="displayPDFOff()">
-</div>
+
 
 <!-- Video displaying code -->
 <div id="videoOverlay" class="mediaOverlay">
@@ -290,7 +296,7 @@
 	</div>
 	<div style="text-align:center;">
 		<video id="videoID" style="text-align:center;" width="500" height="500">
-			<source src="/files/testmp4.mp4" type="video/mp4">
+			<source id="videosrc" src="/files/testmp4.mp4" type="video/mp4">
 		</video>
 	</div>
 	<div style="text-align:center;">
