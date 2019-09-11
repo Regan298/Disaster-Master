@@ -156,7 +156,7 @@ function drawTimeline() {
                     content: currentEvent.subject[0],
                     location: currentEvent.location[0],
                     start: '2019-01-' + scaledTime.getDate() + ' ' + scaledTime.getHours() + ':' + scaledTime.getMinutes() + ':' + scaledTime.getSeconds(),
-                    contentType: currentEvent.type[0]
+                    contentType: currentEvent.type
                 });
                 break;
             }
