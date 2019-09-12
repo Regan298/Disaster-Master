@@ -299,7 +299,7 @@ function addEvent() {
         subject: frmData.elements[1].value,
         time: frmData.elements[2].value,
         type: frmData.elements[3].value,
-        location: '/resources/files/'+file.name
+        location: '/currentScenario/files/'+file.name
     };
     data.eventsList.push(newEvent);
 

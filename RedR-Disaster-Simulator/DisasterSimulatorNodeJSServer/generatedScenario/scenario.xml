@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
 <scenario>
-  <name>Test</name>
+  <name>test</name>
   <ngoCount>1</ngoCount>
-  <duration>43200000</duration>
-  <hoursInDay>2</hoursInDay>
+  <duration>32400000</duration>
+  <hoursInDay>1</hoursInDay>
   <mode>true</mode>
   <ngo>
-    <name>me</name>
-    <passkey>me</passkey>
+    <name>test</name>
+    <passkey>test</passkey>
   </ngo>
   <event>
-    <recipient>me</recipient>
-    <subject>hi</subject>
-    <time>00:00:01</time>
+    <recipient>test</recipient>
+    <subject>test</subject>
+    <time>00:00:30</time>
     <type>pdf</type>
-    <location>/resources/files/1__7_Raroa.pdf</location>
+    <location>/currentScenario/files/1__7_Raroa.pdf</location>
   </event>
 </scenario>
