@@ -1,14 +1,9 @@
 image: node:latest
 
-
-
-
-
 stages:
   - Test
   - Deploy
   - DeployTesting
-  - CodeQuality
 cache:
   paths:
     - node_modules/
@@ -59,11 +54,3 @@ production:
   - sudo dpl --provider=heroku --app=redr-disaster-simulator --api-key=$HEROKU_API_KEY
   only:
   - master
-
-include:
-- template: Code-Quality.gitlab-ci.yml
-  tags:
-    - docker
-  stage: CodeQuality
-  
-
