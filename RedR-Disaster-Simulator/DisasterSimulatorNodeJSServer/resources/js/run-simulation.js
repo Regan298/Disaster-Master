@@ -587,7 +587,8 @@ function displayPDFOff() {
     document.getElementById("pdfOverlay").style.display = "none";
 }
 
-function displayEventMedia(type) {
+function displayEventMedia(type, name) {
+    console.log(type);
     document.getElementById("pdfOverlay").style.display = "none";
     document.getElementById("audioOverlay").style.display = "none";
     document.getElementById("imageOverlay").style.display = "none";
@@ -595,7 +596,8 @@ function displayEventMedia(type) {
     if (type == "mp4") {
         document.getElementById("videoOverlay").style.display = "block";
     } else if (type == "pdf") {
-        PDFObject.embed("/files/test.pdf", "#pdfOverlay");
+        console.log(name);
+        PDFObject.embed(name, "#pdfOverlay");
         document.getElementById("pdfOverlay").style.display = "block";
     } else if (type == "mp3") {
         document.getElementById("audioOverlay").style.display = "block";
