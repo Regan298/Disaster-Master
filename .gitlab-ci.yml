@@ -38,6 +38,8 @@ deploytesting:
   only:
   - heroku-bug-fixes
   - lachlan-features-part3
+  - overlayMultimediaIntegration
+
 
 
 production:

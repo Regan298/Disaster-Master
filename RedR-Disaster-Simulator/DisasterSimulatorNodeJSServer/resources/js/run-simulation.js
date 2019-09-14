@@ -149,13 +149,14 @@ function drawTimeline() {
                 var scaledTime = timelineStartDate.getTime() + (ms * timeScale);
                 scaledTime = new Date(scaledTime);
                 id = groups[k].id;
+                console.log(currentEvent.type[0]);
                 items.push({
                     id: currentEvent.id,
                     group: id,
                     content: currentEvent.subject[0],
                     location: currentEvent.location[0],
-                    start: '2019-01-' + scaledTime.getDate() + ' ' + scaledTime.getHours() + ':' + scaledTime.getMinutes() + ':' + scaledTime.getSeconds()
-
+                    start: '2019-01-' + scaledTime.getDate() + ' ' + scaledTime.getHours() + ':' + scaledTime.getMinutes() + ':' + scaledTime.getSeconds(),
+                    contentType: currentEvent.type
                 });
                 break;
             }

@@ -239,8 +239,19 @@
         //console.log(items[properties.items[0]].location);
         //console.log(items[properties.items[0]].content);
 
-        PDFObject.embed(items[properties.items[0]].location, "#eventMediaDisplay");
-        
+        //console.log(items[properties.items[0]]);
+        console.log(items[properties.items[0]].contentType);
+
+        if(items[properties.items[0]].contentType === 'pdf'){
+
+            PDFObject.embed(items[properties.items[0]].location, "#eventMediaDisplay");
+        }else {
+            $('#eventMediaDisplay').empty();
+        }
+
+
+
+
         modal.style.display = "block";
     }
     span.onclick = function(){

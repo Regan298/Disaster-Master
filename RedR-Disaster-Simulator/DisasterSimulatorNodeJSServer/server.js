@@ -164,6 +164,9 @@ app.post('/upload-event-file', upload.single('upload'), function (req, res, next
 
         let simFileTemp = req.files.upload;
 
+        if (!fs.existsSync(__dirname + '/generatedScenario/')) {
+            fs.mkdirSync(__dirname + '/generatedScenario/');
+        }
         if (!fs.existsSync(__dirname + '/generatedScenario/files/')) {
             fs.mkdirSync(__dirname + '/generatedScenario/files/');
         }
@@ -303,6 +306,7 @@ function processZip(req, res, type) {
 
                             fs.readFile(__dirname + directoryForModification + 'scenario.xml', function (err, data) {
                                 if (err) {
+                                    console.log('here1');
                                     return res.status(400).send("Bad File, Please Input A Valid File :)");
                                 }
                                 parser.parseStringPromise(data).then(function (result) {
@@ -314,51 +318,61 @@ function processZip(req, res, type) {
                                         simData.modeOnline = false;
                                     }
                                     ngosArray = result['scenario']['ngo'];
-                                    for (var i = 0; i < ngosArray.length; i++) {
-                                        var currentNGOName = ngosArray[i].name;
-                                        var currentNGOPasskey = ngosArray[i].passkey;
-                                        var ngo = {
-                                            id: i,
-                                            name: currentNGOName,
-                                            passkey: currentNGOPasskey
+
+                                    if(!(ngosArray === undefined)){
+                                        for (var i = 0; i < ngosArray.length; i++) {
+                                            var currentNGOName = ngosArray[i].name;
+                                            var currentNGOPasskey = ngosArray[i].passkey;
+                                            var ngo = {
+                                                id: i,
+                                                name: currentNGOName,
+                                                passkey: currentNGOPasskey
+                                            }
+                                            simData.ngoList.push(ngo);
                                         }
-                                        simData.ngoList.push(ngo);
                                     }
+                                    
                                     eventsArray = result['scenario']['event'];
 
-                                    for (var i = 0; i < eventsArray.length; i++) {
-                                        var currentEventRecipient = eventsArray[i].recipient;
-                                        var currentEventTime = eventsArray[i].time;
-                                        var currentEventType = eventsArray[i].type[0];
-                                        var currentEventLocation = eventsArray[i].location;
-                                        var currentEventSubject = eventsArray[i].subject;
-
-                                        var event = {
-                                            id: i,
-                                            recipient: currentEventRecipient,
-                                            time: currentEventTime,
-                                            type: currentEventType,
-                                            location: currentEventLocation,
-                                            subject: currentEventSubject,
-                                            responses: [],
-                                            latestUpdateTime: 0
-                                        };
-                                        simData.eventsList.push(event);
+                                    if(!(eventsArray === undefined)){
+                                        for (var i = 0; i < eventsArray.length; i++) {
+                                            var currentEventRecipient = eventsArray[i].recipient;
+                                            var currentEventTime = eventsArray[i].time;
+                                            var currentEventType = eventsArray[i].type[0];
+                                            var currentEventLocation = eventsArray[i].location;
+                                            var currentEventSubject = eventsArray[i].subject;
+    
+                                            var event = {
+                                                id: i,
+                                                recipient: currentEventRecipient,
+                                                time: currentEventTime,
+                                                type: currentEventType,
+                                                location: currentEventLocation,
+                                                subject: currentEventSubject,
+                                                responses: [],
+                                                latestUpdateTime: 0
+                                            };
+                                            simData.eventsList.push(event);
+                                        }
                                     }
+                                    
                                     let libraryArray = result['scenario']['library'];
-                                    for (var i = 0; i < libraryArray.length; i++) {
-                                        var currentLibraryType = libraryArray[i].type[0];
-                                        var currentLibraryLocation = libraryArray[i].location;
-                                        var currentLibrarySubject = libraryArray[i].subject;
-
-                                        var libraryItem = {
-                                            id: i,
-                                            type: currentLibraryType,
-                                            location: currentLibraryLocation,
-                                            subject: currentLibrarySubject
-                                        };
-                                        simData.library.push(libraryItem);
+                                    if(!(libraryArray === undefined)){
+                                        for (var i = 0; i < libraryArray.length; i++) {
+                                            var currentLibraryType = libraryArray[i].type[0];
+                                            var currentLibraryLocation = libraryArray[i].location;
+                                            var currentLibrarySubject = libraryArray[i].subject;
+    
+                                            var libraryItem = {
+                                                id: i,
+                                                type: currentLibraryType,
+                                                location: currentLibraryLocation,
+                                                subject: currentLibrarySubject
+                                            };
+                                            simData.library.push(libraryItem);
+                                        }
                                     }
+                                    
                                     simData.durationMs = result['scenario']['duration'];
                                     var hoursInDay = result['scenario']['hoursInDay'];
                                     simData.timeScale = 24 / hoursInDay;
@@ -370,6 +384,7 @@ function processZip(req, res, type) {
 
                                     if(simData.title.length == 0 || simData.ngoCount == 999 || simData.ngoList.length == 0
                                         || simData.eventsList == 0 || simData.durationMs == null || simData.timeScale.toString() === 'NaN'){
+                                            console.log('here2');
                                         return res.status(400).send("Bad File, Please Input A Valid File :)");
                                     } else {
                                         console.log(simData.timeScale);
@@ -382,13 +397,17 @@ function processZip(req, res, type) {
                                     }
 
                                 }).catch(function (err) {
+                                    console.log('here3');
+                                    console.log(err);
                                     return res.status(400).send("Bad File, Please Input A Valid File :)");
                                 });
                             });
                         } catch (e) {
+                            console.log('here4');
                             return res.status(400).send("Bad File, Please Input A Valid File :)");
                         }
                     } else {
+                        console.log('here5');
                         return res.status(400).send("Bad File, Please Input A Valid File :)");
                     }
                 });
@@ -401,6 +420,7 @@ function processZip(req, res, type) {
 
 
         } else {
+            console.log('here6');
             return res.status(400).send("Bad File, Please Input A Valid File :)");
         }
     });
@@ -504,6 +524,10 @@ io.on('connection', function (socket) {
         }
 
         var xml = root.end({pretty: true});
+
+        if (!fs.existsSync(__dirname + '/generatedScenario')) {
+            fs.mkdirSync(__dirname + '/generatedScenario');
+        }
 
         fs.writeFile("./generatedScenario/scenario.xml", xml, function (err) {
             if (err) {
