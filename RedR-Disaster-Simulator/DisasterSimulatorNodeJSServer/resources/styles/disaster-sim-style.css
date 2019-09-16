@@ -632,7 +632,7 @@ body {
 }
 
 .eventViewerHQ{
-    max-width: 80%;
+    min-width: 80%;
     max-height: 60vh;
 }
 

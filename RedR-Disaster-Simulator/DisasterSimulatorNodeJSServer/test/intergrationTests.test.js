@@ -2,11 +2,6 @@ var app = require('../server');
 var http = require('http');
 var request = require('supertest');
 
-
-
-
-
-
 describe('Server Tests', () => {
     let server;
     const port = 80;
@@ -220,6 +215,8 @@ describe('Server Tests', () => {
             .expect(302);
 
     }, 10000);
+
+
 
 
 });

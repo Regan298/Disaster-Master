@@ -47,7 +47,7 @@
         <subject>Set up</subject>
 		<time>00:00:10</time>
 		<type>pdf</type>
-		<location>/currentScenario/files/000 Needs assessment letter.pdf</location>
+		<location>/currentScenario/files/000_Needs_assessment_letter.pdf</location>
 	</event>
 
 	<event>
@@ -55,7 +55,7 @@
 		<subject>Introduction into Sebadoah</subject>
 		<time>00:02:00</time>
 		<type>pdf</type>
-		<location>/currentScenario/files/001 Activation of Cluster System.pdf</location>
+		<location>/currentScenario/files/001_Activation_of_Cluster_System.pdf</location>
 	</event>
 
 	<event>
@@ -63,7 +63,7 @@
 		<subject>President of Sebadoah</subject>
 		<time>00:04:00</time>
 		<type>pdf</type>
-		<location>/currentScenario/files/002 Purchase from Umbala.pdf</location>
+		<location>/currentScenario/files/002_Purchase_from_Umbala.pdf</location>
 	</event>
 
 	<event>
@@ -71,7 +71,7 @@
 		<subject>SitRep Request</subject>
 		<time>00:06:00</time>
 		<type>pdf</type>
-		<location>/currentScenario/files/003 HQ Daily SitRep Request.pdf</location>
+		<location>/currentScenario/files/003_HQ_Daily_SitRep_Request.pdf</location>
 	</event>
 
 	<event>
@@ -79,7 +79,7 @@
 		<subject>Budget Request</subject>
 		<time>00:08:00</time>
 		<type>pdf</type>
-		<location>/currentScenario/files/004 HQ Budget Request.pdf</location>
+		<location>/currentScenario/files/004_HQ_Budget_Request.pdf</location>
 	</event>
 
 	<event>
@@ -87,7 +87,7 @@
 		<subject>Flood Update</subject>
 		<time>00:10:00</time>
 		<type>pdf</type>
-		<location>/currentScenario/files/005 DisCom Flood Update.pdf</location>
+		<location>/currentScenario/files/005_DisCom_Flood_Update.pdf</location>
 	</event>
 
 	<event>
@@ -95,7 +95,7 @@
 		<subject>Request Cluster SitReps</subject>
 		<time>00:12:00</time>
 		<type>pdf</type>
-		<location>/currentScenario/files/006 Request Cluster SitReps.pdf</location>
+		<location>/currentScenario/files/006_Request_Cluster_SitReps.pdf</location>
 	</event>
 
 	<event>
@@ -103,7 +103,7 @@
 		<subject>Request SitReps</subject>
 		<time>00:14:00</time>
 		<type>pdf</type>
-		<location>/currentScenario/files/007 HQ No Daily SitRep.pdf</location>
+		<location>/currentScenario/files/007_HQ_No_Daily_SitRep.pdf</location>
 	</event>
 
 	<event>
@@ -111,7 +111,7 @@
 		<subject>Budget</subject>
 		<time>00:16:00</time>
 		<type>pdf</type>
-		<location>/currentScenario/files/008 HQ No Budget.pdf</location>
+		<location>/currentScenario/files/008_HQ_No_Budget.pdf</location>
 	</event>
 
 	<event>
@@ -119,7 +119,7 @@
 		<subject>Sit Reps Request</subject>
 		<time>00:18:00</time>
 		<type>pdf</type>
-		<location>/currentScenario/files/009 No Daily Cluster SitReps.pdf</location>
+		<location>/currentScenario/files/009_No_Daily_Cluster_SitReps.pdf</location>
 	</event>
 
 	<event>
@@ -127,7 +127,7 @@
 		<subject>Information Request</subject>
 		<time>00:20:00</time>
 		<type>pdf</type>
-		<location>/currentScenario/files/010 HQ Site Info Request.pdf</location>
+		<location>/currentScenario/files/010_HQ_Site_Info_Request.pdf</location>
 	</event>
 
 	<event>
@@ -135,7 +135,7 @@
 		<subject>Planning Request</subject>
 		<time>00:22:00</time>
 		<type>pdf</type>
-		<location>/currentScenario/files/011 HQ Planning Request.pdf</location>
+		<location>/currentScenario/files/011_HQ_Planning_Request.pdf</location>
 	</event>
 
 	<event>
@@ -143,7 +143,7 @@
 		<subject>Kidnapping</subject>
 		<time>00:24:00</time>
 		<type>pdf</type>
-		<location>/currentScenario/files/012 HQ Kidnapping.pdf</location>
+		<location>/currentScenario/files/012_HQ_Kidnapping.pdf</location>
 	</event>
 
 	<event>
@@ -151,7 +151,7 @@
 		<subject>Kidnapping</subject>
 		<time>00:26:00</time>
 		<type>pdf</type>
-		<location>/currentScenario/files/012 HQ Kidnapping.pdf</location>
+		<location>/currentScenario/files/012_HQ_Kidnapping.pdf</location>
 	</event>
 
 	<event>
@@ -159,7 +159,7 @@
 		<subject>Reminder Flash Appeal</subject>
 		<time>00:28:00</time>
 		<type>pdf</type>
-		<location>/currentScenario/files/013 Reminder - Flash Appeal.pdf</location>
+		<location>/currentScenario/files/013_Reminder_-_Flash_Appeal.pdf</location>
 	</event>
 
 	<event>
@@ -167,7 +167,7 @@
 		<subject>Gender Audit</subject>
 		<time>00:30:00</time>
 		<type>pdf</type>
-		<location>/currentScenario/files/014 HQ Gender Audit.pdf</location>
+		<location>/currentScenario/files/014_HQ_Gender_Audit.pdf</location>
 	</event>
 
 	<event>
@@ -175,7 +175,7 @@
 		<subject>DayinLife Request</subject>
 		<time>00:32:00</time>
 		<type>pdf</type>
-		<location>/currentScenario/files/015 HQ DayinLife Request.pdf</location>
+		<location>/currentScenario/files/015_HQ_DayinLife_Request.pdf</location>
 	</event>
     
     <library>

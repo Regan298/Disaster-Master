@@ -274,7 +274,7 @@ function displayEventMedia(type, name) {
     if (type == "video") {
         document.getElementById("videoOverlay").style.display = "block";
     } else if (type == "pdf") {
-        PDFObject.embed("/files/" + name, "#pdfOverlay");
+        PDFObject.embed(name, "#pdfOverlay");
         document.getElementById("pdfOverlay").style.display = "block";
     } else if (type == "audio") {
         document.getElementById("audioOverlay").style.display = "block";
@@ -361,6 +361,7 @@ function displayEvent(eventId) {
     var currentEventType = eventButtonElement.getAttribute("type");
     var currentEventLocation = eventButtonElement.getAttribute("location");
 
+    console.log(currentEventLocation);
     $("#eventViewerNGO").append("<h1> " + currentEventSubject + "</h1>" + "<h2> " + eventTimeFormat + "</h2>"
         + "<button id='displayEventButton' onclick=displayEventMedia(" + "'" + currentEventType + "'" + "," + "'" +
         currentEventLocation + "'" + ")" + ">View Event</button>");

@@ -1,7 +1,5 @@
 image: node:latest
 
-
-
 stages:
   - Test
   - Deploy
@@ -22,6 +20,8 @@ testing_testing:
   script:
     - npm test
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
+
+  
     
 deploytesting:
   type: deploy

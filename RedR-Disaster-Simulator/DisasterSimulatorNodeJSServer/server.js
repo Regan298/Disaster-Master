@@ -32,6 +32,7 @@ module.exports = app;
 app.use(express.static('resources'));
 app.use('/currentScenario', express.static(__dirname + '/currentScenario'));
 
+
 if (process.env.NODE_ENV !== 'test') {
     http.listen(port, function () {
         console.log('Simulation Run Invoked');
