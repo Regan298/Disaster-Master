@@ -29,7 +29,8 @@
     "jest": ">=24.9.0",
     "should": "^7.0.2",
     "mocha": "^6.2.0",
-    "start-server-and-test": ">=1.10.2"
+    "start-server-and-test": ">=1.10.2",
+    "nyc": "^14.1.1"
   },
   "engines": {
     "node": "12.3.1",
@@ -37,9 +38,9 @@
   },
   "scripts": {
     "start-server": "npm start",
-    "test": "npm run Jest-Routing-Files",
+    "test": "nyc mocha",
     "Jest-Routing-Files": "NODE_ENV=test jest --coverage RoutingAndFileTests/intergrationTests.test.js && npm run Mocha-Socket",
-    "Mocha-Socket": "start-server-and-test start-server-socket http://localhost:80 mocha",
+    "Mocha-Socket": "start-server-and-test start-server-socket http://localhost:80 'nyc mocha'",
     "start-server-socket": "NODE_ENV=socketTesting node server.js"
   },
 
