@@ -93,7 +93,7 @@ describe('Server Tests', () => {
         return request(app)
             .post('/upload')
             .type('file')
-            .attach('simFile', 'test/demoScenarioGood1.zip')
+            .attach('simFile', 'RoutingAndFileTests/demoScenarioGood1.zip')
             .expect(302);
 
     }, 10000);
@@ -102,7 +102,7 @@ describe('Server Tests', () => {
         return request(app)
             .post('/upload')
             .type('file')
-            .attach('simFile', 'test/demoScenarioGood2.zip')
+            .attach('simFile', 'RoutingAndFileTests/demoScenarioGood2.zip')
             .expect(302);
 
     }, 10000);
@@ -111,7 +111,7 @@ describe('Server Tests', () => {
         return request(app)
             .post('/upload')
             .type('file')
-            .attach('simFile', 'test/demoScenarioGood3.zip')
+            .attach('simFile', 'RoutingAndFileTests/demoScenarioGood3.zip')
             .expect(302);
 
     }, 10000);
@@ -120,7 +120,7 @@ describe('Server Tests', () => {
         return request(app)
             .post('/upload')
             .type('file')
-            .attach('simFile', 'test/demoScenarioGood4.zip')
+            .attach('simFile', 'RoutingAndFileTests/demoScenarioGood4.zip')
             .expect(302);
 
     }, 10000);
@@ -129,7 +129,7 @@ describe('Server Tests', () => {
         return request(app)
             .post('/upload')
             .type('file')
-            .attach('simFile', 'test/demoScenarioGood5.zip')
+            .attach('simFile', 'RoutingAndFileTests/demoScenarioGood5.zip')
             .expect(302);
 
     }, 10000);
@@ -139,7 +139,7 @@ describe('Server Tests', () => {
         return request(app)
             .post('/upload')
             .type('file')
-            .attach('simFile', 'test/demoScenarioBad1.zip')
+            .attach('simFile', 'RoutingAndFileTests/demoScenarioBad1.zip')
             .expect(400);
 
     }, 10000);
@@ -148,7 +148,7 @@ describe('Server Tests', () => {
         return request(app)
             .post('/upload')
             .type('file')
-            .attach('simFile', 'test/demoScenarioBad2.zip')
+            .attach('simFile', 'RoutingAndFileTests/demoScenarioBad2.zip')
             .expect(400);
 
     }, 10000);
@@ -157,7 +157,7 @@ describe('Server Tests', () => {
         return request(app)
             .post('/upload')
             .type('file')
-            .attach('simFile', 'test/demoScenarioBad3.zip')
+            .attach('simFile', 'RoutingAndFileTests/demoScenarioBad3.zip')
             .expect(400);
 
     }, 10000);
@@ -166,7 +166,7 @@ describe('Server Tests', () => {
         return request(app)
             .post('/upload')
             .type('file')
-            .attach('simFile', 'test/demoScenarioBad4.zip')
+            .attach('simFile', 'RoutingAndFileTests/demoScenarioBad4.zip')
             .expect(400);
 
     }, 10000);
@@ -175,7 +175,7 @@ describe('Server Tests', () => {
         return request(app)
             .post('/upload')
             .type('file')
-            .attach('simFile', 'test/demoScenarioBad5.zip')
+            .attach('simFile', 'RoutingAndFileTests/demoScenarioBad5.zip')
             .expect(400);
 
     }, 10000);
@@ -184,7 +184,7 @@ describe('Server Tests', () => {
         return request(app)
             .post('/upload')
             .type('file')
-            .attach('simFile', 'test/demoScenarioBad6.zip')
+            .attach('simFile', 'RoutingAndFileTests/demoScenarioBad6.zip')
             .expect(400);
 
     }, 10000);
@@ -193,7 +193,7 @@ describe('Server Tests', () => {
         return request(app)
             .post('/upload')
             .type('file')
-            .attach('simFile', 'test/demoScenarioBad7.zip')
+            .attach('simFile', 'RoutingAndFileTests/demoScenarioBad7.zip')
             .expect(400);
 
     }, 10000);
@@ -202,7 +202,7 @@ describe('Server Tests', () => {
         return request(app)
             .post('/upload')
             .type('file')
-            .attach('simFile', 'test/demoScenarioBad8.zip')
+            .attach('simFile', 'RoutingAndFileTests/demoScenarioBad8.zip')
             .expect(400);
 
     }, 10000);
@@ -211,7 +211,7 @@ describe('Server Tests', () => {
         return request(app)
             .post('/editor-upload')
             .type('file')
-            .attach('simFile', 'test/demoScenarioGood1.zip')
+            .attach('simFile', 'RoutingAndFileTests/demoScenarioGood1.zip')
             .expect(302);
 
     }, 10000);

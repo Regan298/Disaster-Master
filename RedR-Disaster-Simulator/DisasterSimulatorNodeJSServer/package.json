@@ -33,8 +33,14 @@
     "npm": "6.9.0"
   },
   "scripts": {
-    "start": "node server.js",
-    "test": "npm run jest",
-    "jest": "NODE_ENV=test jest --coverage test/intergrationTests.test.js"
+    "start-server": "npm start",
+    "test": "npm run Jest-Routing-Files",
+    "Jest-Routing-Files": "NODE_ENV=test jest --coverage RoutingAndFileTests/intergrationTests.test.js && npm run Mocha-Socket",
+    "Mocha-Socket": "start-server-and-test start-server-socket http://localhost:80 mocha",
+    "start-server-socket": "NODE_ENV=socketTesting node server.js"
+  },
+
+  "mocha": {
+    "spec": "SocketTests/"
   }
 }
