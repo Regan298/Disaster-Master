@@ -309,13 +309,15 @@ function addEvent() {
 function updateEvent(eventNum){
     let frmData = document.getElementById("frm"+eventNum);
     let file = frmData.elements[4].files[0];
-    uploadFiles(file, 'event');
-
+    if(file){
+        uploadFiles(file, 'event');
+        data.eventsList[eventNum].location = '/currentScenario/files/'+file.name;
+    }
+    
     data.eventsList[eventNum].recipient = frmData.elements[0].value;
     data.eventsList[eventNum].subject = frmData.elements[1].value;
     data.eventsList[eventNum].time = frmData.elements[2].value;
     data.eventsList[eventNum].type = frmData.elements[3].value;
-    data.eventsList[eventNum].location = '/currentScenario/files/'+file.name;
 
     drawEvents(data.eventsList);
 }
@@ -389,11 +391,13 @@ function addLibraryItem() {
 function updateLibraryItem(libNum){
     let frmData = document.getElementById("frmLib"+libNum);
     let file = frmData.elements[2].files[0];
-    uploadFiles(file, 'library');
+    if(file){
+        uploadFiles(file, 'event');
+        data.eventsList[eventNum].location = '/currentScenario/files/library/'+file.name;
+    }
 
     data.eventsList[libNum].subject = frmData.elements[0].value;
     data.eventsList[libNum].type = frmData.elements[1].value;
-    data.eventsList[libNum].location = '/currentScenario/files/'+file.name;
 
     drawLibrary(data.library);
 }
@@ -418,6 +422,7 @@ function uploadFiles(file, request) {
 
 function saveXML() {
     socket.emit('exportXML', data);
+    console.log(JSON.stringify(data));
     socket.on('xmlSaved', function () {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "/download-save", true);
