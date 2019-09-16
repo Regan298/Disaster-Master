@@ -245,12 +245,19 @@
             PDFObject.embed(items[properties.items[0]].location, "#eventMediaDisplay");
 
         } else if(items[properties.items[0]].contentType === 'video'){
-            console.log(properties.items[0].location);
-            //document.getElementById("videosrc").setAttribute("src", properties.items[0].location);
-            var x = document.getElementById("videoOverlay").innerHTML;
-            document.getElementById("eventMediaDisplay").innerHTML = x;
-            document.getElementById("eventMediaDisplay").style.display = "block";
-            
+
+            $('#eventMediaDisplay').append(
+                "<br>" +
+                "<div style='text-align:center;'>" +
+		                "<button style='text-align:center;' onclick='videoPausePlay()'>Play/Pause</button>" +
+                "</div>" +
+	            "<div style='text-align:center;'>" +
+		            "<video id='videoID' style='text-align:center;' width='500' height='500'>" +
+		                "<source id='videosrc' src='"+items[properties.items[0]].location+"' type='video/mp4'>" +
+	                "</video>" +
+                "</div>"
+                );
+                    
         } else if(items[properties.items[0]].contentType === 'audio'){
             
         } else if(items[properties.items[0]].contentType === 'image'){
@@ -272,39 +279,8 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Video displaying code -->
-<div id="videoOverlay" class="mediaOverlay">
-	<br>
-	<div style="text-align:center;">
-		<button style="text-align:center;" onclick="videoOverlayOff()">Exit Video</button>
-	</div>
-	<div style="text-align:center;">
-		<video id="videoID" style="text-align:center;" width="500" height="500">
-			<source id="videosrc" src="/files/testmp4.mp4" type="video/mp4">
-		</video>
-	</div>
-	<div style="text-align:center;">
-		<button style="text-align:center;" onclick="videoPausePlay()">Play/Pause</button>
-	</div>
-</div>
-
 <!-- Audio displaying code -->
+<!--
 <div id="audioOverlay" class="mediaOverlay">
 	<br>
 	<div style="text-align:center;">
@@ -320,8 +296,9 @@
 	</audio>
 	</div>
 </div>
-
+-->
 <!-- Image overlay code -->
+<!--
 <br>
 <div id="imageOverlay" class="mediaOverlay" onclick="imageOverlayOff()">
 	<br>
@@ -329,7 +306,7 @@
 		<img src="/files/testjpg.jpg"  width=500 height=500>
 	</div>
 </div>
-
+-->
 
 <!-- Footer -->
 <!--<footer class="bg-light fixed-bottom" id="footer">
