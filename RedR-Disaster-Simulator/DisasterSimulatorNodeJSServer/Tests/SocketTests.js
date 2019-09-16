@@ -22,7 +22,7 @@ describe("Socket Tests Seperate To First Tests Coz Jest Just Clowned Around", fu
 
     before(function (done) {
         request.post('/upload')
-            .attach('simFile', 'SocketTests/demoScenarioGood1.zip')
+            .attach('simFile', 'Tests/demoScenarioGood1.zip')
             .end(function (err, res) {
                 expect(res.status).to.equal(302);
                 done();

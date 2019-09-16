@@ -26,7 +26,6 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
-    "jest": ">=24.9.0",
     "should": "^7.0.2",
     "mocha": "^6.2.0",
     "start-server-and-test": ">=1.10.2",
@@ -38,13 +37,12 @@
   },
   "scripts": {
     "start-server": "npm start",
-    "test": "nyc mocha",
-    "Jest-Routing-Files": "NODE_ENV=test jest --coverage RoutingAndFileTests/intergrationTests.test.js && npm run Mocha-Socket",
-    "Mocha-Socket": "start-server-and-test start-server-socket http://localhost:80 'nyc mocha'",
-    "start-server-socket": "NODE_ENV=socketTesting node server.js"
+    "test": "npm run Mocha-Socket",
+    "Mocha-Socket": "start-server-and-test start-server-testing http://localhost:80 'nyc mocha'",
+    "start-server-testing": "NODE_ENV=socketTesting node server.js"
   },
 
   "mocha": {
-    "spec": "SocketTests/"
+    "spec": "Tests/"
   }
 }
