@@ -33,11 +33,11 @@ app.use(express.static('resources'));
 app.use('/currentScenario', express.static(__dirname + '/currentScenario'));
 
 
-if (process.env.NODE_ENV !== 'test' && !module.parent) {
+//if (process.env.NODE_ENV !== 'test' && !module.parent) {
     http.listen(port, function () {
         console.log('Simulation Run Invoked');
     });
-}
+//}
 
 //ngoCount gets updated when file parsed
 var simData = {

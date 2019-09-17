@@ -2,10 +2,12 @@ var should = require('should');
 var io = require('socket.io-client');
 var supertest = require('supertest');
 var request = supertest('localhost:80');
-var server = require('../server')
+var app = require('../server.js')
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+chai.use(chaiHttp);
+//chai.should();
 const {expect} = chai;
 
 var socketURL = 'http://localhost:80';
@@ -17,8 +19,7 @@ var options = {
 
 describe("Routing And File Tests", function () {
     it('home request should return status 200 and content type html', function (done) {
-        request.get('/')
-            .expect('Content-Type', /html/)
+        chai.request(app).get('/')
             .end(function (err, res) {
                 expect(res.status).to.equal(200);
                 done();
@@ -26,7 +27,7 @@ describe("Routing And File Tests", function () {
 
     });
 
-    it('simulation config should return status 200 and content type html', function (done) {
+    /*it('simulation config should return status 200 and content type html', function (done) {
         request.get('/hq-config')
             .expect('Content-Type', /html/)
             .end(function (err, res) {
@@ -241,7 +242,7 @@ describe("Routing And File Tests", function () {
                 expect(res.status).to.equal(302);
                 done();
             });
-    });
+    });*/
 
 });
 

@@ -18,7 +18,7 @@ testing_testing:
     - npm install
     - npm install supertest
   script:
-    - npm test
+    - npm run mochaScript
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
 
   
