@@ -571,6 +571,10 @@ io.on('connection', function (socket) {
             worker.postMessage(simData);
         });
 
+        socket.on('deleteEvent', function(eventI){
+            simData.eventsList.splice(eventI, 1);
+            worker.postMessage(simData);
+        });
 
 //Send NGO Name To Relevant NGO
         socket.on('nameRequest', function (msg, callback) {

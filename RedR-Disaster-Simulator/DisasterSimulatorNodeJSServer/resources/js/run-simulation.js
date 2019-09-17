@@ -310,7 +310,6 @@ function processScenarioData() {
         handleCommunicationButtons();
         setInterval(handleNGOJoining, 1000);
         fillInNGOFilter();
-        setModal();
     });
 
 }
@@ -726,7 +725,21 @@ function updateEvent(){
     socket.emit('updateEvent', simData.eventsList[selected.id]);
     socket.emit('simState', "request", function (callbackData) {
         simData = callbackData.simData;
-        console.log(simData);
+        timeline.destroy();
+        items = [];
+        groups = [];
+        drawTimeline();
+        timeline.redraw();
+    });
+    cancelEdit();
+}
+
+function deleteEvent() {
+    console.log(selected.id);
+    socket.emit('deleteEvent', selected.id);
+    socket.emit('simState', "request", function (callbackData) {
+        simData = callbackData.simData;
+        // console.log(simData);
         timeline.destroy();
         items = [];
         groups = [];
@@ -751,6 +764,9 @@ function setModal() {
         ngoOptions += "<option value='"+simData.ngoList[i].name+"'>"+simData.ngoList[i].name+"</option>";
     }
 
+    console.log(selected);
+
+    $("#modal").empty();
     $("#modal").append(
         "<div class='eventOverlayContent'>" +
         "<div id='overlayHeader'>" +
@@ -766,7 +782,7 @@ function setModal() {
             "</tr>" +
             "<form id='editEvent' enctype='multipart/form-data'></form>" +
             "<tr>" +
-                "<td><input form='editEvent' id='overlayName' type='text' name='subject' value='tempValue'></input></td>" +
+                "<td><input form='editEvent' id='overlayName' type='text' name='subject' value='"+selected.content+"'></input></td>" +
                 "<td>" +
                     "<select form='editEvent' id='overlayRecipiants'>" +
                         ngoOptions +
@@ -784,7 +800,7 @@ function setModal() {
                     "<button form='editEvent' type='button' onclick=updateEvent()>Update</button>" +
                 "</td>" +
                 "<td>" +
-                "<button type='button' style='background-color:red; color:white;'>Delete</button>" +
+                "<button type='button' style='background-color:red; color:white;' onclick=deleteEvent()>Delete</button>" +
                 "</td>" +
             "</tr>" +
           "</table>" +
