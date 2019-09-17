@@ -562,7 +562,7 @@ $(function () {
             from: name,
             to: recipient,
             content: content
-        }
+        };
 
         $('#input').val('');
         socket.emit('message', {message});
