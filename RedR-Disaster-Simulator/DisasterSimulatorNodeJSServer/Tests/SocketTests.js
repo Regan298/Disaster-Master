@@ -15,10 +15,240 @@ var options = {
     'force new connection': true
 };
 
+describe("Routing And File Tests", function () {
+    it('home request should return status 200 and content type html', function (done) {
+        request.get('/')
+            .expect('Content-Type', /html/)
+            .end(function (err, res) {
+                expect(res.status).to.equal(200);
+                done();
+            });
+
+    });
+
+    it('simulation config should return status 200 and content type html', function (done) {
+        request.get('/hq-config')
+            .expect('Content-Type', /html/)
+            .end(function (err, res) {
+                expect(res.status).to.equal(200);
+                done();
+            });
+
+    });
+
+    it('run simulation should return status 200 and content type html', function (done) {
+        request.get('/hq-run-simulation')
+            .expect('Content-Type', /html/)
+            .end(function (err, res) {
+                expect(res.status).to.equal(200);
+                done();
+            });
+
+    });
+
+    it('ngo run sim should return status 200 and content type html', function (done) {
+        request.get('/ngo-simulation')
+            .expect('Content-Type', /html/)
+            .end(function (err, res) {
+                expect(res.status).to.equal(200);
+                done();
+            });
+
+    });
+
+    it('hq create should return status 200 and content type html', function (done) {
+        request.get('/hq-create')
+            .expect('Content-Type', /html/)
+            .end(function (err, res) {
+                expect(res.status).to.equal(200);
+                done();
+            });
+
+    });
+
+    it('scenario-create-new should return status 200 and content type html', function (done) {
+        request.get('/scenario-create-new')
+            .expect('Content-Type', /html/)
+            .end(function (err, res) {
+                expect(res.status).to.equal(200);
+                done();
+            });
+
+    });
+
+    it('scenario-create should return status 200 and content type html', function (done) {
+        request.get('/scenario-create')
+            .expect('Content-Type', /html/)
+            .end(function (err, res) {
+                expect(res.status).to.equal(200);
+                done();
+            });
+
+    });
+
+    it('scenario-edit should return status 200 and content type html', function (done) {
+        request.get('/scenario-edit')
+            .expect('Content-Type', /html/)
+            .end(function (err, res) {
+                expect(res.status).to.equal(200);
+                done();
+            });
+
+    });
+
+    it('/about return status 200 and content type html', function (done) {
+        request.get('/about')
+            .expect('Content-Type', /html/)
+            .end(function (err, res) {
+                expect(res.status).to.equal(200);
+                done();
+            });
+
+    });
+
+    it('/help return status 200 and content type html', function (done) {
+        request.get('/help')
+            .expect('Content-Type', /html/)
+            .end(function (err, res) {
+                expect(res.status).to.equal(200);
+                done();
+            });
+
+    });
+
+
+    it('upload correctly formed sim file should return status 302 1/5', function (done){
+        request.post('/upload')
+            .attach('simFile', 'Tests/demoScenarioGood1.zip')
+            .end(function (err, res) {
+                expect(res.status).to.equal(302);
+                done();
+            });
+    });
+
+    it('upload correctly formed sim file should return status 302 2/5', function (done){
+        request.post('/upload')
+            .attach('simFile', 'Tests/demoScenarioGood2.zip')
+            .end(function (err, res) {
+                expect(res.status).to.equal(302);
+                done();
+            });
+    });
+
+    it('upload correctly formed sim file should return status 302 3/5', function (done){
+        request.post('/upload')
+            .attach('simFile', 'Tests/demoScenarioGood3.zip')
+            .end(function (err, res) {
+                expect(res.status).to.equal(302);
+                done();
+            });
+    });
+
+    it('upload correctly formed sim file should return status 302 4/5', function (done){
+        request.post('/upload')
+            .attach('simFile', 'Tests/demoScenarioGood4.zip')
+            .end(function (err, res) {
+                expect(res.status).to.equal(302);
+                done();
+            });
+    });
+
+    it('upload correctly formed sim file should return status 302 5/5', function (done){
+        request.post('/upload')
+            .attach('simFile', 'Tests/demoScenarioGood5.zip')
+            .end(function (err, res) {
+                expect(res.status).to.equal(302);
+                done();
+            });
+    });
+
+    it('upload incorrectly formed sim file (no title) should return status 400', function (done){
+        request.post('/upload')
+            .attach('simFile', 'Tests/demoScenarioBad1.zip')
+            .end(function (err, res) {
+                expect(res.status).to.equal(400);
+                done();
+            });
+    });
+
+    it('upload incorrectly formed sim file (no ngo count) should return status 400', function (done){
+        request.post('/upload')
+            .attach('simFile', 'Tests/demoScenarioBad2.zip')
+            .end(function (err, res) {
+                expect(res.status).to.equal(400);
+                done();
+            });
+    });
+
+    it('upload incorrectly formed sim file (duration) should return status 400', function (done){
+        request.post('/upload')
+            .attach('simFile', 'Tests/demoScenarioBad3.zip')
+            .end(function (err, res) {
+                expect(res.status).to.equal(400);
+                done();
+            });
+    });
+
+    it('upload incorrectly formed sim file (no scale) should return status 400', function (done){
+        request.post('/upload')
+            .attach('simFile', 'Tests/demoScenarioBad4.zip')
+            .end(function (err, res) {
+                expect(res.status).to.equal(400);
+                done();
+            });
+    });
+
+    it('upload incorrectly formed sim file (no ngo definitions) should return status 400', function (done){
+        request.post('/upload')
+            .attach('simFile', 'Tests/demoScenarioBad5.zip')
+            .end(function (err, res) {
+                expect(res.status).to.equal(400);
+                done();
+            });
+    });
+
+    it('upload incorrectly formed sim file (no events) should return status 400', function (done){
+        request.post('/upload')
+            .attach('simFile', 'Tests/demoScenarioBad6.zip')
+            .end(function (err, res) {
+                expect(res.status).to.equal(400);
+                done();
+            });
+    });
+
+    it('upload incorrectly formed sim file (invalid xml) should return status 400', function (done){
+        request.post('/upload')
+            .attach('simFile', 'Tests/demoScenarioBad7.zip')
+            .end(function (err, res) {
+                expect(res.status).to.equal(400);
+                done();
+            });
+    });
+
+    it('upload incorrectly formed sim file (no file at all) should return status 400', function (done){
+        request.post('/upload')
+            .attach('simFile', 'Tests/demoScenarioBad8.zip')
+            .end(function (err, res) {
+                expect(res.status).to.equal(400);
+                done();
+            });
+    });
+
+    it('upload sim file into edit (no file at all) should return status 302', function (done){
+        request.post('/editor-upload')
+            .attach('simFile', 'Tests/demoScenarioGood1.zip')
+            .end(function (err, res) {
+                expect(res.status).to.equal(302);
+                done();
+            });
+    });
+
+});
 
 
 
-describe("Socket Tests Seperate To First Tests Coz Jest Just Clowned Around", function () {
+
+describe("Socket Tests ", function () {
 
     before(function (done) {
         request.post('/upload')

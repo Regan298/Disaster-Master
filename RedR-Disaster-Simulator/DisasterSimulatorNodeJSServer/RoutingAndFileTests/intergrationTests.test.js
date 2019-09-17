@@ -207,7 +207,7 @@ describe('Server Tests', () => {
 
     }, 10000);
 
-    test('upload sim file into edit (no file at all) should return status 400', () => {
+    test('upload sim file into edit (no file at all) should return status 302', () => {
         return request(app)
             .post('/editor-upload')
             .type('file')

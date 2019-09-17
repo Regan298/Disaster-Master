@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scenario>
 	<name>Sebadoah</name>
-	<ngoCount>5</ngoCount>
+	<ngoCount>50</ngoCount>
 	<duration>19800000</duration>
 	<hoursInDay>1</hoursInDay>
 	<mode>online</mode>
@@ -39,6 +39,42 @@
 	<ngo>
 		<name>Reach Up</name>
 		<passkey>ngo6</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>People First1</name>
+		<passkey>ngo7</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>We Care1</name>
+		<passkey>ngo8</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>EWB1</name>
+		<passkey>ngo9</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>Red Heart1</name>
+		<passkey>ngo10</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>Peacedoves1</name>
+		<passkey>ngo11</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>Reach Up1</name>
+		<passkey>ngo12</passkey>
 
 	</ngo>
 	

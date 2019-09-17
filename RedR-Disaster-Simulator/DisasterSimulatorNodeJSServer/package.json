@@ -38,7 +38,8 @@
   "scripts": {
     "start-server": "npm start",
     "test": "npm run Mocha-Socket",
-    "Mocha-Socket": "start-server-and-test start-server-testing http://localhost:80 'nyc mocha'",
+    "mochaScript": "nyc mocha",
+    "Mocha-Socket": "start-server-and-test start-server-testing http://localhost:80 mochaScript",
     "start-server-testing": "NODE_ENV=socketTesting node server.js"
   },
 
