@@ -623,7 +623,7 @@ io.on('connection', function (socket) {
     });
 
 
-//Listen for play/pause
+    //Listen for play/pause
     socket.on('play', function () {
         if (!simData.started) {
             var data = simData;
@@ -641,6 +641,10 @@ io.on('connection', function (socket) {
         simData.isRunning = false;
     });
 
+
+    socket.on('updateEvent', function(event) {
+        simData.eventsList[event.id] = event;
+    });
 });
 
 function runSim() {

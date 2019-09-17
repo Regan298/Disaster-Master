@@ -722,6 +722,12 @@ function updateEvent(){
     simData.eventsList[selected.id].type = type[type.length-1];
     
     console.log(simData.eventsList[selected.id]);
+    socket.emit('updateEvent', simData.eventsList[selected.id]);
+    socket.emit('simState', "request", function (callbackData) {
+        simData = callbackData.simData;
+        drawTimeline();
+        updateEventList();
+    });
     timeline.redraw();
     cancelEdit();
 }
