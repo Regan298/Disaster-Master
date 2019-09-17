@@ -139,13 +139,13 @@ app.get('/help', function (req, res) {
 app.get('/download-save', function (req, res) {
     // console.log(req);
 
-    zipFolder(__dirname + '/generatedScenario', __dirname + '/scenario.zip', function (err) {
+    zipFolder(__dirname + '/generatedScenario', __dirname + '/'+simData.title+'Scenario.zip', function (err) {
         if (err) {
             console.log('failed to zip', err);
             res.end();
         } else {
             console.log('zipped');
-            res.download(__dirname + '/scenario.zip', 'scenario.zip');
+            res.download(__dirname + '/'+simData.title+'Scenario.zip', simData.title+'Scenario.zip');
         }
     });
 
@@ -170,7 +170,7 @@ app.post('/upload-event-file', upload.single('upload'), function (req, res, next
             fs.mkdirSync(__dirname + '/generatedScenario/files/');
         }
 
-        simFileTemp.mv(__dirname + '/generatedScenario/files/' + simFileTemp.name, function (err) {
+        simFileTemp.mv(__dirname + '/generatedScenario/files/' + simFileTemp.name.replace(/ /g, "_"), function (err) {
             if (err) {
                 console.log(err);
                 res.status(400).send(err);
@@ -196,7 +196,7 @@ app.post('/upload-library-file', upload.single('upload'), function (req, res, ne
             fs.mkdirSync(__dirname + '/generatedScenario/files/library');
         }
 
-        simFileTemp.mv(__dirname + '/generatedScenario/files/library/' + simFileTemp.name, function (err) {
+        simFileTemp.mv(__dirname + '/generatedScenario/files/library/' + simFileTemp.name.replace(/ /g, "_"), function (err) {
             if (err) {
                 console.log(err);
                 res.status(400).send(err);
@@ -265,7 +265,7 @@ function processZip(req, res, type) {
             }
             //Move file into working dir
             let simFileTemp = req.files.simFile;
-            simFileTemp.mv(__dirname + '/' + simFileTemp.name, function (err) {
+            simFileTemp.mv(__dirname + '/' + simFileTemp.name.replace(/ /g, "_"), function (err) {
                 if (err) {
                     console.log(err);
                     return res.status(400).send(err);
@@ -279,12 +279,12 @@ function processZip(req, res, type) {
 
 
 
-                zip.unzip(__dirname + '/' + simFileTemp.name,  __dirname + directoryForModification, function (err) {
+                zip.unzip(__dirname + '/' + simFileTemp.name.replace(/ /g, "_"),  __dirname + directoryForModification, function (err) {
                     //extract(__dirname + '/' + simFileTemp.name, {dir: __dirname + directoryForModification}, function (err) {
                     if (err) console.log("unziperror: " + err);
 
-                    if (fs.existsSync(__dirname + '/' + simFileTemp.name)) {
-                        fs.unlink(__dirname + '/' + simFileTemp.name, (err) => {
+                    if (fs.existsSync(__dirname + '/' + simFileTemp.name.replace(/ /g, "_"))) {
+                        fs.unlink(__dirname + '/' + simFileTemp.name.replace(/ /g, "_"), (err) => {
                             if (err) throw err;
                             console.log('successfully deleted zip');
                         });

@@ -30,7 +30,7 @@ function handleNGOJoining() {
     socket.emit('getConnected', "request", function (callbackData) {
         processNGOData(callbackData.connectedUsers);
         for (var i = 0; i < ngos.length; i++) {
-            let currentUserName = new String(ngos[i].name).trim().replace(" ", "_");
+            let currentUserName = new String(ngos[i].name).trim().replace(/ /g, "_");
             ;
             if (currentUserName !== "HQ") {
                 try {
@@ -55,7 +55,7 @@ function processNGOData(recievedNGOs) {
     ngos = [];
     for (var i = 0; i < recievedNGOs.length; i++) {
         ngos.push(recievedNGOs[i]);
-        ngos[i].name = new String(ngos[i].name).trim().replace(" ", "_");
+        ngos[i].name = new String(ngos[i].name).trim().replace(/ /g, "_");
     }
 }
 
@@ -66,12 +66,12 @@ function handlePersistentMessages() {
             for (var i = 0; i < callbackData.pastMessages.length; i++) {
                 let currentPastMessage = callbackData.pastMessages[i];
                 var isOrigin;
-                if (currentPastMessage.sender.replace(" ", "_") === "HQ") {
+                if (currentPastMessage.sender.replace(/ /g, "_") === "HQ") {
                     isOrigin = true;
                 } else {
                     isOrigin = false;
                 }
-                addToConversation(currentPastMessage.content, isOrigin, currentPastMessage.sender.replace(" ", "_"), currentPastMessage.recipient.replace(" ", "_"));
+                addToConversation(currentPastMessage.content, isOrigin, currentPastMessage.sender.replace(/ /g, "_"), currentPastMessage.recipient.replace(/ /g, "_"));
 
             }
         }
@@ -177,7 +177,7 @@ function handleCommunicationButtons() {
 
 
     for (var i = 0; i < simData.ngoList.length; i++) {
-        let currentUserName = new String(simData.ngoList[i].name).trim().replace(" ", "_");
+        let currentUserName = new String(simData.ngoList[i].name).trim().replace(/ /g, "_");
 
         buttons[i].innerHTML = currentUserName;
         buttons[i].id = currentUserName;
@@ -210,7 +210,7 @@ function handleCommunicationButtons() {
 
 
     for (var i = 0; i < simData.ngoList.length; i++) {
-        messagingChats[i].id = new String(simData.ngoList[i].name).trim().replace(" ", "_") + "Content";
+        messagingChats[i].id = new String(simData.ngoList[i].name).trim().replace(/ /g, "_") + "Content";
     }
 
     //remove extra buttons and chats
@@ -551,7 +551,7 @@ function addToConversation(content, isOrigin, from, to) {
                 $(childUl).append("<li id='origin'>" + content + "</li>");
             }
         }
-        to = to.trim().replace(" ", "_") + "Content";
+        to = to.trim().replace(/ /g, "_") + "Content";
         var childUl = $("#" + to).find('.messageList');
         $(childUl).append("<li id='origin'>" + content + "</li>");
     } else {
@@ -563,7 +563,7 @@ function addToConversation(content, isOrigin, from, to) {
         var value;
         for (var i = 0; i < ngos.length; i++) {
             if (ngos[i].name === from) {
-                value = from.replace(" ", "_") + "Content";
+                value = from.replace(/ /g, "_") + "Content";
                 break;
             }
         }

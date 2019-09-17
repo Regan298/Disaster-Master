@@ -299,7 +299,7 @@ function addEvent() {
         subject: frmData.elements[1].value,
         time: frmData.elements[2].value,
         type: frmData.elements[3].value,
-        location: '/resources/files/'+file.name
+        location: '/currentScenario/files/'+file.name.replace(/ /g, "_")
     };
     data.eventsList.push(newEvent);
 
@@ -315,7 +315,7 @@ function updateEvent(eventNum){
     data.eventsList[eventNum].subject = frmData.elements[1].value;
     data.eventsList[eventNum].time = frmData.elements[2].value;
     data.eventsList[eventNum].type = frmData.elements[3].value;
-    data.eventsList[eventNum].location = '/currentScenario/files/'+file.name;
+    data.eventsList[eventNum].location = '/currentScenario/files/'+file.name.replace(/ /g, "_");
 
     drawEvents(data.eventsList);
 }
@@ -379,7 +379,7 @@ function addLibraryItem() {
     let newLibItem = {
         subject: frmData.elements[0].value,
         type: frmData.elements[1].value,
-        location: '/currentScenario/files/library/'+file.name
+        location: '/currentScenario/files/library/'+file.name.replace(/ /g, "_")
     };
     data.library.push(newLibItem);
 
@@ -393,7 +393,7 @@ function updateLibraryItem(libNum){
 
     data.eventsList[libNum].subject = frmData.elements[0].value;
     data.eventsList[libNum].type = frmData.elements[1].value;
-    data.eventsList[libNum].location = '/currentScenario/files/'+file.name;
+    data.eventsList[libNum].location = '/currentScenario/files/'+file.name.replace(/ /g, "_");
 
     drawLibrary(data.library);
 }
