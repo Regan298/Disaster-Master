@@ -33,11 +33,11 @@ app.use(express.static('resources'));
 app.use('/currentScenario', express.static(__dirname + '/currentScenario'));
 
 
-if (process.env.NODE_ENV !== 'test') {
+//if (process.env.NODE_ENV !== 'test' && !module.parent) {
     http.listen(port, function () {
         console.log('Simulation Run Invoked');
     });
-}
+//}
 
 //ngoCount gets updated when file parsed
 var simData = {
@@ -68,7 +68,7 @@ var connectedUsers = [];
 
 var hostIP = ip.address();
 
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'socketTesting' && !module.parent ) {
     opn('http://' + hostIP);
 }
 
@@ -435,211 +435,208 @@ app.post('/upload', function (req, res) {
 //End Route Handling
 
 // On connection for when an entity is using socket
+
+
 io.on('connection', function (socket) {
-    console.log("new connection");
 
+        console.log("new connection");
 
-    //When ngo is attempting to join
-    socket.on('join', function (msg) {
+        //When ngo is attempting to join
+        socket.on('join', function (msg) {
+            //Accept only if ngo not in sim yet
+            var ngoName = 'notFound';
 
-        //Accept only if ngo not in sim yet
-        var ngoName = 'notFound';
-
-        for (var i = 0; i < simData.ngoList.length; i++) {
-            if (simData.ngoList[i].passkey == msg) {
-                ngoName = simData.ngoList[i].name;
+            for (var i = 0; i < simData.ngoList.length; i++) {
+                if (simData.ngoList[i].passkey == msg) {
+                    ngoName = simData.ngoList[i].name;
+                }
             }
-        }
 
-        var isNGOPresent = false;
-        for (var i = 0; i < connectedUsers.length; i++) {
-            if (connectedUsers[i].name === ngoName) {
-                isNGOPresent = true;
-                break;
+            var isNGOPresent = false;
+            for (var i = 0; i < connectedUsers.length; i++) {
+                if (connectedUsers[i].name === ngoName) {
+                    isNGOPresent = true;
+                    break;
+                }
             }
-        }
 
-        if (!isNGOPresent && ngoName !== 'notFound') {
-            let ngo = {
-                id: msg,
-                name: ngoName
-            };
-            //Add new ngo to connected users
-            connectedUsers.push(ngo);
-            socket.emit('loginState', 'accepted');
-        } else {
-            socket.emit('loginState', 'rejected');
-        }
+            if (!isNGOPresent && ngoName !== 'notFound') {
+                let ngo = {
+                    id: msg,
+                    name: ngoName
+                };
+                //Add new ngo to connected users
+                connectedUsers.push(ngo);
+                socket.emit('loginState', 'accepted');
+            } else {
+                socket.emit('loginState', 'rejected');
+            }
 
 
-    });
+        });
 
 //Send past messages to NGOs upon request
-    socket.on('getPastMessages', function (msg, callback) {
-        var pastMessages = simData.messageList;
-        callback({pastMessages});
-    });
+        socket.on('getPastMessages', function (msg, callback) {
+            var pastMessages = simData.messageList;
+            callback({pastMessages});
+        });
 
 //Send connectedusers to ngo upon ngo request
-    socket.on('getConnected', function (msg, callback) {
-        callback({connectedUsers});
-    });
+        socket.on('getConnected', function (msg, callback) {
+            callback({connectedUsers});
+        });
 
 //Save XML from scenario editor
-    socket.on('exportXML', function (data) {
+        socket.on('exportXML', function (data) {
 
-        simData = data;
+            simData = data;
 
-        var root = xmlBuilder.create('scenario');
+            var root = xmlBuilder.create('scenario');
 
-        root.ele('name', data.title).end({pretty: true});
-        root.ele('ngoCount', data.ngoList.length).end({pretty: true});
-        root.ele('duration', '' + data.durationMs).end({pretty: true});
-        root.ele('hoursInDay', '' + 24 / data.timeScale).end({pretty: true});
-        root.ele('mode', data.modeOnline).end({pretty: true});
+            root.ele('name', data.title).end({pretty: true});
+            root.ele('ngoCount', data.ngoList.length).end({pretty: true});
+            root.ele('duration', '' + data.durationMs).end({pretty: true});
+            root.ele('hoursInDay', '' + 24 / data.timeScale).end({pretty: true});
+            root.ele('mode', data.modeOnline).end({pretty: true});
 
-        for (var i = 0; i < data.ngoList.length; i++) {
-            var item = root.ele('ngo');
-            item.ele('name', '' + data.ngoList[i].name).end({pretty: true});
-            item.ele('passkey', '' + data.ngoList[i].passkey).end({pretty: true});
-            item.end({pretty: true});
-        }
-
-        for (var i = 0; i < data.eventsList.length; i++) {
-            var item = root.ele('event');
-            item.ele('recipient', '' + data.eventsList[i].recipient).end({pretty: true});
-            item.ele('subject', '' + data.eventsList[i].subject).end({pretty: true});
-            item.ele('time', '' + data.eventsList[i].time).end({pretty: true});
-            item.ele('type', '' + data.eventsList[i].type).end({pretty: true});
-            item.ele('location', '' + data.eventsList[i].location).end({pretty: true});
-            item.end({pretty: true});
-        }
-
-        for (var i = 0; i < data.library.length; i++) {
-            var item = root.ele('library');
-            item.ele('subject', '' + data.library[i].subject).end({pretty: true});
-            item.ele('type', '' + data.library[i].type).end({pretty: true});
-            item.ele('location', '' + data.library[i].location).end({pretty: true});
-            item.end({pretty: true});
-        }
-
-        var xml = root.end({pretty: true});
-
-        if (!fs.existsSync(__dirname + '/generatedScenario')) {
-            fs.mkdirSync(__dirname + '/generatedScenario');
-        }
-
-        fs.writeFile("./generatedScenario/scenario.xml", xml, function (err) {
-            if (err) {
-                return console.log(err);
+            for (var i = 0; i < data.ngoList.length; i++) {
+                var item = root.ele('ngo');
+                item.ele('name', '' + data.ngoList[i].name).end({pretty: true});
+                item.ele('passkey', '' + data.ngoList[i].passkey).end({pretty: true});
+                item.end({pretty: true});
             }
 
-            console.log('File generated');
-            socket.emit('xmlSaved');
+            for (var i = 0; i < data.eventsList.length; i++) {
+                var item = root.ele('event');
+                item.ele('recipient', '' + data.eventsList[i].recipient).end({pretty: true});
+                item.ele('subject', '' + data.eventsList[i].subject).end({pretty: true});
+                item.ele('time', '' + data.eventsList[i].time).end({pretty: true});
+                item.ele('type', '' + data.eventsList[i].type).end({pretty: true});
+                item.ele('location', '' + data.eventsList[i].location).end({pretty: true});
+                item.end({pretty: true});
+            }
+
+            for (var i = 0; i < data.library.length; i++) {
+                var item = root.ele('library');
+                item.ele('subject', '' + data.library[i].subject).end({pretty: true});
+                item.ele('type', '' + data.library[i].type).end({pretty: true});
+                item.ele('location', '' + data.library[i].location).end({pretty: true});
+                item.end({pretty: true});
+            }
+
+            var xml = root.end({pretty: true});
+
+            if (!fs.existsSync(__dirname + '/generatedScenario')) {
+                fs.mkdirSync(__dirname + '/generatedScenario');
+            }
+
+            fs.writeFile("./generatedScenario/scenario.xml", xml, function (err) {
+                if (err) {
+                    return console.log(err);
+                }
+
+                console.log('File generated');
+                socket.emit('xmlSaved');
+            });
         });
-    });
 
 
 //Send NGO Name To Relevant NGO
-    socket.on('nameRequest', function (msg, callback) {
-        for (var i = 0; i < connectedUsers.length; i++) {
-            ngoTemp = connectedUsers[i];
-            if (ngoTemp.id == msg) {
-                if (!ngoTemp.name.includes("HQ")) {
-                    callback(ngoTemp.name);
+        socket.on('nameRequest', function (msg, callback) {
+            for (var i = 0; i < connectedUsers.length; i++) {
+                ngoTemp = connectedUsers[i];
+                if (ngoTemp.id == msg) {
+                    if (!ngoTemp.name.includes("HQ")) {
+                        callback(ngoTemp.name);
+                    }
                 }
             }
-        }
-    });
+        });
 
 
 // Trigger for Run simulation displaying of sceanrio title and timeline view update
 // if (simData.ready) {
 
-    socket.on('simState', function (msg, callback) {
-        callback({simData});
-    });
-    //io.emit('simState', {simData});
+        socket.on('simState', function (msg, callback) {
+            callback({simData});
+        });
+        //io.emit('simState', {simData});
 
 // }
 
 //Messaging Handling
-    socket.on('message', function (msg) {
-        var recievedMessage = {
-            from: msg.message.from,
-            to: msg.message.to,
-            content: msg.message.content
-        };
-
-        console.log(recievedMessage);
+        socket.on('message', function (msg) {
+            var recievedMessage = {
+                from: msg.message.from,
+                to: msg.message.to,
+                content: msg.message.content
+            };
 
 
-        //store in simdata
-        var d = new Date();
-        var date = dateFormat(d, "HH:MM:ss")
-        var message = {
-            recipient: msg.message.to,
-            sender: msg.message.from,
-            time: date,
-            content: msg.message.content
-        };
-        simData.messageList.push(message);
-        io.emit('message', {recievedMessage});
-    });
+            //store in simdata
+            var d = new Date();
+            var date = dateFormat(d, "HH:MM:ss")
+            var message = {
+                recipient: msg.message.to,
+                sender: msg.message.from,
+                time: date,
+                content: msg.message.content
+            };
+            simData.messageList.push(message);
+            io.emit('message', {recievedMessage});
+        });
 
-    socket.on('newEventResponse', function (msg) {
-        //Get event id
-
-        var event = msg.response.event.toString();
-        var eventID = parseInt(event, 10);
-        //Find event in list of events
-        var responseTime = new Date().getTime();
-        for (var i = 0; i < simData.eventsList.length; i++) {
-            if (simData.eventsList[i].id === eventID) {
-                simData.eventsList[i].responses.push({
-                    content: msg.response.content,
-                    sender: msg.response.from,
-                    time: responseTime
-                });
-                worker.postMessage(simData);
+        socket.on('newEventResponse', function (msg) {
+            //Get event id
+            var event = msg.response.event.toString();
+            var eventID = parseInt(event, 10);
+            //Find event in list of events
+            var responseTime = new Date().getTime();
+            for (var i = 0; i < simData.eventsList.length; i++) {
+                if (simData.eventsList[i].id === eventID) {
+                    simData.eventsList[i].responses.push({
+                        content: msg.response.content,
+                        sender: msg.response.from,
+                        time: responseTime
+                    });
+                    worker.postMessage(simData);
+                }
             }
-        }
-    });
+        });
 
-    socket.on('pastEventResponses', function (msg, callback) {
-
-        var event = msg.selectedEvent.toString();
-        var eventID = parseInt(event, 10);
-        //do lookup of events response data
-        var pastEventResponseList;
-        for (var i = 0; i < simData.eventsList.length; i++) {
-            if (simData.eventsList[i].id === eventID) {
-                pastEventResponseList = simData.eventsList[i].responses;
+        socket.on('pastEventResponses', function (msg, callback) {
+            var event = msg.selectedEvent.toString();
+            var eventID = parseInt(event, 10);
+            //do lookup of events response data
+            var pastEventResponseList;
+            for (var i = 0; i < simData.eventsList.length; i++) {
+                if (simData.eventsList[i].id === eventID) {
+                    pastEventResponseList = simData.eventsList[i].responses;
+                }
             }
-        }
 
-        callback({pastEventResponseList});
+            callback({pastEventResponseList});
 
-    });
+        });
 
 
 //Listen for play/pause
-    socket.on('play', function () {
-        if (!simData.started) {
-            var data = simData;
-            worker = new Worker('./autoevents.js', {workerData: data});
-            currentRunningInstance = runSim();
-            simData.started = true;
-        } else {
-            worker.postMessage('play');
-        }
-        simData.isRunning = true;
-    });
+        socket.on('play', function () {
+            if (!simData.started) {
+                var data = simData;
+                worker = new Worker('./autoevents.js', {workerData: data});
+                currentRunningInstance = runSim();
+                simData.started = true;
+            } else {
+                worker.postMessage('play');
+            }
+            simData.isRunning = true;
+        });
 
-    socket.on('pause', function () {
-        worker.postMessage('pause');
-        simData.isRunning = false;
-    });
+        socket.on('pause', function () {
+            worker.postMessage('pause');
+            simData.isRunning = false;
+        });
 
 });
 
