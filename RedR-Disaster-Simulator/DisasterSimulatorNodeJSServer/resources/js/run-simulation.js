@@ -157,7 +157,8 @@ function drawTimeline() {
                     content: currentEvent.subject[0],
                     location: currentEvent.location[0],
                     start: '2019-01-' + scaledTime.getDate() + ' ' + scaledTime.getHours() + ':' + scaledTime.getMinutes() + ':' + scaledTime.getSeconds(),
-                    contentType: currentEvent.type
+                    contentType: currentEvent.type,
+                    recipient: currentEvent.recipient[0]
                 });
                 break;
             }
@@ -760,11 +761,15 @@ function uploadFiles(file, request) {
 
 function setModal() {
     var ngoOptions = '';
+    var selectedOption = '';
     for(var i=0; i < simData.ngoList.length; i++){
-        ngoOptions += "<option value='"+simData.ngoList[i].name+"'>"+simData.ngoList[i].name+"</option>";
+        if(selected.recipient === simData.ngoList[i].name[0]){
+            selectedOption = 'selected';
+        }else{
+            selectedOption = '';
+        }
+        ngoOptions += "<option "+selectedOption+" value='"+simData.ngoList[i].name+"'>"+simData.ngoList[i].name+"</option>";
     }
-
-    console.log(selected);
 
     $("#modal").empty();
     $("#modal").append(
