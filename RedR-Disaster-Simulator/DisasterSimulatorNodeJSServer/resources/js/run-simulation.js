@@ -18,6 +18,7 @@ var selectedEvent;
 var eventResponseList = [];
 var eventCounter = 0;
 var selectNGOFilter = 'default';
+var selected;
 
 //todo: Unccomment this when done
 window.onbeforeunload = function() {
@@ -688,7 +689,49 @@ function submitMessage(isForAll, content) {
 
 }
 
+function cancelEdit(){
+    modal.style.display = "none";
+    timeline.setSelection([]);
+    selected = null;
+}
 
+function updateEvent(){
+    let frmData = document.getElementById("editEvent");
+    let file = frmData.elements[4].files[0];
+    if(file){
+        uploadFiles(file, 'event');
+        simData.eventsList[selected.id].location = '/currentScenario/files/'+file.name;
+    }
+    
+    simData.eventsList[selected.id].recipient = frmData.elements[1].value;
+    simData.eventsList[selected.id].subject = frmData.elements[0].value;
+    var day = frmData.elements[2].value;
+    var time = frmData.elements[3].value.split(':');
+    var simHours = time[0];
+    var simMins = time[1];
+
+    var ms = ((day * 24 * 60 * 60 * 1000) + (simHours * 60 * 60 * 1000) + (simMins * 60 * 1000))/simData.timeScale;
+    var seconds = Math.floor((ms / 1000) % 60);
+    var minutes = Math.floor((ms / 1000 / 60) % 60);
+    var hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
+
+    simData.eventsList[selected.id].time = hours+":"+minutes+":"+seconds;
+    var type = file.name.split(".");
+    simData.eventsList[selected.id].type = type[type.length-1];
+    
+    console.log(simData.eventsList[selected.id]);
+    timeline.redraw();
+    cancelEdit();
+}
+
+function uploadFiles(file, request) {
+    var xhr = new XMLHttpRequest();
+    var formData = new FormData();
+    xhr.open("POST", "/upload-"+request+"-file", true);
+    xhr.setRequestHeader('X-Requested-With','XMLHttpRequest');
+    formData.append("upload", file);
+    xhr.send(formData);
+}
 
 //Once Page Loaded
 $(function () {
@@ -699,8 +742,46 @@ $(function () {
     switchNGOChat();
     handleNewMessages();
 
-
-
+    $("#modal").append(
+        "<div class='eventOverlayContent'>" +
+        "<div id='overlayHeader'>" +
+        "<button class='close' type='button' onclick=cancelEdit()><span>&times;</span></button>"+
+        // "<span class='close'>&times;</span>" +
+        
+        "<table border-collapse= 'collapse' width= '100%'>" +
+            "<tr>" +
+              "<th>Event Name</th>" +
+              "<th>Recipient</th>" +
+              "<th>Day</th>" +
+              "<th>Event Content</th>" +
+            "</tr>" +
+            "<form id='editEvent' enctype='multipart/form-data'></form>" +
+            "<tr>" +
+                "<td><input form='editEvent' id='overlayName' type='text' name='subject' value='tempValue'></input></td>" +
+                "<td>" +
+                    "<select form='editEvent' id='overlayRecipiants'>" +
+                        "<option value='group1'>group1</option>" +
+                        "<option value='group2'>group2</option>" +
+                    "</select>" +
+                "</td>" +
+                "<td>" +
+                    "<input form='editEvent' id='overlayDay' type='number' name='day' value='3' min='1' max='5'></input>" +
+                    "<input form='editEvent' id='overlayTime' type='time' name='time' value='12:44'></input>" +
+                "</td>" +
+                "<td>" +
+                    "<input form='editEvent' type='file' name='file' id='file' class='overlayinputfile' />" +
+                    "<label for='file' >File Selector</label>" +
+                "</td>" +
+                "<td>" +
+                    "<button form='editEvent' type='button' onclick=updateEvent()>Update</button>" +
+                "</td>" +
+                "<td>" +
+                "<button type='button' style='background-color:red; color:white;'>Delete</button>" +
+                "</td>" +
+            "</tr>" +
+          "</table>" +
+          "<div id='eventMediaDisplay'></div>"+
+          "</div></div>");
 
     //Handle Messages
 

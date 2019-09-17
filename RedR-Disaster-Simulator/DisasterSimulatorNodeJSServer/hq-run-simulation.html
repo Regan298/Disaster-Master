@@ -172,54 +172,7 @@
 
 
 <div id="modal" class="eventOverlay"> 
-    <div class="eventOverlayContent">
-        <div id="overlayHeader">
-
-        <span class="close">&times;</span>
-        
-        
-        <table border-collapse= "collapse" width= "100%">
-            <tr>
-              <th>Event Name</th>
-              <th>Recipient</th>
-              <th>Day</th>
-              <th>Event Content</th>
-            </tr>
-
-            <tr>
-                <td><input id="overlayName" type="text" name="subject" value="tempValue"></input></td>
-                <td>
-                    <select id="overlayRecipiants">
-                        <option value="group1">group1</option>
-                        <option value="group2">group2</option>
-                    </select>
-                </td>
-                <td>
-                    <input id="overlayDay" type="number" name="day" value="3" min="1" max="5"></input>
-                    <input id="overlayTime" type="time" name="time" value="12:44"></input>
-                </td>
-                <td>
-                    <input type="file" name="file" id="file" class="overlayinputfile" />
-                    <label for="file" >File Selector</label>
-                </td>
-                <td>
-                    <button type="button">Update</button>
-                    
-                </td>
-                <td>
-                <button type="button" style="background-color:red; color:white;">Delete</button>
-                </td>
-            </tr>
-          </table>
-          
-
-
-
-        
-        </div>
-
-        <div id="eventMediaDisplay"></div>
-    </div>
+    
 </div>
 
 <script>
@@ -232,20 +185,18 @@
     function onSelect(properties){
 
         //setting field values
-        document.getElementById("overlayName").value = items[properties.items[0]].content;
-
- 
-
+        // document.getElementById("overlayName").value = items[properties.items[0]].content;
         //console.log(items[properties.items[0]].contentType);
 
         $('#eventMediaDisplay').empty();
+        selected = items[properties.items[0]];
 
-        if(items[properties.items[0]].contentType === 'pdf'){
+        if(selected.contentType === 'pdf'){
+            console.log(selected.location);
 
-            PDFObject.embed(items[properties.items[0]].location, "#eventMediaDisplay");
+            PDFObject.embed(selected.location, "#eventMediaDisplay");
 
-        } else if(items[properties.items[0]].contentType === 'video'){
-
+        } else if(selected.contentType === 'video'){
             $('#eventMediaDisplay').append(
                 "<br>" +
                 "<div style='text-align:center;'>" +
@@ -253,31 +204,19 @@
                 "</div>" +
 	            "<div style='text-align:center;'>" +
 		            "<video id='videoID' style='text-align:center;' width='500' height='500'>" +
-		                "<source id='videosrc' src='"+items[properties.items[0]].location+"' type='video/mp4'>" +
+		                "<source id='videosrc' src='"+selected.location+"' type='video/mp4'>" +
 	                "</video>" +
                 "</div>"
                 );
                     
-        } else if(items[properties.items[0]].contentType === 'audio'){
+        } else if(selected.contentType === 'audio'){
             
-        } else if(items[properties.items[0]].contentType === 'image'){
+        } else if(selected.contentType === 'image'){
             
         }
-
-
-
-
         modal.style.display = "block";
     }
-    span.onclick = function(){
-        modal.style.display = "none";
-        timeline.setSelection([]);
-    }
 </script>
-
-
-
-
 
 <!-- Audio displaying code -->
 <!--
