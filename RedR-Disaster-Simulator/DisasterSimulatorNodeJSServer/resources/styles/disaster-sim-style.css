@@ -757,22 +757,37 @@ body {
     resize: none;
     float: left;
     max-height: 100%;
-    min-width: 85%;
+    min-width: 75%;
     margin-right: 5%;
     min-height: 10vh;
 }
 
-
-#inboxNGOForm input {
+#inboxNGOForm select {
     /* margin-top: 2%; */
-    width: 10%;
+    width: 20%;
     display: inline-block;
     vertical-align: top;
     float: left;
     font-size: 100%;
     padding: 0;
-    height: 10vh;
+    height: 5vh;
+    margin-bottom: 2%;
 }
+
+
+#inboxNGOForm input {
+    /* margin-top: 2%; */
+    width: 20%;
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+    font-size: 100%;
+    padding: 0;
+    height: 2.5vh;
+    padding-bottom: 5%;
+}
+
+
 
 
 .pdfobject {
