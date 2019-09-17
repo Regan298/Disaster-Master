@@ -186,6 +186,32 @@ app.post('/upload-event-file', upload.single('upload'), function (req, res, next
     }
 });
 
+app.post('/upload-event-file-live', upload.single('upload'), function (req, res, next) {
+    // console.log(req);
+
+    if (req.files != null) {
+
+        let simFileTemp = req.files.upload;
+
+        if (!fs.existsSync(__dirname + '/currentScenario/files/')) {
+            fs.mkdirSync(__dirname + '/currentScenario/files/');
+        }
+
+        simFileTemp.mv(__dirname + '/currentScenario/files/' + simFileTemp.name, function (err) {
+            if (err) {
+                console.log(err);
+                res.status(400).send(err);
+                res.end();
+            } else {
+                res.end();
+            }
+        });
+    } else {
+        console.log("no file");
+        return res.status(400).send("Bad File, Please Input A Valid File :)");
+    }
+});
+
 app.post('/upload-library-file', upload.single('upload'), function (req, res, next) {
     // console.log(req);
 
@@ -538,6 +564,10 @@ io.on('connection', function (socket) {
                 console.log('File generated');
                 socket.emit('xmlSaved');
             });
+        });
+
+        socket.on('updateEvent', function(event){
+            simData.eventsList[event.id] = event;
         });
 
 

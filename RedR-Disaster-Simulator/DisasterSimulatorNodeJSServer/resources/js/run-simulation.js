@@ -310,6 +310,7 @@ function processScenarioData() {
         handleCommunicationButtons();
         setInterval(handleNGOJoining, 1000);
         fillInNGOFilter();
+        setModal();
     });
 
 }
@@ -702,11 +703,13 @@ function updateEvent(){
     let file = frmData.elements[4].files[0];
     if(file){
         uploadFiles(file, 'event');
-        simData.eventsList[selected.id].location = '/currentScenario/files/'+file.name;
+        simData.eventsList[selected.id].location = ['/currentScenario/files/'+file.name];
+        var type = file.name.split(".");
+        simData.eventsList[selected.id].type = type[type.length-1];
     }
     
-    simData.eventsList[selected.id].recipient = frmData.elements[1].value;
-    simData.eventsList[selected.id].subject = frmData.elements[0].value;
+    simData.eventsList[selected.id].recipient = [frmData.elements[1].value];
+    simData.eventsList[selected.id].subject = [frmData.elements[0].value];
     var day = frmData.elements[2].value;
     var time = frmData.elements[3].value.split(':');
     var simHours = time[0];
@@ -717,38 +720,36 @@ function updateEvent(){
     var minutes = Math.floor((ms / 1000 / 60) % 60);
     var hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
 
-    simData.eventsList[selected.id].time = hours+":"+minutes+":"+seconds;
-    var type = file.name.split(".");
-    simData.eventsList[selected.id].type = type[type.length-1];
+    simData.eventsList[selected.id].time = [hours+":"+minutes+":"+seconds];
     
     console.log(simData.eventsList[selected.id]);
     socket.emit('updateEvent', simData.eventsList[selected.id]);
     socket.emit('simState', "request", function (callbackData) {
         simData = callbackData.simData;
+        console.log(simData);
+        timeline.destroy();
+        items = [];
+        groups = [];
         drawTimeline();
-        updateEventList();
+        timeline.redraw();
     });
-    timeline.redraw();
     cancelEdit();
 }
 
 function uploadFiles(file, request) {
     var xhr = new XMLHttpRequest();
     var formData = new FormData();
-    xhr.open("POST", "/upload-"+request+"-file", true);
+    xhr.open("POST", "/upload-"+request+"-file-live", true);
     xhr.setRequestHeader('X-Requested-With','XMLHttpRequest');
     formData.append("upload", file);
     xhr.send(formData);
 }
 
-//Once Page Loaded
-$(function () {
-
-    processScenarioData();
-    updateCurrentTime();
-    handleTimeSwitcher();
-    switchNGOChat();
-    handleNewMessages();
+function setModal() {
+    var ngoOptions = '';
+    for(var i=0; i < simData.ngoList.length; i++){
+        ngoOptions += "<option value='"+simData.ngoList[i].name+"'>"+simData.ngoList[i].name+"</option>";
+    }
 
     $("#modal").append(
         "<div class='eventOverlayContent'>" +
@@ -768,8 +769,7 @@ $(function () {
                 "<td><input form='editEvent' id='overlayName' type='text' name='subject' value='tempValue'></input></td>" +
                 "<td>" +
                     "<select form='editEvent' id='overlayRecipiants'>" +
-                        "<option value='group1'>group1</option>" +
-                        "<option value='group2'>group2</option>" +
+                        ngoOptions +
                     "</select>" +
                 "</td>" +
                 "<td>" +
@@ -790,6 +790,16 @@ $(function () {
           "</table>" +
           "<div id='eventMediaDisplay'></div>"+
           "</div></div>");
+}
+
+//Once Page Loaded
+$(function () {
+
+    processScenarioData();
+    updateCurrentTime();
+    handleTimeSwitcher();
+    switchNGOChat();
+    handleNewMessages();
 
     //Handle Messages
 
