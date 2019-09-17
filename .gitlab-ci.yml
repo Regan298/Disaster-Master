@@ -39,6 +39,7 @@ deploytesting:
   - heroku-bug-fixes
   - lachlan-features-part3
   - overlayMultimediaIntegration
+  - quick-mocha-pipeline-test
 
 
 
