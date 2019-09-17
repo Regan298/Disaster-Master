@@ -172,54 +172,7 @@
 
 
 <div id="modal" class="eventOverlay"> 
-    <div class="eventOverlayContent">
-        <div id="overlayHeader">
-
-        <span class="close">&times;</span>
-        
-        
-        <table border-collapse= "collapse" width= "100%">
-            <tr>
-              <th>Event Name</th>
-              <th>Recipient</th>
-              <th>Day</th>
-              <th>Event Content</th>
-            </tr>
-
-            <tr>
-                <td><input id="overlayName" type="text" name="subject" value="tempValue"></input></td>
-                <td>
-                    <select id="overlayRecipiants">
-                        <option value="group1">group1</option>
-                        <option value="group2">group2</option>
-                    </select>
-                </td>
-                <td>
-                    <input id="overlayDay" type="number" name="day" value="3" min="1" max="5"></input>
-                    <input id="overlayTime" type="time" name="time" value="12:44"></input>
-                </td>
-                <td>
-                    <input type="file" name="file" id="file" class="overlayinputfile" />
-                    <label for="file" >File Selector</label>
-                </td>
-                <td>
-                    <button type="button">Update</button>
-                    
-                </td>
-                <td>
-                <button type="button" style="background-color:red; color:white;">Delete</button>
-                </td>
-            </tr>
-          </table>
-          
-
-
-
-        
-        </div>
-
-        <div id="eventMediaDisplay"></div>
-    </div>
+    
 </div>
 
 <script>
@@ -232,73 +185,41 @@
     function onSelect(properties){
 
         //setting field values
-        document.getElementById("overlayName").value = items[properties.items[0]].content;
+        // document.getElementById("overlayName").value = items[properties.items[0]].content;
+        //console.log(items[properties.items[0]].contentType);
 
-        //console.log(items);
-        //console.log(properties.items[0]);
-        //console.log(items[properties.items[0]].location);
-        //console.log(items[properties.items[0]].content);
+        $('#eventMediaDisplay').empty();
+        selected = items[properties.items[0]];
 
-        //console.log(items[properties.items[0]]);
-        console.log(items[properties.items[0]].contentType);
+        if(selected.contentType === 'pdf'){
+            console.log(selected.location);
 
-        if(items[properties.items[0]].contentType === 'pdf'){
+            PDFObject.embed(selected.location, "#eventMediaDisplay");
 
-            PDFObject.embed(items[properties.items[0]].location, "#eventMediaDisplay");
-        }else {
-            $('#eventMediaDisplay').empty();
+        } else if(selected.contentType === 'video'){
+            $('#eventMediaDisplay').append(
+                "<br>" +
+                "<div style='text-align:center;'>" +
+		                "<button style='text-align:center;' onclick='videoPausePlay()'>Play/Pause</button>" +
+                "</div>" +
+	            "<div style='text-align:center;'>" +
+		            "<video id='videoID' style='text-align:center;' width='500' height='500'>" +
+		                "<source id='videosrc' src='"+selected.location+"' type='video/mp4'>" +
+	                "</video>" +
+                "</div>"
+                );
+                    
+        } else if(selected.contentType === 'audio'){
+            
+        } else if(selected.contentType === 'image'){
+            
         }
-
-
-
-
         modal.style.display = "block";
-    }
-    span.onclick = function(){
-        modal.style.display = "none";
-        timeline.setSelection([]);
     }
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--PDF Displayer-->
-<div id="pdfOverlay" class="mediaOverlay" onclick="displayPDFOff()">
-</div>
-
-<!-- Video displaying code -->
-<div id="videoOverlay" class="mediaOverlay">
-	<br>
-	<div style="text-align:center;">
-		<button style="text-align:center;" onclick="videoOverlayOff()">Exit Video</button>
-	</div>
-	<div style="text-align:center;">
-		<video id="videoID" style="text-align:center;" width="500" height="500">
-			<source src="/files/testmp4.mp4" type="video/mp4">
-		</video>
-	</div>
-	<div style="text-align:center;">
-		<button style="text-align:center;" onclick="videoPausePlay()">Play/Pause</button>
-	</div>
-</div>
-
 <!-- Audio displaying code -->
+<!--
 <div id="audioOverlay" class="mediaOverlay">
 	<br>
 	<div style="text-align:center;">
@@ -314,8 +235,9 @@
 	</audio>
 	</div>
 </div>
-
+-->
 <!-- Image overlay code -->
+<!--
 <br>
 <div id="imageOverlay" class="mediaOverlay" onclick="imageOverlayOff()">
 	<br>
@@ -323,7 +245,7 @@
 		<img src="/files/testjpg.jpg"  width=500 height=500>
 	</div>
 </div>
-
+-->
 
 <!-- Footer -->
 <!--<footer class="bg-light fixed-bottom" id="footer">
