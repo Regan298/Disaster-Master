@@ -710,7 +710,7 @@ function updateEvent(){
     
     simData.eventsList[selected.id].recipient = [frmData.elements[1].value];
     simData.eventsList[selected.id].subject = [frmData.elements[0].value];
-    var day = frmData.elements[2].value;
+    var day = frmData.elements[2].value-1;
     var time = frmData.elements[3].value.split(':');
     var simHours = time[0];
     var simMins = time[1];

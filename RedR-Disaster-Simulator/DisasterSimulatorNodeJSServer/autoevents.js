@@ -9,13 +9,13 @@ const { parentPort, workerData } = require('worker_threads');
 // const stopwatch = new Stopwatch();
 
 console.log("init");
-simLength = workerData.durationMs;
-eventList = workerData.eventsList;
+
 // stopwatch.start();
 var timeS = 0;
 var t;
 
 function updadeEvents(msg) {
+	simLength = msg.durationMs;
 	eventList = msg.eventsList;
 	t = setInterval(getEvents,1000);
 }
@@ -37,7 +37,7 @@ parentPort.on('message', (msg) => {
 	}
 });
 
-t = setInterval(getEvents,1000);
+// t = setInterval(getEvents,1000);
 
 function getEvents(){
 	timeS++;

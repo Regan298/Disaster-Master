@@ -21,7 +21,7 @@ var zipFolder = require('zip-folder');
 var extract = require('extract-zip');
 var rimraf = require("rimraf");
 
-var worker; //auto events worker
+worker = new Worker('./autoevents.js'); //autoevents worker
 var productionMode = false;
 const port = process.env.PORT || 80;
 
@@ -568,6 +568,7 @@ io.on('connection', function (socket) {
 
         socket.on('updateEvent', function(event){
             simData.eventsList[event.id] = event;
+            worker.postMessage(simData);
         });
 
 
@@ -654,7 +655,7 @@ io.on('connection', function (socket) {
         socket.on('play', function () {
             if (!simData.started) {
                 var data = simData;
-                worker = new Worker('./autoevents.js', {workerData: data});
+                worker.postMessage(data);
                 currentRunningInstance = runSim();
                 simData.started = true;
             } else {
