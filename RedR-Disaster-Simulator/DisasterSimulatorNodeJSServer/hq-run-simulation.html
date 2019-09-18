@@ -210,6 +210,19 @@
                 );
                     
         } else if(selected.contentType === 'audio'){
+
+            $('#eventMediaDisplay').append(
+				"<br>" +
+				"<div style='text-align:center;'>" +
+					"<button id='audioButton' style='text-align:center;' onclick='audioPausePlay()'>Paused</button>" +
+				"</div>" +
+				"<br>" +
+				"<div style='text-align:center;'>" +
+					"<audio id='audioID'>" +
+						"<source src='"+selected.location+"' type='audio/mpeg'>" +
+					"</audio>" +
+				"</div>"
+			);
             
         } else if(selected.contentType === 'image'){
             
@@ -217,40 +230,6 @@
         modal.style.display = "block";
     }
 </script>
-
-<!-- Audio displaying code -->
-<!--
-<div id="audioOverlay" class="mediaOverlay">
-	<br>
-	<div style="text-align:center;">
-	<button id="audioButton" style="text-align:center;" onclick="audioPausePlay()">Paused</button>
-	<br>
-	<br>
-	<button style="text-align:center;" onclick="audioOverlayOff()">Exit Audio</button>
-	</div>
-	<br>
-	<div style="text-align:center;">
-	<audio id="audioID">
-	<source src="/files/testmp3.mp3" type="audio/mpeg">
-	</audio>
-	</div>
-</div>
--->
-<!-- Image overlay code -->
-<!--
-<br>
-<div id="imageOverlay" class="mediaOverlay" onclick="imageOverlayOff()">
-	<br>
-	<div style="text-align:center;">
-		<img src="/files/testjpg.jpg"  width=500 height=500>
-	</div>
-</div>
--->
-
-<!-- Footer -->
-<!--<footer class="bg-light fixed-bottom" id="footer">
-    <script>$("#footer").load("footer.html");</script>
-</footer>-->
 </body>
 
 </html>
