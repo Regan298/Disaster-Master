@@ -225,6 +225,13 @@
 			);
             
         } else if(selected.contentType === 'image'){
+
+            $('#eventMediaDisplay').append(
+				"<br>" +
+				"<div style='text-align:center;'>" +
+					"<img src='"+selected.location+"'  width=500 height=500>" +
+				"</div>"
+			);
             
         }
         modal.style.display = "block";
