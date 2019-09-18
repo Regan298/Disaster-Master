@@ -242,7 +242,7 @@ function addMessageToEventResponse(responses, isOrigin) {
 
         if (!isOrigin) {
             if(responses[i].chosenNGOTag != null) {
-                $("#eventResponseViewerHQ").append("Chosen NGO Tag: " + responses[i].chosenNGOTag);
+                $("#eventResponseViewerHQ").append("<b>Chosen NGO Tag: " + responses[i].chosenNGOTag + "</b>");
             }
         }
 

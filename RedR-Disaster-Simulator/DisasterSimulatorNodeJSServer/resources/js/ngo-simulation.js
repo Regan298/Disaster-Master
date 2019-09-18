@@ -394,15 +394,17 @@ function addMessageToEventResponse(responseData, isorigin) {
         } else {
             valSplit = responseData[i].content.split("\n");
         }
+
+        $("#eventResponseViewerNGO").append("<p>");
         for (var j = 0; j < valSplit.length; j++) {
             $("#eventResponseViewerNGO").append(valSplit[j] + "<br>");
         }
 
         if (isorigin) {
-            $("#eventResponseViewerNGO").append("Chosen Tag: " + responseData[i].tag);
+            $("#eventResponseViewerNGO").append("<b> Chosen Tag: " + responseData[i].tag + "</b>");
         } else {
             if(responseData[i].chosenNGOTag != null) {
-                $("#eventResponseViewerNGO").append("Chosen Tag: " + responseData[i].chosenNGOTag);
+                $("#eventResponseViewerNGO").append("<b> Chosen Tag: " + responseData[i].chosenNGOTag + "</b>");
             }
         }
 

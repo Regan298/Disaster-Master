@@ -594,8 +594,6 @@ body {
     display: flex;
     width: 45%;
     position: absolute;
-    /*flex-direction: column;*/
-    flex-wrap: wrap;
 
 }
 
@@ -643,7 +641,7 @@ body {
     height: 45vh;
     max-width: 95%;
     margin-left: 2%;
-    /* margin-right: 2%; */
+    word-wrap: break-word;
     margin-top: 5%;
 }
 
@@ -718,7 +716,7 @@ body {
 }
 
 #eventViewerNGO{
-    min-width: 75%;
+    min-width: 80%;
     max-height: 60vh;
 
 }
@@ -740,6 +738,7 @@ body {
     margin-left: 2%;
     margin-right: 2%;
     margin-top: 2%;
+    word-wrap: break-word;
 }
 
 #inboxFormDivNGO{
@@ -782,9 +781,9 @@ body {
     vertical-align: top;
     float: left;
     font-size: 100%;
-    padding: 0;
-    height: 2.5vh;
+
     padding-bottom: 5%;
+    height: 2.5vh;
 }
 
 
