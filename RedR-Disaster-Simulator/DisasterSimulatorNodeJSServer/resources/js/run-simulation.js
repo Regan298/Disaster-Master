@@ -696,6 +696,8 @@ function cancelEdit(){
     modal.style.display = "none";
     timeline.setSelection([]);
     selected = null;
+    //this is here to stop audio/video events playing once the overlay is closed
+    $("#modal").empty();
 }
 
 function updateEvent(){
