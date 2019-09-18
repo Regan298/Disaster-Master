@@ -158,7 +158,8 @@ function drawTimeline() {
                     location: currentEvent.location[0],
                     start: '2019-01-' + scaledTime.getDate() + ' ' + scaledTime.getHours() + ':' + scaledTime.getMinutes() + ':' + scaledTime.getSeconds(),
                     contentType: currentEvent.type,
-                    recipient: currentEvent.recipient[0]
+                    recipient: currentEvent.recipient[0],
+                    time: currentEvent.time[0]
                 });
                 break;
             }
@@ -772,6 +773,16 @@ function setModal() {
         }
         ngoOptions += "<option "+selectedOption+" value='"+simData.ngoList[i].name+"'>"+simData.ngoList[i].name+"</option>";
     }
+    var t = selected.time.split(':');
+    var h = parseInt(t[0], 10);
+    var m = parseInt(t[1], 10);
+    var s = parseInt(t[2], 10);
+    var ms = ((h * 60 * 60 * 1000) + (m * 60 * 1000) + (s * 1000))*24;
+    var seconds = Math.floor((ms / 1000) % 60);
+    var minutes = Math.floor((ms / 1000 / 60) % 60);
+    var hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
+    var days = Math.floor((ms / (1000 * 60 * 60)) / 24);
+    console.log(days+", "+hours+':'+minutes);
 
     $("#modal").empty();
     $("#modal").append(
@@ -796,8 +807,8 @@ function setModal() {
                     "</select>" +
                 "</td>" +
                 "<td>" +
-                    "<input form='editEvent' id='overlayDay' type='number' name='day' value='3' min='1' max='5'></input>" +
-                    "<input form='editEvent' id='overlayTime' type='time' name='time' value='12:44'></input>" +
+                    "<input form='editEvent' id='overlayDay' type='number' name='day' value='"+(days+1)+"' min='1' max='"+endDate.getDate+"'></input>" +
+                    "<input form='editEvent' id='overlayTime' type='time' name='time' value='"+pad(hours, 2)+":"+pad(minutes, 2)+"'></input>" +
                 "</td>" +
                 "<td>" +
                     "<input form='editEvent' type='file' name='file' id='file' class='overlayinputfile' />" +
@@ -814,6 +825,12 @@ function setModal() {
           "<div id='eventMediaDisplay'></div>"+
           "</div></div>");
 }
+
+function pad(n, width, z) {
+    z = z || '0';
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+  }
 
 //Once Page Loaded
 $(function () {
