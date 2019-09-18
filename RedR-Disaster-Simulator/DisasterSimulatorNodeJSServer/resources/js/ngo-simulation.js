@@ -219,11 +219,21 @@ function loadNGOTitle() {
 }
 
 
+function fillInTagSelectForm() {
+    for(var i = 0; i < simData.EventTags.length; i++ ) {
+        var tag = simData.EventTags[i];
+        console.log(tag);
+        $("#TagDropDown").append("<option value='" + tag + "'>" + tag + "</option>");
+    }
+
+}
+
 function processScenarioData() {
     socket.emit('simState', "request", function (callbackData) {
         simData = callbackData.simData;
         recieveEvents();
         loadNGOTitle();
+        fillInTagSelectForm();
 
         //handleEventResponseListening();
 
@@ -375,20 +385,30 @@ function displayEvent(eventId) {
     });
 }
 
-function addMessageToEventResponse(responses, isorigin) {
+function addMessageToEventResponse(responseData, isorigin) {
 
-    for (var i = 0; i < responses.length; i++) {
+    for (var i = 0; i < responseData.length; i++) {
         var valSplit;
         if (isorigin) {
-            valSplit = responses[i].split("\n");
+            valSplit = responseData[i].text.split("\n");
         } else {
-            valSplit = responses[i].content.split("\n");
+            valSplit = responseData[i].content.split("\n");
         }
         for (var j = 0; j < valSplit.length; j++) {
             $("#eventResponseViewerNGO").append(valSplit[j] + "<br>");
         }
 
+        if (isorigin) {
+            $("#eventResponseViewerNGO").append("Chosen Tag: " + responseData[i].tag);
+        } else {
+            if(responseData[i].chosenNGOTag != null) {
+                $("#eventResponseViewerNGO").append("Chosen Tag: " + responseData[i].chosenNGOTag);
+            }
+        }
+
+
         $("#eventResponseViewerNGO").append("<hr>");
+
     }
 }
 
@@ -574,17 +594,25 @@ $(function () {
 
         e.preventDefault(); // prevents page reloading
         let content = $('#inputEmailResponseNGO').val();
+        let chosenTag = $('#TagDropDown').val();
         if(content.length <= 0){
             return;
         }
         //Function takes array by default so add turn single message into array
         var responseAsArray = [];
-        responseAsArray.push(content);
+
+        var responseData = {
+            text: content,
+            tag: chosenTag
+        };
+
+        responseAsArray.push(responseData);
         addMessageToEventResponse(responseAsArray, true);
         var response = {
             from: name,
             event: selectedEvent,
-            content: content
+            content: content,
+            chosenNGOTag: chosenTag
         };
 
         $('#inputEmailResponseNGO').val('');

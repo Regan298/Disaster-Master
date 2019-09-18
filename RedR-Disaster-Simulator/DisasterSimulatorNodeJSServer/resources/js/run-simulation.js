@@ -240,6 +240,12 @@ function addMessageToEventResponse(responses, isOrigin) {
             $("#eventResponseViewerHQ").append(valSplit[j] + "<br>");
         }
 
+        if (!isOrigin) {
+            if(responses[i].chosenNGOTag != null) {
+                $("#eventResponseViewerHQ").append("Chosen NGO Tag: " + responses[i].chosenNGOTag);
+            }
+        }
+
         $("#eventResponseViewerHQ").append("<hr>");
     }
 }

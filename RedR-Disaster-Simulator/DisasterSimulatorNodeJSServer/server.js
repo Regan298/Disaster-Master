@@ -55,7 +55,8 @@ var simData = {
     occurredEvents: [],
     library: [],
     startTimeMS: 0,
-    isRunning: false
+    isRunning: false,
+    EventTags: ['Cow', 'cat', 'chicken']
 };
 
 var currentRunningInstance;
@@ -350,7 +351,8 @@ function processZip(req, res, type) {
                                                 location: currentEventLocation,
                                                 subject: currentEventSubject,
                                                 responses: [],
-                                                latestUpdateTime: 0
+                                                latestUpdateTime: 0,
+                                                ChosenNGOTag: "Not Chosen"
                                             };
                                             simData.eventsList.push(event);
                                         }
@@ -594,11 +596,15 @@ io.on('connection', function (socket) {
             var responseTime = new Date().getTime();
             for (var i = 0; i < simData.eventsList.length; i++) {
                 if (simData.eventsList[i].id === eventID) {
+
                     simData.eventsList[i].responses.push({
                         content: msg.response.content,
                         sender: msg.response.from,
-                        time: responseTime
+                        time: responseTime,
+                        chosenNGOTag: msg.response.chosenNGOTag
                     });
+                    simData.eventsList[i].ChosenNGOTag = msg.response.chosenNGOTag;
+                    console.log(simData.eventsList[i]);
                     worker.postMessage(simData);
                 }
             }
