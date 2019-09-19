@@ -12,9 +12,9 @@ var startDuration;
 var firstTimeReccieve = true;
 var eventDisplayCounter = 0;
 var eventResponseList = [];
-document.documentElement.style.height="1500px";
+document.documentElement.style.height = "1500px";
 
-window.onbeforeunload = function() {
+window.onbeforeunload = function () {
     //return "Generic Message (Browsers Prevent Custom Message For Security Purposes)";
 };
 
@@ -109,7 +109,7 @@ function handleCommunicationButtonsAndMessages(callback) {
 
 
 function displayRemainingTime(timerElement, timeRemaining) {
-    if(timeRemaining == 0){
+    if (timeRemaining == 0) {
         timerElement.innerHTML = "Simulation Not Running"
     } else {
         var seconds = Math.floor((timeRemaining / 1000) % 60);
@@ -220,9 +220,9 @@ function loadNGOTitle() {
 
 
 function fillInTagSelectForm() {
-    for(var i = 0; i < simData.EventTags.length; i++ ) {
+    console.log(simData);
+    for (var i = 0; i < simData.EventTags.length; i++) {
         var tag = simData.EventTags[i];
-        console.log(tag);
         $("#TagDropDown").append("<option value='" + tag + "'>" + tag + "</option>");
     }
 
@@ -267,6 +267,26 @@ function displayPDFOff() {
     document.getElementById("pdfOverlay").style.display = "none";
 }
 
+function displayVideoOff() {
+    var videoOverlay = document.getElementById("videoPlayer");
+    videoOverlay.parentNode.removeChild(videoOverlay);
+    document.getElementById("videoOverlay").style.display = "none";
+}
+
+function displayAudioOff() {
+    var audioOverlay = document.getElementById("audioPlayer");
+    audioOverlay.parentNode.removeChild(audioOverlay);
+    document.getElementById("audioOverlay").style.display = "none";
+}
+
+
+function displayImageOff() {
+    var imageOverlay = document.getElementById("imageDisplay");
+    imageOverlay.parentNode.removeChild(imageOverlay);
+    document.getElementById("imageOverlay").style.display = "none";
+}
+
+
 function displayEventMedia(type, name) {
 
     //pdf
@@ -282,65 +302,25 @@ function displayEventMedia(type, name) {
     document.getElementById("videoOverlay").style.display = "none";
 
     if (type == "video") {
+        $("#videoOverlay").append("<div style='text-align:center;'><video id='videoPlayer' style='text-align:center; margin-top: 5%' controls>\n" +
+            "        <source src=' " + name + " ' type='video/mp4'>\n" +
+            "    </video></div>");
         document.getElementById("videoOverlay").style.display = "block";
     } else if (type == "pdf") {
         PDFObject.embed(name, "#pdfOverlay");
         document.getElementById("pdfOverlay").style.display = "block";
     } else if (type == "audio") {
+        $("#audioOverlay").append("<div style='text-align:center;'><audio id='audioPlayer' style='text-align:center; margin-top: 5%' controls>\n" +
+            "            <source src=' " + name + "'type='audio/mpeg'>\n" +
+            "            Your browser does not support the audio element.\n" +
+            "        </audio></div>");
         document.getElementById("audioOverlay").style.display = "block";
     } else if (type == "image") {
+        $("#imageOverlay").append("<div id='imageDisplay' style='text-align:center;'><img  style='margin-top: 5%' height='500px' width='500px' src= '" + name + "'></div>");
         document.getElementById("imageOverlay").style.display = "block";
     }
 }
 
-
-function videoPausePlay() {
-    var video = document.getElementById("videoID");
-    if (video.paused) {
-        video.play();
-    } else {
-        video.pause();
-    }
-}
-
-function videoOverlayOff() {
-    var video = document.getElementById("videoID");
-    video.pause();
-    document.getElementById("videoOverlay").style.display = "none";
-}
-
-
-function audioPausePlay() {
-    var audio = document.getElementById("audioID");
-    var audioButton = document.getElementById("audioButton");
-    if (audio.paused) {
-        audio.play();
-        audioButton.innerHTML = "Playing";
-    } else {
-        audio.pause();
-        audioButton.innerHTML = "Paused";
-    }
-}
-
-function audioOverlayOff() {
-    var audio = document.getElementById("audioID");
-    audio.pause();
-    document.getElementById("audioOverlay").style.display = "none";
-}
-
-function imageOverlayOff() {
-    document.getElementById("imageOverlay").style.display = "none";
-}
-
-/*
-function handleEventResponseListening() {
-    socket.on('ngoEventResponseRecieving', function (received) {
-        received.eventForSending.timeRecieved = new Date().getTime();
-        eventResponseList.push(received.eventForSending);
-        console.log(received.eventForSending);
-    });
-}
-*/
 
 function displayEvent(eventId) {
     console.log(eventId);
@@ -403,7 +383,7 @@ function addMessageToEventResponse(responseData, isorigin) {
         if (isorigin) {
             $("#eventResponseViewerNGO").append("<b> Chosen Tag: " + responseData[i].tag + "</b>");
         } else {
-            if(responseData[i].chosenNGOTag != null) {
+            if (responseData[i].chosenNGOTag != null) {
                 $("#eventResponseViewerNGO").append("<b> Chosen Tag: " + responseData[i].chosenNGOTag + "</b>");
             }
         }
@@ -473,7 +453,6 @@ function recieveEvents() {
                 if (to.toString().trim() === name) {
 
                     //loop through all of the response data correctly
-
 
 
                     for (var j = 0; j < currentEvent.responses.length; j++) {
@@ -572,7 +551,7 @@ $(function () {
         e.preventDefault(); // prevents page reloading
         var content = $('#input').val();
 
-        if(content.length <= 0){
+        if (content.length <= 0) {
             return;
         }
 
@@ -597,7 +576,7 @@ $(function () {
         e.preventDefault(); // prevents page reloading
         let content = $('#inputEmailResponseNGO').val();
         let chosenTag = $('#TagDropDown').val();
-        if(content.length <= 0){
+        if (content.length <= 0) {
             return;
         }
         //Function takes array by default so add turn single message into array

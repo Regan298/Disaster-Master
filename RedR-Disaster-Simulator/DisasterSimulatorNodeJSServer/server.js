@@ -20,12 +20,12 @@ var path = require('path');
 var zipFolder = require('zip-folder');
 var extract = require('extract-zip');
 var rimraf = require("rimraf");
+var zip = require('cross-zip')
 
 var worker; //auto events worker
 var productionMode = false;
 const port = process.env.PORT || 80;
 
-var zip = require('cross-zip')
 
 
 module.exports = app;
@@ -236,7 +236,8 @@ function clearSimData() {
         occurredEvents: [],
         library: [],
         startTimeMS: 0,
-        isRunning: false
+        isRunning: false,
+        EventTags: ['Cow', 'cat', 'chicken']
     };
     connectedUsers = [];
     connectedUsers.push(host);
@@ -633,6 +634,12 @@ io.on('connection', function (socket) {
                 worker = new Worker('./autoevents.js', {workerData: data});
                 currentRunningInstance = runSim();
                 simData.started = true;
+
+
+                for(var i = 0; i < simData.eventsList; i++){
+                    console.log(simData.eventsList[i]);
+                }
+
             } else {
                 worker.postMessage('play');
             }
