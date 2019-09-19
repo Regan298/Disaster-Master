@@ -333,7 +333,7 @@ body {
     margin-top: 2.5%;
     max-width: 45%;
     min-width: 45%;
-    /*padding-right: 10%;*/
+    /* padding-right: 10%; */
 }
 
 .inboxTitle {
@@ -356,6 +356,7 @@ body {
     display: flex;
     width: 45%;
     /*position: relative;*/
+    margin-left: 2%;
 }
 
 
@@ -363,7 +364,7 @@ body {
 
 .messagingButtonsHQ {
     max-height: 100%;
-    max-width: 25%;
+    width: 20%;
     align-self: stretch;
     border-right: solid;
     border-width: 1px;
@@ -489,7 +490,7 @@ body {
 
 .messagingButtonsNGO {
     max-height: 100%;
-    max-width: 25%;
+    width: 20%;
     align-self: stretch;
     border-right: solid;
     border-width: 1px;
@@ -594,7 +595,6 @@ body {
     display: flex;
     width: 45%;
     position: absolute;
-
 }
 
 .inboxElementHQ h1 {
