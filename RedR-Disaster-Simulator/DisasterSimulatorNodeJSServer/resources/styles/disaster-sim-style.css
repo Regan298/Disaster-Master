@@ -378,6 +378,7 @@ body {
 .messagingButtonsHQ {
     max-height: 100%;
     min-width: 20%;
+    max-width: 20%;
     align-self: stretch;
     border-right: solid;
     border-width: 1px;
@@ -505,6 +506,7 @@ body {
 .messagingButtonsNGO {
     max-height: 100%;
     min-width: 20%;
+    max-width: 20%;
     align-self: stretch;
     border-right: solid;
     border-width: 1px;
