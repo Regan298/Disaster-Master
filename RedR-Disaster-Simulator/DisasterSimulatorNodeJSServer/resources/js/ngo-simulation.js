@@ -12,6 +12,7 @@ var startDuration;
 var firstTimeReccieve = true;
 var eventDisplayCounter = 0;
 var eventResponseList = [];
+var currentHour;
 document.documentElement.style.height = "1500px";
 
 window.onbeforeunload = function () {
@@ -522,10 +523,11 @@ function recieveCurrentTime() {
         var timerElement = document.getElementById("simTime");
         displayRemainingTime(timerElement, simulationDuration);
 
-        time = 3600000;
+        time = 3600000*4;
 
         //On every hour do status report skrrt skrrt
         if(time % 3600000 === 0){
+            currentHour = time / 3600000;
             statusReportInitialise();
         }
     });
@@ -619,9 +621,13 @@ $(function () {
         e.preventDefault();
         document.getElementById("statusOverlay").style.display='none';
         var status = $('input[name="status"]:checked').val();
+        var ngoStatusReport = {
+            hour: currentHour,
+            name: name,
+            status: status
+        };
 
-        console.log(status);
-
+        socket.emit('ngoStatusReport', {ngoStatusReport});
 
     });
 
