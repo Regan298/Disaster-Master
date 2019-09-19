@@ -129,7 +129,7 @@ function switchNGOChat(ngo) {
         for (var i = 0; i < buttons.length; i++) {
             buttons[i].style.backgroundColor = "#b5b5b5";
         }
-        document.getElementById(ngo).style.backgroundColor = "#EE2A2B";
+        document.getElementById(ngo).style.backgroundColor = "var(--main-color)";
         selectedNGOChat = ngo;
     }
     // Hide all elements with class="messaging content" by default */
@@ -506,6 +506,12 @@ function eventComparator(e1, e2) {
     return 0;
 }
 
+function statusReportInitialise() {
+    console.log("dostatus");
+    document.getElementById("statusOverlay").style.display='block';
+
+}
+
 function recieveCurrentTime() {
     socket.on('currentTime', function (time) {
         if (firstTimeReccieve) {
@@ -515,6 +521,13 @@ function recieveCurrentTime() {
         simulationDuration = time;
         var timerElement = document.getElementById("simTime");
         displayRemainingTime(timerElement, simulationDuration);
+
+        time = 3600000;
+
+        //On every hour do status report skrrt skrrt
+        if(time % 3600000 === 0){
+            statusReportInitialise();
+        }
     });
 }
 
@@ -598,6 +611,17 @@ $(function () {
 
         $('#inputEmailResponseNGO').val('');
         socket.emit('newEventResponse', {response});
+
+    });
+
+
+    $('#ngoStatusForm').submit(function (e){
+        e.preventDefault();
+        document.getElementById("statusOverlay").style.display='none';
+        var status = $('input[name="status"]:checked').val();
+
+        console.log(status);
+
 
     });
 

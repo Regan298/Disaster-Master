@@ -1,68 +1,42 @@
 <?xml version="1.0"?>
 <scenario>
-  <name>Video Test</name>
-  <ngoCount>1</ngoCount>
-  <duration>3600000</duration>
+  <name>Test</name>
+  <ngoCount>2</ngoCount>
+  <duration>1800000</duration>
   <hoursInDay>1</hoursInDay>
   <mode>false</mode>
   <ngo>
     <name>Lachlan</name>
     <passkey>1</passkey>
   </ngo>
-  <event>
-    <recipient>Lachlan</recipient>
-    <subject>h</subject>
-    <time>00:00:10</time>
-    <type>video</type>
-    <location>/currentScenario/files/SampleVideo_1280x720_30mb.mp4</location>
-  </event>
+  <ngo>
+    <name> Lachlan Keene</name>
+    <passkey>2</passkey>
+  </ngo>
   <event>
     <recipient>Lachlan</recipient>
     <subject>jkljl</subject>
-    <time>00:00:20</time>
+    <time>00:00:10</time>
     <type>pdf</type>
     <location>/currentScenario/files/ramanlvish-2.pdf</location>
   </event>
   <event>
     <recipient>Lachlan</recipient>
-    <subject>fdgfdg</subject>
-    <time>00:00:25</time>
+    <subject>ausio</subject>
+    <time>00:00:20</time>
     <type>audio</type>
     <location>/currentScenario/files/TracyChapman-Fastcar.mp3</location>
   </event>
   <event>
     <recipient>Lachlan</recipient>
-    <subject>img</subject>
-    <time>00:00:30</time>
+    <subject>image</subject>
+    <time>00:00:20</time>
     <type>image</type>
     <location>/currentScenario/files/placeholder_logo.png</location>
   </event>
-  <event>
-    <recipient>Lachlan</recipient>
-    <subject>pdf2</subject>
-    <time>00:00:40</time>
+  <library>
+    <subject>temp</subject>
     <type>pdf</type>
-    <location>/currentScenario/files/ramanlvish-2.pdf</location>
-  </event>
-  <event>
-    <recipient>Lachlan</recipient>
-    <subject>video2</subject>
-    <time>00:01:00</time>
-    <type>video</type>
-    <location>/currentScenario/files/SampleVideo_1280x720_30mb.mp4</location>
-  </event>
-  <event>
-    <recipient>Lachlan</recipient>
-    <subject>audio2</subject>
-    <time>00:01:10</time>
-    <type>audio</type>
-    <location>/currentScenario/files/pEMDZvQuuCsg.128.mp3</location>
-  </event>
-  <event>
-    <recipient>Lachlan</recipient>
-    <subject>img2</subject>
-    <time>00:01:20</time>
-    <type>image</type>
-    <location>/currentScenario/files/IMG_20170917_212118.jpg</location>
-  </event>
+    <location>/currentScenario/files/library/ramanlvish-2.pdf</location>
+  </library>
 </scenario>
