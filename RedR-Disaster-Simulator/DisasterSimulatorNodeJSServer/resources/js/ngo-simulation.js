@@ -523,11 +523,12 @@ function recieveCurrentTime() {
         var timerElement = document.getElementById("simTime");
         displayRemainingTime(timerElement, simulationDuration);
 
-        time = 3600000*4;
+        var currentTimeElapsed = simData.durationMs-time;
 
         //On every hour do status report skrrt skrrt
-        if(time % 3600000 === 0){
-            currentHour = time / 3600000;
+        if(currentTimeElapsed % 3600000 === 0){
+            //console.log(time);
+            currentHour = currentTimeElapsed / 3600000;
             statusReportInitialise();
         }
     });
