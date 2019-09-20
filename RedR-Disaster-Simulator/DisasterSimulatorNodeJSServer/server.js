@@ -262,9 +262,9 @@ function processZip(req, res, type) {
                 return res.status(400).send("Simulation Currently Already Running Please End Your Current Simulation and" +
                     " Go Back And Try Again");
             }
-            if (simData.loaded) {
+            //if (simData.loaded) {
                 clearSimData();
-            }
+            //}
             //Move file into working dir
             let simFileTemp = req.files.simFile;
             simFileTemp.mv(__dirname + '/' + simFileTemp.name, function (err) {

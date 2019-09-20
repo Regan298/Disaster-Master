@@ -1,42 +1,19 @@
 <?xml version="1.0"?>
 <scenario>
-  <name>Test</name>
-  <ngoCount>2</ngoCount>
-  <duration>1800000</duration>
+  <name>l</name>
+  <ngoCount>1</ngoCount>
+  <duration>3600000</duration>
   <hoursInDay>1</hoursInDay>
-  <mode>false</mode>
+  <mode>true</mode>
   <ngo>
     <name>Lachlan</name>
     <passkey>1</passkey>
   </ngo>
-  <ngo>
-    <name> Lachlan Keene</name>
-    <passkey>2</passkey>
-  </ngo>
   <event>
     <recipient>Lachlan</recipient>
-    <subject>jkljl</subject>
-    <time>00:00:10</time>
-    <type>pdf</type>
-    <location>/currentScenario/files/ramanlvish-2.pdf</location>
-  </event>
-  <event>
-    <recipient>Lachlan</recipient>
-    <subject>ausio</subject>
+    <subject>1</subject>
     <time>00:00:20</time>
-    <type>audio</type>
-    <location>/currentScenario/files/TracyChapman-Fastcar.mp3</location>
-  </event>
-  <event>
-    <recipient>Lachlan</recipient>
-    <subject>image</subject>
-    <time>00:00:20</time>
-    <type>image</type>
-    <location>/currentScenario/files/placeholder_logo.png</location>
-  </event>
-  <library>
-    <subject>temp</subject>
     <type>pdf</type>
-    <location>/currentScenario/files/library/ramanlvish-2.pdf</location>
-  </library>
+    <location>/currentScenario/files/1984.pdf</location>
+  </event>
 </scenario>
