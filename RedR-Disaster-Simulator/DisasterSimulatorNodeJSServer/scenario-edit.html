@@ -24,6 +24,12 @@
     <script src="js/vis-4.21.0/dist/vis.js"></script>
     <link href="js/vis-4.21.0/dist/vis.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="js/timelineComponents.js"></script>
+    <script>
+      // Warning before leaving the page (back button, or outgoinglink)
+      window.onbeforeunload = function() {
+         return "Are you sure you want to leave?\nIf you have any unsaved changes they will be lost";
+      };
+      </script>
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light static-top "id="header">

@@ -41,6 +41,7 @@ deploytesting:
   - overlayMultimediaIntegration
   - quick-mocha-pipeline-test
   - Tags-Implementation
+  - scenario-creation
 
 
 
