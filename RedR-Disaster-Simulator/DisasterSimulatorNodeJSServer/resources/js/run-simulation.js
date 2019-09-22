@@ -240,6 +240,12 @@ function addMessageToEventResponse(responses, isOrigin) {
             $("#eventResponseViewerHQ").append(valSplit[j] + "<br>");
         }
 
+        if (!isOrigin) {
+            if(responses[i].chosenNGOTag != null) {
+                $("#eventResponseViewerHQ").append("<b>Chosen NGO Tag: " + responses[i].chosenNGOTag + "</b>");
+            }
+        }
+
         $("#eventResponseViewerHQ").append("<hr>");
     }
 }
@@ -588,63 +594,58 @@ function displayPDFOff() {
     document.getElementById("pdfOverlay").style.display = "none";
 }
 
+function displayVideoOff() {
+    var videoOverlay = document.getElementById("videoPlayer");
+    videoOverlay.parentNode.removeChild(videoOverlay);
+    document.getElementById("videoOverlay").style.display = "none";
+}
+
+function displayAudioOff() {
+    var audioOverlay = document.getElementById("audioPlayer");
+    audioOverlay.parentNode.removeChild(audioOverlay);
+    document.getElementById("audioOverlay").style.display = "none";
+}
+
+
+function displayImageOff() {
+    var imageOverlay = document.getElementById("imageDisplay");
+    imageOverlay.parentNode.removeChild(imageOverlay);
+    document.getElementById("imageOverlay").style.display = "none";
+}
+
+
 function displayEventMedia(type, name) {
-    console.log(type);
+
+    //pdf
+    //image
+    //audio
+    //video
+
+    console.log(name);
+
     document.getElementById("pdfOverlay").style.display = "none";
     document.getElementById("audioOverlay").style.display = "none";
     document.getElementById("imageOverlay").style.display = "none";
     document.getElementById("videoOverlay").style.display = "none";
-    if (type == "mp4") {
+
+    if (type == "video") {
+        $("#videoOverlay").append("<div style='text-align:center;'><video id='videoPlayer' style='text-align:center; margin-top: 5%' controls>\n" +
+            "        <source src=' " + name + " ' type='video/mp4'>\n" +
+            "    </video></div>");
         document.getElementById("videoOverlay").style.display = "block";
     } else if (type == "pdf") {
-        console.log(name);
         PDFObject.embed(name, "#pdfOverlay");
         document.getElementById("pdfOverlay").style.display = "block";
-    } else if (type == "mp3") {
+    } else if (type == "audio") {
+        $("#audioOverlay").append("<div style='text-align:center;'><audio id='audioPlayer' style='text-align:center; margin-top: 5%' controls>\n" +
+            "            <source src=' " + name + "'type='audio/mpeg'>\n" +
+            "            Your browser does not support the audio element.\n" +
+            "        </audio></div>");
         document.getElementById("audioOverlay").style.display = "block";
-    } else if (type == "jpg") {
+    } else if (type == "image") {
+        $("#imageOverlay").append("<div id='imageDisplay' style='text-align:center;'><img  style='margin-top: 5%' height='500px' width='500px' src= '" + name + "'></div>");
         document.getElementById("imageOverlay").style.display = "block";
     }
-}
-
-function videoPausePlay() {
-    var video = document.getElementById("videoID");
-    if (video.paused) {
-        video.play();
-    } else {
-        video.pause();
-    }
-}
-
-
-function videoOverlayOff() {
-    var video = document.getElementById("videoID");
-    video.pause();
-    document.getElementById("videoOverlay").style.display = "none";
-}
-
-
-function audioPausePlay() {
-    var audio = document.getElementById("audioID");
-    var audioButton = document.getElementById("audioButton");
-    if (audio.paused) {
-        audio.play();
-        audioButton.innerHTML = "Playing";
-    } else {
-        audio.pause();
-        audioButton.innerHTML = "Paused";
-    }
-}
-
-function audioOverlayOff() {
-    var audio = document.getElementById("audioID");
-    audio.pause();
-    document.getElementById("audioOverlay").style.display = "none";
-}
-
-//
-function imageOverlayOff() {
-    document.getElementById("imageOverlay").style.display = "none";
 }
 
 
@@ -700,10 +701,6 @@ $(function () {
     handleTimeSwitcher();
     switchNGOChat();
     handleNewMessages();
-
-
-
-
     //Handle Messages
 
     $("#hqSendToNGO").click(function(e) {
