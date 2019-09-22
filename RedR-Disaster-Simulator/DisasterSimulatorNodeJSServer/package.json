@@ -25,16 +25,22 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "jest": ">=24.9.0",
-    "should": "^7.0.2"
+    "chai-http": "^4.3.0",
+    "should": "^7.0.2",
+    "mocha": "^6.2.0",
+    "start-server-and-test": ">=1.10.2",
+    "nyc": "^14.1.1"
   },
   "engines": {
     "node": "12.3.1",
     "npm": "6.9.0"
   },
   "scripts": {
-    "start": "node server.js",
-    "test": "npm run jest",
-    "jest": "NODE_ENV=test jest --coverage test/intergrationTests.test.js"
+    "start-server": "npm start",
+    "test": "nyc mocha"
+  },
+
+  "mocha": {
+    "spec": "Tests/"
   }
 }

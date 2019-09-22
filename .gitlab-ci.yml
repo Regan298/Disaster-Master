@@ -1,7 +1,5 @@
 image: node:latest
 
-
-
 stages:
   - Test
   - Deploy
@@ -22,6 +20,8 @@ testing_testing:
   script:
     - npm test
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
+
+  
     
 deploytesting:
   type: deploy
@@ -39,6 +39,8 @@ deploytesting:
   - heroku-bug-fixes
   - lachlan-features-part3
   - overlayMultimediaIntegration
+  - quick-mocha-pipeline-test
+  - Tags-Implementation
 
 
 

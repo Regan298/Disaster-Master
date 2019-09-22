@@ -30,7 +30,7 @@
     <!--Colour Changer-->
     <script>
         $("#header").load("ngoHeader.html", function (response,
-                                                   status, http) {
+                                                      status, http) {
             document.getElementById("colourChooser").setAttribute("value", document.cookie);
         });
         document.documentElement.style.setProperty("--main-color", document.cookie);
@@ -69,13 +69,12 @@
                 <div id="messagingButtonsNGO" class='messagingButtonsNGO'>
                     <!--NGO0 Kinda dumb but reserved for hq-->
                     <button class="btn btn-secondary" id="ngo0">userPlaceholder</button>
-                    <button class="btn btn-secondary"  id="ngo1">userPlaceholder</button>
-                    <button class="btn btn-secondary"  id="ngo2">userPlaceholder</button>
-                    <button class="btn btn-secondary"  id="ngo3">userPlaceholder</button>
-                    <button class="btn btn-secondary"  id="ngo4">userPlaceholder</button>
-                    <button class="btn btn-secondary"  id="ngo5">userPlaceholder</button>
-                    <button class="btn btn-secondary"  id="ngo6">userPlaceholder</button>
-
+                    <button class="btn btn-secondary" id="ngo1">userPlaceholder</button>
+                    <button class="btn btn-secondary" id="ngo2">userPlaceholder</button>
+                    <button class="btn btn-secondary" id="ngo3">userPlaceholder</button>
+                    <button class="btn btn-secondary" id="ngo4">userPlaceholder</button>
+                    <button class="btn btn-secondary" id="ngo5">userPlaceholder</button>
+                    <button class="btn btn-secondary" id="ngo6">userPlaceholder</button>
 
 
                 </div>
@@ -126,20 +125,35 @@
                 <div id="inboxFormDivNGO">
                     <form action="" id="inboxNGOForm">
                         <textarea form="inboxNGOForm" id="inputEmailResponseNGO"></textarea>
+                        <select id="TagDropDown" form="inboxNGOForm">
+                            <option selected disabled>Choose A Tag</option>
+                        </select>
                         <input type="submit" value="Send" class="button"/>
                     </form>
                 </div>
 
 
-
-                </div>
-
             </div>
 
-
         </div>
+
+
     </div>
 </div>
+
+<div id="statusOverlay" class="eventOverlay">
+
+    <div id="ngoFormDiv">
+    <form action="" id="ngoStatusForm">
+        <p id="ngoStatusText">Please Let Your HQ Know How You Think Your Going:</p>
+        <input class="ngoStatusRadio" type="radio" name="status" value="Poor"> Poor<br>
+        <input class="ngoStatusRadio"  type="radio" name="status" value="OK"> OK<br>
+        <input class="ngoStatusRadio" type="radio" name="status" value="Great"> Great<br>
+        <br>
+        <input id="ngoStatusSubmit" type="submit" value="Submit">
+    </form>
+    </div>
+
 </div>
 
 <!--PDF Displayer-->
@@ -147,49 +161,16 @@
 </div>
 
 
-<div id="videoOverlay" class="mediaOverlay" >
-    <br>
-    <div style="text-align:center;">
-        <button style="text-align:center;" onclick="videoOverlayOff()">Exit Video</button>
-    </div>
-    <div style="text-align:center;">
-        <video id="videoID" style="text-align:center;" width="500" height="500">
-            <source src="/files/testmp4.mp4" type="video/mp4">
-        </video>
-    </div>
-    <div style="text-align:center;">
-        <button style="text-align:center;" onclick="videoPausePlay()">Play/Pause</button>
-    </div>
+<!-- Video displaying code -->
+<div id="videoOverlay" class="mediaOverlay" onclick="displayVideoOff()">
 </div>
 
 <!-- Audio displaying code -->
-
-<div id="audioOverlay" class="mediaOverlay" >
-    <br>
-    <div style="text-align:center;">
-        <button id="audioButton"style="text-align:center;" onclick="audioPausePlay()">Paused</button>
-        <br>
-        <br>
-        <button style="text-align:center;" onclick="audioOverlayOff()">Exit Audio</button>
-    </div>
-    <br>
-    <div style="text-align:center;">
-        <audio id="audioID">
-            <source src="/files/testmp3.mp3" type="audio/mpeg">
-        </audio>
-    </div>
-
+<div id="audioOverlay" class="mediaOverlay" onclick="displayAudioOff()">
 </div>
 
-
 <!-- Image overlay code -->
-
-<br>
-<div id="imageOverlay" class="mediaOverlay"  onclick="imageOverlayOff()">
-    <br>
-    <div style="text-align:center;">
-        <img src="/files/testjpg.jpg" width=500 height=500>
-    </div>
+<div id="imageOverlay" class="mediaOverlay" onclick="displayImageOff()">
 </div>
 
 <!-- Footer -->
