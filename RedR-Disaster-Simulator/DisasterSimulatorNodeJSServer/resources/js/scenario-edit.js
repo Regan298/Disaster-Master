@@ -266,10 +266,7 @@ function editEvent(eventNum){
 function addEvent() {
     let frmData = document.getElementById("addForm");
     let file = frmData.elements[6].files[0];
-    if(file){
-        uploadFiles(file, 'event');
-        data.eventsList[eventNum].location = '/currentScenario/files/'+file.name;
-    }
+    uploadFiles(file, 'event');
 
     var hrs = frmData.elements[2].value;
     var mins = frmData.elements[3].value;
@@ -285,12 +282,12 @@ function addEvent() {
     let newEvent = {
         recipient: frmData.elements[0].value,
         subject: frmData.elements[1].value,
-        time: hrs+":"+mins+":"+secs,
+        time: [hrs+":"+mins+":"+secs],
         type: frmData.elements[5].value,
         location: '/currentScenario/files/'+file.name.replace(/ /g, "_")
     };
-    console.log(newEvent.time);
     data.eventsList.push(newEvent);
+    console.log(newEvent.time);
 
     drawEvents(data.eventsList);
 }
@@ -300,7 +297,7 @@ function updateEvent(eventNum){
     let file = frmData.elements[6].files[0];
     if(file){
         uploadFiles(file, 'event');
-        data.eventsList[eventNum].location = '/currentScenario/files/'+file.name;
+        data.eventsList[eventNum].location = '/currentScenario/files/'+file.name.replace(/ /g, "_");
     }
 
     var hrs = frmData.elements[2].value;
@@ -316,10 +313,9 @@ function updateEvent(eventNum){
 
     data.eventsList[eventNum].recipient = frmData.elements[0].value;
     data.eventsList[eventNum].subject = frmData.elements[1].value;
-    data.eventsList[eventNum].time = hrs+":"+mins+":"+secs;
-    console.log(data.eventsList[eventNum].time);
+    data.eventsList[eventNum].time = [hrs+":"+mins+":"+secs];
     data.eventsList[eventNum].type = frmData.elements[5].value;
-    data.eventsList[eventNum].location = '/currentScenario/files/'+file.name.replace(/ /g, "_");
+    console.log(data.eventsList[eventNum].time);
 
     drawEvents(data.eventsList);
 }
