@@ -256,6 +256,23 @@ body {
     background-color: #5cb85c;
     color: white;
 }
+
+.row {
+    display: flex;
+}
+.column1 {
+    flex: 50%;
+}
+.column2 {
+    flex: 50%;
+}
+ul.libraryList {
+    height: 400px;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
 /* overlay file input style*/
 .overlayinputfile {
     width: 0.1px;

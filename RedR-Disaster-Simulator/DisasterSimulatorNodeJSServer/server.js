@@ -21,7 +21,7 @@ var zipFolder = require('zip-folder');
 var extract = require('extract-zip');
 var rimraf = require("rimraf");
 
-worker = new Worker('./autoevents.js'); //autoevents worker
+const worker = new Worker('./autoevents.js'); //autoevents worker
 var productionMode = false;
 const port = process.env.PORT || 80;
 

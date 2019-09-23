@@ -762,6 +762,56 @@ function uploadFiles(file, request) {
     xhr.send(formData);
 }
 
+function useLibraryItem(libNum){
+    addPopup(simData.library[libNum].subject, simData.library[libNum].location)
+}
+
+function addPopup(subject, fileLocation){
+    var libraryItems = '';
+    for(var i=0; i<simData.library.length; i++){
+        libraryItems += "<li>"+simData.library[i].subject+"<button onclick='useLibraryItem("+i+")'>Select</button></li>"
+    }
+
+    var ngoOptions = '';
+    for(var i=0; i < simData.ngoList.length; i++){
+        ngoOptions += "<option value='"+simData.ngoList[i].name+"'>"+simData.ngoList[i].name+"</option>";
+    }
+    $("#modal").empty();
+    $("#modal").append(
+        "<div class='eventOverlayContent'>" +
+        "<div id='overlayHeader'>" +
+        "<button class='close' type='button' onclick=cancelEdit()><span>&times;</span></button>"+
+        // "<span class='close'>&times;</span>" +
+        "<form id='addEvent' enctype='multipart/form-data'></form>" +
+        "<h3>Add Event</h3><br>" +
+        "<div class='row'>"+
+            "<div class='column1'>" +
+                "<h4>Event Details:</h4><br>" +
+                "<h5>Event Name</h5>" +
+                "<input form='editEvent' id='overlayName' type='text' name='subject' value='"+subject+"'></input></td>" +
+                "<h5>Recipient</h5>" +
+                "<select form='editEvent' id='overlayRecipiants'>" +
+                    "<option hidden disabled selected value> --select NGO-- </option>" +
+                    ngoOptions +
+                "</select>" +
+                "<h5>Day</h5>" +
+                "<input form='editEvent' id='overlayDay' type='number' name='day' min='1' max='"+endDate.getDate()+"'></input>" +
+                "<input form='editEvent' id='overlayTime' type='time' name='time'></input>" +
+                "<h5>Event Content</h5>" +
+                "<input form='editEvent' type='file' name='file' id='file' class='overlayinputfile' />" +
+                "<label for='file' >File Selector</label><br>" +
+                "<button form='addEvent' type='button' onclick=addEvent("+fileLocation+")>Submit</button>" +
+            "</div>" +
+            "<div class='column2'>" +
+                "<h4>Library:</h4><br>" +
+                "<ul class='libraryList'>" +
+                    libraryItems +
+                "</ul>" +
+            "</div>" +
+        "</div>");
+    document.getElementById("modal").style.display = "block";
+}
+
 function setModal() {
     var ngoOptions = '';
     var selectedOption = '';
@@ -807,7 +857,7 @@ function setModal() {
                     "</select>" +
                 "</td>" +
                 "<td>" +
-                    "<input form='editEvent' id='overlayDay' type='number' name='day' value='"+(days+1)+"' min='1' max='"+endDate.getDate+"'></input>" +
+                    "<input form='editEvent' id='overlayDay' type='number' name='day' value='"+(days+1)+"' min='1' max='"+endDate.getDate()+"'></input>" +
                     "<input form='editEvent' id='overlayTime' type='time' name='time' value='"+pad(hours, 2)+":"+pad(minutes, 2)+"'></input>" +
                 "</td>" +
                 "<td>" +

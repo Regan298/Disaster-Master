@@ -4,7 +4,7 @@
   <ngoCount>6</ngoCount>
   <duration>19800000</duration>
   <hoursInDay>1</hoursInDay>
-  <mode>true</mode>
+  <mode>false</mode>
   <ngo>
     <name>People First</name>
     <passkey>ngo1</passkey>
@@ -152,5 +152,85 @@
     <subject>Test</subject>
     <type>pdf</type>
     <location>/currentScenario/files/library/test.pdf</location>
+  </library>
+  <library>
+    <subject>blah</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/A5_buurmatom_marked.pdf</location>
+  </library>
+  <library>
+    <subject>beanz</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/comp309-a3.pdf</location>
+  </library>
+  <library>
+    <subject>sdn</subject>
+    <type>image</type>
+    <location>/currentScenario/files/library/20190905_232941.jpg</location>
+  </library>
+  <library>
+    <subject>ngfklad</subject>
+    <type>video</type>
+    <location>/currentScenario/files/library/COMP309_Thurs_on_8_1_2019_(Thu)_default_26d6f226.mp4</location>
+  </library>
+  <library>
+    <subject>uvjbm</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/feedback (1).pdf</location>
+  </library>
+  <library>
+    <subject>pjiobhj h</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/A3_buurmatom.marked.pdf</location>
+  </library>
+  <library>
+    <subject>pokfepko</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/feedback.pdf</location>
+  </library>
+  <library>
+    <subject>o;iblhuk</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/ENGR301-Requirements-team_16-Feedback (1).pdf</location>
+  </library>
+  <library>
+    <subject>puoi</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/Using_your_own_vehicle_for_your_business (1).pdf</location>
+  </library>
+  <library>
+    <subject>ycufg</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/ENGR301-IP_Agreement-buurmatom.pdf</location>
+  </library>
+  <library>
+    <subject>lur</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/xanpan.pdf</location>
+  </library>
+  <library>
+    <subject>ilybgvukjh</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/hfe_yamaha_ns-6900_7900_c7900_e7900_flyer_en.pdf</location>
+  </library>
+  <library>
+    <subject>louiy</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/2018_1_COMP307 (2).pdf</location>
+  </library>
+  <library>
+    <subject>uxetdcfg</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/305902194.pdf</location>
+  </library>
+  <library>
+    <subject>bkhjvgcfxd</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/Kathy-Schwalbe-An-Introduction-to-Project-Management-min.pdf</location>
+  </library>
+  <library>
+    <subject>cfxdzrseSZdxfc</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/2018_1_COMP307.pdf</location>
   </library>
 </scenario>
