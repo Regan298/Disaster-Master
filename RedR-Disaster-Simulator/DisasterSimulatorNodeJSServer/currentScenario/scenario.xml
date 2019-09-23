@@ -1,31 +1,23 @@
 <?xml version="1.0"?>
 <scenario>
-  <name>Test</name>
-  <ngoCount>1</ngoCount>
-  <duration>21600000</duration>
-  <hoursInDay>9</hoursInDay>
+  <name>Case Study</name>
+  <ngoCount>2</ngoCount>
+  <duration>10000</duration>
+  <hoursInDay>1</hoursInDay>
   <mode>false</mode>
   <ngo>
-    <name>hi</name>
+    <name>Lachlanrety</name>
+    <passkey>1</passkey>
+  </ngo>
+  <ngo>
+    <name>Lachlan</name>
     <passkey>1</passkey>
   </ngo>
   <event>
-    <recipient>hi</recipient>
-    <subject>test</subject>
-    <time>0:0:9</time>
+    <recipient>Lachlanrety</recipient>
+    <subject>image</subject>
+    <time>0:0:10</time>
     <type>pdf</type>
-    <location>/currentScenario/files/A5_buurmatom_marked.pdf</location>
+    <location>/currentScenario/files/000_Needs_assessment_letter.pdf</location>
   </event>
-  <event>
-    <recipient>hi</recipient>
-    <subject>sfxhx</subject>
-    <time>0:2:0</time>
-    <type>pdf</type>
-    <location>/currentScenario/files/feedback_(1).pdf</location>
-  </event>
-  <library>
-    <subject>lib</subject>
-    <type>pdf</type>
-    <location>/currentScenario/files/library/comp309-a3.pdf</location>
-  </library>
 </scenario>

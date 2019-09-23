@@ -211,6 +211,17 @@ app.post('/upload-library-file', upload.single('upload'), function (req, res, ne
     }
 });
 
+app.get('/getReviewFile', function (req, res) {
+    GenerateReviewPDF(function () {
+        fs.rename(__dirname + '/'+'document.pdf', __dirname + '/' + simData.title + 'Review.pdf', function(err) {
+            if ( err ) console.log('ERROR: ' + err);
+            res.download(__dirname + '/'+ simData.title + 'Review.pdf', simData.title + 'Review.pdf');
+        });
+    });
+
+});
+
+
 function clearGeneratedScenario() {
     rimraf(__dirname + "/generatedScenario", function () {
         console.log("deleted generated scenario");
@@ -665,5 +676,136 @@ function runSim() {
         io.emit('currentTime', currentTimeMs);
         io.emit('occurredEvents', {occurredEvents, time});
     });
+
+}
+
+function GenerateReviewPDF(requestReviewCB) {
+    // Define font files
+    console.log("generatePDFCalled");
+    var fonts = {
+        Roboto: {
+            normal: 'fonts/Roboto-Regular.ttf'
+        }
+    };
+
+    var PdfPrinter = require('pdfmake');
+    var printer = new PdfPrinter(fonts);
+    var fs = require('fs');
+
+    var currentDateOBJ = new Date();
+
+    var currentDateString = currentDateOBJ.getDate()+"/"+currentDateOBJ.getMonth()+"/"+currentDateOBJ.getFullYear();
+
+    //organizing simdata into data that will be diplayed on the review pdf
+    let ngoInfoList = [];
+    //adds names of ngos into list
+    for(let i=0;i< simData.ngoList.length; i++){
+        var ngoEventListStart = {
+            subjects: [],
+            eventTimes: [],
+            responseTimes: [],
+            eventResponses: [],
+        };
+        var ngoInfo = {
+            name: simData.ngoList[i].name,
+            ngoEventList: ngoEventListStart,
+        };
+        ngoInfoList.push(ngoInfo);
+    }
+    //add every event conversation and other content into each ngo in the ngoInfoList
+    //this will organize the data into what is needed to display event and response conversations
+    for(let i=0;i<simData.eventsList.length;i++){
+        for(let j=0;j<ngoInfoList.length;j++){
+            //if event matches recipient name for ngo then add relevant data to ngoinfo
+            if(simData.eventsList[i].recipient===ngoInfoList[j].name){
+                let eventTime = simData.eventsList[i].time;
+                console.log('EventTime: '+eventTime);
+                let subject = simData.eventsList[i].subject;
+                console.log('Subject: '+subject);
+                let response = [];
+                let responseTimes = [];
+                //adding reponses and response times into arrays
+                for(let k = 0;k<simData.eventsList[i].responses.length;k++){
+                    response.push(simData.eventsList[i].responses[k].content);
+                    console.log('ResponseContent: '+simData.eventsList[i].responses[k].content);
+                    responseTimes.push(simData.eventsList[i].responses[k].time);
+                    console.log('ResponseTime: '+simData.eventsList[i].responses[k].time);
+                }
+                //adding every data into the same index of each array in the ngoInfo variables
+                ngoInfoList[j].ngoEventList.responseTimes.push(responseTimes);
+                ngoInfoList[j].ngoEventList.responses.push(response);
+                ngoInfoList[j].ngoEventList.subjects.push(subject);
+                ngoInfoList[j].ngoEventList.eventTimes.push(eventTime);
+            }
+        }
+    }
+    //format data into strings for each ngo so it can be displayed in the pdf
+    //console.log(ngoInfoList[0].name+", "+ngoInfoList[0].ngoEventList.subjects[0]+", "+ngoInfoList[0].ngoEventList.eventTimes[0]);
+
+
+    var docDefinition = {
+        content: [
+            {
+                text: "Scenario: " + simData.title,
+                style: 'header'
+            },
+            {
+                text: "Date: " + currentDateString,
+                style: 'header'
+            },
+            {
+                text: "Duration: " + simData.durationMs,
+                style: 'header'
+            },
+            {
+                text: 'Subheader 1 - using subheader style',
+                style: 'subheader'
+            },
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Confectum ponit legam, perferendis nomine miserum, animi. Moveat nesciunt triari naturam posset, eveniunt specie deorsus efficiat sermone instituendarum fuisse veniat, eademque mutat debeo. Delectet plerique protervi diogenem dixerit logikh levius probabo adipiscuntur afficitur, factis magistra inprobitatem aliquo andriam obiecta, religionis, imitarentur studiis quam, clamat intereant vulgo admonitionem operis iudex stabilitas vacillare scriptum nixam, reperiri inveniri maestitiam istius eaque dissentias idcirco gravis, refert suscipiet recte sapiens oportet ipsam terentianus, perpauca sedatio aliena video.',
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Confectum ponit legam, perferendis nomine miserum, animi. Moveat nesciunt triari naturam posset, eveniunt specie deorsus efficiat sermone instituendarum fuisse veniat, eademque mutat debeo. Delectet plerique protervi diogenem dixerit logikh levius probabo adipiscuntur afficitur, factis magistra inprobitatem aliquo andriam obiecta, religionis, imitarentur studiis quam, clamat intereant vulgo admonitionem operis iudex stabilitas vacillare scriptum nixam, reperiri inveniri maestitiam istius eaque dissentias idcirco gravis, refert suscipiet recte sapiens oportet ipsam terentianus, perpauca sedatio aliena video.',
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Confectum ponit legam, perferendis nomine miserum, animi. Moveat nesciunt triari naturam posset, eveniunt specie deorsus efficiat sermone instituendarum fuisse veniat, eademque mutat debeo. Delectet plerique protervi diogenem dixerit logikh levius probabo adipiscuntur afficitur, factis magistra inprobitatem aliquo andriam obiecta, religionis, imitarentur studiis quam, clamat intereant vulgo admonitionem operis iudex stabilitas vacillare scriptum nixam, reperiri inveniri maestitiam istius eaque dissentias idcirco gravis, refert suscipiet recte sapiens oportet ipsam terentianus, perpauca sedatio aliena video.\n\n',
+            {
+                text: 'Subheader 2 - using subheader style',
+                style: 'subheader'
+            },
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Confectum ponit legam, perferendis nomine miserum, animi. Moveat nesciunt triari naturam posset, eveniunt specie deorsus efficiat sermone instituendarum fuisse veniat, eademque mutat debeo. Delectet plerique protervi diogenem dixerit logikh levius probabo adipiscuntur afficitur, factis magistra inprobitatem aliquo andriam obiecta, religionis, imitarentur studiis quam, clamat intereant vulgo admonitionem operis iudex stabilitas vacillare scriptum nixam, reperiri inveniri maestitiam istius eaque dissentias idcirco gravis, refert suscipiet recte sapiens oportet ipsam terentianus, perpauca sedatio aliena video.',
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Confectum ponit legam, perferendis nomine miserum, animi. Moveat nesciunt triari naturam posset, eveniunt specie deorsus efficiat sermone instituendarum fuisse veniat, eademque mutat debeo. Delectet plerique protervi diogenem dixerit logikh levius probabo adipiscuntur afficitur, factis magistra inprobitatem aliquo andriam obiecta, religionis, imitarentur studiis quam, clamat intereant vulgo admonitionem operis iudex stabilitas vacillare scriptum nixam, reperiri inveniri maestitiam istius eaque dissentias idcirco gravis, refert suscipiet recte sapiens oportet ipsam terentianus, perpauca sedatio aliena video.\n\n',
+            {
+                text: 'It is possible to apply multiple styles, by passing an array. This paragraph uses two styles: quote and small. When multiple styles are provided, they are evaluated in the specified order which is important in case they define the same properties',
+                style: ['quote', 'small']
+            }
+        ],
+        styles: {
+            header: {
+                fontSize: 18
+                //bold: true
+            },
+            subheader: {
+                fontSize: 15
+                //bold: true
+            },
+            quote: {
+                //italics: true
+            },
+            small: {
+                fontSize: 8
+            }
+        }
+    };
+
+    var options = {
+        // ...
+    };
+
+    var pdfDoc = printer.createPdfKitDocument(docDefinition, options);
+
+    var writeStream = fs.createWriteStream('document.pdf');
+    pdfDoc.pipe(writeStream);
+
+    writeStream.on('close', function() {
+        requestReviewCB();
+    });
+
+    pdfDoc.end();
 
 }

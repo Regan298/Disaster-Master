@@ -516,6 +516,11 @@ function updateCurrentTime() {
             let timerElement = document.getElementById("simTime");
             simDisplayRemainingTime(timerElement, simulationDuration * timeScale);
         }
+
+        if (time == 1000){
+            socket.off('currentTime');
+            window.open('/getReviewFile');
+        }
     });
 
 }
