@@ -591,6 +591,10 @@ $(function () {
         e.preventDefault(); // prevents page reloading
         let content = $('#inputEmailResponseNGO').val();
         let chosenTag = $('#TagDropDown').val();
+
+        if(chosenTag === null){
+            chosenTag = "Not Chosen";
+        }
         if (content.length <= 0) {
             return;
         }
