@@ -221,7 +221,6 @@ function loadNGOTitle() {
 
 
 function fillInTagSelectForm() {
-    console.log(simData);
     for (var i = 0; i < simData.EventTags.length; i++) {
         var tag = simData.EventTags[i];
         $("#TagDropDown").append("<option value='" + tag + "'>" + tag + "</option>");
