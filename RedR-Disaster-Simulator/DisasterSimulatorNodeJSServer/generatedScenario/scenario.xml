@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<scenario>
+  <name>Test</name>
+  <ngoCount>1</ngoCount>
+  <duration>21600000</duration>
+  <hoursInDay>9</hoursInDay>
+  <mode>false</mode>
+  <ngo>
+    <name>hi</name>
+    <passkey>1</passkey>
+  </ngo>
+  <event>
+    <recipient>hi</recipient>
+    <subject>test</subject>
+    <time>0:0:9</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/A5_buurmatom_marked.pdf</location>
+  </event>
+  <event>
+    <recipient>hi</recipient>
+    <subject>sfxhx</subject>
+    <time>0:2:0</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/feedback_(1).pdf</location>
+  </event>
+  <library>
+    <subject>lib</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/comp309-a3.pdf</location>
+  </library>
+</scenario>
