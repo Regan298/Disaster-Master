@@ -122,39 +122,8 @@ function editDuration(){
     var minutes = Math.floor((data.durationMs / 1000 / 60) % 60);
     var hours = Math.floor((data.durationMs / (1000 * 60 * 60)) % 24);
     $('#editDuration').append("<form id='durationForm'></form>" +
-                            "Hours: <select form='durationForm' name='hours' value='"+hours+"'>" +
-                            "<option value=0>0</option>" +
-                            "<option value=1>1</option>" +
-                            "<option value=2>2</option>" +
-                            "<option value=3>3</option>" +
-                            "<option value=4>4</option>" +
-                            "<option value=5>5</option>" +
-                            "<option value=6>6</option>" +
-                            "<option value=7>7</option>" +
-                            "<option value=8>8</option>" +
-                            "<option value=9>9</option>" +
-                            "<option value=10>10</option>" +
-                            "<option value=11>11</option>" +
-                            "<option value=12>12</option>" +
-                            "<option value=13>13</option>" +
-                            "<option value=14>14</option>" +
-                            "<option value=15>15</option>" +
-                            "<option value=16>16</option>" +
-                            "<option value=17>17</option>" +
-                            "<option value=18>18</option>" +
-                            "<option value=19>19</option>" +
-                            "<option value=20>20</option>" +
-                            "<option value=21>21</option>" +
-                            "<option value=22>22</option>" +
-                            "<option value=23>23</option>" +
-                            "<option value=24>24</option>" +
-                            "</select>" +
-                            "Minutes: <select form='durationForm' name='mins' value='"+minutes+"'>" +
-                            "<option value=0>0</option>" +
-                            "<option value=15>15</option>" +
-                            "<option value=30>30</option>" +
-                            "<option value=45>45</option>" +
-                            "</select><br>" +
+                            "Hours: <input form='durationForm' type='number' name='scale' min='0' max='24' step='1' value='"+hours+"'><br>"+
+                            "Minutes: <input form='durationForm' type='number' name='scale' min='0' max='59' step='1' value='"+minutes+"'><br>" +
                             "<input form='durationForm' type='button' onclick='updateDuration()' value='Submit'>" +
                             "<button type='button' onclick=cancelEdit('#editDuration')>Cancel</button>");
 }
@@ -176,7 +145,7 @@ function updateDuration(){
 function editScale(){
     $('#editScale').empty();
     $('#editScale').append("<form id='scaleForm'></form>" +
-                            "<input form='scaleForm' type='text' name='scale' value='"+24/data.timeScale+"'><br>"+
+                            "<input form='scaleForm' type='number' name='scale' min='0.5' max='24' step='0.5' value='"+24/data.timeScale+"'><br>"+
                             "<input form='scaleForm' type='button' onclick='updateScale()' value='Submit'>" +
                             "<button type='button' onclick=cancelEdit('#editScale')>Cancel</button>");
 }
@@ -245,7 +214,9 @@ function newEvent() {
                             ngoOptions +
                             "</select><br>" +
                             "Subject: <input form='addForm' type='text' name='subject'><br>" +
-                            "Time: <input form='addForm' type='text' name='time'><br>" +
+                            "Scheduled (real) Time: <br><input form='addForm' type='number' name='scale' min='0' max='24' step='1'>hrs "+
+                            "<input form='addForm' type='number' name='scale' min='0' max='59' step='1'>mins " +
+                            "<input form='addForm' type='number' name='scale' min='0' max='59' step='1'>secs<br>" +
                             "Type: <select form='addForm' name='type'>" +
                             "<option value='pdf'>pdf</option>" +
                             "<option value='video'>video</option>" +
@@ -273,12 +244,15 @@ function editEvent(eventNum){
     }else if (data.eventsList[eventNum].type === 'image'){
         options = "<option value='pdf'>pdf</option><option value='video'>video</option><option value='audio'>audio</option><option value='image' selected>image</option>";
     }
+    var time = data.eventsList[eventNum].time[0].split(":");
     $("#editForm"+eventNum).append("<form id='frm"+eventNum+"' enctype='multipart/form-data'></form>" +
                                     "NGO Recipient: <select form='frm"+eventNum+"' name='type' value='"+data.eventsList[eventNum].recipient+"'>"+
                                     ngoOptions +
                                     "</select><br>" +
                                     "Subject: <input form='frm"+eventNum+"' type='text' name='subject' value='"+data.eventsList[eventNum].subject+"'><br>"+
-                                    "Time: <input form='frm"+eventNum+"' type='text' name='time' value='"+data.eventsList[eventNum].time+"'><br>" +
+                                    "Scheduled (real) Time: <br><input form='frm"+eventNum+"' type='number' name='scale' min='0' max='24' step='1' value='"+time[0]+"'>hrs "+
+                                    "<input form='frm"+eventNum+"' type='number' name='scale' min='0' max='59' step='1' value='"+time[1]+"'>mins " +
+                                    "<input form='frm"+eventNum+"' type='number' name='scale' min='0' max='59' step='1' value='"+time[2]+"'>secs<br>" +
                                     "Type: <select form='frm"+eventNum+"' name='type' value='"+data.eventsList[eventNum].type+"'>" +
                                     options +
                                     "</select><br>" +
@@ -291,15 +265,26 @@ function editEvent(eventNum){
 
 function addEvent() {
     let frmData = document.getElementById("addForm");
-    let file = frmData.elements[4].files[0];
+    let file = frmData.elements[6].files[0];
     uploadFiles(file, 'event');
+
+    var hrs = frmData.elements[2].value;
+    var mins = frmData.elements[3].value;
+    var secs = frmData.elements[4].value;
+    if(hrs === NaN || hrs === undefined || hrs<0 || hrs === ''){
+        hrs = 0;
+    }if(mins === NaN || mins === undefined || mins<0 || mins === ''){
+        mins = 0;
+    }if(secs === NaN || secs === undefined || secs<0 || secs === ''){
+        secs = 0;
+    }
 
     let newEvent = {
         recipient: frmData.elements[0].value,
         subject: frmData.elements[1].value,
-        time: frmData.elements[2].value,
-        type: frmData.elements[3].value,
-        location: '/currentScenario/files/'+file.name
+        time: [hrs+":"+mins+":"+secs],
+        type: frmData.elements[5].value,
+        location: '/currentScenario/files/'+file.name.replace(/ /g, "_")
     };
     data.eventsList.push(newEvent);
 
@@ -308,16 +293,28 @@ function addEvent() {
 
 function updateEvent(eventNum){
     let frmData = document.getElementById("frm"+eventNum);
-    let file = frmData.elements[4].files[0];
+    let file = frmData.elements[6].files[0];
     if(file){
         uploadFiles(file, 'event');
-        data.eventsList[eventNum].location = '/currentScenario/files/'+file.name;
+        data.eventsList[eventNum].location = '/currentScenario/files/'+file.name.replace(/ /g, "_");
     }
+
+    var hrs = frmData.elements[2].value;
+    var mins = frmData.elements[3].value;
+    var secs = frmData.elements[4].value;
+    if(hrs === NaN || hrs === undefined || hrs<0 || hrs === ''){
+        hrs = 0;
+    }if(mins === NaN || mins === undefined || mins<0 || mins === ''){
+        mins = 0;
+    }if(secs === NaN || secs === undefined || secs<0 || secs === ''){
+        secs = 0;
+    }
+
     
     data.eventsList[eventNum].recipient = frmData.elements[0].value;
     data.eventsList[eventNum].subject = frmData.elements[1].value;
-    data.eventsList[eventNum].time = frmData.elements[2].value;
-    data.eventsList[eventNum].type = frmData.elements[3].value;
+    data.eventsList[eventNum].time = [hrs+":"+mins+":"+secs];
+    data.eventsList[eventNum].type = frmData.elements[5].value;
 
     drawEvents(data.eventsList);
 }
@@ -381,7 +378,7 @@ function addLibraryItem() {
     let newLibItem = {
         subject: frmData.elements[0].value,
         type: frmData.elements[1].value,
-        location: '/currentScenario/files/library/'+file.name
+        location: '/currentScenario/files/library/'+file.name.replace(/ /g, "_")
     };
     data.library.push(newLibItem);
 
@@ -398,6 +395,7 @@ function updateLibraryItem(libNum){
 
     data.eventsList[libNum].subject = frmData.elements[0].value;
     data.eventsList[libNum].type = frmData.elements[1].value;
+    data.eventsList[libNum].location = '/currentScenario/files/'+file.name.replace(/ /g, "_");
 
     drawLibrary(data.library);
 }
