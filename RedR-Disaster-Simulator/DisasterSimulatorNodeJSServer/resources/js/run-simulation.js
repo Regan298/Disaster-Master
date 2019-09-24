@@ -19,6 +19,7 @@ var eventResponseList = [];
 var eventCounter = 0;
 var selectNGOFilter = 'default';
 var selected;
+var firstTimeViewingKeys = true;
 
 //todo: Unccomment this when done
 window.onbeforeunload = function() {
@@ -83,6 +84,10 @@ function handlePersistentMessages() {
 }
 
 
+function displayPasskeysOff() {
+    document.getElementById('ngoPasskeyOverlay').style.display='none';
+}
+
 function loadScenarioHeader() {
     simTitle = simData.title;
     var url = document.URL.split('/');
@@ -98,8 +103,35 @@ function loadScenarioHeader() {
             "<p class='lead'> [Offline Mode]: Please Open a New Tab For Each NGO: " + "</p>" + "<a href='" + "/ngo" + "'>" + url + "</a>";
 
     }
+
+    if(simData.modeOnline == false){
+        htmlContent += "<br>";
+    }
+
+    htmlContent += "<a href='" + "javascript:void(0);" + "' id='getPassKeys'>" + "NGO Passkeys" + "</a><br>";
     $(htmlContent).appendTo(".scenarioTitle");
 
+    $(function() {
+        $("#getPassKeys").click(function(e) {
+            e.preventDefault(); // if desired...
+
+            if(firstTimeViewingKeys) {
+
+                var ngoPassKeyHTML = "<ul>";
+
+                for (var ngo of simData.ngoList) {
+                    ngoPassKeyHTML += "<li>" + ngo.name + ": " + ngo.passkey + "</li>";
+                }
+
+                ngoPassKeyHTML += "</ul>";
+                $(ngoPassKeyHTML).appendTo("#ngoPasskeyContent");
+                document.getElementById('ngoPasskeyOverlay').style.display='block';
+                firstTimeViewingKeys = false;
+            } else {
+            document.getElementById('ngoPasskeyOverlay').style.display='block';
+            }
+        });
+    });
 
 }
 

@@ -219,6 +219,14 @@ function loadNGOTitle() {
 }
 
 
+function fillInTagSelectForm() {
+    for (var i = 0; i < simData.EventTags.length; i++) {
+        var tag = simData.EventTags[i];
+        $("#TagDropDown").append("<option value='" + tag + "'>" + tag + "</option>");
+    }
+
+}
+
 function processScenarioData() {
     socket.emit('simState', "request", function (callbackData) {
         simData = callbackData.simData;
@@ -574,7 +582,12 @@ $(function () {
 
         e.preventDefault(); // prevents page reloading
         let content = $('#inputEmailResponseNGO').val();
-        if(content.length <= 0){
+        let chosenTag = $('#TagDropDown').val();
+
+        if(chosenTag === null){
+            chosenTag = "Not Chosen";
+        }
+        if (content.length <= 0) {
             return;
         }
         //Function takes array by default so add turn single message into array

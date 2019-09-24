@@ -111,6 +111,18 @@ body {
     margin-top: 2.5%;
 }
 
+#ngoPasskeyContent{
+    width: 20%;
+    margin-top: 20%;
+    margin-left: 40%;
+    background-color: white;
+    text-align: center;
+}
+
+#ngoPasskeyContent li{
+
+}
+
 .toggle-switch {
     background: #ccc;
     width: 80px;

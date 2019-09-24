@@ -27,11 +27,11 @@
 <script type="text/javascript" src="js/timelineComponents.js"></script>
 
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light static-top "id="header">
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top " id="header">
     <!--Colour Changer-->
     <script>
         $("#header").load("header.html", function (response,
-                                                   status, http){
+                                                   status, http) {
             document.getElementById("colourChooser").setAttribute("value", document.cookie);
         });
         document.documentElement.style.setProperty("--main-color", document.cookie);
@@ -133,12 +133,11 @@
             </div>
 
 
-
             <div id="inboxElementHQ" class="inboxElementHQ">
 
                 <div id="inboxEventListHQ" class="inboxEventListHQ">
-                    <select id="ngoFilterHQ" onchange="filterEvents()" >
-                        <option hidden value="default" >Events From All NGO's</option>
+                    <select id="ngoFilterHQ" onchange="filterEvents()">
+                        <option hidden value="default">Events From All NGO's</option>
 
                     </select>
                 </div>
@@ -152,22 +151,22 @@
                 </div>
 
 
-
-
-
             </div>
 
 
-
             <!--add messaging form-->
-
 
 
         </div>
     </div>
 </div>
 
+<div id="ngoPasskeyOverlay" class="eventOverlay" onclick="displayPasskeysOff()">
+    <div id="ngoPasskeyContent">
+    <p id="ngoPasskeyText">List Of NGO Passkeys:</p>
+    </div>
 
+</div>
 
 
 
@@ -181,7 +180,8 @@
 
     var modal = document.getElementById("modal");
     var span = document.getElementsByClassName("close")[0];
-    function onSelect(properties){
+
+    function onSelect(properties) {
 
         //setting field values
         // document.getElementById("overlayName").value = items[properties.items[0]].content;
