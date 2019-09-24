@@ -142,13 +142,13 @@ app.get('/help', function (req, res) {
 app.get('/download-save', function (req, res) {
     // console.log(req);
 
-    zipFolder(__dirname + '/generatedScenario', __dirname + '/scenario.zip', function (err) {
+    zipFolder(__dirname + '/generatedScenario', __dirname + '/' + simData.title + 'Scenario.zip', function (err) {
         if (err) {
             console.log('failed to zip', err);
             res.end();
         } else {
             console.log('zipped');
-            res.download(__dirname + '/scenario.zip', 'scenario.zip');
+            res.download(__dirname + '/'+simData.title+'Scenario.zip', simData.title+'Scenario.zip');
         }
     });
 

@@ -203,7 +203,7 @@ function drawTimeline() {
                     start: '2019-01-' + scaledTime.getDate() + ' ' + scaledTime.getHours() + ':' + scaledTime.getMinutes() + ':' + scaledTime.getSeconds(),
                     contentType: currentEvent.type,
                     recipient: currentEvent.recipient[0],
-                    time: currentEvent.time[0]
+                    time: currentEvent.time[0],
                     style: ngoColor
                 });
                 break;
