@@ -150,7 +150,6 @@ function drawTimeline() {
                 var scaledTime = timelineStartDate.getTime() + (ms * timeScale);
                 scaledTime = new Date(scaledTime);
                 id = groups[k].id;
-                console.log(currentEvent.type[0]);
                 items.push({
                     id: currentEvent.id,
                     group: id,
@@ -827,7 +826,6 @@ function addPopup(subject, fileLocation, type){
     }
 
     var options = '';
-    console.log(type);
     if (type === 'pdf'){
         options = "<option value='pdf' selected>pdf</option><option value='video'>video</option><option value='audio'>audio</option><option value='image'>image</option>";
     }else if (type === 'video'){
@@ -843,11 +841,9 @@ function addPopup(subject, fileLocation, type){
         ngoOptions += "<option value='"+simData.ngoList[i].name+"'>"+simData.ngoList[i].name+"</option>";
     }
     var filename = ' - select new'
-    console.log(fileLocation);
     if(!(fileLocation === undefined)){
         var loc = fileLocation[0].split("/");
         filename = ' - '+loc[loc.length-1];
-        console.log(filename);
     }
     if(subject === undefined){
         subject = '';
@@ -907,7 +903,6 @@ function setModal() {
     }
 
     var options = '';
-    console.log(selected.contentType);
     if (selected.contentType === 'pdf'){
         options = "<option value='pdf' selected>pdf</option><option value='video'>video</option><option value='audio'>audio</option><option value='image'>image</option>";
     }else if (selected.contentType === 'video'){
