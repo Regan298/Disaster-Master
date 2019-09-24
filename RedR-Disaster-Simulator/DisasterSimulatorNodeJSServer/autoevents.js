@@ -14,7 +14,7 @@ console.log("init");
 var timeS = 0;
 var t;
 
-function updadeEvents(msg) {
+function updateEvents(msg) {
 	simLength = msg.durationMs;
 	eventList = msg.eventsList;
 	t = setInterval(getEvents,1000);
@@ -23,7 +23,7 @@ function updadeEvents(msg) {
 parentPort.on('message', (msg) => {
 	if(typeof msg === "object"){
 		clearInterval(t);
-		updadeEvents(msg);
+		updateEvents(msg);
 		return;
 	}
 	if (msg === 'pause') {
