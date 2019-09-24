@@ -182,13 +182,26 @@ function drawTimeline() {
                 scaledTime = new Date(scaledTime);
                 id = groups[k].id;
                 console.log(currentEvent.type[0]);
+
+                var ngoColor;
+                if(currentEvent.type === 'pdf'){
+                    ngoColor = 'background-color: red; color: white;'
+                } else if(currentEvent.type === 'video'){
+                    ngoColor = 'background-color: blue; color: white;'
+                } else if(currentEvent.type === 'image'){
+                    ngoColor = 'background-color: green; color: white;'
+                } else if(currentEvent.type === 'audio'){
+                    ngoColor = 'background-color: yellow; color: black;'
+                }
+
                 items.push({
                     id: currentEvent.id,
                     group: id,
                     content: currentEvent.subject[0],
                     location: currentEvent.location[0],
                     start: '2019-01-' + scaledTime.getDate() + ' ' + scaledTime.getHours() + ':' + scaledTime.getMinutes() + ':' + scaledTime.getSeconds(),
-                    contentType: currentEvent.type
+                    contentType: currentEvent.type,
+                    style: ngoColor
                 });
                 break;
             }
