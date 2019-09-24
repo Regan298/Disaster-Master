@@ -329,6 +329,7 @@ function startStopSim() {
     if (!running) {
         running = true;
         socket.emit('play', true);
+        simData.startTimeMS = new Date().getTime();
         doPlay();
         document.getElementById("playPauseSwitch").innerHTML = "&#10074 &#10074";
     } else {
@@ -738,7 +739,8 @@ $(function () {
         var response = {
             from: 'HQ',
             event: selectedEvent,
-            content: content
+            content: content,
+            chosenNGOTag: "None (From HQ)"
         }
 
         $('#inputEmailResponseHQ').val('');

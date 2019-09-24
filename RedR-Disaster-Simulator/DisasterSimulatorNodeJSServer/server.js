@@ -648,11 +648,7 @@ io.on('connection', function (socket) {
             worker = new Worker('./autoevents.js', {workerData: data});
             currentRunningInstance = runSim();
             simData.started = true;
-
-
-            for (var i = 0; i < simData.eventsList; i++) {
-                console.log(simData.eventsList[i]);
-            }
+            simData.startTimeMS = new Date().getTime();
 
         } else {
             worker.postMessage('play');
@@ -680,27 +676,45 @@ function runSim() {
 }
 
 function GenerateReviewPDF(requestReviewCB) {
-    // Define font files
-    console.log("generatePDFCalled");
+    var PdfPrinter = require('pdfmake');
     var fonts = {
         Roboto: {
             normal: 'fonts/Roboto-Regular.ttf'
         }
     };
-
-    var PdfPrinter = require('pdfmake');
     var printer = new PdfPrinter(fonts);
     var fs = require('fs');
+    console.log("generatePDFCalled");
+
 
     var currentDateOBJ = new Date();
-
     var currentDateString = currentDateOBJ.getDate()+"/"+currentDateOBJ.getMonth()+"/"+currentDateOBJ.getFullYear();
+
+    var duration = simData.durationMs;
+    var seconds = Math.floor((duration / 1000) % 60);
+    var minutes = Math.floor((duration / 1000 / 60) % 60);
+    var hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+    if(hours<10){
+        hours = "0"+hours;
+    }
+    if(minutes<10){
+        minutes = "0"+minutes;
+    }
+    if(seconds<10){
+        seconds= "0"+seconds;
+    }
+
+    var durationFormatted = hours + ":" + minutes + ":" + seconds;
+
 
     //organizing simdata into data that will be diplayed on the review pdf
     let ngoInfoList = [];
-    //adds names of ngos into list
+
+
     for(let i=0;i< simData.ngoList.length; i++){
-        var ngoEventListStart = {
+
+        var ngoEventsObject = {
             subjects: [],
             eventTimes: [],
             responseTimes: [],
@@ -709,38 +723,33 @@ function GenerateReviewPDF(requestReviewCB) {
         };
         var ngoInfo = {
             name: simData.ngoList[i].name,
-            ngoEventList: ngoEventListStart,
+            ngoEventList: ngoEventsObject,
         };
         ngoInfoList.push(ngoInfo);
     }
-    //add every event conversation and other content into each ngo in the ngoInfoList
+
+    //add every event conversation and meta data into each ngo in the ngoInfoList
     //this will organize the data into what is needed to display event and response conversations
-    for(let i=0;i<simData.eventsList.length;i++){
-        for(let j=0;j<ngoInfoList.length;j++){
+    for(let i=0; i<simData.eventsList.length; i++){
+        for(let j=0; j<ngoInfoList.length; j++){
             //if event matches recipient name for ngo then add relevant data to ngoinfo
             if(simData.eventsList[i].recipient.toString()===ngoInfoList[j].name.toString()){
+
                 let eventTime = simData.eventsList[i].time;
-               // console.log('EventTime: '+eventTime);
                 let subject = simData.eventsList[i].subject;
-               // console.log('Subject: '+subject);
                 let response = [];
                 let responseTimes = [];
                 let responseTags = [];
                 //adding reponses and response times into arrays
-                for(let k = 0;k<simData.eventsList[i].responses.length;k++){
-
+                for(let k = 0; k<simData.eventsList[i].responses.length; k++){
                     response.push(simData.eventsList[i].responses[k].content);
-                   //if no data add no data to response array
-
-
-                    // console.log('ResponseContent: '+simData.eventsList[i].responses[k].content);
-
                     let timeCollect = simData.eventsList[i].responses[k].time;
                     let time=(timeCollect-simData.startTimeMS);
-                    //time = 1 - 2
+                    console.log(simData.startTimeMS);
                     var seconds = Math.floor((time / 1000) % 60);
                     var minutes = Math.floor((time / 1000 / 60) % 60);
                     var hours = Math.floor((time / (1000 * 60 * 60)) % 24);
+
                     if(hours<10){
                         hours = "0"+hours;
                     }
@@ -751,19 +760,17 @@ function GenerateReviewPDF(requestReviewCB) {
                         seconds= "0"+seconds;
                     }
 
-                     let convertedTime = hours + ":" + minutes + ":" + seconds;
-
+                    let convertedTime = hours + ":" + minutes + ":" + seconds;
                     responseTimes.push(convertedTime);
-                    //console.log('ResponseTime: '+simData.eventsList[i].responses[k].time);
                     responseTags.push(simData.eventsList[i].responses[k].chosenNGOTag);
                 }
-                //adding every data into the same index of each array in the ngoInfo variables
+                //adding data into the same index of each array in the ngoInfo variables
                 //if there are no responses then no data will be added into the array for response times and content
                 if(response.length===0){
                     let responseTimeEmpty = [];
                     responseTimeEmpty.push("No Data");
                     ngoInfoList[j].ngoEventList.responseTimes.push(responseTimeEmpty);
-                    console.log("No DATA part reached");
+
                     let responseEmpty = [];
                     responseEmpty.push("No Data");
                     ngoInfoList[j].ngoEventList.eventResponses.push(responseEmpty);
@@ -784,52 +791,37 @@ function GenerateReviewPDF(requestReviewCB) {
 
     }
 
-    //console.log(ngoInfoList[4].ngoEventList.eventResponses);
-    console.log(ngoInfoList[4].ngoEventList);
-
-    var NGOEventString;
+    var NGOEventString = "\n";
     for(var i=0; i < ngoInfoList.length; i++ ){
-        NGOEventString += "NGO: " + ngoInfoList[i].name + ". \n";
+        NGOEventString += "NGO: " + ngoInfoList[i].name + "\n\n";
+
+
 
         for(var j=0; j < ngoInfoList[i].ngoEventList.subjects.length; j++ ){
-            NGOEventString += "Subject: " + ngoInfoList[i].ngoEventList.subjects[j] + ". \n";
-            NGOEventString += "Time: " + ngoInfoList[i].ngoEventList.eventTimes[j] + ". \n\n";
+            NGOEventString += "Event: " + ngoInfoList[i].ngoEventList.subjects[j] + "\n";
+            NGOEventString += "Time: " + ngoInfoList[i].ngoEventList.eventTimes[j] + "\n\n";
 
             for(var k=0; k < ngoInfoList[i].ngoEventList.eventResponses[j].length; k++ ){
                 var temp1 = ngoInfoList[i].ngoEventList.eventResponses[j];
-                console.log("temp1" + temp1);
-                // var temp2 = temp1.eventResponses[j].toString();
-                // console.log(temp2);
 
                 if(temp1.toString() ==="No Data"){
-                    NGOEventString += "No Response Data for this Event. \n\n\n";
+                    NGOEventString += "No Response Data for this Event. \n\n";
                     break;
                 }
+
                 NGOEventString += "Response: " + ngoInfoList[i].ngoEventList.eventResponses[j][k] + ". \n";
                 NGOEventString += "Time of Response: " + ngoInfoList[i].ngoEventList.responseTimes[j][k] + ". \n";
                 NGOEventString += "Tag: " + ngoInfoList[i].ngoEventList.responseTagsList[j][k] + ". \n\n";
 
             }
             NGOEventString += "\n\n";
-            NGOEventString += "-----------------------------\n";
+            NGOEventString += "----------------------------------------------------------------------------------------------------------------------------------------------------------\n";
         }
 
-        NGOEventString += "-----------------------------\n\n";
+
     }
-    console.log(NGOEventString);
 
-
-    //format data into strings for each ngo so it can be displayed in the pdf
-    //console.log(ngoInfoList[0].name+", "+ngoInfoList[0].ngoEventList.subjects[0]+", "+ngoInfoList[0].ngoEventList.eventTimes[0]);
-
-    //this part will be creating a series of components to combine into the review pdf using a series of for loops and
-    //terrible structure
-
-
-
-
-
-
+    //Output Accumalative String Into PDF
     var docDefinition = {
         content: [
             {
@@ -841,14 +833,16 @@ function GenerateReviewPDF(requestReviewCB) {
                 style: 'header'
             },
             {
-                text: "Duration: " + simData.durationMs,
+                text: "Duration: " + durationFormatted,
                 style: 'header'
             },
-            NGOEventString,
+            {
+                text : NGOEventString
+            },
         ],
         styles: {
             header: {
-                fontSize: 18
+                fontSize: 25
                 //bold: true
             },
             subheader: {
