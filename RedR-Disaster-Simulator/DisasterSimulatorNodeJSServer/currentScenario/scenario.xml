@@ -1,23 +1,186 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <scenario>
-  <name>Case Study</name>
-  <ngoCount>2</ngoCount>
-  <duration>10000</duration>
-  <hoursInDay>1</hoursInDay>
-  <mode>false</mode>
-  <ngo>
-    <name>Lachlanrety</name>
-    <passkey>1</passkey>
-  </ngo>
-  <ngo>
-    <name>Lachlan</name>
-    <passkey>1</passkey>
-  </ngo>
-  <event>
-    <recipient>Lachlanrety</recipient>
-    <subject>image</subject>
-    <time>0:0:10</time>
-    <type>pdf</type>
-    <location>/currentScenario/files/000_Needs_assessment_letter.pdf</location>
-  </event>
+	<name>Sebadoah</name>
+	<ngoCount>5</ngoCount>
+	<duration>40000</duration>
+	<hoursInDay>1</hoursInDay>
+	<mode>online</mode>
+
+	<ngo>
+		<name>People First</name>
+		<passkey>ngo1</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>We Care</name>
+		<passkey>ngo2</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>EWB</name>
+		<passkey>ngo3</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>Red Heart</name>
+		<passkey>ngo4</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>Peacedoves</name>
+		<passkey>ngo5</passkey>
+
+	</ngo>
+
+	<ngo>
+		<name>Reach Up</name>
+		<passkey>ngo6</passkey>
+
+	</ngo>
+	
+	<event>
+		<recipient>Peacedoves</recipient>
+        <subject>Set up</subject>
+		<time>00:00:10</time>
+		<type>pdf</type>
+		<location>/currentScenario/files/000_Needs_assessment_letter.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Introduction into Sebadoah</subject>
+		<time>00:00:20</time>
+		<type>pdf</type>
+		<location>/currentScenario/files/001_Activation_of_Cluster_System.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>President of Sebadoah</subject>
+		<time>00:00:30</time>
+		<type>pdf</type>
+		<location>/currentScenario/files/002_Purchase_from_Umbala.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>SitRep Request</subject>
+		<time>00:06:00</time>
+		<type>pdf</type>
+		<location>/currentScenario/files/003_HQ_Daily_SitRep_Request.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Budget Request</subject>
+		<time>00:08:00</time>
+		<type>pdf</type>
+		<location>/currentScenario/files/004_HQ_Budget_Request.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Flood Update</subject>
+		<time>00:10:00</time>
+		<type>pdf</type>
+		<location>/currentScenario/files/005_DisCom_Flood_Update.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Request Cluster SitReps</subject>
+		<time>00:12:00</time>
+		<type>pdf</type>
+		<location>/currentScenario/files/006_Request_Cluster_SitReps.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Request SitReps</subject>
+		<time>00:14:00</time>
+		<type>pdf</type>
+		<location>/currentScenario/files/007_HQ_No_Daily_SitRep.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Budget</subject>
+		<time>00:16:00</time>
+		<type>pdf</type>
+		<location>/currentScenario/files/008_HQ_No_Budget.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Sit Reps Request</subject>
+		<time>00:18:00</time>
+		<type>pdf</type>
+		<location>/currentScenario/files/009_No_Daily_Cluster_SitReps.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Information Request</subject>
+		<time>00:20:00</time>
+		<type>pdf</type>
+		<location>/currentScenario/files/010_HQ_Site_Info_Request.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Planning Request</subject>
+		<time>00:22:00</time>
+		<type>pdf</type>
+		<location>/currentScenario/files/011_HQ_Planning_Request.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Kidnapping</subject>
+		<time>00:24:00</time>
+		<type>pdf</type>
+		<location>/currentScenario/files/012_HQ_Kidnapping.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Kidnapping</subject>
+		<time>00:26:00</time>
+		<type>pdf</type>
+		<location>/currentScenario/files/012_HQ_Kidnapping.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Reminder Flash Appeal</subject>
+		<time>00:28:00</time>
+		<type>pdf</type>
+		<location>/currentScenario/files/013_Reminder_-_Flash_Appeal.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>Gender Audit</subject>
+		<time>00:30:00</time>
+		<type>pdf</type>
+		<location>/currentScenario/files/014_HQ_Gender_Audit.pdf</location>
+	</event>
+
+	<event>
+		<recipient>Peacedoves</recipient>
+		<subject>DayinLife Request</subject>
+		<time>00:32:00</time>
+		<type>pdf</type>
+		<location>/currentScenario/files/015_HQ_DayinLife_Request.pdf</location>
+	</event>
+    
+    <library>
+        <subject>Test</subject>
+        <type>pdf</type>
+        <location>/currentScenario/files/library/test.pdf</location>
+    </library>
 </scenario>

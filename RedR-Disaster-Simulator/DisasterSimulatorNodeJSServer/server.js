@@ -614,7 +614,7 @@ io.on('connection', function (socket) {
                     chosenNGOTag: msg.response.chosenNGOTag
                 });
                 simData.eventsList[i].ChosenNGOTag = msg.response.chosenNGOTag;
-                console.log(simData.eventsList[i]);
+                //console.log(simData.eventsList[i]);
                 worker.postMessage(simData);
             }
         }
@@ -705,6 +705,7 @@ function GenerateReviewPDF(requestReviewCB) {
             eventTimes: [],
             responseTimes: [],
             eventResponses: [],
+            responseTagsList: [],
         };
         var ngoInfo = {
             name: simData.ngoList[i].name,
@@ -717,30 +718,116 @@ function GenerateReviewPDF(requestReviewCB) {
     for(let i=0;i<simData.eventsList.length;i++){
         for(let j=0;j<ngoInfoList.length;j++){
             //if event matches recipient name for ngo then add relevant data to ngoinfo
-            if(simData.eventsList[i].recipient===ngoInfoList[j].name){
+            if(simData.eventsList[i].recipient.toString()===ngoInfoList[j].name.toString()){
                 let eventTime = simData.eventsList[i].time;
-                console.log('EventTime: '+eventTime);
+               // console.log('EventTime: '+eventTime);
                 let subject = simData.eventsList[i].subject;
-                console.log('Subject: '+subject);
+               // console.log('Subject: '+subject);
                 let response = [];
                 let responseTimes = [];
+                let responseTags = [];
                 //adding reponses and response times into arrays
                 for(let k = 0;k<simData.eventsList[i].responses.length;k++){
+
                     response.push(simData.eventsList[i].responses[k].content);
-                    console.log('ResponseContent: '+simData.eventsList[i].responses[k].content);
-                    responseTimes.push(simData.eventsList[i].responses[k].time);
-                    console.log('ResponseTime: '+simData.eventsList[i].responses[k].time);
+                   //if no data add no data to response array
+
+
+                    // console.log('ResponseContent: '+simData.eventsList[i].responses[k].content);
+
+                    let timeCollect = simData.eventsList[i].responses[k].time;
+                    let time=(timeCollect-simData.startTimeMS);
+                    //time = 1 - 2
+                    var seconds = Math.floor((time / 1000) % 60);
+                    var minutes = Math.floor((time / 1000 / 60) % 60);
+                    var hours = Math.floor((time / (1000 * 60 * 60)) % 24);
+                    if(hours<10){
+                        hours = "0"+hours;
+                    }
+                    if(minutes<10){
+                        minutes = "0"+minutes;
+                    }
+                    if(seconds<10){
+                        seconds= "0"+seconds;
+                    }
+
+                     let convertedTime = hours + ":" + minutes + ":" + seconds;
+
+                    responseTimes.push(convertedTime);
+                    //console.log('ResponseTime: '+simData.eventsList[i].responses[k].time);
+                    responseTags.push(simData.eventsList[i].responses[k].chosenNGOTag);
                 }
                 //adding every data into the same index of each array in the ngoInfo variables
-                ngoInfoList[j].ngoEventList.responseTimes.push(responseTimes);
-                ngoInfoList[j].ngoEventList.responses.push(response);
+                //if there are no responses then no data will be added into the array for response times and content
+                if(response.length===0){
+                    let responseTimeEmpty = [];
+                    responseTimeEmpty.push("No Data");
+                    ngoInfoList[j].ngoEventList.responseTimes.push(responseTimeEmpty);
+                    console.log("No DATA part reached");
+                    let responseEmpty = [];
+                    responseEmpty.push("No Data");
+                    ngoInfoList[j].ngoEventList.eventResponses.push(responseEmpty);
+
+                    let responseTagsEmpty = [];
+                    responseTagsEmpty.push("No Data");
+                    ngoInfoList[j].ngoEventList.responseTagsList.push(responseTagsEmpty);
+                }
+                else {
+                    ngoInfoList[j].ngoEventList.responseTimes.push(responseTimes);
+                    ngoInfoList[j].ngoEventList.eventResponses.push(response);
+                    ngoInfoList[j].ngoEventList.responseTagsList.push(responseTags);
+                }
                 ngoInfoList[j].ngoEventList.subjects.push(subject);
                 ngoInfoList[j].ngoEventList.eventTimes.push(eventTime);
             }
         }
+
     }
+
+    //console.log(ngoInfoList[4].ngoEventList.eventResponses);
+    console.log(ngoInfoList[4].ngoEventList);
+
+    var NGOEventString;
+    for(var i=0; i < ngoInfoList.length; i++ ){
+        NGOEventString += "NGO: " + ngoInfoList[i].name + ". \n";
+
+        for(var j=0; j < ngoInfoList[i].ngoEventList.subjects.length; j++ ){
+            NGOEventString += "Subject: " + ngoInfoList[i].ngoEventList.subjects[j] + ". \n";
+            NGOEventString += "Time: " + ngoInfoList[i].ngoEventList.eventTimes[j] + ". \n\n";
+
+            for(var k=0; k < ngoInfoList[i].ngoEventList.eventResponses[j].length; k++ ){
+                var temp1 = ngoInfoList[i].ngoEventList.eventResponses[j];
+                console.log("temp1" + temp1);
+                // var temp2 = temp1.eventResponses[j].toString();
+                // console.log(temp2);
+
+                if(temp1.toString() ==="No Data"){
+                    NGOEventString += "No Response Data for this Event. \n\n\n";
+                    break;
+                }
+                NGOEventString += "Response: " + ngoInfoList[i].ngoEventList.eventResponses[j][k] + ". \n";
+                NGOEventString += "Time of Response: " + ngoInfoList[i].ngoEventList.responseTimes[j][k] + ". \n";
+                NGOEventString += "Tag: " + ngoInfoList[i].ngoEventList.responseTagsList[j][k] + ". \n\n";
+
+            }
+            NGOEventString += "\n\n";
+            NGOEventString += "-----------------------------\n";
+        }
+
+        NGOEventString += "-----------------------------\n\n";
+    }
+    console.log(NGOEventString);
+
+
     //format data into strings for each ngo so it can be displayed in the pdf
     //console.log(ngoInfoList[0].name+", "+ngoInfoList[0].ngoEventList.subjects[0]+", "+ngoInfoList[0].ngoEventList.eventTimes[0]);
+
+    //this part will be creating a series of components to combine into the review pdf using a series of for loops and
+    //terrible structure
+
+
+
+
 
 
     var docDefinition = {
@@ -757,23 +844,7 @@ function GenerateReviewPDF(requestReviewCB) {
                 text: "Duration: " + simData.durationMs,
                 style: 'header'
             },
-            {
-                text: 'Subheader 1 - using subheader style',
-                style: 'subheader'
-            },
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Confectum ponit legam, perferendis nomine miserum, animi. Moveat nesciunt triari naturam posset, eveniunt specie deorsus efficiat sermone instituendarum fuisse veniat, eademque mutat debeo. Delectet plerique protervi diogenem dixerit logikh levius probabo adipiscuntur afficitur, factis magistra inprobitatem aliquo andriam obiecta, religionis, imitarentur studiis quam, clamat intereant vulgo admonitionem operis iudex stabilitas vacillare scriptum nixam, reperiri inveniri maestitiam istius eaque dissentias idcirco gravis, refert suscipiet recte sapiens oportet ipsam terentianus, perpauca sedatio aliena video.',
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Confectum ponit legam, perferendis nomine miserum, animi. Moveat nesciunt triari naturam posset, eveniunt specie deorsus efficiat sermone instituendarum fuisse veniat, eademque mutat debeo. Delectet plerique protervi diogenem dixerit logikh levius probabo adipiscuntur afficitur, factis magistra inprobitatem aliquo andriam obiecta, religionis, imitarentur studiis quam, clamat intereant vulgo admonitionem operis iudex stabilitas vacillare scriptum nixam, reperiri inveniri maestitiam istius eaque dissentias idcirco gravis, refert suscipiet recte sapiens oportet ipsam terentianus, perpauca sedatio aliena video.',
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Confectum ponit legam, perferendis nomine miserum, animi. Moveat nesciunt triari naturam posset, eveniunt specie deorsus efficiat sermone instituendarum fuisse veniat, eademque mutat debeo. Delectet plerique protervi diogenem dixerit logikh levius probabo adipiscuntur afficitur, factis magistra inprobitatem aliquo andriam obiecta, religionis, imitarentur studiis quam, clamat intereant vulgo admonitionem operis iudex stabilitas vacillare scriptum nixam, reperiri inveniri maestitiam istius eaque dissentias idcirco gravis, refert suscipiet recte sapiens oportet ipsam terentianus, perpauca sedatio aliena video.\n\n',
-            {
-                text: 'Subheader 2 - using subheader style',
-                style: 'subheader'
-            },
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Confectum ponit legam, perferendis nomine miserum, animi. Moveat nesciunt triari naturam posset, eveniunt specie deorsus efficiat sermone instituendarum fuisse veniat, eademque mutat debeo. Delectet plerique protervi diogenem dixerit logikh levius probabo adipiscuntur afficitur, factis magistra inprobitatem aliquo andriam obiecta, religionis, imitarentur studiis quam, clamat intereant vulgo admonitionem operis iudex stabilitas vacillare scriptum nixam, reperiri inveniri maestitiam istius eaque dissentias idcirco gravis, refert suscipiet recte sapiens oportet ipsam terentianus, perpauca sedatio aliena video.',
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Confectum ponit legam, perferendis nomine miserum, animi. Moveat nesciunt triari naturam posset, eveniunt specie deorsus efficiat sermone instituendarum fuisse veniat, eademque mutat debeo. Delectet plerique protervi diogenem dixerit logikh levius probabo adipiscuntur afficitur, factis magistra inprobitatem aliquo andriam obiecta, religionis, imitarentur studiis quam, clamat intereant vulgo admonitionem operis iudex stabilitas vacillare scriptum nixam, reperiri inveniri maestitiam istius eaque dissentias idcirco gravis, refert suscipiet recte sapiens oportet ipsam terentianus, perpauca sedatio aliena video.\n\n',
-            {
-                text: 'It is possible to apply multiple styles, by passing an array. This paragraph uses two styles: quote and small. When multiple styles are provided, they are evaluated in the specified order which is important in case they define the same properties',
-                style: ['quote', 'small']
-            }
+            NGOEventString,
         ],
         styles: {
             header: {
