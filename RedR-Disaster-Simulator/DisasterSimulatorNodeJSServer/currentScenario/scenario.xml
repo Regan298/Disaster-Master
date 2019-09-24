@@ -1,31 +1,236 @@
 <?xml version="1.0"?>
 <scenario>
-  <name>Test</name>
-  <ngoCount>1</ngoCount>
-  <duration>21600000</duration>
-  <hoursInDay>9</hoursInDay>
+  <name>Sebadoah</name>
+  <ngoCount>6</ngoCount>
+  <duration>19800000</duration>
+  <hoursInDay>1</hoursInDay>
   <mode>false</mode>
   <ngo>
-    <name>hi</name>
-    <passkey>1</passkey>
+    <name>People First</name>
+    <passkey>ngo1</passkey>
+  </ngo>
+  <ngo>
+    <name>We Care</name>
+    <passkey>ngo2</passkey>
+  </ngo>
+  <ngo>
+    <name>EWB</name>
+    <passkey>ngo3</passkey>
+  </ngo>
+  <ngo>
+    <name>Red Heart</name>
+    <passkey>ngo4</passkey>
+  </ngo>
+  <ngo>
+    <name>Peacedoves</name>
+    <passkey>ngo5</passkey>
+  </ngo>
+  <ngo>
+    <name>Reach Up</name>
+    <passkey>ngo6</passkey>
   </ngo>
   <event>
-    <recipient>hi</recipient>
-    <subject>test</subject>
-    <time>0:0:9</time>
+    <recipient>Peacedoves</recipient>
+    <subject>Set up</subject>
+    <time>00:00:10</time>
     <type>pdf</type>
-    <location>/currentScenario/files/A5_buurmatom_marked.pdf</location>
+    <location>/currentScenario/files/000 Needs assessment letter.pdf</location>
   </event>
   <event>
-    <recipient>hi</recipient>
-    <subject>sfxhx</subject>
-    <time>0:2:0</time>
+    <recipient>Peacedoves</recipient>
+    <subject>Introduction into Sebadoah</subject>
+    <time>00:02:00</time>
     <type>pdf</type>
-    <location>/currentScenario/files/feedback_(1).pdf</location>
+    <location>/currentScenario/files/001 Activation of Cluster System.pdf</location>
+  </event>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>President of Sebadoah</subject>
+    <time>00:04:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/002 Purchase from Umbala.pdf</location>
+  </event>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>SitRep Request</subject>
+    <time>00:06:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/003 HQ Daily SitRep Request.pdf</location>
+  </event>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>Budget Request</subject>
+    <time>00:08:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/004 HQ Budget Request.pdf</location>
+  </event>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>Flood Update</subject>
+    <time>00:10:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/005 DisCom Flood Update.pdf</location>
+  </event>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>Request Cluster SitReps</subject>
+    <time>00:12:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/006 Request Cluster SitReps.pdf</location>
+  </event>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>Request SitReps</subject>
+    <time>00:14:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/007 HQ No Daily SitRep.pdf</location>
+  </event>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>Budget</subject>
+    <time>00:16:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/008 HQ No Budget.pdf</location>
+  </event>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>Sit Reps Request</subject>
+    <time>00:18:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/009 No Daily Cluster SitReps.pdf</location>
+  </event>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>Information Request</subject>
+    <time>00:20:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/010 HQ Site Info Request.pdf</location>
+  </event>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>Planning Request</subject>
+    <time>00:22:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/011 HQ Planning Request.pdf</location>
+  </event>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>Kidnapping</subject>
+    <time>00:24:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/012 HQ Kidnapping.pdf</location>
+  </event>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>Kidnapping</subject>
+    <time>00:26:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/012 HQ Kidnapping.pdf</location>
+  </event>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>Reminder Flash Appeal</subject>
+    <time>00:28:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/013 Reminder - Flash Appeal.pdf</location>
+  </event>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>Gender Audit</subject>
+    <time>00:30:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/014 HQ Gender Audit.pdf</location>
+  </event>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>DayinLife Request</subject>
+    <time>00:32:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/015 HQ DayinLife Request.pdf</location>
   </event>
   <library>
-    <subject>lib</subject>
+    <subject>Test</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/test.pdf</location>
+  </library>
+  <library>
+    <subject>blah</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/A5_buurmatom_marked.pdf</location>
+  </library>
+  <library>
+    <subject>beanz</subject>
     <type>pdf</type>
     <location>/currentScenario/files/library/comp309-a3.pdf</location>
+  </library>
+  <library>
+    <subject>sdn</subject>
+    <type>image</type>
+    <location>/currentScenario/files/library/20190905_232941.jpg</location>
+  </library>
+  <library>
+    <subject>ngfklad</subject>
+    <type>video</type>
+    <location>/currentScenario/files/library/COMP309_Thurs_on_8_1_2019_(Thu)_default_26d6f226.mp4</location>
+  </library>
+  <library>
+    <subject>uvjbm</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/feedback (1).pdf</location>
+  </library>
+  <library>
+    <subject>pjiobhj h</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/A3_buurmatom.marked.pdf</location>
+  </library>
+  <library>
+    <subject>pokfepko</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/feedback.pdf</location>
+  </library>
+  <library>
+    <subject>o;iblhuk</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/ENGR301-Requirements-team_16-Feedback (1).pdf</location>
+  </library>
+  <library>
+    <subject>puoi</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/Using_your_own_vehicle_for_your_business (1).pdf</location>
+  </library>
+  <library>
+    <subject>ycufg</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/ENGR301-IP_Agreement-buurmatom.pdf</location>
+  </library>
+  <library>
+    <subject>lur</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/xanpan.pdf</location>
+  </library>
+  <library>
+    <subject>ilybgvukjh</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/hfe_yamaha_ns-6900_7900_c7900_e7900_flyer_en.pdf</location>
+  </library>
+  <library>
+    <subject>louiy</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/2018_1_COMP307 (2).pdf</location>
+  </library>
+  <library>
+    <subject>uxetdcfg</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/305902194.pdf</location>
+  </library>
+  <library>
+    <subject>bkhjvgcfxd</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/Kathy-Schwalbe-An-Introduction-to-Project-Management-min.pdf</location>
+  </library>
+  <library>
+    <subject>cfxdzrseSZdxfc</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/2018_1_COMP307.pdf</location>
   </library>
 </scenario>

@@ -218,20 +218,7 @@ body {
 
 
 
-.mediaOverlay {
-    position: fixed;
-    display: none;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
 
-
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 3;
-    cursor: pointer;
-}
 
 
 
@@ -363,7 +350,7 @@ ul.libraryList {
     margin-top: 2.5%;
     max-width: 45%;
     min-width: 45%;
-    /* padding-right: 10%; */
+    /*padding-right: 10%;*/
 }
 
 .inboxTitle {
@@ -386,7 +373,6 @@ ul.libraryList {
     display: flex;
     width: 45%;
     /*position: relative;*/
-    margin-left: 2%;
 }
 
 
@@ -394,8 +380,7 @@ ul.libraryList {
 
 .messagingButtonsHQ {
     max-height: 100%;
-    min-width: 20%;
-    max-width: 20%;
+    max-width: 25%;
     align-self: stretch;
     border-right: solid;
     border-width: 1px;
@@ -421,7 +406,6 @@ ul.libraryList {
     height: 80%;
     margin-bottom: 16%;
     min-width: 75%;
-    margin-left: 2%;
 }
 
 .messagingContentHQ ul {
@@ -522,8 +506,7 @@ ul.libraryList {
 
 .messagingButtonsNGO {
     max-height: 100%;
-    min-width: 20%;
-    max-width: 20%;
+    max-width: 25%;
     align-self: stretch;
     border-right: solid;
     border-width: 1px;
@@ -544,7 +527,6 @@ ul.libraryList {
     height: 80%;
     margin-bottom: 16%;
     min-width: 75%;
-    margin-left: 2%;
 }
 
 .messagingContentNGO ul {
@@ -629,6 +611,9 @@ ul.libraryList {
     display: flex;
     width: 45%;
     position: absolute;
+    /*flex-direction: column;*/
+    flex-wrap: wrap;
+
 }
 
 .inboxElementHQ h1 {
@@ -675,7 +660,7 @@ ul.libraryList {
     height: 45vh;
     max-width: 95%;
     margin-left: 2%;
-    word-wrap: break-word;
+    /* margin-right: 2%; */
     margin-top: 5%;
 }
 
@@ -750,7 +735,7 @@ ul.libraryList {
 }
 
 #eventViewerNGO{
-    min-width: 80%;
+    min-width: 75%;
     max-height: 60vh;
 
 }
@@ -771,8 +756,7 @@ ul.libraryList {
     max-width: 100%;
     margin-left: 2%;
     margin-right: 2%;
-    margin-top: 2%;
-    word-wrap: break-word;
+    margin-top: 5%;
 }
 
 #inboxFormDivNGO{
@@ -790,62 +774,22 @@ ul.libraryList {
     resize: none;
     float: left;
     max-height: 100%;
-    min-width: 75%;
+    min-width: 85%;
     margin-right: 5%;
     min-height: 10vh;
-}
-
-#inboxNGOForm select {
-    /* margin-top: 2%; */
-    width: 20%;
-    display: inline-block;
-    vertical-align: top;
-    float: left;
-    font-size: 100%;
-    padding: 0;
-    height: 5vh;
-    margin-bottom: 2%;
 }
 
 
 #inboxNGOForm input {
     /* margin-top: 2%; */
-    width: 20%;
+    width: 10%;
     display: inline-block;
-    /* vertical-align: top; */
-    /* float: left; */
-    /* font-size: 100%; */
-    /* padding-bottom: 5%; */
-    /* height: 2vh; */
-    /* padding: 1em; */
+    vertical-align: top;
+    float: left;
+    font-size: 100%;
+    padding: 0;
+    height: 10vh;
 }
-
-#ngoFormDiv {
-
-    background-color: white;
-    margin: auto;
-    margin-top: 20%;
-    max-width: 25%;
-}
-
-#ngoStatusText {
-    font-weight: bold;
-    text-align: center;
-    color: white;
-    background-color: var(--main-color);
-}
-
-.ngoStatusRadio{
-    margin-left: 45%;
-}
-
-#ngoStatusSubmit{
-    margin-left: 40%;
-    margin-bottom: 2%;
-    width: 20%;
-}
-
-
 
 
 .pdfobject {

@@ -64,6 +64,9 @@
 
             <!--Timeline-->
             <div id="timeline" class="timeline">
+                <div style="position:relative">
+                    <button type="button" id="addButton" onclick=addPopup() style="border: 2px solid #ffffff00; right: 0px; position:absolute; font-size: 20px; padding: 3px 10px; z-index: 2;">  +  </button>
+                </div>
                 <div id="visualization"></div><!-- container for timeline -->
             </div>
 
@@ -172,115 +175,68 @@
 
 
 <div id="modal" class="eventOverlay"> 
-    <div class="eventOverlayContent">
-        <div id="overlayHeader">
-
-        <span class="close">&times;</span>
-        
-        
-        <table border-collapse= "collapse" width= "100%">
-            <tr>
-              <th>Event Name</th>
-              <th>Recipient</th>
-              <th>Day</th>
-              <th>Event Content</th>
-            </tr>
-
-            <tr>
-                <td><input id="overlayName" type="text" name="subject" value="tempValue"></input></td>
-                <td>
-                    <select id="overlayRecipiants">
-                        <option value="group1">group1</option>
-                        <option value="group2">group2</option>
-                    </select>
-                </td>
-                <td>
-                    <input id="overlayDay" type="number" name="day" value="3" min="1" max="5"></input>
-                    <input id="overlayTime" type="time" name="time" value="12:44"></input>
-                </td>
-                <td>
-                    <input type="file" name="file" id="file" class="overlayinputfile" />
-                    <label for="file" >File Selector</label>
-                </td>
-                <td>
-                    <button type="button">Update</button>
-                    
-                </td>
-                <td>
-                <button type="button" style="background-color:red; color:white;">Delete</button>
-                </td>
-            </tr>
-          </table>
-          
-
-
-
-        
-        </div>
-
-        <div id="eventMediaDisplay"></div>
-    </div>
 </div>
 
 <script>
-
 
     var modal = document.getElementById("modal");
     var span = document.getElementsByClassName("close")[0];
     function onSelect(properties){
 
         //setting field values
-        document.getElementById("overlayName").value = items[properties.items[0]].content;
+        // document.getElementById("overlayName").value = items[properties.items[0]].content;
+        //console.log(items[properties.items[0]].contentType);
 
-        //console.log(items);
-        //console.log(properties.items[0]);
-        //console.log(items[properties.items[0]].location);
-        //console.log(items[properties.items[0]].content);
+        $('#eventMediaDisplay').empty();
+        selected = items[properties.items[0]];
+        setModal();
+        console.log(selected.contentType);
+        if(selected.contentType === 'pdf'){
+            console.log(selected.location);
 
-        //console.log(items[properties.items[0]]);
-        console.log(items[properties.items[0]].contentType);
+            PDFObject.embed(selected.location, "#eventMediaDisplay");
 
-        if(items[properties.items[0]].contentType === 'pdf'){
+        } else if(selected.contentType === 'video'){
+            $('#eventMediaDisplay').append(
+                "<br>" +
+                "<div style='text-align:center;'>" +
+		                "<button style='text-align:center;' onclick='videoPausePlay()'>Play/Pause</button>" +
+                "</div>" +
+	            "<div style='text-align:center;'>" +
+		            "<video id='videoID' style='text-align:center;' width='500' height='500'>" +
+		                "<source id='videosrc' src='"+selected.location+"' type='video/mp4'>" +
+	                "</video>" +
+                "</div>"
+                );
+                    
+        } else if(selected.contentType === 'audio'){
 
-            PDFObject.embed(items[properties.items[0]].location, "#eventMediaDisplay");
-        }else {
-            $('#eventMediaDisplay').empty();
+            $('#eventMediaDisplay').append(
+				"<br>" +
+				"<div style='text-align:center;'>" +
+					"<button id='audioButton' style='text-align:center;' onclick='audioPausePlay()'>Paused</button>" +
+				"</div>" +
+				"<br>" +
+				"<div style='text-align:center;'>" +
+					"<audio id='audioID'>" +
+						"<source src='"+selected.location+"' type='audio/mpeg'>" +
+					"</audio>" +
+				"</div>"
+			);
+            
+        } else if(selected.contentType === 'image'){
+
+            $('#eventMediaDisplay').append(
+				"<br>" +
+				"<div style='text-align:center;'>" +
+					"<img src='"+selected.location+"'  width=500 height=500>" +
+				"</div>"
+			);
+            
         }
-
-
-
-
         modal.style.display = "block";
     }
-    span.onclick = function(){
-        modal.style.display = "none";
-        timeline.setSelection([]);
-    }
 </script>
-
-
-<!--PDF Displayer-->
-<div id="pdfOverlay" class="mediaOverlay" onclick="displayPDFOff()">
-</div>
-
-
-<!-- Video displaying code -->
-<div id="videoOverlay" class="mediaOverlay" onclick="displayVideoOff()">
-</div>
-
-<!-- Audio displaying code -->
-<div id="audioOverlay" class="mediaOverlay" onclick="displayAudioOff()">
-</div>
-
-<!-- Image overlay code -->
-<div id="imageOverlay" class="mediaOverlay" onclick="displayImageOff()">
-</div>
-
-
-<!-- Footer -->
-<!--<footer class="bg-light fixed-bottom" id="footer">
-    <script>$("#footer").load("footer.html");</script>
-</footer>-->
 </body>
 
 </html>
