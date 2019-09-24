@@ -32,7 +32,7 @@ function handleNGOJoining() {
     socket.emit('getConnected', "request", function (callbackData) {
         processNGOData(callbackData.connectedUsers);
         for (var i = 0; i < ngos.length; i++) {
-            let currentUserName = new String(ngos[i].name).trim().replace(" ", "_");
+            let currentUserName = new String(ngos[i].name).trim().replace(/ /g, "_");
             ;
             if (currentUserName !== "HQ") {
                 try {
@@ -57,7 +57,7 @@ function processNGOData(recievedNGOs) {
     ngos = [];
     for (var i = 0; i < recievedNGOs.length; i++) {
         ngos.push(recievedNGOs[i]);
-        ngos[i].name = new String(ngos[i].name).trim().replace(" ", "_");
+        ngos[i].name = new String(ngos[i].name).trim().replace(/ /g, "_");
     }
 }
 
@@ -68,12 +68,12 @@ function handlePersistentMessages() {
             for (var i = 0; i < callbackData.pastMessages.length; i++) {
                 let currentPastMessage = callbackData.pastMessages[i];
                 var isOrigin;
-                if (currentPastMessage.sender.replace(" ", "_") === "HQ") {
+                if (currentPastMessage.sender.replace(/ /g, "_") === "HQ") {
                     isOrigin = true;
                 } else {
                     isOrigin = false;
                 }
-                addToConversation(currentPastMessage.content, isOrigin, currentPastMessage.sender.replace(" ", "_"), currentPastMessage.recipient.replace(" ", "_"));
+                addToConversation(currentPastMessage.content, isOrigin, currentPastMessage.sender.replace(/ /g, "_"), currentPastMessage.recipient.replace(/ /g, "_"));
 
             }
         }
@@ -211,7 +211,7 @@ function handleCommunicationButtons() {
 
 
     for (var i = 0; i < simData.ngoList.length; i++) {
-        let currentUserName = new String(simData.ngoList[i].name).trim().replace(" ", "_");
+        let currentUserName = new String(simData.ngoList[i].name).trim().replace(/ /g, "_");
 
         buttons[i].innerHTML = currentUserName;
         buttons[i].id = currentUserName;
@@ -244,7 +244,7 @@ function handleCommunicationButtons() {
 
 
     for (var i = 0; i < simData.ngoList.length; i++) {
-        messagingChats[i].id = new String(simData.ngoList[i].name).trim().replace(" ", "_") + "Content";
+        messagingChats[i].id = new String(simData.ngoList[i].name).trim().replace(/ /g, "_") + "Content";
     }
 
     //remove extra buttons and chats
@@ -272,6 +272,11 @@ function addMessageToEventResponse(responses, isOrigin) {
 
         for (var j = 0; j < valSplit.length; j++) {
             $("#eventResponseViewerHQ").append(valSplit[j] + "<br>");
+        }
+        if (!isOrigin) {
+            if(responses[i].chosenNGOTag != null) {
+                $("#eventResponseViewerHQ").append("<b>Chosen NGO Tag: " + responses[i].chosenNGOTag + "</b>");
+            }
         }
 
         $("#eventResponseViewerHQ").append("<hr>");
@@ -585,7 +590,7 @@ function addToConversation(content, isOrigin, from, to) {
                 $(childUl).append("<li id='origin'>" + content + "</li>");
             }
         }
-        to = to.trim().replace(" ", "_") + "Content";
+        to = to.trim().replace(/ /g, "_") + "Content";
         var childUl = $("#" + to).find('.messageList');
         $(childUl).append("<li id='origin'>" + content + "</li>");
     } else {
@@ -597,7 +602,7 @@ function addToConversation(content, isOrigin, from, to) {
         var value;
         for (var i = 0; i < ngos.length; i++) {
             if (ngos[i].name === from) {
-                value = from.replace(" ", "_") + "Content";
+                value = from.replace(/ /g, "_") + "Content";
                 break;
             }
         }
@@ -622,63 +627,50 @@ function displayPDFOff() {
     document.getElementById("pdfOverlay").style.display = "none";
 }
 
+function displayVideoOff() {
+    var videoOverlay = document.getElementById("videoPlayer");
+    videoOverlay.parentNode.removeChild(videoOverlay);
+    document.getElementById("videoOverlay").style.display = "none";
+}
+
+function displayAudioOff() {
+    var audioOverlay = document.getElementById("audioPlayer");
+    audioOverlay.parentNode.removeChild(audioOverlay);
+    document.getElementById("audioOverlay").style.display = "none";
+}
+
+
+function displayImageOff() {
+    var imageOverlay = document.getElementById("imageDisplay");
+    imageOverlay.parentNode.removeChild(imageOverlay);
+    document.getElementById("imageOverlay").style.display = "none";
+}
+
 function displayEventMedia(type, name) {
     console.log(type);
     document.getElementById("pdfOverlay").style.display = "none";
     document.getElementById("audioOverlay").style.display = "none";
     document.getElementById("imageOverlay").style.display = "none";
     document.getElementById("videoOverlay").style.display = "none";
-    if (type == "mp4") {
+    if (type == "video") {
+        $("#videoOverlay").append("<div style='text-align:center;'><video id='videoPlayer' style='text-align:center; margin-top: 5%' controls>\n" +
+            "        <source src=' " + name + " ' type='video/mp4'>\n" +
+            "    </video></div>");
         document.getElementById("videoOverlay").style.display = "block";
     } else if (type == "pdf") {
         console.log(name);
         PDFObject.embed(name, "#pdfOverlay");
         document.getElementById("pdfOverlay").style.display = "block";
-    } else if (type == "mp3") {
+    } else if (type == "audio") {
+        $("#audioOverlay").append("<div style='text-align:center;'><audio id='audioPlayer' style='text-align:center; margin-top: 5%' controls>\n" +
+            "            <source src=' " + name + "'type='audio/mpeg'>\n" +
+            "            Your browser does not support the audio element.\n" +
+            "        </audio></div>");
         document.getElementById("audioOverlay").style.display = "block";
-    } else if (type == "jpg") {
+    } else if (type == "image") {
+        $("#imageOverlay").append("<div id='imageDisplay' style='text-align:center;'><img  style='margin-top: 5%' height='500px' width='500px' src= '" + name + "'></div>");
         document.getElementById("imageOverlay").style.display = "block";
     }
-}
-
-function videoPausePlay() {
-    var video = document.getElementById("videoID");
-    if (video.paused) {
-        video.play();
-    } else {
-        video.pause();
-    }
-}
-
-
-function videoOverlayOff() {
-    var video = document.getElementById("videoID");
-    video.pause();
-    document.getElementById("videoOverlay").style.display = "none";
-}
-
-
-function audioPausePlay() {
-    var audio = document.getElementById("audioID");
-    var audioButton = document.getElementById("audioButton");
-    if (audio.paused) {
-        audio.play();
-        audioButton.innerHTML = "Playing";
-    } else {
-        audio.pause();
-        audioButton.innerHTML = "Paused";
-    }
-}
-
-function audioOverlayOff() {
-    var audio = document.getElementById("audioID");
-    audio.pause();
-    document.getElementById("audioOverlay").style.display = "none";
-}
-
-//
-function imageOverlayOff() {
-    document.getElementById("imageOverlay").style.display = "none";
 }
 
 

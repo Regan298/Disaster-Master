@@ -55,7 +55,9 @@ var simData = {
     occurredEvents: [],
     library: [],
     startTimeMS: 0,
-    isRunning: false
+    isRunning: false,
+    EventTags: ['Cow', 'cat', 'chicken'],
+    ngoStatusReports: []
 };
 
 var currentRunningInstance;
@@ -261,7 +263,9 @@ function clearSimData() {
         occurredEvents: [],
         library: [],
         startTimeMS: 0,
-        isRunning: false
+        isRunning: false,
+        EventTags: ['Cow', 'cat', 'chicken'],
+        ngoStatusReports: []
     };
     connectedUsers = [];
     connectedUsers.push(host);
@@ -376,7 +380,8 @@ function processZip(req, res, type) {
                                                 location: currentEventLocation,
                                                 subject: currentEventSubject,
                                                 responses: [],
-                                                latestUpdateTime: 0
+                                                latestUpdateTime: 0,
+                                                ChosenNGOTag: "Not Chosen"
                                             };
                                             simData.eventsList.push(event);
                                         }
@@ -639,11 +644,15 @@ io.on('connection', function (socket) {
                     simData.eventsList[i].responses.push({
                         content: msg.response.content,
                         sender: msg.response.from,
-                        time: responseTime
+                        time: responseTime,
+                        chosenNGOTag: msg.response.chosenNGOTag
                     });
+                    simData.eventsList[i].ChosenNGOTag = msg.response.chosenNGOTag;
+                    console.log(simData.eventsList[i]);
                     worker.postMessage(simData);
                 }
             }
+    
         });
 
         socket.on('pastEventResponses', function (msg, callback) {
@@ -661,6 +670,11 @@ io.on('connection', function (socket) {
 
         });
 
+        socket.on('ngoStatusReport', function (msg) {
+            var currentNGOStatusReport = msg.ngoStatusReport;
+            console.log(currentNGOStatusReport);
+            simData.ngoStatusReports.push(currentNGOStatusReport);
+        });    
 
 //Listen for play/pause
         socket.on('play', function () {
