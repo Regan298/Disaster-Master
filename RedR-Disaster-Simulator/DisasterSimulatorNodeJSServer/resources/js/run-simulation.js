@@ -182,6 +182,19 @@ function drawTimeline() {
                 var scaledTime = timelineStartDate.getTime() + (ms * timeScale);
                 scaledTime = new Date(scaledTime);
                 id = groups[k].id;
+                console.log(currentEvent.type[0]);
+
+                var ngoColor;
+                if(currentEvent.type === 'pdf'){
+                    ngoColor = 'background-color: red; color: white;'
+                } else if(currentEvent.type === 'video'){
+                    ngoColor = 'background-color: blue; color: white;'
+                } else if(currentEvent.type === 'image'){
+                    ngoColor = 'background-color: green; color: white;'
+                } else if(currentEvent.type === 'audio'){
+                    ngoColor = 'background-color: yellow; color: black;'
+                }
+
                 items.push({
                     id: currentEvent.id,
                     group: id,
@@ -191,6 +204,7 @@ function drawTimeline() {
                     contentType: currentEvent.type,
                     recipient: currentEvent.recipient[0],
                     time: currentEvent.time[0]
+                    style: ngoColor
                 });
                 break;
             }
