@@ -27,11 +27,11 @@
 <script type="text/javascript" src="js/timelineComponents.js"></script>
 
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light static-top "id="header">
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top " id="header">
     <!--Colour Changer-->
     <script>
         $("#header").load("header.html", function (response,
-                                                   status, http){
+                                                   status, http) {
             document.getElementById("colourChooser").setAttribute("value", document.cookie);
         });
         document.documentElement.style.setProperty("--main-color", document.cookie);
@@ -130,12 +130,11 @@
             </div>
 
 
-
             <div id="inboxElementHQ" class="inboxElementHQ">
 
                 <div id="inboxEventListHQ" class="inboxEventListHQ">
-                    <select id="ngoFilterHQ" onchange="filterEvents()" >
-                        <option hidden value="default" >Events From All NGO's</option>
+                    <select id="ngoFilterHQ" onchange="filterEvents()">
+                        <option hidden value="default">Events From All NGO's</option>
 
                     </select>
                 </div>
@@ -149,73 +148,66 @@
                 </div>
 
 
-
-
-
             </div>
 
 
-
             <!--add messaging form-->
-
 
 
         </div>
     </div>
 </div>
 
+<div id="ngoPasskeyOverlay" class="eventOverlay" onclick="displayPasskeysOff()">
+    <div id="ngoPasskeyContent">
+    <p id="ngoPasskeyText">List Of NGO Passkeys:</p>
+    </div>
+
+</div>
 
 
-
-
-
-
-
-<div id="modal" class="eventOverlay"> 
+<div id="modal" class="eventOverlay">
     <div class="eventOverlayContent">
         <div id="overlayHeader">
 
-        <span class="close">&times;</span>
-        
-        
-        <table border-collapse= "collapse" width= "100%">
-            <tr>
-              <th>Event Name</th>
-              <th>Recipient</th>
-              <th>Day</th>
-              <th>Event Content</th>
-            </tr>
-
-            <tr>
-                <td><input id="overlayName" type="text" name="subject" value="tempValue"></input></td>
-                <td>
-                    <select id="overlayRecipiants">
-                        <option value="group1">group1</option>
-                        <option value="group2">group2</option>
-                    </select>
-                </td>
-                <td>
-                    <input id="overlayDay" type="number" name="day" value="3" min="1" max="5"></input>
-                    <input id="overlayTime" type="time" name="time" value="12:44"></input>
-                </td>
-                <td>
-                    <input type="file" name="file" id="file" class="overlayinputfile" />
-                    <label for="file" >File Selector</label>
-                </td>
-                <td>
-                    <button type="button">Update</button>
-                    
-                </td>
-                <td>
-                <button type="button" style="background-color:red; color:white;">Delete</button>
-                </td>
-            </tr>
-          </table>
-          
+            <span class="close">&times;</span>
 
 
+            <table border-collapse="collapse" width="100%">
+                <tr>
+                    <th>Event Name</th>
+                    <th>Recipient</th>
+                    <th>Day</th>
+                    <th>Event Content</th>
+                </tr>
 
-        
+                <tr>
+                    <td><input id="overlayName" type="text" name="subject" value="tempValue"></input></td>
+                    <td>
+                        <select id="overlayRecipiants">
+                            <option value="group1">group1</option>
+                            <option value="group2">group2</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input id="overlayDay" type="number" name="day" value="3" min="1" max="5"></input>
+                        <input id="overlayTime" type="time" name="time" value="12:44"></input>
+                    </td>
+                    <td>
+                        <input type="file" name="file" id="file" class="overlayinputfile"/>
+                        <label for="file">File Selector</label>
+                    </td>
+                    <td>
+                        <button type="button">Update</button>
+
+                    </td>
+                    <td>
+                        <button type="button" style="background-color:red; color:white;">Delete</button>
+                    </td>
+                </tr>
+            </table>
+
+
         </div>
 
         <div id="eventMediaDisplay"></div>
@@ -227,7 +219,8 @@
 
     var modal = document.getElementById("modal");
     var span = document.getElementsByClassName("close")[0];
-    function onSelect(properties){
+
+    function onSelect(properties) {
 
         //setting field values
         document.getElementById("overlayName").value = items[properties.items[0]].content;
@@ -240,19 +233,18 @@
         //console.log(items[properties.items[0]]);
         console.log(items[properties.items[0]].contentType);
 
-        if(items[properties.items[0]].contentType === 'pdf'){
+        if (items[properties.items[0]].contentType === 'pdf') {
 
             PDFObject.embed(items[properties.items[0]].location, "#eventMediaDisplay");
-        }else {
+        } else {
             $('#eventMediaDisplay').empty();
         }
 
 
-
-
         modal.style.display = "block";
     }
-    span.onclick = function(){
+
+    span.onclick = function () {
         modal.style.display = "none";
         timeline.setSelection([]);
     }
