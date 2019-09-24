@@ -571,6 +571,13 @@ io.on('connection', function (socket) {
             worker.postMessage(simData);
         });
 
+        socket.on('addEvent', function(event){
+            console.log('addEvent');
+            console.log(event);
+            simData.eventsList.push(event);
+            worker.postMessage(simData);
+        });
+
         socket.on('deleteEvent', function(eventI){
             simData.eventsList.splice(eventI, 1);
             worker.postMessage(simData);
