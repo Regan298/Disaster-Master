@@ -587,7 +587,7 @@ io.on('connection', function (socket) {
 
         //store in simdata
         var d = new Date();
-        var date = dateFormat(d, "HH:MM:ss")
+        var date = dateFormat(d, "HH:MM:ss");
         var message = {
             recipient: msg.message.to,
             sender: msg.message.from,
@@ -736,6 +736,13 @@ function GenerateReviewPDF(requestReviewCB) {
             if(simData.eventsList[i].recipient.toString()===ngoInfoList[j].name.toString()){
 
                 let eventTime = simData.eventsList[i].time;
+                var timeSplit = eventTime.toString().split(":");
+                var h = parseInt(timeSplit[0], 10);
+                var m = parseInt(timeSplit[1], 10);
+                var s = parseInt(timeSplit[2], 10);
+
+
+                let eventTimeFormated = h+"h"+m+"m"+s+"s";
                 let subject = simData.eventsList[i].subject;
                 let response = [];
                 let responseTimes = [];
@@ -785,7 +792,7 @@ function GenerateReviewPDF(requestReviewCB) {
                     ngoInfoList[j].ngoEventList.responseTagsList.push(responseTags);
                 }
                 ngoInfoList[j].ngoEventList.subjects.push(subject);
-                ngoInfoList[j].ngoEventList.eventTimes.push(eventTime);
+                ngoInfoList[j].ngoEventList.eventTimes.push(eventTimeFormated);
             }
         }
 
