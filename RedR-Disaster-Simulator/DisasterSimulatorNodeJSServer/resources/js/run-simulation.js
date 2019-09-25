@@ -872,6 +872,8 @@ function addPopup(subject, fileLocation, type){
         options = "<option value='pdf'>pdf</option><option value='video'>video</option><option value='audio' selected>audio</option><option value='image'>image</option>";
     }else if (type === 'image'){
         options = "<option value='pdf'>pdf</option><option value='video'>video</option><option value='audio'>audio</option><option value='image' selected>image</option>";
+    }else {
+        options = "<option value='pdf'>pdf</option><option value='video'>video</option><option value='audio'>audio</option><option value='image'>image</option>";
     }
 
     var ngoOptions = '';
