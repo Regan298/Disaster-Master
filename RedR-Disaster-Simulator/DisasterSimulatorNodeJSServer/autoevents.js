@@ -9,21 +9,24 @@ const { parentPort, workerData } = require('worker_threads');
 // const stopwatch = new Stopwatch();
 
 console.log("init");
-simLength = workerData.durationMs;
-eventList = workerData.eventsList;
+
 // stopwatch.start();
 var timeS = 0;
 var t;
 
-function updadeEvents(msg) {
+function updateEvents(msg) {
+	console.log('updateEvents');
+	simLength = msg.durationMs;
 	eventList = msg.eventsList;
 	t = setInterval(getEvents,1000);
 }
 
 parentPort.on('message', (msg) => {
+	console.log('received in AE');
 	if(typeof msg === "object"){
+		console.log('object');
 		clearInterval(t);
-		updadeEvents(msg);
+		updateEvents(msg);
 		return;
 	}
 	if (msg === 'pause') {
@@ -37,7 +40,7 @@ parentPort.on('message', (msg) => {
 	}
 });
 
-t = setInterval(getEvents,1000);
+// t = setInterval(getEvents,1000);
 
 function getEvents(){
 	timeS++;

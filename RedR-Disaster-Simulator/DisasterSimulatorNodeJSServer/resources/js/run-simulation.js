@@ -18,6 +18,7 @@ var selectedEvent;
 var eventResponseList = [];
 var eventCounter = 0;
 var selectNGOFilter = 'default';
+var selected;
 var firstTimeViewingKeys = true;
 
 //todo: Unccomment this when done
@@ -182,13 +183,28 @@ function drawTimeline() {
                 scaledTime = new Date(scaledTime);
                 id = groups[k].id;
                 console.log(currentEvent.type[0]);
+
+                var ngoColor;
+                if(currentEvent.type === 'pdf'){
+                    ngoColor = 'background-color: red; color: white;'
+                } else if(currentEvent.type === 'video'){
+                    ngoColor = 'background-color: blue; color: white;'
+                } else if(currentEvent.type === 'image'){
+                    ngoColor = 'background-color: green; color: white;'
+                } else if(currentEvent.type === 'audio'){
+                    ngoColor = 'background-color: yellow; color: black;'
+                }
+
                 items.push({
                     id: currentEvent.id,
                     group: id,
                     content: currentEvent.subject[0],
                     location: currentEvent.location[0],
                     start: '2019-01-' + scaledTime.getDate() + ' ' + scaledTime.getHours() + ':' + scaledTime.getMinutes() + ':' + scaledTime.getSeconds(),
-                    contentType: currentEvent.type
+                    contentType: currentEvent.type,
+                    recipient: currentEvent.recipient[0],
+                    time: currentEvent.time[0],
+                    style: ngoColor
                 });
                 break;
             }
@@ -271,7 +287,6 @@ function addMessageToEventResponse(responses, isOrigin) {
         for (var j = 0; j < valSplit.length; j++) {
             $("#eventResponseViewerHQ").append(valSplit[j] + "<br>");
         }
-
         if (!isOrigin) {
             if(responses[i].chosenNGOTag != null) {
                 $("#eventResponseViewerHQ").append("<b>Chosen NGO Tag: " + responses[i].chosenNGOTag + "</b>");
@@ -651,27 +666,19 @@ function displayImageOff() {
     document.getElementById("imageOverlay").style.display = "none";
 }
 
-
 function displayEventMedia(type, name) {
-
-    //pdf
-    //image
-    //audio
-    //video
-
-    console.log(name);
-
+    console.log(type);
     document.getElementById("pdfOverlay").style.display = "none";
     document.getElementById("audioOverlay").style.display = "none";
     document.getElementById("imageOverlay").style.display = "none";
     document.getElementById("videoOverlay").style.display = "none";
-
     if (type == "video") {
         $("#videoOverlay").append("<div style='text-align:center;'><video id='videoPlayer' style='text-align:center; margin-top: 5%' controls>\n" +
             "        <source src=' " + name + " ' type='video/mp4'>\n" +
             "    </video></div>");
         document.getElementById("videoOverlay").style.display = "block";
     } else if (type == "pdf") {
+        console.log(name);
         PDFObject.embed(name, "#pdfOverlay");
         document.getElementById("pdfOverlay").style.display = "block";
     } else if (type == "audio") {
@@ -729,7 +736,295 @@ function submitMessage(isForAll, content) {
 
 }
 
+function cancelEdit(){
+    modal.style.display = "none";
+    timeline.setSelection([]);
+    selected = null;
+    //this is here to stop audio/video events playing once the overlay is closed
+    $("#modal").empty();
+}
 
+function addEvent(location){
+    console.log('addEvent');
+    let frmData = document.getElementById("addEvent");
+    var newEvent = {
+        id: simData.eventsList.length,
+        recipient: '',
+        time: '',
+        type: '',
+        location: '',
+        subject: '',
+        responses: [],
+        latestUpdateTime: 0
+    };
+    let file = frmData.elements[5].files[0];
+    if(file){
+        uploadFiles(file, 'event');
+        newEvent.location = ['/currentScenario/files/'+file.name];
+        // var type = file.name.split(".");
+        // newEvent.type = type[type.length-1];
+    }else{
+        newEvent.location = [location];
+        // var type = location.split(".");
+        // newEvent.type = type[type.length-1];
+    }
+    
+    newEvent.type = frmData.elements[4].value;
+    newEvent.recipient = [frmData.elements[1].value];
+    newEvent.subject = [frmData.elements[0].value];
+    var day = frmData.elements[2].value-1;
+    var time = frmData.elements[3].value.split(':');
+    var simHours = time[0];
+    var simMins = time[1];
+
+    var ms = ((day * 24 * 60 * 60 * 1000) + (simHours * 60 * 60 * 1000) + (simMins * 60 * 1000))/simData.timeScale;
+    var seconds = Math.floor((ms / 1000) % 60);
+    var minutes = Math.floor((ms / 1000 / 60) % 60);
+    var hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
+
+    newEvent.time = [hours+":"+minutes+":"+seconds];
+    
+    console.log(newEvent);
+    socket.emit('addEvent', newEvent);
+    socket.emit('simState', "request", function (callbackData) {
+        simData = callbackData.simData;
+        timeline.destroy();
+        items = [];
+        groups = [];
+        drawTimeline();
+        timeline.redraw();
+    });
+    cancelEdit();
+}
+
+function updateEvent(){
+    let frmData = document.getElementById("editEvent");
+    let file = frmData.elements[5].files[0];
+    if(file){
+        uploadFiles(file, 'event');
+        simData.eventsList[selected.id].location = ['/currentScenario/files/'+file.name];
+        // var type = file.name.split(".");
+        // simData.eventsList[selected.id].type = type[type.length-1];
+    }
+    
+    simData.eventsList[selected.id].type = frmData.elements[4].value;
+    simData.eventsList[selected.id].recipient = [frmData.elements[1].value];
+    simData.eventsList[selected.id].subject = [frmData.elements[0].value];
+    var day = frmData.elements[2].value-1;
+    var time = frmData.elements[3].value.split(':');
+    var simHours = time[0];
+    var simMins = time[1];
+
+    var ms = ((day * 24 * 60 * 60 * 1000) + (simHours * 60 * 60 * 1000) + (simMins * 60 * 1000))/simData.timeScale;
+    var seconds = Math.floor((ms / 1000) % 60);
+    var minutes = Math.floor((ms / 1000 / 60) % 60);
+    var hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
+
+    simData.eventsList[selected.id].time = [hours+":"+minutes+":"+seconds];
+    
+    console.log(simData.eventsList[selected.id]);
+    socket.emit('updateEvent', simData.eventsList[selected.id]);
+    socket.emit('simState', "request", function (callbackData) {
+        simData = callbackData.simData;
+        timeline.destroy();
+        items = [];
+        groups = [];
+        drawTimeline();
+        timeline.redraw();
+    });
+    cancelEdit();
+}
+
+function deleteEvent() {
+    console.log(selected.id);
+    socket.emit('deleteEvent', selected.id);
+    socket.emit('simState', "request", function (callbackData) {
+        simData = callbackData.simData;
+        // console.log(simData);
+        timeline.destroy();
+        items = [];
+        groups = [];
+        drawTimeline();
+        timeline.redraw();
+    });
+    cancelEdit();
+}
+
+function uploadFiles(file, request) {
+    var xhr = new XMLHttpRequest();
+    var formData = new FormData();
+    xhr.open("POST", "/upload-"+request+"-file-live", true);
+    xhr.setRequestHeader('X-Requested-With','XMLHttpRequest');
+    formData.append("upload", file);
+    xhr.send(formData);
+}
+
+function useLibraryItem(libNum){
+    addPopup(simData.library[libNum].subject, simData.library[libNum].location, simData.library[libNum].type);
+}
+
+function addPopup(subject, fileLocation, type){
+    var libraryItems = '';
+    for(var i=0; i<simData.library.length; i++){
+        libraryItems += "<li>"+simData.library[i].subject+"\t<button onclick='useLibraryItem("+i+")'>Quick Add</button></li>"
+    }
+
+    var options = '';
+    if (type === 'pdf'){
+        options = "<option value='pdf' selected>pdf</option><option value='video'>video</option><option value='audio'>audio</option><option value='image'>image</option>";
+    }else if (type === 'video'){
+        options = "<option value='pdf'>pdf</option><option value='video' selected>video</option><option value='audio'>audio</option><option value='image'>image</option>";
+    }else if (type === 'audio'){
+        options = "<option value='pdf'>pdf</option><option value='video'>video</option><option value='audio' selected>audio</option><option value='image'>image</option>";
+    }else if (type === 'image'){
+        options = "<option value='pdf'>pdf</option><option value='video'>video</option><option value='audio'>audio</option><option value='image' selected>image</option>";
+    }else {
+        options = "<option value='pdf'>pdf</option><option value='video'>video</option><option value='audio'>audio</option><option value='image'>image</option>";
+    }
+
+    var ngoOptions = '';
+    for(var i=0; i < simData.ngoList.length; i++){
+        ngoOptions += "<option value='"+simData.ngoList[i].name+"'>"+simData.ngoList[i].name+"</option>";
+    }
+    var filename = ' - select new'
+    if(!(fileLocation === undefined)){
+        var loc = fileLocation[0].split("/");
+        filename = ' - '+loc[loc.length-1];
+    }
+    if(subject === undefined){
+        subject = '';
+    }
+
+    var days = Math.floor((simData.durationMs / (1000 * 60 * 60)));
+    $("#modal").empty();
+    $("#modal").append(
+        "<div class='eventOverlayContent'>" +
+        "<div id='overlayHeader'>" +
+        "<button class='close' type='button' onclick=cancelEdit()><span>&times;</span></button>"+
+        // "<span class='close'>&times;</span>" +
+        "<form id='addEvent' enctype='multipart/form-data'></form>" +
+        "<h3>Add Event</h3><br>" +
+        "<div class='row'>"+
+            "<div class='column1'>" +
+                "<h4>Event Details:</h4><br>" +
+                "<h5>Event Name</h5>" +
+                "<input form='addEvent' id='overlayName' type='text' name='subject' value='"+subject+"'></input></td>" +
+                "<h5>Recipient</h5>" +
+                "<select form='addEvent' id='overlayRecipiants'>" +
+                    "<option hidden disabled selected value> --select NGO-- </option>" +
+                    ngoOptions +
+                "</select>" +
+                "<h5>Day</h5>" +
+                "<input form='addEvent' id='overlayDay' type='number' name='day' min='1' max='"+days+"'></input>" +
+                "<input form='addEvent' id='overlayTime' type='time' name='time'></input>" +
+                "<h5>Type</h5>" +
+                "<select form='addEvent' name='type'>" +
+                    options +
+                "</select><br>" +
+                "<h5>Event Content<p>"+filename+"</p></h5>" +
+                "<input form='addEvent' type='file' name='file' id='file' class='overlayinputfile' />" +
+                "<label for='file'>File Selector</label><br>" +
+                "<button form='addEvent' type='button' onclick=addEvent('"+fileLocation+"')>Submit</button>" +
+            "</div>" +
+            "<div class='column2'>" +
+                "<h4>Library:</h4><br>" +
+                "<ul class='libraryList'>" +
+                    libraryItems +
+                "</ul>" +
+            "</div>" +
+        "</div>");
+    document.getElementById("modal").style.display = "block";
+}
+
+function setModal() {
+    var ngoOptions = '';
+    var selectedOption = '';
+    for(var i=0; i < simData.ngoList.length; i++){
+        if(selected.recipient === simData.ngoList[i].name[0]){
+            selectedOption = 'selected';
+        }else{
+            selectedOption = '';
+        }
+        ngoOptions += "<option "+selectedOption+" value='"+simData.ngoList[i].name+"'>"+simData.ngoList[i].name+"</option>";
+    }
+
+    var options = '';
+    if (selected.contentType === 'pdf'){
+        options = "<option value='pdf' selected>pdf</option><option value='video'>video</option><option value='audio'>audio</option><option value='image'>image</option>";
+    }else if (selected.contentType === 'video'){
+        options = "<option value='pdf'>pdf</option><option value='video' selected>video</option><option value='audio'>audio</option><option value='image'>image</option>";
+    }else if (selected.contentType === 'audio'){
+        options = "<option value='pdf'>pdf</option><option value='video'>video</option><option value='audio' selected>audio</option><option value='image'>image</option>";
+    }else if (selected.contentType === 'image'){
+        options = "<option value='pdf'>pdf</option><option value='video'>video</option><option value='audio'>audio</option><option value='image' selected>image</option>";
+    }
+
+    var t = selected.time.split(':');
+    var h = parseInt(t[0], 10);
+    var m = parseInt(t[1], 10);
+    var s = parseInt(t[2], 10);
+    var ms = ((h * 60 * 60 * 1000) + (m * 60 * 1000) + (s * 1000))*24;
+    var seconds = Math.floor((ms / 1000) % 60);
+    var minutes = Math.floor((ms / 1000 / 60) % 60);
+    var hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
+    var days = Math.floor((ms / (1000 * 60 * 60)) / 24);
+    console.log(days+", "+hours+':'+minutes);
+
+    var maxDays = Math.floor((simData.durationMs / (1000 * 60 * 60)));
+
+    $("#modal").empty();
+    $("#modal").append(
+        "<div class='eventOverlayContent'>" +
+        "<div id='overlayHeader'>" +
+        "<button class='close' type='button' onclick=cancelEdit()><span>&times;</span></button>"+
+        // "<span class='close'>&times;</span>" +
+        
+        "<table border-collapse= 'collapse' width= '100%'>" +
+            "<tr>" +
+              "<th>Event Name</th>" +
+              "<th>Recipient</th>" +
+              "<th>Day</th>" +
+              "<th>Type</th>" +
+              "<th>Event Content</th>" +
+            "</tr>" +
+            "<form id='editEvent' enctype='multipart/form-data'></form>" +
+            "<tr>" +
+                "<td><input form='editEvent' id='overlayName' type='text' name='subject' value='"+selected.content+"'></input></td>" +
+                "<td>" +
+                    "<select form='editEvent' id='overlayRecipiants'>" +
+                        ngoOptions +
+                    "</select>" +
+                "</td>" +
+                "<td>" +
+                    "<input form='editEvent' id='overlayDay' type='number' name='day' value='"+(days+1)+"' min='1' max='"+maxDays+"'></input>" +
+                    "<input form='editEvent' id='overlayTime' type='time' name='time' value='"+pad(hours, 2)+":"+pad(minutes, 2)+"'></input>" +
+                "</td>" +
+                "<td>" +
+                    "<select form='editEvent' name='type'>" +
+                        options +
+                    "</select><br>" +
+                "</td>" +
+                "<td>" +
+                    "<input form='editEvent' type='file' name='file' id='file' class='overlayinputfile' />" +
+                    "<label for='file' >File Selector</label>" +
+                "</td>" +
+                "<td>" +
+                    "<button form='editEvent' type='button' onclick=updateEvent()>Update</button>" +
+                "</td>" +
+                "<td>" +
+                "<button type='button' style='background-color:red; color:white;' onclick=deleteEvent()>Delete</button>" +
+                "</td>" +
+            "</tr>" +
+          "</table>" +
+          "<div id='eventMediaDisplay'></div>"+
+          "</div></div>");
+}
+
+function pad(n, width, z) {
+    z = z || '0';
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+  }
 
 //Once Page Loaded
 $(function () {
@@ -739,6 +1034,7 @@ $(function () {
     handleTimeSwitcher();
     switchNGOChat();
     handleNewMessages();
+
     //Handle Messages
 
     $("#hqSendToNGO").click(function(e) {
