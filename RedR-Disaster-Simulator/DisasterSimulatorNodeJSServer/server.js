@@ -717,6 +717,7 @@ function GenerateReviewPDF(requestReviewCB) {
         var ngoEventsObject = {
             subjects: [],
             eventTimes: [],
+            rawEventTimes: [],
             responseTimes: [],
             eventResponses: [],
             responseTagsList: [],
@@ -740,7 +741,7 @@ function GenerateReviewPDF(requestReviewCB) {
                 var h = parseInt(timeSplit[0], 10);
                 var m = parseInt(timeSplit[1], 10);
                 var s = parseInt(timeSplit[2], 10);
-
+                let eventTimeRaw = simData.eventsList[i].time;
 
                 let eventTimeFormated = h+"h"+m+"m"+s+"s";
                 let subject = simData.eventsList[i].subject;
@@ -752,7 +753,7 @@ function GenerateReviewPDF(requestReviewCB) {
                     response.push(simData.eventsList[i].responses[k].content);
                     let timeCollect = simData.eventsList[i].responses[k].time;
                     let time=(timeCollect-simData.startTimeMS);
-                    console.log(simData.startTimeMS);
+                    //console.log(simData.startTimeMS);
                     var seconds = Math.floor((time / 1000) % 60);
                     var minutes = Math.floor((time / 1000 / 60) % 60);
                     var hours = Math.floor((time / (1000 * 60 * 60)) % 24);
@@ -793,15 +794,50 @@ function GenerateReviewPDF(requestReviewCB) {
                 }
                 ngoInfoList[j].ngoEventList.subjects.push(subject);
                 ngoInfoList[j].ngoEventList.eventTimes.push(eventTimeFormated);
+                ngoInfoList[j].ngoEventList.rawEventTimes.push(eventTimeRaw);
             }
         }
 
     }
 
+    //collect Repsonse times for Ngos and calculate average response times
+    //need to find out event response times and the event time for every ngo then calculate the difference and find
+    // the average inital response time. Only using the first response time from a ngo response to an event
+    let averageResponseTimes = [];
+    for(let i=0;i<ngoInfoList.length;i++){
+        let ngoResponseDelay = [];
+        for(let j=0;j<ngoInfoList[i].ngoEventList.eventTimes.length;j++){
+            //get values for response time and event times, then alter and calculate difference
+             let eventTime = ngoInfoList[i].ngoEventList.rawEventTimes[j];
+             console.log("EventTime: " + eventTime);
+             let responseTime = ngoInfoList[i].ngoEventList.responseTimes[j][0];
+             console.log("ResponseTime: "+responseTime);
+            if(responseTime.toString()!=="No Data") {
+                let tempEventSeconds = eventTime.toString().split(':'); // split it at the colons
+                let tempResponseSeconds = responseTime.split(":");
+                // minutes are worth 60 seconds. Hours are worth 60 minutes.
+                let eventSeconds = (+tempEventSeconds[0]) * 60 * 60 + (+tempEventSeconds[1]) * 60 + (+tempEventSeconds[2]);
+                let responseSeconds = (+tempResponseSeconds[0]) * 60 * 60 + (+tempResponseSeconds[1]) * 60 + (+tempResponseSeconds[2]);
+                console.log("---------> EventSeconds: "+ eventSeconds);
+                console.log("---------> ResponseSeconds: "+ responseSeconds);
+                let delay = responseSeconds-eventSeconds;
+                console.log("--------->DELAY: "+delay);
+                ngoResponseDelay.push(delay);
+            }
+        }
+        //find average for single ngo and add to average response time\
+        let averageDelay = 0;
+        for(let j=0;j<ngoResponseDelay.length;j++){
+            averageDelay += ngoResponseDelay[j];
+        }
+        averageDelay = (averageDelay/ngoResponseDelay.length);
+        averageResponseTimes.push(averageDelay);
+    }
+
     var NGOEventString = "\n";
     for(var i=0; i < ngoInfoList.length; i++ ){
-        NGOEventString += "NGO: " + ngoInfoList[i].name + "\n\n";
-
+        NGOEventString += "NGO: " + ngoInfoList[i].name + "\n";
+        NGOEventString += "Average Response Time: " + averageResponseTimes[i].toFixed(1)+" Seconds"+"\n\n";
 
 
         for(var j=0; j < ngoInfoList[i].ngoEventList.subjects.length; j++ ){
