@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <scenario>
-  <name>Team16 Demo2</name>
+  <name>Team16 Demo</name>
   <ngoCount>4</ngoCount>
   <duration>120000</duration>
   <hoursInDay>1</hoursInDay>
-  <mode>false</mode>
+  <mode>true</mode>
   <ngo>
     <name>Lachlan</name>
     <passkey>1</passkey>
