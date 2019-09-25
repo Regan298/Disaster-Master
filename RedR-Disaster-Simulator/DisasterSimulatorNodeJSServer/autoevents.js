@@ -15,13 +15,16 @@ var timeS = 0;
 var t;
 
 function updateEvents(msg) {
+	console.log('updateEvents');
 	simLength = msg.durationMs;
 	eventList = msg.eventsList;
 	t = setInterval(getEvents,1000);
 }
 
 parentPort.on('message', (msg) => {
+	console.log('received in AE');
 	if(typeof msg === "object"){
+		console.log('object');
 		clearInterval(t);
 		updateEvents(msg);
 		return;
