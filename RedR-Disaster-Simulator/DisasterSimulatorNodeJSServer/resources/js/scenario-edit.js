@@ -287,7 +287,6 @@ function addEvent() {
         location: '/currentScenario/files/'+file.name.replace(/ /g, "_")
     };
     data.eventsList.push(newEvent);
-    console.log(newEvent.time);
 
     drawEvents(data.eventsList);
 }
@@ -311,11 +310,11 @@ function updateEvent(eventNum){
         secs = 0;
     }
 
+    
     data.eventsList[eventNum].recipient = frmData.elements[0].value;
     data.eventsList[eventNum].subject = frmData.elements[1].value;
     data.eventsList[eventNum].time = [hrs+":"+mins+":"+secs];
     data.eventsList[eventNum].type = frmData.elements[5].value;
-    console.log(data.eventsList[eventNum].time);
 
     drawEvents(data.eventsList);
 }
