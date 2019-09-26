@@ -20,12 +20,13 @@ var path = require('path');
 var zipFolder = require('zip-folder');
 var extract = require('extract-zip');
 var rimraf = require("rimraf");
+var zip = require('cross-zip')
 
 var worker = new Worker('./autoevents.js'); //autoevents worker
 var productionMode = false;
 const port = process.env.PORT || 80;
 
-var zip = require('cross-zip')
+//var zip = require('cross-zip')
 
 
 module.exports = app;
@@ -59,6 +60,7 @@ var simData = {
     EventTags: ['Cow', 'cat', 'chicken'],
     ngoStatusReports: []
 };
+
 
 var currentRunningInstance;
 
@@ -240,6 +242,17 @@ app.post('/upload-library-file', upload.single('upload'), function (req, res, ne
     }
 });
 
+app.get('/getReviewFile', function (req, res) {
+    GenerateReviewPDF(function () {
+        fs.rename(__dirname + '/'+'document.pdf', __dirname + '/' + simData.title + 'Review.pdf', function(err) {
+            if ( err ) console.log('ERROR: ' + err);
+            res.download(__dirname + '/'+ simData.title + 'Review.pdf', simData.title + 'Review.pdf');
+        });
+    });
+
+});
+
+
 function clearGeneratedScenario() {
     rimraf(__dirname + "/generatedScenario", function () {
         console.log("deleted generated scenario");
@@ -291,12 +304,12 @@ function processZip(req, res, type) {
                 return res.status(400).send("Simulation Currently Already Running Please End Your Current Simulation and" +
                     " Go Back And Try Again");
             }
-            if (simData.loaded) {
+            //if (simData.loaded) {
                 clearSimData();
-            }
+            //}
             //Move file into working dir
             let simFileTemp = req.files.simFile;
-            simFileTemp.mv(__dirname + '/' + simFileTemp.name, function (err) {
+            simFileTemp.mv(__dirname + '/' + simFileTemp.name.replace(/ /g, "_"), function (err) {
                 if (err) {
                     console.log(err);
                     return res.status(400).send(err);
@@ -310,19 +323,19 @@ function processZip(req, res, type) {
 
 
 
-                zip.unzip(__dirname + '/' + simFileTemp.name,  __dirname + directoryForModification, function (err) {
+                zip.unzip(__dirname + '/' + simFileTemp.name.replace(/ /g, "_"),  __dirname + directoryForModification, function (err) {
                     //extract(__dirname + '/' + simFileTemp.name, {dir: __dirname + directoryForModification}, function (err) {
                     if (err) console.log("unziperror: " + err);
 
-                    if (fs.existsSync(__dirname + '/' + simFileTemp.name)) {
-                        fs.unlink(__dirname + '/' + simFileTemp.name, (err) => {
+                    if (fs.existsSync(__dirname + '/' + simFileTemp.name.replace(/ /g, "_"))) {
+                        fs.unlink(__dirname + '/' + simFileTemp.name.replace(/ /g, "_"), (err) => {
                             if (err) throw err;
                             console.log('successfully deleted zip');
                         });
                     }
 
 
-                    if (fs.existsSync(__dirname + directoryForModification+'scenario.xml')) {
+                    if (fs.existsSync(__dirname + directoryForModification + 'scenario.xml')) {
 
 
                         var directory = directoryForModification;
@@ -361,7 +374,7 @@ function processZip(req, res, type) {
                                             simData.ngoList.push(ngo);
                                         }
                                     }
-                                    
+
                                     eventsArray = result['scenario']['event'];
 
                                     if(!(eventsArray === undefined)){
@@ -371,7 +384,7 @@ function processZip(req, res, type) {
                                             var currentEventType = eventsArray[i].type[0];
                                             var currentEventLocation = eventsArray[i].location;
                                             var currentEventSubject = eventsArray[i].subject;
-    
+
                                             var event = {
                                                 id: i,
                                                 recipient: currentEventRecipient,
@@ -386,14 +399,14 @@ function processZip(req, res, type) {
                                             simData.eventsList.push(event);
                                         }
                                     }
-                                    
+
                                     let libraryArray = result['scenario']['library'];
                                     if(!(libraryArray === undefined)){
                                         for (var i = 0; i < libraryArray.length; i++) {
                                             var currentLibraryType = libraryArray[i].type[0];
                                             var currentLibraryLocation = libraryArray[i].location;
                                             var currentLibrarySubject = libraryArray[i].subject;
-    
+
                                             var libraryItem = {
                                                 id: i,
                                                 type: currentLibraryType,
@@ -403,7 +416,7 @@ function processZip(req, res, type) {
                                             simData.library.push(libraryItem);
                                         }
                                     }
-                                    
+
                                     simData.durationMs = result['scenario']['duration'];
                                     var hoursInDay = result['scenario']['hoursInDay'];
                                     simData.timeScale = 24 / hoursInDay;
@@ -652,7 +665,7 @@ io.on('connection', function (socket) {
                     worker.postMessage(simData);
                 }
             }
-    
+
         });
 
         socket.on('pastEventResponses', function (msg, callback) {
@@ -674,7 +687,7 @@ io.on('connection', function (socket) {
             var currentNGOStatusReport = msg.ngoStatusReport;
             console.log(currentNGOStatusReport);
             simData.ngoStatusReports.push(currentNGOStatusReport);
-        });    
+        });
 
 //Listen for play/pause
         socket.on('play', function () {
@@ -707,5 +720,248 @@ function runSim() {
         io.emit('currentTime', currentTimeMs);
         io.emit('occurredEvents', {occurredEvents, time});
     });
+
+}
+
+function GenerateReviewPDF(requestReviewCB) {
+    var PdfPrinter = require('pdfmake');
+    var fonts = {
+        Roboto: {
+            normal: 'fonts/Roboto-Regular.ttf'
+        }
+    };
+    var printer = new PdfPrinter(fonts);
+    var fs = require('fs');
+    console.log("generatePDFCalled");
+
+
+    var currentDateOBJ = new Date();
+    var currentDateString = currentDateOBJ.getDate()+"/"+currentDateOBJ.getMonth()+"/"+currentDateOBJ.getFullYear();
+
+    var duration = simData.durationMs;
+    var seconds = Math.floor((duration / 1000) % 60);
+    var minutes = Math.floor((duration / 1000 / 60) % 60);
+    var hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+    if(hours<10){
+        hours = "0"+hours;
+    }
+    if(minutes<10){
+        minutes = "0"+minutes;
+    }
+    if(seconds<10){
+        seconds= "0"+seconds;
+    }
+
+    var durationFormatted = hours + ":" + minutes + ":" + seconds;
+
+
+    //organizing simdata into data that will be diplayed on the review pdf
+    let ngoInfoList = [];
+
+
+    for(let i=0;i< simData.ngoList.length; i++){
+
+        var ngoEventsObject = {
+            subjects: [],
+            eventTimes: [],
+            rawEventTimes: [],
+            responseTimes: [],
+            eventResponses: [],
+            responseTagsList: [],
+        };
+        var ngoInfo = {
+            name: simData.ngoList[i].name,
+            ngoEventList: ngoEventsObject,
+        };
+        ngoInfoList.push(ngoInfo);
+    }
+
+    //add every event conversation and meta data into each ngo in the ngoInfoList
+    //this will organize the data into what is needed to display event and response conversations
+    for(let i=0; i<simData.eventsList.length; i++){
+        for(let j=0; j<ngoInfoList.length; j++){
+            //if event matches recipient name for ngo then add relevant data to ngoinfo
+            if(simData.eventsList[i].recipient.toString()===ngoInfoList[j].name.toString()){
+
+                let eventTime = simData.eventsList[i].time;
+                var timeSplit = eventTime.toString().split(":");
+                var h = parseInt(timeSplit[0], 10);
+                var m = parseInt(timeSplit[1], 10);
+                var s = parseInt(timeSplit[2], 10);
+                let eventTimeRaw = simData.eventsList[i].time;
+
+                let eventTimeFormated = h+"h"+m+"m"+s+"s";
+                let subject = simData.eventsList[i].subject;
+                let response = [];
+                let responseTimes = [];
+                let responseTags = [];
+                //adding reponses and response times into arrays
+                for(let k = 0; k<simData.eventsList[i].responses.length; k++){
+                    response.push(simData.eventsList[i].responses[k].content);
+                    let timeCollect = simData.eventsList[i].responses[k].time;
+                    let time=(timeCollect-simData.startTimeMS);
+                    //console.log(simData.startTimeMS);
+                    var seconds = Math.floor((time / 1000) % 60);
+                    var minutes = Math.floor((time / 1000 / 60) % 60);
+                    var hours = Math.floor((time / (1000 * 60 * 60)) % 24);
+
+                    if(hours<10){
+                        hours = "0"+hours;
+                    }
+                    if(minutes<10){
+                        minutes = "0"+minutes;
+                    }
+                    if(seconds<10){
+                        seconds= "0"+seconds;
+                    }
+
+                    let convertedTime = hours + ":" + minutes + ":" + seconds;
+                    responseTimes.push(convertedTime);
+                    responseTags.push(simData.eventsList[i].responses[k].chosenNGOTag);
+                }
+                //adding data into the same index of each array in the ngoInfo variables
+                //if there are no responses then no data will be added into the array for response times and content
+                if(response.length===0){
+                    let responseTimeEmpty = [];
+                    responseTimeEmpty.push("No Data");
+                    ngoInfoList[j].ngoEventList.responseTimes.push(responseTimeEmpty);
+
+                    let responseEmpty = [];
+                    responseEmpty.push("No Data");
+                    ngoInfoList[j].ngoEventList.eventResponses.push(responseEmpty);
+
+                    let responseTagsEmpty = [];
+                    responseTagsEmpty.push("No Data");
+                    ngoInfoList[j].ngoEventList.responseTagsList.push(responseTagsEmpty);
+                }
+                else {
+                    ngoInfoList[j].ngoEventList.responseTimes.push(responseTimes);
+                    ngoInfoList[j].ngoEventList.eventResponses.push(response);
+                    ngoInfoList[j].ngoEventList.responseTagsList.push(responseTags);
+                }
+                ngoInfoList[j].ngoEventList.subjects.push(subject);
+                ngoInfoList[j].ngoEventList.eventTimes.push(eventTimeFormated);
+                ngoInfoList[j].ngoEventList.rawEventTimes.push(eventTimeRaw);
+            }
+        }
+
+    }
+
+    //collect Repsonse times for Ngos and calculate average response times
+    //need to find out event response times and the event time for every ngo then calculate the difference and find
+    // the average inital response time. Only using the first response time from a ngo response to an event
+    let averageResponseTimes = [];
+    for(let i=0;i<ngoInfoList.length;i++){
+        let ngoResponseDelay = [];
+        for(let j=0;j<ngoInfoList[i].ngoEventList.eventTimes.length;j++){
+            //get values for response time and event times, then alter and calculate difference
+             let eventTime = ngoInfoList[i].ngoEventList.rawEventTimes[j];
+             console.log("EventTime: " + eventTime);
+             let responseTime = ngoInfoList[i].ngoEventList.responseTimes[j][0];
+             console.log("ResponseTime: "+responseTime);
+            if(responseTime.toString()!=="No Data") {
+                let tempEventSeconds = eventTime.toString().split(':'); // split it at the colons
+                let tempResponseSeconds = responseTime.split(":");
+                // minutes are worth 60 seconds. Hours are worth 60 minutes.
+                let eventSeconds = (+tempEventSeconds[0]) * 60 * 60 + (+tempEventSeconds[1]) * 60 + (+tempEventSeconds[2]);
+                let responseSeconds = (+tempResponseSeconds[0]) * 60 * 60 + (+tempResponseSeconds[1]) * 60 + (+tempResponseSeconds[2]);
+                console.log("---------> EventSeconds: "+ eventSeconds);
+                console.log("---------> ResponseSeconds: "+ responseSeconds);
+                let delay = responseSeconds-eventSeconds;
+                console.log("--------->DELAY: "+delay);
+                ngoResponseDelay.push(delay);
+            }
+        }
+        //find average for single ngo and add to average response time\
+        let averageDelay = 0;
+        for(let j=0;j<ngoResponseDelay.length;j++){
+            averageDelay += ngoResponseDelay[j];
+        }
+        averageDelay = (averageDelay/ngoResponseDelay.length);
+        averageResponseTimes.push(averageDelay);
+    }
+
+    var NGOEventString = "\n";
+    for(var i=0; i < ngoInfoList.length; i++ ){
+        NGOEventString += "NGO: " + ngoInfoList[i].name + "\n";
+        NGOEventString += "Average Response Time: " + averageResponseTimes[i].toFixed(1)+" Seconds"+"\n\n";
+
+
+        for(var j=0; j < ngoInfoList[i].ngoEventList.subjects.length; j++ ){
+            NGOEventString += "Event: " + ngoInfoList[i].ngoEventList.subjects[j] + "\n";
+            NGOEventString += "Time: " + ngoInfoList[i].ngoEventList.eventTimes[j] + "\n\n";
+
+            for(var k=0; k < ngoInfoList[i].ngoEventList.eventResponses[j].length; k++ ){
+                var temp1 = ngoInfoList[i].ngoEventList.eventResponses[j];
+
+                if(temp1.toString() ==="No Data"){
+                    NGOEventString += "No Response Data for this Event. \n\n";
+                    break;
+                }
+
+                NGOEventString += "Response: " + ngoInfoList[i].ngoEventList.eventResponses[j][k] + ". \n";
+                NGOEventString += "Time of Response: " + ngoInfoList[i].ngoEventList.responseTimes[j][k] + ". \n";
+                NGOEventString += "Tag: " + ngoInfoList[i].ngoEventList.responseTagsList[j][k] + ". \n\n";
+
+            }
+            NGOEventString += "\n\n";
+            NGOEventString += "----------------------------------------------------------------------------------------------------------------------------------------------------------\n";
+        }
+
+
+    }
+
+    //Output Accumalative String Into PDF
+    var docDefinition = {
+        content: [
+            {
+                text: "Scenario: " + simData.title,
+                style: 'header'
+            },
+            {
+                text: "Date: " + currentDateString,
+                style: 'header'
+            },
+            {
+                text: "Duration: " + durationFormatted,
+                style: 'header'
+            },
+            {
+                text : NGOEventString
+            },
+        ],
+        styles: {
+            header: {
+                fontSize: 25
+                //bold: true
+            },
+            subheader: {
+                fontSize: 15
+                //bold: true
+            },
+            quote: {
+                //italics: true
+            },
+            small: {
+                fontSize: 8
+            }
+        }
+    };
+
+    var options = {
+        // ...
+    };
+
+    var pdfDoc = printer.createPdfKitDocument(docDefinition, options);
+
+    var writeStream = fs.createWriteStream('document.pdf');
+    pdfDoc.pipe(writeStream);
+
+    writeStream.on('close', function() {
+        requestReviewCB();
+    });
+
+    pdfDoc.end();
 
 }

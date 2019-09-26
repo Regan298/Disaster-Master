@@ -376,6 +376,7 @@ function startStopSim() {
     if (!running) {
         running = true;
         socket.emit('play', true);
+        simData.startTimeMS = new Date().getTime();
         doPlay();
         document.getElementById("playPauseSwitch").innerHTML = "&#10074 &#10074";
     } else {
@@ -562,6 +563,11 @@ function updateCurrentTime() {
         } else {
             let timerElement = document.getElementById("simTime");
             simDisplayRemainingTime(timerElement, simulationDuration * timeScale);
+        }
+
+        if (time == 1000){
+            socket.off('currentTime');
+            window.open('/getReviewFile');
         }
     });
 
@@ -1061,7 +1067,8 @@ $(function () {
         var response = {
             from: 'HQ',
             event: selectedEvent,
-            content: content
+            content: content,
+            chosenNGOTag: "None (From HQ)"
         }
 
         $('#inputEmailResponseHQ').val('');
