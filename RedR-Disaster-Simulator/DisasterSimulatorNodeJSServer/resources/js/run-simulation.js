@@ -673,7 +673,7 @@ function displayEventMedia(type, name) {
     document.getElementById("imageOverlay").style.display = "none";
     document.getElementById("videoOverlay").style.display = "none";
     if (type == "video") {
-        $("#videoOverlay").append("<div style='text-align:center;'><video id='videoPlayer' style='text-align:center; margin-top: 5%' controls>\n" +
+        $("#videoOverlay").append("<div style='text-align:center;'><video id='videoPlayer' height='500'; width='500'; style='text-align:center; margin-top: 5%' controls>\n" +
             "        <source src=' " + name + " ' type='video/mp4'>\n" +
             "    </video></div>");
         document.getElementById("videoOverlay").style.display = "block";

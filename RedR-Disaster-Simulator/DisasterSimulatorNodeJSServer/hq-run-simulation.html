@@ -200,10 +200,9 @@
             $('#eventMediaDisplay').append(
                 "<br>" +
                 "<div style='text-align:center;'>" +
-		                "<button style='text-align:center;' onclick='videoPausePlay()'>Play/Pause</button>" +
                 "</div>" +
 	            "<div style='text-align:center;'>" +
-		            "<video id='videoID' style='text-align:center;' width='500' height='500'>" +
+		            "<video id='videoID' style='text-align:center;' width='500' controls>" +
 		                "<source id='videosrc' src='"+selected.location+"' type='video/mp4'>" +
 	                "</video>" +
                 "</div>"
@@ -219,7 +218,7 @@
 				"<br>" +
 				"<div style='text-align:center;'>" +
 					"<audio id='audioID'>" +
-						"<source src='"+selected.location+"' type='audio/mpeg'>" +
+						"<source src='"+selected.location+"' type='audio/mpeg' controls>" +
 					"</audio>" +
 				"</div>"
 			);
