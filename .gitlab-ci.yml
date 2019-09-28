@@ -32,7 +32,7 @@ deploytesting:
   script:
   - sudo apt-get update -qy
   - sudo apt-get install -y ruby-dev
-  - sudo gem install dpl --pre
+  - sudo gem install dpl
   - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
   - sudo dpl --provider=heroku --app=disaster-simulator-testing --api-key=$HEROKU_API_KEY
   only:
