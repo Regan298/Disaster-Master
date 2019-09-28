@@ -507,7 +507,6 @@ function eventComparator(e1, e2) {
 }
 
 function statusReportInitialise() {
-    console.log("dostatus");
     document.getElementById("statusOverlay").style.display='block';
 
 }
@@ -517,6 +516,7 @@ function recieveCurrentTime() {
         if (firstTimeReccieve) {
             startDuration = time;
             firstTimeReccieve = false;
+            simData.startTimeMS = new Date().getTime();
         }
         simulationDuration = time;
         var timerElement = document.getElementById("simTime");
@@ -524,16 +524,19 @@ function recieveCurrentTime() {
 
         var currentTimeElapsed = simData.durationMs-time;
 
+        var interval = 10000;
+
         //On every hour do status report skrrt skrrt
-        if(currentTimeElapsed % 3600000 === 0){
+        if(currentTimeElapsed % interval === 0){
             //console.log(time);
-            currentHour = currentTimeElapsed / 3600000;
+            currentHour = currentTimeElapsed / interval;
             statusReportInitialise();
         }
     });
 }
 
 function displayDisclaimer() {
+    //todo Enable this allert when done
     //alert("The purpose of this tool is for training please keep this in mind throughout this simulation");
 
 }

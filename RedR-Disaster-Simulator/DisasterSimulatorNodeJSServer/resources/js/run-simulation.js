@@ -423,6 +423,7 @@ function pauseTimeline() {
 
 function doPlay() {
     clearInterval(pauseTimeline);
+    simData.startTimeMS = new Date().getTime();
     //runClock();
 }
 

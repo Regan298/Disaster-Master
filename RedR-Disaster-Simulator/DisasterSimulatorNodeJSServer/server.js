@@ -685,7 +685,6 @@ io.on('connection', function (socket) {
 
         socket.on('ngoStatusReport', function (msg) {
             var currentNGOStatusReport = msg.ngoStatusReport;
-            console.log(currentNGOStatusReport);
             simData.ngoStatusReports.push(currentNGOStatusReport);
         });
 
@@ -698,6 +697,7 @@ io.on('connection', function (socket) {
                 worker.postMessage(data);
                 currentRunningInstance = runSim();
                 simData.started = true;
+                simData.startTimeMS = new Date().getTime();
             } else {
                 worker.postMessage('play');
             }
@@ -732,6 +732,9 @@ function GenerateReviewPDF(requestReviewCB) {
     };
     var printer = new PdfPrinter(fonts);
     var fs = require('fs');
+
+    var newLine = "----------------------------------------------------------------------------------------------------------------------------------------------------------\n";
+
     console.log("generatePDFCalled");
 
 
@@ -857,19 +860,14 @@ function GenerateReviewPDF(requestReviewCB) {
         for(let j=0;j<ngoInfoList[i].ngoEventList.eventTimes.length;j++){
             //get values for response time and event times, then alter and calculate difference
              let eventTime = ngoInfoList[i].ngoEventList.rawEventTimes[j];
-             console.log("EventTime: " + eventTime);
              let responseTime = ngoInfoList[i].ngoEventList.responseTimes[j][0];
-             console.log("ResponseTime: "+responseTime);
             if(responseTime.toString()!=="No Data") {
                 let tempEventSeconds = eventTime.toString().split(':'); // split it at the colons
                 let tempResponseSeconds = responseTime.split(":");
                 // minutes are worth 60 seconds. Hours are worth 60 minutes.
                 let eventSeconds = (+tempEventSeconds[0]) * 60 * 60 + (+tempEventSeconds[1]) * 60 + (+tempEventSeconds[2]);
                 let responseSeconds = (+tempResponseSeconds[0]) * 60 * 60 + (+tempResponseSeconds[1]) * 60 + (+tempResponseSeconds[2]);
-                console.log("---------> EventSeconds: "+ eventSeconds);
-                console.log("---------> ResponseSeconds: "+ responseSeconds);
                 let delay = responseSeconds-eventSeconds;
-                console.log("--------->DELAY: "+delay);
                 ngoResponseDelay.push(delay);
             }
         }
@@ -906,11 +904,28 @@ function GenerateReviewPDF(requestReviewCB) {
 
             }
             NGOEventString += "\n\n";
-            NGOEventString += "----------------------------------------------------------------------------------------------------------------------------------------------------------\n";
+            NGOEventString += newLine;
         }
 
 
     }
+
+    var ngoStatusReportString = "";
+
+    for(var currentNGO of simData.ngoList){
+        ngoStatusReportString += "NGO: " + currentNGO.name + "\n";
+        for(var i = 0; i < simData.ngoStatusReports.length; i++){
+
+            if(simData.ngoStatusReports[i].name.toString() === currentNGO.name.toString()){
+                ngoStatusReportString += "Hour " + simData.ngoStatusReports[i].hour + ": " + simData.ngoStatusReports[i].status + "\n";
+            }
+        }
+
+        ngoStatusReportString += newLine;
+    }
+
+    console.log(ngoStatusReportString);
+
 
     //Output Accumalative String Into PDF
     var docDefinition = {
@@ -930,6 +945,14 @@ function GenerateReviewPDF(requestReviewCB) {
             {
                 text : NGOEventString
             },
+            {
+                text : "Status Reports On The Hour",
+                style: 'header'
+            },
+            {
+                text : ngoStatusReportString
+            },
+
         ],
         styles: {
             header: {
