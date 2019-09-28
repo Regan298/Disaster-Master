@@ -937,6 +937,53 @@ function addPopup(subject, fileLocation, type){
     document.getElementById("modal").style.display = "block";
 }
 
+
+function onSelect(properties) {
+
+    $('#eventMediaDisplay').empty();
+    selected = items[properties.items[0]];
+    console.log(selected);
+    setModal();
+    if(selected.contentType === 'pdf'){
+        console.log(selected.location);
+
+        PDFObject.embed(selected.location, "#eventMediaDisplay");
+
+    } else if(selected.contentType === 'video'){
+        $('#eventMediaDisplay').append(
+            "<br>" +
+            "<div style='text-align:center;'>" +
+            "<video id='videoID' style='text-align:center;' width='500' controls>" +
+            "<source id='videosrc' src='"+selected.location+"' type='video/mp4'>" +
+            "</video>" +
+            "</div>"
+        );
+
+    } else if(selected.contentType === 'audio'){
+
+        $('#eventMediaDisplay').append(
+            "<br>" +
+            "<div style='text-align:center;'>" +
+            "<audio id='audioID' controls>" +
+            "<source src='"+selected.location+"' type='audio/mpeg'>" +
+            "</audio>" +
+            "</div>"
+        );
+
+    } else if(selected.contentType === 'image'){
+
+        $('#eventMediaDisplay').append(
+            "<br>" +
+            "<div style='text-align:center;'>" +
+            "<img src='"+selected.location+"'  width=500 height=500>" +
+            "</div>"
+        );
+
+    }
+    document.getElementById("modal").style.display = "block";
+}
+
+
 function setModal() {
     var ngoOptions = '';
     var selectedOption = '';

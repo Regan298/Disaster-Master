@@ -681,7 +681,7 @@ ul.libraryList {
 }
 
 .eventViewerHQ{
-    min-width: 80%;
+    width: 80%;
     max-height: 60vh;
 }
 
@@ -734,7 +734,7 @@ ul.libraryList {
     margin: auto;
     display: flex;
     width: 45%;
-    height: 75vh;
+    height: 80vh;
 
     position: absolute;
     margin-left: 50%;

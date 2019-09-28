@@ -524,7 +524,7 @@ function recieveCurrentTime() {
 
         var currentTimeElapsed = simData.durationMs-time;
 
-        var interval = 10000;
+        var interval = 3600000; //1hr
 
         //On every hour do status report skrrt skrrt
         if(currentTimeElapsed % interval === 0){
