@@ -723,6 +723,19 @@ function runSim() {
 
 }
 
+function msToTime(duration) {
+    var milliseconds = parseInt((duration % 1000) / 100),
+        seconds = Math.floor((duration / 1000) % 60),
+        minutes = Math.floor((duration / (1000 * 60)) % 60),
+        hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+    hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+    return hours + "h:" + minutes + "m:" + seconds + "s";
+}
+
 function GenerateReviewPDF(requestReviewCB) {
     var PdfPrinter = require('pdfmake');
     var fonts = {
@@ -740,31 +753,12 @@ function GenerateReviewPDF(requestReviewCB) {
 
     var currentDateOBJ = new Date();
     var currentDateString = currentDateOBJ.getDate()+"/"+currentDateOBJ.getMonth()+"/"+currentDateOBJ.getFullYear();
-
     var duration = simData.durationMs;
-    var seconds = Math.floor((duration / 1000) % 60);
-    var minutes = Math.floor((duration / 1000 / 60) % 60);
-    var hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-
-    if(hours<10){
-        hours = "0"+hours;
-    }
-    if(minutes<10){
-        minutes = "0"+minutes;
-    }
-    if(seconds<10){
-        seconds= "0"+seconds;
-    }
-
-    var durationFormatted = hours + ":" + minutes + ":" + seconds;
-
+    var durationFormatted = msToTime(duration);
 
     //organizing simdata into data that will be diplayed on the review pdf
     let ngoInfoList = [];
-
-
     for(let i=0;i< simData.ngoList.length; i++){
-
         var ngoEventsObject = {
             subjects: [],
             eventTimes: [],
@@ -792,7 +786,6 @@ function GenerateReviewPDF(requestReviewCB) {
                 var h = parseInt(timeSplit[0], 10);
                 var m = parseInt(timeSplit[1], 10);
                 var s = parseInt(timeSplit[2], 10);
-                let eventTimeRaw = simData.eventsList[i].time;
 
                 let eventTimeFormated = h+"h"+m+"m"+s+"s";
                 let subject = simData.eventsList[i].subject;
@@ -802,24 +795,11 @@ function GenerateReviewPDF(requestReviewCB) {
                 //adding reponses and response times into arrays
                 for(let k = 0; k<simData.eventsList[i].responses.length; k++){
                     response.push(simData.eventsList[i].responses[k].content);
-                    let timeCollect = simData.eventsList[i].responses[k].time;
-                    let time=(timeCollect-simData.startTimeMS);
-                    //console.log(simData.startTimeMS);
-                    var seconds = Math.floor((time / 1000) % 60);
-                    var minutes = Math.floor((time / 1000 / 60) % 60);
-                    var hours = Math.floor((time / (1000 * 60 * 60)) % 24);
+                    let rawResponseTime = simData.eventsList[i].responses[k].time;
+                    let responseTime=(rawResponseTime-simData.startTimeMS);
 
-                    if(hours<10){
-                        hours = "0"+hours;
-                    }
-                    if(minutes<10){
-                        minutes = "0"+minutes;
-                    }
-                    if(seconds<10){
-                        seconds= "0"+seconds;
-                    }
 
-                    let convertedTime = hours + ":" + minutes + ":" + seconds;
+                    let convertedTime = msToTime(responseTime);
                     responseTimes.push(convertedTime);
                     responseTags.push(simData.eventsList[i].responses[k].chosenNGOTag);
                 }
@@ -845,7 +825,7 @@ function GenerateReviewPDF(requestReviewCB) {
                 }
                 ngoInfoList[j].ngoEventList.subjects.push(subject);
                 ngoInfoList[j].ngoEventList.eventTimes.push(eventTimeFormated);
-                ngoInfoList[j].ngoEventList.rawEventTimes.push(eventTimeRaw);
+                ngoInfoList[j].ngoEventList.rawEventTimes.push(eventTime);
             }
         }
 
@@ -861,13 +841,16 @@ function GenerateReviewPDF(requestReviewCB) {
             //get values for response time and event times, then alter and calculate difference
              let eventTime = ngoInfoList[i].ngoEventList.rawEventTimes[j];
              let responseTime = ngoInfoList[i].ngoEventList.responseTimes[j][0];
-            if(responseTime.toString()!=="No Data") {
+             if(responseTime.toString()!=="No Data") {
                 let tempEventSeconds = eventTime.toString().split(':'); // split it at the colons
-                let tempResponseSeconds = responseTime.split(":");
+                let tempResponseSeconds = responseTime.toString().replace("h", "").
+                replace("m", "").replace("s", "").split(":");
                 // minutes are worth 60 seconds. Hours are worth 60 minutes.
                 let eventSeconds = (+tempEventSeconds[0]) * 60 * 60 + (+tempEventSeconds[1]) * 60 + (+tempEventSeconds[2]);
                 let responseSeconds = (+tempResponseSeconds[0]) * 60 * 60 + (+tempResponseSeconds[1]) * 60 + (+tempResponseSeconds[2]);
                 let delay = responseSeconds-eventSeconds;
+                console.log(responseSeconds);
+                console.log(eventSeconds);
                 ngoResponseDelay.push(delay);
             }
         }
@@ -877,14 +860,20 @@ function GenerateReviewPDF(requestReviewCB) {
             averageDelay += ngoResponseDelay[j];
         }
         averageDelay = (averageDelay/ngoResponseDelay.length);
-        averageResponseTimes.push(averageDelay);
+
+        var convertedTime = msToTime(averageDelay*1000);
+        averageResponseTimes.push(convertedTime);
     }
 
     var NGOEventString = "\n";
     for(var i=0; i < ngoInfoList.length; i++ ){
         NGOEventString += "NGO: " + ngoInfoList[i].name + "\n";
-        NGOEventString += "Average Response Time: " + averageResponseTimes[i].toFixed(1)+" Seconds"+"\n\n";
 
+        if(averageResponseTimes[i].includes("NaN")){
+            NGOEventString += "Average Response Time: NA" + "\n\n";
+        } else {
+            NGOEventString += "Average Response Time: " + averageResponseTimes[i] + "\n\n";
+        }
 
         for(var j=0; j < ngoInfoList[i].ngoEventList.subjects.length; j++ ){
             NGOEventString += "Event: " + ngoInfoList[i].ngoEventList.subjects[j] + "\n";
@@ -906,28 +895,20 @@ function GenerateReviewPDF(requestReviewCB) {
             NGOEventString += "\n\n";
             NGOEventString += newLine;
         }
-
-
     }
 
     var ngoStatusReportString = "";
 
     for(var currentNGO of simData.ngoList){
-        ngoStatusReportString += "NGO: " + currentNGO.name + "\n";
+        ngoStatusReportString += "NGO: " + currentNGO.name + "\n\n";
         for(var i = 0; i < simData.ngoStatusReports.length; i++){
-
             if(simData.ngoStatusReports[i].name.toString() === currentNGO.name.toString()){
                 ngoStatusReportString += "Hour " + simData.ngoStatusReports[i].hour + ": " + simData.ngoStatusReports[i].status + "\n";
             }
         }
-
         ngoStatusReportString += newLine;
     }
-
-    console.log(ngoStatusReportString);
-
-
-    //Output Accumalative String Into PDF
+    //Output Accumalative Strings Into PDF
     var docDefinition = {
         content: [
             {
