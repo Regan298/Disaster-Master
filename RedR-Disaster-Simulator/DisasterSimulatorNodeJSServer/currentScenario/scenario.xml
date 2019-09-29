@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <scenario>
-  <name>Team16 Demo</name>
+  <name>MediaTesting</name>
   <ngoCount>4</ngoCount>
   <duration>120000</duration>
   <hoursInDay>1</hoursInDay>
-  <mode>true</mode>
+  <mode>false</mode>
   <ngo>
     <name>Lachlan</name>
     <passkey>1</passkey>
@@ -24,7 +24,7 @@
   <event>
     <recipient>Lachlan</recipient>
     <subject>e1</subject>
-    <time>0:0:30</time>
+    <time>0:0:10</time>
     <type>pdf</type>
     <location>/currentScenario/files/SebadoahReview.pdf</location>
   </event>
@@ -52,9 +52,9 @@
   <event>
     <recipient>Lachlan</recipient>
     <subject>e5</subject>
-    <time>0:1:0</time>
-    <type>pdf</type>
-    <location>/currentScenario/files/SebadoahReview.pdf</location>
+    <time>0:0:20</time>
+    <type>video</type>
+    <location>/currentScenario/files/SampleVideo_1280x720_30mb.mp4</location>
   </event>
   <event>
     <recipient>Riley</recipient>
@@ -74,8 +74,8 @@
     <recipient>Lachlan</recipient>
     <subject>e8</subject>
     <time>0:1:30</time>
-    <type>pdf</type>
-    <location>/currentScenario/files/SebadoahReview.pdf</location>
+    <type>audio</type>
+    <location>/currentScenario/files/LinkinParkvs.ArianaGrande-IntoNumbYou.mp3</location>
   </event>
   <event>
     <recipient>Riley</recipient>
@@ -104,5 +104,12 @@
     <time>0:1:0</time>
     <type>pdf</type>
     <location>/currentScenario/files/SebadoahReview.pdf</location>
+  </event>
+  <event>
+    <recipient>Lachlan</recipient>
+    <subject>e13</subject>
+    <time>0:0:40</time>
+    <type>image</type>
+    <location>/currentScenario/files/Med2.png</location>
   </event>
 </scenario>

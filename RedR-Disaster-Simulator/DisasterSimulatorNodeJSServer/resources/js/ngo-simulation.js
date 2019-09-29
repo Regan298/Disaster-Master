@@ -302,7 +302,7 @@ function displayEventMedia(type, name) {
     document.getElementById("videoOverlay").style.display = "none";
 
     if (type == "video") {
-        $("#videoOverlay").append("<div style='text-align:center;'><video id='videoPlayer' style='text-align:center; margin-top: 5%' controls>\n" +
+        $("#videoOverlay").append("<div style='text-align:center;'><video id='videoPlayer' height='500' width='500' style='text-align:center; margin-top: 5%' controls>\n" +
             "        <source src=' " + name + " ' type='video/mp4'>\n" +
             "    </video></div>");
         document.getElementById("videoOverlay").style.display = "block";
@@ -507,7 +507,6 @@ function eventComparator(e1, e2) {
 }
 
 function statusReportInitialise() {
-    console.log("dostatus");
     document.getElementById("statusOverlay").style.display='block';
 
 }
@@ -517,6 +516,7 @@ function recieveCurrentTime() {
         if (firstTimeReccieve) {
             startDuration = time;
             firstTimeReccieve = false;
+            simData.startTimeMS = new Date().getTime();
         }
         simulationDuration = time;
         var timerElement = document.getElementById("simTime");
@@ -524,16 +524,19 @@ function recieveCurrentTime() {
 
         var currentTimeElapsed = simData.durationMs-time;
 
+        var interval = 3600000; //1hr
+
         //On every hour do status report skrrt skrrt
-        if(currentTimeElapsed % 3600000 === 0){
+        if(currentTimeElapsed % interval === 0){
             //console.log(time);
-            currentHour = currentTimeElapsed / 3600000;
+            currentHour = currentTimeElapsed / interval;
             statusReportInitialise();
         }
     });
 }
 
 function displayDisclaimer() {
+    //todo Enable this allert when done
     //alert("The purpose of this tool is for training please keep this in mind throughout this simulation");
 
 }
