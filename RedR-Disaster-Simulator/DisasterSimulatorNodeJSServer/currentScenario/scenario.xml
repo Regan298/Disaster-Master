@@ -1,115 +1,181 @@
 <?xml version="1.0"?>
 <scenario>
-  <name>MediaTesting</name>
-  <ngoCount>4</ngoCount>
-  <duration>120000</duration>
+  <name>newScenarioyeet</name>
+  <ngoCount>6</ngoCount>
+  <duration>19800000</duration>
   <hoursInDay>1</hoursInDay>
   <mode>false</mode>
   <ngo>
-    <name>Lachlan</name>
-    <passkey>1</passkey>
+    <name>People First</name>
+    <passkey>ngo1</passkey>
   </ngo>
   <ngo>
-    <name>Riley</name>
-    <passkey>2</passkey>
+    <name>We Care</name>
+    <passkey>ngo2</passkey>
   </ngo>
   <ngo>
-    <name>Tom</name>
-    <passkey>3</passkey>
+    <name>EWB</name>
+    <passkey>ngo3</passkey>
   </ngo>
   <ngo>
-    <name>Daniel</name>
-    <passkey>4</passkey>
+    <name>Red Heart</name>
+    <passkey>ngo4</passkey>
+  </ngo>
+  <ngo>
+    <name>Peacedoves</name>
+    <passkey>ngo5</passkey>
+  </ngo>
+  <ngo>
+    <name>Reach Up</name>
+    <passkey>ngo6</passkey>
   </ngo>
   <event>
-    <recipient>Lachlan</recipient>
-    <subject>e1</subject>
-    <time>0:0:10</time>
+    <recipient>Peacedoves</recipient>
+    <subject>Set up</subject>
+    <time>00:00:10</time>
     <type>pdf</type>
-    <location>/currentScenario/files/SebadoahReview.pdf</location>
+    <location>/currentScenario/files/000 Needs assessment letter.pdf</location>
   </event>
   <event>
-    <recipient>Riley</recipient>
-    <subject>e2</subject>
-    <time>0:0:30</time>
+    <recipient>Peacedoves</recipient>
+    <subject>Introduction into Sebadoah</subject>
+    <time>00:02:00</time>
     <type>pdf</type>
-    <location>/currentScenario/files/SebadoahReview.pdf</location>
+    <location>/currentScenario/files/001 Activation of Cluster System.pdf</location>
   </event>
   <event>
-    <recipient>Tom</recipient>
-    <subject>e3</subject>
-    <time>0:0:30</time>
+    <recipient>Peacedoves</recipient>
+    <subject>President of Sebadoah</subject>
+    <time>00:04:00</time>
     <type>pdf</type>
-    <location>/currentScenario/files/SebadoahReview.pdf</location>
+    <location>/currentScenario/files/002 Purchase from Umbala.pdf</location>
   </event>
   <event>
-    <recipient>Daniel</recipient>
-    <subject>e4</subject>
-    <time>0:0:30</time>
+    <recipient>Peacedoves</recipient>
+    <subject>SitRep Request</subject>
+    <time>00:06:00</time>
     <type>pdf</type>
-    <location>/currentScenario/files/SebadoahReview.pdf</location>
+    <location>/currentScenario/files/003 HQ Daily SitRep Request.pdf</location>
   </event>
   <event>
-    <recipient>Lachlan</recipient>
-    <subject>e5</subject>
-    <time>0:0:20</time>
-    <type>video</type>
-    <location>/currentScenario/files/SampleVideo_1280x720_30mb.mp4</location>
-  </event>
-  <event>
-    <recipient>Riley</recipient>
-    <subject>e6</subject>
-    <time>0:1:0</time>
+    <recipient>Peacedoves</recipient>
+    <subject>Budget Request</subject>
+    <time>00:08:00</time>
     <type>pdf</type>
-    <location>/currentScenario/files/SebadoahReview.pdf</location>
+    <location>/currentScenario/files/004 HQ Budget Request.pdf</location>
   </event>
   <event>
-    <recipient>Tom</recipient>
-    <subject>e7</subject>
-    <time>0:1:0</time>
+    <recipient>Peacedoves</recipient>
+    <subject>Flood Update</subject>
+    <time>00:10:00</time>
     <type>pdf</type>
-    <location>/currentScenario/files/SebadoahReview.pdf</location>
+    <location>/currentScenario/files/005 DisCom Flood Update.pdf</location>
   </event>
   <event>
-    <recipient>Lachlan</recipient>
-    <subject>e8</subject>
-    <time>0:1:30</time>
-    <type>audio</type>
-    <location>/currentScenario/files/LinkinParkvs.ArianaGrande-IntoNumbYou.mp3</location>
-  </event>
-  <event>
-    <recipient>Riley</recipient>
-    <subject>e9</subject>
-    <time>0:1:30</time>
+    <recipient>Peacedoves</recipient>
+    <subject>Request Cluster SitReps</subject>
+    <time>00:12:00</time>
     <type>pdf</type>
-    <location>/currentScenario/files/SebadoahReview.pdf</location>
+    <location>/currentScenario/files/006 Request Cluster SitReps.pdf</location>
   </event>
   <event>
-    <recipient>Tom</recipient>
-    <subject>e10</subject>
-    <time>0:1:30</time>
+    <recipient>Peacedoves</recipient>
+    <subject>Request SitReps</subject>
+    <time>00:14:00</time>
     <type>pdf</type>
-    <location>/currentScenario/files/SebadoahReview.pdf</location>
+    <location>/currentScenario/files/007 HQ No Daily SitRep.pdf</location>
   </event>
   <event>
-    <recipient>Daniel</recipient>
-    <subject>e11</subject>
-    <time>0:1:30</time>
+    <recipient>Peacedoves</recipient>
+    <subject>Budget</subject>
+    <time>00:16:00</time>
     <type>pdf</type>
-    <location>/currentScenario/files/SebadoahReview.pdf</location>
+    <location>/currentScenario/files/008 HQ No Budget.pdf</location>
   </event>
   <event>
-    <recipient>Daniel</recipient>
-    <subject>e12</subject>
-    <time>0:1:0</time>
+    <recipient>Peacedoves</recipient>
+    <subject>Sit Reps Request</subject>
+    <time>00:18:00</time>
     <type>pdf</type>
-    <location>/currentScenario/files/SebadoahReview.pdf</location>
+    <location>/currentScenario/files/009 No Daily Cluster SitReps.pdf</location>
   </event>
   <event>
-    <recipient>Lachlan</recipient>
-    <subject>e13</subject>
-    <time>0:0:40</time>
+    <recipient>Peacedoves</recipient>
+    <subject>Information Request</subject>
+    <time>00:20:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/010 HQ Site Info Request.pdf</location>
+  </event>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>Planning Request</subject>
+    <time>00:22:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/011 HQ Planning Request.pdf</location>
+  </event>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>Kidnapping</subject>
+    <time>00:24:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/012 HQ Kidnapping.pdf</location>
+  </event>
+  <event>
+    <recipient>Peacedoves</recipient>
+    <subject>Kidnapping</subject>
+    <time>00:26:00</time>
+    <type>pdf</type>
+    <location>/currentScenario/files/012 HQ Kidnapping.pdf</location>
+  </event>
+  <event>
+    <recipient>People First</recipient>
+    <subject>IMAGE</subject>
+    <time>00:28:00</time>
     <type>image</type>
-    <location>/currentScenario/files/Med2.png</location>
+    <location>/currentScenario/files/testjpg.jpg</location>
   </event>
+  <event>
+    <recipient>People First</recipient>
+    <subject>AUDIO</subject>
+    <time>00:30:00</time>
+    <type>audio</type>
+    <location>/currentScenario/files/testmp3.mp3</location>
+  </event>
+  <event>
+    <recipient>People First</recipient>
+    <subject>VIDEO</subject>
+    <time>00:32:00</time>
+    <type>video</type>
+    <location>/currentScenario/files/testmp4.mp4</location>
+  </event>
+  <library>
+    <subject>Test</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/test.pdf</location>
+  </library>
+  <library>
+    <subject>event1</subject>
+    <type>image</type>
+    <location>/currentScenario/files/library/preview.jpg</location>
+  </library>
+  <library>
+    <subject>efvev</subject>
+    <type>image</type>
+    <location>/currentScenario/files/library/qrcode2.png</location>
+  </library>
+  <library>
+    <subject>dfrvdfv</subject>
+    <type>image</type>
+    <location>/currentScenario/files/library/qrcode.png</location>
+  </library>
+  <library>
+    <subject>sdcsdcsc</subject>
+    <type>pdf</type>
+    <location>/currentScenario/files/library/325-a1-report-millerdani1.pdf</location>
+  </library>
+  <library>
+    <subject>sdcsdcs</subject>
+    <type>image</type>
+    <location>/currentScenario/files/library/imageonline-co-invertedimage.png</location>
+  </library>
 </scenario>
