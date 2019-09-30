@@ -13,7 +13,7 @@ cache:
 eslint:
   stage: lint
   tags:
-    - deploy
+    - docker
   before_script:
     - npm install
     
