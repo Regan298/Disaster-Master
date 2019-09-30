@@ -22,9 +22,7 @@ eslint:
     # Install ESLint in this docker container
     - npm install -g eslint
     # Configure ESLint (will read your .eslintrc file)
-    - eslint --init
-    # Run ESLint
-    - eslint RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer/server.js
+    - node_modules/eslint/bin/eslint.js .
 
 
 testing_testing:
