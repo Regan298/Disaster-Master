@@ -15,6 +15,7 @@ eslint:
   tags:
     - docker
   before_script:
+    - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
     - npm install
     
   script:
