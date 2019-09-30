@@ -21,7 +21,8 @@
     "socket.io": ">=2.2.0",
     "statman-stopwatch": ">=2.8.2",
     "xml2js": "^0.4.22",
-    "zip-folder": "^1.0.0"
+    "zip-folder": "^1.0.0",
+    "pdfmake": "^0.1.60"
   },
   "devDependencies": {
     "chai": "^4.2.0",
