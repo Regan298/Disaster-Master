@@ -6,10 +6,9 @@
             "jsx": true
         }
     },
-    "eslintConfig": {
-        "env": {
-            "node": true
-        }
+    "env": {
+        "browser": true,
+        "node": true
     },
     "rules": {
         "semi": "error"
