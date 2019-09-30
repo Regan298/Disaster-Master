@@ -6,6 +6,11 @@
             "jsx": true
         }
     },
+    "eslintConfig": {
+        "env": {
+            "node": true
+        }
+    },
     "rules": {
         "semi": "error"
     }
