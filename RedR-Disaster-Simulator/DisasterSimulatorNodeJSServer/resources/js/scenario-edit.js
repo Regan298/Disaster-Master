@@ -6,20 +6,24 @@ var data;
 socket.emit('simState', 'request', function (simdata) {
     data = simdata.simData;
     // simData object structure
-    // var simData = {
-    //     ready: false,
-    //     title: "",
-    //     ngoCount: 999,
-    //     ngoList: [],
-    //     eventsList: [],
-    //     messageList: [],
-    //     durationMs: 0,
-    //     timeScale: 0,
-    //     started: false,
-    //     modeOnline: true,
-    //     occurredEvents: [],
-    //     library: []
-    // };
+    // loaded: false,
+    // ready: false,
+    // title: "",
+    // ngoCount: 999,
+    // ngoList: [],
+    // eventsList: [],
+    // messageList: [],
+    // durationMs: 0,
+    // timeScale: 0,
+    // started: false,
+    // modeOnline: true,
+    // occurredEvents: [],
+    // library: [],
+    // startTimeMS: 0,
+    // isRunning: false,
+    // EventTags: ['Cow', 'cat', 'chicken'],
+    // ngoStatusReports: []
+    console.log(data);
     $(function () {
         drawDetails(data);
         drawEvents(data.eventsList);
@@ -42,6 +46,54 @@ function drawDetails(data){
                         "<button onclick='editScale()'>Edit</button><div id='editScale'></div>");
     $('#details').append("<div id='ngos'></div>");
     drawNgos();
+    $('#details').append("<div id='tags'></div>");
+    drawTags();
+}
+
+function drawTags() {
+    $('#tags').empty();
+    $('#tags').append("<h6>Tags</h6>" +
+                        "<ul id='tagList'></ul>");
+    for(var i=0; i < data.EventTags.length; i++){
+        $("#tagList").append("<li>"+data.EventTags[i]+"<button onclick=editTag("+i+")>Edit</button><div id='tagForm"+i+"'></div></li>")
+    }
+
+    newTag()
+}
+
+function newTag() {
+    $('#tagList').append("<br><h6>New:</h6>" +
+                        "<form id='tagForm'></form>" +
+                        "Tag: <input form='tagForm' id='newTag' type='text' name='tag'><br>"+
+                        "<input form='tagForm' type='button' onclick='addTag()' value='Submit'>");
+}
+
+function addTag() {
+    data.EventTags.push($("#newTag").val());
+
+    $('#tagForm').empty();
+    drawTags();
+}
+
+function editTag(tagNum){
+    $('#tagForm'+tagNum).empty();
+    $('#tagForm'+tagNum).append("<form id='tagForm"+tagNum+"'></form>" +
+                            "Tag: <input form='tagForm"+tagNum+"' type='text' id='tagname' name='name' value='"+data.EventTags[tagNum]+"'><br>"+
+                            "<input form='tagForm"+tagNum+"' type='button' onclick='updateTag("+tagNum+")' value='Submit'>" +
+                            "<button type='button' onclick=cancelEdit('#tagForm"+tagNum+"')>Cancel</button>" +
+                            "<button type='button' onclick=deleteTag('"+tagNum+"')>DELETE</button>");
+}
+
+function deleteTag(tagNum){
+    data.EventTags.splice(tagNum, 1);
+    drawTags(data.EventTags);
+}
+
+function updateTag(tagNum){
+    data.EventTags[tagNum] = $("#tagname").val();
+
+    $('#tagForm'+tagNum).empty();
+    drawTags();
 }
 
 function drawNgos() {

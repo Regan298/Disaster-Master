@@ -57,7 +57,7 @@ var simData = {
     library: [],
     startTimeMS: 0,
     isRunning: false,
-    EventTags: ['Cow', 'cat', 'chicken'],
+    EventTags: [],
     ngoStatusReports: []
 };
 
@@ -277,7 +277,7 @@ function clearSimData() {
         library: [],
         startTimeMS: 0,
         isRunning: false,
-        EventTags: ['Cow', 'cat', 'chicken'],
+        EventTags: [],
         ngoStatusReports: []
     };
     connectedUsers = [];
@@ -360,9 +360,17 @@ function processZip(req, res, type) {
                                     } else {
                                         simData.modeOnline = false;
                                     }
-                                    ngosArray = result['scenario']['ngo'];
 
-                                    if(!(ngosArray === undefined)){
+                                    tags = result['scenario']['tag'];
+                                    if (!(tags === undefined)) {
+                                        for (var i = 0; i < tags.length; i++) {
+                                            var tag = tags[i];
+                                            simData.EventTags.push(tag);
+                                        }
+                                    }
+
+                                    ngosArray = result['scenario']['ngo'];
+                                    if (!(ngosArray === undefined)) {
                                         for (var i = 0; i < ngosArray.length; i++) {
                                             var currentNGOName = ngosArray[i].name;
                                             var currentNGOPasskey = ngosArray[i].passkey;
@@ -548,6 +556,10 @@ io.on('connection', function (socket) {
                 item.ele('name', '' + data.ngoList[i].name).end({pretty: true});
                 item.ele('passkey', '' + data.ngoList[i].passkey).end({pretty: true});
                 item.end({pretty: true});
+            }
+
+            for (var i = 0; i < data.EventTags.length; i++) {
+                var item = root.ele('tag', data.EventTags[i]).end({pretty: true});
             }
 
             for (var i = 0; i < data.eventsList.length; i++) {
