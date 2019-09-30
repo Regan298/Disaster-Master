@@ -5,22 +5,17 @@ var express = require('express');
 var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-const {Worker, isMainThread, parentPort} = require('worker_threads');
+const {Worker} = require('worker_threads');
 const fileUpload = require('express-fileupload');
 var multer = require('multer');
 var upload = multer({dest: 'library/'});
-var TimeFormat = require('hh-mm-ss');
 var dateFormat = require('dateformat');
 var xml2js = require('xml2js');
-var parser = new xml2js.Parser();
 app.use(fileUpload());
-var formidable = require('formidable');
 var xmlBuilder = require('xmlbuilder');
-var path = require('path');
 var zipFolder = require('zip-folder');
-var extract = require('extract-zip');
 var rimraf = require("rimraf");
-var zip = require('cross-zip')
+var zip = require('cross-zip');
 
 var worker = new Worker('./autoevents.js'); //autoevents worker
 var productionMode = false;
@@ -61,8 +56,6 @@ var simData = {
     ngoStatusReports: []
 };
 
-
-var currentRunningInstance;
 
 
 var currentTimeMs;
@@ -161,7 +154,7 @@ app.post('/editor-upload', function (req, res) {
     processZip(req, res, 'edit');
 });
 
-app.post('/upload-event-file', upload.single('upload'), function (req, res, next) {
+app.post('/upload-event-file', upload.single('upload'), function (req, res) {
     // console.log(req);
 
     if (req.files != null) {
@@ -190,7 +183,7 @@ app.post('/upload-event-file', upload.single('upload'), function (req, res, next
     }
 });
 
-app.post('/upload-event-file-live', upload.single('upload'), function (req, res, next) {
+app.post('/upload-event-file-live', upload.single('upload'), function (req, res) {
     // console.log(req);
 
     if (req.files != null) {
@@ -216,7 +209,7 @@ app.post('/upload-event-file-live', upload.single('upload'), function (req, res,
     }
 });
 
-app.post('/upload-library-file', upload.single('upload'), function (req, res, next) {
+app.post('/upload-library-file', upload.single('upload'), function (req, res) {
     // console.log(req);
 
     if (req.files != null) {
@@ -359,7 +352,7 @@ function processZip(req, res, type) {
                                         simData.modeOnline = false;
                                     }
 
-                                    tags = result['scenario']['tag'];
+                                    var tags = result['scenario']['tag'];
                                     if (!(tags === undefined)) {
                                         for (var i = 0; i < tags.length; i++) {
                                             var tag = tags[i];
@@ -369,14 +362,14 @@ function processZip(req, res, type) {
 
                                     ngosArray = result['scenario']['ngo'];
                                     if (!(ngosArray === undefined)) {
-                                        for (var i = 0; i < ngosArray.length; i++) {
-                                            var currentNGOName = ngosArray[i].name;
-                                            var currentNGOPasskey = ngosArray[i].passkey;
+                                        for (var j = 0; j < ngosArray.length; j++) {
+                                            var currentNGOName = ngosArray[j].name;
+                                            var currentNGOPasskey = ngosArray[j].passkey;
                                             var ngo = {
-                                                id: i,
+                                                id: j,
                                                 name: currentNGOName,
                                                 passkey: currentNGOPasskey
-                                            }
+                                            };
                                             simData.ngoList.push(ngo);
                                         }
                                     }
@@ -384,15 +377,15 @@ function processZip(req, res, type) {
                                     eventsArray = result['scenario']['event'];
 
                                     if(!(eventsArray === undefined)){
-                                        for (var i = 0; i < eventsArray.length; i++) {
-                                            var currentEventRecipient = eventsArray[i].recipient;
-                                            var currentEventTime = eventsArray[i].time;
-                                            var currentEventType = eventsArray[i].type[0];
-                                            var currentEventLocation = eventsArray[i].location;
-                                            var currentEventSubject = eventsArray[i].subject;
+                                        for (var k = 0; k < eventsArray.length; k++) {
+                                            var currentEventRecipient = eventsArray[k].recipient;
+                                            var currentEventTime = eventsArray[k].time;
+                                            var currentEventType = eventsArray[k].type[0];
+                                            var currentEventLocation = eventsArray[k].location;
+                                            var currentEventSubject = eventsArray[k].subject;
 
                                             var event = {
-                                                id: i,
+                                                id: k,
                                                 recipient: currentEventRecipient,
                                                 time: currentEventTime,
                                                 type: currentEventType,
@@ -408,13 +401,13 @@ function processZip(req, res, type) {
 
                                     let libraryArray = result['scenario']['library'];
                                     if(!(libraryArray === undefined)){
-                                        for (var i = 0; i < libraryArray.length; i++) {
-                                            var currentLibraryType = libraryArray[i].type[0];
-                                            var currentLibraryLocation = libraryArray[i].location;
-                                            var currentLibrarySubject = libraryArray[i].subject;
+                                        for (var l = 0; l < libraryArray.length; l++) {
+                                            var currentLibraryType = libraryArray[l].type[0];
+                                            var currentLibraryLocation = libraryArray[l].location;
+                                            var currentLibrarySubject = libraryArray[l].subject;
 
                                             var libraryItem = {
-                                                id: i,
+                                                id: l,
                                                 type: currentLibraryType,
                                                 location: currentLibraryLocation,
                                                 subject: currentLibrarySubject
@@ -503,8 +496,8 @@ io.on('connection', function (socket) {
             }
 
             var isNGOPresent = false;
-            for (var i = 0; i < connectedUsers.length; i++) {
-                if (connectedUsers[i].name === ngoName) {
+            for (var j = 0; j < connectedUsers.length; j++) {
+                if (connectedUsers[j].name === ngoName) {
                     isNGOPresent = true;
                     break;
                 }
@@ -549,32 +542,34 @@ io.on('connection', function (socket) {
             root.ele('hoursInDay', '' + 24 / data.timeScale).end({pretty: true});
             root.ele('mode', data.modeOnline).end({pretty: true});
 
+            var item;
+
             for (var i = 0; i < data.ngoList.length; i++) {
-                var item = root.ele('ngo');
+                item = root.ele('ngo');
                 item.ele('name', '' + data.ngoList[i].name).end({pretty: true});
                 item.ele('passkey', '' + data.ngoList[i].passkey).end({pretty: true});
                 item.end({pretty: true});
             }
 
-            for (var i = 0; i < data.EventTags.length; i++) {
-                var item = root.ele('tag', data.EventTags[i]).end({pretty: true});
+            for (var j = 0; j < data.EventTags.length; j++) {
+                item = root.ele('tag', data.EventTags[j]).end({pretty: true});
             }
 
-            for (var i = 0; i < data.eventsList.length; i++) {
-                var item = root.ele('event');
-                item.ele('recipient', '' + data.eventsList[i].recipient).end({pretty: true});
-                item.ele('subject', '' + data.eventsList[i].subject).end({pretty: true});
-                item.ele('time', '' + data.eventsList[i].time).end({pretty: true});
-                item.ele('type', '' + data.eventsList[i].type).end({pretty: true});
-                item.ele('location', '' + data.eventsList[i].location).end({pretty: true});
+            for (var k = 0; k < data.eventsList.length; k++) {
+                item = root.ele('event');
+                item.ele('recipient', '' + data.eventsList[k].recipient).end({pretty: true});
+                item.ele('subject', '' + data.eventsList[k].subject).end({pretty: true});
+                item.ele('time', '' + data.eventsList[k].time).end({pretty: true});
+                item.ele('type', '' + data.eventsList[k].type).end({pretty: true});
+                item.ele('location', '' + data.eventsList[k].location).end({pretty: true});
                 item.end({pretty: true});
             }
 
-            for (var i = 0; i < data.library.length; i++) {
-                var item = root.ele('library');
-                item.ele('subject', '' + data.library[i].subject).end({pretty: true});
-                item.ele('type', '' + data.library[i].type).end({pretty: true});
-                item.ele('location', '' + data.library[i].location).end({pretty: true});
+            for (var l = 0; l < data.library.length; l++) {
+                item = root.ele('library');
+                item.ele('subject', '' + data.library[l].subject).end({pretty: true});
+                item.ele('type', '' + data.library[l].type).end({pretty: true});
+                item.ele('location', '' + data.library[l].location).end({pretty: true});
                 item.end({pretty: true});
             }
 
@@ -614,7 +609,7 @@ io.on('connection', function (socket) {
 //Send NGO Name To Relevant NGO
         socket.on('nameRequest', function (msg, callback) {
             for (var i = 0; i < connectedUsers.length; i++) {
-                ngoTemp = connectedUsers[i];
+                var ngoTemp = connectedUsers[i];
                 if (ngoTemp.id == msg) {
                     if (!ngoTemp.name.includes("HQ")) {
                         callback(ngoTemp.name);
@@ -645,7 +640,7 @@ io.on('connection', function (socket) {
 
             //store in simdata
             var d = new Date();
-            var date = dateFormat(d, "HH:MM:ss")
+            var date = dateFormat(d, "HH:MM:ss");
             var message = {
                 recipient: msg.message.to,
                 sender: msg.message.from,
@@ -705,7 +700,7 @@ io.on('connection', function (socket) {
                 var data = simData;
                 worker = new Worker('./autoevents.js');
                 worker.postMessage(data);
-                currentRunningInstance = runSim();
+                runSim();
                 simData.started = true;
                 simData.startTimeMS = new Date().getTime();
             } else {
@@ -723,19 +718,16 @@ io.on('connection', function (socket) {
 
 function runSim() {
     worker.on('message', (msg) => {
-
         currentTimeMs = simData.durationMs - msg.timeMs;
         var time = msg.timeMs;
         var occurredEvents = msg.events;
         io.emit('currentTime', currentTimeMs);
         io.emit('occurredEvents', {occurredEvents, time});
     });
-
 }
 
 function msToTime(duration) {
-    var milliseconds = parseInt((duration % 1000) / 100),
-        seconds = Math.floor((duration / 1000) % 60),
+    var seconds = Math.floor((duration / 1000) % 60),
         minutes = Math.floor((duration / (1000 * 60)) % 60),
         hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
 
@@ -911,9 +903,9 @@ function GenerateReviewPDF(requestReviewCB) {
 
     for(var currentNGO of simData.ngoList){
         ngoStatusReportString += "NGO: " + currentNGO.name + "\n\n";
-        for(var i = 0; i < simData.ngoStatusReports.length; i++){
-            if(simData.ngoStatusReports[i].name.toString() === currentNGO.name.toString()){
-                ngoStatusReportString += "Hour " + simData.ngoStatusReports[i].hour + ": " + simData.ngoStatusReports[i].status + "\n";
+        for(var l = 0; l < simData.ngoStatusReports.length; l++){
+            if(simData.ngoStatusReports[l].name.toString() === currentNGO.name.toString()){
+                ngoStatusReportString += "Hour " + simData.ngoStatusReports[l].hour + ": " + simData.ngoStatusReports[l].status + "\n";
             }
         }
         ngoStatusReportString += newLine;
