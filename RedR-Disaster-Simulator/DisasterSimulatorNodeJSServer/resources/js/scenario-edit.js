@@ -96,37 +96,6 @@ function updateTag(tagNum){
     drawTags();
 }
 
-function drawNgos() {
-    $('#ngos').empty();
-    $('#ngos').append("<h6>NGOs:</h6>" +
-                        "<ul id='ngoList'></ul>");
-    for(var i=0; i < data.ngoList.length; i++){
-        $("#ngoList").append("<li>"+data.ngoList[i].name+"<button onclick=editNgo("+i+")>Edit</button><div id='ngoForm"+i+"'></div></li>")
-    }
-    newNgo();
-    newEvent();
-}
-
-function newNgo() {
-    $('#ngoList').append("<br><h6>New:</h6>" +
-                        "<form id='ngoForm'></form>" +
-                        "NGO Name: <input form='ngoForm' type='text' name='name'><br>"+
-                        "NGO Passkey: <input form='ngoForm' type='text' name='passkey'><br>"+
-                        "<input form='ngoForm' type='button' onclick='addNgo()' value='Submit'>");
-}
-
-function addNgo() {
-    let frmData = document.getElementById("ngoForm");
-
-    let ngo = {
-        name: frmData.elements[0].value,
-        passkey: frmData.elements[1].value
-    };
-    data.ngoList.push(ngo);
-
-    drawNgos();
-}
-
 function editType(){
     $('#editType').empty();
     var options = '';
@@ -211,6 +180,44 @@ function updateScale(){
     drawDetails(data);
 }
 
+function drawNgos() {
+    $('#ngos').empty();
+    $('#ngos').append("<h6>NGOs:</h6>" +
+                        "<ul id='ngoList'></ul>");
+    for(var i=0; i < data.ngoList.length; i++){
+        $("#ngoList").append("<li>"+data.ngoList[i].name+"<button onclick=editNgo("+i+")>Edit</button><div id='ngoForm"+i+"'></div></li>")
+    }
+    newNgo();
+    newEvent();
+}
+
+function newNgo() {
+    $('#ngoList').append("<br><h6>New:</h6>" +
+                        "<form id='ngoForm'></form>" +
+                        "NGO Name: <input form='ngoForm' type='text' name='name'><br>"+
+                        "NGO Passkey: <input form='ngoForm' type='text' name='passkey'><br>"+
+                        "<input form='ngoForm' type='button' onclick='addNgo()' value='Submit'>");
+}
+
+function addNgo() {
+    let frmData = document.getElementById("ngoForm");
+    if(frmData.elements[1].value === ''){
+        return alert('Must enter a passkey');
+    }
+    for(var j=0; j<data.ngoList.length; j++){
+        if(frmData.elements[1].value === data.ngoList[j].passkey[0]){
+            return alert('Passkeys must be unique');
+        }
+    }
+    let ngo = {
+        name: frmData.elements[0].value.replace(/ /g, "_"),
+        passkey: frmData.elements[1].value
+    };
+    data.ngoList.push(ngo);
+
+    drawNgos();
+}
+
 function editNgo(ngoNum){
     $('#ngoForm'+ngoNum).empty();
     $('#ngoForm'+ngoNum).append("<form id='ngoForm"+ngoNum+"'></form>" +
@@ -223,7 +230,16 @@ function editNgo(ngoNum){
 
 function updateNgo(ngoNum){
     //for some reason works only with jQuery and not with the regular document.getElementsById...
-    data.ngoList[ngoNum].name = $("#ngoname").val();
+    if($("#ngopasskey").val() === ''){
+        return alert('Must enter a passkey');
+    }
+    for(var j=0; j<data.ngoList.length; j++){
+        if(j === ngoNum){ continue; }
+        if($("#ngopasskey").val() === data.ngoList[j].passkey[0]){
+            return alert('Passkeys must be unique');
+        }
+    }
+    data.ngoList[ngoNum].name = $("#ngoname").val().replace(/ /g, "_");
     data.ngoList[ngoNum].passkey = $("#ngopasskey").val();
 
     $('#ngoForm'+ngoNum).empty();
@@ -442,7 +458,7 @@ function updateLibraryItem(libNum){
     let file = frmData.elements[2].files[0];
     if(file){
         uploadFiles(file, 'event');
-        data.eventsList[eventNum].location = '/currentScenario/files/library/'+file.name;
+        data.eventsList[eventNum].location = '/currentScenario/files/library/'+file.name.replace(/ /g, "_");
     }
 
     data.eventsList[libNum].subject = frmData.elements[0].value;
