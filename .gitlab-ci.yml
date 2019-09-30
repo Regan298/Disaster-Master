@@ -1,12 +1,27 @@
 image: node:latest
 
 stages:
+  - lint
   - Test
   - Deploy
   - DeployTesting
 cache:
   paths:
     - node_modules/
+    
+    
+eslint:
+  stage: lint
+  tags:
+    - docker
+  before_script:
+    - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
+    - npm install
+    
+  script:
+    # Install ESLint in this docker container
+    - npm install -g eslint
+    - eslint server.js
 
 
 testing_testing:
