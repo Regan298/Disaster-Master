@@ -572,16 +572,6 @@ io.on('connection', function (socket) {
                 item.end({pretty: true});
             }
 
-            for (var i = 0; i < data.eventsList.length; i++) {
-                var item = root.ele('event');
-                item.ele('recipient', '' + data.eventsList[i].recipient).end({pretty: true});
-                item.ele('subject', '' + data.eventsList[i].subject).end({pretty: true});
-                item.ele('time', '' + data.eventsList[i].time).end({pretty: true});
-                item.ele('type', '' + data.eventsList[i].type).end({pretty: true});
-                item.ele('location', '' + data.eventsList[i].location).end({pretty: true});
-                item.end({pretty: true});
-            }
-
             for (var i = 0; i < data.library.length; i++) {
                 var item = root.ele('library');
                 item.ele('subject', '' + data.library[i].subject).end({pretty: true});

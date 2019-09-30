@@ -23,6 +23,7 @@ socket.emit('simState', 'request', function (simdata) {
     // isRunning: false,
     // EventTags: ['Cow', 'cat', 'chicken'],
     // ngoStatusReports: []
+    console.log(data);
     $(function () {
         drawDetails(data);
         drawEvents(data.eventsList);
