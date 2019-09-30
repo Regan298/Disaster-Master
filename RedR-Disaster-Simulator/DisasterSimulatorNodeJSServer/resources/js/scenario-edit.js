@@ -56,23 +56,21 @@ function drawTags() {
     for(var i=0; i < data.EventTags.length; i++){
         $("#tagList").append("<li>"+data.EventTags[i]+"<button onclick=editTag("+i+")>Edit</button><div id='tagForm"+i+"'></div></li>")
     }
+
+    newTag()
 }
 
 function newTag() {
     $('#tagList').append("<br><h6>New:</h6>" +
                         "<form id='tagForm'></form>" +
-                        "Tag: <input form='tagForm' type='text' name='tag'><br>"+
+                        "Tag: <input form='tagForm' id='newTag' type='text' name='tag'><br>"+
                         "<input form='tagForm' type='button' onclick='addTag()' value='Submit'>");
 }
 
 function addTag() {
-    let frmData = document.getElementById("tagForm");
+    data.EventTags.push($("#newTag").val());
 
-    let tag = {
-        tag: frmData.elements[0].value
-    };
-    data.tagList.push(tag);
-
+    $('#tagForm').empty();
     drawTags();
 }
 
