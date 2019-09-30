@@ -21,6 +21,9 @@
     <name>Daniel</name>
     <passkey>4</passkey>
   </ngo>
+  <tag>Decision</tag>
+  <tag>Important</tag>
+  <tag>Banter</tag>
   <event>
     <recipient>Lachlan</recipient>
     <subject>e1</subject>
