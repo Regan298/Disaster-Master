@@ -280,8 +280,8 @@ body {
 
 #overlayHeader {
     padding: 2px 16px;
-    background-color: #fff;
-    color: white;
+    background-color: white;
+    color: black;
 }
 
 .row {
