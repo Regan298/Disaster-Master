@@ -168,7 +168,7 @@ app.post('/upload-event-file', upload.single('upload'), function (req, res) {
             fs.mkdirSync(__dirname + '/generatedScenario/files/');
         }
 
-        simFileTemp.mv(__dirname + '/generatedScenario/files/' + simFileTemp.name, function (err) {
+        simFileTemp.mv(__dirname + '/generatedScenario/files/' + simFileTemp.name.replace(/ /g, "_"), function (err) {
             if (err) {
                 console.log(err);
                 res.status(400).send(err);
@@ -194,7 +194,7 @@ app.post('/upload-event-file-live', upload.single('upload'), function (req, res)
             fs.mkdirSync(__dirname + '/currentScenario/files/');
         }
 
-        simFileTemp.mv(__dirname + '/currentScenario/files/' + simFileTemp.name, function (err) {
+        simFileTemp.mv(__dirname + '/currentScenario/files/' + simFileTemp.name.replace(/ /g, "_"), function (err) {
             if (err) {
                 console.log(err);
                 res.status(400).send(err);
@@ -220,7 +220,7 @@ app.post('/upload-library-file', upload.single('upload'), function (req, res) {
             fs.mkdirSync(__dirname + '/generatedScenario/files/library');
         }
 
-        simFileTemp.mv(__dirname + '/generatedScenario/files/library/' + simFileTemp.name, function (err) {
+        simFileTemp.mv(__dirname + '/generatedScenario/files/library/' + simFileTemp.name.replace(/ /g, "_"), function (err) {
             if (err) {
                 console.log(err);
                 res.status(400).send(err);
@@ -312,9 +312,6 @@ function processZip(req, res, type) {
                 if (!fs.existsSync(__dirname + directoryForModification)) {
                     fs.mkdirSync(__dirname + directoryForModification);
                 }
-
-
-
 
                 zip.unzip(__dirname + '/' + simFileTemp.name.replace(/ /g, "_"),  __dirname + directoryForModification, function (err) {
                     //extract(__dirname + '/' + simFileTemp.name, {dir: __dirname + directoryForModification}, function (err) {

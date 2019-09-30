@@ -761,7 +761,7 @@ function addEvent(location){
     let file = frmData.elements[5].files[0];
     if(file){
         uploadFiles(file, 'event');
-        newEvent.location = ['/currentScenario/files/'+file.name];
+        newEvent.location = ['/currentScenario/files/'+file.name.replace(/ /g, "_")];
         // var type = file.name.split(".");
         // newEvent.type = type[type.length-1];
     }else{
@@ -803,7 +803,7 @@ function updateEvent(){
     let file = frmData.elements[5].files[0];
     if(file){
         uploadFiles(file, 'event');
-        simData.eventsList[selected.id].location = ['/currentScenario/files/'+file.name];
+        simData.eventsList[selected.id].location = ['/currentScenario/files/'+file.name.replace(/ /g, "_")];
         // var type = file.name.split(".");
         // simData.eventsList[selected.id].type = type[type.length-1];
     }

@@ -442,7 +442,7 @@ function updateLibraryItem(libNum){
     let file = frmData.elements[2].files[0];
     if(file){
         uploadFiles(file, 'event');
-        data.eventsList[eventNum].location = '/currentScenario/files/library/'+file.name;
+        data.eventsList[eventNum].location = '/currentScenario/files/library/'+file.name.replace(/ /g, "_");
     }
 
     data.eventsList[libNum].subject = frmData.elements[0].value;
