@@ -12,6 +12,8 @@ cache:
     
 eslint:
   stage: lint
+  tags:
+    - deploy
   script:
     # Install ESLint in this docker container
     - npm install -g eslint
