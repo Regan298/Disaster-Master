@@ -238,6 +238,9 @@ app.post('/upload-library-file', upload.single('upload'), function (req, res) {
 app.get('/getReviewFile', function (req, res) {
     GenerateReviewPDF(function () {
         fs.rename(__dirname + '/'+'document.pdf', __dirname + '/' + simData.title + 'Review.pdf', function(err) {
+            if(err){
+                console.log(err);
+            }
             res.download(__dirname + '/'+ simData.title + 'Review.pdf', simData.title + 'Review.pdf');
         });
     });
