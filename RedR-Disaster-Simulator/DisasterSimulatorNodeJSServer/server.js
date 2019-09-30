@@ -20,7 +20,7 @@ var path = require('path');
 var zipFolder = require('zip-folder');
 var extract = require('extract-zip');
 var rimraf = require("rimraf");
-var zip = require('cross-zip')
+var zip = require('cross-zip');
 
 var worker = new Worker('./autoevents.js'); //autoevents worker
 var productionMode = false;
@@ -378,7 +378,7 @@ function processZip(req, res, type) {
                                                 id: i,
                                                 name: currentNGOName,
                                                 passkey: currentNGOPasskey
-                                            }
+                                            };
                                             simData.ngoList.push(ngo);
                                         }
                                     }
@@ -647,7 +647,7 @@ io.on('connection', function (socket) {
 
             //store in simdata
             var d = new Date();
-            var date = dateFormat(d, "HH:MM:ss")
+            var date = dateFormat(d, "HH:MM:ss");
             var message = {
                 recipient: msg.message.to,
                 sender: msg.message.from,
