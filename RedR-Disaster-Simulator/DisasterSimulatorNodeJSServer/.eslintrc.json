@@ -9,6 +9,9 @@
     "env": {
         "node": true
     },
+    "extends": {
+        "eslint": recommended
+    },
     "rules": {
         "semi": "error"
     }
