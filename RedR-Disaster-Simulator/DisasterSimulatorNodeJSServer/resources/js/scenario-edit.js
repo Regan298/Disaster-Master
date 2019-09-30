@@ -76,6 +76,27 @@ function addTag() {
     drawTags();
 }
 
+function editTag(tagNum){
+    $('#tagForm'+tagNum).empty();
+    $('#tagForm'+tagNum).append("<form id='tagForm"+tagNum+"'></form>" +
+                            "Tag: <input form='tagForm"+tagNum+"' type='text' id='tagname' name='name' value='"+data.EventTags[tagNum]+"'><br>"+
+                            "<input form='tagForm"+tagNum+"' type='button' onclick='updateTag("+tagNum+")' value='Submit'>" +
+                            "<button type='button' onclick=cancelEdit('#tagForm"+tagNum+"')>Cancel</button>" +
+                            "<button type='button' onclick=deleteTag('"+tagNum+"')>DELETE</button>");
+}
+
+function deleteTag(tagNum){
+    data.EventTags.splice(tagNum, 1);
+    drawTags(data.EventTags);
+}
+
+function updateTag(tagNum){
+    data.EventTags[tagNum] = $("#tagname").val();
+
+    $('#tagForm'+tagNum).empty();
+    drawTags();
+}
+
 function drawNgos() {
     $('#ngos').empty();
     $('#ngos').append("<h6>NGOs:</h6>" +
