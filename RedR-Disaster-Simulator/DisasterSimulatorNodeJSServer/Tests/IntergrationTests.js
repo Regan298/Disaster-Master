@@ -270,6 +270,16 @@ describe("Routing And File Tests", function () {
             });
     });
 
+    it('Test pdf pdf is created', function (done) {
+        chai.request(app).get('/getReviewFile')
+            .end(function (err, res) {
+                expect(res.type).to.equal('application/pdf');
+                expect(res.status).to.equal(200);
+                done();
+            });
+
+    });
+
     describe("Socket Tests", function () {
 
         before(function (done) {

@@ -16,21 +16,22 @@
     "mysql": ">=2.17.1",
     "opn": ">=1.0.0",
     "path": ">=0.12.7",
+    "pdfmake": "^0.1.60",
     "promise-mysql": ">=4.0.4",
     "rimraf": "^3.0.0",
     "socket.io": ">=2.2.0",
     "statman-stopwatch": ">=2.8.2",
+    "supertest": "^4.0.2",
     "xml2js": "^0.4.22",
-    "zip-folder": "^1.0.0",
-    "pdfmake": "^0.1.60"
+    "zip-folder": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
-    "should": "^7.0.2",
     "mocha": "^6.2.0",
-    "start-server-and-test": ">=1.10.2",
-    "nyc": "^14.1.1"
+    "nyc": "^14.1.1",
+    "should": "^7.0.2",
+    "start-server-and-test": ">=1.10.2"
   },
   "engines": {
     "node": "12.3.1",
@@ -40,7 +41,6 @@
     "start-server": "npm start",
     "test": "nyc mocha"
   },
-
   "mocha": {
     "spec": "Tests/"
   }
