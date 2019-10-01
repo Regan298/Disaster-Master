@@ -23,7 +23,24 @@ Node.js binary version is installed along with required npm packages in the pack
 
 ### Dependencies
 
-- List all npm packages here
+- clone-deep
+- cross-zip
+- dateformat
+- express
+- express-fileupload
+- extract-zip
+- formidable
+- hh-mm-ss
+- ip
+- multer
+- opn
+- path
+- pdfmake
+- rimraf
+- socket.io
+- supertest
+- xml2js
+- zip-folder
 
 ### Troubleshooting Issues
 
