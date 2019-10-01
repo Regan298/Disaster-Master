@@ -8,6 +8,10 @@ var selectedNGOChat;
 var running = false;
 var simulationDuration = 0;
 var timeScale = 0;
+/*eslint-disable */
+// Bogus Warning
+var pauseTimeline;
+/*eslint-enable */
 var timeline;
 var realCountdown = false;
 var simData;
@@ -423,14 +427,16 @@ function simDisplayRemainingTime(timerElement, timeRemaining) {
 
 function doPause() {
     //clearInterval(updateClockProcess);
-    setInterval(pauseTimeline, 100);
+    pauseTimeline = setInterval(pauseTimelineMethod, 100);
 }
 
-function pauseTimeline() {
+function pauseTimelineMethod() {
+
     /*eslint-disable */
     // External Reference error suppressed
     timeline.setCurrentTime(startDate);
     /*eslint-enable */
+
     timeline.redraw();
 }
 
