@@ -23,6 +23,7 @@ eslint:
     - npm install -g eslint
     - eslint server.js
     - eslint resources/js/run-simulation.js
+    - eslint resources/js/ngo-simulation.js
 
 
 testing_testing:
