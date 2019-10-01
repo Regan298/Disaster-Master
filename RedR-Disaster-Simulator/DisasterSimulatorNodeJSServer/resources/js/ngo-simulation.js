@@ -1,17 +1,16 @@
-const socket = io();
+/*eslint-disable */
+const socket = io(); // Disabled liniting as being referenced in previous call
+/*eslint-enable */
 var name;
 var ngos = [];
 var eventList = [];
 var simulationDuration = 0;
 var selectedNGOChat;
 var selectedEvent;
-var nameNotRecieved = true;
 var simData;
 var haveProcessedPastMessages = false;
-var startDuration;
 var firstTimeReccieve = true;
 var eventDisplayCounter = 0;
-var eventResponseList = [];
 var currentHour;
 document.documentElement.style.height = "1500px";
 
@@ -63,7 +62,7 @@ function handleCommunicationButtonsAndMessages(callback) {
     var messagingChats = document.getElementsByClassName("messagingContentNGO");
     buttons[0].innerHTML = "HQ";
     buttons[0].id = "HQ";
-    buttons[0].setAttribute("onclick", "switchNGOChat('" + "HQ" + "')")
+    buttons[0].setAttribute("onclick", "switchNGOChat('" + "HQ" + "')");
     var ngosTemp = [];
     for (var i = 0; i < simData.ngoList.length; i++) {
         let currentUserName = new String(simData.ngoList[i].name).trim().replace(" ", "_");
@@ -77,20 +76,20 @@ function handleCommunicationButtonsAndMessages(callback) {
     }
 
 
-    for (var i = 1; i <= ngosTemp.length; i++) {
-        let currentUserName = new String(ngosTemp[i - 1].name).trim().replace(" ", "_");
+    for (var j = 1; j <= ngosTemp.length; j++) {
+        let currentUserName = new String(ngosTemp[j - 1].name).trim().replace(" ", "_");
 
-        buttons[i].innerHTML = currentUserName;
-        buttons[i].id = currentUserName;
-        buttons[i].setAttribute("onclick", "switchNGOChat('" + currentUserName + "')");
+        buttons[j].innerHTML = currentUserName;
+        buttons[j].id = currentUserName;
+        buttons[j].setAttribute("onclick", "switchNGOChat('" + currentUserName + "')");
 
         //buttons[i] = "switchNGOChat('" + currentUserName + "')";
-        buttons[i].style.visibility = "hidden";
+        buttons[j].style.visibility = "hidden";
     }
 
 
-    for (var i = 1; i <= ngosTemp.length; i++) {
-        messagingChats[i].id = new String(ngosTemp[i - 1].name).trim().replace(" ", "_") + "Content";
+    for (var k = 1; k <= ngosTemp.length; k++) {
+        messagingChats[k].id = new String(ngosTemp[k - 1].name).trim().replace(" ", "_") + "Content";
     }
 
     //remove extra buttons and chats
@@ -98,7 +97,7 @@ function handleCommunicationButtonsAndMessages(callback) {
 
     var buttonsCount = buttons.length;
 
-    for (var j = ngosTemp.length; j < buttonsCount - 1; j++) {
+    for (var l = ngosTemp.length; l < buttonsCount - 1; l++) {
         buttons[ngosTemp.length + 1].remove();
         messagingChats[ngosTemp.length + 1].remove();
     }
@@ -111,7 +110,7 @@ function handleCommunicationButtonsAndMessages(callback) {
 
 function displayRemainingTime(timerElement, timeRemaining) {
     if (timeRemaining == 0) {
-        timerElement.innerHTML = "Simulation Not Running"
+        timerElement.innerHTML = "Simulation Not Running";
     } else {
         var seconds = Math.floor((timeRemaining / 1000) % 60);
         var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
@@ -126,7 +125,7 @@ function switchNGOChat(ngo) {
 
     //Highlight selected button and unlight non selected
     if (ngo != null) {
-        buttons = document.getElementsByClassName("btn btn-secondary");
+        var buttons = document.getElementsByClassName("btn btn-secondary");
         for (var i = 0; i < buttons.length; i++) {
             buttons[i].style.backgroundColor = "#b5b5b5";
         }
@@ -156,7 +155,7 @@ function switchNGOChat(ngo) {
 
 function addToConversation(content, isOrigin, from, to) {
 
-
+    var childUl;
     if (isOrigin) {
         if (to == "HQ") {
             to = "ngo0Content";
@@ -164,7 +163,7 @@ function addToConversation(content, isOrigin, from, to) {
             to = to.trim().replace(" ", "_") + "Content";
         }
 
-        var childUl = $("#" + to).find('.messageList');
+        childUl = $("#" + to).find('.messageList');
 
         $(childUl).append("<li id='origin'>" + content + "</li>");
     } else {
@@ -192,7 +191,7 @@ function addToConversation(content, isOrigin, from, to) {
         }
 
 
-        var childUl = $("#" + value).find('.messageList');
+        childUl = $("#" + value).find('.messageList');
 
         $(childUl).append("<li id='nonOrigin'>" + content + "</li>");
     }
@@ -210,7 +209,6 @@ function loadNGOTitle() {
         name = name.trim().replace(" ", "_");
         var htmlContent = "<h1 class='titles'><span>NGO: " + name + "</span></h1>";
         $(htmlContent).appendTo(".ngoTitle");
-        nameNotRecieved = false;
 
         handleCommunicationButtonsAndMessages(function () {
             setInterval(handleNGOJoining, 1000);
@@ -262,7 +260,8 @@ function handlePersistentMessages() {
 
 }
 
-
+/*eslint-disable */
+// Supress linter warnings as these function are refernced externally, all inner function warnings have been adressed
 function displayPDFOff() {
     document.getElementById("pdfOverlay").style.display = "none";
 }
@@ -394,6 +393,8 @@ function addMessageToEventResponse(responseData, isorigin) {
     }
 }
 
+/*eslint-enable */
+
 function processEvent(event) {
 
 
@@ -487,8 +488,8 @@ function recieveEvents() {
 
             $("button.eventObject").remove();
             eventDisplayCounter = 0;
-            for (var i = 0; i < eventList.length; i++) {
-                processEvent(eventList[i]);
+            for (var k = 0; k < eventList.length; k++) {
+                processEvent(eventList[k]);
             }
 
 
@@ -514,7 +515,6 @@ function statusReportInitialise() {
 function recieveCurrentTime() {
     socket.on('currentTime', function (time) {
         if (firstTimeReccieve) {
-            startDuration = time;
             firstTimeReccieve = false;
             simData.startTimeMS = new Date().getTime();
         }
@@ -547,7 +547,7 @@ function handleMessageRecieving() {
 
         var from = msg.recievedMessage.from;
         var to = msg.recievedMessage.to;
-        addToConversation(msg.recievedMessage.content, false, from, to)
+        addToConversation(msg.recievedMessage.content, false, from, to);
     });
 
 }

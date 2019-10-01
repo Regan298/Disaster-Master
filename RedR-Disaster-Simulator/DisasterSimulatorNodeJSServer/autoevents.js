@@ -1,10 +1,9 @@
 // var Stopwatch = require('statman-stopwatch');
 var TimeFormat = require('hh-mm-ss');
-const util = require('util');
 var simLength;
 var pastEvents = [];
 var eventList = [];
-const { parentPort, workerData } = require('worker_threads');
+const {parentPort} = require('worker_threads');
 
 // const stopwatch = new Stopwatch();
 
@@ -61,7 +60,7 @@ function getEvents(){
 		var eventTime;
 	
 		for (var i = 0; i < eventList.length; i++) {
-			var et = eventList[i].time+''
+			var et = eventList[i].time+'';
 			t = et.split(":");
 			eventTime = new Date();
 			eventTime.setHours(t[0]);
@@ -77,7 +76,7 @@ function getEvents(){
 		var data = {
 			events: pastEvents,
 			timeMs: timeS*1000
-		}
+		};
 		parentPort.postMessage(data);
 		//console.log(count);
 	}else{
@@ -90,12 +89,4 @@ function endSim(){
 	// stopwatch.stop();
 	// stopwatch.reset();
 	console.log("end of simulation");
-}
-
-function wait(ms) {
-    var start = new Date().getTime();
-    var end = start;
-    while (end < start + ms) {
-        end = new Date().getTime();
-    }
 }
