@@ -36,9 +36,11 @@ Node.js binary version is installed along with required npm packages in the pack
 - opn
 - path
 - pdfmake
+- pdfobject
 - rimraf
 - socket.io
 - supertest
+- vis.js
 - xml2js
 - zip-folder
 
