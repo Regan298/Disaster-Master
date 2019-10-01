@@ -261,7 +261,7 @@ describe("Routing And File Tests", function () {
             });
     });
 
-    it('upload sim file into edit (no file at all) should return status 302', function (done){
+    it('upload correct sim file into edit should return status 200', function (done){
         chai.request(app).post('/editor-upload')
             .attach('simFile', 'Tests/demoScenarioGood1.zip')
             .end(function (err, res) {
@@ -278,6 +278,42 @@ describe("Routing And File Tests", function () {
                 done();
             });
 
+    });
+
+    it('Test scenario download', function (done) {
+        chai.request(app).get('/download-save')
+            .end(function (err, res) {
+                expect(res.type).to.equal('application/zip');
+                expect(res.status).to.equal(200);
+                done();
+            });
+    });
+
+    it('Test event pdf upload', function (done) {
+        chai.request(app).post('/upload-event-file')
+            .attach('upload', 'Tests/003 HQ Daily SitRep Request.pdf')
+            .end(function (err, res) {
+                expect(res.status).to.equal(200);
+                done();
+            });
+    });
+
+    it('Test live event pdf upload', function (done) {
+        chai.request(app).post('/upload-event-file-live')
+            .attach('upload', 'Tests/003 HQ Daily SitRep Request.pdf')
+            .end(function (err, res) {
+                expect(res.status).to.equal(200);
+                done();
+            });
+    });
+
+    it('Test library pdf upload', function (done) {
+        chai.request(app).post('/upload-library-file')
+            .attach('upload', 'Tests/003 HQ Daily SitRep Request.pdf')
+            .end(function (err, res) {
+                expect(res.status).to.equal(200);
+                done();
+            });
     });
 
     describe("Socket Tests", function () {
