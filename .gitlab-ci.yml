@@ -25,6 +25,7 @@ eslint:
     - eslint autoevents.js
     - eslint resources/js/run-simulation.js
     - eslint resources/js/ngo-simulation.js
+    - eslint resources/js/scenario-edit.js
 
 
 testing_testing:
