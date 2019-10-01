@@ -65,7 +65,10 @@
             <!--Timeline-->
             <div id="timeline" class="timeline">
                 <div style="position:relative">
-                    <button type="button" id="addButton" onclick=addPopup() style="border: 2px solid #ffffff00; right: 0px; position:absolute; font-size: 20px; padding: 3px 10px; z-index: 2;">  +  </button>
+                    <button type="button" id="addButton" onclick=addPopup()
+                            style="border: 2px solid #ffffff00; right: 0px; position:absolute; font-size: 20px; padding: 3px 10px; z-index: 2;">
+                        +
+                    </button>
                 </div>
                 <div id="visualization"></div><!-- container for timeline -->
             </div>
@@ -163,17 +166,19 @@
 
 <div id="ngoPasskeyOverlay" class="eventOverlay" onclick="displayPasskeysOff()">
     <div id="ngoPasskeyContent">
-    <p id="ngoPasskeyText">List Of NGO Passkeys:</p>
+        <p id="ngoPasskeyText">List Of NGO Passkeys:</p>
     </div>
+</div>
 
+<div id="simulationTerminationOverlay" class="eventOverlay" >
+    <div id="simulationTerminationContent">
+    <p id="simulationTerminationContentText">This Simulation Has Ended Click <a href="/getReviewFile"> Here </a> To Download
+        Your Review File. Once Downloaded, Refresh this Page to Close this Popup. And go home to load a New Scenario.</p>
+    </div>
 </div>
 
 
-
-
-
-
-<div id="modal" class="eventOverlay"> 
+<div id="modal" class="eventOverlay">
 </div>
 
 
@@ -193,9 +198,6 @@
 <!-- Image overlay code -->
 <div id="imageOverlay" class="mediaOverlay" onclick="displayImageOff()">
 </div>
-
-
-
 
 
 </body>

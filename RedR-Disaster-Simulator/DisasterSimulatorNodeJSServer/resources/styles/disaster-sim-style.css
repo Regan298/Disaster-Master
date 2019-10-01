@@ -863,6 +863,16 @@ ul.libraryList {
     width: 20%;
 }
 
+#simulationTerminationContent{
+    width: 20%;
+    margin-top: 20%;
+    margin-left: 40%;
+    background-color: white;
+    text-align: center;
+    vertical-align: center;
+    font-size: large;
+}
+
 
 
 .pdfobject {

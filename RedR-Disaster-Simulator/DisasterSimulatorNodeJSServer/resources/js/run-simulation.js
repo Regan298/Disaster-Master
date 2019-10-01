@@ -587,11 +587,16 @@ function updateCurrentTime() {
 
         if (time == 1000){
             socket.off('currentTime');
-            window.open('/getReviewFile');
+            document.getElementById('simulationTerminationOverlay').style.display = 'block';
         }
     });
 
 }
+
+//Might Be useful however could result in loss of review file due to mis click
+/*function displaySimTerminationOff(){
+    document.getElementById('simulationTerminationOverlay').style.display = 'none';
+}*/
 
 function handleTimeSwitcher() {
     document.getElementById('simTime').style.display = 'inline';
