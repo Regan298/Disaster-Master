@@ -63,6 +63,7 @@ deploytesting:
   - scenario-creation
   - ngo-passkey-display
   - lachlan-review
+  - graceful-simulation-termination
 
 
 
