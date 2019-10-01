@@ -261,7 +261,7 @@ describe("Routing And File Tests", function () {
             });
     });
 
-    it('upload sim file into edit (no file at all) should return status 302', function (done){
+    it('upload correct sim file into edit should return status 200', function (done){
         chai.request(app).post('/editor-upload')
             .attach('simFile', 'Tests/demoScenarioGood1.zip')
             .end(function (err, res) {
@@ -278,6 +278,42 @@ describe("Routing And File Tests", function () {
                 done();
             });
 
+    });
+
+    it('Test scenario download', function (done) {
+        chai.request(app).get('/download-save')
+            .end(function (err, res) {
+                expect(res.type).to.equal('application/zip');
+                expect(res.status).to.equal(200);
+                done();
+            });
+    });
+
+    it('Test event pdf upload', function (done) {
+        chai.request(app).post('/upload-event-file')
+            .attach('upload', 'Tests/003 HQ Daily SitRep Request.pdf')
+            .end(function (err, res) {
+                expect(res.status).to.equal(200);
+                done();
+            });
+    });
+
+    it('Test live event pdf upload', function (done) {
+        chai.request(app).post('/upload-event-file-live')
+            .attach('upload', 'Tests/003 HQ Daily SitRep Request.pdf')
+            .end(function (err, res) {
+                expect(res.status).to.equal(200);
+                done();
+            });
+    });
+
+    it('Test library pdf upload', function (done) {
+        chai.request(app).post('/upload-library-file')
+            .attach('upload', 'Tests/003 HQ Daily SitRep Request.pdf')
+            .end(function (err, res) {
+                expect(res.status).to.equal(200);
+                done();
+            });
     });
 
     describe("Socket Tests", function () {
@@ -452,6 +488,107 @@ describe("Routing And File Tests", function () {
             });
         });
 
+        it('Check for export XML', function (done) {
+            var client = io.connect(socketURL, options);
+            client.on('connect', function (data) {
+                var simData = {
+                    loaded: false,
+                    ready: false,
+                    title: "Test",
+                    ngoCount: 0,
+                    ngoList: [],
+                    eventsList: [],
+                    messageList: [],
+                    durationMs: 0,
+                    timeScale: 0,
+                    started: false,
+                    modeOnline: true,
+                    occurredEvents: [],
+                    library: [],
+                    startTimeMS: 0,
+                    isRunning: false,
+                    EventTags: [],
+                    ngoStatusReports: []
+                };
+                client.emit('exportXML', simData);
+                client.on('xmlSaved', function () {
+                    expect(true).to.equal(true);
+                    done();
+                });
+            });
+        });
+
+        it('Check update event', function (done) {
+            var client = io.connect(socketURL, options);
+            client.on('connect', function (data) {
+                var event = {
+                    id: 0,
+                    recipient: ['test'],
+                    time: ['00:00:30'],
+                    type: ['pdf'],
+                    location: ['./Tests/003 HQ Daily SitRep Request.pdf'],
+                    subject: ['test'],
+                    responses: [],
+                    latestUpdateTime: 0,
+                    ChosenNGOTag: "Not Chosen"
+                };
+                client.emit('updateEvent', event);
+                client.emit('simState', "request", function (callbackData) {
+                    expect(callbackData.simData.eventsList[0].subject[0]).to.equal('test');
+                    done();
+                });
+            });
+        });
+
+        it('Check add event', function (done) {
+            var client = io.connect(socketURL, options);
+            client.on('connect', function (data) {
+                var event = {
+                    id: 0,
+                    recipient: ['test'],
+                    time: ['00:00:30'],
+                    type: ['pdf'],
+                    location: ['./Tests/003 HQ Daily SitRep Request.pdf'],
+                    subject: ['test'],
+                    responses: [],
+                    latestUpdateTime: 0,
+                    ChosenNGOTag: "Not Chosen"
+                };
+                client.emit('addEvent', event);
+                client.emit('simState', "request", function (callbackData) {
+                    expect(callbackData.simData.eventsList[callbackData.simData.eventsList.length-1].subject[0]).to.equal('test');
+                    done();
+                });
+            });
+        });
+
+        it('Check delete event', function (done) {
+            var client = io.connect(socketURL, options);
+            client.on('connect', function (data) {
+                client.emit('deleteEvent', 1);
+                client.emit('simState', "request", function (callbackData) {
+                    console.log(callbackData.simData.eventsList);
+                    expect(callbackData.simData.eventsList[callbackData.simData.eventsList.length]).to.equal(undefined);
+                    done();
+                });
+            });
+        });
+
+        it('Check ngo status', function (done) {
+            var client = io.connect(socketURL, options);
+            client.on('connect', function (data) {
+                var ngoStatusReport = {
+                    hour: 1,
+                    name: 'test',
+                    status: 'OK'
+                };
+                client.emit('ngoStatusReport', {ngoStatusReport});
+                client.emit('simState', "request", function (callbackData) {
+                    expect(callbackData.simData.ngoStatusReports[0].name).to.equal('test');
+                    done();
+                });
+            });
+        });
 
     });
 
