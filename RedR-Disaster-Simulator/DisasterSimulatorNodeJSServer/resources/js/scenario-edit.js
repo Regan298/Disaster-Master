@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 const socket = io();
 
 var data;
@@ -55,10 +56,10 @@ function drawTags() {
     $('#tags').append("<h6>Tags</h6>" +
                         "<ul id='tagList'></ul>");
     for(var i=0; i < data.EventTags.length; i++){
-        $("#tagList").append("<li>"+data.EventTags[i]+"<button onclick=editTag("+i+")>Edit</button><div id='tagForm"+i+"'></div></li>")
+        $("#tagList").append("<li>"+data.EventTags[i]+"<button onclick=editTag("+i+")>Edit</button><div id='tagForm"+i+"'></div></li>");
     }
 
-    newTag()
+    newTag();
 }
 
 function newTag() {
@@ -68,6 +69,7 @@ function newTag() {
                         "<input form='tagForm' type='button' onclick='addTag()' value='Submit'>");
 }
 
+// eslint-disable-next-line no-unused-vars
 function addTag() {
     data.EventTags.push($("#newTag").val());
 
@@ -75,6 +77,7 @@ function addTag() {
     drawTags();
 }
 
+// eslint-disable-next-line no-unused-vars
 function editTag(tagNum){
     $('#tagForm'+tagNum).empty();
     $('#tagForm'+tagNum).append("<form id='tagForm"+tagNum+"'></form>" +
@@ -84,11 +87,13 @@ function editTag(tagNum){
                             "<button type='button' onclick=deleteTag('"+tagNum+"')>DELETE</button>");
 }
 
+// eslint-disable-next-line no-unused-vars
 function deleteTag(tagNum){
     data.EventTags.splice(tagNum, 1);
     drawTags(data.EventTags);
 }
 
+// eslint-disable-next-line no-unused-vars
 function updateTag(tagNum){
     data.EventTags[tagNum] = $("#tagname").val();
 
@@ -96,6 +101,7 @@ function updateTag(tagNum){
     drawTags();
 }
 
+// eslint-disable-next-line no-unused-vars
 function editType(){
     $('#editType').empty();
     var options = '';
@@ -112,7 +118,9 @@ function editType(){
                             "<button type='button' onclick=cancelEdit('#editType')>Cancel</button>");
 }
 
+// eslint-disable-next-line no-unused-vars
 function updateType(){
+    // eslint-disable-next-line no-undef
     let frmData = document.getElementById("typeForm");
 
     data.modeOnline = (frmData.elements[0].value === 'true');
@@ -121,6 +129,7 @@ function updateType(){
     drawDetails(data);
 }
 
+// eslint-disable-next-line no-unused-vars
 function editTitle(){
     $('#editTitle').empty();
     $('#editTitle').append("<form id='titleForm'></form>" +
@@ -129,7 +138,9 @@ function editTitle(){
                             "<button type='button' onclick=cancelEdit('#editTitle')>Cancel</button>");
 }
 
+// eslint-disable-next-line no-unused-vars
 function updateTitle(){
+    // eslint-disable-next-line no-undef
     let frmData = document.getElementById("titleForm");
 
     data.title = frmData.elements[0].value;
@@ -138,6 +149,7 @@ function updateTitle(){
     drawDetails(data);
 }
 
+// eslint-disable-next-line no-unused-vars
 function editDuration(){
     $('#editDuration').empty();
     var minutes = Math.floor((data.durationMs / 1000 / 60) % 60);
@@ -149,7 +161,9 @@ function editDuration(){
                             "<button type='button' onclick=cancelEdit('#editDuration')>Cancel</button>");
 }
 
+// eslint-disable-next-line no-unused-vars
 function updateDuration(){
+    // eslint-disable-next-line no-undef
     let frmData = document.getElementById("durationForm");
 
     var h = frmData.elements[0].value;
@@ -163,6 +177,7 @@ function updateDuration(){
     drawDetails(data);
 }
 
+// eslint-disable-next-line no-unused-vars
 function editScale(){
     $('#editScale').empty();
     $('#editScale').append("<form id='scaleForm'></form>" +
@@ -171,7 +186,9 @@ function editScale(){
                             "<button type='button' onclick=cancelEdit('#editScale')>Cancel</button>");
 }
 
+// eslint-disable-next-line no-unused-vars
 function updateScale(){
+    // eslint-disable-next-line no-undef
     let frmData = document.getElementById("scaleForm");
 
     data.timeScale = 24/frmData.elements[0].value;
@@ -185,7 +202,7 @@ function drawNgos() {
     $('#ngos').append("<h6>NGOs:</h6>" +
                         "<ul id='ngoList'></ul>");
     for(var i=0; i < data.ngoList.length; i++){
-        $("#ngoList").append("<li>"+data.ngoList[i].name+"<button onclick=editNgo("+i+")>Edit</button><div id='ngoForm"+i+"'></div></li>")
+        $("#ngoList").append("<li>"+data.ngoList[i].name+"<button onclick=editNgo("+i+")>Edit</button><div id='ngoForm"+i+"'></div></li>");
     }
     newNgo();
     newEvent();
@@ -199,13 +216,17 @@ function newNgo() {
                         "<input form='ngoForm' type='button' onclick='addNgo()' value='Submit'>");
 }
 
+// eslint-disable-next-line no-unused-vars
 function addNgo() {
+    // eslint-disable-next-line no-undef
     let frmData = document.getElementById("ngoForm");
     if(frmData.elements[1].value === ''){
+        // eslint-disable-next-line no-undef
         return alert('Must enter a passkey');
     }
     for(var j=0; j<data.ngoList.length; j++){
         if(frmData.elements[1].value === data.ngoList[j].passkey[0]){
+            // eslint-disable-next-line no-undef
             return alert('Passkeys must be unique');
         }
     }
@@ -218,6 +239,7 @@ function addNgo() {
     drawNgos();
 }
 
+// eslint-disable-next-line no-unused-vars
 function editNgo(ngoNum){
     $('#ngoForm'+ngoNum).empty();
     $('#ngoForm'+ngoNum).append("<form id='ngoForm"+ngoNum+"'></form>" +
@@ -228,6 +250,7 @@ function editNgo(ngoNum){
                             "<button type='button' onclick=deleteNgo('"+ngoNum+"')>DELETE</button>");
 }
 
+// eslint-disable-next-line no-unused-vars
 function updateNgo(ngoNum){
     //for some reason works only with jQuery and not with the regular document.getElementsById...
     if($("#ngopasskey").val() === ''){
@@ -246,6 +269,7 @@ function updateNgo(ngoNum){
     drawDetails(data);
 }
 
+// eslint-disable-next-line no-unused-vars
 function deleteNgo(ngoNum){
     data.ngoList.splice(ngoNum, 1);
     drawNgos(data.ngoList);
@@ -265,7 +289,7 @@ function drawEvents(events){
 
     $("#events").empty();
     for(var i=0; i < events.length; i++){
-        $("#events").append("<li>"+events[i].recipient+": "+events[i].subject+"<button onclick='editEvent("+i+")'>Edit</button><div id='editForm"+i+"'></div></li>")
+        $("#events").append("<li>"+events[i].recipient+": "+events[i].subject+"<button onclick='editEvent("+i+")'>Edit</button><div id='editForm"+i+"'></div></li>");
     }
 
     newEvent();
@@ -296,6 +320,7 @@ function newEvent() {
     
 }
 
+// eslint-disable-next-line no-unused-vars
 function editEvent(eventNum){
     $('#editForm'+eventNum).empty();
     var ngoOptions = '';
@@ -331,6 +356,7 @@ function editEvent(eventNum){
                                     "<button type='button' onclick=deleteEvent('"+eventNum+"')>DELETE</button>");
 }
 
+// eslint-disable-next-line no-unused-vars
 function addEvent() {
     let frmData = document.getElementById("addForm");
     let file = frmData.elements[6].files[0];
@@ -339,11 +365,11 @@ function addEvent() {
     var hrs = frmData.elements[2].value;
     var mins = frmData.elements[3].value;
     var secs = frmData.elements[4].value;
-    if(hrs === NaN || hrs === undefined || hrs<0 || hrs === ''){
+    if(isNaN(hrs) || hrs === undefined || hrs<0 || hrs === ''){
         hrs = 0;
-    }if(mins === NaN || mins === undefined || mins<0 || mins === ''){
+    }if(isNaN(mins) || mins === undefined || mins<0 || mins === ''){
         mins = 0;
-    }if(secs === NaN || secs === undefined || secs<0 || secs === ''){
+    }if(isNaN(secs) || secs === undefined || secs<0 || secs === ''){
         secs = 0;
     }
 
@@ -359,6 +385,7 @@ function addEvent() {
     drawEvents(data.eventsList);
 }
 
+// eslint-disable-next-line no-unused-vars
 function updateEvent(eventNum){
     let frmData = document.getElementById("frm"+eventNum);
     let file = frmData.elements[6].files[0];
@@ -370,11 +397,11 @@ function updateEvent(eventNum){
     var hrs = frmData.elements[2].value;
     var mins = frmData.elements[3].value;
     var secs = frmData.elements[4].value;
-    if(hrs === NaN || hrs === undefined || hrs<0 || hrs === ''){
+    if(isNaN(hrs) || hrs === undefined || hrs<0 || hrs === ''){
         hrs = 0;
-    }if(mins === NaN || mins === undefined || mins<0 || mins === ''){
+    }if(isNaN(mins) || mins === undefined || mins<0 || mins === ''){
         mins = 0;
-    }if(secs === NaN || secs === undefined || secs<0 || secs === ''){
+    }if(isNaN(secs) || secs === undefined || secs<0 || secs === ''){
         secs = 0;
     }
 
@@ -387,6 +414,7 @@ function updateEvent(eventNum){
     drawEvents(data.eventsList);
 }
 
+// eslint-disable-next-line no-unused-vars
 function deleteEvent(eventNum){
     data.eventsList.splice(eventNum, 1);
     drawEvents(data.eventsList);
@@ -415,6 +443,7 @@ function newLibraryItem() {
                             "<input form='addLibraryItemForm' type='button' onclick=addLibraryItem() value='Submit'></input>");
 }
 
+// eslint-disable-next-line no-unused-vars
 function editLibraryItem(libNum){
     $('#editLibraryItem'+libNum).empty();
     var options = '';
@@ -438,6 +467,7 @@ function editLibraryItem(libNum){
                                     "<button type='button' onclick=deleteLibraryItem('"+libNum+"')>DELETE</button>");
 }
 
+// eslint-disable-next-line no-unused-vars
 function addLibraryItem() {
     let frmData = document.getElementById("addLibraryItemForm");
     let file = frmData.elements[2].files[0];
@@ -453,26 +483,28 @@ function addLibraryItem() {
     drawLibrary(data.library);
 }
 
+// eslint-disable-next-line no-unused-vars
 function updateLibraryItem(libNum){
     let frmData = document.getElementById("frmLib"+libNum);
     let file = frmData.elements[2].files[0];
     if(file){
-        uploadFiles(file, 'event');
-        data.eventsList[eventNum].location = '/currentScenario/files/library/'+file.name.replace(/ /g, "_");
+        uploadFiles(file, 'library');
+        data.library[libNum].location = '/currentScenario/files/library/'+file.name.replace(/ /g, "_");
     }
 
-    data.eventsList[libNum].subject = frmData.elements[0].value;
-    data.eventsList[libNum].type = frmData.elements[1].value;
-    data.eventsList[libNum].location = '/currentScenario/files/'+file.name.replace(/ /g, "_");
+    data.library[libNum].subject = frmData.elements[0].value;
+    data.library[libNum].type = frmData.elements[1].value;
 
     drawLibrary(data.library);
 }
 
+// eslint-disable-next-line no-unused-vars
 function deleteLibraryItem(libNum){
     data.library.splice(libNum, 1);
     drawLibrary(data.library);
 }
 
+// eslint-disable-next-line no-unused-vars
 function cancelEdit(form) {
     $(form).empty();
 }
@@ -486,6 +518,7 @@ function uploadFiles(file, request) {
     xhr.send(formData);
 }
 
+// eslint-disable-next-line no-unused-vars
 function saveXML() {
     socket.emit('exportXML', data);
     console.log(JSON.stringify(data));
