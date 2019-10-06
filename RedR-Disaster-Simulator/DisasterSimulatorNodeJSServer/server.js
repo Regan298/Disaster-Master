@@ -704,6 +704,7 @@ io.on('connection', function (socket) {
                 simData.started = true;
                 simData.startTimeMS = new Date().getTime();
             } else {
+                console.log('hasstartedplay');
                 worker.postMessage('play');
             }
             simData.isRunning = true;
@@ -748,6 +749,7 @@ function GenerateReviewPDF(requestReviewCB) {
     var printer = new PdfPrinter(fonts);
     var fs = require('fs');
 
+    //Not proud of this:
     var newLine = "----------------------------------------------------------------------------------------------------------------------------------------------------------\n";
 
     console.log("generatePDFCalled");
