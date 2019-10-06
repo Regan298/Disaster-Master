@@ -1,2 +1,2 @@
 cd DisasterSimulatorNodeJSServer
-cmd /k npm install
+cmd /k npm start

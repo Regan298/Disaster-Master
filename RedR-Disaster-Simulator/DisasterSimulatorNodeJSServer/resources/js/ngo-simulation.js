@@ -526,10 +526,11 @@ function recieveCurrentTime() {
 
         var interval = 3600000; //1hr
 
-        //On every hour do status report skrrt skrrt
-        if(currentTimeElapsed % interval === 0){
+        //On every hour do status report skrrt skrrt or at end
+        if(currentTimeElapsed % interval === 0 || currentTimeElapsed + 1000 === parseInt(simData.durationMs[0], 10)){
             //console.log(time);
             currentHour = currentTimeElapsed / interval;
+
             statusReportInitialise();
         }
     });
