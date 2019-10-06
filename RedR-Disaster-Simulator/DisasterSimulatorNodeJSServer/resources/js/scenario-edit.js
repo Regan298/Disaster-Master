@@ -231,7 +231,8 @@ function addNgo() {
         }
     }
     let ngo = {
-        name: frmData.elements[0].value.replace(/ /g, "_"),
+        id: data.ngoList.length,
+        name: [frmData.elements[0].value.replace(/ /g, "_")],
         passkey: frmData.elements[1].value
     };
     data.ngoList.push(ngo);
@@ -271,8 +272,24 @@ function updateNgo(ngoNum){
 
 // eslint-disable-next-line no-unused-vars
 function deleteNgo(ngoNum){
+    var ngoName = (data.ngoList[ngoNum].name[0]);
     data.ngoList.splice(ngoNum, 1);
+
+    // Remove all associated events
+    var splice = [];
+    for(var e=0; e<data.eventsList.length; e++){
+        console.log(data.eventsList[e].recipient[0]);
+        if(data.eventsList[e].recipient[0] === ngoName){
+            console.log(e);
+            splice.push(e);
+        }
+    }
+    while(splice.length) {
+        data.eventsList.splice(splice.pop(), 1);
+    }
+
     drawNgos(data.ngoList);
+    drawEvents(data.eventsList);
 }
 
 // Display a list of events
@@ -289,14 +306,14 @@ function drawEvents(events){
 
     $("#events").empty();
     for(var i=0; i < events.length; i++){
-        $("#events").append("<li>"+events[i].recipient+": "+events[i].subject+"<button onclick='editEvent("+i+")'>Edit</button><div id='editForm"+i+"'></div></li>");
+        $("#events").append("<li>"+events[i].recipient+": "+events[i].subject+" - "+events[i].time+"<button onclick='editEvent("+i+")'>Edit</button><div id='editForm"+i+"'></div></li>");
     }
 
     newEvent();
 }
 
 function newEvent() {
-    var ngoOptions = '';
+    var ngoOptions = "<option value='All'>All</option>";
     for(var i=0; i < data.ngoList.length; i++){
         ngoOptions += "<option value='"+data.ngoList[i].name+"'>"+data.ngoList[i].name+"</option>";
     }
@@ -323,9 +340,15 @@ function newEvent() {
 // eslint-disable-next-line no-unused-vars
 function editEvent(eventNum){
     $('#editForm'+eventNum).empty();
-    var ngoOptions = '';
+    var ngoOptions = "<option value='All'>All</option>";
+    var selectedOption = '';
     for(var i=0; i < data.ngoList.length; i++){
-        ngoOptions += "<option value='"+data.ngoList[i].name+"'>"+data.ngoList[i].name+"</option>";
+        if(data.eventsList[eventNum].recipient[0] === data.ngoList[i].name[0]){
+            selectedOption = 'selected';
+        }else{
+            selectedOption = '';
+        }
+        ngoOptions += "<option "+selectedOption+" value='"+data.ngoList[i].name+"'>"+data.ngoList[i].name+"</option>";
     }
     var options = '';
     if (data.eventsList[eventNum].type === 'pdf'){
@@ -373,14 +396,30 @@ function addEvent() {
         secs = 0;
     }
 
-    let newEvent = {
-        recipient: frmData.elements[0].value,
-        subject: frmData.elements[1].value,
-        time: [hrs+":"+mins+":"+secs],
-        type: frmData.elements[5].value,
-        location: '/currentScenario/files/'+file.name.replace(/ /g, "_")
-    };
-    data.eventsList.push(newEvent);
+    let newEvent;
+
+    if(frmData.elements[0].value === 'All'){
+        for(var l=0; l<data.ngoList.length; l++){
+            newEvent = {
+                recipient: [data.ngoList[l].name[0]],
+                subject: frmData.elements[1].value,
+                time: [hrs+":"+mins+":"+secs],
+                type: frmData.elements[5].value,
+                location: '/currentScenario/files/'+file.name.replace(/ /g, "_")
+            };
+            data.eventsList.push(newEvent);
+        }
+    }else{
+        newEvent = {
+            recipient: [frmData.elements[0].value],
+            subject: frmData.elements[1].value,
+            time: [hrs+":"+mins+":"+secs],
+            type: frmData.elements[5].value,
+            location: '/currentScenario/files/'+file.name.replace(/ /g, "_")
+        };
+        data.eventsList.push(newEvent);
+    }
+    
 
     drawEvents(data.eventsList);
 }
@@ -389,10 +428,6 @@ function addEvent() {
 function updateEvent(eventNum){
     let frmData = document.getElementById("frm"+eventNum);
     let file = frmData.elements[6].files[0];
-    if(file){
-        uploadFiles(file, 'event');
-        data.eventsList[eventNum].location = '/currentScenario/files/'+file.name.replace(/ /g, "_");
-    }
 
     var hrs = frmData.elements[2].value;
     var mins = frmData.elements[3].value;
@@ -405,12 +440,38 @@ function updateEvent(eventNum){
         secs = 0;
     }
 
+    if(frmData.elements[0].value === 'All'){
+        
+        var newEvent;
+        for(var l=0; l<data.ngoList.length; l++){
+            newEvent = {
+                recipient: data.ngoList[l].name,
+                subject: frmData.elements[1].value,
+                time: [hrs+":"+mins+":"+secs],
+                type: frmData.elements[5].value,
+                location: data.eventsList[eventNum].location
+            };
+            if(file){
+                newEvent.location = '/currentScenario/files/'+file.name.replace(/ /g, "_");
+            }
+            data.eventsList.splice(eventNum, 1);
+            data.eventsList.push(newEvent);
+        }
+        if(file){
+            uploadFiles(file, 'event');
+        }
+    }else{
+        if(file){
+            uploadFiles(file, 'event');
+            data.eventsList[eventNum].location = '/currentScenario/files/'+file.name.replace(/ /g, "_");
+        }
+        
+        data.eventsList[eventNum].recipient = frmData.elements[0].value;
+        data.eventsList[eventNum].subject = frmData.elements[1].value;
+        data.eventsList[eventNum].time = [hrs+":"+mins+":"+secs];
+        data.eventsList[eventNum].type = frmData.elements[5].value;
+    }
     
-    data.eventsList[eventNum].recipient = frmData.elements[0].value;
-    data.eventsList[eventNum].subject = frmData.elements[1].value;
-    data.eventsList[eventNum].time = [hrs+":"+mins+":"+secs];
-    data.eventsList[eventNum].type = frmData.elements[5].value;
-
     drawEvents(data.eventsList);
 }
 
@@ -521,7 +582,6 @@ function uploadFiles(file, request) {
 // eslint-disable-next-line no-unused-vars
 function saveXML() {
     socket.emit('exportXML', data);
-    console.log(JSON.stringify(data));
     socket.on('xmlSaved', function () {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "/download-save", true);
