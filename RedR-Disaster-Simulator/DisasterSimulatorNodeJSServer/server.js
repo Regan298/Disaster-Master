@@ -266,7 +266,7 @@ function processZip(req, res, type) {
 
         if (req.files != null) {
             //todo: Enable Production Mode When Finished
-            if (productionMode && simData.loaded) {
+            if (productionMode && simData.loaded && module.parent == null) {
                 return res.status(400).send("There is either a simulation currently running or your last one has just"+
                     " finished, either go back to this page or if you are done with this simulation please close the" +
                     " initial command prompt Disaster Master Window and restart the program.");
