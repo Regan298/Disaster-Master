@@ -24,7 +24,7 @@ var firstTimeViewingKeys = true;
 
 //todo: Unccomment this when done
 window.onbeforeunload = function() {
-    //return "Generic Message (Browsers Prevent Custom Message For Security Purposes)";
+    return "Generic Message (Browsers Prevent Custom Message For Security Purposes)";
 };
 
 
@@ -65,7 +65,6 @@ function processNGOData(recievedNGOs) {
 function handlePersistentMessages() {
     socket.emit('getPastMessages', "request", function (callbackData) {
         if (callbackData.pastMessages != null) {
-
             for (var i = 0; i < callbackData.pastMessages.length; i++) {
                 let currentPastMessage = callbackData.pastMessages[i];
                 var isOrigin;
@@ -75,13 +74,9 @@ function handlePersistentMessages() {
                     isOrigin = false;
                 }
                 addToConversation(currentPastMessage.content, isOrigin, currentPastMessage.sender.replace(/ /g, "_"), currentPastMessage.recipient.replace(/ /g, "_"));
-
             }
         }
-
-
     });
-
 }
 
 /*eslint-disable */
@@ -95,7 +90,6 @@ function loadScenarioHeader() {
     var url = document.URL.split('/');
     url = url[2] + "/ngo";
     var htmlContent;
-    console.log(url);
 
     if (simData.modeOnline) {
         htmlContent = "<h1 class='titles'><span>Scenario: " + simTitle + "</span></h1>" +
@@ -115,16 +109,12 @@ function loadScenarioHeader() {
 
     $(function() {
         $("#getPassKeys").click(function(e) {
-            e.preventDefault(); // if desired...
-
+            e.preventDefault();
             if(firstTimeViewingKeys) {
-
                 var ngoPassKeyHTML = "<ul>";
-
                 for (var ngo of simData.ngoList) {
                     ngoPassKeyHTML += "<li>" + ngo.name + ": " + ngo.passkey + "</li>";
                 }
-
                 ngoPassKeyHTML += "</ul>";
                 $(ngoPassKeyHTML).appendTo("#ngoPasskeyContent");
                 document.getElementById('ngoPasskeyOverlay').style.display='block';
@@ -134,13 +124,11 @@ function loadScenarioHeader() {
             }
         });
     });
-
 }
 
 function drawTimeline() {
     /*eslint-disable */
     //Disable linting for this method as linter has issue with external function (but fixed non no-undef errors), but fixed
-    console.log("loadtimeline");
     simulationDuration = simData.durationMs[0];
     timeScale = simData.timeScale;
     var d = new Date(startDate.getTime() + (simulationDuration * timeScale));
@@ -149,8 +137,6 @@ function drawTimeline() {
     timeline = new vis.Timeline(container, items, groups, options);
     timeline.on('select', onSelect);
     initDraw = false;
-    console.log(startDate);
-    console.log(endDate);
     var timerElement;
     timerElement = document.getElementById("realTime");
     realDisplayRemainingTime(timerElement, simulationDuration);
@@ -158,7 +144,6 @@ function drawTimeline() {
     simDisplayRemainingTime(timerElement, simulationDuration * timeScale);
 
     for (var i = 0; i < simData.ngoList.length; i++) {
-        console.log(simData.ngoList[i]);
         groups.push({
             id: simData.ngoList[i].id,
             content: simData.ngoList[i].name[0]
@@ -186,7 +171,6 @@ function drawTimeline() {
                 var scaledTime = timelineStartDate.getTime() + (ms * timeScale);
                 scaledTime = new Date(scaledTime);
                 id = groups[k].id;
-                console.log(currentEvent.type[0]);
 
                 var ngoColor;
                 if(currentEvent.type === 'pdf'){
@@ -221,21 +205,16 @@ function drawTimeline() {
     /*eslint-enable */
 }
 
-
 function handleCommunicationButtons() {
-
 
     var buttons = document.getElementsByClassName("btn btn-secondary");
     var messagingChats = document.getElementsByClassName("messagingContentHQ");
 
-
     for (var i = 0; i < simData.ngoList.length; i++) {
         let currentUserName = new String(simData.ngoList[i].name).trim().replace(/ /g, "_");
-
         buttons[i].innerHTML = currentUserName;
         buttons[i].id = currentUserName;
         buttons[i].setAttribute("onclick", "switchNGOChat('" + currentUserName + "')");
-        //buttons[i] = "switchNGOChat('" + currentUserName + "')";
         buttons[i].style.borderWidth = "thin";
         buttons[i].style.visibility = "hidden";
         switch (i) {
@@ -260,18 +239,11 @@ function handleCommunicationButtons() {
         }
     }
 
-
     for (var j = 0; j < simData.ngoList.length; j++) {
         messagingChats[j].id = new String(simData.ngoList[j].name).trim().replace(/ /g, "_") + "Content";
     }
-
     //remove extra buttons and chats
-
-
     var buttonsCount = buttons.length;
-
-    console.log(simData.ngoList.length); // 6
-    console.log(buttonsCount); // 7
 
     for (var k = simData.ngoList.length + 1; k <= buttonsCount; k++) {
         buttons[simData.ngoList.length].remove();
@@ -306,12 +278,9 @@ function addMessageToEventResponse(responses, isOrigin) {
     // Method is being referenced by html was causing no-unsued error
 function displayEvent(eventId) {
     /*eslint-enable */
-    console.log(eventId);
     selectedEvent = document.getElementById(eventId).getAttribute("eventID");
-
     var eventViewerElement = document.getElementById("eventViewerHQ");
     eventViewerElement.parentNode.removeChild(eventViewerElement);
-
     $("#inboxElementHQ").append("<div id=\"eventViewerHQ\" class=\"eventViewerHQ\"></div>");
 
     var eventButtonElement = document.getElementById(eventId);
@@ -329,7 +298,6 @@ function displayEvent(eventId) {
     socket.emit('pastEventResponses', {selectedEvent}, function (callbackData) {
         let pastEventResponseList = callbackData.pastEventResponseList;
         addMessageToEventResponse(pastEventResponseList, false);
-
     });
 }
 
@@ -339,22 +307,17 @@ function fillInNGOFilter() {
     for(var i = 0; i < simData.ngoList.length; i++) {
         $("#ngoFilterHQ").append("<option value= " + simData.ngoList[i].name + ">" + simData.ngoList[i].name + "</option>");
     }
-
 }
 
 function filterEvents() {
     selectNGOFilter = document.getElementById("ngoFilterHQ").value;
     var eventButtons = document.getElementsByClassName('eventObject');
-
     for(var i = 0; i < eventButtons.length; i++){
         document.getElementById(eventButtons[i].getAttribute('id')).style.display = 'block';
-
         if(eventButtons[i].getAttribute('recipient') !== selectNGOFilter && selectNGOFilter !== 'default'   ){
             document.getElementById(eventButtons[i].getAttribute('id')).style.display = 'none';
         }
-
     }
-
 }
 
 function processScenarioData() {
@@ -379,7 +342,6 @@ function processScenarioData() {
 function startStopSim() {
     /*eslint-enable */
     if (initStart) {
-        console.log('initial start');
         /*eslint-disable */
         // startdate is an external reference
         timeline.setCurrentTime(startDate);
@@ -399,68 +361,54 @@ function startStopSim() {
         doPause();
         document.getElementById("playPauseSwitch").innerHTML = "&#9205";
     }
-
 }
 
 //real time countdown
 function realDisplayRemainingTime(timerElement, timeRemaining) {
-
     var seconds = Math.floor((timeRemaining / 1000) % 60);
     var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
     var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
-
     timerElement.innerHTML = hours + "h" + minutes + "m" + seconds + "s remaining";
 
 }
 
 //sim time countdown
 function simDisplayRemainingTime(timerElement, timeRemaining) {
-
     var seconds = Math.floor((timeRemaining / 1000) % 60);
     var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
     var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
     var days = Math.floor((timeRemaining / (1000 * 60 * 60)) / 24);
-
     timerElement.innerHTML = "Day: " + days + " " + hours + "h" + minutes + "m" + seconds + "s remaining";
 
 }
 
 function doPause() {
-    //clearInterval(updateClockProcess);
     pauseTimeline = setInterval(pauseTimelineMethod, 100);
 }
 
 function pauseTimelineMethod() {
-
     /*eslint-disable */
     // External Reference error suppressed
     timeline.setCurrentTime(startDate);
     /*eslint-enable */
-
     timeline.redraw();
 }
 
 function doPlay() {
     clearInterval(pauseTimeline);
     simData.startTimeMS = new Date().getTime();
-    //runClock();
 }
 
 function switchNGOChat(ngo) {
-
     //Highlight selected button and unlight non selected
     if (ngo != null) {
-
         var buttons = document.getElementsByClassName("btn btn-secondary");
         for (var i = 0; i < buttons.length; i++) {
             buttons[i].style.backgroundColor = "#b5b5b5";
         }
-
         document.getElementById(ngo).style.backgroundColor = document.getElementById(ngo).style.borderColor;
         selectedNGOChat = ngo;
     }
-
-
     // Hide all elements with class="messaging content" by default */
 
     var messagingContent = document.getElementsByClassName("messagingContentHQ");
@@ -468,11 +416,8 @@ function switchNGOChat(ngo) {
     for (i = 0; i < messagingContent.length; i++) {
         messagingContent[i].style.display = "none";
     }
-
-
     // Show the specific message content
     if (ngo != null) {
-
         document.getElementById(ngo + "Content").style.display = "inline-block";
     }
 }
@@ -484,9 +429,6 @@ function displayNGOEventResponse(ngoEventResponse) {
     let time = ngoEventResponse.time;
     let type = ngoEventResponse.type;
     let recipient = ngoEventResponse.recipient;
-
-    //convert time string into ms for manipulation
-
     var timeSplit = time.toString().split(":");
     var h = parseInt(timeSplit[0], 10);
     var m = parseInt(timeSplit[1], 10);
@@ -515,12 +457,10 @@ function displayNGOEventResponse(ngoEventResponse) {
     eventButton.setAttribute("time", time);
     eventButton.setAttribute("type", type);
     eventButton.setAttribute("recipient", recipient);
-
     eventCounter++;
 }
 
 function handleNGOResponseEvents(occuredEvents) {
-
     var eventList = [];
     //add occured events
     for (var i = 0; i < occuredEvents.length; i++) {
@@ -544,8 +484,6 @@ function handleNGOResponseEvents(occuredEvents) {
         displayNGOEventResponse(eventList[k]);
     }
     filterEvents();
-
-
 }
 
 function eventComparator(e1, e2) {
@@ -561,20 +499,16 @@ function eventComparator(e1, e2) {
 //Runs in background
 function updateEventList() {
     socket.on('occurredEvents', function (received) {
-
         var timelineStartDate = new Date('2019', '01' - 1, '01', '00', '00', '00');
         var scaledTime = timelineStartDate.getTime() + (received.time * timeScale);
         scaledTime = new Date(scaledTime);
         timeline.setCurrentTime(scaledTime);
         timeline.redraw();
         handleNGOResponseEvents(received.occurredEvents);
-
     });
-
 }
 
 function updateCurrentTime() {
-
     socket.on('currentTime', function (time) {
         simulationDuration = time;
         if (realCountdown) {
@@ -584,16 +518,14 @@ function updateCurrentTime() {
             let timerElement = document.getElementById("simTime");
             simDisplayRemainingTime(timerElement, simulationDuration * timeScale);
         }
-
         if (time == 1000){
             socket.off('currentTime');
             document.getElementById('simulationTerminationOverlay').style.display = 'block';
         }
     });
-
 }
 
-//Might Be useful however could result in loss of review file due to mis click
+//Might Be useful however could result in loss of review file due to miss click:
 /*function displaySimTerminationOff(){
     document.getElementById('simulationTerminationOverlay').style.display = 'none';
 }*/
@@ -619,19 +551,14 @@ function handleTimeSwitcher() {
             timerElement = document.getElementById("realTime");
             realDisplayRemainingTime(timerElement, simulationDuration);
         }
-
     });
-
 }
 
 function addToConversation(content, isOrigin, from, to) {
-
-    console.log(from);
     var childUl;
     if (isOrigin) {
         if(to === 'all'){
             for (var i = 0; i < ngos.length; i++) {
-                console.log(ngos[i].name);
                 childUl = $("#" + ngos[i].name + 'Content').find('.messageList');
                 $(childUl).append("<li id='origin'>" + content + "</li>");
             }
@@ -640,11 +567,9 @@ function addToConversation(content, isOrigin, from, to) {
         childUl = $("#" + to).find('.messageList');
         $(childUl).append("<li id='origin'>" + content + "</li>");
     } else {
-
         if (to !== "HQ") {
             return;
         }
-
         var value;
         for (var j = 0; j < ngos.length; j++) {
             if (ngos[j].name === from) {
@@ -652,10 +577,7 @@ function addToConversation(content, isOrigin, from, to) {
                 break;
             }
         }
-
-        console.log(value);
         childUl = $("#" + value).find('.messageList');
-
         $(childUl).append("<li id='nonOrigin'>" + content + "</li>");
     }
 }
@@ -687,7 +609,6 @@ function displayImageOff() {
 }
 
 function displayEventMedia(type, name) {
-    console.log(type);
     document.getElementById("pdfOverlay").style.display = "none";
     document.getElementById("audioOverlay").style.display = "none";
     document.getElementById("imageOverlay").style.display = "none";
@@ -698,7 +619,6 @@ function displayEventMedia(type, name) {
             "    </video></div>");
         document.getElementById("videoOverlay").style.display = "block";
     } else if (type == "pdf") {
-        console.log(name);
         PDFObject.embed(name, "#pdfOverlay");
         document.getElementById("pdfOverlay").style.display = "block";
     } else if (type == "audio") {
@@ -727,7 +647,6 @@ function handleNewMessages() {
 }
 
 function submitMessage(isForAll, content) {
-
     if(content.toString().length <= 0){
         return;
     }
@@ -769,7 +688,6 @@ function cancelEdit(){
 /*eslint-disable */
 // External Reference error suppressed
 function addEvent(location){
-    console.log('addEvent');
     let frmData = document.getElementById("addEvent");
     var newEvent = {
         id: simData.eventsList.length,
@@ -785,12 +703,8 @@ function addEvent(location){
     if(file){
         uploadFiles(file, 'event');
         newEvent.location = ['/currentScenario/files/'+file.name.replace(/ /g, "_")];
-        // var type = file.name.split(".");
-        // newEvent.type = type[type.length-1];
     }else{
         newEvent.location = [location];
-        // var type = location.split(".");
-        // newEvent.type = type[type.length-1];
     }
     
     newEvent.type = frmData.elements[4].value;
@@ -807,8 +721,7 @@ function addEvent(location){
     var hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
 
     newEvent.time = [hours+":"+minutes+":"+seconds];
-    
-    console.log(newEvent);
+
     socket.emit('addEvent', newEvent);
     socket.emit('simState', "request", function (callbackData) {
         simData = callbackData.simData;
@@ -830,8 +743,6 @@ function updateEvent(){
     if(file){
         uploadFiles(file, 'event');
         simData.eventsList[selected.id].location = ['/currentScenario/files/'+file.name.replace(/ /g, "_")];
-        // var type = file.name.split(".");
-        // simData.eventsList[selected.id].type = type[type.length-1];
     }
     
     simData.eventsList[selected.id].type = frmData.elements[4].value;
@@ -848,8 +759,6 @@ function updateEvent(){
     var hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
 
     simData.eventsList[selected.id].time = [hours+":"+minutes+":"+seconds];
-    
-    console.log(simData.eventsList[selected.id]);
     socket.emit('updateEvent', simData.eventsList[selected.id]);
     socket.emit('simState', "request", function (callbackData) {
         simData = callbackData.simData;
@@ -866,11 +775,9 @@ function updateEvent(){
 /*eslint-disable */
 // External Reference error suppressed
 function deleteEvent() {
-    console.log(selected.id);
     socket.emit('deleteEvent', selected.id);
     socket.emit('simState', "request", function (callbackData) {
         simData = callbackData.simData;
-        // console.log(simData);
         timeline.destroy();
         items = [];
         groups = [];
@@ -978,10 +885,8 @@ function onSelect(properties) {
     // external reference error supress
     selected = items[properties.items[0]];
     /*eslint-enable */
-    console.log(selected);
     setModal();
     if(selected.contentType === 'pdf'){
-        console.log(selected.location);
 
         /*eslint-disable */
         // external reference error supress
@@ -1053,7 +958,6 @@ function setModal() {
     var minutes = Math.floor((ms / 1000 / 60) % 60);
     var hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
     var days = Math.floor((ms / (1000 * 60 * 60)) / 24);
-    console.log(days+", "+hours+':'+minutes);
 
     var maxDays = Math.floor((simData.durationMs / (1000 * 60 * 60)));
 
@@ -1148,7 +1052,6 @@ $(function () {
         var responseAsArray = [];
         responseAsArray.push(content);
         addMessageToEventResponse(responseAsArray, true);
-        console.log(selectedEvent);
         var response = {
             from: 'HQ',
             event: selectedEvent,
