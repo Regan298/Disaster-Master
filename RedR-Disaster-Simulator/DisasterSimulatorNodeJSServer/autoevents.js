@@ -17,7 +17,10 @@ function updateEvents(msg) {
 	console.log('updateEvents');
 	simLength = msg.durationMs;
 	eventList = msg.eventsList;
-	t = setInterval(getEvents,1000);
+
+	if(msg.isRunning || !msg.started) {
+		t = setInterval(getEvents, 1000);
+	}
 }
 
 parentPort.on('message', (msg) => {
@@ -27,12 +30,11 @@ parentPort.on('message', (msg) => {
 		clearInterval(t);
 		updateEvents(msg);
 		return;
-	}
-	if (msg === 'pause') {
+	} else if (msg === 'pause') {
 		console.log('Pause');
 		// stopwatch.stop();
 		clearInterval(t);
-	} else {
+	} else{
 		console.log('Play');
 		// stopwatch.start();
 		t = setInterval(getEvents,1000);
@@ -42,8 +44,10 @@ parentPort.on('message', (msg) => {
 // t = setInterval(getEvents,1000);
 
 function getEvents(){
+	console.log('her1');
 	timeS++;
 	if ((timeS*1000) < simLength) {
+		console.log('her2');
 
 		pastEvents = [];
 
