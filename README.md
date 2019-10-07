@@ -58,6 +58,6 @@ If the server is failing to start:
 
 ## License
 
-To be added
+GNU General Public License v3.0
 
 #
