@@ -15,7 +15,7 @@ var currentHour;
 document.documentElement.style.height = "1500px";
 
 window.onbeforeunload = function () {
-    //return "Generic Message (Browsers Prevent Custom Message For Security Purposes)";
+    return "Generic Message (Browsers Prevent Custom Message For Security Purposes)";
 };
 
 //Runs in Background and gets new and past users on a period
@@ -49,7 +49,6 @@ function processNGOData(recievedNGOs) {
         let currentUserName = new String(recievedNGOs[i].name).trim();
         if (currentUserName !== name) {
             ngos.push(recievedNGOs[i]);
-            //console.log(ngos[i].name);
             ngos[ngos.length - 1].name = new String(ngos[ngos.length - 1].name).trim().replace(" ", "_");
         }
     }
@@ -66,42 +65,29 @@ function handleCommunicationButtonsAndMessages(callback) {
     var ngosTemp = [];
     for (var i = 0; i < simData.ngoList.length; i++) {
         let currentUserName = new String(simData.ngoList[i].name).trim().replace(" ", "_");
-
         if (currentUserName !== name) {
-
             ngosTemp.push(simData.ngoList[i]);
-        } else {
-            console.log("skippedmyname");
         }
     }
 
-
     for (var j = 1; j <= ngosTemp.length; j++) {
         let currentUserName = new String(ngosTemp[j - 1].name).trim().replace(" ", "_");
-
         buttons[j].innerHTML = currentUserName;
         buttons[j].id = currentUserName;
         buttons[j].setAttribute("onclick", "switchNGOChat('" + currentUserName + "')");
-
-        //buttons[i] = "switchNGOChat('" + currentUserName + "')";
         buttons[j].style.visibility = "hidden";
     }
-
 
     for (var k = 1; k <= ngosTemp.length; k++) {
         messagingChats[k].id = new String(ngosTemp[k - 1].name).trim().replace(" ", "_") + "Content";
     }
-
     //remove extra buttons and chats
-
-
     var buttonsCount = buttons.length;
 
     for (var l = ngosTemp.length; l < buttonsCount - 1; l++) {
         buttons[ngosTemp.length + 1].remove();
         messagingChats[ngosTemp.length + 1].remove();
     }
-
     //Start lisening for ngos joining
     callback();
 
@@ -133,16 +119,12 @@ function switchNGOChat(ngo) {
         selectedNGOChat = ngo;
     }
     // Hide all elements with class="messaging content" by default */
-
     var messagingContent = document.getElementsByClassName("messagingContentNGO");
-
     for (i = 0; i < messagingContent.length; i++) {
         messagingContent[i].style.display = "none";
     }
-
     // Show the specific message content
     if (ngo != null) {
-
         var value;
         if (ngo == "HQ") {
             value = "ngo0Content";
@@ -162,24 +144,16 @@ function addToConversation(content, isOrigin, from, to) {
         } else {
             to = to.trim().replace(" ", "_") + "Content";
         }
-
         childUl = $("#" + to).find('.messageList');
-
         $(childUl).append("<li id='origin'>" + content + "</li>");
     } else {
-
         //Return if messages not adressed to self and not a broadcast
         if (to !== name && to !== 'all') {
-            console.log(to);
             return;
-
         }
 
-
         var value;
-
         for (var i = 0; i < ngos.length; i++) {
-
             if (ngos[i].name == from) {
                 if (from == "HQ") {
                     value = "ngo0Content";
@@ -189,30 +163,23 @@ function addToConversation(content, isOrigin, from, to) {
                 break;
             }
         }
-
-
         childUl = $("#" + value).find('.messageList');
-
         $(childUl).append("<li id='nonOrigin'>" + content + "</li>");
     }
 }
 
 
 function loadNGOTitle() {
-
-    var url = window.location.href; // or window.location.href for current url
-    var key = /key=([^&]+)/.exec(url)[1]; // Value is in [1] ('384' in our case)
-
+    var url = window.location.href;
+    var key = /key=([^&]+)/.exec(url)[1];
 
     socket.emit('nameRequest', key.toString(), function (callbackData) {
         name = callbackData;
         name = name.trim().replace(" ", "_");
         var htmlContent = "<h1 class='titles'><span>NGO: " + name + "</span></h1>";
         $(htmlContent).appendTo(".ngoTitle");
-
         handleCommunicationButtonsAndMessages(function () {
             setInterval(handleNGOJoining, 1000);
-
         });
     });
 }
@@ -228,20 +195,17 @@ function fillInTagSelectForm() {
 
 function processScenarioData() {
     socket.emit('simState', "request", function (callbackData) {
+        alert("The purpose of this tool is for training please keep this in mind throughout this simulation");
         simData = callbackData.simData;
         recieveEvents();
         loadNGOTitle();
         fillInTagSelectForm();
-
-        //handleEventResponseListening();
-
     });
 }
 
 function handlePersistentMessages() {
     socket.emit('getPastMessages', "request", function (callbackData) {
         if (callbackData.pastMessages != null) {
-
             for (var i = 0; i < callbackData.pastMessages.length; i++) {
                 let currentPastMessage = callbackData.pastMessages[i];
                 var isOrigin;
@@ -254,10 +218,7 @@ function handlePersistentMessages() {
 
             }
         }
-
-
     });
-
 }
 
 /*eslint-disable */
@@ -278,23 +239,13 @@ function displayAudioOff() {
     document.getElementById("audioOverlay").style.display = "none";
 }
 
-
 function displayImageOff() {
     var imageOverlay = document.getElementById("imageDisplay");
     imageOverlay.parentNode.removeChild(imageOverlay);
     document.getElementById("imageOverlay").style.display = "none";
 }
 
-
 function displayEventMedia(type, name) {
-
-    //pdf
-    //image
-    //audio
-    //video
-
-    console.log(name);
-
     document.getElementById("pdfOverlay").style.display = "none";
     document.getElementById("audioOverlay").style.display = "none";
     document.getElementById("imageOverlay").style.display = "none";
@@ -320,21 +271,14 @@ function displayEventMedia(type, name) {
     }
 }
 
-
 function displayEvent(eventId) {
-    console.log(eventId);
     selectedEvent = document.getElementById(eventId).getAttribute("eventID");
-    //selectedEvent = eventId;
-
     var eventViewerElement = document.getElementById("eventViewerNGO");
     eventViewerElement.parentNode.removeChild(eventViewerElement);
-
     $("#inboxElementNGO").append("<div id=\"eventViewerNGO\" class=\"eventViewerNGO\"></div>");
-
     var eventButtonElement = document.getElementById(eventId);
     var currentEventSubject = eventButtonElement.getAttribute("subject");
     var currentEventTime = eventButtonElement.getAttribute("time");
-
     var timeSplit = currentEventTime.toString().split(":");
     var h = parseInt(timeSplit[0], 10);
     var m = parseInt(timeSplit[1], 10);
@@ -350,7 +294,6 @@ function displayEvent(eventId) {
     var currentEventType = eventButtonElement.getAttribute("type");
     var currentEventLocation = eventButtonElement.getAttribute("location");
 
-    console.log(currentEventLocation);
     $("#eventViewerNGO").append("<h1> " + currentEventSubject + "</h1>" + "<h2> " + eventTimeFormat + "</h2>"
         + "<button id='displayEventButton' onclick=displayEventMedia(" + "'" + currentEventType + "'" + "," + "'" +
         currentEventLocation + "'" + ")" + ">View Event</button>");
@@ -373,12 +316,10 @@ function addMessageToEventResponse(responseData, isorigin) {
         } else {
             valSplit = responseData[i].content.split("\n");
         }
-
         $("#eventResponseViewerNGO").append("<p>");
         for (var j = 0; j < valSplit.length; j++) {
             $("#eventResponseViewerNGO").append(valSplit[j] + "<br>");
         }
-
         if (isorigin) {
             $("#eventResponseViewerNGO").append("<b> Chosen Tag: " + responseData[i].tag + "</b>");
         } else {
@@ -386,18 +327,13 @@ function addMessageToEventResponse(responseData, isorigin) {
                 $("#eventResponseViewerNGO").append("<b> Chosen Tag: " + responseData[i].chosenNGOTag + "</b>");
             }
         }
-
-
         $("#eventResponseViewerNGO").append("<hr>");
-
     }
 }
 
 /*eslint-enable */
 
 function processEvent(event) {
-
-
     let currentEvent = event;
     let id = currentEvent.id;
     let location = currentEvent.location;
@@ -445,22 +381,16 @@ function recieveEvents() {
     //on receive event
 
     socket.on('occurredEvents', function (evnt) {
-
             eventList = [];
             for (var i = 0; i < evnt.occurredEvents.length; i++) {
                 let currentEvent = evnt.occurredEvents[i];
 
                 let to = currentEvent.recipient;
                 if (to.toString().trim() === name) {
-
                     //loop through all of the response data correctly
-
-
                     for (var j = 0; j < currentEvent.responses.length; j++) {
                         //if event response is from opposite entity type add to event list
                         if (currentEvent.responses[j].sender === "HQ") {
-
-
                             //make copy of event for every response
                             var eventCopy = $.extend(true, {}, currentEvent);
                             eventCopy.displayAsResponse = true;
@@ -480,19 +410,13 @@ function recieveEvents() {
 
                 }
             }
-
-
             //sort events for displaying
             eventList.sort(eventComparator);
-
-
             $("button.eventObject").remove();
             eventDisplayCounter = 0;
             for (var k = 0; k < eventList.length; k++) {
                 processEvent(eventList[k]);
             }
-
-
         }
     );
 }
@@ -509,7 +433,6 @@ function eventComparator(e1, e2) {
 
 function statusReportInitialise() {
     document.getElementById("statusOverlay").style.display='block';
-
 }
 
 function recieveCurrentTime() {
@@ -521,52 +444,37 @@ function recieveCurrentTime() {
         simulationDuration = time;
         var timerElement = document.getElementById("simTime");
         displayRemainingTime(timerElement, simulationDuration);
-
         var currentTimeElapsed = simData.durationMs-time;
-
         var interval = 3600000; //1hr
 
         //On every hour do status report skrrt skrrt or at end
         if(currentTimeElapsed % interval === 0 || currentTimeElapsed + 1000 === parseInt(simData.durationMs[0], 10)){
-            //console.log(time);
             currentHour = currentTimeElapsed / interval;
-
             statusReportInitialise();
         }
     });
 }
 
-function displayDisclaimer() {
-    //todo Enable this allert when done
-    //alert("The purpose of this tool is for training please keep this in mind throughout this simulation");
-
-}
 
 function handleMessageRecieving() {
     //on receive message
     socket.on('message', function (msg) {
-
         var from = msg.recievedMessage.from;
         var to = msg.recievedMessage.to;
         addToConversation(msg.recievedMessage.content, false, from, to);
     });
-
 }
 
 
 //On Page Load
 $(function () {
-    displayDisclaimer();
     processScenarioData();
     switchNGOChat();
     displayRemainingTime(document.getElementById("simTime"), 0);
     recieveCurrentTime();
     handleMessageRecieving();
-
-
     //New message form
     $('#messageNGOForm').submit(function (e) {
-
         e.preventDefault(); // prevents page reloading
         var content = $('#input').val();
 
@@ -577,7 +485,6 @@ $(function () {
         addToConversation(content, true, null, selectedNGOChat);
         let recipient = document.getElementById(selectedNGOChat).innerHTML;
 
-
         var message = {
             from: name,
             to: recipient,
@@ -586,16 +493,13 @@ $(function () {
 
         $('#input').val('');
         socket.emit('message', {message});
-
     });
 
     //New Event Response Form
     $('#inboxNGOForm').submit(function (e) {
-
         e.preventDefault(); // prevents page reloading
         let content = $('#inputEmailResponseNGO').val();
         let chosenTag = $('#TagDropDown').val();
-
         if(chosenTag === null){
             chosenTag = "Not Chosen";
         }
@@ -624,7 +528,6 @@ $(function () {
 
     });
 
-
     $('#ngoStatusForm').submit(function (e){
         e.preventDefault();
         document.getElementById("statusOverlay").style.display='none';
@@ -634,10 +537,6 @@ $(function () {
             name: name,
             status: status
         };
-
         socket.emit('ngoStatusReport', {ngoStatusReport});
-
     });
-
-
 });
