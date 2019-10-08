@@ -1,7 +1,7 @@
 # The Final Project Report
 **Project *Disaster Simulator*:** 
-**Client:** *Reagan Potangaroa*  
-**Date:** 11 October 201
+**Client:** *Regan Potangaroa*  
+**Date:** 11 October 2019
 
 ## 1. Project Objectives
 
