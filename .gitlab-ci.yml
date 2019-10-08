@@ -15,7 +15,7 @@ eslint:
   tags:
     - docker
   before_script:
-    - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
+    - cd disaster-master/disaster-master-product
     - npm install
     
   script:
@@ -33,7 +33,7 @@ testing_testing:
   tags:
     - docker
   before_script:
-    - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
+    - cd disaster-master/disaster-master-product
     - npm install
     - npm install supertest
   script:
@@ -52,7 +52,7 @@ deploytesting:
   - sudo apt-get update -qy
   - sudo apt-get install -y ruby-dev
   - sudo gem install dpl
-  - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
+  - cd cd disaster-master/disaster-master-product
   - sudo dpl --provider=heroku --app=disaster-simulator-testing --api-key=$HEROKU_API_KEY
   only:
   - heroku-bug-fixes
@@ -77,7 +77,7 @@ production:
   - sudo apt-get update -qy
   - sudo apt-get install -y ruby-dev
   - sudo gem install dpl
-  - cd RedR-Disaster-Simulator/DisasterSimulatorNodeJSServer
+  - cd cd disaster-master/disaster-master-product
   - sudo dpl --provider=heroku --app=redr-disaster-simulator --api-key=$HEROKU_API_KEY
   only:
   - master
