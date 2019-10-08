@@ -92,9 +92,9 @@ A summary of the original timelines and a summary of deviations from the origina
 
 ## 5. Delivered Expenditure
 
-No Budget. 
+Originally the project had no budget. There were no foreseen costs.
 
-However, Heroku incident includes $7 or even $14.
+However, in order to setup a pipeline to continuously deploy for demonstration. The team used Heroku. This cost totalled to $14 for 2 months of use.
 
 ## 6. Project Self-Assessment
 
