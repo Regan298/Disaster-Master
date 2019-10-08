@@ -77,7 +77,7 @@ production:
   - sudo apt-get update -qy
   - sudo apt-get install -y ruby-dev
   - sudo gem install dpl
-  - cd cd disaster-master/disaster-master-product
+  - cd disaster-master/disaster-master-product
   - sudo dpl --provider=heroku --app=redr-disaster-simulator --api-key=$HEROKU_API_KEY
   only:
   - master
