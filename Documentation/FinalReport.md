@@ -115,4 +115,4 @@ Agile
 Client Communication
 
 ## 8. Procurement Summary
-A description of procurements, naming major suppliers, stating where to find the procurement information in the project documents and flagging any unclosed procurements. Projects with no procurements should state “No procurements” for this section
+Our only procured service was the use of Heroku. This was used as a host for running the webapp online for presentation and testing purposes. Since our requirements were always to have the webapp being hosted locally for full portability and local network access, Heroku was just a convenient way to present and allow people to easily test the program. On delivery and transitioning according to the transition plan, the Heroku service has been closed.
