@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>Redr Disaster Simulator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="styles/disaster-sim-style.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/run-simulation.js"></script>
+<script src="js/PDFObject/pdfobject.js"></script>
+<script src="js/vis-4.21.0/dist/vis.js"></script>
+<link href="js/vis-4.21.0/dist/vis.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="js/timelineComponents.js"></script>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top " id="header">
+    <!--Colour Changer-->
+    <script>
+        $("#header").load("header.html", function (response,
+                                                   status, http) {
+            document.getElementById("colourChooser").setAttribute("value", document.cookie);
+        });
+        document.documentElement.style.setProperty("--main-color", document.cookie);
+    </script>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center" id="mainContent">
+
+            <!--Scenario Title Gets Updated In Socket-->
+            <div class="scenarioTitle"></div>
+
+            <!--Play/Pause-->
+            <div class="timeControl" id="playPauseSwitch" onclick="startStopSim()">&#9205</div>
+
+
+            <!--Timer-->
+            <div id="timeManagement">
+                <div id="realTime"></div>
+                <div id="simTime"></div>
+            </div>
+
+            <div class="toggle">
+                <div class="toggle-label toggle-label-off">Simulation Time Countdown</div>
+                <div class="toggle-switch"></div>
+                <div class="toggle-label toggle-label-on">Real Time Countdown</div>
+            </div>
+
+            <!--Timeline-->
+            <div id="timeline" class="timeline">
+                <div style="position:relative">
+                    <button type="button" id="addButton" onclick=addPopup()
+                            style="border: 2px solid #ffffff00; right: 0px; position:absolute; font-size: 20px; padding: 3px 10px; z-index: 2;">
+                        +
+                    </button>
+                </div>
+                <div id="visualization"></div><!-- container for timeline -->
+            </div>
+
+            <!--Messaging Title-->
+            <div id="messagingTitle" class="messagingTitle">
+                <h1 class="titles"><span>Communication</span></h1>
+            </div>
+
+            <!--Email Title-->
+            <div id="inboxTitle" class="inboxTitle">
+                <h1 class="titles"><span>Inbox</span></h1>
+            </div>
+
+            <!--Messaging Element-->
+            <div id="messagingElementHQ" class="messagingElementHQ">
+
+
+                <!--add buttons-->
+                <div id="messagingButtonsHQ" class='messagingButtonsHQ'>
+                    <button class="btn btn-secondary" onclick="switchNGOChat('ngo1')" id="ngo1">ngoPlaceholder</button>
+                    <button class="btn btn-secondary" onclick="switchNGOChat('ngo2')" id="ngo2">ngoPlaceholder</button>
+                    <button class="btn btn-secondary" onclick="switchNGOChat('ngo3')" id="ngo3">ngoPlaceholder</button>
+                    <button class="btn btn-secondary" onclick="switchNGOChat('ngo4')" id="ngo4">ngoPlaceholder</button>
+                    <button class="btn btn-secondary" onclick="switchNGOChat('ngo5')" id="ngo5">ngoPlaceholder</button>
+                    <button class="btn btn-secondary" onclick="switchNGOChat('ngo6')" id="ngo6">ngoPlaceholder</button>
+                    <button class="btn btn-secondary" onclick="switchNGOChat('ngo7')" id="ngo7">ngoPlaceholder</button>
+
+
+                </div>
+
+
+                <!--add div for each NGO conversation-->
+                <div class='messagingContentHQ' id="ngo1Content">
+                    <ul class="messageList"></ul>
+                </div>
+                <div class='messagingContentHQ' id='ngo2Content'>
+                    <ul class="messageList"></ul>
+                </div>
+                <div class='messagingContentHQ' id='ngo3Content'>
+                    <ul class="messageList"></ul>
+                </div>
+                <div class='messagingContentHQ' id='ngo4Content'>
+                    <ul class="messageList"></ul>
+                </div>
+                <div class='messagingContentHQ' id='ngo5Content'>
+                    <ul class="messageList"></ul>
+                </div>
+                <div class='messagingContentHQ' id='ngo6Content'>
+                    <ul class="messageList"></ul>
+                </div>
+                <div class='messagingContentHQ' id='ngo7Content'>
+                    <ul class="messageList"></ul>
+                </div>
+
+
+                <div id="messageingFormDivHQ">
+                    <form action="" id="messageHQForm">
+                        <textarea form="messageHQForm" id="input"></textarea>
+                        <button id="hqSendToNGO" type='submit' form='messageHQForm'>Send</button>
+                        <button id="hqSendToAll" type='submit' form='messageHQForm'>Send To All</button>
+                    </form>
+                </div>
+
+            </div>
+
+
+            <div id="inboxElementHQ" class="inboxElementHQ">
+
+                <div id="inboxEventListHQ" class="inboxEventListHQ">
+                    <select id="ngoFilterHQ" onchange="filterEvents()">
+                        <option hidden value="default">Events From All NGO's</option>
+
+                    </select>
+                </div>
+                <div id="eventViewerHQ" class="eventViewerHQ"></div>
+
+                <div id="inboxFormDivHQ" class="inboxFormDivHQ">
+                    <form action="" id="inboxHQForm">
+                        <textarea form="inboxHQForm" id="inputEmailResponseHQ"></textarea>
+                        <input type="submit" value="Send" class="button"/>
+                    </form>
+                </div>
+
+
+            </div>
+
+
+            <!--add messaging form-->
+
+
+        </div>
+    </div>
+</div>
+
+<div id="ngoPasskeyOverlay" class="eventOverlay" onclick="displayPasskeysOff()">
+    <div id="ngoPasskeyContent">
+        <p id="ngoPasskeyText">List Of NGO Passkeys:</p>
+    </div>
+</div>
+
+<div id="simulationTerminationOverlay" class="eventOverlay" >
+    <div id="simulationTerminationContent">
+    <p id="simulationTerminationContentText">This Simulation Has Ended Click <a href="/getReviewFile"> Here </a> To Download
+        Your Review File. Once Downloaded, Refresh this Page to Close this Popup. And then close the Disaster Master
+        command prompt window and restart the program when you want to load in a new scenario.
+    </p>
+    </div>
+</div>
+
+
+<div id="modal" class="eventOverlay">
+</div>
+
+
+<!--PDF Displayer-->
+<div id="pdfOverlay" class="mediaOverlay" onclick="displayPDFOff()">
+</div>
+
+
+<!-- Video displaying code -->
+<div id="videoOverlay" class="mediaOverlay" onclick="displayVideoOff()">
+</div>
+
+<!-- Audio displaying code -->
+<div id="audioOverlay" class="mediaOverlay" onclick="displayAudioOff()">
+</div>
+
+<!-- Image overlay code -->
+<div id="imageOverlay" class="mediaOverlay" onclick="displayImageOff()">
+</div>
+
+
+</body>
+
+</html>

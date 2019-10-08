@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Redr Disaster Simulator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="styles/disaster-sim-style.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<script src="js/jquery.js"></script>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top "id="header">
+    <!--Colour Changer-->
+    <script>
+        $("#header").load("header.html", function (response,
+                                                   status, http){
+            document.getElementById("colourChooser").setAttribute("value", document.cookie);
+        });
+        document.documentElement.style.setProperty("--main-color", document.cookie);
+    </script>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12" id="mainContent">
+            <h1><strong>Disaster Master – Help Documentation</strong></h1>
+
+            <p>Authored by Regan Potangaroa (Software Producer) and edited by Lachlan Keene &amp; Tom Buurmans (Software Developers)</p>
+
+            <p><strong>The Purpose of this Software</strong></p>
+
+            <p>Scenarios and simulations are one key pillar of humanitarian training and the  Disaster-Master has been written and written to assist that process. It does it by first automating and taking over the methodical component of injecting into a scenario; second by setting up a debriefing framework designed by the author of the scenario it allows for deeper learning for the participants because of the depth of the debrief; third, it allows scenarios to be repeated and thus learning for the author when these are compared; finally fourth, it allows for research to be conducted using the scenario as a platform. These are in addition to the usual insights that emerge from the use of scenarios for training and also for testing proposed response plans.</p>
+
+            <p>The Disaster Master also allows scenarios at two different levels. The first level is as a Table Top Exercise TTX that does requires a single Windows 10 Based Computer. The second level requires a Computer with Windows 10 as the operating system as Host/HQ, a standard LAN (A network of computers that share the same router with no further setup required) and up to 6 Allocated Roles in which utilise up to 6 Computer Devices (irrespective of Operating System, with Google Chrome to connect to the HQ Server with the URL supplied by HQ). (Please note that no external internet connection is needed to run this software in any circumstances). There is a range of training contexts and situations that this software could be used in (and perhaps this is its fifth advantage). Consequently, TTX scenarios could be in run in an office with minimal setup and logistics; or in the field in a response situation: for up to 15 participants. On the other hand it could also be used for multi groups (up to 6) within an agency or multiple agencies of up to 60 people.</p>
+
+            <p>Documents such as HSEEP1 could be used to design such scenarios and to align with that process a similar naming convention has been used for Disaster Master.</p>
+
+            <p>The program has been developed by Lachlan Keene, Tom Buurmans, Riley Grice, Daniel Miller, Nathan Ellison, produced by Professor Regan Potangaroa based on his experience ostensibly for RedR Australia as part of ENGR301/ENGR302 supervised by Senior Lecturer James Quilty, at the Victoria University Of Wellington.</p>
+
+            <p><strong>Disclaimer</strong></p>
+
+            <p>Victoria and or its authors do not give any warranty, representation or assurance in relation to this Product (including as to quality, durability or fitness) and any implied warranties, rights, duties or liabilities of any kind (including, without limitation, any implied terms and conditions under the Sale of Goods Act 1908 or the Contract and Commercial Law Act 2017) are negated to the fullest extent permitted by law.</p>
+
+            <p><strong>Role of Exercises</strong></p>
+
+            <p>Exercises play a vital role in preparedness by enabling whole community stakeholders to test and validate plans and capabilities, and identify both capability gaps and areas for improvement. A well-designed exercise provides a low-risk environment to test capabilities, familiarize personnel with roles and responsibilities, and foster meaningful interaction and communication across organisations. Exercises bring together and strengthen the whole community in its efforts to prevent, protect against, mitigate, respond to, and recover from all hazards. Overall, exercises are cost-effective and useful tools that help organisations practice and refine their collective capacity to achieve the core capabilities.</p>
+
+            <p>In the TTX setup, the HQ user will load in a scenario to there liking, once configured the HQ user will take turns with NGO&#39;s as such sharing the single TTX desktop machine. Whereby, HQ will have to instruct each NGO when it their turn on the machine. And during there time on the Machine, each NGO will interact with the product as they desire, before being instructed by HQ to switch to another NGO. Obviously, this setup is rather limited, as it reveals how each participating entity is unable to concurrently be interacting with the simulation. This then ties nicely into the full networked version of this product. Whereby, all participating entities (HQ in addition to each NGO) are able to interact with all product features simultaneously. And this is ensured for when the current simulation environment supports a standard router, a Windows 10 Desktop machine as Host/HQ and as well as a computer for each NGO. Meaning, that each entity will make use of the Router/Host in order to transfer key simulation data between each other.</p>
+
+            <p><strong>Product Overview</strong></p>
+
+            <p>The HQ has a range of embedded sub features in which combine to form a scenario management experience. The first of these features is the timeline, enabling HQ users to get a rough idea as to what events have occurred and which are yet to occur. For events that are yet to occur, HQ has the capacity to manipulate the details of these events before they have an effect on the simulation. In addition can also insert a completely new event by making use of the library of events. This library consists of event templates in which HQ can build atop of to their liking.</p>
+
+            <p>The next feature for HQ is there ability to send quick messages to connected NGO&#39;s, within the communication sub interface, thus also informing HQ which NGO&#39;s are connected (even in the TTX version). The next key feature of the HQ is the event inbox. This feature ensures that when an NGO responds to an event HQ then has the capacity to review the NGO response and formulate their own response as they see best fits. Once a simulation has concluded, HQ is then presented with a popup that presents the offer to download the review file. Upon accepting, a Review PDF is downloaded in which summarises the events as well as status reports of the past just executed simulation.</p>
+
+            <p>The NGO&#39;s also have a range of embedded sub features one of which is the aforementioned communication sub interface, enabling NGO&#39;s to send quick messages to other NGO&#39;s as well as to HQ. However, the key feature for NGO&#39;s is there capacity to receive events, review associated event media, and respond back to HQ as they see fit. Also, for each hour of a simulation, NGO&#39;s will be presented with a request to respond with there Status report in which gets stored for review by HQ post simulation.</p>
+
+            <p>The HQ user can also create new scenarios as well as modify existing scenario files. Such that they can be made custom to the HQ&#39;s likening in terms of key simulation properties such as: Scenario Title, Duration, NGO Specifying, Events for NGO&#39;s, Library template events etc. What this means is that a range of simulations can be generated with automation, such that even template scenario files can be generated for building upon. And that efficiency and effectiveness is ensured for by use of this process.</p>
+
+            <p><strong>Application</strong></p>
+
+            <p>It is anticipated that this program could be used by emergency and disaster responding agencies, research teams, NGOs and NGOs. Hence it has a wide coverage.</p>
+
+            <p><strong>Instructions</strong></p>
+
+            <p><strong>HQ</strong></p>
+
+            <p><strong>Process of Getting The Software Started</strong></p>
+
+            <ol>
+                <li>Open the folder Disaster-Master</li>
+
+                <li>Double click the file called &quot;Disaster-Master-Run.bat&quot;</li>
+
+                <li>Wait for the program to open in your browser (If it does not open in Chrome, copy the URL and paste it into Chrome)</li>
+            </ol>
+
+            <p><strong>Process of Creating a new scenario</strong></p>
+
+            <ol>
+                <li>From the landing page: Click the &quot;Create A Scenario&quot; button</li>
+
+                <li>Click &quot;Create New Scenario&quot;</li>
+
+                <li>&quot;Online Option&quot; – Change whether this scenario will be using multiple computers (true) or a single computer (false) And Click Submit</li>
+
+                <li>&quot;Title Option&quot; – Modify the scenario title to your liking And Click Submit</li>
+
+                <li>&quot;Duration Option&quot; – Specify the duration of this simulation in hours and minutes And Click Submit</li>
+
+                <li>&quot;Hours in a Simulation Day Option&quot; – Specify how many real time hours equals a simulated day And Click Submit</li>
+
+                <li>&quot;NGOs Option&quot; – For each new NGO you want to add, specify there name and a passkey (used for ngos to login to the simulation with) And Click Submit</li>
+
+                <li>&quot;Events Option&quot; – For each new event that you want add, specify the NGO recipient, Event Subject, Event Time, Event Media file type (document / .pdf, video / .mp4, image / .jpg), File – the media file And Click Submit</li>
+
+                <li>&quot;Library Option&quot; – For each new library item, specify the subject, Event Media file type (document / .pdf, video / .mp4, image / .jpg), File – the media file And Click Submit. These are used for scheduling events during the simulation.</li>
+
+                <li>Once you have constructed the simulation to your liking click save and the simulation .zip file will download to your computer shortly, this file will most likely will be in your downloads folder.</li>
+            </ol>
+
+            <p><strong>Process For Editing An Existing Scenario File</strong></p>
+
+            <ol>
+                <li>From the landing page: Click the &quot;Create A Scenario&quot; button</li>
+
+                <li>Click &quot;Edit Existing Scenario&quot;</li>
+
+                <li>Choose an existing simulation .zip file for uploading</li>
+
+                <li>Click Begin</li>
+
+                <li><strong>Same as from step 3 of creating new scenario above</strong></li>
+            </ol>
+
+            <p><strong>Running a Scenario HQ – Online</strong></p>
+
+            <ol>
+                <li>Loading Scenario</li>
+
+
+            <ul>
+                <li>From the landing page: Click the &quot;Start A New Scenario&quot; button</li>
+
+                <li>Choose an existing online type simulation .zip file for uploading</li>
+
+                <li>Click Begin</li>
+            </ul>
+
+
+                <li>Connect NGO's</li>
+
+
+            <ul>
+                <li>Communicate the displayed URL to NGO&#39;s.</li>
+
+                <li>Click on the &quot;Show NGO passkeys&quot; button displayed next to the URL and pass these passkeys onto teams. This needs
+                    to be entered to log in as the correct NGO at the URL.</li>
+            </ul>
+
+
+                <li>Starting the simulation</li>
+
+
+            <ul>
+                <li>Once everyone is connected and ready, you can select the play icon to start running the simulation.</li>
+
+                <li>You can select to view either the simulated or real countdown timer.</li>
+
+                <li>You can pause the simulation at any point and start again when ready.</li>
+            </ul>
+
+
+                <li>Using the timeline</li>
+
+
+            <ul>
+                <li>The timeline displays all scheduled events, zoom in with your mouse&#39;s scroll wheel and drag the timeline around to scrub through it.</li>
+
+                <li>To edit events, click the event on the timeline to bring up the popup editor.</li>
+
+                <li>You can cancel by clicking on the &quot;x&quot; in the top right hand of the popup; delete the event by clicking &quot;Delete&quot;; update the event by filling in the form and clicking &quot;Update&quot;.</li>
+
+                <li>You can add a new event by clicking the + icon in the top right corner of the timeline to open the add new event from library interface. From here you can choose to fill in these fields with pre-existing library items with the quick add button, or make a new event from scratch.</li>
+
+                <li>From the add/edit event interfaces, this where you would inject new media into the simulation should you desire it. What this means is having pre-recorded media files (mp4/mp3) saved somewhere on your computer for selecting as part of this new/existing event. (The process by which this media is created is not supported by this product meaning you will have to create it some other way)</li>
+            </ul>
+
+
+                <li>Messaging</li>
+
+
+            <ul>
+                <li>Once an NGO connected, they will appear on the communication side bar, click on them to start chatting with them.</li>
+
+                <li>Enter a message in the text box.</li>
+
+                <li>Choose either &quot;Send&quot; (to send the message to the selected NGO) or to &quot;Send To All&quot; (send the inputted message to all NGO&#39;s as a broadcast).</li>
+            </ul>
+
+
+                <li>The events inbox</li>
+
+
+            <ul>
+                <li>This is where NGO event responses will appear. Use the drop down to filter inbox items.</li>
+
+                <li>Clicking on an event response will show response messages from that NGOs event.</li>
+
+                <li>You can then respond to the NGO&#39;s response using the text box and send button at the bottom of the inbox. This will be sent to the NGO.</li>
+
+                <li>You can also click the view event button, which displays the events associated media file.</li>
+            </ul>
+
+
+                <li>Once a scenario has concluded, a simulation review pdf document will start downloading. Once downloaded, opening it will show a report of the completed simulation. From here if you wish to run another scenario you are required to close the open black command prompt window and then restart the program, this is in order to prevent multiple simulations running simultaneously.</li>
+            </ol>
+
+            <p><strong>Running a Scenario HQ – Offline</strong></p>
+
+            <ol>
+                <li>From the landing page: Click the &quot;Start A New Scenario&quot; button</li>
+
+                <li>Choose an existing offline type simulation .zip file for uploading</li>
+
+                <li>Click Begin</li>
+
+                <li>Open a new tab using the URL link provided for however many NGO&#39;s are a part of this simulation ( <strong>See step 1 of Running A Scenario NGO Offline</strong> )</li>
+
+                <li><strong>See step 3 of Running a Scenario HQ –</strong>  <strong>Online</strong>  <strong>Onwards.</strong></li>
+            </ol>
+
+            <p><strong>Other program features</strong></p>
+
+            <ul>
+                <li>Click on the colour icon in the top right-hand corner of the page to select a theme colour. This can be done at any time.</li>
+
+                <li>To change the logo navigate to the program directory then /Disaster-Master-Product/resources/assets and replace the &quot;placeholder_logo.png&quot; with your own logo, make sure to save it with the same name and format.</li>
+            </ul>
+
+            <p><strong>NGO</strong></p>
+
+            <p><strong>Online</strong></p>
+
+            <ol>
+                <li>Connecting</li>
+
+
+            <ul>
+                <li>Open chrome and go to the URL that was supplied to you by your HQ.</li>
+
+                <li>Input the passkey that was supplied to you by your HQ.</li>
+
+                <li>Click Send.</li>
+            </ul>
+
+
+                <li>Messaging</li>
+
+
+            <ul>
+                <li>The communication box can be used to send messages to the HQ or other NGOs. Do this by selecting who you would like to contact in the sidebar, composing a message in the text box and sending it by clicking on &quot;Send&quot;.</li>
+            </ul>
+
+
+                <li>Event inbox</li>
+
+
+            <ul>
+                <li>The inbox is where occurred events will appear. These will display in the side bar, click on them to open.</li>
+
+                <li>Click the view event button to display the event media file. Event responses will be displayed below.</li>
+
+                <li>You can then choose to submit a new response by using the text box and send button at the bottom of the inbox. Make sure to choose a tag that you think best suits this event when submitting a message.</li>
+            </ul>
+
+
+                <li>Every real time hour a popup will show asking you to report your status to HQ.</li>
+            </ol>
+
+            <p><strong>Offline</strong></p>
+
+            <ol>
+                <li>Using the tab that was opened by your HQ input your passkey, keep track of this tab as it will be your NGO tab.</li>
+
+                <li>See step 2 of Running a Scenario NGO Online Onwards**</li>
+            </ol>
+
+            <p><strong>Evaluation Process-How does it work and how is it set up</strong></p>
+
+            <p>Post simulation conclusion a review file will be downloaded from HQ summarising the events of the previously occurred simulation. What exactly this ensures for is firstly a Contextual information about the scenario. Secondly, a summary of how each NGO responded to associated events with there response text data plus the event type tag that they chose as the best fit for the event plus meta event information. Within this section also you will find the average time to respond to an event calculated based upon all events for each NGO. Appended to the bottom of this document is also a dump of NGO status reports. You are free to interpret this information as you please.</p>
+
+            <p><strong>Program Improvement</strong></p>
+
+            <p>This program has its drawbacks as there are various non-functional issues that effect this product. This is mainly a result of a limited small team of undergraduate engineers giving their best efforts, whilst learning project management, as to ensuring quality throughout this product. So please keep this in mind. This product has a lot of potential therefore that can be addressed by capable individuals, therefore if you feel like you are one of these people please contact:Prof Regan Potangaroa at <a href="mailto:regan.potangaroa@vuw.ac.nz">regan.potangaroa@vuw.ac.nz</a>. If you would like your changes to be propagated throughout RedR.</p>
+
+            <p><strong>Background</strong></p>
+
+            <p>A TTX is intended to generate discussion of various issues regarding a hypothetical, simulated emergency. TTXs can be used to enhance general awareness, validate plans and procedures, rehearse concepts, and/or assess the types of systems needed to guide the prevention of, protection from, mitigation of, response to, and recovery from a defined incident. Generally, TTXs are aimed at facilitating conceptual understanding, identifying strengths and areas for improvement, and/or achieving changes in perceptions. During a TTX, players are encouraged to discuss issues in depth, collaboratively examining areas of concern and solving problems.</p>
+
+            <p>TTXs can range from basic to complex. In a basic TTX, the scenario is presented and remains constant—it describes an emergency and brings discussion participants up to the simulated present time. Players apply their knowledge and skills to a list of problems presented by the facilitator; problems are discussed as a group; and resolution is reached and documented for later analysis. In a more advanced TTX, play advances as players receive pre-scripted messages that alter the original scenario. A facilitator usually introduces problems one at a time in the form of a written message, simulated telephone call, videotape, or other means. Players discuss the issues raised by each problem, referencing established authorities, plans, and procedures for guidance. Player decisions are incorporated as the scenario continues to unfold. During a TTX, all participants should be encouraged to contribute to the discussion and be reminded that they are making decisions in a no-fault environment. Effective TTX facilitation is critical to keeping participants focused on exercise objectives and associated capability targets.</p>
+
+            <p>Functional Exercises FEs are designed to validate and evaluate capabilities, multiple functions and/or sub-functions, or interdependent groups of functions. FEs are typically focused on exercising plans, policies, procedures, and staff members involved in management, direction, command, and control functions. In FEs, events are projected through an exercise scenario with event updates that drive activity typically at the management level. An FE is conducted in a realistic, real-time environment; however, movement of personnel and equipment is usually simulated. FE controllers typically use a Master Scenario Events List (MSEL) to ensure participant activity remains within predefined boundaries and ensure exercise objectives are accomplished. Simulators in a Simulation Cell (SimCell) can inject scenario elements to simulate real events.</p>
+
+            <p>Full-Scale Exercises FSEs are typically the most complex and resource-intensive type of exercise. They involve multiple agencies, organizations, and jurisdictions and validate many facets of preparedness. FSEs often include many players operating under cooperative systems such as the Incident Command System (ICS) or Unified Command. In an FSE, events are projected through an exercise scenario with event updates that drive activity at the operational level. FSEs are usually conducted in a real-time, stressful environment that is intended to mirror a real incident. Personnel and resources may be mobilized and deployed to the scene, where actions are performed as if a real incident had occurred. The FSE simulates reality by presenting complex and realistic problems that require critical thinking, rapid problem solving, and effective responses by trained personnel. The level of support needed to conduct an FSE is greater than that needed for other types of exercises. The exercise site for an FSE is usually large, and site logistics require close monitoring. Safety issues, particularly regarding the use of props and special effects, must be monitored. Throughout the duration of the exercise, many activities occur simultaneously.</p>
+
+            <p>Participation Level Active participation by appropriate entities and key leaders is paramount to meeting the exercise objectives successfully. Participation level refers to the organizations and level of personnel (e.g., tactical operators, line supervisors, agency directors) participating in the exercise, as well as the general number of personnel who will participate in the exercise. At times, scheduling conflicts, real-world events, or other competing requirements will limit an organization&#39;s or key players&#39; ability to participate in an exercise. In this case, exercise designers will need to simulate the decisions and actions of those participants through an exercise SimCell. An Extent of Play Agreement (XPA) defines the level of participation. Exercise Duration When selecting the exercise duration, the planning team should determine how long it will take to address the exercise objectives effectively. Discussion-based exercises and some drills are generally shorter, ranging from a couple of hours to a full day. FEs and FSEs may take longer. Prevention-focused FEs that exercise the intelligence and information sharing core capability may last up to 30 days with limited duration of play each day. Resource constraints, including the opportunity cost of having employees away from their primary roles, should be factored into determining duration.</p>
+
+            <p>Exercise Parameters Exercise parameters clearly outline what should be included in an exercise scenario based on the objectives and scope, and what should not be exercised. Often there is a desire to add exercise activities that fall outside of the scope of the exercise in order to meet diverse planning and training requirements. While these activities may be useful to an organization, they may impact the ability of players to meet exercise objectives or may reduce the benefit of the exercise by diluting its focus. Clearly defining the exercise scope early in the design process will help exercise planners keep the exercise to a manageable and realistic level.</p>
+
+            <p>Exercise Objectives Based on direction from elected and appointed officials, the exercise planning team selects one or more exercise program priorities on which to focus an individual exercise. These priorities drive the development of exercise objectives, which are distinct outcomes that an organization wishes to achieve during an exercise. Exercise objectives should incorporate elected and appointed officials&#39; intent and guidance, and exercise participants&#39; plans and procedures, operating environment, and desired outcomes. Generally, planners should select a reasonable number of specific, measurable, achievable, relevant, and time-bound (SMART) exercise objectives to facilitate effective scenario design, exercise conduct, and evaluation.</p>
+
+            <p>Evaluation Requirements It is important to develop exercise evaluation requirements early in the design process, as they will guide development of the exercise scenario, discussion questions, and/or MSEL. Evaluation requirements clearly articulate what will be evaluated during the exercise and how exercise play will be assessed. This information is documented in the EEGs. Once the exercise planning team aligns objectives to core capabilities, it identifies which capability targets and critical tasks for each core capability are being addressed by the exercise. Capability targets are the performance thresholds for each core capability; they state the exact amount of capability that players aim to achieve. Generally, these targets are based on targets identified as part of an organization&#39;s or jurisdiction&#39;s THIRA or other threat and hazard identification or risk assessment process. Critical tasks are the distinct elements required to perform a core capability. Critical tasks may be derived from Mission Area Frameworks, organizational operations plans or SOPs, or discipline-specific standards. Scenario A scenario is an outline or model of the simulated sequence of events for the exercise. It can be written as a narrative or depicted by an event timeline. For discussion-based exercises, a scenario provides the backdrop that drives participant discussion, and is contained in a SitMan. For operations-based exercises, a scenario provides background information about the incident catalyst(s) of the exercise. The overall scenario is provided in the C/E Handbook, and specific scenario events are contained in the MSEL. Exercise planners should select and develop scenarios that enable an exercise to assess objectives and core capabilities. All scenarios should be realistic, plausible, and challenging; however, designers must ensure the scenario is not so complicated that it overwhelms players. A scenario consists of three basic elements: (1) the general context or comprehensive story; (2) the required conditions that will allow players to demonstrate proficiency and competency in conducting critical tasks, demonstrating core capabilities, and meeting objectives; and (3) the technical details necessary to accurately depict scenario conditions and events. The exercise planning team ensures that the design effort is not characterized by a fixation on scenario development; rather, the scenario facilitates assessment of exercise objectives and core capabilities. Because of this, exercise planners should refrain from developing the scenario until after the scope and objectives of the exercise have been clearly defined. Furthermore, scenarios should avoid any sensitivity that may arise, such as the use of real names of terrorist groups or sensitive venues.</p>
+
+            <p>Threat or Hazard, the first step in designing a scenario is determining the type of threat or hazard on which the exercise will focus. Each type of emergency has its own strengths and weaknesses when it comes to evaluating different aspects of prevention, protection, mitigation, response, and recovery. The exercise planning team should choose a threat or hazard that best assesses the objectives and core capabilities on which the exercise will focus. The identification of this threat or hazard scenario should also be based on the organization&#39;s threat/hazard identification and risk assessment. For further guidance on identifying and assessing risks and associated impacts, please refer to the DHS Comprehensive Preparedness Guide 201: Threat and Hazard Identification and Risk Assessment Guide, First Edition, April 2012. Developing and maintaining these risk analyses is an essential component of</p>
+
+            <p>Homeland Security Exercise and Evaluation Program3-13 the National Preparedness System, as they enable organizations to identify potential events that would stress their core preparedness capabilities. Modeling and Simulation When incorporated into the development of the scenario and overall exercise design, modeling and simulation can bring versatility, cost savings, and fidelity to exercises. A model is a representation of a system at a point in time or space intended to expand an understanding of the real system. Simulation is a method of implementing the performance of a model, or combination of models, over time. Modeling and simulation supports decision-making processes by providing human and/or computer feedback to players during exercise play, thus dynamically representing the impact of their decisions. For example, human-based simulation during exercises is often manifested through the SimCell, which represents nonparticipating entities. An example of a computer-based simulation could include wind damage and storm surge forecasting models developed by the National Oceanic and Atmospheric Administration, which enable simulation of a hurricane&#39;s effects on coastal communities. Modeling and simulation can also be applied in situations where reality cannot be achieved. For example, for safety reasons a bioterrorism exercise cannot be conducted by releasing a deadly virus into the environment. However, it is still important to exercise the capabilities necessary to respond to this type of scenario. The use of modeling and simulation can realistically replicate variables such as disease propagation, radiation, and chemical attacks. Exercise Documentation Comprehensive, organized exercise documentation is critical to ensure an accurate account of the exercise is preserved. This in turn allows organizations to leverage past documentation to support future exercises and, more importantly, ensures that all critical issues, lessons learned, and corrective actions are appropriately captured to support improvement efforts. While most exercise materials are not sensitive or classified, some materials (e.g., scenario details) may necessitate restrictions on distribution. It is important for the exercise sponsor(s) to understand the specific requirements for security marking rules and requirements, access and dissemination, storage, disposal, and incident reporting of sensitive documents. Consideration should also be given to the accessibility of presentations and documents, such as making information available in alternative formats (e.g., large print, compact disc, Braille), closed captioning or another form of text display, or the provision of sign language interpreters.</p>
+
+            <p><strong>Terms as per HSEEP</strong></p>
+
+            <p><strong>Contextual Inject:</strong> are introduced to a player by a controller to help build the exercise operating environment and/or keep exercise play moving. For example, if the exercise is designed to test information-sharing capabilities, a MSEL inject can be developed to direct an actor to portray a suspect by behaving suspiciously in front of a law enforcement player.</p>
+
+            <p><strong>Contingency Inject:</strong> are events that a controller provides to a player if the players get off track or do not take an action that is necessary for the continuation of the exercise. This ensures that play moves forward, as needed, to adequately evaluate performance of activities. For example, if a simulated secondary device is placed at an incident scene during a terrorism response exercise, but is not discovered, a controller may want to prompt an actor to approach a player to say that he or she witnessed suspicious activity close to the device location.</p>
+
+            <p><strong>Controller/Evaluator (C/E) Briefing:</strong> The C/E Briefing is a pre-exercise overview for controllers, evaluators, and the exercise administrative staff. The briefing summarizes the C/E Handbook (or the COSIN and EvalPlan) and focuses on explaining the roles and responsibilities of controllers and evaluators.</p>
+
+            <p><strong>Controller/Evaluator (C/E) Debriefing:</strong> The C/E Debriefing provides a forum for functional area controllers and evaluators to review the exercise. The exercise planning team leader facilitates this debriefing, which provides each controller and evaluator with an opportunity to provide an overview of the functional area they observed and to discuss both strengths and areas for improvement. During the debriefing, controllers and evaluators complete and submit their EEGs and their Participant Feedback Forms. Debriefing results are captured for inclusion in the AAR/IP.</p>
+
+            <p><strong>Corrective Actions:</strong> Are the concrete, actionable steps outlined in an IP that are intended to resolve preparedness gaps and shortcomings experienced in exercises or real-world events.</p>
+
+            <p><strong>End of Exercise (EndEx):</strong> The official conclusion of an exercise.Evaluation Plan (EvalPlan)The EvalPlan is typically used for exercises of a large scope and scale.</p>
+
+            <p><strong>EvalPlan</strong> :  An EvalPlan provides evaluation staff with guidance and instructions on evaluation or observation methodology to be used as well as essential materials required to execute their specific functions.</p>
+
+            <p><strong>Evaluation Team:</strong> The evaluation team consists of evaluators trained to observe and record participant actions. These individuals should be familiar with the exercising jurisdiction&#39;s plans, policies, procedures, and agreements.</p>
+
+            <p><strong>Exercise:</strong> An exercise is an instrument to train for, assess, practice, and improve performance in prevention, protection, mitigation, response, and recovery capabilities in a risk-free environment. Exercises can be used for testing and validating policies, plans, procedures, training, equipment, and interagency agreements; clarifying and training personnel in roles and responsibilities; improving interagency coordination and communications; improving individual performance; identifying gaps in resources; and identifying opportunities for improvement.</p>
+
+            <p><strong>Exercise Evaluation Guide (EEG):</strong> EEGs provide a template for observing and collecting exercise data in relation to objectives and associated core capabilities. EEGs typically identify targets and critical tasks for exercise objectives and core capabilities and enable evaluators to capture structured and unstructured data regarding exercise performance. Evaluators should develop and customize EEGs to meet the unique objectives of their exercise and to reflect jurisdiction-specific capability targets.</p>
+
+            <p><strong>Exercise Plan (ExPlan):</strong> An ExPlan is a general information document that helps operations-based exercises run smoothly by providing participants with a synopsis of the exercise. It is published and distributed to the participating organizations following development of most of the critical elements of the exercise. In addition to addressing exercise objectives and scope, an ExPlan assignsactivities and responsibilities for exercise planning, conduct, and evaluation. The ExPlan is intended to be seen by the exercise players and observers—therefore, it does not contain detailed scenario information that may reduce the realism of the exercise.</p>
+
+            <p><strong>Exercise Planning Team:</strong> The exercise planning team is responsible for the successful execution of all aspects of an individual exercise. The planning team determines exercise objectives and core capabilities, creates a realistic scenario to achieve the exercise objectives, and develops documents to guide exercise conduct and evaluation. The planning team&#39;s organization and management principles should include clearly defined roles and responsibilities and a manageable span of control.</p>
+
+            <p><strong>Exercise Play Area:</strong> The exercise play area is the site or facility where the bulk of tactical player activities and tasks are demonstrated during an exercise.</p>
+
+            <p><strong>Exercise Play Rules:</strong> Exercise play rules are the parameters that exercise participants follow during the exercise. Exercise play rules describe appropriate exercise behaviour, particularly in the case of real-world emergencies.</p>
+
+            <p><strong>Exercise Program Management:</strong> Exercise program management is the process of overseeing a variety of individual exercises and supporting activities sustained over time. An effective exercise program helps whole community stakeholders maximize efficiency, resources, time, and funding by ensuring that individual exercises are part of a coordinated, integrated approach to building, sustaining, and delivering core capabilities.</p>
+
+            <p><strong>Exercise Project Management:</strong> Exercise project management is the act of engaging in design and development, conduct, evaluation, and improvement planning for an individual exercise. Effective project management ensures that all aspects of planning and executing an individual exercise are done efficiently and are grounded in common approaches and best practices.</p>
+
+            <p><strong>Facilitated Discussion:</strong> A facilitated discussion is the focused discussion of specific issues through a facilitator with functional area or subject-matter expertise.</p>
+
+            <p><strong>Facilitator:</strong> During a discussion-based exercise, the facilitator(s) is responsible for keeping participant discussions on track with exercise objectives and ensuring all issues and objectives are explored as thoroughly as possible within time constraints. If an exercise uses breakout groups, more than one facilitator may be needed.</p>
+
+            <p><strong>Final Planning Meeting (FPM):</strong> The FPM is the final forum for reviewing exercise processes and procedures. An FPM should be conducted for all exercises to ensure that all elements of the exercise are ready for conduct. Prior to the FPM, the exercise planning team receives final drafts of all exercise materials. No major changes to exercise&#39;s design, scope, or supporting documentation should take place at or following the FPM. The FPM ensures that all logistical requirements have been met, outstanding issues have been identified and resolved, and exercise products are ready for printing.Full-Scale Exercise (FSE)FSEs are typically the most complex and resource-intensive type of exercise. They involve multiple agencies, organizations, and jurisdictions and validate many facets of preparedness. FSEs often include many players operating under cooperative systems such as the Incident Command System or Unified Command.</p>
+
+            <p><strong>Functional Exercise (FE):</strong> Functional exercises are designed to validate and evaluate capabilities, multiple functions and/or sub-functions, or interdependent groups of functions. FEs are typically focused on exercising plans, policies, procedures, and staff members involved in management, direction, command, and control functions. In FEs, events are projected through an exercise scenario with event updates that drive activity at the management level. An FE is conducted in a realistic, real-time environment; however, movement of personnel and equipment is usually simulated.</p>
+
+            <p><strong>H Homeland Security Exercise and Evaluation Program (HSEEP):</strong> HSEEP is a program that provides a set of guiding principles for exercise programs, as well as a common approach to exercise program management, design and development, conduct, evaluation, and improvement planning.</p>
+
+            <p><strong>Initial Planning Meeting (IPM):</strong> The IPM marks the beginning of the exercise development phase. An IPM&#39;s purpose is to determine exercise scope by gathering input from the exercise planning team; design requirements and conditions (e.g., assumptions and artificialities); objectives; extent of play; and scenario variables (e.g., time, location, hazard selection). The IPM is also used to develop exercise documentation by obtaining the planning team&#39;s input on exercise location, schedule, duration, and other relevant details.</p>
+
+            <p><strong>Inject:</strong> Injects are MSEL events that prompt players to implement the plans, policies, and procedures that planners want the exercise to validate. Exercise controllers provide injects to exercise players to drive exercise play toward achievement of objectives. Injects can be written, oral, televised, and/or transmitted via any means (e.g., fax, phone, e-mail, voice, radio). Injects can be contextual or contingency.</p>
+
+            <p><strong>Master Scenario Events List (MSEL):</strong> The MSEL is a chronological timeline of expected actions and scripted events to be injected into exercise play by controllers to generate or prompt player activity. It ensures necessary events happen so that all objectives are met. Larger, more complex exercises may also use a procedural flow, which differs from the MSEL in that it contains only expected player actions or events. The MSEL links simulation to action, enhances exercise experience for players, and reflects an incident or activity meant to prompt players to action.</p>
+
+            <p><strong>Objectives:</strong> Objectives are the distinct outcomes an organization wishes to achieve during an individual exercise. Objectives should reflect the exercise sponsor&#39;s specific needs, environment, plans, and procedures, while providing a framework for scenario development and a basis for evaluation. Objectives can be based on outcomes from a THIRA, from Homeland Security Strategies, and other preparedness documents. Planners should create objectives that are specific, measurable, achievable, relevant, and time-bound (SMART) and should limit the number of exercise objectives to enable timely exercise conduct, facilitate reasonable scenario design, and support successful evaluation.</p>
+
+            <p><strong>Observers:</strong> do not directly participate in the exercise; rather, they observe selected segments of the exercise as it unfolds, while remaining separated from player activities. Observers view the exercise from a designated observation area and are asked to remain within the observation area during the exercise. A dedicated controller or public information officer should be assigned to manage these groups. In a discussion-based exercise, observers may support the development of player responses to the situation during the discussion by delivering messages or citing references.</p>
+
+            <p><strong>Operations Section:</strong> The Operations Section of the exercise planning team provides most of the technical or functional expertise for both scenario development and evaluation. This includes development of the MSEL.</p>
+
+            <p><strong>Participant:</strong> Participants are the overarching group that includes all players, controllers, evaluators, and staff members involved in conducting an exercise.</p>
+
+            <p><strong>Players:</strong> have an active role in preventing, responding to, or recovering from the risks and hazards presented in the scenario, by either discussing or performing their regular roles and responsibilities. Players initiate actions that will respond to and/or mitigate the simulated emergency.</p>
+
+            <p><strong>Player Briefing:</strong> A Player Briefing is held immediately before an exercise and addresses individual roles and responsibilities, exercise parameters, safety, badges, and any other logistical items. For a drill or full-scale exercise, Player Briefings typically occur in the exercise assembly area.</p>
+
+            <p>1. Homeland Security Exercise and Evaluation Program (HSEEP) April 2013 <a href="https://www.fema.gov/media-library-data/20130726-1914-25045-8890/hseep_apr13_.pdf%20accessed%20on%20sept%202019">https://www.fema.gov/media-library-data/20130726-1914-25045-8890/hseep_apr13_.pdf accessed on sept 2019</a>.</p>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<footer class="bg-light fixed-bottom" id="footer">
+    <script>$("#footer").load("footer.html");</script>
+</footer>
+
+</body>
+
+</html>
