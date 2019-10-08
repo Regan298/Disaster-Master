@@ -12,8 +12,10 @@ This program is open to modification from anyone looking to adapt this program t
 
 ### How to Run
 
-- Download the packaged version DisasterMasterPortable.zip
-- Unzip and run runsimulator.bat
+- Download the packaged version DisasterMasterPortable.exe
+- Run it
+- Browse to location to extract, then click "Extract"
+- Navigate to selected location and run DisasterMaster.bat
 - Refer to the user manual for a more indepth usage guide
 
 ## Technical Guide
@@ -47,13 +49,15 @@ Node.js binary version is installed along with required npm packages in the pack
 ### Troubleshooting Issues
 
 If the server is failing to start:
-- Open the Command Line
-- cd to the program directory
-- Run 'npm install'
-- Try running the program again
+1.  Make sure there is not already a server instance running
+
+2.  - Open the Command Line
+    - cd to the program directory
+    - Run 'npm install'
+    - Try running the program again
 
 ## License
 
-To be added
+GNU General Public License v3.0
 
 #
