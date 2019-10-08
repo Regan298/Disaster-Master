@@ -1,15 +1,8 @@
-// var Stopwatch = require('statman-stopwatch');
 var TimeFormat = require('hh-mm-ss');
 var simLength;
 var pastEvents = [];
 var eventList = [];
 const {parentPort} = require('worker_threads');
-
-// const stopwatch = new Stopwatch();
-
-console.log("init");
-
-// stopwatch.start();
 var timeS = 0;
 var t;
 
@@ -41,19 +34,11 @@ parentPort.on('message', (msg) => {
 	}
 });
 
-// t = setInterval(getEvents,1000);
 
 function getEvents(){
-	console.log('her1');
 	timeS++;
 	if ((timeS*1000) < simLength) {
-		console.log('her2');
-
 		pastEvents = [];
-
-		// console.log(stopwatch.read());
-
-	
 		var t = TimeFormat.fromMs((timeS*1000), 'hh:mm:ss');
 		var now = new Date();
 		t = t.split(":");
@@ -72,7 +57,6 @@ function getEvents(){
 			eventTime.setSeconds(t[2]);
 
 			if (eventTime <= now) {
-				// console.log('found past event');
 				pastEvents.push(eventList[i]);
 			}
 		}
@@ -82,7 +66,6 @@ function getEvents(){
 			timeMs: timeS*1000
 		};
 		parentPort.postMessage(data);
-		//console.log(count);
 	}else{
 		clearInterval(t);
 		endSim();
@@ -90,7 +73,5 @@ function getEvents(){
 }
 
 function endSim(){
-	// stopwatch.stop();
-	// stopwatch.reset();
 	console.log("end of simulation");
 }
