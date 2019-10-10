@@ -114,5 +114,41 @@ Agile
 
 Client Communication
 
+
+The disaster simulator project meets major scope goals, and delivers the baseline functionality requirements specified in the requirements document. 
+Additional scope goals for extra polish or advanced functionality were left out however, such as the audio overlay feature, or graphs outputted in the review pdf.
+
+Time goals were unclear in the first half of the project, due to poor time management planning, however in the second half time was managed much better, 
+with comprehensive epic and milestone use. For this second half of the project, time goals were mostly meet, although many features were carried between sprints 
+due to the over estimation of work that could be completed. Cost goals were also met, with no cost imposed on the client. Costs associated with Heroku were 
+overlooked, however this cost was neutralised as it was covered by the University.
+
+The success criteria listed in the project scope statement was:
+
+    1. Ability to load dynamic simulation files, from an Overseer at HQ machine, that dictates for the details of each type of scenario and such that Overseer has main control over current simulation. 
+    2. Operating on 1..* Machines, whereby a single machine implies no access to the internet. 
+    3. Inter-communication between Overseer at HQ and NGO's at Client machines, each machine being over network infrastructure operated by RedR, and communication via superficial emails and texts between teams and Overseer at HQ. Communication may have embedded imagery and audio files. 
+    4. Tracking for the progress of the simulation, a varying time scale that is used for each simulation. 
+    5. Custom creation of varying scenario situations. 
+    6. Real-time interfering of scenario by Overseer. 
+    7. Review of the events that occurred in past simulations, with functionality to export scenario result. 
+    8. Ability to function in a range of limited environments on varying hardware.
+
+All of these success criteria points have been met by the project.
+
+
+
+On 10/9/18 Team 16 had an unpleasant meeting with James and our current SM Nick in order to address how our poor communication was resulting in the Team 
+being Dysfunctional. As such, it was revealed to all Team members in this meeting that an informant of James had disclosed screenshot evidence of Team 16's 
+illicit and unapproved Facebook Messenger Group Chat. Whereby, these screenshots revealed to Staff of VUW Engineering that Team 16 was using this medium 
+in order to communicate potentially sensitive information amongst the team. And therefore, breaking the IP agreement in the process. The reciprocation's 
+of this were that members of Team 16 course grades are to be severely reduced for there voluntary acts of breaking this agreement, regardless of Lachlan's 
+defense that the primary purpose of this unproved channel was for off topic chatter (however this was not the case in its entirety) and that the product 
+that Team 16 is developing is to deemed as open source upon completion. Regardless, Team 16 not only feels very remorseful for there wrong doing and has 
+agreed that there proposed punishment is fair. But also as has made clear by James, there poor demonstration of communication skills has resulted in the 
+team being dysfunctional with individuals in the Team not being as informed as others due to poor propagation of crucial team information. As such upon 
+reflection, the Team vows to cease all communication over non approved channels in addition to ensuring that there communication over Mattermost increases 
+significantly in order to address the aforementioned risks.
+
 ## 8. Procurement Summary
 Our only procured service was the use of Heroku. This was used as a host for running the webapp online for presentation and testing purposes. Since our requirements were always to have the webapp being hosted locally for full portability and local network access, Heroku was just a convenient way to present and allow people to easily test the program. On delivery and transitioning according to the transition plan, the Heroku service has been closed.
