@@ -34,56 +34,116 @@ The Scope of this undertaking is to produce a computer program: that is going to
 
 ### Delivered Scope
 
-- Events Displayed 
+Every scope goal has been met.
 
-[Event Display Report Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/ViewEvent.PNG)
+### 3.1. Ability to load dynamic simulation files, from an Overseer at HQ machine, that dictates for the details of each type of scenario and such that Overseer has main control over the current simulation.
 
 
-- Timer 
 
-[Timer Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/timer.PNG)
+### 3.2. Operating on 1..* Machines, whereby a single machine implies no access to the internet.
+
+- Offline and Online 
+
+The simulations can be run on when the computer is offline or online, the NGOs training in the scenario simulation can use different tabs on Google Chrome on one computer to do their training, this allows offline use for mutiple NGOs to train. As well as that, NGOs can use other computers that are on the same network and connect into the scenario simulation via a link from the Overseer, no selection of offline or online is necessary as both run at the same time if possible. Very versitile.
+
+
+### 3.3. Inter-communication between Overseer at HQ and NGO's at Client machines, each machine being over network infrastructure operated by RedR, and communication via superficial emails and texts between teams and Overseer at HQ. Communication may have embedded imagery and audio files.
 
 - Emailing System 
 
 [Emailing Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/emailer.PNG)
 
+The replicated email system allows for the similar use of emails for NGOs to communiate to the Overseer during the simulation. 
+
 - Messaging System 
 
 [Messaging Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/Messaging.PNG)
+
+Replicated messaging system allows NGOs to communicate to the Overseer and other NGOs during the simulation. The messaging system is very similar to texting and the Messenger application for phones.
+
+- Events Displayed 
+
+[Event Display Report Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/ViewEvent.PNG)
+
+Multimedia events can be shown in events sent from the Overseer to the NGOs in a range of pdfs, mp4, mp3, and images.
+
+
+### 3.4. Tracking for the progress of the simulation, a varying time scale that is used for each simulation.
 
 - Timeline 
 
 [Timeline Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/timeline.PNG)
 
-- Live Editing scenario 
+The Overseer will be able to see the timeline with each event for each group at their designated event sending times. The Overseer can click on these events and see what they look like
 
-[Editing Live Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/LiveEdit.PNG)
+- Timer 
+
+[Timer Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/timer.PNG)
+
+The Overseer and NGOs will be able to keep track of time during the simulation and measure it against their progress in the duration of the scenario simulation.
+
+
+### 3.5. Custom creation of varying scenario situations.
 
 - Creating and editing scenarios 
 
 [Create or Edit Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/CreateOrEdit.PNG)
 
+The Overseer can choose to either create a new scenario simulation file or edit an existing scenario simulation
+
 [Creating Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/creating.PNG)
 
+Creating a new simulation occurs here with the ability to add NGOs with passkeys, new events with multimedia files with release time, very similar to editing. After adding new items in the scenario the new scenenario simulation file can be downloaded.
+
 [Editing Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/editing.PNG)
+
+Editing will load up a scenario simulation file and load the content of the scenario with their NGOs and the events' content. Then adding, editing, removing items in the screen a new edited scenario simulation file can be downloaded.
+
+
+### 3.6. Real-time interfering with the scenario by Overseer.
+
+- Live Editing scenario 
+
+[Editing Live Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/LiveEdit.PNG)
+
+The Overseer can use the live editing from the timeline feature to control events of edit deatils of the event such as time, recipient, and deletion. This gives more control to the Overseer during the simulation training and allows interfering.
+
+
+### 3.7. Review of the events that occurred in past simulations, with functionality to export scenario results.
 
 - Review pdf after scenario completion 
 
 [End of Simulation Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/pdfReivewPopUp.PNG) 
 
+Shows the download pop up of the review PDF.
+
 [Review PDF Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/ReviewPDF.PNG)
 
-- Colour Changing of the system 
-
-[Colour Changing Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/ColourChanger.PNG)
+This PDF contains the event repsonse conversations between the NGOs and HQ, with their response times, this includes the statuses of how the NGOs felt they were going at each hour in the training simulations. It also contains the messages bewteen NGOs and the Overseer. This PDF will be analysed after the simulation by the Overseer in a breakdown for them to review and talk about to the NGOs.
 
 - Status Screen 
 
 [Status Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/status.png)
 
-- Offline and Online 
+NGOs will say how they're going each hour and respond to the pop up with how they feel their NGO group is doing so far.
+
+
+### 3.8. Ability to function in a range of limited environments on varying hardware.
+
+It can run anywhere, the node.js server is meant to be portable which is a special usecase for a server.
+
+
+### 3.9. Others additional scope goals
+
+- Colour Changing of the system 
+
+[Colour Changing Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/ColourChanger.PNG)
+
+This is create less offence to different NGO groups who wish to use the software. 
 
 - Licencing
+
+The client would like the software to be open source and for no one to be able to commercial it. We have used the GNU General Public Licence V3.0 which allows for open source and any edits of the software must use this licence.
 
 
 ## 4. Original and Actual Schedule
