@@ -13,6 +13,8 @@ This program is open to modification from anyone looking to adapt this program t
 
 ### How to Run
 
+Need to Update names:
+
 - Download the packaged version DisasterMasterPortable.exe
 - Run it
 - Browse to location to extract, then click "Extract"
