@@ -13,13 +13,22 @@ This program is open to modification from anyone looking to adapt this program t
 
 ### How to Run
 
-Need to Update names:
+Offline portable version:
+This version uses a portable Node.js binary installation with node modules pre-installed, all packaged up with the program.
 
 - Download the packaged version DisasterMasterPortable.exe
 - Run it
 - Browse to location to extract, then click "Extract"
 - Navigate to selected location and run DisasterMaster.bat
 - Refer to the user manual for a more indepth usage guide
+
+To run from the repo:
+
+- clone the repo 'git clone '
+- install [Node.js](https://nodejs.org/en/download/)
+- open command prompt in cloned repo
+- run 'npm install'
+- run DisasterMaster.bat
 
 ## Technical Guide
 
@@ -38,6 +47,7 @@ Lastly, NGO's have the capacity to interact with the current scenario via two me
 
 ### Dependencies
 
+- bootstrap
 - clone-deep
 - cross-zip
 - dateformat
@@ -64,7 +74,7 @@ Lastly, NGO's have the capacity to interact with the current scenario via two me
 If the server is failing to start:
 1.  Make sure there is not already a server instance running
 
-2.  - Open the Command Line
+2.  - Open the Command Prompt
     - cd to the program directory
     - Run 'npm install'
     - Try running the program again
