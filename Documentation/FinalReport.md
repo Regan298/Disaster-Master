@@ -98,7 +98,7 @@ However, in order to setup a pipeline to continuously deploy for demonstration. 
 
 ## 6. Project Self-Assessment
 
-A short statement of the team’s assessment of the delivered project, with a focus on the technical aspects. This should convey to the reader those aspects of the project results which are not obvious from other documents.
+The delivered product is a unique use-case for a Node.js server which allows for the ability to be used in a range of environments, including changing network connection and devices - both things not possible on traditional servers. This causes a required learning curve for initially using the program with no native executable and having to settle for compressed archives for portability due to the complex nature of a local server over a traditional client. The program achieves full synchronisation between clients and the server, keeping the real-time feel and immediacy that's important for a disaster simulation. Flexibility with scenarios is well implemented with the ability to adapt your disaster scenario to fit your training method, prior or during a simulation. Editing during the simulation triggers updates to all clients keeping everything running seemlessly.
 
 ## 7. Lessons Learned Summary
 
