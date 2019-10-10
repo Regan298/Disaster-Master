@@ -7,29 +7,21 @@ var timeS = 0;
 var t;
 
 function updateEvents(msg) {
-	console.log('updateEvents');
 	simLength = msg.durationMs;
 	eventList = msg.eventsList;
-
 	if(msg.isRunning || !msg.started) {
 		t = setInterval(getEvents, 1000);
 	}
 }
 
 parentPort.on('message', (msg) => {
-	console.log('received in AE');
 	if(typeof msg === "object"){
-		console.log('object');
 		clearInterval(t);
 		updateEvents(msg);
 		return;
 	} else if (msg === 'pause') {
-		console.log('Pause');
-		// stopwatch.stop();
 		clearInterval(t);
 	} else{
-		console.log('Play');
-		// stopwatch.start();
 		t = setInterval(getEvents,1000);
 	}
 });
@@ -73,5 +65,5 @@ function getEvents(){
 }
 
 function endSim(){
-	console.log("end of simulation");
+	console.log("End Of Simulation");
 }
