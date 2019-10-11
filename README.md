@@ -30,6 +30,8 @@ To run from the repo:
 - run 'npm install'
 - run DisasterMaster.bat
 
+To stop the server, close the command prompt window.
+
 ## Technical Guide
 
 Disaster Master runs as a local Node.js web server. This makes the program fully portable, it can be run on a local network, or on a single computer with multiple browser tabs. With no external internet dependency.
