@@ -83,6 +83,6 @@ If the server is failing to start:
 
 ## License
 
-[GNU General Public License v3.0](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/LICENSE)
+[GNU General Public License v3.0](https://github.com/Regan298/Disaster-Master/blob/master/LICENSE)
 
 #
