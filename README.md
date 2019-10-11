@@ -16,7 +16,7 @@ This program is open to modification from anyone looking to adapt this program t
 Offline portable version:
 This version uses a portable Node.js binary installation with node modules pre-installed, all packaged up with the program.
 
-- Download the packaged version [disaster-master.exe](https://github.com/Regan298/Disaster-Master/raw/master/disaster-master/disaster-master.exe)
+- Download the packaged version [disaster-master-portable.exe](https://github.com/Regan298/Disaster-Master/raw/master/disaster-master/disaster-master-portable.exe)
 - Run it
 - Browse to location to extract, then click "Extract"
 - Navigate to selected location and run Disaster-Master-Run.bat
