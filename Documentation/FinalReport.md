@@ -6,11 +6,11 @@
 
 ## 1. Project Objectives
 
-To create a disaster simulator software product for training disaster relief workers, in which is more effective for the trainees and trainers than their current manual solution to the problem of simulating disasters. This is ensured for by way of automating many current manual actions involved during the scenario for the trainers, in addition to increasing simulation immersion for the trainees. Moreover, this product would also enable for the generation of a structured analysis report of the trainees, regarding actions that they invoked in response to simulation events, throughout each disaster simulation. 
+To create a disaster simulator software product for training disaster relief workers, in which is more effective for the trainees and trainers than their current solution to the problem of manually simulating disasters. This is ensured for by way of automating many current manual actions involved during the scenario for the trainers, in addition to increasing simulation immersion for the trainees. A portable offline solution would also allow for use in adverse conditions such as during disasters. Moreover, this product would also enable for the generation of a structured analysis report of the trainees, regarding actions that they invoked in response to simulation events, throughout each disaster simulation. 
 
 ## 2. Summary of Project Results
 
-This Team has produced a product that is capable of increasing efficiency and immersion of manual approaches to disaster simulation. This was achieved as a result of implementing and designing a grouping of key disaster simulation required features for the intended user base. These features are Inclusive of, however not limited to; Scenario: Creation, Event Management/Displaying, Entity Communication and Reflection Documentation. The team believes that within these product features the client will be satisfied by the level of quality delivered.
+This Team has produced a product that is capable of increasing efficiency and immersion of manual approaches to disaster simulation. This was achieved as a result of implementing and designing a grouping of key disaster simulation required features for the intended user base. These features are inclusive of, however not limited to; Scenario Creation, Event Management/Displaying, Dynamic Environments Adaptability, Entity Communication, and Reflection Documentation. The team believes that within these product features the client will be satisfied by the level of quality delivered as they directly help the training of disaster relief workers.
 
 ## 3. Original and Delivered Scope
 
@@ -37,13 +37,13 @@ The following discussion serves as to outline that each area of the project scop
 
 [Example File Breakdown](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/ExampleScenarioFilePic.PNG)
 
-Post user interaction with the scenario editor, a simulation zip file is generated. Whereby, each of these zip files contain meta simulation information, in addition to simulation media files (Documents, Videos, Audio, Imagery) that when parsed by the server, construct dynamic and varying current scenarios, according to simulation details that were provided/inputted in order to create each given scenario file. 
+Post user interaction with the scenario editor, a simulation zip file is generated. Whereby, each of these zip files contain meta simulation information, in addition to simulation media files (Documents, Videos, Audio, Imagery). This file is then parsed through to the server to set up the given simulation structure.
 
 #### 2. Operating on 1..* Machines, whereby a single machine implies no access to the internet.
 
 Each simulation can either be run in an offline or online mode. Online is possible when the given physical simulation environment supports a standard LAN with a machine (Laptop/Desktop irrespective of OS, excluding the host/server in which Windows 10 is required) for each participating entity. However, when a standard LAN is not present then the offline mode is required. This offline mode means that each participating entity of the simulation is required to make use of a single Windows 10 computer, as host and the client. Whereby, the users must make use of this computers browser, with a tab to represent each entity, such that participating simulation user groups must rotate in order to share their access to this sole machine.
 
-#### 3. Inter-communication between Overseer at HQ and NGO's at Client machines, each machine being over network infrastructure operated by RedR, and communication via superficial emails and texts between teams and Overseer at HQ. Communication may have embedded imagery and audio files.
+#### 3. Inter-communication between Overseer at HQ and NGO's on Client machines, each machine being over network infrastructure operated by RedR, and communication via superficial emails and texts between teams and Overseer at HQ. Communication may have embedded imagery and audio files.
 
 [Emailing Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/emailer.PNG)
 
@@ -75,7 +75,7 @@ Regardless of which option they choose, they will be displayed with this interfa
 
 [Editing Live Picture](https://gitlab.ecs.vuw.ac.nz/ENGR300-2019/Project-16/redr-disaster-simulation-program/blob/master/Images/LiveEdit.PNG)
 
-The Overseer can use the live editing from the timeline feature to control events details such as time, recipient, and deletion. This gives more control to the Overseer during the simulation training and allows for interfering.
+The Overseer can use the live editing from the timeline feature to control events details such as time, recipient, and deletion. New events can be created and scheduled from scratch or via pre-set library items that are created during the scenario creation. This gives more control to the Overseer during the simulation training and allows for interfering.
 
 #### 7. Review of the events that occurred in past simulations, with functionality to export scenario results.
 
@@ -105,7 +105,7 @@ This creates less offense to different organisations who wish to use the softwar
 
 - Licensing
 
-The client wanted the software to be open source and for no one to be able to commercialise it. Therefore, we have used the GNU General Public License V3.0 which allows for it to be open source and any parties that choose to modify it are nevertheless prevented from profiting from it.
+The client wanted the software to be open source and for no one to be able to commercialise it. Therefore, we have used the GNU General Public License v3.0 which allows for it to be open source and any parties that choose to modify it are nevertheless prevented from profiting from it.
 
 ## 4. Original and Actual Schedule
 
@@ -133,15 +133,15 @@ The client wanted the software to be open source and for no one to be able to co
 | Reviewing Scenario        | Jul 16 - Oct 1  |
 | Polishing/Testing/Closure | Sep 17 - Nov 1  |
 
-There are two main discrepancy's between the planned schedule and the actual schedule. The first is the CI/CD Pipeline. The team underestimated the work required for this aspect of the project particularly as CD was never apart of this project scope hence given a low priority for the team over trimester 1.  So come trimester 2, the team is given a new project team member who was then naturally assigned the role of CD , as they claimed they were competent in this field. However, now come the mid tri break, little objective work has been contributed towards CD by this new Team member. Therefore, another team member took it upon themselves to deploy over the mid trimester break, as they realized that this project aspect was severely lacking, which resulted from the team poorly managing this. As well as the new team member explicitly refusing to perform their assigned task. Therefore, this explains why this discrepancy occurred.
+There are two main discrepancy's between the planned schedule and the actual schedule. The first is the CI/CD Pipeline. The team underestimated the work required for this aspect of the project particularly as CD was never apart of this project scope hence given a low priority for the team over trimester 1.  So come trimester 2, the team is given a new project team member who was then naturally assigned the role of CD , as they claimed they were competent in this field. However, now come the mid tri break, little objective work has been contributed towards CD by this new Team member. Therefore, another team member took it upon themselves to deploy over the mid trimester break, as they realised that this project aspect was severely lacking, which resulted from the team poorly managing this. As well as the new team member explicitly refusing to perform their assigned task. Therefore, this explains why this discrepancy occurred.
 
-The second discrepancy was regarding the review aspect of this product. The main reasons for this were that the Team had performed a poor job at upskilling team members about how this project functions. This then resulted in the team member essentially assigned to this epic having little understanding as to what was required of them and rightly so. Therefore, towards the end of the schedule this project aspect was not developed productively and hence its due date had to be pushed back which was not planned for. 
+The second discrepancy was regarding the review aspect of this product. The main reasons for this were that other features took longer than expected to develop, and that the Team had performed a poor job at upskilling team members about how this project functions. This then resulted in the team member essentially assigned to this epic having little understanding as to what was required of them and rightly so. Therefore, towards the end of the schedule this project aspect was not developed productively and hence its due date had to be pushed back which was not planned for. 
 
 ## 5. Delivered Expenditure
 
 Originally the project had no budget. There were no foreseen costs.
 
-However, in order to set up a pipeline to continuously deploy for demonstration. The team used Heroku. This cost totaled to $21 for 2 months of use.
+However, in order to set up a pipeline to continuously deploy for demonstration the team used Heroku as an external host. This cost totaled to $21 for 2 months of use.
 
 ## 6. Project Self-Assessment
 
@@ -165,4 +165,4 @@ Planning sprints was discussed as very positive during retrospectives and the te
 
 ## 8. Procurement Summary
 
-Our only procured service was the use of Heroku. This was used as a host for running the webapp online for presentation and testing purposes. Since our requirements were always to have the webapp being hosted locally for full portability and local network access, Heroku was just a convenient way to present and allow people to easily test the program. On delivery and transitioning according to the transition plan, the Heroku service has been closed.
+Our only procured service was the use of Heroku. This was used as a host for running the web app online for presentation and testing purposes. Since our requirements were always to have the web app being hosted locally for full portability and local network access, Heroku was just a convenient way to present and allow people to easily test the program. On delivery and transitioning according to the transition plan, the Heroku service has been closed.
