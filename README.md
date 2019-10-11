@@ -28,7 +28,7 @@ To run from the repo:
 - install [Node.js](https://nodejs.org/en/download/)
 - open command prompt in cloned repo
 - run 'npm install'
-- run DisasterMaster.bat
+- run Disaster-Master-Run.bat
 
 To stop the server, close the command prompt window.
 
