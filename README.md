@@ -24,11 +24,13 @@ This version uses a portable Node.js binary installation with node modules pre-i
 
 To run from the repo:
 
-- clone the repo 'git clone '
+- clone the repo 'git clone https://github.com/Regan298/Disaster-Master.git'
 - install [Node.js](https://nodejs.org/en/download/)
 - open command prompt in cloned repo
+- cd to disaster-master/disaster-master-product/
 - run 'npm install'
-- run Disaster-Master-Run.bat
+- close command prompt
+- run Disaster-Master-Run.bat in disaster-master/
 
 To stop the server, close the command prompt window.
 
