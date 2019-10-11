@@ -19,7 +19,7 @@ This version uses a portable Node.js binary installation with node modules pre-i
 - Download the packaged version [disaster-master.exe](https://github.com/Regan298/Disaster-Master/raw/master/disaster-master/disaster-master.exe)
 - Run it
 - Browse to location to extract, then click "Extract"
-- Navigate to selected location and run DisasterMaster.bat
+- Navigate to selected location and run Disaster-Master-Run.bat
 - Refer to the user manual for a more indepth usage guide
 
 To run from the repo:
