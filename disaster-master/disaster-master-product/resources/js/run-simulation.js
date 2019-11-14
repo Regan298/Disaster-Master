@@ -21,6 +21,7 @@ var eventCounter = 0;
 var selectNGOFilter = 'default';
 var selected;
 var firstTimeViewingKeys = true;
+var eventList = [];
 
 //todo: Unccomment this when done
 window.onbeforeunload = function() {
@@ -461,7 +462,8 @@ function displayNGOEventResponse(ngoEventResponse) {
 }
 
 function handleNGOResponseEvents(occuredEvents) {
-    var eventList = [];
+
+    eventList = [];
     //add occured events
     for (var i = 0; i < occuredEvents.length; i++) {
         let currentEvent = occuredEvents[i];
@@ -1048,6 +1050,17 @@ $(function () {
             return;
         }
         e.preventDefault(); // prevents page reloading
+        var recip;
+        console.log(selectedEvent.toString());
+        for(var i = 0; i < eventList.length; i++){
+            console.log(eventList[i].id);
+            if(eventList[i].id.toString() === selectedEvent.toString()){
+                recip = eventList[i].recipient;
+            }
+        }
+
+        content = "Hi " + recip + "\n\n" + content + "\n\n" + "Regards HQ";
+
         //Function takes array by default so add turn single message into array
         var responseAsArray = [];
         responseAsArray.push(content);

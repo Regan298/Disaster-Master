@@ -506,6 +506,9 @@ $(function () {
         if (content.length <= 0) {
             return;
         }
+
+        content = "Hi HQ " + "\n\n" + content + "\n\n" + "Regards " + name;
+
         //Function takes array by default so add turn single message into array
         var responseAsArray = [];
 

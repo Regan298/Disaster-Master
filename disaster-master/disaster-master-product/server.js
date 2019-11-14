@@ -796,7 +796,7 @@ function GenerateReviewPDF(requestReviewCB) {
                     break;
                 }
 
-                NGOEventString += "Response: " + ngoInfoList[i].ngoEventList.eventResponses[j][k] + ". \n";
+                NGOEventString += "Response:\n'" + ngoInfoList[i].ngoEventList.eventResponses[j][k] + "' \n";
                 NGOEventString += "Time of Response: " + ngoInfoList[i].ngoEventList.responseTimes[j][k] + ". \n";
                 NGOEventString += "Tag: " + ngoInfoList[i].ngoEventList.responseTagsList[j][k] + ". \n\n";
 
