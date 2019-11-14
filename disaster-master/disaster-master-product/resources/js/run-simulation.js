@@ -401,8 +401,12 @@ function doPlay() {
 }
 
 function switchNGOChat(ngo) {
+
     //Highlight selected button and unlight non selected
     if (ngo != null) {
+        //Stop button Flashing
+        document.getElementById(ngo).style.animation = null;
+
         var buttons = document.getElementsByClassName("btn btn-secondary");
         for (var i = 0; i < buttons.length; i++) {
             buttons[i].style.backgroundColor = "#b5b5b5";
@@ -572,6 +576,7 @@ function addToConversation(content, isOrigin, from, to) {
         if (to !== "HQ") {
             return;
         }
+        highlightChatButton(from);
         var value;
         for (var j = 0; j < ngos.length; j++) {
             if (ngos[j].name === from) {
@@ -638,6 +643,10 @@ function displayEventMedia(type, name) {
 /*eslint-enable */
 
 
+function highlightChatButton(name) {
+    document.getElementById(name).style.animation = 'glowing 1500ms infinite';
+}
+
 function handleNewMessages() {
     socket.on('message', function (msg) {
         var from = msg.recievedMessage.from;
@@ -645,6 +654,8 @@ function handleNewMessages() {
         if (from != "HQ") {
             addToConversation(msg.recievedMessage.content, false, from, to);
         }
+
+
     });
 }
 

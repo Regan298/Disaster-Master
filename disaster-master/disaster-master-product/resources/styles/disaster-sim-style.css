@@ -44,6 +44,12 @@
     box-sizing: border-box;
 }
 
+@keyframes glowing {
+    0% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+    50% { background-color: #FF0000; box-shadow: 0 0 40px #FF0000; }
+    100% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+}
+
 html {
     font-family: sans-serif;
     line-height: 1.15;

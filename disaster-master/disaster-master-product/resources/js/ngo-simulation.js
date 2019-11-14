@@ -111,6 +111,7 @@ function switchNGOChat(ngo) {
 
     //Highlight selected button and unlight non selected
     if (ngo != null) {
+        document.getElementById(ngo).style.animation = null;
         var buttons = document.getElementsByClassName("btn btn-secondary");
         for (var i = 0; i < buttons.length; i++) {
             buttons[i].style.backgroundColor = "#b5b5b5";
@@ -151,6 +152,8 @@ function addToConversation(content, isOrigin, from, to) {
         if (to !== name && to !== 'all') {
             return;
         }
+        
+        document.getElementById(from).style.animation = 'glowing 1500ms infinite';
 
         var value;
         for (var i = 0; i < ngos.length; i++) {
