@@ -562,6 +562,9 @@ function handleTimeSwitcher() {
 
 function addToConversation(content, isOrigin, from, to) {
     var childUl;
+    var d = new Date();
+    var h = d.getHours();
+    var m = d.getMinutes();
     if (isOrigin) {
         if(to === 'all'){
             for (var i = 0; i < ngos.length; i++) {
@@ -571,7 +574,7 @@ function addToConversation(content, isOrigin, from, to) {
         }
         to = to.trim().replace(/ /g, "_") + "Content";
         childUl = $("#" + to).find('.messageList');
-        $(childUl).append("<li id='origin'>" + content + "</li>");
+        $(childUl).append("<li id='origin'>" + content + "<br>" + h + ":" + m + "</li>");
     } else {
         if (to !== "HQ") {
             return;
@@ -585,7 +588,7 @@ function addToConversation(content, isOrigin, from, to) {
             }
         }
         childUl = $("#" + value).find('.messageList');
-        $(childUl).append("<li id='nonOrigin'>" + content + "</li>");
+        $(childUl).append("<li id='nonOrigin'>" + content + "<br>" + h + ":" + m + "</li>");
     }
 }
 

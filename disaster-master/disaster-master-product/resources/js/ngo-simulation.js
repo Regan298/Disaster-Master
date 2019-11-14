@@ -137,8 +137,11 @@ function switchNGOChat(ngo) {
 }
 
 function addToConversation(content, isOrigin, from, to) {
-
     var childUl;
+
+    var d = new Date();
+    var h = d.getHours();
+    var m = d.getMinutes();
     if (isOrigin) {
         if (to == "HQ") {
             to = "ngo0Content";
@@ -146,13 +149,13 @@ function addToConversation(content, isOrigin, from, to) {
             to = to.trim().replace(" ", "_") + "Content";
         }
         childUl = $("#" + to).find('.messageList');
-        $(childUl).append("<li id='origin'>" + content + "</li>");
+        $(childUl).append("<li id='origin'>" + content + "<br>" + h + ":" + m + "</li>");
     } else {
         //Return if messages not adressed to self and not a broadcast
         if (to !== name && to !== 'all') {
             return;
         }
-        
+
         document.getElementById(from).style.animation = 'glowing 1500ms infinite';
 
         var value;
@@ -167,7 +170,7 @@ function addToConversation(content, isOrigin, from, to) {
             }
         }
         childUl = $("#" + value).find('.messageList');
-        $(childUl).append("<li id='nonOrigin'>" + content + "</li>");
+        $(childUl).append("<li id='nonOrigin'>" + content + "<br>" + h + ":" + m + "</li>");
     }
 }
 
