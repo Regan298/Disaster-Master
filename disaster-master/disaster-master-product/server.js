@@ -82,7 +82,7 @@ app.get('/hq-config', function (req, res) {
 });
 
 app.post('/upload', function (req, res) {
-    processZip(req, res, 'run');
+    processZip(req, res, 'run', true);
 });
 
 app.get('/hq-run-simulation', function (req, res) {
@@ -138,7 +138,7 @@ app.get('/download-save', function (req, res) {
 });
 
 app.post('/editor-upload', function (req, res) {
-    processZip(req, res, 'edit');
+    processZip(req, res, 'edit', false);
 });
 
 app.post('/upload-event-file', upload.single('upload'), function (req, res) {
@@ -254,7 +254,7 @@ function clearSimData() {
     }
 }
 
-function processZip(req, res, type) {
+function processZip(req, res, type, isForRunning) {
     let directoryForModification;
     if(type === 'edit'){
         directoryForModification = '/generatedScenario/';
@@ -378,7 +378,9 @@ function processZip(req, res, type) {
                                     var hoursInDay = result['scenario']['hoursInDay'];
                                     simData.timeScale = 24 / hoursInDay;
                                     simData.ready = true;
-                                    simData.loaded = true;
+                                    if(isForRunning){
+                                        simData.loaded = true;
+                                    }
                                     simData.startTimeMS = new Date().getTime();
 
 
