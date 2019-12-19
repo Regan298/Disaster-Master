@@ -208,16 +208,21 @@ function drawNgos() {
     newEvent();
 }
 
+
 function newNgo() {
     $('#ngoList').append("<br><h6>New:</h6>" +
                         "<form id='ngoForm'></form>" +
-                        "NGO Name: <input form='ngoForm' type='text' name='name'><br>"+
+                        "NGO Name: <input form='ngoForm' type='text' maxlength='20' name='name'><br>"+
                         "NGO Passkey: <input form='ngoForm' type='text' name='passkey'><br>"+
                         "<input form='ngoForm' type='button' onclick='addNgo()' value='Submit'>");
 }
 
 // eslint-disable-next-line no-unused-vars
 function addNgo() {
+
+    if(data.ngoList.length == 7){
+        return;
+    }
     // eslint-disable-next-line no-undef
     let frmData = document.getElementById("ngoForm");
     if(frmData.elements[1].value === ''){
@@ -334,7 +339,7 @@ function newEvent() {
                             "</select><br>" +
                             "File: <br><input form='addForm' type='file' name='eventFile'>" +
                             "<input form='addForm' type='button' onclick=addEvent() value='Submit'></input>");
-    
+
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -419,7 +424,7 @@ function addEvent() {
         };
         data.eventsList.push(newEvent);
     }
-    
+
 
     drawEvents(data.eventsList);
 }
@@ -441,7 +446,7 @@ function updateEvent(eventNum){
     }
 
     if(frmData.elements[0].value === 'All'){
-        
+
         var newEvent;
         for(var l=0; l<data.ngoList.length; l++){
             newEvent = {
@@ -465,13 +470,13 @@ function updateEvent(eventNum){
             uploadFiles(file, 'event');
             data.eventsList[eventNum].location = '/currentScenario/files/'+file.name.replace(/ /g, "_");
         }
-        
+
         data.eventsList[eventNum].recipient = frmData.elements[0].value;
         data.eventsList[eventNum].subject = frmData.elements[1].value;
         data.eventsList[eventNum].time = [hrs+":"+mins+":"+secs];
         data.eventsList[eventNum].type = frmData.elements[5].value;
     }
-    
+
     drawEvents(data.eventsList);
 }
 
