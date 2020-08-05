@@ -7,7 +7,7 @@
     "cross-zip": "^2.1.6",
     "dateformat": ">=3.0.3",
     "express": ">=4.17.1",
-    "express-fileupload": ">=1.1.5",
+    "express-fileupload": ">=1.1.9",
     "extract-zip": "^1.6.7",
     "formidable": ">=1.2.1",
     "hh-mm-ss": ">=1.2.0",
