@@ -17,7 +17,7 @@
     "path": ">=0.12.7",
     "pdfmake": "^0.1.60",
     "rimraf": "^3.0.0",
-    "socket.io": ">=2.2.0",
+    "socket.io": ">=4.5.4",
     "supertest": "^4.0.2",
     "xml2js": "^0.4.22",
     "zip-folder": "^1.0.0"
